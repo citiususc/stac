@@ -103,7 +103,7 @@ def leer_datos(nombre_archivo):
     else:
         return descripcion_error
 
-@route('/wilcoxon_test/<alpha>/<tipo>', method="GET")
+@route('/wilcoxon/<alpha:float>/<tipo:float>', method="GET")
 def wilcoxon_test(alpha, tipo):
     """
     Servicio web para el test de los rangos signados de Wilcoxon
@@ -126,7 +126,7 @@ def wilcoxon_test(alpha, tipo):
     response.headers['Access-Control-Allow-Origin'] = '*'
     response.content_type = "application/json"
     if isinstance(datos, tuple):
-        resultado = tw.wilcoxon_test(datos[0],datos[1],datos[2],datos[3],float(alpha),int(tipo))
+        resultado = tw.wilcoxon_test(datos[0],datos[1],datos[2],datos[3],alpha,tipo)
         return resultado
     else:
         return {"fallo" : datos}

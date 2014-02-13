@@ -87,27 +87,6 @@ def wilcoxon_test(palabra, nombres_conj_datos, nombres_algoritmos, matriz_datos,
 
     #T es el valor mínimo de T_Mas y T_Men.
     T = min(T_Mas,T_Men)
-
-    #Cálculo del ranking. Será determinado según se trate de maximizar o minimizar. Por ejemplo
-    #si lo que se pretendía era minimizar al restar los resultados del primer algoritmo por los
-    #del segundo si hay mas signos negativos que positivos querrá decir que en global el
-    #primer algoritmo mejora al segundo.
-    ranking = []
-    if not tipo:
-        if len(menor0) >= len(mayor0):
-            ranking.append([nombres_algoritmos[0],len(menor0)])
-            ranking.append([nombres_algoritmos[1],len(mayor0)])
-        else:
-            ranking.append([nombres_algoritmos[1],len(mayor0)])
-            ranking.append([nombres_algoritmos[0],len(menor0)])
-    else:
-        if len(mayor0) >= len(menor0):
-            ranking.append([nombres_algoritmos[0],len(mayor0)])
-            ranking.append([nombres_algoritmos[1],len(menor0)])
-        else:
-            ranking.append([nombres_algoritmos[1],len(menor0)])
-            ranking.append([nombres_algoritmos[0],len(mayor0)])
-
     
     print "N (sin ceros):" , N
     print "Suma de rangos positivos:" , T_Mas
@@ -121,7 +100,7 @@ def wilcoxon_test(palabra, nombres_conj_datos, nombres_algoritmos, matriz_datos,
         #Límite inferior del intervalo de aceptación.
         punto_critico = tabla_wilcoxon[alpha][N]
         return {"resultado" : str(T <= punto_critico), "estadistico" : T, "suma rangos pos" : T_Mas, "suma rangos neg" : T_Men ,
-        "punto critico" : punto_critico, "ranking" : ranking}
+        "punto critico" : punto_critico}
     else:
         #Cálculo del valor Z
         Z = (T-((N*(N+1))/4))/sp.sqrt((N*(N+1)*(2*N+1))/24)
@@ -144,5 +123,4 @@ def wilcoxon_test(palabra, nombres_conj_datos, nombres_algoritmos, matriz_datos,
             #print "Se acepta HO."
         
         return {"resultado" : str(p_valor < alpha), "p_valor" : round(p_valor,5), "estadistico" : round(Z,5),
-        "suma rangos pos" : T_Mas, "suma rangos neg" : T_Men, "puntos criticos" : [round(Z_alphaDiv2,2),round(-Z_alphaDiv2,2)],
-        "ranking" : ranking}
+        "suma rangos pos" : T_Mas, "suma rangos neg" : T_Men, "puntos criticos" : [round(Z_alphaDiv2,2),round(-Z_alphaDiv2,2)]}
