@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>Caso Prueba Wilcoxon</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script src="prueba_jquery.js"></script>
+    </head>
+    <body>
+        <h2>Caso Prueba Wilcoxon</h2>
+        <form id="formulario">
+            <strong>Test a aplicar:</strong><br><br>
+            <select id="test">
+                <option value="wilcoxon_test">RS de Wilcoxon</option>
+            </select><br><br>
+            <strong>Nivel de Significancia:</strong><br><br>
+            <select id="alpha">
+                <option value="0.10">0.10</option>
+                <option value="0.05">0.05</option>
+                <option value="0.02">0.02</option>
+                <option value="0.01">0.01</option>
+                <option value="0.005">0.005</option>
+                <option value="0.001">0.001</option>
+            </select><br><br>
+            <strong>Maximización / Minimización:</strong><br><br>
+            <select id="tipo">
+                <option value="0">Minimización</option>
+                <option value="1">Maximización</option>
+            </select><br><br>
+            <input type="button" value="Enviar" id="datos">
+            <div id="resultado"></div>
+        </form>
+    </body>
+</html>
