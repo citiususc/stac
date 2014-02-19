@@ -12,9 +12,11 @@
             <strong>Test a aplicar:</strong><br><br>
             <select id="test">
                 <option value="wilcoxon">RS de Wilcoxon</option>
+				<option value="friedman">Test de Friedman</option>
             </select><br><br>
             <strong>Nivel de Significancia:</strong><br><br>
             <select id="alpha">
+				<option value="no">Elige</option>
                 <option value="0.10">0.10</option>
                 <option value="0.05">0.05</option>
                 <option value="0.02">0.02</option>
@@ -24,11 +26,19 @@
             </select><br><br>
             <strong>Maximización / Minimización:</strong><br><br>
             <select id="tipo">
+				<option value="no">Elige</option>
                 <option value="0">Minimización</option>
                 <option value="1">Maximización</option>
             </select><br><br>
-            <input type="button" value="Enviar" id="datos">
-            <div id="resultado"></div>
+            <input type="button" value="Enviar" id="datos"><br><br>
         </form>
+		<div id="resultado"></div>
+		<!--Esta parte no funciona correctamente-->
+		<form id="subida_fichero" method="post" enctype="multipart/form-data">
+	  		<strong>Subir Fichero (no funciona correctamente):<strong><br><br>
+			<input type="file" name="fichero"/><br><br>
+	  		<input type="submit" value="Subir"/><br><br>
+		</form>
+		<div id="lista_ficheros"></div>
     </body>
 </html>

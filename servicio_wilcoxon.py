@@ -5,9 +5,9 @@ Created on Fri Jan 31 12:49:31 2014
 @author: Adrián
 """
 
-from bottle import route, run, response
+from bottle import route, run, response, request
 import test_wilcoxon as tw
-import re
+import re, os
 
 def leer_datos(nombre_archivo):
     """
@@ -103,8 +103,23 @@ def leer_datos(nombre_archivo):
     else:
         return descripcion_error
 
-@route('/wilcoxon/<alpha:float>/<tipo:float>', method="GET")
-def wilcoxon_test(alpha, tipo):
+#No funciona correctamente!
+@route('/subir', method='POST')
+def subir_fichero():
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    response.content_type = "application/json"
+    subida = request.files.get('fichero')
+    nombre, extension = os.path.splitext(subida.filename)
+    if extension not in ('.csv'):
+        return {"error:" : "Extension no permitida"}
+    else:
+        return {"nombre" : nombre, "extension" : extension}
+
+@route('/wilcoxon', method="GET")
+@route('/wilcoxon/<alpha:float>', method="GET")
+@route('/wilcoxon/<tipo:int>', method="GET")
+@route('/wilcoxon/<alpha:float>/<tipo:int>', method="GET")
+def wilcoxon_test(alpha=0.05, tipo=0):
     """
     Servicio web para el test de los rangos signados de Wilcoxon
     
@@ -126,7 +141,38 @@ def wilcoxon_test(alpha, tipo):
     response.headers['Access-Control-Allow-Origin'] = '*'
     response.content_type = "application/json"
     if isinstance(datos, tuple):
-        resultado = tw.wilcoxon_test(datos[0],datos[1],datos[2],datos[3],alpha,tipo)
+        resultado = tw.wilcoxon_test(datos[3],alpha,tipo)
+        return resultado
+    else:
+        return {"fallo" : datos}
+        
+@route('/friedman', method="GET")
+@route('/friedman/<alpha:float>', method="GET")
+@route('/friedman/<tipo:int>', method="GET")
+@route('/friedman/<alpha:float>/<tipo:int>', method="GET")
+def friedman_test(alpha=0.05, tipo=0):
+    """
+    Servicio web para el test de Friedman
+    
+    Argumentos
+    ----------
+    alpha: string
+        Nivel de significancia. Probabilidad de rechazar la hipótesis nula siendo cierta
+    tipo: string
+        Indica si lo que se quiere es minimizar ("0") o maximizar ("1")
+        
+    Salida
+    ------
+    resultado: dict (JSON)
+        Resultado devuelto al aplicar el test de Wilcoxon.
+    fallo en el archivo: dict (JSON)
+        Diccionario con la clave "fallo" que indica un fallo ocurrido durante la lectura del arhivo en la función "leer_datos"
+    """
+    datos = leer_datos("data_wilcoxon.csv")
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    response.content_type = "application/json"
+    if isinstance(datos, tuple):
+        resultado = tw.friedman_test(datos[2],datos[3],alpha,tipo)
         return resultado
     else:
         return {"fallo" : datos}
