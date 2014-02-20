@@ -6,7 +6,7 @@ Created on Fri Jan 31 12:49:31 2014
 """
 
 from bottle import route, run, response, request
-import test_wilcoxon as tw
+import tests_no_parametricos as tnp
 import re, os
 
 def leer_datos(nombre_archivo):
@@ -141,7 +141,7 @@ def wilcoxon_test(alpha=0.05, tipo=0):
     response.headers['Access-Control-Allow-Origin'] = '*'
     response.content_type = "application/json"
     if isinstance(datos, tuple):
-        resultado = tw.wilcoxon_test(datos[3],alpha,tipo)
+        resultado = tnp.wilcoxon_test(datos[3],alpha,tipo)
         return resultado
     else:
         return {"fallo" : datos}
@@ -164,7 +164,7 @@ def friedman_test(alpha=0.05, tipo=0):
     Salida
     ------
     resultado: dict (JSON)
-        Resultado devuelto al aplicar el test de Wilcoxon.
+        Resultado devuelto al aplicar el test de Friedman.
     fallo en el archivo: dict (JSON)
         Diccionario con la clave "fallo" que indica un fallo ocurrido durante la lectura del arhivo en la función "leer_datos"
     """
@@ -172,7 +172,38 @@ def friedman_test(alpha=0.05, tipo=0):
     response.headers['Access-Control-Allow-Origin'] = '*'
     response.content_type = "application/json"
     if isinstance(datos, tuple):
-        resultado = tw.friedman_test(datos[2],datos[3],alpha,tipo)
+        resultado = tnp.friedman_test(datos[2],datos[3],alpha,tipo)
+        return resultado
+    else:
+        return {"fallo" : datos}
+
+@route('/iman-davenport', method="GET")
+@route('/iman-davenport/<alpha:float>', method="GET")
+@route('/iman-davenport/<tipo:int>', method="GET")
+@route('/iman-davenport/<alpha:float>/<tipo:int>', method="GET")
+def iman_davenport_test(alpha=0.05, tipo=0):
+    """
+    Servicio web para el test de Iman Davenport
+    
+    Argumentos
+    ----------
+    alpha: string
+        Nivel de significancia. Probabilidad de rechazar la hipótesis nula siendo cierta
+    tipo: string
+        Indica si lo que se quiere es minimizar ("0") o maximizar ("1")
+        
+    Salida
+    ------
+    resultado: dict (JSON)
+        Resultado devuelto al aplicar el test de Iman Davenport.
+    fallo en el archivo: dict (JSON)
+        Diccionario con la clave "fallo" que indica un fallo ocurrido durante la lectura del arhivo en la función "leer_datos"
+    """
+    datos = leer_datos("data_wilcoxon.csv")
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    response.content_type = "application/json"
+    if isinstance(datos, tuple):
+        resultado = tnp.iman_davenport_test(datos[2],datos[3],alpha,tipo)
         return resultado
     else:
         return {"fallo" : datos}

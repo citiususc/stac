@@ -150,33 +150,27 @@ def friedman_test(nombres_algoritmos, matriz_datos, alpha, tipo):
         for dato in conj_datos:
             ranking_conj.append((copia.count(dato)+copia.index(dato)*2+1)/float(2))
         rankings.append(ranking_conj)
-    
+        
     #Cálculo de los rankings medios de los algoritmos sobre los N problemas.
     rankings_medios = []
     for i in range(K):
         rankings_medios.append(sp.mean([fila[i] for fila in rankings]))
-
+        
     #Cálculo del estadístico de Friedman, que se distribuye como una distribución chi-cuadrado
     #con K-1 grados de libertad, siendo K el número de variables relacionadas (o número de algoritmos).
-    chi2 = ((12*N)/(K*(K+1)))*((sp.sum(r**2 for r in rankings_medios))-((K*(K+1)**2)/4))
+    chi2 = ((12*N)/(K*(K+1)))*((sp.sum(r**2 for r in rankings_medios))-((K*(K+1)**2)/float(4)))
     
     #Cálculo del p_valor: Probabilidad de obtener un valor al menos tan extremo como el estadístico 
     #chi2.
     p_valor = 1 - st.chi2.cdf(chi2, K-1)
     
-    #Cálculo del ranking final (tanto nombres de algoritmos como rankings medios) ordenado por el tipo de
-    #problema (minimización o maximización). datos_ordenados es una lista de tuplas (cada tupla representa
-    #el nombre del algoritmo y el valor) que están ordenadas por el valor de cada tupla.
-    datos_ordenados = sorted({nombres_algoritmos[i] : rankings_medios[i] for i in range(K)}.items(), 
-                              key = lambda t:t[1], reverse=tipo)
+    #Cálculo del ranking de los nombres de los algoritmos (de acuerdo a los rankings medios obtenidos).
     ranking_nombres = []
-    ranking_valores = []
-    for i in datos_ordenados:
+    for i in sorted({nombres_algoritmos[i] : rankings_medios[i] for i in range(K)}.items(), key = lambda t:t[1]):
         ranking_nombres.append(i[0])
-        ranking_valores.append(i[1])
-    
+        
     return {"resultado" : str(p_valor < alpha), "p_valor": round(p_valor,5), "estadistico" : round(chi2,5), 
-    "nombres" : ranking_nombres, "ranking" : ranking_valores}
+    "nombres" : ranking_nombres, "ranking" : rankings_medios}
     
 def iman_davenport_test(nombres_algoritmos, matriz_datos, alpha, tipo):
 
@@ -205,33 +199,3 @@ def iman_davenport_test(nombres_algoritmos, matriz_datos, alpha, tipo):
 
     return {"resultado" : str(p_valor < alpha), "p_valor": round(p_valor,5), "estadistico" : round(iman_davenport,5), 
     "nombres": friedman["nombres"], "ranking": friedman["ranking"]}
-
-
-"""
-nombres_algoritmos = ["PSO","SSGA","SS_BLX","DE_EXP"]
-matriz_datos = [[1.23E-01,8.42E-06,3.40E+02,8.26E-06],
-        [2.60E+01,8.72E-02,1.73E+03,8.18E-06],
-        [5.17E+07,7.95E+07,1.84E+08,9.94E+04],
-        [2.49E+03,2.59E+00,6.23E+03,8.35E-06],
-        [4.10E+05,1.34E+05,2.19E+03,8.51E-06],
-        [7.31E+05,6.17E+03,1.15E+05,8.39E-06],
-        [2.68E+02,1.27E+06,1.97E+06,1.27E+06],
-        [2.04E+04,2.04E+04,2.04E+04,2.04E+04],
-        [1.44E+04,7.29E-06,4.20E+03,8.15E-06],
-        [1.40E+04,1.71E+04,1.24E+04,1.12E+04],
-        [5.59E+03,3.26E+03,2.93E+03,2.07E+03],
-        [6.36E+05,2.79E+05,1.51E+05,6.31E+04],
-        [1.50E+03,6.71E+02,3.25E+02,6.40E+02],
-        [3.30E+03,2.26E+03,2.80E+03,3.16E+03],
-        [3.40E+05,2.92E+05,1.14E+05,2.94E+05],
-        [1.33E+05,1.05E+05,1.04E+05,1.13E+05],
-        [1.50E+05,1.19E+05,1.18E+05,1.31E+05],
-        [8.51E+05,8.06E+05,7.67E+05,4.48E+05],
-        [8.50E+05,8.90E+05,7.56E+05,4.34E+05],
-        [8.51E+05,8.89E+05,7.46E+05,4.19E+05],
-        [9.14E+05,8.52E+05,4.85E+05,5.42E+05],
-        [8.07E+05,7.52E+05,6.83E+05,7.72E+05],
-        [1.03E+06,1.00E+06,5.74E+05,5.82E+05],
-        [4.12E+05,2.36E+05,2.51E+05,2.02E+05],
-        [5.10E+05,1.75E+06,1.79E+06,1.74E+06]]
-"""
