@@ -117,7 +117,9 @@ def subir_fichero():
 
 @route('/wilcoxon', method="GET")
 @route('/wilcoxon/<alpha:float>', method="GET")
-def wilcoxon_test(alpha=0.05):
+@route('/wilcoxon/<tipo:int>', method="GET")
+@route('/wilcoxon/<alpha:float>/<tipo:int>', method="GET")
+def wilcoxon_test(alpha=0.05, tipo=0):
     """
     Servicio web para el test de los rangos signados de Wilcoxon
     
@@ -125,6 +127,8 @@ def wilcoxon_test(alpha=0.05):
     ----------
     alpha: string
         Nivel de significancia. Probabilidad de rechazar la hipótesis nula siendo cierta
+    tipo: string
+        Indica si lo que se quiere es minimizar ("0") o maximizar ("1")
         
     Salida
     ------
@@ -137,7 +141,7 @@ def wilcoxon_test(alpha=0.05):
     response.headers['Access-Control-Allow-Origin'] = '*'
     response.content_type = "application/json"
     if isinstance(datos, tuple):
-        resultado = tnp.wilcoxon_test(datos[3],alpha)
+        resultado = tnp.wilcoxon_test(datos[3],alpha,tipo)
         return resultado
     else:
         return {"fallo" : datos}
