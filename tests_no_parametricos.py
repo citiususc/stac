@@ -27,6 +27,7 @@ tabla_wilcoxon = {0.10:{5:0,6:2,7:3,8:5,9:8,10:10,11:13,12:17,13:21,14:25,15:30,
                   0.001:{11:0,12:1,13:2,14:4,15:6,16:8,17:11,18:14,19:18,20:21,21:25,22:30,
                     23:35,24:40,25:45}}
 
+"""Test de los Rangos Signados de Wilcoxon."""
 def wilcoxon_test(matriz_datos, alpha):
 
     #El test de Wilcoxon compara dos algoritmos.
@@ -102,14 +103,14 @@ def wilcoxon_test(matriz_datos, alpha):
         "punto critico" : punto_critico}
     else:
         #Cálculo del valor Z
-        Z = (T-((N*(N+1))/4))/sp.sqrt((N*(N+1)*(2*N+1))/24)
+        Z = (T-((N*(N+1))/float(4)))/float(sp.sqrt((N*(N+1)*(2*N+1))/float(24)))
         #Cálculo del punto critico de la distribución Normal (Para alpha = 0.05
         #es -1.96 en el caso de dos colas, es decir 0.025 a cada lado).
-        Z_alphaDiv2 = st.norm.ppf(alpha/2)
+        Z_alphaDiv2 = st.norm.ppf(alpha/float(2))
         #Cálculo del p_valor: Probabilidad de obtener un valor al menos tan extremo
         #como el estadístico Z.
         p_valor = 2*(1-st.norm.cdf(abs(Z)))
-        
+		
         print "Valor Z:" , Z
         print "Valor Z_alphaDiv2:" , Z_alphaDiv2
         print "p_valor:" , p_valor
@@ -123,7 +124,10 @@ def wilcoxon_test(matriz_datos, alpha):
         
         return {"resultado" : str(p_valor < alpha), "p_valor" : round(p_valor,5), "estadistico" : round(Z,5),
         "suma rangos pos" : T_Mas, "suma rangos neg" : T_Men, "puntos criticos" : [round(Z_alphaDiv2,2),round(-Z_alphaDiv2,2)]}
-        
+  
+
+
+"""Test de Friedman."""      
 def friedman_test(nombres_algoritmos, matriz_datos, alpha, tipo):
     
     #Número de algoritmos.
@@ -158,7 +162,7 @@ def friedman_test(nombres_algoritmos, matriz_datos, alpha, tipo):
         
     #Cálculo del estadístico de Friedman, que se distribuye como una distribución chi-cuadrado
     #con K-1 grados de libertad, siendo K el número de variables relacionadas (o número de algoritmos).
-    chi2 = ((12*N)/(K*(K+1)))*((sp.sum(r**2 for r in rankings_medios))-((K*(K+1)**2)/float(4)))
+    chi2 = ((12*N)/float((K*(K+1))))*((sp.sum(r**2 for r in rankings_medios))-((K*(K+1)**2)/float(4)))
     
     #Cálculo del p_valor: Probabilidad de obtener un valor al menos tan extremo como el estadístico 
     #chi2.
@@ -171,7 +175,10 @@ def friedman_test(nombres_algoritmos, matriz_datos, alpha, tipo):
         
     return {"resultado" : str(p_valor < alpha), "p_valor": round(p_valor,5), "estadistico" : round(chi2,5), 
     "nombres" : ranking_nombres, "ranking" : rankings_medios}
-    
+
+
+
+"""Test de Iman-Davenport."""
 def iman_davenport_test(nombres_algoritmos, matriz_datos, alpha, tipo):
 
     #Número de algoritmos.
@@ -191,7 +198,7 @@ def iman_davenport_test(nombres_algoritmos, matriz_datos, alpha, tipo):
 
     # Cálculo del estadistico de Iman-Davenport, que se distribuye de acuerdo a una distribución
     #f con (K-1) y (K-1)(N-1) grados de libertad.
-    iman_davenport = ((N-1)*chi2)/(N*(K-1)-chi2)
+    iman_davenport = ((N-1)*chi2)/float((N*(K-1)-chi2))
     
     #Cálculo del p_valor: Probabilidad de obtener un valor al menos tan extremo como el estadístico 
     #iman_davenport.
@@ -199,3 +206,110 @@ def iman_davenport_test(nombres_algoritmos, matriz_datos, alpha, tipo):
 
     return {"resultado" : str(p_valor < alpha), "p_valor": round(p_valor,5), "estadistico" : round(iman_davenport,5), 
     "nombres": friedman["nombres"], "ranking": friedman["ranking"]}
+
+
+
+"""Test de los Rangos Alineados de Friedman."""
+def friedman_rangos_alineados_test(nombres_algoritmos, matriz_datos, alpha, tipo):
+
+    #Número de algoritmos.
+    K = len(nombres_algoritmos)
+    
+    #El test de los Rangos Alineados de Friedman compara al menos dos algoritmos.
+    if K < 2:
+        return {"fallo" : "Test de los Rangos Alineados necesita al menos 2 algoritmos"}
+
+    #Número de conjuntos de datos (Número de veces que se aplican los algoritmos o número de
+    #problemas).
+    N = len(matriz_datos)
+    
+    #Cálculo de las observaciones alienadas: Primero se halla el valor de localización, que es el
+    #rendimiento medio alcanzado por cada algoritmo en cada conjunto de datos. Luego, se calculan
+	#las diferencias entre el rendimiento obtenido por cada algoritmo con respecto al valor de localización.
+    #Se repite para todos los algoritmos y conjuntos de datos.
+    observaciones_alineadas = []
+    for conj_datos in matriz_datos:
+        fila_observaciones = []
+        valor_localizacion = sp.mean(conj_datos)
+        for dato in conj_datos:
+            fila_observaciones.append(dato-valor_localizacion)
+        observaciones_alineadas.append(fila_observaciones)
+        
+    # Creación de una lista a partir de la tabla observaciones_alineadas.
+    tabla_a_lista = []
+    for fila in observaciones_alineadas:
+        for dato in fila:
+            tabla_a_lista.append(dato)
+    
+    # Ordenación de la lista.
+    tabla_a_lista.sort(reverse=tipo)
+    
+    #Asignación de rankings a los resultados obtenidos por cada algoritmo en cada problema.
+    #Cada fila representa un conjunto de datos compuesto por los rankings asignados. Los
+    #rankings se asignan de forma ascencente: 1 al mejor resultado, 2 al segundo, ... hasta
+    #K*N. En caso de empates, se asignan valores medios.
+    rankings = []
+    for fila in observaciones_alineadas:
+        ranking_conj = []
+        for dato in fila:
+            ranking_conj.append((tabla_a_lista.count(dato)+tabla_a_lista.index(dato)*2+1)/float(2))
+        rankings.append(ranking_conj)
+    
+    #Cálculo de los rankings medios de los algoritmos sobre los N problemas y de la suma de los
+    #ranking obtenidos por cada algoritmo.
+    rankings_medios = []
+    totales_algoritmos = []
+    for i in range(K):
+        rankings_medios.append(sp.mean([fila[i] for fila in rankings]))
+        totales_algoritmos.append(sp.sum([fila[i] for fila in rankings]))
+        
+    #Cálculo de suma de los rankings obtenidos para cada conjunto de datos.
+    totales_conjuntos = []
+    for i in rankings:
+        totales_conjuntos.append(sp.sum(i))
+        
+    #Cálculo del estadístico de los Rangos Alineados de Friedman.
+    T = (K-1)*(sp.sum(total**2 for total in totales_algoritmos)-(K*N**2/float(4))*(K*N+1)**2)/float(((K*N*(K*N+1)*(2*K*N+1))/float(6))-(1/float(K))*sp.sum(total**2 for total in totales_conjuntos))
+
+    #Cálculo del p_valor: Probabilidad de obtener un valor al menos tan extremo como el estadístico T.
+    p_valor = 1 - st.chi2.cdf(T, K-1)
+    
+    #Cálculo del ranking de los nombres de los algoritmos (de acuerdo a los rankings medios obtenidos).
+    ranking_nombres = []
+    for i in sorted({nombres_algoritmos[i] : rankings_medios[i] for i in range(K)}.items(), key = lambda t:t[1]):
+        ranking_nombres.append(i[0])
+        
+    return {"resultado" : str(p_valor < alpha), "p_valor": round(p_valor,5), "estadistico" : round(T,5), 
+    "nombres" : ranking_nombres, "ranking" : rankings_medios}
+
+
+
+# Pruebas
+"""
+nombres = ["PDFC","NNEP","IS-CHC+INN","FH-GBML"]
+
+datos = [[0.752,0.773,0.785,0.795],
+        [0.727,0.748,0.724,0.713],
+        [0.736,0.716,0.585,0.638],
+        [0.994,0.861,0.880,0.791],
+        [0.508,0.553,0.575,0.515],
+        [0.535,0.536,0.513,0.471],
+        [0.967,0.871,0.954,0.532],
+        [0.831,0.807,0.819,0.768],
+        [0.745,0.702,0.719,0.705],
+        [0.709,0.572,0.669,0.607],
+        [0.722,0.728,0.725,0.732],
+        [0.967,0.947,0.953,0.960],
+        [0.832,0.752,0.802,0.691],
+        [0.998,0.992,0.482,0.910],
+        [0.963,0.963,0.954,0.926],
+        [0.982,0.953,0.932,0.630],
+        [0.978,0.773,0.834,0.849],
+        [0.854,0.787,0.841,0.779],
+        [0.965,0.984,0.995,0.947],
+        [0.924,0.887,0.861,0.804],
+        [0.929,0.942,0.931,0.921],
+        [0.837,0.643,0.602,0.554],
+        [0.972,0.956,0.944,0.922],
+        [0.958,0.959,0.964,0.964]]
+"""
