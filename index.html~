@@ -14,7 +14,6 @@
                 <option value="wilcoxon">RS de Wilcoxon</option>
 				<option value="friedman">Test de Friedman</option>
 				<option value="iman-davenport">Iman-Davenport</option>
-				<option value="rangos-alineados">Rangos Alineados</option>
             </select><br><br>
             <strong>Nivel de Significancia:</strong><br><br>
             <select id="alpha">

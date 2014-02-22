@@ -129,7 +129,7 @@ def wilcoxon_test(alpha=0.05):
     Salida
     ------
     resultado: dict (JSON)
-        Resultado devuelto al aplicar el test de Wilcoxon.
+        Resultado devuelto al aplicar el test de Wilcoxon
     fallo en el archivo: dict (JSON)
         Diccionario con la clave "fallo" que indica un fallo ocurrido durante la lectura del arhivo en la función "leer_datos"
     """
@@ -160,7 +160,7 @@ def friedman_test(alpha=0.05, tipo=0):
     Salida
     ------
     resultado: dict (JSON)
-        Resultado devuelto al aplicar el test de Friedman.
+        Resultado devuelto al aplicar el test de Friedman
     fallo en el archivo: dict (JSON)
         Diccionario con la clave "fallo" que indica un fallo ocurrido durante la lectura del arhivo en la función "leer_datos"
     """
@@ -179,7 +179,7 @@ def friedman_test(alpha=0.05, tipo=0):
 @route('/iman-davenport/<alpha:float>/<tipo:int>', method="GET")
 def iman_davenport_test(alpha=0.05, tipo=0):
     """
-    Servicio web para el test de Iman Davenport
+    Servicio web para el test de Iman-Davenport
     
     Argumentos
     ----------
@@ -191,7 +191,7 @@ def iman_davenport_test(alpha=0.05, tipo=0):
     Salida
     ------
     resultado: dict (JSON)
-        Resultado devuelto al aplicar el test de Iman Davenport.
+        Resultado devuelto al aplicar el test de Iman-Davenport
     fallo en el archivo: dict (JSON)
         Diccionario con la clave "fallo" que indica un fallo ocurrido durante la lectura del arhivo en la función "leer_datos"
     """
@@ -200,6 +200,37 @@ def iman_davenport_test(alpha=0.05, tipo=0):
     response.content_type = "application/json"
     if isinstance(datos, tuple):
         resultado = tnp.iman_davenport_test(datos[2],datos[3],alpha,tipo)
+        return resultado
+    else:
+        return {"fallo" : datos}
+        
+@route('/rangos-alineados', method="GET")
+@route('/rangos-alineados/<alpha:float>', method="GET")
+@route('/rangos-alineados/<tipo:int>', method="GET")
+@route('/rangos-alineados/<alpha:float>/<tipo:int>', method="GET")
+def friedman_rangos_alineados_test(alpha=0.05, tipo=0):
+    """
+    Servicio web para el test de los Rangos Alineados de Friedman
+    
+    Argumentos
+    ----------
+    alpha: string
+        Nivel de significancia. Probabilidad de rechazar la hipótesis nula siendo cierta
+    tipo: string
+        Indica si lo que se quiere es minimizar ("0") o maximizar ("1")
+        
+    Salida
+    ------
+    resultado: dict (JSON)
+        Resultado devuelto al aplicar el test de los Rangos Alineados de Friedman
+    fallo en el archivo: dict (JSON)
+        Diccionario con la clave "fallo" que indica un fallo ocurrido durante la lectura del arhivo en la función "leer_datos"
+    """
+    datos = leer_datos("data_wilcoxon.csv")
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    response.content_type = "application/json"
+    if isinstance(datos, tuple):
+        resultado = tnp.friedman_rangos_alineados_test(datos[2],datos[3],alpha,tipo)
         return resultado
     else:
         return {"fallo" : datos}
