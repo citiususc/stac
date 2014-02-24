@@ -173,6 +173,9 @@ def friedman_test(nombres_algoritmos, matriz_datos, alpha, tipo):
     for i in sorted({nombres_algoritmos[i] : rankings_medios[i] for i in range(K)}.items(), key = lambda t:t[1]):
         ranking_nombres.append(i[0])
         
+	#Ordenamiento de menor a mayor de los rankings medios obtenidos.
+    rankings_medios.sort()
+
     return {"resultado" : str(p_valor < alpha), "p_valor": round(p_valor,5), "estadistico" : round(chi2,5), 
     "nombres" : ranking_nombres, "ranking" : rankings_medios}
 
@@ -278,6 +281,9 @@ def friedman_rangos_alineados_test(nombres_algoritmos, matriz_datos, alpha, tipo
     ranking_nombres = []
     for i in sorted({nombres_algoritmos[i] : rankings_medios[i] for i in range(K)}.items(), key = lambda t:t[1]):
         ranking_nombres.append(i[0])
+
+	#Ordenamiento de menor a mayor de los rankings medios obtenidos.
+    rankings_medios.sort()
         
     return {"resultado" : str(p_valor < alpha), "p_valor": round(p_valor,5), "estadistico" : round(T,5), 
     "nombres" : ranking_nombres, "ranking" : rankings_medios}
