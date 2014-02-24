@@ -6,7 +6,7 @@ $(document).on('ready', function() {
         var alpha = $('#alpha').val();
         var tipo = $('#tipo').val();
 
-		/*var url;
+		var url;
 		if(alpha != "no" & tipo !="no")
 			url = "http://localhost:8080/"+test+"/"+alpha+"/"+tipo;
 		else if(alpha != "no")
@@ -14,11 +14,11 @@ $(document).on('ready', function() {
 		else if(tipo != "no")
 			url = "http://localhost:8080/"+test+"/"+tipo;
 		else
-			url = "http://localhost:8080/"+test*/
+			url = "http://localhost:8080/"+test
 
         $.ajax({
             type: "get",
-            url: "http://localhost:8080/"+test,
+            url: url,
             dataType: "json",
             success : function(data) {
                 salida = "<p>Resultado test:</p>";

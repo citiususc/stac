@@ -9,14 +9,16 @@ from bottle import route, run, response, request
 import tests_no_parametricos as tnp
 import re, os
 
-def leer_datos(nombre_archivo):
+lista_ficheros = {}
+
+def leer_datos(ruta_archivo):
     """
     Función que lee el fichero de datos que contiene los datos sobre los que se aplican los tests.
 
     Argumentos
     ----------
-    nombre_archivo: string
-        Nombre del archivo a abrir (con extensión)
+    ruta_archivo: string
+        Ruta absoluta del fichero a abrir.
         
     Salida
     ------
@@ -29,6 +31,8 @@ def leer_datos(nombre_archivo):
             Nombres de los algoritmos (diferentes).
         matriz_datos: list
             Lista de listas que contiene las listas de los diferentes conjuntos de datos.
+		nombre_fichero: string
+			Nombre fichero con extensión.
     descripcion_error: string
         Cadena que contiene un mensaje de error. Será la única salida en caso de error
         
@@ -46,7 +50,8 @@ def leer_datos(nombre_archivo):
     nombres_conj_datos = []
     nombres_algoritmos = []
     matriz_datos = []
-    f = open(nombre_archivo,"r")
+    nombre_fichero = ""
+    f = open(ruta_archivo,"r")
     numero_linea = 0
     error = 0
     while not error:
@@ -87,6 +92,8 @@ def leer_datos(nombre_archivo):
                         break
             matriz_datos.append(lista_datos)
         numero_linea += 1
+        
+    nombre_fichero = os.path.basename(ruta_archivo)
 
     numero_algoritmos = len(nombres_algoritmos)
     for i in matriz_datos:
@@ -99,11 +106,11 @@ def leer_datos(nombre_archivo):
         error = 1
 
     if not error:
-        return palabra, nombres_conj_datos, nombres_algoritmos, matriz_datos
+        return palabra, nombres_conj_datos, nombres_algoritmos, matriz_datos, nombre_fichero
     else:
         return descripcion_error
 
-#No funciona correctamente!
+#Servicio para la subida de ficheros.
 @route('/subir', method='POST')
 def subir_fichero():
     response.headers['Access-Control-Allow-Origin'] = '*'
@@ -111,9 +118,42 @@ def subir_fichero():
     subida = request.files.get('fichero')
     nombre, extension = os.path.splitext(subida.filename)
     if extension not in ('.csv'):
-        return {"error:" : "Extension no permitida"}
+        return {"fallo" : "Extension no permitida"}
     else:
-        return {"nombre" : nombre, "extension" : extension}
+        #Búsqueda del fichero en la lista de ficheros en el servidor.
+        for clave in lista_ficheros.keys():
+            if lista_ficheros[clave][4] == subida.filename:
+                return {"fallo" : "El fichero \"" + subida.filename + "\" ya se encuentra el servidor"}
+        #Si no está en el servidor se busca el directorio del archivo en /home.
+        ruta = ""
+        for root, dirs, files in os.walk("/home"):
+            if subida.filename in files:
+                ruta = os.path.join(root, subida.filename)
+        #Se procesa y se guarda en el diccionario de archivos "lista_ficheros".
+        datos = leer_datos(ruta)
+        clave_hash = hash(subida.file)
+        lista_ficheros[clave_hash] = datos
+        #Devolución de la lista de ficheros (hash-nombre).
+        clave_nombre = {}
+        for clave in lista_ficheros.keys():
+            clave_nombre[clave] = lista_ficheros[clave][4]
+        return clave_nombre
+
+#Servicio para la consula de ficheros.
+@route('/consultar/<id_fichero:int>', method='GET')
+def consultar_fichero(id_fichero):
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    response.content_type = "application/json"
+    #Consulta del contenido de un fichero en concreto.
+    contenido = {}
+    for clave in lista_ficheros.keys():
+        if clave == id_fichero:
+            contenido["palabra"] = lista_ficheros[clave][0]
+            contenido["nombres_conj_datos"] = lista_ficheros[clave][1]
+            contenido["nombres_algoritmos"] = lista_ficheros[clave][2]
+            contenido["matriz_datos"] = lista_ficheros[clave][3]
+            contenido["nombre_fichero"] = lista_ficheros[clave][4]
+    return contenido
 
 @route('/wilcoxon', method="GET")
 @route('/wilcoxon/<alpha:float>', method="GET")

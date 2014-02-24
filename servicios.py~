@@ -9,14 +9,16 @@ from bottle import route, run, response, request
 import tests_no_parametricos as tnp
 import re, os
 
-def leer_datos(nombre_archivo):
+lista_ficheros = {}
+
+def leer_datos(ruta_archivo):
     """
     Función que lee el fichero de datos que contiene los datos sobre los que se aplican los tests.
 
     Argumentos
     ----------
-    nombre_archivo: string
-        Nombre del archivo a abrir (con extensión)
+    ruta_archivo: string
+        Ruta absoluta del fichero a abrir.
         
     Salida
     ------
@@ -29,6 +31,8 @@ def leer_datos(nombre_archivo):
             Nombres de los algoritmos (diferentes).
         matriz_datos: list
             Lista de listas que contiene las listas de los diferentes conjuntos de datos.
+		nombre_fichero: string
+			Nombre fichero con extensión.
     descripcion_error: string
         Cadena que contiene un mensaje de error. Será la única salida en caso de error
         
@@ -46,7 +50,8 @@ def leer_datos(nombre_archivo):
     nombres_conj_datos = []
     nombres_algoritmos = []
     matriz_datos = []
-    f = open(nombre_archivo,"r")
+    nombre_fichero = ""
+    f = open(ruta_archivo,"r")
     numero_linea = 0
     error = 0
     while not error:
@@ -87,6 +92,8 @@ def leer_datos(nombre_archivo):
                         break
             matriz_datos.append(lista_datos)
         numero_linea += 1
+        
+    nombre_fichero = os.path.basename(ruta_archivo)
 
     numero_algoritmos = len(nombres_algoritmos)
     for i in matriz_datos:
@@ -99,7 +106,7 @@ def leer_datos(nombre_archivo):
         error = 1
 
     if not error:
-        return palabra, nombres_conj_datos, nombres_algoritmos, matriz_datos
+        return palabra, nombres_conj_datos, nombres_algoritmos, matriz_datos, nombre_fichero
     else:
         return descripcion_error
 
@@ -117,9 +124,7 @@ def subir_fichero():
 
 @route('/wilcoxon', method="GET")
 @route('/wilcoxon/<alpha:float>', method="GET")
-@route('/wilcoxon/<tipo:int>', method="GET")
-@route('/wilcoxon/<alpha:float>/<tipo:int>', method="GET")
-def wilcoxon_test(alpha=0.05, tipo=0):
+def wilcoxon_test(alpha=0.05):
     """
     Servicio web para el test de los rangos signados de Wilcoxon
     
@@ -127,13 +132,11 @@ def wilcoxon_test(alpha=0.05, tipo=0):
     ----------
     alpha: string
         Nivel de significancia. Probabilidad de rechazar la hipótesis nula siendo cierta
-    tipo: string
-        Indica si lo que se quiere es minimizar ("0") o maximizar ("1")
         
     Salida
     ------
     resultado: dict (JSON)
-        Resultado devuelto al aplicar el test de Wilcoxon.
+        Resultado devuelto al aplicar el test de Wilcoxon
     fallo en el archivo: dict (JSON)
         Diccionario con la clave "fallo" que indica un fallo ocurrido durante la lectura del arhivo en la función "leer_datos"
     """
@@ -141,7 +144,7 @@ def wilcoxon_test(alpha=0.05, tipo=0):
     response.headers['Access-Control-Allow-Origin'] = '*'
     response.content_type = "application/json"
     if isinstance(datos, tuple):
-        resultado = tnp.wilcoxon_test(datos[3],alpha,tipo)
+        resultado = tnp.wilcoxon_test(datos[3],alpha)
         return resultado
     else:
         return {"fallo" : datos}
@@ -164,7 +167,7 @@ def friedman_test(alpha=0.05, tipo=0):
     Salida
     ------
     resultado: dict (JSON)
-        Resultado devuelto al aplicar el test de Friedman.
+        Resultado devuelto al aplicar el test de Friedman
     fallo en el archivo: dict (JSON)
         Diccionario con la clave "fallo" que indica un fallo ocurrido durante la lectura del arhivo en la función "leer_datos"
     """
@@ -183,7 +186,7 @@ def friedman_test(alpha=0.05, tipo=0):
 @route('/iman-davenport/<alpha:float>/<tipo:int>', method="GET")
 def iman_davenport_test(alpha=0.05, tipo=0):
     """
-    Servicio web para el test de Iman Davenport
+    Servicio web para el test de Iman-Davenport
     
     Argumentos
     ----------
@@ -195,7 +198,7 @@ def iman_davenport_test(alpha=0.05, tipo=0):
     Salida
     ------
     resultado: dict (JSON)
-        Resultado devuelto al aplicar el test de Iman Davenport.
+        Resultado devuelto al aplicar el test de Iman-Davenport
     fallo en el archivo: dict (JSON)
         Diccionario con la clave "fallo" que indica un fallo ocurrido durante la lectura del arhivo en la función "leer_datos"
     """
@@ -204,6 +207,37 @@ def iman_davenport_test(alpha=0.05, tipo=0):
     response.content_type = "application/json"
     if isinstance(datos, tuple):
         resultado = tnp.iman_davenport_test(datos[2],datos[3],alpha,tipo)
+        return resultado
+    else:
+        return {"fallo" : datos}
+        
+@route('/rangos-alineados', method="GET")
+@route('/rangos-alineados/<alpha:float>', method="GET")
+@route('/rangos-alineados/<tipo:int>', method="GET")
+@route('/rangos-alineados/<alpha:float>/<tipo:int>', method="GET")
+def friedman_rangos_alineados_test(alpha=0.05, tipo=0):
+    """
+    Servicio web para el test de los Rangos Alineados de Friedman
+    
+    Argumentos
+    ----------
+    alpha: string
+        Nivel de significancia. Probabilidad de rechazar la hipótesis nula siendo cierta
+    tipo: string
+        Indica si lo que se quiere es minimizar ("0") o maximizar ("1")
+        
+    Salida
+    ------
+    resultado: dict (JSON)
+        Resultado devuelto al aplicar el test de los Rangos Alineados de Friedman
+    fallo en el archivo: dict (JSON)
+        Diccionario con la clave "fallo" que indica un fallo ocurrido durante la lectura del arhivo en la función "leer_datos"
+    """
+    datos = leer_datos("data_wilcoxon.csv")
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    response.content_type = "application/json"
+    if isinstance(datos, tuple):
+        resultado = tnp.friedman_rangos_alineados_test(datos[2],datos[3],alpha,tipo)
         return resultado
     else:
         return {"fallo" : datos}
