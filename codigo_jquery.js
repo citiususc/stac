@@ -69,6 +69,7 @@ $(document).on('ready', function() {
 						lista1 = lista1 + "<br><input type=\"button\" value=\"Ver Contenido\" id=\"boton_contenido\"/><br><br>";
 						lista2 = lista2 + "</select><br><br>";
 						$('#campos').html(lista1);
+						$("#error").empty();
 						$('#seleccionar_fichero').html(lista2);
 					}
 					else{
@@ -77,7 +78,6 @@ $(document).on('ready', function() {
 						});
 					}
 					$('#formfichero').trigger('reset');
-					$("#contenido_fichero").empty();
 				},
 				error : function(e) {
 				    alert('Error: ' + e);

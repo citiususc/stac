@@ -14,13 +14,13 @@ $(document).on('ready', function() {
 
 			var url;
 			if(alpha != "no" & tipo !="no")
-				url = "http://localhost:8080/"+test+"/"+alpha+"/"+tipo;
+				url = "http://localhost:8080/"+test+"/"+id_fichero+"/"+alpha+"/"+tipo;
 			else if(alpha != "no")
-				url = "http://localhost:8080/"+test+"/"+alpha;
+				url = "http://localhost:8080/"+test+"/"+id_fichero+"/"+alpha;
 			else if(tipo != "no")
-				url = "http://localhost:8080/"+test+"/"+tipo;
+				url = "http://localhost:8080/"+test+"/"+id_fichero+"/"+tipo;
 			else
-				url = "http://localhost:8080/"+test;
+				url = "http://localhost:8080/"+test+"/"+id_fichero;
 
 		    $.ajax({
 		        type: "get",
