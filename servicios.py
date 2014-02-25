@@ -116,46 +116,46 @@ def leer_datos(ruta_archivo):
 @route('/subir', method='POST')
 @route('/consultar/<id_fichero:int>', method='GET')
 def subir_fichero(id_fichero=""):
+	response.headers['Access-Control-Allow-Origin'] = '*'
+	response.content_type = "application/json"
 	if(id_fichero==""):
-		response.headers['Access-Control-Allow-Origin'] = '*'
-		response.content_type = "application/json"
 		subida = request.files.get('fichero')
 		nombre, extension = os.path.splitext(subida.filename)
 		if extension not in ('.csv'):
-		    return {"fallo" : "Extension no permitida"}
+			return {"fallo" : "Extension no permitida"}
 		else:
-		    #Búsqueda del fichero en la lista de ficheros en el servidor.
-		    for clave in lista_ficheros.keys():
-		        if lista_ficheros[clave][4] == subida.filename:
-		            return {"fallo" : "El fichero \"" + subida.filename + "\" ya se encuentra el servidor"}
-		    #Si no está en el servidor se busca el directorio del archivo en /home.
-		    ruta = ""
+			#Búsqueda del fichero en la lista de ficheros en el servidor.
+			for clave in lista_ficheros.keys():
+				if lista_ficheros[clave][4] == subida.filename:
+					return {"fallo" : "El fichero \"" + subida.filename + "\" ya se encuentra el servidor"}
+			#Si no está en el servidor se busca el directorio del archivo en /home.
+			ruta = ""
 			for root, dirs, files in os.walk("/home"):
-		        if subida.filename in files:
-		            ruta = os.path.join(root, subida.filename)
-		    #Se procesa y se guarda en el diccionario de archivos "lista_ficheros" o se devuelve fallo
+				if subida.filename in files:
+					ruta = os.path.join(root, subida.filename)
+			#Se procesa y se guarda en el diccionario de archivos "lista_ficheros" o se devuelve fallo
 			#en caso de que el archivo no tenga el formato adecuado.
-		    datos = leer_datos(ruta)
-		    if isinstance(datos, tuple):
-		        clave_hash = hash(subida.file)
-		        lista_ficheros[clave_hash] = datos
-		        #Devolución de la lista de ficheros (hash-nombre).
-		        clave_nombre = {}
-		        for clave in lista_ficheros.keys():
-		            clave_nombre[clave] = lista_ficheros[clave][4]
-		        return clave_nombre
+			datos = leer_datos(ruta)
+			if isinstance(datos, tuple):
+				clave_hash = hash(subida.file)
+				lista_ficheros[clave_hash] = datos
+				#Devolución de la lista de ficheros (hash-nombre).
+				clave_nombre = {}
+				for clave in lista_ficheros.keys():
+					clave_nombre[clave] = lista_ficheros[clave][4]
+				return clave_nombre
 		   	else:
-		        return {"fallo" : datos}
+				return {"fallo" : datos}
 	else:
 		#Consulta del contenido de un fichero en concreto.
 		contenido = {}
 		for clave in lista_ficheros.keys():
-		    if clave == id_fichero:
-		        contenido["palabra"] = lista_ficheros[clave][0]
-		        contenido["nombres_conj_datos"] = lista_ficheros[clave][1]
-		        contenido["nombres_algoritmos"] = lista_ficheros[clave][2]
-		        contenido["matriz_datos"] = lista_ficheros[clave][3]
-		        contenido["nombre_fichero"] = lista_ficheros[clave][4]
+			if clave == id_fichero:
+			    contenido["palabra"] = lista_ficheros[clave][0]
+			    contenido["nombres_conj_datos"] = lista_ficheros[clave][1]
+			    contenido["nombres_algoritmos"] = lista_ficheros[clave][2]
+			    contenido["matriz_datos"] = lista_ficheros[clave][3]
+			    contenido["nombre_fichero"] = lista_ficheros[clave][4]
 		return contenido
 
 
