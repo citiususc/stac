@@ -126,18 +126,23 @@ def subir_fichero():
                 return {"fallo" : "El fichero \"" + subida.filename + "\" ya se encuentra el servidor"}
         #Si no está en el servidor se busca el directorio del archivo en /home.
         ruta = ""
-        for root, dirs, files in os.walk("/home"):
+    	for root, dirs, files in os.walk("/home"):
             if subida.filename in files:
                 ruta = os.path.join(root, subida.filename)
-        #Se procesa y se guarda en el diccionario de archivos "lista_ficheros".
+        #Se procesa y se guarda en el diccionario de archivos "lista_ficheros" o se devuelve fallo
+		#en caso de que el archivo no tenga el formato adecuado.
         datos = leer_datos(ruta)
-        clave_hash = hash(subida.file)
-        lista_ficheros[clave_hash] = datos
-        #Devolución de la lista de ficheros (hash-nombre).
-        clave_nombre = {}
-        for clave in lista_ficheros.keys():
-            clave_nombre[clave] = lista_ficheros[clave][4]
-        return clave_nombre
+        print datos
+        if isinstance(datos, tuple):
+            clave_hash = hash(subida.file)
+            lista_ficheros[clave_hash] = datos
+            #Devolución de la lista de ficheros (hash-nombre).
+            clave_nombre = {}
+            for clave in lista_ficheros.keys():
+                clave_nombre[clave] = lista_ficheros[clave][4]
+            return clave_nombre
+       	else:
+            return {"fallo" : datos}
 
 #Servicio para la consula de ficheros.
 @route('/consultar/<id_fichero:int>', method='GET')
