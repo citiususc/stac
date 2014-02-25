@@ -133,10 +133,6 @@ def friedman_test(nombres_algoritmos, matriz_datos, alpha, tipo):
     #Número de algoritmos.
     K = len(nombres_algoritmos)
     
-    #El test de Friedman compara al menos dos algoritmos.
-    if K < 2:
-        return {"fallo" : "Test de Friedman necesita al menos 2 algoritmos"}
-
     #Número de conjuntos de datos (Número de veces que se aplican los algoritmos o número de
     #problemas).
     N = len(matriz_datos)
@@ -187,10 +183,6 @@ def iman_davenport_test(nombres_algoritmos, matriz_datos, alpha, tipo):
     #Número de algoritmos.
     K = len(nombres_algoritmos)
     
-    #El test de Iman-Davenport compara al menos dos algoritmos.
-    if K < 2:
-        return {"fallo" : "Test de Iman-Davenport necesita al menos 2 algoritmos"}
-    
     #Número de conjuntos de datos (Número de veces que se aplican los algoritmos o número de
     #problemas).
     N = len(matriz_datos)
@@ -218,10 +210,6 @@ def friedman_rangos_alineados_test(nombres_algoritmos, matriz_datos, alpha, tipo
     #Número de algoritmos.
     K = len(nombres_algoritmos)
     
-    #El test de los Rangos Alineados de Friedman compara al menos dos algoritmos.
-    if K < 2:
-        return {"fallo" : "Test de los Rangos Alineados necesita al menos 2 algoritmos"}
-
     #Número de conjuntos de datos (Número de veces que se aplican los algoritmos o número de
     #problemas).
     N = len(matriz_datos)
@@ -281,38 +269,9 @@ def friedman_rangos_alineados_test(nombres_algoritmos, matriz_datos, alpha, tipo
     ranking_nombres = []
     for i in sorted({nombres_algoritmos[i] : rankings_medios[i] for i in range(K)}.items(), key = lambda t:t[1]):
         ranking_nombres.append(i[0])
+
+	#Ordenamiento de menor a mayor de los rankings medios obtenidos.
+    rankings_medios.sort()
         
     return {"resultado" : str(p_valor < alpha), "p_valor": round(p_valor,5), "estadistico" : round(T,5), 
     "nombres" : ranking_nombres, "ranking" : rankings_medios}
-
-
-
-# Pruebas
-"""
-nombres = ["PDFC","NNEP","IS-CHC+INN","FH-GBML"]
-
-datos = [[0.752,0.773,0.785,0.795],
-        [0.727,0.748,0.724,0.713],
-        [0.736,0.716,0.585,0.638],
-        [0.994,0.861,0.880,0.791],
-        [0.508,0.553,0.575,0.515],
-        [0.535,0.536,0.513,0.471],
-        [0.967,0.871,0.954,0.532],
-        [0.831,0.807,0.819,0.768],
-        [0.745,0.702,0.719,0.705],
-        [0.709,0.572,0.669,0.607],
-        [0.722,0.728,0.725,0.732],
-        [0.967,0.947,0.953,0.960],
-        [0.832,0.752,0.802,0.691],
-        [0.998,0.992,0.482,0.910],
-        [0.963,0.963,0.954,0.926],
-        [0.982,0.953,0.932,0.630],
-        [0.978,0.773,0.834,0.849],
-        [0.854,0.787,0.841,0.779],
-        [0.965,0.984,0.995,0.947],
-        [0.924,0.887,0.861,0.804],
-        [0.929,0.942,0.931,0.921],
-        [0.837,0.643,0.602,0.554],
-        [0.972,0.956,0.944,0.922],
-        [0.958,0.959,0.964,0.964]]
-"""
