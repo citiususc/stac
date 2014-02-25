@@ -155,14 +155,16 @@ def consultar_fichero(id_fichero):
             contenido["nombre_fichero"] = lista_ficheros[clave][4]
     return contenido
 
-@route('/wilcoxon', method="GET")
-@route('/wilcoxon/<alpha:float>', method="GET")
-def wilcoxon_test(alpha=0.05):
+@route('/wilcoxon/<id_fichero:int>', method="GET")
+@route('/wilcoxon/<id_fichero:int>/<alpha:float>', method="GET")
+def wilcoxon_test(id_fichero, alpha=0.05):
     """
     Servicio web para el test de los rangos signados de Wilcoxon
     
     Argumentos
     ----------
+    id_fichero: int
+        Identificador HASH del fichero sobre el que se quiere aplicar el test
     alpha: string
         Nivel de significancia. Probabilidad de rechazar la hipótesis nula siendo cierta
         
@@ -170,28 +172,25 @@ def wilcoxon_test(alpha=0.05):
     ------
     resultado: dict (JSON)
         Resultado devuelto al aplicar el test de Wilcoxon
-    fallo en el archivo: dict (JSON)
-        Diccionario con la clave "fallo" que indica un fallo ocurrido durante la lectura del arhivo en la función "leer_datos"
     """
-    datos = leer_datos("data_wilcoxon.csv")
+    datos = lista_ficheros[id_fichero]
     response.headers['Access-Control-Allow-Origin'] = '*'
     response.content_type = "application/json"
-    if isinstance(datos, tuple):
-        resultado = tnp.wilcoxon_test(datos[3],alpha)
-        return resultado
-    else:
-        return {"fallo" : datos}
+    resultado = tnp.wilcoxon_test(datos[3],alpha)
+    return resultado
         
-@route('/friedman', method="GET")
-@route('/friedman/<alpha:float>', method="GET")
-@route('/friedman/<tipo:int>', method="GET")
-@route('/friedman/<alpha:float>/<tipo:int>', method="GET")
-def friedman_test(alpha=0.05, tipo=0):
+@route('/friedman/<id_fichero:int>', method="GET")
+@route('/friedman/<id_fichero:int>/<alpha:float>', method="GET")
+@route('/friedman/<id_fichero:int>/<tipo:int>', method="GET")
+@route('/friedman/<id_fichero:int>/<alpha:float>/<tipo:int>', method="GET")
+def friedman_test(id_fichero, alpha=0.05, tipo=0):
     """
     Servicio web para el test de Friedman
     
     Argumentos
     ----------
+    id_fichero: int
+        Identificador HASH del fichero sobre el que se quiere aplicar el test
     alpha: string
         Nivel de significancia. Probabilidad de rechazar la hipótesis nula siendo cierta
     tipo: string
@@ -201,28 +200,25 @@ def friedman_test(alpha=0.05, tipo=0):
     ------
     resultado: dict (JSON)
         Resultado devuelto al aplicar el test de Friedman
-    fallo en el archivo: dict (JSON)
-        Diccionario con la clave "fallo" que indica un fallo ocurrido durante la lectura del arhivo en la función "leer_datos"
     """
-    datos = leer_datos("data_wilcoxon.csv")
+    datos = lista_ficheros[id_fichero]
     response.headers['Access-Control-Allow-Origin'] = '*'
     response.content_type = "application/json"
-    if isinstance(datos, tuple):
-        resultado = tnp.friedman_test(datos[2],datos[3],alpha,tipo)
-        return resultado
-    else:
-        return {"fallo" : datos}
+    resultado = tnp.friedman_test(datos[2],datos[3],alpha,tipo)
+    return resultado
 
-@route('/iman-davenport', method="GET")
-@route('/iman-davenport/<alpha:float>', method="GET")
-@route('/iman-davenport/<tipo:int>', method="GET")
-@route('/iman-davenport/<alpha:float>/<tipo:int>', method="GET")
-def iman_davenport_test(alpha=0.05, tipo=0):
+@route('/iman-davenport/<id_fichero:int>', method="GET")
+@route('/iman-davenport/<id_fichero:int>/<alpha:float>', method="GET")
+@route('/iman-davenport/<id_fichero:int>/<tipo:int>', method="GET")
+@route('/iman-davenport/<id_fichero:int>/<alpha:float>/<tipo:int>', method="GET")
+def iman_davenport_test(id_fichero, alpha=0.05, tipo=0):
     """
     Servicio web para el test de Iman-Davenport
     
     Argumentos
     ----------
+    id_fichero: int
+        Identificador HASH del fichero sobre el que se quiere aplicar el test
     alpha: string
         Nivel de significancia. Probabilidad de rechazar la hipótesis nula siendo cierta
     tipo: string
@@ -232,28 +228,25 @@ def iman_davenport_test(alpha=0.05, tipo=0):
     ------
     resultado: dict (JSON)
         Resultado devuelto al aplicar el test de Iman-Davenport
-    fallo en el archivo: dict (JSON)
-        Diccionario con la clave "fallo" que indica un fallo ocurrido durante la lectura del arhivo en la función "leer_datos"
     """
-    datos = leer_datos("data_wilcoxon.csv")
+    datos = lista_ficheros[id_fichero]
     response.headers['Access-Control-Allow-Origin'] = '*'
     response.content_type = "application/json"
-    if isinstance(datos, tuple):
-        resultado = tnp.iman_davenport_test(datos[2],datos[3],alpha,tipo)
-        return resultado
-    else:
-        return {"fallo" : datos}
-        
-@route('/rangos-alineados', method="GET")
-@route('/rangos-alineados/<alpha:float>', method="GET")
-@route('/rangos-alineados/<tipo:int>', method="GET")
-@route('/rangos-alineados/<alpha:float>/<tipo:int>', method="GET")
-def friedman_rangos_alineados_test(alpha=0.05, tipo=0):
+    resultado = tnp.iman_davenport_test(datos[2],datos[3],alpha,tipo)
+    return resultado
+
+@route('/rangos-alineados/<id_fichero:int>', method="GET")
+@route('/rangos-alineados/<id_fichero:int>/<alpha:float>', method="GET")
+@route('/rangos-alineados/<id_fichero:int>/<tipo:int>', method="GET")
+@route('/rangos-alineados/<id_fichero:int>/<alpha:float>/<tipo:int>', method="GET")
+def friedman_rangos_alineados_test(id_fichero, alpha=0.05, tipo=0):
     """
     Servicio web para el test de los Rangos Alineados de Friedman
     
     Argumentos
     ----------
+    id_fichero: int
+        Identificador HASH del fichero sobre el que se quiere aplicar el test
     alpha: string
         Nivel de significancia. Probabilidad de rechazar la hipótesis nula siendo cierta
     tipo: string
@@ -263,16 +256,11 @@ def friedman_rangos_alineados_test(alpha=0.05, tipo=0):
     ------
     resultado: dict (JSON)
         Resultado devuelto al aplicar el test de los Rangos Alineados de Friedman
-    fallo en el archivo: dict (JSON)
-        Diccionario con la clave "fallo" que indica un fallo ocurrido durante la lectura del arhivo en la función "leer_datos"
     """
-    datos = leer_datos("data_wilcoxon.csv")
+    datos = lista_ficheros[id_fichero]
     response.headers['Access-Control-Allow-Origin'] = '*'
     response.content_type = "application/json"
-    if isinstance(datos, tuple):
-        resultado = tnp.friedman_rangos_alineados_test(datos[2],datos[3],alpha,tipo)
-        return resultado
-    else:
-        return {"fallo" : datos}
+    resultado = tnp.friedman_rangos_alineados_test(datos[2],datos[3],alpha,tipo)
+    return resultado
 
 run(reloader=True, host='localhost', port=8080)
