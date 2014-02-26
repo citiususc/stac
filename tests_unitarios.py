@@ -9,7 +9,7 @@ Created on Thu Jan 25 10:31:12 2014
 las pruebas para los tests no parmétricos de ranking."""
 
 import unittest
-from .tests_no_parametricos import wilcoxon_test, friedman_test, iman_davenport_test, friedman_rangos_alineados_test
+from tests_no_parametricos import wilcoxon_test, friedman_test, iman_davenport_test, friedman_rangos_alineados_test
 
 #Datos para relizar las pruebas del test de Wilcoxon. Los argumentos del test son (matriz_datos, alpha).
 #Caso normal N<25 y >= 5 y número de algoritmos = 2.
