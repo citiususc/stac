@@ -12,14 +12,14 @@ import re, os
 lista_ficheros = {}
 
 #Función para leer los datos de un fichero.
-def leer_datos(ruta_archivo):
+def leer_datos(nombre_archivo):
     """
     Función que lee el fichero de datos que contiene los datos sobre los que se aplican los tests.
 
     Argumentos
     ----------
-    ruta_archivo: string
-        Ruta absoluta del fichero a abrir.
+    nombre_archivo: string
+        Nombre del archivo con extensión a subir.
         
     Salida
     ------
@@ -52,7 +52,7 @@ def leer_datos(ruta_archivo):
     nombres_algoritmos = []
     matriz_datos = []
     nombre_fichero = ""
-    f = open(ruta_archivo,"r")
+    f = open(nombre_archivo,"r")
     numero_linea = 0
     error = 0
     while not error:
@@ -94,7 +94,7 @@ def leer_datos(ruta_archivo):
             matriz_datos.append(lista_datos)
         numero_linea += 1
         
-    nombre_fichero = os.path.basename(ruta_archivo)
+    nombre_fichero = nombre_archivo
 
     numero_algoritmos = len(nombres_algoritmos)
     for i in matriz_datos:
@@ -128,14 +128,9 @@ def subir_fichero(id_fichero=""):
 			for clave in lista_ficheros.keys():
 				if lista_ficheros[clave][4] == subida.filename:
 					return {"fallo" : "El fichero \"" + subida.filename + "\" ya se encuentra el servidor"}
-			#Si no está en el servidor se busca el directorio del archivo en /home.
-			ruta = ""
-			for root, dirs, files in os.walk("/home"):
-				if subida.filename in files:
-					ruta = os.path.join(root, subida.filename)
 			#Se procesa y se guarda en el diccionario de archivos "lista_ficheros" o se devuelve fallo
 			#en caso de que el archivo no tenga el formato adecuado.
-			datos = leer_datos(ruta)
+			datos = leer_datos(subida.filename)
 			if isinstance(datos, tuple):
 				clave_hash = hash(subida.file)
 				lista_ficheros[clave_hash] = datos
