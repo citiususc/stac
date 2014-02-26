@@ -122,7 +122,7 @@ def wilcoxon_test(matriz_datos, alpha):
         #else:
             #print "Se acepta HO."
         
-        return {"resultado" : str(p_valor < alpha), "p_valor" : round(p_valor,5), "estadistico" : round(Z,5),
+        return {"resultado" : str(p_valor < alpha), "p_valor" : round(p_valor,6), "estadistico" : round(Z,3),
         "suma rangos pos" : T_Mas, "suma rangos neg" : T_Men, "puntos criticos" : [round(Z_alphaDiv2,2),round(-Z_alphaDiv2,2)]}
   
 
@@ -169,10 +169,12 @@ def friedman_test(nombres_algoritmos, matriz_datos, alpha, tipo):
     for i in sorted({nombres_algoritmos[i] : rankings_medios[i] for i in range(K)}.items(), key = lambda t:t[1]):
         ranking_nombres.append(i[0])
         
-	#Ordenamiento de menor a mayor de los rankings medios obtenidos.
+	#Ordenamiento de menor a mayor de los rankings medios obtenidos y redondeo de sus datos.
     rankings_medios.sort()
+    for i in range(K):
+        rankings_medios[i] = round(rankings_medios[i],3)
 
-    return {"resultado" : str(p_valor < alpha), "p_valor": round(p_valor,5), "estadistico" : round(chi2,5), 
+    return {"resultado" : str(p_valor < alpha), "p_valor": round(p_valor,6), "estadistico" : round(chi2,3), 
     "nombres" : ranking_nombres, "ranking" : rankings_medios}
 
 
@@ -199,7 +201,7 @@ def iman_davenport_test(nombres_algoritmos, matriz_datos, alpha, tipo):
     #iman_davenport.
     p_valor = 1 - st.f.cdf(iman_davenport, K-1, (K-1)*(N-1))
 
-    return {"resultado" : str(p_valor < alpha), "p_valor": round(p_valor,5), "estadistico" : round(iman_davenport,5), 
+    return {"resultado" : str(p_valor < alpha), "p_valor": round(p_valor,6), "estadistico" : round(iman_davenport,3), 
     "nombres": friedman["nombres"], "ranking": friedman["ranking"]}
 
 
@@ -270,9 +272,11 @@ def friedman_rangos_alineados_test(nombres_algoritmos, matriz_datos, alpha, tipo
     for i in sorted({nombres_algoritmos[i] : rankings_medios[i] for i in range(K)}.items(), key = lambda t:t[1]):
         ranking_nombres.append(i[0])
 
-	#Ordenamiento de menor a mayor de los rankings medios obtenidos.
+	#Ordenamiento de menor a mayor de los rankings medios obtenidos y redondeo de sus datos.
     rankings_medios.sort()
+    for i in range(K):
+        rankings_medios[i] = round(rankings_medios[i],3)
         
-    return {"resultado" : str(p_valor < alpha), "p_valor": round(p_valor,5), "estadistico" : round(T,5), 
+    return {"resultado" : str(p_valor < alpha), "p_valor": round(p_valor,6), "estadistico" : round(T,3), 
     "nombres" : ranking_nombres, "ranking" : rankings_medios}
 
