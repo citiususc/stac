@@ -13,26 +13,6 @@ lista_ficheros = {}
 
 #Función para leer los datos de un fichero.
 def leer_datos(archivo):
-    """
-    Función que lee el fichero de datos que contiene los datos sobre los que se aplican los tests.
-
-    Argumentos
-    ----------
-    archivo: file object.
-        Objeto fichero que contiene los datos del fichero obtenido con el objeto request de Bottle.
-        
-    Salida
-    ------
-    dict (JSON):
-        palabra: string
-            Palabra del fichero antes de la primera coma.
-        nombres_conj_datos: list
-            Nombres de los conjuntos de datos (diferentes).
-        nombres_algoritmos: list
-            Nombres de los algoritmos (diferentes).
-        matriz_datos: list
-            Lista de listas que contiene las listas de los diferentes conjuntos de datos.
-    """
     patron_numeros = re.compile('^\d+(\.\d+)?([eE][+-]?\d+)?$')
 
     palabra = ""
@@ -94,32 +74,36 @@ def generar_md5(archivo):
     return md5.hexdigest()
 
 
-#Servicio para la subida y consulta de ficheros.
-@route('/subir', method='POST')
-@route('/consultar/<id_fichero>', method='GET')
-def subir_fichero(id_fichero=""):
+#Servicio para la subida de ficheros.
+@route('/fichero', method='POST')
+def gestionar_fichero():
     response.headers['Access-Control-Allow-Origin'] = '*'
     response.content_type = "application/json"
-    if(id_fichero==""):
-        subida = request.files.get('fichero')
-        clave_hash = generar_md5(subida.file)
-        for clave in lista_ficheros.keys():
-            if clave == clave_hash:
-                return {"fallo" : "El fichero con hash \"" + clave + "\" ya se encuentra el servidor"}
-        try:
-            datos = leer_datos(subida.file)
-        except Exception, error:
-            return {"fallo" : str(error)}
-        lista_ficheros[clave_hash] = datos
-        return {"clave" : clave_hash}
-    else:
-        #Consulta del contenido de un fichero en concreto.
-        print "estoy"
-        try:
-            datos = lista_ficheros[id_fichero]
-        except Exception:
-            return {"fallo" : "No existe ningun fichero con esa clave"}
-        return datos
+    subida = request.files.get('fichero')
+    clave_hash = generar_md5(subida.file)
+    for clave in lista_ficheros.keys():
+        if clave == clave_hash:
+            return {"fallo" : "El fichero con hash \"" + clave + "\" ya se encuentra el servidor"}
+    try:
+        datos = leer_datos(subida.file)
+    except Exception, error:
+        return {"fallo" : str(error)}
+    lista_ficheros[clave_hash] = datos
+    return {"clave" : clave_hash}
+
+
+#Servicio para la subida de ficheros.
+@route('/fichero/<id_fichero>', method='GET')
+def gestionar_fichero(id_fichero):
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    response.content_type = "application/json"
+    #Consulta del contenido de un fichero en concreto.
+    try:
+        datos = lista_ficheros[id_fichero]
+    except Exception:
+        return {"fallo" : "No existe ningun fichero con esa clave"}
+    return datos
+
 
 #Servicio para el test de Wilcoxon.
 @route('/wilcoxon/<id_fichero>', method="GET")
@@ -130,8 +114,8 @@ def wilcoxon_test(id_fichero, alpha=0.05):
     
     Argumentos
     ----------
-    id_fichero: int
-        Identificador HASH del fichero sobre el que se quiere aplicar el test
+    id_fichero: string
+        Identificador HASH MD5 del fichero sobre el que se quiere aplicar el test
     alpha: string
         Nivel de significancia. Probabilidad de rechazar la hipótesis nula siendo cierta
         
@@ -161,8 +145,8 @@ def friedman_test(id_fichero, alpha=0.05, tipo=0):
     
     Argumentos
     ----------
-    id_fichero: int
-        Identificador HASH del fichero sobre el que se quiere aplicar el test
+    id_fichero: string
+        Identificador HASH MD5 del fichero sobre el que se quiere aplicar el test
     alpha: string
         Nivel de significancia. Probabilidad de rechazar la hipótesis nula siendo cierta
     tipo: string
@@ -194,8 +178,8 @@ def iman_davenport_test(id_fichero, alpha=0.05, tipo=0):
     
     Argumentos
     ----------
-    id_fichero: int
-        Identificador HASH del fichero sobre el que se quiere aplicar el test
+    id_fichero: string
+        Identificador HASH MD5 del fichero sobre el que se quiere aplicar el test
     alpha: string
         Nivel de significancia. Probabilidad de rechazar la hipótesis nula siendo cierta
     tipo: string
@@ -227,8 +211,8 @@ def friedman_rangos_alineados_test(id_fichero, alpha=0.05, tipo=0):
     
     Argumentos
     ----------
-    id_fichero: int
-        Identificador HASH del fichero sobre el que se quiere aplicar el test
+    id_fichero: string
+        Identificador HASH MD5 del fichero sobre el que se quiere aplicar el test
     alpha: string
         Nivel de significancia. Probabilidad de rechazar la hipótesis nula siendo cierta
     tipo: string

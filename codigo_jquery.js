@@ -32,6 +32,7 @@ $(document).on('ready', function() {
 		                salida = salida + "<p>" + key + " = " + val + "</p>";
 		            });
 		            $("#resultado").html(salida);
+		            $('#seleccionar_hashmd5').val("");
 		        },
 		        error : function(e) {
 		            alert('Error: ' + e);
@@ -52,7 +53,7 @@ $(document).on('ready', function() {
 		else{
 			$.ajax({
 				type: "POST",
-			   	url: "http://localhost:8080/subir",
+			   	url: "http://localhost:8080/fichero",
 				dataType: "json",
 				data: formData,
 				cache: false,
@@ -84,9 +85,8 @@ $(document).on('ready', function() {
 			console.log(consulta_id);
 			$.ajax({
 				type: "GET",
-			   	url: "http://localhost:8080/consultar/"+consulta_id,
+			   	url: "http://localhost:8080/fichero/"+consulta_id,
 				success : function(data) {
-					console.log("sdfsfsd");
 					salida = "<p>Contenido del fichero:</p>";
 		            $.each(data, function(key, val) {
 		            	salida = salida + "<p>" + key + " = " + val + "</p>";
