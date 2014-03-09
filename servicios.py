@@ -232,4 +232,36 @@ def friedman_rangos_alineados_test(id_fichero, alpha=0.05, tipo=0):
     resultado = tnp.friedman_rangos_alineados_test(datos["nombres_algoritmos"],datos["matriz_datos"],alpha,tipo)
     return resultado
 
+#Servicio para el test Quade.
+@route('/quade/<id_fichero>', method="GET")
+@route('/quade/<id_fichero>/<alpha:float>', method="GET")
+@route('/quade/<id_fichero>/<tipo:int>', method="GET")
+@route('/quade/<id_fichero>/<alpha:float>/<tipo:int>', method="GET")
+def quade_test(id_fichero, alpha=0.05, tipo=0):
+    """
+    Servicio web para el test de Quade
+    
+    Argumentos
+    ----------
+    id_fichero: string
+        Identificador HASH MD5 del fichero sobre el que se quiere aplicar el test
+    alpha: string
+        Nivel de significancia. Probabilidad de rechazar la hipótesis nula siendo cierta
+    tipo: string
+        Indica si lo que se quiere es minimizar ("0") o maximizar ("1")
+        
+    Salida
+    ------
+    resultado: dict (JSON)
+        Resultado devuelto al aplicar el test de Quade
+    """
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    response.content_type = "application/json"
+    try:
+        datos = lista_ficheros[id_fichero]
+    except Exception:
+        return {"fallo" : "No existe ningun fichero con esa clave"}
+    resultado = tnp.quade_test(datos["nombres_algoritmos"],datos["matriz_datos"],alpha,tipo)
+    return resultado
+
 run(reloader=True, host='localhost', port=8080)

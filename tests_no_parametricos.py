@@ -280,3 +280,91 @@ def friedman_rangos_alineados_test(nombres_algoritmos, matriz_datos, alpha, tipo
     return {"resultado" : str(p_valor < alpha), "p_valor": round(p_valor,6), "estadistico" : round(T,3), 
     "nombres" : ranking_nombres, "ranking" : rankings_medios}
 
+
+
+"""Test de Quade."""
+def quade_test(nombres_algoritmos, matriz_datos, alpha, tipo):
+    
+    #Número de algoritmos.
+    K = len(nombres_algoritmos)
+    
+    #Número de conjuntos de datos (Número de veces que se aplican los algoritmos o número de
+    #problemas).
+    N = len(matriz_datos)
+    
+    #Asignación de rankings a los resultados obtenidos por cada algoritmo en cada problema de forma
+    #similar al test de Friedman: cada fila representa un conjunto de datos compuesto por los 
+    #valores (rankings) asignados. Los valores se asignan de forma ascencente: 1 al mejor resultado,
+    #2 al segundo, etc. En caso de empates, se asignan valores medios.
+    rankings_resultados = []
+    for conj_datos in matriz_datos:
+        ranking_conj = []
+        copia = list(conj_datos)
+        #Ordenamos según el problema se tratase de maximizar o minimizar.
+        copia.sort(reverse=tipo)
+        for dato in conj_datos:
+            ranking_conj.append((copia.count(dato)+copia.index(dato)*2+1)/float(2))
+        rankings_resultados.append(ranking_conj)
+
+    #Los rankings se asignan a los problemas de acuerdo al tamaño del rango de la muestra en cada
+    #uno. El rango de la muestra en un problema es la diferencia entre la observación más alta y
+    #la más baja en dicho problema. Se asigna el ranking 1 al conjunto con el menor rango, el 2 al
+    #segundo con menor rango, etc. Se utilizan rankings medios en caso de empate.
+    rankings_problemas = []
+    rangos = []
+    for conj_datos in matriz_datos:
+        rangos.append(max(conj_datos)-min(conj_datos))
+    copia = list(rangos)
+    copia.sort()
+    for rango in rangos:
+        rankings_problemas.append((copia.count(rango)+copia.index(rango)*2+1)/float(2))
+    
+    #S, W.
+    S = []
+    W = []
+    ranking_medio = (K+1)/float(2)
+    contador_problemas = 0
+    for ranking_conj in rankings_resultados:
+        fila_s = []
+        fila_w = []
+        for i in range(K):
+            fila_s.append(rankings_problemas[contador_problemas]*(ranking_conj[i]-ranking_medio))
+            fila_w.append(rankings_problemas[contador_problemas]*ranking_conj[i])
+        contador_problemas+=1
+        S.append(fila_s)
+        W.append(fila_w)
+      
+    #Sj, Wj.
+    Sj = []
+    Wj = []
+    for i in range(K):
+        Sj.append(sp.sum(fila[i] for fila in S))
+        Wj.append(sp.sum(fila[i] for fila in W))
+    
+    #Rankings medios.
+    rankings_medios = []
+    for i in range(K):
+        rankings_medios.append(Wj[i]/float((N*(N+1))/float(2)))
+    
+    #Términos A, B.
+    A = N*(N+1)*(2*N+1)*K*(K+1)*(K-1)/float(72)
+    B = sp.sum(x**2 for x in Sj)/float(N)
+    
+    #Cáculo del estadístico.
+    T = (N-1)*B/float(A-B)
+    
+    #Cálculo del p_valor: Probabilidad de obtener un valor al menos tan extremo como el estadístico T.
+    p_valor = 1 - st.f.cdf(T, K-1, (K-1)*(N-1))
+    
+    #Cálculo del ranking de los nombres de los algoritmos (de acuerdo a los rankings medios obtenidos).
+    ranking_nombres = []
+    for i in sorted({nombres_algoritmos[i] : rankings_medios[i] for i in range(K)}.items(), key = lambda t:t[1]):
+        ranking_nombres.append(i[0])
+
+    #Ordenamiento de menor a mayor de los rankings medios obtenidos y redondeo de sus datos.
+    rankings_medios.sort()
+    for i in range(K):
+        rankings_medios[i] = round(rankings_medios[i],3)
+        
+    return {"resultado" : str(p_valor < alpha), "p_valor": round(p_valor,6), "estadistico" : round(T,3), 
+    "nombres" : ranking_nombres, "ranking" : rankings_medios}
