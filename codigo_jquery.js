@@ -1,5 +1,14 @@
 $(document).on('ready', function() {
 
+	//Visualización de selector de tipo si se requiere test de ranking.
+	$("#test").change(function () {
+    	if($("#test").val()=="wilcoxon")
+    		$("#mostrar_tipo").hide();
+    	else
+    		$("#mostrar_tipo").show();
+  	})
+  	.change();
+
 	//Ejecución de los tests.
 	$(document).on('click', '#datos', function() {
 

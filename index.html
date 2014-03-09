@@ -7,7 +7,7 @@
         <script src="codigo_jquery.js"></script>
     </head>
     <body>
-        <h2>Sprint 2</h2>
+        <h2>Sprint 3</h2>
 		<!--Selección de datos para aplicar los tests-->
         <form id="formulario">
             <strong>Test a aplicar:</strong><br><br>
@@ -28,12 +28,14 @@
                 <option value="0.005">0.005</option>
                 <option value="0.001">0.001</option>
             </select><br><br>
-            <strong>Maximización / Minimización:</strong><br><br>
-            <select id="tipo">
-				<option value="no">Elige</option>
-                <option value="0">Minimización</option>
-                <option value="1">Maximización</option>
-            </select><br><br>
+            <div id="mostrar_tipo">
+                <strong>Maximización / Minimización:</strong><br><br>
+                <select id="tipo">
+                    <option value="no">Elige</option>
+                    <option value="0">Minimización</option>
+                    <option value="1">Maximización</option>
+                </select><br><br>
+            </div>
 			<strong>Seleccionar fichero:</strong><br><br>
             <input type="text" size="32" maxlength="32" placeholder="Introduce HASH" id="seleccionar_hashmd5"><br><br>
             <input type="button" value="Enviar" id="datos"><br><br>
