@@ -34,20 +34,23 @@
                 <option value="1">Maximización</option>
             </select><br><br>
 			<strong>Seleccionar fichero:</strong><br><br>
-			<div id="seleccionar_fichero">No existen ficheros<br><br></div>
+            <input type="text" size="32" maxlength="32" placeholder="Introduce HASH" id="seleccionar_hashmd5"><br><br>
             <input type="button" value="Enviar" id="datos"><br><br>
         </form>
 		<div id="resultado"></div>
-		<!--Subida y consulta de ficheros-->
-		<form id="formfichero" enctype="multipart/form-data">
-	  		<strong>Subir Fichero:</strong><br><br>
-			<input type="file" name="fichero" id="fichero"/><br><br>
-	  		<input type="button" value="Subir" id="boton_fichero"/><br><br>
-		</form>
-		<form id="seleccion_fichero">
-			<div id="error"></div>
-			<div id="campos"></div>
-		</form>
-		<div id="contenido_fichero"></div>
+        <!--Subida de ficheros-->
+        <form id="formfichero" enctype="multipart/form-data">
+            <strong>Subir Fichero:</strong><br><br>
+            <input type="file" name="fichero" id="fichero"/><br><br>
+            <input type="button" value="Subir" id="boton_fichero"/><br><br>
+        </form>
+        <div id="hash_fichero"></div>
+        <!--Consulta de ficheros-->
+        <form id="consfichero">
+            <strong>Consultar Fichero:</strong><br><br>
+            <input type="text" size="32" maxlength="32" placeholder="Introduce HASH" id="consultar_hashmd5"><br><br>
+            <input type="button" value="Consultar" id="boton_consulta"/><br><br>
+        </form>
+        <div id="contenido_fichero"></div>
     </body>
 </html>

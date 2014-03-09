@@ -1,15 +1,15 @@
 $(document).on('ready', function() {
 
 	//Ejecución de los tests.
-    $(document).on('click', '#datos', function() {
+	$(document).on('click', '#datos', function() {
 
         var test = $('#test').val();
         var alpha = $('#alpha').val();
         var tipo = $('#tipo').val();
-		var id_fichero = $('#selector_fichero').val();
+		var id_fichero = $('#seleccionar_hashmd5').val();
 
-		if(!id_fichero || id_fichero=="no")
-			alert("Selecciona un fichero")
+		if(id_fichero == "")
+			alert("Falta HASH fichero")
 		else{
 
 			var url;
@@ -59,24 +59,12 @@ $(document).on('ready', function() {
 				contentType: false,
 				processData: false,
 				success : function(data) {
-					if(!data.fallo){
-						lista1 = "<p>Lista de ficheros:</p>";
-						lista2 = "<select id=\"selector_fichero\"><option value=\"no\">Elige</option>";
-				        $.each(data, function(key, val) {
-				            lista1 = lista1 + "<input type=\"radio\" name=\"consulta\" value=\"" + key + "\"> " + val + "<br>";
-							lista2 = lista2 + "<option value=\"" + key + "\">" + val + "</option>";
-				        });
-						lista1 = lista1 + "<br><input type=\"button\" value=\"Ver Contenido\" id=\"boton_contenido\"/><br><br>";
-						lista2 = lista2 + "</select><br><br>";
-						$('#campos').html(lista1);
-						$("#error").empty();
-						$('#seleccionar_fichero').html(lista2);
-					}
-					else{
-						$.each(data, function(key, val) {
-							$('#error').html("<p>" +data.fallo+ "</p>");
-						});
-					}
+					resultado = "<p>Hash MD5 del fichero:</p>";
+					if(!data.fallo)
+	                	resultado = resultado + "<p>" + data.clave + "</p>";
+	                else
+	                	resultado = resultado + "<p>" + data.fallo + "</p>";
+					$('#hash_fichero').html(resultado);
 					$('#formfichero').trigger('reset');
 				},
 				error : function(e) {
@@ -87,21 +75,24 @@ $(document).on('ready', function() {
 
 	});
 
-	//Consulta de ficheros.
-	$(document).on('click', '#boton_contenido', function() {
 
-		if( $("#seleccion_fichero input[name='consulta']:radio").is(':checked')) {
-			var consulta_id = $('input:radio[name=consulta]:checked').val();
+	//Consulta de ficheros.
+	$(document).on('click', '#boton_consulta', function() {
+
+		if( $("#consultar_hashmd5").val()!="") {
+			var consulta_id = $('#consultar_hashmd5').val();
+			console.log(consulta_id);
 			$.ajax({
 				type: "GET",
 			   	url: "http://localhost:8080/consultar/"+consulta_id,
 				success : function(data) {
+					console.log("sdfsfsd");
 					salida = "<p>Contenido del fichero:</p>";
 		            $.each(data, function(key, val) {
 		            	salida = salida + "<p>" + key + " = " + val + "</p>";
 		            });
 					$('#contenido_fichero').html(salida);
-					$('input:radio').prop('checked', false);
+					$('#consultar_hashmd5').val("");
 				},
 				error : function(e) {
 				    alert('Error: ' + e);
@@ -109,7 +100,7 @@ $(document).on('ready', function() {
 			});
         }
 		else{
-        	alert("Selecciona un fichero");
+        	alert("Introduce hash del fichero");
 		}
 
 	});

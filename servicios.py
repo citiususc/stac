@@ -7,156 +7,123 @@ Created on Fri Jan 31 12:49:31 2014
 
 from bottle import route, run, response, request
 import tests_no_parametricos as tnp
-import re, os
+import csv, re, hashlib
 
 lista_ficheros = {}
 
 #Función para leer los datos de un fichero.
-def leer_datos(nombre_archivo):
+def leer_datos(archivo):
     """
     Función que lee el fichero de datos que contiene los datos sobre los que se aplican los tests.
 
     Argumentos
     ----------
-    nombre_archivo: string
-        Nombre del archivo con extensión a subir.
+    archivo: file object.
+        Objeto fichero que contiene los datos del fichero obtenido con el objeto request de Bottle.
         
     Salida
     ------
-    tuple:
+    dict (JSON):
         palabra: string
-            Palabra que sale antes de la primera coma
+            Palabra del fichero antes de la primera coma.
         nombres_conj_datos: list
             Nombres de los conjuntos de datos (diferentes).
         nombres_algoritmos: list
             Nombres de los algoritmos (diferentes).
         matriz_datos: list
             Lista de listas que contiene las listas de los diferentes conjuntos de datos.
-		nombre_fichero: string
-			Nombre fichero con extensión.
-    descripcion_error: string
-        Cadena que contiene un mensaje de error. Será la única salida en caso de error
-        
-    Tipos de errores
-    ----------------
-    Nombre algoritmo repetido\n
-    Nombre conjunto datos repetido\n
-    Error dato linea (El dato no es un número válido)\n
-    Error formato datos (La estructura de los datos presentados no es correcta)\n
-    Deben existir al menos dos algoritmos\n
     """
-    patron_numeros = re.compile('^\d+(\.{1}\d+)?$')
-    descripcion_error = ""
+    patron_numeros = re.compile('^\d+(\.\d+)?([eE][+-]?\d+)?$')
+
     palabra = ""
     nombres_conj_datos = []
     nombres_algoritmos = []
     matriz_datos = []
-    nombre_fichero = ""
-    f = open(nombre_archivo,"r")
+
+    lector = csv.reader(archivo)
+
     numero_linea = 0
-    error = 0
-    while not error:
-        linea = f.readline()
-        if not linea:
-            break
-        tokens = re.split(",",linea)
+
+    for fila in lector:
+        if len(fila)<3:
+            raise Exception("Error formato datos")
         if numero_linea == 0:
-            for i in range(len(tokens)):
+            for i in range(len(fila)):
                 if i == 0:
-                    palabra = tokens[i]
+                    palabra = fila[i]
                 else:
-                    nombre = tokens[i].replace("\n","")
-                    if nombres_algoritmos.count(nombre) == 0:
-                        nombres_algoritmos.append(nombre)
+                    if nombres_algoritmos.count(fila[i]) == 0:
+                        nombres_algoritmos.append(fila[i])
                     else:
-                        descripcion_error = "Nombre algoritmo repetido"
-                        error = 1
-                        break
+                        raise Exception("Nombre de algoritmo repetido")
         else:
+            numero_algoritmos = len(nombres_algoritmos)
+            if len(fila) != numero_algoritmos + 1:
+                raise Exception("Error formato datos")
             lista_datos = []
-            for i in range(len(tokens)):
+            for i in range(len(fila)):
                 if i == 0:
-                    if nombres_conj_datos.count(tokens[i]) == 0:
-                        nombres_conj_datos.append(tokens[i])
+                    if nombres_conj_datos.count(fila[i]) == 0:
+                        nombres_conj_datos.append(fila[i])
                     else:
-                        descripcion_error = "Nombre conjunto datos repetido"
-                        error = 1
-                        break
+                        raise Exception("Nombre conjunto datos repetido")
                 else:
-                    m = patron_numeros.match(tokens[i])
+                    m = patron_numeros.match(fila[i])
                     if m:
-                        dato = float(tokens[i])
+                        dato = float(fila[i])
                         lista_datos.append(dato)
                     else:
-                        descripcion_error = "Error dato linea" , numero_linea
-                        error = 1
-                        break
+                        raise Exception("Numero \"" + fila[i] + "\" no valido en linea " + str(numero_linea+1))
             matriz_datos.append(lista_datos)
-        numero_linea += 1
+        numero_linea = numero_linea + 1
         
-    nombre_fichero = nombre_archivo
+    return {"palabra" : palabra, "nombres_conj_datos" : nombres_conj_datos, "nombres_algoritmos" : nombres_algoritmos,
+        "matriz_datos" : matriz_datos}
 
-    numero_algoritmos = len(nombres_algoritmos)
-    for i in matriz_datos:
-        if len(i) != numero_algoritmos:
-            descripcion_error = "Error formato datos"
-            error = 1
-            break
-    if numero_algoritmos < 2:
-        descripcion_error = "Deben existir al menos dos algoritmos"
-        error = 1
 
-    if not error:
-        return palabra, nombres_conj_datos, nombres_algoritmos, matriz_datos, nombre_fichero
-    else:
-        return descripcion_error
+#Función para generar el resumen hash MD5 de los ficheros.
+def generar_md5(archivo):
+
+    tam_bloque = 65536
+    md5 = hashlib.md5()
+    bufer = archivo.read(tam_bloque)
+    while len(bufer) > 0:
+        md5.update(bufer)
+        bufer = archivo.read(tam_bloque)
+    archivo.seek(0, 0);
+    return md5.hexdigest()
 
 
 #Servicio para la subida y consulta de ficheros.
 @route('/subir', method='POST')
-@route('/consultar/<id_fichero:int>', method='GET')
+@route('/consultar/<id_fichero>', method='GET')
 def subir_fichero(id_fichero=""):
-	response.headers['Access-Control-Allow-Origin'] = '*'
-	response.content_type = "application/json"
-	if(id_fichero==""):
-		subida = request.files.get('fichero')
-		nombre, extension = os.path.splitext(subida.filename)
-		if extension not in ('.csv'):
-			return {"fallo" : "Extension no permitida"}
-		else:
-			#Búsqueda del fichero en la lista de ficheros en el servidor.
-			for clave in lista_ficheros.keys():
-				if lista_ficheros[clave][4] == subida.filename:
-					return {"fallo" : "El fichero \"" + subida.filename + "\" ya se encuentra el servidor"}
-			#Se procesa y se guarda en el diccionario de archivos "lista_ficheros" o se devuelve fallo
-			#en caso de que el archivo no tenga el formato adecuado.
-			datos = leer_datos(subida.filename)
-			if isinstance(datos, tuple):
-				clave_hash = hash(subida.file)
-				lista_ficheros[clave_hash] = datos
-				#Devolución de la lista de ficheros (hash-nombre).
-				clave_nombre = {}
-				for clave in lista_ficheros.keys():
-					clave_nombre[clave] = lista_ficheros[clave][4]
-				return clave_nombre
-		   	else:
-				return {"fallo" : datos}
-	else:
-		#Consulta del contenido de un fichero en concreto.
-		contenido = {}
-		for clave in lista_ficheros.keys():
-			if clave == id_fichero:
-			    contenido["palabra"] = lista_ficheros[clave][0]
-			    contenido["nombres_conj_datos"] = lista_ficheros[clave][1]
-			    contenido["nombres_algoritmos"] = lista_ficheros[clave][2]
-			    contenido["matriz_datos"] = lista_ficheros[clave][3]
-			    contenido["nombre_fichero"] = lista_ficheros[clave][4]
-		return contenido
-
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    response.content_type = "application/json"
+    if(id_fichero==""):
+        subida = request.files.get('fichero')
+        clave_hash = generar_md5(subida.file)
+        for clave in lista_ficheros.keys():
+            if clave == clave_hash:
+                return {"fallo" : "El fichero con hash \"" + clave + "\" ya se encuentra el servidor"}
+        try:
+            datos = leer_datos(subida.file)
+        except Exception, error:
+            return {"fallo" : str(error)}
+        lista_ficheros[clave_hash] = datos
+        return {"clave" : clave_hash}
+    else:
+        #Consulta del contenido de un fichero en concreto.
+        print "estoy"
+        try:
+            datos = lista_ficheros[id_fichero]
+        except Exception:
+            return {"fallo" : "No existe ningun fichero con esa clave"}
+        return datos
 
 #Servicio para el test de Wilcoxon.
-@route('/wilcoxon/<id_fichero:int>', method="GET")
-@route('/wilcoxon/<id_fichero:int>/<alpha:float>', method="GET")
+@route('/wilcoxon/<id_fichero>', method="GET")
+@route('/wilcoxon/<id_fichero>/<alpha:float>', method="GET")
 def wilcoxon_test(id_fichero, alpha=0.05):
     """
     Servicio web para el test de los rangos signados de Wilcoxon
@@ -173,18 +140,21 @@ def wilcoxon_test(id_fichero, alpha=0.05):
     resultado: dict (JSON)
         Resultado devuelto al aplicar el test de Wilcoxon
     """
-    datos = lista_ficheros[id_fichero]
     response.headers['Access-Control-Allow-Origin'] = '*'
     response.content_type = "application/json"
-    resultado = tnp.wilcoxon_test(datos[3],alpha)
+    try:
+        datos = lista_ficheros[id_fichero]
+    except Exception:
+        return {"fallo" : "No existe ningun fichero con esa clave"}
+    resultado = tnp.wilcoxon_test(datos["matriz_datos"],alpha)
     return resultado
 
         
 #Servicio para el test de Friedman.
-@route('/friedman/<id_fichero:int>', method="GET")
-@route('/friedman/<id_fichero:int>/<alpha:float>', method="GET")
-@route('/friedman/<id_fichero:int>/<tipo:int>', method="GET")
-@route('/friedman/<id_fichero:int>/<alpha:float>/<tipo:int>', method="GET")
+@route('/friedman/<id_fichero>', method="GET")
+@route('/friedman/<id_fichero>/<alpha:float>', method="GET")
+@route('/friedman/<id_fichero>/<tipo:int>', method="GET")
+@route('/friedman/<id_fichero>/<alpha:float>/<tipo:int>', method="GET")
 def friedman_test(id_fichero, alpha=0.05, tipo=0):
     """
     Servicio web para el test de Friedman
@@ -203,18 +173,21 @@ def friedman_test(id_fichero, alpha=0.05, tipo=0):
     resultado: dict (JSON)
         Resultado devuelto al aplicar el test de Friedman
     """
-    datos = lista_ficheros[id_fichero]
     response.headers['Access-Control-Allow-Origin'] = '*'
     response.content_type = "application/json"
-    resultado = tnp.friedman_test(datos[2],datos[3],alpha,tipo)
+    try:
+        datos = lista_ficheros[id_fichero]
+    except Exception:
+        return {"fallo" : "No existe ningun fichero con esa clave"}
+    resultado = tnp.friedman_test(datos["nombres_algoritmos"],datos["matriz_datos"],alpha,tipo)
     return resultado
 
 
 #Servicio para el test de Iman-Davenport.
-@route('/iman-davenport/<id_fichero:int>', method="GET")
-@route('/iman-davenport/<id_fichero:int>/<alpha:float>', method="GET")
-@route('/iman-davenport/<id_fichero:int>/<tipo:int>', method="GET")
-@route('/iman-davenport/<id_fichero:int>/<alpha:float>/<tipo:int>', method="GET")
+@route('/iman-davenport/<id_fichero>', method="GET")
+@route('/iman-davenport/<id_fichero>/<alpha:float>', method="GET")
+@route('/iman-davenport/<id_fichero>/<tipo:int>', method="GET")
+@route('/iman-davenport/<id_fichero>/<alpha:float>/<tipo:int>', method="GET")
 def iman_davenport_test(id_fichero, alpha=0.05, tipo=0):
     """
     Servicio web para el test de Iman-Davenport
@@ -233,18 +206,21 @@ def iman_davenport_test(id_fichero, alpha=0.05, tipo=0):
     resultado: dict (JSON)
         Resultado devuelto al aplicar el test de Iman-Davenport
     """
-    datos = lista_ficheros[id_fichero]
     response.headers['Access-Control-Allow-Origin'] = '*'
     response.content_type = "application/json"
-    resultado = tnp.iman_davenport_test(datos[2],datos[3],alpha,tipo)
+    try:
+        datos = lista_ficheros[id_fichero]
+    except Exception:
+        return {"fallo" : "No existe ningun fichero con esa clave"}
+    resultado = tnp.iman_davenport_test(datos["nombres_algoritmos"],datos["matriz_datos"],alpha,tipo)
     return resultado
 
 
 #Servicio para el test de los Rangos Alineados de Friedman.
-@route('/rangos-alineados/<id_fichero:int>', method="GET")
-@route('/rangos-alineados/<id_fichero:int>/<alpha:float>', method="GET")
-@route('/rangos-alineados/<id_fichero:int>/<tipo:int>', method="GET")
-@route('/rangos-alineados/<id_fichero:int>/<alpha:float>/<tipo:int>', method="GET")
+@route('/rangos-alineados/<id_fichero>', method="GET")
+@route('/rangos-alineados/<id_fichero>/<alpha:float>', method="GET")
+@route('/rangos-alineados/<id_fichero>/<tipo:int>', method="GET")
+@route('/rangos-alineados/<id_fichero>/<alpha:float>/<tipo:int>', method="GET")
 def friedman_rangos_alineados_test(id_fichero, alpha=0.05, tipo=0):
     """
     Servicio web para el test de los Rangos Alineados de Friedman
@@ -263,10 +239,13 @@ def friedman_rangos_alineados_test(id_fichero, alpha=0.05, tipo=0):
     resultado: dict (JSON)
         Resultado devuelto al aplicar el test de los Rangos Alineados de Friedman
     """
-    datos = lista_ficheros[id_fichero]
     response.headers['Access-Control-Allow-Origin'] = '*'
     response.content_type = "application/json"
-    resultado = tnp.friedman_rangos_alineados_test(datos[2],datos[3],alpha,tipo)
+    try:
+        datos = lista_ficheros[id_fichero]
+    except Exception:
+        return {"fallo" : "No existe ningun fichero con esa clave"}
+    resultado = tnp.friedman_rangos_alineados_test(datos["nombres_algoritmos"],datos["matriz_datos"],alpha,tipo)
     return resultado
 
 run(reloader=True, host='localhost', port=8080)
