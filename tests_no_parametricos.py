@@ -27,6 +27,10 @@ tabla_wilcoxon = {0.10:{5:0,6:2,7:3,8:5,9:8,10:10,11:13,12:17,13:21,14:25,15:30,
                   0.001:{11:0,12:1,13:2,14:4,15:6,16:8,17:11,18:14,19:18,20:21,21:25,22:30,
                     23:35,24:40,25:45}}
 
+#Valores críticos para el test de dos colas de Bonferroni-Dunn.
+tabla_bonferroni_dunn = {0.05:{2:1.960,3:2.241,4:2.394,5:2.498,6:2.567,7:2.638,8:2.690,9:2.724,10:2.773},
+                         0.10:{2:1.645,3:1.960,4:2.128,5:2.241,6:2.326,7:2.394,8:2.450,9:2.498,10:2.539}}
+
 """Test de los Rangos Signados de Wilcoxon."""
 def wilcoxon_test(matriz_datos, alpha):
 
@@ -365,6 +369,67 @@ def quade_test(nombres_algoritmos, matriz_datos, alpha, tipo):
     rankings_medios.sort()
     for i in range(K):
         rankings_medios[i] = round(rankings_medios[i],3)
-        
+            
     return {"resultado" : str(p_valor < alpha), "p_valor": round(p_valor,6), "estadistico" : round(T,3), 
     "nombres" : ranking_nombres, "ranking" : rankings_medios}
+
+
+"""Test de Bonferroni Dunn."""
+def bonferroni_dunn_test(ranking, N, alpha):
+    
+    #Número de algoritmos K (incluyendo método de control).
+    K = len(ranking)
+    
+    #Obtención del valor crítico.
+    q = tabla_bonferroni_dunn[alpha]    
+    
+    #Cálculo de la diferencia crítica.
+    diferencia_critica = q*sp.sqrt((K*K+1)/float(6*N))
+    
+    #Cálculo de las diferencias de ranking medias.
+    diferencia_ranking = []
+    for i in range(1,K):
+        diferencia_ranking.append(abs(ranking[0]-ranking[i]))
+        
+    print diferencia_critica, diferencia_ranking
+
+
+
+"""Test de Bonferroni Dunn (estadístico y p_valores ajustados)."""
+def bonferroni_dunn_test_estadistico(test_principal, ranking, N, alpha):
+
+    #Número de algoritmos K (incluyendo método de control).
+    K = len(ranking)
+
+    #Cálculo del estadístico Z (distribución normal). El valor cambia en función
+    #de si el test principal es Friedman o Quade.
+    valores_z = []
+    if test_principal == "friedman":
+        for j in range(1,K):
+            valores_z.append((ranking[0]-ranking[j])/sp.sqrt(K*(K+1)/float(6*N)))
+    else:
+        for j in range(1,K):
+            valores_z.append((ranking[0]-ranking[j])/sp.sqrt((K*(K+1)*(2*N+1)(K-1))/float(18*N*((N+1)))))
+
+    #Cálculo de los p_valores.
+    p_valores = []
+    for i in range(K-1):
+        p_valores.append(2*(1-st.norm.cdf(abs(valores_z[i]))))
+
+    #Nuevo nivel de significancia.
+    alpha2 = alpha / float(K-1)
+    
+    #Cálculo de los p_valores ajustados.
+    p_valores_ajustados = []
+    for i in range(K-1):
+        v = (K-1)*p_valores[i]
+        p_valores_ajustados.append(min(v,1))
+        
+    #Cálculo del resultado (Si se rechaza o no la hipótesis). Si se rechaza quiere
+    #decir que el algoritmo es diferente al algoritmo de control (se encuentran diferencias
+    #significativas).
+    resultado = []
+    for p_valor in p_valores_ajustados:
+        resultado.append(p_valor<alpha2)    
+   
+    print valores_z, alpha2, p_valores_ajustados, resultado
