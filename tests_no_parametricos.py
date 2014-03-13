@@ -173,8 +173,6 @@ def friedman_test(nombres_algoritmos, matriz_datos, alpha, tipo):
     rankings_medios.sort()
     for i in range(K):
         rankings_medios[i] = round(rankings_medios[i],3)
-    
-    bonferroni_dunn_test("friedman", ranking_nombres, rankings_medios, N, alpha)
 
     return {"resultado" : str(p_valor < alpha), "p_valor": round(p_valor,6), "estadistico" : round(chi2,3), 
     "nombres" : ranking_nombres, "ranking" : rankings_medios}
@@ -420,5 +418,60 @@ def bonferroni_dunn_test(test_principal, nombres, ranking, N, alpha):
         p_valores_ajustados.append(min(v,1))
     
     return {"valores z" : valores_z, "p_valores" : p_valores, "metodo de control" : metodo_control,
-            "nombres" : nombres,"alpha" : alpha2, "resultado" : resultado,
-            "p_valores ajustados" : p_valores_ajustados}
+            "nombres" : nombres,"alpha" : alpha2, "resultado" : resultado, "p_valores ajustados" : p_valores_ajustados}
+
+
+
+"""Test de Holm."""
+def holm_test(test_principal, nombres, ranking, N, alpha):
+    
+    #Número de algoritmos K (incluyendo método de control).
+    K = len(ranking)
+    
+    #Cálculo del estadístico Z (distribución normal). El valor cambia en función
+    #de si el test principal es Friedman o Quade.
+    valores_z = []
+    if test_principal == "friedman":
+        for j in range(1,K):
+            valores_z.append((ranking[0]-ranking[j])/sp.sqrt(K*(K+1)/float(6*N)))
+    else:
+        for j in range(1,K):
+            valores_z.append((ranking[0]-ranking[j])/sp.sqrt((K*(K+1)*(2*N+1)(K-1))/float(18*N*((N+1)))))
+    
+    #Cálculo de los p_valores.
+    p_valores = []
+    for i in range(K-1):
+        p_valores.append(2*(1-st.norm.cdf(abs(valores_z[i]))))
+        
+    #Método de control (Primero del ranking).
+    metodo_control = nombres[0]
+    
+    #Ordenamiento de los nombres, valores_z y p_valores segun el p_valor.
+    tabla = zip(nombres[1:],valores_z,p_valores)
+    tabla.sort(key=lambda valor: valor[2])
+    n, z, p = zip(*tabla)
+    nombres = list(n)
+    valores_z = list(z)
+    p_valores = list(p)
+    
+    #Valores alphas.
+    alphas = []
+    for i in range(1,K):
+        alphas.append(alpha/float(K-i))
+    
+    #Cálculo de los resultados.
+    resultado = [False]*(K-1)
+    for i in range(K-1):
+        if p_valores[i] < alphas[i]:
+            resultado[i] = True
+        else:
+            break
+    
+    #Cálculo de los p_valores ajustados.
+    p_valores_ajustados = []
+    for i in range(K-1):
+        v = max([(K-(j+1))*p_valores[j] for j in range(i+1)])
+        p_valores_ajustados.append(min(v,1))
+        
+    return {"valores z" : valores_z, "p_valores" : p_valores, "metodo de control" : metodo_control,
+            "nombres" : nombres,"alphas" : alphas, "resultado" : resultado, "p_valores ajustados" : p_valores_ajustados}
