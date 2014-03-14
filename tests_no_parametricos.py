@@ -539,3 +539,57 @@ def hochberg_test(test_principal, nombres, ranking, N, alpha):
         
     return {"valores z" : valores_z, "p_valores" : p_valores, "metodo de control" : metodo_control,
             "nombres" : nombres, "alphas" : alphas, "resultado" : resultado, "p_valores ajustados" : p_valores_ajustados}
+
+
+
+"""Test de Li."""
+def li_test(test_principal, nombres, ranking, N, alpha):
+    
+    #Número de algoritmos K (incluyendo método de control).
+    K = len(ranking)
+    
+    #Cálculo del estadístico Z (distribución normal). El valor cambia en función de si el
+    #test principal es Friedman o Iman-Davenport, Rangos Alineados de Friedman o Quade.
+    valores_z = []
+    if test_principal == "friedman" or test_principal == "iman-davenport":
+        for j in range(1,K):
+            valores_z.append((ranking[0]-ranking[j])/sp.sqrt((K*(K+1))/float(6*N)))
+    elif test_principal == "rangos-alineados":
+        for j in range(1,K):
+            valores_z.append((ranking[0]-ranking[j])/sp.sqrt((K*(N+1))/float(6)))
+    else:
+        for j in range(1,K):
+            valores_z.append((ranking[0]-ranking[j])/sp.sqrt((K*(K+1)*((2*N)+1)*(K-1))/float(18*N*(N+1))))
+    
+    #Cálculo de los p_valores.
+    p_valores = []
+    for i in range(K-1):
+        p_valores.append(2*(1-st.norm.cdf(abs(valores_z[i]))))
+        
+    #Método de control (Primero del ranking).
+    metodo_control = nombres[0]
+    
+    #Ordenamiento de los nombres, valores_z y p_valores segun el p_valor.
+    tabla = zip(nombres[1:],valores_z,p_valores)
+    tabla.sort(key=lambda valor: valor[2])
+    n, z, p = zip(*tabla)
+    nombres = list(n)
+    valores_z = list(z)
+    p_valores = list(p)
+    
+    #Cálculo de los resultados.
+    resultado = [True]*(K-1)
+    if p_valores[K-2] > alpha:
+        resultado[K-2] =  False
+        valor = (1-p_valores[K-2])/float((1-alpha)*alpha)
+        for i in range(K-2):
+            if p_valores[i] > valor:
+                resultado[i] = False
+
+    #Cálculo de los p_valores ajustados.
+    p_valores_ajustados = []
+    for i in range(K-1):
+        p_valores_ajustados.append(p_valores[i]/float(p_valores[i]+1-p_valores[K-2]))
+        
+    return {"valores z" : valores_z, "p_valores" : p_valores, "metodo de control" : metodo_control,
+            "nombres" : nombres, "resultado" : resultado, "p_valores ajustados" : p_valores_ajustados}
