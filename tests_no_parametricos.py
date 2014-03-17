@@ -593,3 +593,72 @@ def li_test(test_principal, nombres, ranking, N, alpha):
         
     return {"valores z" : valores_z, "p_valores" : p_valores, "metodo de control" : metodo_control,
             "nombres" : nombres, "resultado" : resultado, "p_valores ajustados" : p_valores_ajustados}
+
+
+
+"""Test de Shaffer."""
+def shaffer_test(test_principal, nombres, ranking, N, alpha):
+    
+    #Número de algoritmos K (incluyendo método de control).
+    K = len(ranking)
+
+    #Número posible de comparaciones.
+    m = (K*(K-1))/2
+
+    #Nombres de las coparaciones.
+    comparaciones = []
+    for i in range(K-1):
+        for j in range(1,K):
+            comparaciones.append(nombres[i] + " vs " + nombres[j])
+    
+    #Cálculo del estadístico Z (distribución normal). El valor cambia en función de si el
+    #test principal es Friedman o Iman-Davenport, Rangos Alineados de Friedman o Quade.
+    valores_z = []
+    if test_principal == "friedman" or test_principal == "iman-davenport":
+        for i in range(K-1):
+            for j in range(1,K):
+                valores_z.append((ranking[i]-ranking[j])/sp.sqrt((K*(K+1))/float(6*N)))
+    elif test_principal == "rangos-alineados":
+        for i in range(K-1):
+            for j in range(1,K):
+                valores_z.append((ranking[i]-ranking[j])/sp.sqrt((K*(N+1))/float(6)))
+    else:
+        for i in range(K-1):
+            for j in range(1,K):
+                valores_z.append((ranking[i]-ranking[j])/sp.sqrt((K*(K+1)*((2*N)+1)*(K-1))/float(18*N*(N+1))))
+
+    #Cálculo de los p_valores.
+    p_valores = []
+    for i in range(m):
+        p_valores.append(2*(1-st.norm.cdf(abs(valores_z[i]))))
+    
+    #Ordenamiento de las comparaciones, valores_z y p_valores segun el p_valor.
+    tabla = zip(comparaciones,valores_z,p_valores)
+    tabla.sort(key=lambda valor: valor[2])
+    c, z, p = zip(*tabla)
+    comparaciones = list(c)
+    valores_z = list(z)
+    p_valores = list(p)
+    
+    #Valores alphas (Esto no usa la fórmula de la pág. 150 Lo hace igual que Holm. Hay que revisar).
+    alphas = []
+    for i in range(1,m+1):
+        alphas.append(alpha/float(m+1-i))
+    
+    #Cálculo de los resultados.
+    resultado = [False]*m
+    for i in range(m):
+        if p_valores[i] < alphas[i]:
+            resultado[i] = True
+        else:
+            break
+    
+    #Cálculo de los p_valores ajustados (Esto no usa la fórmula de la pág. 150 El tj que usa sería
+    #el j de la lista de alphas. Hay que revisar).
+    p_valores_ajustados = []
+    for i in range(m):
+        v = max([alphas[j]*p_valores[j] for j in range(i+1)])
+        p_valores_ajustados.append(min(v,1))
+        
+    return {"valores z" : valores_z, "p_valores" : p_valores, "comparaciones" : comparaciones, "alphas" : alphas,
+            "resultado" : resultado, "p_valores ajustados" : p_valores_ajustados}
