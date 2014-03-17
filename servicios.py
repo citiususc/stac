@@ -76,7 +76,7 @@ def generar_md5(archivo):
 
 #Servicio para la subida de ficheros.
 @route('/fichero', method='POST')
-def gestionar_fichero():
+def subir_fichero():
     response.headers['Access-Control-Allow-Origin'] = '*'
     response.content_type = "application/json"
     subida = request.files.get('fichero')
@@ -92,9 +92,9 @@ def gestionar_fichero():
     return {"clave" : clave_hash}
 
 
-#Servicio para la subida de ficheros.
+#Servicio para la consulta de ficheros.
 @route('/fichero/<id_fichero>', method='GET')
-def gestionar_fichero(id_fichero):
+def consultar_fichero(id_fichero):
     response.headers['Access-Control-Allow-Origin'] = '*'
     response.content_type = "application/json"
     #Consulta del contenido de un fichero en concreto.
@@ -130,10 +130,13 @@ def wilcoxon_test(id_fichero, alpha=0.05):
         datos = lista_ficheros[id_fichero]
     except Exception:
         return {"fallo" : "No existe ningun fichero con esa clave"}
-    resultado = tnp.wilcoxon_test(datos["matriz_datos"],alpha)
+    try:
+        resultado = tnp.wilcoxon_test(datos["matriz_datos"],alpha)
+    except Exception, error:
+        return {"fallo" : str(error)}
     return resultado
 
-        
+
 #Servicio para el test de Friedman.
 @route('/friedman/<id_fichero>', method="GET")
 @route('/friedman/<id_fichero>/<alpha:float>', method="GET")

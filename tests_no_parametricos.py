@@ -32,7 +32,7 @@ def wilcoxon_test(matriz_datos, alpha):
 
     #El test de Wilcoxon compara dos algoritmos.
     if len(matriz_datos[0]) != 2:
-        return {"fallo" : "Test de Wilcoxon solo aplicable a dos algoritmos"}
+        raise Exception("Test de Wilcoxon solo aplicable a dos algoritmos")
     
     #Paso de una matriz de conjuntos de datos a dos listas: lista "a", que contiene
     #los resultados de aplicar el primer algoritmo a los datos y una lista "b" que
@@ -63,7 +63,7 @@ def wilcoxon_test(matriz_datos, alpha):
 
     #El tamaño de la muestra  (sin ligaduras) debe ser al menos de 5.
     if N < 5:
-        return {"fallo" : "Menos de 5 conjuntos de datos sin ligaduras"}
+        raise Exception("Menos de 5 conjuntos de datos sin ligaduras")
 
     #Rangos de orden 1,2,...,N. Cada elemento de copia tiene un rango asociado:
     #indice(elemento) + 1. Si hay empates se calcula la media del rango de cada
@@ -88,11 +88,6 @@ def wilcoxon_test(matriz_datos, alpha):
     #T es el valor mínimo de T_Mas y T_Men.
     T = min(T_Mas,T_Men)
     
-    print "N (sin ceros):" , N
-    print "Suma de rangos positivos:" , T_Mas
-    print "Suma de rangos negativos:" , T_Men
-    print "Valor T:" , T
-    
     #Para tamaños muestrales pequeños, se puede determinar el test de Wilcoxon mediante la comparación
     #de T con el valor crítico de la tabla de Wilcoxon. Para tamaños muestrales grandes, el test se puede
     #aproximar con la distribución normal.
@@ -110,10 +105,6 @@ def wilcoxon_test(matriz_datos, alpha):
         #Cálculo del p_valor: Probabilidad de obtener un valor al menos tan extremo
         #como el estadístico Z.
         p_valor = 2*(1-st.norm.cdf(abs(Z)))
-		
-        print "Valor Z:" , Z
-        print "Valor Z_alphaDiv2:" , Z_alphaDiv2
-        print "p_valor:" , p_valor
         
         #Si p_valor < alpha => contraste estadísticamente significativo. Otra 
         #forma de saber si el estadístico Z cae en la región de rechazo es:
@@ -124,7 +115,7 @@ def wilcoxon_test(matriz_datos, alpha):
         
         return {"resultado" : str(p_valor < alpha), "p_valor" : round(p_valor,6), "estadistico" : round(Z,3),
         "suma rangos pos" : T_Mas, "suma rangos neg" : T_Men, "puntos criticos" : [round(Z_alphaDiv2,2),round(-Z_alphaDiv2,2)]}
-  
+
 
 
 """Test de Friedman."""      
