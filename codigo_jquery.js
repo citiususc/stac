@@ -1,11 +1,15 @@
 $(document).on('ready', function() {
 
-	//Visualización de selector de tipo si se requiere test de ranking.
+	//Visualización de selector de tipo y test POST-HOC si se requiere test de ranking.
 	$("#test").change(function () {
-    	if($("#test").val()=="wilcoxon")
+    	if($("#test").val()=="wilcoxon"){
     		$("#mostrar_tipo").hide();
-    	else
+    		$("#mostrar_comparacion").hide();
+    	}
+    	else{
     		$("#mostrar_tipo").show();
+    		$("#mostrar_comparacion").show();
+    	}
   	})
   	.change();
 
@@ -16,6 +20,7 @@ $(document).on('ready', function() {
         var alpha = $('#alpha').val();
         var tipo = $('#tipo').val();
 		var id_fichero = $('#seleccionar_hashmd5').val();
+		var test_post_hoc = $("#test_post_hoc").val();
 
 		if(id_fichero == "")
 			alert("Falta HASH fichero")
@@ -31,17 +36,45 @@ $(document).on('ready', function() {
 			else
 				url = "http://localhost:8080/"+test+"/"+id_fichero;
 
+			var salida;
+
 		    $.ajax({
-		        type: "get",
+		        type: "GET",
 		        url: url,
 		        dataType: "json",
 		        success : function(data) {
-		            salida = "<p>Resultado test:</p>";
+		            salida = "<u>Resultado test: "+test+"</u>";
 		            $.each(data, function(key, val) {
 		                salida = salida + "<p>" + key + " = " + val + "</p>";
 		            });
+		            "--------------"
+		            if(data.resultado == "True" && test_post_hoc != "no"){
+
+		            	var url2;
+						if(alpha != "no")
+							url2 = "http://localhost:8080/"+test_post_hoc+"/"+test+"/"+data.nombres+"/"+data.ranking+"/"+data.N+"/"+alpha;
+						else
+							url2 = "http://localhost:8080/"+test_post_hoc+"/"+test+"/"+data.nombres+"/"+data.ranking+"/"+data.N;
+
+		        		$.ajax({
+							type: "GET",
+						   	url: url2,
+							dataType: "json",
+							success : function(data) {
+								salida = salida + "<p>---------------------------</p>"
+								salida = salida + "<u>Resultado POST-HOC "+test_post_hoc+":</u>";
+								$.each(data, function(key, val) {
+					                salida = salida + "<p>" + key + " = " + val + "</p>";
+					            });
+		        				$("#resultado").html(salida);
+							},
+							error : function(e) {
+							    alert('Error: ' + e);
+							}
+						});
+		        	}
+		            "--------------"
 		            $("#resultado").html(salida);
-		            $('#seleccionar_hashmd5').val("");
 		        },
 		        error : function(e) {
 		            alert('Error: ' + e);

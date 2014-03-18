@@ -267,4 +267,15 @@ def quade_test(id_fichero, alpha=0.05, tipo=0):
     resultado = tnp.quade_test(datos["nombres_algoritmos"],datos["matriz_datos"],alpha,tipo)
     return resultado
 
+#Servicio para el test de Bonferroni-Dunn.
+@route('/bonferroni-dunn/<test_principal>/<nombres>/<ranking>/<n:int>', method="GET")
+@route('/bonferroni-dunn/<test_principal>/<nombres>/<ranking>/<n:int>/<alpha:float>', method="GET")
+def bonferroni_dunn_test(test_principal,nombres,ranking,n,alpha=0.05):
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    response.content_type = "application/json"
+    nombres = nombres.split(",")
+    ranking = [float(x) for x in ranking.split(",")]
+    resultado = tnp.bonferroni_dunn_test(test_principal,nombres,ranking,n,alpha)
+    return resultado
+
 run(reloader=True, host='localhost', port=8080)

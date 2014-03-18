@@ -166,7 +166,7 @@ def friedman_test(nombres_algoritmos, matriz_datos, alpha, tipo):
         rankings_medios[i] = round(rankings_medios[i],3)
 
     return {"resultado" : str(p_valor < alpha), "p_valor": round(p_valor,6), "estadistico" : round(chi2,3), 
-    "nombres" : ranking_nombres, "ranking" : rankings_medios}
+    "nombres" : ranking_nombres, "ranking" : rankings_medios, "N" : N}
 
 
 
@@ -193,7 +193,7 @@ def iman_davenport_test(nombres_algoritmos, matriz_datos, alpha, tipo):
     p_valor = 1 - st.f.cdf(iman_davenport, K-1, (K-1)*(N-1))
 
     return {"resultado" : str(p_valor < alpha), "p_valor": round(p_valor,6), "estadistico" : round(iman_davenport,3), 
-    "nombres": friedman["nombres"], "ranking": friedman["ranking"]}
+    "nombres": friedman["nombres"], "ranking": friedman["ranking"], "N" : friedman["N"]}
 
 
 
@@ -269,7 +269,7 @@ def friedman_rangos_alineados_test(nombres_algoritmos, matriz_datos, alpha, tipo
         rankings_medios[i] = round(rankings_medios[i],3)
         
     return {"resultado" : str(p_valor < alpha), "p_valor": round(p_valor,6), "estadistico" : round(T,3), 
-    "nombres" : ranking_nombres, "ranking" : rankings_medios}
+    "nombres" : ranking_nombres, "ranking" : rankings_medios, "N" : N}
 
 
 
@@ -358,7 +358,7 @@ def quade_test(nombres_algoritmos, matriz_datos, alpha, tipo):
         rankings_medios[i] = round(rankings_medios[i],3)
             
     return {"resultado" : str(p_valor < alpha), "p_valor": round(p_valor,6), "estadistico" : round(T,3), 
-    "nombres" : ranking_nombres, "ranking" : rankings_medios}
+    "nombres" : ranking_nombres, "ranking" : rankings_medios, "N" : N}
 
 
 
@@ -410,9 +410,17 @@ def bonferroni_dunn_test(test_principal, nombres, ranking, N, alpha):
     for i in range(K-1):
         v = (K-1)*p_valores[i]
         p_valores_ajustados.append(min(v,1))
+        
+    #Para seralizar JSON.
+    resultado = [str(x) for x in resultado]
+    #Redondeos.
+    valores_z = [round(x,3) for x in valores_z]
+    p_valores = [round(x,6) for x in p_valores]
+    p_valores_ajustados = [round(x,6) for x in p_valores_ajustados]
+    
     
     return {"valores z" : valores_z, "p_valores" : p_valores, "metodo de control" : metodo_control,
-            "nombres" : nombres, "alpha" : alpha2, "resultado" : resultado, "p_valores ajustados" : p_valores_ajustados}
+            "nombres" : nombres, "alpha" : round(alpha2,3), "resultado" : resultado, "p_valores ajustados" : p_valores_ajustados}
 
 
 
