@@ -418,7 +418,6 @@ def bonferroni_dunn_test(test_principal, nombres, ranking, N, alpha):
     p_valores = [round(x,6) for x in p_valores]
     p_valores_ajustados = [round(x,6) for x in p_valores_ajustados]
     
-    
     return {"valores z" : valores_z, "p_valores" : p_valores, "metodo de control" : metodo_control,
             "nombres" : nombres, "alpha" : round(alpha2,3), "resultado" : resultado, "p_valores ajustados" : p_valores_ajustados}
 
@@ -478,6 +477,14 @@ def holm_test(test_principal, nombres, ranking, N, alpha):
         v = max([(K-(j+1))*p_valores[j] for j in range(i+1)])
         p_valores_ajustados.append(min(v,1))
         
+    #Para seralizar JSON.
+    resultado = [str(x) for x in resultado]
+    #Redondeos.
+    valores_z = [round(x,3) for x in valores_z]
+    p_valores = [round(x,6) for x in p_valores]
+    p_valores_ajustados = [round(x,6) for x in p_valores_ajustados]
+    alphas = [round(x,3) for x in alphas]
+
     return {"valores z" : valores_z, "p_valores" : p_valores, "metodo de control" : metodo_control,
             "nombres" : nombres, "alphas" : alphas, "resultado" : resultado, "p_valores ajustados" : p_valores_ajustados}
 
@@ -536,6 +543,14 @@ def hochberg_test(test_principal, nombres, ranking, N, alpha):
     for i in range(K-1):
         p_valores_ajustados.append(max([(K-j)*p_valores[j-1] for j in range(K-1,i,-1)]))
         
+    #Para seralizar JSON.
+    resultado = [str(x) for x in resultado]
+    #Redondeos.
+    valores_z = [round(x,3) for x in valores_z]
+    p_valores = [round(x,6) for x in p_valores]
+    p_valores_ajustados = [round(x,6) for x in p_valores_ajustados]
+    alphas = [round(x,3) for x in alphas]
+        
     return {"valores z" : valores_z, "p_valores" : p_valores, "metodo de control" : metodo_control,
             "nombres" : nombres, "alphas" : alphas, "resultado" : resultado, "p_valores ajustados" : p_valores_ajustados}
 
@@ -589,6 +604,13 @@ def li_test(test_principal, nombres, ranking, N, alpha):
     p_valores_ajustados = []
     for i in range(K-1):
         p_valores_ajustados.append(p_valores[i]/float(p_valores[i]+1-p_valores[K-2]))
+        
+    #Para seralizar JSON.
+    resultado = [str(x) for x in resultado]
+    #Redondeos.
+    valores_z = [round(x,3) for x in valores_z]
+    p_valores = [round(x,6) for x in p_valores]
+    p_valores_ajustados = [round(x,6) for x in p_valores_ajustados]
         
     return {"valores z" : valores_z, "p_valores" : p_valores, "metodo de control" : metodo_control,
             "nombres" : nombres, "resultado" : resultado, "p_valores ajustados" : p_valores_ajustados}
@@ -658,6 +680,14 @@ def shaffer_test(test_principal, nombres, ranking, N, alpha):
     for i in range(m):
         v = max([alphas[j]*p_valores[j] for j in range(i+1)])
         p_valores_ajustados.append(min(v,1))
+        
+    #Para seralizar JSON.
+    resultado = [str(x) for x in resultado]
+    #Redondeos.
+    valores_z = [round(x,3) for x in valores_z]
+    p_valores = [round(x,6) for x in p_valores]
+    p_valores_ajustados = [round(x,6) for x in p_valores_ajustados]
+    alphas = [round(x,3) for x in alphas]
         
     return {"valores z" : valores_z, "p_valores" : p_valores, "comparaciones" : comparaciones, "alphas" : alphas,
             "resultado" : resultado, "p_valores ajustados" : p_valores_ajustados}
