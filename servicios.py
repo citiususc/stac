@@ -277,5 +277,16 @@ def bonferroni_dunn_test(test_principal,nombres,ranking,n,alpha=0.05):
     ranking = [float(x) for x in ranking.split(",")]
     resultado = tnp.bonferroni_dunn_test(test_principal,nombres,ranking,n,alpha)
     return resultado
+    
+#Servicio para el test de Holm.
+@route('/holm/<test_principal>/<nombres>/<ranking>/<n:int>', method="GET")
+@route('/holm/<test_principal>/<nombres>/<ranking>/<n:int>/<alpha:float>', method="GET")
+def holm_test(test_principal,nombres,ranking,n,alpha=0.05):
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    response.content_type = "application/json"
+    nombres = nombres.split(",")
+    ranking = [float(x) for x in ranking.split(",")]
+    resultado = tnp.holm_test(test_principal,nombres,ranking,n,alpha)
+    return resultado
 
 run(reloader=True, host='localhost', port=8080)
