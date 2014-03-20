@@ -410,7 +410,7 @@ def bonferroni_dunn_test(test_principal, nombres, ranking, N, alpha):
     for i in range(K-1):
         v = (K-1)*p_valores[i]
         p_valores_ajustados.append(min(v,1))
-        
+    
     #Para seralizar JSON.
     resultado = [str(x) for x in resultado]
     #Redondeos.
@@ -420,6 +420,76 @@ def bonferroni_dunn_test(test_principal, nombres, ranking, N, alpha):
     
     return {"valores z" : valores_z, "p_valores" : p_valores, "metodo de control" : metodo_control,
             "nombres" : nombres, "alpha" : round(alpha2,3), "resultado" : resultado, "p_valores ajustados" : p_valores_ajustados}
+
+
+
+"""MultiTest de Nemenyi (Bonferroni-Dunn)."""
+def nemenyi_multitest(test_principal, nombres, ranking, N, alpha):
+    
+    #Número de algoritmos K.
+    K = len(ranking)
+
+    #Número posible de comparaciones.
+    m = (K*(K-1))/2
+
+    #Nombres de las coparaciones.
+    comparaciones = []
+    for i in range(K-1):
+        for j in range(i+1,K):
+            comparaciones.append(nombres[i] + " vs " + nombres[j])
+    
+    #Cálculo del estadístico Z (distribución normal). El valor cambia en función de si el
+    #test principal es Friedman o Iman-Davenport, Rangos Alineados de Friedman o Quade.
+    valores_z = []
+    if test_principal == "friedman" or test_principal == "iman-davenport":
+        for i in range(K-1):
+            for j in range(i+1,K):
+                valores_z.append((ranking[i]-ranking[j])/sp.sqrt((K*(K+1))/float(6*N)))
+    elif test_principal == "rangos-alineados":
+        for i in range(K-1):
+            for j in range(i+1,K):
+                valores_z.append((ranking[i]-ranking[j])/sp.sqrt((K*(N+1))/float(6)))
+    else:
+        for i in range(K-1):
+            for j in range(i+1,K):
+                valores_z.append((ranking[i]-ranking[j])/sp.sqrt((K*(K+1)*((2*N)+1)*(K-1))/float(18*N*(N+1))))
+    
+    #Cálculo de los p_valores.
+    p_valores = []
+    for i in range(m):
+        p_valores.append(2*(1-st.norm.cdf(abs(valores_z[i]))))
+    
+    #Ordenamiento de las comparaciones, valores_z y p_valores segun el p_valor.
+    tabla = zip(comparaciones,valores_z,p_valores)
+    tabla.sort(key=lambda valor: valor[2])
+    c, z, p = zip(*tabla)
+    comparaciones = list(c)
+    valores_z = list(z)
+    p_valores = list(p)
+    
+    #Nuevo alpha.
+    alpha2 = alpha/float(m)
+
+    #Cálculo de los resultados.
+    resultado = []
+    for i in range(m):
+        resultado.append(p_valores[i]<alpha2)
+        
+    #Cálculo de los p_valores ajustados.
+    p_valores_ajustados = []
+    for i in range(m):
+        v = m*p_valores[i]
+        p_valores_ajustados.append(min(v,1))
+    
+    #Para seralizar JSON.
+    resultado = [str(x) for x in resultado]
+    #Redondeos.
+    valores_z = [round(x,3) for x in valores_z]
+    p_valores = [round(x,6) for x in p_valores]
+    p_valores_ajustados = [round(x,6) for x in p_valores_ajustados]
+    
+    return {"valores z" : valores_z, "p_valores" : p_valores, "comparaciones" : comparaciones, "alpha" : alpha2,
+            "resultado" : resultado, "p_valores ajustados" : p_valores_ajustados}
 
 
 
@@ -490,6 +560,82 @@ def holm_test(test_principal, nombres, ranking, N, alpha):
 
 
 
+"""MultiTest de Holm."""
+def holm_multitest(test_principal, nombres, ranking, N, alpha):
+    
+    #Número de algoritmos K.
+    K = len(ranking)
+
+    #Número posible de comparaciones.
+    m = (K*(K-1))/2
+
+    #Nombres de las coparaciones.
+    comparaciones = []
+    for i in range(K-1):
+        for j in range(i+1,K):
+            comparaciones.append(nombres[i] + " vs " + nombres[j])
+    
+    #Cálculo del estadístico Z (distribución normal). El valor cambia en función de si el
+    #test principal es Friedman o Iman-Davenport, Rangos Alineados de Friedman o Quade.
+    valores_z = []
+    if test_principal == "friedman" or test_principal == "iman-davenport":
+        for i in range(K-1):
+            for j in range(i+1,K):
+                valores_z.append((ranking[i]-ranking[j])/sp.sqrt((K*(K+1))/float(6*N)))
+    elif test_principal == "rangos-alineados":
+        for i in range(K-1):
+            for j in range(i+1,K):
+                valores_z.append((ranking[i]-ranking[j])/sp.sqrt((K*(N+1))/float(6)))
+    else:
+        for i in range(K-1):
+            for j in range(i+1,K):
+                valores_z.append((ranking[i]-ranking[j])/sp.sqrt((K*(K+1)*((2*N)+1)*(K-1))/float(18*N*(N+1))))
+
+    #Cálculo de los p_valores.
+    p_valores = []
+    for i in range(m):
+        p_valores.append(2*(1-st.norm.cdf(abs(valores_z[i]))))
+    
+    #Ordenamiento de las comparaciones, valores_z y p_valores segun el p_valor.
+    tabla = zip(comparaciones,valores_z,p_valores)
+    tabla.sort(key=lambda valor: valor[2])
+    c, z, p = zip(*tabla)
+    comparaciones = list(c)
+    valores_z = list(z)
+    p_valores = list(p)
+    
+    #Valores alphas.
+    alphas = []
+    for i in range(1,m+1):
+        alphas.append(alpha/float(m+1-i))
+    
+    #Cálculo de los resultados.
+    resultado = [False]*m
+    for i in range(m):
+        if p_valores[i] < alphas[i]:
+            resultado[i] = True
+        else:
+            break
+    
+    #Cálculo de los p_valores ajustados.
+    p_valores_ajustados = []
+    for i in range(m):
+        v = max([(m-j)*p_valores[j] for j in range(i+1)])
+        p_valores_ajustados.append(min(v,1))
+        
+    #Para seralizar JSON.
+    resultado = [str(x) for x in resultado]
+    #Redondeos.
+    valores_z = [round(x,3) for x in valores_z]
+    p_valores = [round(x,6) for x in p_valores]
+    p_valores_ajustados = [round(x,6) for x in p_valores_ajustados]
+    alphas = [round(x,3) for x in alphas]
+        
+    return {"valores z" : valores_z, "p_valores" : p_valores, "comparaciones" : comparaciones, "alphas" : alphas,
+            "resultado" : resultado, "p_valores ajustados" : p_valores_ajustados}
+
+
+
 """Test de Hochberg."""
 def hochberg_test(test_principal, nombres, ranking, N, alpha):
     
@@ -538,10 +684,11 @@ def hochberg_test(test_principal, nombres, ranking, N, alpha):
         else:
             break
     
-    #Cálculo de los p_valores ajustados (no da lo mismo que la pág. 142).
+    #Cálculo de los p_valores ajustados (La pág. 137 pone max. Si no se pone min no da lo mismo
+    #que la pág. 142).
     p_valores_ajustados = []
     for i in range(K-1):
-        p_valores_ajustados.append(max([(K-j)*p_valores[j-1] for j in range(K-1,i,-1)]))
+        p_valores_ajustados.append(min([(K-j)*p_valores[j-1] for j in range(K-1,i,-1)]))
         
     #Para seralizar JSON.
     resultado = [str(x) for x in resultado]
@@ -614,80 +761,3 @@ def li_test(test_principal, nombres, ranking, N, alpha):
         
     return {"valores z" : valores_z, "p_valores" : p_valores, "metodo de control" : metodo_control,
             "nombres" : nombres, "resultado" : resultado, "p_valores ajustados" : p_valores_ajustados}
-
-
-
-"""Test de Shaffer."""
-def shaffer_test(test_principal, nombres, ranking, N, alpha):
-    
-    #Número de algoritmos K (incluyendo método de control).
-    K = len(ranking)
-
-    #Número posible de comparaciones.
-    m = (K*(K-1))/2
-
-    #Nombres de las coparaciones.
-    comparaciones = []
-    for i in range(K-1):
-        for j in range(1,K):
-            comparaciones.append(nombres[i] + " vs " + nombres[j])
-    
-    #Cálculo del estadístico Z (distribución normal). El valor cambia en función de si el
-    #test principal es Friedman o Iman-Davenport, Rangos Alineados de Friedman o Quade.
-    valores_z = []
-    if test_principal == "friedman" or test_principal == "iman-davenport":
-        for i in range(K-1):
-            for j in range(1,K):
-                valores_z.append((ranking[i]-ranking[j])/sp.sqrt((K*(K+1))/float(6*N)))
-    elif test_principal == "rangos-alineados":
-        for i in range(K-1):
-            for j in range(1,K):
-                valores_z.append((ranking[i]-ranking[j])/sp.sqrt((K*(N+1))/float(6)))
-    else:
-        for i in range(K-1):
-            for j in range(1,K):
-                valores_z.append((ranking[i]-ranking[j])/sp.sqrt((K*(K+1)*((2*N)+1)*(K-1))/float(18*N*(N+1))))
-
-    #Cálculo de los p_valores.
-    p_valores = []
-    for i in range(m):
-        p_valores.append(2*(1-st.norm.cdf(abs(valores_z[i]))))
-    
-    #Ordenamiento de las comparaciones, valores_z y p_valores segun el p_valor.
-    tabla = zip(comparaciones,valores_z,p_valores)
-    tabla.sort(key=lambda valor: valor[2])
-    c, z, p = zip(*tabla)
-    comparaciones = list(c)
-    valores_z = list(z)
-    p_valores = list(p)
-    
-    #Valores alphas (Esto no usa la fórmula de la pág. 150 Lo hace igual que Holm. Hay que revisar).
-    alphas = []
-    for i in range(1,m+1):
-        alphas.append(alpha/float(m+1-i))
-    
-    #Cálculo de los resultados.
-    resultado = [False]*m
-    for i in range(m):
-        if p_valores[i] < alphas[i]:
-            resultado[i] = True
-        else:
-            break
-    
-    #Cálculo de los p_valores ajustados (Esto no usa la fórmula de la pág. 150 El tj que usa sería
-    #el j de la lista de alphas. Hay que revisar).
-    p_valores_ajustados = []
-    for i in range(m):
-        v = max([alphas[j]*p_valores[j] for j in range(i+1)])
-        p_valores_ajustados.append(min(v,1))
-        
-    #Para seralizar JSON.
-    resultado = [str(x) for x in resultado]
-    #Redondeos.
-    valores_z = [round(x,3) for x in valores_z]
-    p_valores = [round(x,6) for x in p_valores]
-    p_valores_ajustados = [round(x,6) for x in p_valores_ajustados]
-    alphas = [round(x,3) for x in alphas]
-        
-    return {"valores z" : valores_z, "p_valores" : p_valores, "comparaciones" : comparaciones, "alphas" : alphas,
-            "resultado" : resultado, "p_valores ajustados" : p_valores_ajustados}
