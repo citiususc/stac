@@ -6,10 +6,10 @@ Created on Thu Jan 25 10:31:12 2014
 """
 
 """Fichero de pruebas unitarias. Primero se recogen las pruebas del test de Wilcoxon y a continuación se presentan
-las pruebas para los tests no parmétricos de ranking."""
+las pruebas para los tests no parmétricos de ranking y los tests POST-HOC."""
 
 import unittest
-from tests_no_parametricos import wilcoxon_test, friedman_test, iman_davenport_test, friedman_rangos_alineados_test
+import tests_no_parametricos as tnp
 
 #Datos para relizar las pruebas del test de Wilcoxon. Los argumentos del test son (matriz_datos, alpha).
 #Caso normal N<25 y >= 5 y número de algoritmos = 2.
@@ -53,54 +53,45 @@ datos2 = [[78,78],
 [45,48]]
 
 """TestCase que contiene las pruebas a realizar sobre el test de Wilcoxon. El nivel de
-signficancia considerado es el más habitual: 0.05. Se asume que si las pruebas no fallan
-ocurrirá lo mismo con otros niveles de significancia."""
+signficancia considerado es el más habitual: 0.05."""
 class TestWilcoxon(unittest.TestCase):
 
 	def test_resultado(self):
-		"""Prueba para verfificar el resultado obtenido (si el test aplicado sobre los datos
-		es o no estadísticamente significativo)."""
-		datos_devueltos = wilcoxon_test(datos0, 0.05)
+		"""Verfifica si el test aplicado sobre los datos es o no estadísticamente significativo)."""
+		datos_devueltos = tnp.wilcoxon_test(datos0, 0.05)
 		self.assertEqual(datos_devueltos["resultado"], "True")
 
 	def test_estadistico(self):
-		"""Prueba para verificar del valor del estadístico."""
-		datos_devueltos = wilcoxon_test(datos0, 0.05)
+		"""Verifica del valor del estadístico."""
+		datos_devueltos = tnp.wilcoxon_test(datos0, 0.05)
 		self.assertEqual(datos_devueltos["estadistico"], 19)
 
 	def test_rangos_pos(self):
-		"""Prueba para verificar el valor de la suma de rangos positivos."""
-		datos_devueltos = wilcoxon_test(datos0, 0.05)
+		"""Verifica el valor de la suma de rangos positivos."""
+		datos_devueltos = tnp.wilcoxon_test(datos0, 0.05)
 		self.assertEqual(datos_devueltos["suma rangos pos"], 86)
 
 	def test_rangos_neg(self):
-		"""Prueba para verificar el valor de la suma de rangos negativos."""
-		datos_devueltos = wilcoxon_test(datos0, 0.05)
+		"""Verifica el valor de la suma de rangos negativos."""
+		datos_devueltos = tnp.wilcoxon_test(datos0, 0.05)
 		self.assertEqual(datos_devueltos["suma rangos neg"], 19)
 
 	def test_punto_critico(self):
-		"""Prueba para verificar que el valor del punto crítico es recogido correctamente
-		del diccionario con la tabla de Wilcoxon."""
-		datos_devueltos = wilcoxon_test(datos0, 0.05)
+		"""Verifica que el valor del punto crítico es recogido correctamente de la tabla de Wilcoxon."""
+		datos_devueltos = tnp.wilcoxon_test(datos0, 0.05)
 		self.assertEqual(datos_devueltos["punto critico"], 21)
 
 	def test_numero_algoritmos(self):
-		"""Prueba para verificar que se devuelve fallo en caso de que el número de
-		algoritmos sea distinto de 2, en cuyo caso el valor devuelto será un diccionario
-		con la clave fallo."""
-		datos_devueltos = wilcoxon_test(datos1, 0.05)
-		self.assertDictEqual(datos_devueltos, {"fallo" : "Test de Wilcoxon solo aplicable a dos algoritmos"})
+		"""Verifica que se lanza una excepción en caso de que el número de algoritmos sea distinto de 2."""
+		self.assertRaises(Exception,tnp.wilcoxon_test,datos1,0.05)
 
 	def test_numero_conjuntos(self):
-		"""Prueba para verificar que se devuelve fallo en caso de que el número de
-		conjuntos sea menor de 5, en cuyo caso el valor devuelto será un diccionario
-		con la clave fallo."""
-		datos_devueltos = wilcoxon_test(datos2, 0.05)
-		self.assertDictEqual(datos_devueltos, {"fallo" : "Menos de 5 conjuntos de datos sin ligaduras"})
+		"""Verifica que se lanza una excepción en caso de que el número de conjuntos sea menor de 5."""
+		self.assertRaises(Exception,tnp.wilcoxon_test,datos2,0.05)
 
 #Datos para relizar las pruebas de los tests no paramétricos de ranking. Los argumentos de estos tests siempre
-#son (nombres_algoritmos, matriz_datos, alpha, tipo)
-nombres = ["PDFC","NNEP","IS-CHC+INN","FH-GBML"]
+#son (nombres_algoritmos, matriz_datos, alpha, tipo).
+nombres0 = ["PDFC","NNEP","IS-CHC+INN","FH-GBML"]
 datos3 = [[0.752,0.773,0.785,0.795],
 [0.727,0.748,0.724,0.713],
 [0.736,0.716,0.585,0.638],
@@ -127,119 +118,448 @@ datos3 = [[0.752,0.773,0.785,0.795],
 [0.958,0.959,0.964,0.964]]
 
 """TestCase que contiene las pruebas a realizar sobre el test de Friedman. El nivel de
-signficancia considerado es el más habitual: 0.05. Se asume que si las pruebas no fallan
-ocurrirá lo mismo con otros niveles de significancia. Para la cuestión de si se trata de
+signficancia considerado es el más habitual: 0.05. Para la cuestión de si se trata de
 minimizar o maximizar, en todas las pruebas se asume un tipo 0 (minimización) y se crean
 dos pruebas adicionales con el tipo 1 para el caso de los nombres y de los rankings, ya
 que son los casos en que puede haber variaciones."""
 class TestFriedman(unittest.TestCase):
 
     def test_resultado(self):
-		"""Prueba para verfificar el resultado obtenido (si el test aplicado sobre los datos
-		es o no estadísticamente significativo)."""
-		datos_devueltos = friedman_test(nombres, datos3, 0.05, 0)
+		"""Verifica si el test aplicado sobre los datos es o no estadísticamente significativo)."""
+		datos_devueltos = tnp.friedman_test(nombres0, datos3, 0.05, 0)
 		self.assertEqual(datos_devueltos["resultado"], "True")
 
     def test_estadistico(self):
-		"""Prueba para verificar del valor del estadístico."""
-		datos_devueltos = friedman_test(nombres, datos3, 0.05, 0)
+		"""Verifica el valor del estadístico."""
+		datos_devueltos = tnp.friedman_test(nombres0, datos3, 0.05, 0)
 		self.assertEqual(datos_devueltos["estadistico"], 16.225)
 
     def test_p_valor(self):
-		"""Prueba para verificar el p_valor."""
-		datos_devueltos = friedman_test(nombres, datos3, 0.05, 0)
+		"""Verifica el p_valor."""
+		datos_devueltos = tnp.friedman_test(nombres0, datos3, 0.05, 0)
 		self.assertEqual(datos_devueltos["p_valor"], 0.00102)
 
     def test_nombres_tipo0(self):
-		"""Prueba para verificar el ranking de nombres tratándose del caso de
-		minimizar."""
-		datos_devueltos = friedman_test(nombres, datos3, 0.05, 0)
+		"""Verifica el ranking de nombres tratándose del caso de minimizar."""
+		datos_devueltos = tnp.friedman_test(nombres0, datos3, 0.05, 0)
 		self.assertEqual(datos_devueltos["nombres"], ["FH-GBML","IS-CHC+INN","NNEP","PDFC"])
 
     def test_nombres_tipo1(self):
-		"""Prueba para verificar el ranking de nombres tratándose del caso de
-		maximizar."""
-		datos_devueltos = friedman_test(nombres, datos3, 0.05, 1)
+		"""Verifica el ranking de nombres tratándose del caso de maximizar."""
+		datos_devueltos = tnp.friedman_test(nombres0, datos3, 0.05, 1)
 		self.assertEqual(datos_devueltos["nombres"], ["PDFC","IS-CHC+INN","NNEP","FH-GBML"])
 
     def test_ranking_tipo0(self):
-		"""Prueba para verificar el ranking de valores obtenidos tratándose del caso de
-		minimizar."""
-		datos_devueltos = friedman_test(nombres, datos3, 0.05, 0)
+		"""Verifica el ranking de valores obtenidos tratándose del caso de minimizar."""
+		datos_devueltos = tnp.friedman_test(nombres0, datos3, 0.05, 0)
 		self.assertEqual(datos_devueltos["ranking"], [1.729,2.521,2.521,3.229])
 
     def test_ranking_tipo1(self):
-		"""Prueba para verificar el ranking de valores obtenidos tratándose del caso de
-		maximizar."""
-		datos_devueltos = friedman_test(nombres, datos3, 0.05, 1)
+		"""Verifica el ranking de valores obtenidos tratándose del caso de maximizar."""
+		datos_devueltos = tnp.friedman_test(nombres0, datos3, 0.05, 1)
 		self.assertEqual(datos_devueltos["ranking"], [1.771,2.479,2.479,3.271])
 
 
 """TestCase que contiene las pruebas a realizar sobre el test de Iman-Davenport. El nivel 
-de signficancia considerado es el más habitual: 0.05. Se asume que si las pruebas no
-fallan ocurrirá lo mismo con otros niveles de significancia. Solo se prueba p_valor y
-estadístico, ya que el resto de casos se hacen en Friedman."""
+de signficancia considerado es el más habitual: 0.05. Solo se prueba p_valor y estadístico,
+ya que el resto de casos se hacen en Friedman."""
 class TestImanDavenport(unittest.TestCase):
 
     def test_estadistico(self):
-		"""Prueba para verificar del valor del estadístico."""
-		datos_devueltos = iman_davenport_test(nombres, datos3, 0.05, 0)
+		"""Verifica el valor del estadístico."""
+		datos_devueltos = tnp.iman_davenport_test(nombres0, datos3, 0.05, 0)
 		self.assertEqual(datos_devueltos["estadistico"], 6.691)
 
     def test_p_valor(self):
-		"""Prueba para verificar el p_valor."""
-		datos_devueltos = iman_davenport_test(nombres, datos3, 0.05, 0)
+		"""Verifica el p_valor."""
+		datos_devueltos = tnp.iman_davenport_test(nombres0, datos3, 0.05, 0)
 		self.assertEqual(datos_devueltos["p_valor"], 0.000497)
 
 
 """TestCase que contiene las pruebas a realizar sobre el test de los Rangos Signados de
-Friedman. El nivel de signficancia considerado es el más habitual: 0.05. Se asume que si
-las pruebas no fallan ocurrirá lo mismo con otros niveles de significancia. Para la 
-cuestión de si se trata de minimizar o maximizar, en todas las pruebas se asume un 
-tipo 0 (minimización) y se crean dos pruebas adicionales con el tipo 1 para el caso de 
-los nombres y de los rankings, ya que son los casos en que puede haber variaciones."""
+Friedman. El nivel de signficancia considerado es el más habitual: 0.05. Para la cuestión
+de si se trata de minimizar o maximizar, en todas las pruebas se asume un tipo 0 (minimización)
+y se crean dos pruebas adicionales con el tipo 1 para el caso de los nombres y de los rankings,
+ya que son los casos en que puede haber variaciones."""
 class TestFriedmanRangosAlineados(unittest.TestCase):
 
 	def test_resultado(self):
-		"""Prueba para verfificar el resultado obtenido (si el test aplicado sobre los datos
-		es o no estadísticamente significativo)."""
-		datos_devueltos = friedman_rangos_alineados_test(nombres, datos3, 0.05, 0)
+		"""Verifica si el test aplicado sobre los datos es o no estadísticamente significativo)."""
+		datos_devueltos = tnp.friedman_rangos_alineados_test(nombres0, datos3, 0.05, 0)
 		self.assertEqual(datos_devueltos["resultado"], "True")
 
 	def test_estadistico(self):
-		"""Prueba para verificar del valor del estadístico."""
-		datos_devueltos = friedman_rangos_alineados_test(nombres, datos3, 0.05, 0)
+		"""Verifica el valor del estadístico."""
+		datos_devueltos = tnp.friedman_rangos_alineados_test(nombres0, datos3, 0.05, 0)
 		self.assertEqual(datos_devueltos["estadistico"], 22.26)
 
 	def test_p_valor(self):
-		"""Prueba para verificar el p_valor."""
-		datos_devueltos = friedman_rangos_alineados_test(nombres, datos3, 0.05, 0)
+		"""Verifica el p_valor."""
+		datos_devueltos = tnp.friedman_rangos_alineados_test(nombres0, datos3, 0.05, 0)
 		self.assertEqual(datos_devueltos["p_valor"], 0.000058)
 
 	def test_nombres_tipo0(self):
-		"""Prueba para verificar el ranking de nombres tratándose del caso de
-		minimizar."""
-		datos_devueltos = friedman_rangos_alineados_test(nombres, datos3, 0.05, 0)
+		"""Verifica el ranking de nombres tratándose del caso de minimizar."""
+		datos_devueltos = tnp.friedman_rangos_alineados_test(nombres0, datos3, 0.05, 0)
 		self.assertEqual(datos_devueltos["nombres"], ["FH-GBML","IS-CHC+INN","NNEP","PDFC"])
 
 	def test_nombres_tipo1(self):
-		"""Prueba para verificar el ranking de nombres tratándose del caso de
-		maximizar."""
-		datos_devueltos = friedman_rangos_alineados_test(nombres, datos3, 0.05, 1)
+		"""Verifica el ranking de nombres tratándose del caso de maximizar."""
+		datos_devueltos = tnp.friedman_rangos_alineados_test(nombres0, datos3, 0.05, 1)
 		self.assertEqual(datos_devueltos["nombres"], ["PDFC","NNEP","IS-CHC+INN","FH-GBML"])
 
 	def test_ranking_tipo0(self):
-		"""Prueba para verificar el ranking de valores obtenidos tratándose del caso de
-		minimizar."""
-		datos_devueltos = friedman_rangos_alineados_test(nombres, datos3, 0.05, 0)
+		"""Verifica el ranking de valores obtenidos tratándose del caso de minimizar."""
+		datos_devueltos = tnp.friedman_rangos_alineados_test(nombres0, datos3, 0.05, 0)
 		self.assertEqual(datos_devueltos["ranking"], [26.104, 50.021, 50.208, 67.667])
 
 	def test_ranking_tipo1(self):
-		"""Prueba para verificar el ranking de valores obtenidos tratándose del caso de
-		maximizar."""
-		datos_devueltos = friedman_rangos_alineados_test(nombres, datos3, 0.05, 1)
+		"""Verifica el ranking de valores obtenidos tratándose del caso de maximizar."""
+		datos_devueltos = tnp.friedman_rangos_alineados_test(nombres0, datos3, 0.05, 1)
 		self.assertEqual(datos_devueltos["ranking"], [29.333, 46.792, 46.979, 70.896])
 
-if __name__ == '__main__':
-	unittest.main()
 
+"""TestCase que contiene las pruebas a realizar sobre el test de Quade. El nivel de
+signficancia considerado es el más habitual: 0.05. Para la cuestión de si se trata de
+minimizar o maximizar, en todas las pruebas se asume un tipo 0 (minimización) y se crean
+dos pruebas adicionales con el tipo 1 para el caso de los nombres y de los rankings, ya 
+que son los casos en que puede haber variaciones."""
+class TestQuade(unittest.TestCase):
+
+	def test_resultado(self):
+		"""Verifica si el test aplicado sobre los datos es o no estadísticamente significativo)."""
+		datos_devueltos = tnp.quade_test(nombres0, datos3, 0.05, 0)
+		self.assertEqual(datos_devueltos["resultado"], "True")
+
+	def test_estadistico(self):
+		"""Verifica el valor del estadístico."""
+		datos_devueltos = tnp.quade_test(nombres0, datos3, 0.05, 0)
+		self.assertEqual(datos_devueltos["estadistico"], 11.752)
+
+	def test_p_valor(self):
+		"""Verifica el p_valor."""
+		datos_devueltos = tnp.quade_test(nombres0, datos3, 0.05, 0)
+		self.assertEqual(datos_devueltos["p_valor"], 0.000003)
+
+	def test_nombres_tipo0(self):
+		"""Verifica el ranking de nombres tratándose del caso de minimizar."""
+		datos_devueltos = tnp.quade_test(nombres0, datos3, 0.05, 0)
+		self.assertEqual(datos_devueltos["nombres"], ["FH-GBML","IS-CHC+INN","NNEP","PDFC"])
+
+	def test_nombres_tipo1(self):
+		"""Verifica el ranking de nombres tratándose del caso de maximizar."""
+		datos_devueltos = tnp.quade_test(nombres0, datos3, 0.05, 1)
+		self.assertEqual(datos_devueltos["nombres"], ["PDFC","NNEP","IS-CHC+INN","FH-GBML"])
+
+	def test_ranking_tipo0(self):
+		"""Verifica el ranking de valores obtenidos tratándose del caso de minimizar."""
+		datos_devueltos = tnp.quade_test(nombres0, datos3, 0.05, 0)
+		self.assertEqual(datos_devueltos["ranking"], [1.518,2.408,2.462,3.612])
+
+	def test_ranking_tipo1(self):
+		"""Verifica el ranking de valores obtenidos tratándose del caso de maximizar."""
+		datos_devueltos = tnp.quade_test(nombres0, datos3, 0.05, 1)
+		self.assertEqual(datos_devueltos["ranking"], [1.388,2.538,2.592,3.482])
+
+
+#Datos para relizar las pruebas de los tests no paramétricos de comparación POST-HOC (con método
+#de control). Los argumentos de estos tests siempre son (test_principal, nombres, ranking, N, alpha).
+nombres2 = ["PDFC","IS-CHC+INN","NNEP","FH-GBML"]
+datos5 = [1.7708333333333333, 2.4791666666666665, 2.4791666666666665, 3.2708333333333335]
+
+"""TestCase que contiene las pruebas a realizar sobre el mutitest de Bonferroni-Dunn. El nivel 
+de signficancia considerado es el más habitual: 0.05."""
+class TestBonferroni_Dunn(unittest.TestCase):
+
+    def test_resultado(self):
+    		"""Verifica si los tests aplicados sobre todas las hipótesis son o no significativos."""
+    		datos_devueltos = tnp.bonferroni_dunn_test("friedman", nombres2, datos5, 24, 0.05)
+    		self.assertEqual(datos_devueltos["resultado"], ['True', 'False', 'False'])
+    
+    def test_valores_z(self):
+    		"""Verifica el valor de los estadisticos correspondientes a las comparaciones."""
+    		datos_devueltos = tnp.bonferroni_dunn_test("friedman", nombres2, datos5, 24, 0.05)
+    		self.assertEqual(datos_devueltos["valores z"], [-4.025, -1.901, -1.901])
+    
+    def test_p_valores(self):
+    		"""Verifica los p_valores."""
+    		datos_devueltos = tnp.bonferroni_dunn_test("friedman", nombres2, datos5, 24, 0.05)
+    		self.assertEqual(datos_devueltos["p_valores"], [5.7e-05, 0.057347, 0.057347])
+    
+    def test_alpha(self):
+    		"""Verifica el valor de alpha."""
+    		datos_devueltos = tnp.bonferroni_dunn_test("friedman", nombres2, datos5, 24, 0.05)
+    		self.assertEqual(datos_devueltos["alpha"], 0.017)
+    
+    def test_nombres(self):
+    		"""Verifica el orden de los nombres de los algoritmos."""
+    		datos_devueltos = tnp.bonferroni_dunn_test("friedman", nombres2, datos5, 24, 0.05)
+    		self.assertEqual(datos_devueltos["nombres"], ['FH-GBML', 'IS-CHC+INN', 'NNEP'])
+
+    def test_metodo_control(self):
+		"""Verifica que el método de control es el correcto."""
+		datos_devueltos = tnp.bonferroni_dunn_test("friedman", nombres2, datos5, 24, 0.05)
+		self.assertEqual(datos_devueltos["metodo de control"], "PDFC")    
+    
+    def test_p_valores_ajustados(self):
+    		"""Verifica los p_valores ajustados."""
+    		datos_devueltos = tnp.bonferroni_dunn_test("friedman", nombres2, datos5, 24, 0.05)
+    		self.assertEqual(datos_devueltos["p_valores ajustados"], [0.000171, 0.172041, 0.172041])
+
+
+"""TestCase que contiene las pruebas a realizar sobre el mutitest de Holm. El nivel 
+de signficancia considerado es el más habitual: 0.05."""
+class TestHolm(unittest.TestCase):
+
+    def test_resultado(self):
+    		"""Verifica si los tests aplicados sobre todas las hipótesis son o no significativos."""
+    		datos_devueltos = tnp.holm_test("friedman", nombres2, datos5, 24, 0.05)
+    		self.assertEqual(datos_devueltos["resultado"], ['True', 'False', 'False'])
+    
+    def test_valores_z(self):
+    		"""Verifica el valor de los estadisticos correspondientes a las comparaciones."""
+    		datos_devueltos = tnp.holm_test("friedman", nombres2, datos5, 24, 0.05)
+    		self.assertEqual(datos_devueltos["valores z"], [-4.025, -1.901, -1.901])
+    
+    def test_p_valores(self):
+    		"""Verifica los p_valores."""
+    		datos_devueltos = tnp.holm_test("friedman", nombres2, datos5, 24, 0.05)
+    		self.assertEqual(datos_devueltos["p_valores"], [5.7e-05, 0.057347, 0.057347])
+    
+    def test_alphas(self):
+    		"""Verifica los valores alpha."""
+    		datos_devueltos = tnp.holm_test("friedman", nombres2, datos5, 24, 0.05)
+    		self.assertEqual(datos_devueltos["alphas"], [0.017, 0.025, 0.05])
+    
+    def test_nombres(self):
+    		"""Verifica el orden de los nombres de los algoritmos."""
+    		datos_devueltos = tnp.holm_test("friedman", nombres2, datos5, 24, 0.05)
+    		self.assertEqual(datos_devueltos["nombres"], ['FH-GBML', 'IS-CHC+INN', 'NNEP'])
+
+    def test_metodo_control(self):
+		"""Verifica que el método de control es el correcto."""
+		datos_devueltos = tnp.holm_test("friedman", nombres2, datos5, 24, 0.05)
+		self.assertEqual(datos_devueltos["metodo de control"], "PDFC")    
+    
+    def test_p_valores_ajustados(self):
+    		"""Verifica los p_valores ajustados."""
+    		datos_devueltos = tnp.holm_test("friedman", nombres2, datos5, 24, 0.05)
+    		self.assertEqual(datos_devueltos["p_valores ajustados"], [0.000171, 0.114694, 0.114694])
+
+
+"""TestCase que contiene las pruebas a realizar sobre el mutitest de Hochberg. El nivel 
+de signficancia considerado es el más habitual: 0.05."""
+class TestHochberg(unittest.TestCase):
+
+    def test_resultado(self):
+    		"""Verifica si los tests aplicados sobre todas las hipótesis son o no significativos."""
+    		datos_devueltos = tnp.hochberg_test("friedman", nombres2, datos5, 24, 0.05)
+    		self.assertEqual(datos_devueltos["resultado"], ['True', 'False', 'False'])
+    
+    def test_valores_z(self):
+    		"""Verifica el valor de los estadisticos correspondientes a las comparaciones."""
+    		datos_devueltos = tnp.hochberg_test("friedman", nombres2, datos5, 24, 0.05)
+    		self.assertEqual(datos_devueltos["valores z"], [-4.025, -1.901, -1.901])
+    
+    def test_p_valores(self):
+    		"""Verifica los p_valores."""
+    		datos_devueltos = tnp.hochberg_test("friedman", nombres2, datos5, 24, 0.05)
+    		self.assertEqual(datos_devueltos["p_valores"], [5.7e-05, 0.057347, 0.057347])
+    
+    def test_alphas(self):
+    		"""Verifica los valores alpha."""
+    		datos_devueltos = tnp.hochberg_test("friedman", nombres2, datos5, 24, 0.05)
+    		self.assertEqual(datos_devueltos["alphas"], [0.017, 0.025, 0.05])
+    
+    def test_nombres(self):
+    		"""Verifica el orden de los nombres de los algoritmos."""
+    		datos_devueltos = tnp.hochberg_test("friedman", nombres2, datos5, 24, 0.05)
+    		self.assertEqual(datos_devueltos["nombres"], ['FH-GBML', 'IS-CHC+INN', 'NNEP'])
+
+    def test_metodo_control(self):
+		"""Verifica que el método de control es el correcto."""
+		datos_devueltos = tnp.hochberg_test("friedman", nombres2, datos5, 24, 0.05)
+		self.assertEqual(datos_devueltos["metodo de control"], "PDFC")    
+    
+    def test_p_valores_ajustados(self):
+    		"""Verifica los p_valores ajustados."""
+    		datos_devueltos = tnp.hochberg_test("friedman", nombres2, datos5, 24, 0.05)
+    		self.assertEqual(datos_devueltos["p_valores ajustados"], [0.000171, 0.057347, 0.057347])
+
+
+"""TestCase que contiene las pruebas a realizar sobre el mutitest de Li. El nivel 
+de signficancia considerado es el más habitual: 0.05."""
+class TestLi(unittest.TestCase):
+
+    def test_resultado(self):
+    		"""Verifica si los tests aplicados sobre todas las hipótesis son o no significativos."""
+    		datos_devueltos = tnp.li_test("friedman", nombres2, datos5, 24, 0.05)
+    		self.assertEqual(datos_devueltos["resultado"], ['True', 'True', 'False'])
+    
+    def test_valores_z(self):
+    		"""Verifica el valor de los estadisticos correspondientes a las comparaciones."""
+    		datos_devueltos = tnp.li_test("friedman", nombres2, datos5, 24, 0.05)
+    		self.assertEqual(datos_devueltos["valores z"], [-4.025, -1.901, -1.901])
+    
+    def test_p_valores(self):
+    		"""Verifica los p_valores."""
+    		datos_devueltos = tnp.li_test("friedman", nombres2, datos5, 24, 0.05)
+    		self.assertEqual(datos_devueltos["p_valores"], [5.7e-05, 0.057347, 0.057347])
+    
+    def test_nombres(self):
+    		"""Verifica el orden de los nombres de los algoritmos."""
+    		datos_devueltos = tnp.li_test("friedman", nombres2, datos5, 24, 0.05)
+    		self.assertEqual(datos_devueltos["nombres"], ['FH-GBML', 'IS-CHC+INN', 'NNEP'])
+
+    def test_metodo_control(self):
+		"""Verifica que el método de control es el correcto."""
+		datos_devueltos = tnp.li_test("friedman", nombres2, datos5, 24, 0.05)
+		self.assertEqual(datos_devueltos["metodo de control"], "PDFC")    
+    
+    def test_p_valores_ajustados(self):
+    		"""Verifica los p_valores ajustados."""
+    		datos_devueltos = tnp.li_test("friedman", nombres2, datos5, 24, 0.05)
+    		self.assertEqual(datos_devueltos["p_valores ajustados"], [6e-05, 0.057347, 0.057347])
+
+
+#Datos para relizar las pruebas de los tests no paramétricos de comparación POST-HOC (multitest).
+#Los argumentos de estos tests siempre son (test_principal, nombres, ranking, N, alpha).
+nombres1 = ["C4.5","1NN","NaiveBayes","Kernel","CN2"]
+datos4 = [2.100,3.250,2.200,4.333,3.117]
+
+"""TestCase que contiene las pruebas a realizar sobre el mutitest de Nemenyi (Bonferroni-Dunn
+multitest). El nivel de signficancia considerado es el más habitual: 0.05."""
+class TestNemenyi(unittest.TestCase):
+
+    def test_resultado(self):
+		"""Verifica si los tests aplicados sobre todas las hipótesis (multitest) son o no significativos."""
+		datos_devueltos = tnp.nemenyi_multitest("friedman", nombres1, datos4, 30, 0.05)
+		self.assertEqual(datos_devueltos["resultado"], ['True','True','True','True','False','False','False','False','False','False'])
+
+    def test_comparaciones(self):
+		"""Verifica la lista de posibles comparaciones (m = K(K-1)/2)."""
+		datos_devueltos = tnp.nemenyi_multitest("friedman", nombres1, datos4, 30, 0.05)
+		self.assertEqual(datos_devueltos["comparaciones"], ['C4.5 vs Kernel','NaiveBayes vs Kernel','Kernel vs CN2','C4.5 vs 1NN','1NN vs Kernel','1NN vs NaiveBayes','C4.5 vs CN2','NaiveBayes vs CN2','1NN vs CN2','C4.5 vs NaiveBayes'])
+
+    def test_valores_z(self):
+		"""Verifica el valor de los estadisticos correspondientes a las distintas comparaciones."""
+		datos_devueltos = tnp.nemenyi_multitest("friedman", nombres1, datos4, 30, 0.05)
+		self.assertEqual(datos_devueltos["valores z"], [-5.47,-5.225,2.979,-2.817,-2.653,2.572,-2.491,-2.246,0.326,-0.245])
+
+    def test_p_valores(self):
+		"""Verifica los p_valores."""
+		datos_devueltos = tnp.nemenyi_multitest("friedman", nombres1, datos4, 30, 0.05)
+		self.assertEqual(datos_devueltos["p_valores"], [0.0,0.0,0.002896,0.004849,0.007983,0.010112,0.012734,0.024692,0.744589,0.806496])
+
+    def test_alpha(self):
+		"""Verifica el valor de alpha."""
+		datos_devueltos = tnp.nemenyi_multitest("friedman", nombres1, datos4, 30, 0.05)
+		self.assertEqual(datos_devueltos["alpha"], 0.005)
+
+    def test_p_valores_ajustados(self):
+		"""Verifica los p_valores ajustados."""
+		datos_devueltos = tnp.nemenyi_multitest("friedman", nombres1, datos4, 30, 0.05)
+		self.assertEqual(datos_devueltos["p_valores ajustados"], [0.0,2e-06,0.028959,0.048488,0.079828,0.101123,0.127337,0.246923,1.0,1.0])
+
+
+"""TestCase que contiene las pruebas a realizar sobre el mutitest de Holm. El nivel de signficancia
+considerado es el más habitual: 0.05."""
+class TestHolmMultitest(unittest.TestCase):
+
+    def test_resultado(self):
+		"""Verifica si los tests aplicados sobre todas las hipótesis (multitest) son o no significativos."""
+		datos_devueltos = tnp.holm_multitest("friedman", nombres1, datos4, 30, 0.05)
+		self.assertEqual(datos_devueltos["resultado"], ['True','True','True','True','True','False','False','False','False','False'])
+
+    def test_comparaciones(self):
+		"""Verifica la lista de posibles comparaciones (m = K(K-1)/2)."""
+		datos_devueltos = tnp.holm_multitest("friedman", nombres1, datos4, 30, 0.05)
+		self.assertEqual(datos_devueltos["comparaciones"], ['C4.5 vs Kernel','NaiveBayes vs Kernel','Kernel vs CN2','C4.5 vs 1NN','1NN vs Kernel','1NN vs NaiveBayes','C4.5 vs CN2','NaiveBayes vs CN2','1NN vs CN2','C4.5 vs NaiveBayes'])
+
+    def test_valores_z(self):
+		"""Verifica el valor de los estadisticos correspondientes a las distintas comparaciones."""
+		datos_devueltos = tnp.holm_multitest("friedman", nombres1, datos4, 30, 0.05)
+		self.assertEqual(datos_devueltos["valores z"], [-5.47,-5.225,2.979,-2.817,-2.653,2.572,-2.491,-2.246,0.326,-0.245])
+
+    def test_p_valores(self):
+		"""Verifica los p_valores."""
+		datos_devueltos = tnp.holm_multitest("friedman", nombres1, datos4, 30, 0.05)
+		self.assertEqual(datos_devueltos["p_valores"], [0.0,0.0,0.002896,0.004849,0.007983,0.010112,0.012734,0.024692,0.744589,0.806496])
+
+    def test_alphas(self):
+		"""Verifica los valores alphas."""
+		datos_devueltos = tnp.holm_multitest("friedman", nombres1, datos4, 30, 0.05)
+		self.assertEqual(datos_devueltos["alphas"], [0.005,0.006,0.006,0.007,0.008,0.01,0.013,0.017,0.025,0.05])
+
+    def test_p_valores_ajustados(self):
+		"""Verifica los p_valores ajustados."""
+		datos_devueltos = tnp.holm_multitest("friedman", nombres1, datos4, 30, 0.05)
+		self.assertEqual(datos_devueltos["p_valores ajustados"], [0.0,2e-06,0.023167,0.033941,0.047897,0.050562,0.050935,0.074077,1.0,1.0])
+
+
+"""TestCase que contiene las pruebas a realizar sobre el mutitest de Hochberg. El nivel de 
+signficancia considerado es el más habitual: 0.05."""
+class TestHochbergMultitest(unittest.TestCase):
+
+    def test_resultado(self):
+		"""Verifica si los tests aplicados sobre todas las hipótesis (multitest) son o no significativos."""
+		datos_devueltos = tnp.hochberg_multitest("friedman", nombres1, datos4, 30, 0.05)
+		self.assertEqual(datos_devueltos["resultado"], ['True','True','True','True','True','False','False','False','False','False'])
+
+    def test_comparaciones(self):
+		"""Verifica la lista de posibles comparaciones (m = K(K-1)/2)."""
+		datos_devueltos = tnp.hochberg_multitest("friedman", nombres1, datos4, 30, 0.05)
+		self.assertEqual(datos_devueltos["comparaciones"], ['C4.5 vs Kernel','NaiveBayes vs Kernel','Kernel vs CN2','C4.5 vs 1NN','1NN vs Kernel','1NN vs NaiveBayes','C4.5 vs CN2','NaiveBayes vs CN2','1NN vs CN2','C4.5 vs NaiveBayes'])
+
+    def test_valores_z(self):
+		"""Verifica el valor de los estadisticos correspondientes a las distintas comparaciones."""
+		datos_devueltos = tnp.hochberg_multitest("friedman", nombres1, datos4, 30, 0.05)
+		self.assertEqual(datos_devueltos["valores z"], [-5.47,-5.225,2.979,-2.817,-2.653,2.572,-2.491,-2.246,0.326,-0.245])
+
+    def test_p_valores(self):
+		"""Verifica los p_valores."""
+		datos_devueltos = tnp.hochberg_multitest("friedman", nombres1, datos4, 30, 0.05)
+		self.assertEqual(datos_devueltos["p_valores"], [0.0,0.0,0.002896,0.004849,0.007983,0.010112,0.012734,0.024692,0.744589,0.806496])
+
+    def test_alphas(self):
+		"""Verifica los valores alphas."""
+		datos_devueltos = tnp.hochberg_multitest("friedman", nombres1, datos4, 30, 0.05)
+		self.assertEqual(datos_devueltos["alphas"], [0.005,0.006,0.006,0.007,0.008,0.01,0.013,0.017,0.025,0.05])
+
+    def test_p_valores_ajustados(self):
+		"""Verifica los p_valores ajustados."""
+		datos_devueltos = tnp.hochberg_multitest("friedman", nombres1, datos4, 30, 0.05)
+		self.assertEqual(datos_devueltos["p_valores ajustados"], [0.0,2e-06,0.023167,0.033941,0.047897,0.050562,0.050935,0.074077,0.806496,0.806496])
+
+
+"""TestCase que contiene las pruebas a realizar sobre el mutitest de Li. El nivel de 
+signficancia considerado es el más habitual: 0.05."""
+class TestLiMultitest(unittest.TestCase):
+
+    def test_resultado(self):
+		"""Verifica si los tests aplicados sobre todas las hipótesis (multitest) son o no significativos."""
+		datos_devueltos = tnp.li_multitest("friedman", nombres1, datos4, 30, 0.05)
+		self.assertEqual(datos_devueltos["resultado"], ['True','True','True','True','True','True','True','True','True','False'])
+
+    def test_comparaciones(self):
+		"""Verifica la lista de posibles comparaciones (m = K(K-1)/2)."""
+		datos_devueltos = tnp.li_multitest("friedman", nombres1, datos4, 30, 0.05)
+		self.assertEqual(datos_devueltos["comparaciones"], ['C4.5 vs Kernel','NaiveBayes vs Kernel','Kernel vs CN2','C4.5 vs 1NN','1NN vs Kernel','1NN vs NaiveBayes','C4.5 vs CN2','NaiveBayes vs CN2','1NN vs CN2','C4.5 vs NaiveBayes'])
+
+    def test_valores_z(self):
+		"""Verifica el valor de los estadisticos correspondientes a las distintas comparaciones."""
+		datos_devueltos = tnp.li_multitest("friedman", nombres1, datos4, 30, 0.05)
+		self.assertEqual(datos_devueltos["valores z"], [-5.47,-5.225,2.979,-2.817,-2.653,2.572,-2.491,-2.246,0.326,-0.245])
+
+    def test_p_valores(self):
+		"""Verifica los p_valores."""
+		datos_devueltos = tnp.li_multitest("friedman", nombres1, datos4, 30, 0.05)
+		self.assertEqual(datos_devueltos["p_valores"], [0.0,0.0,0.002896,0.004849,0.007983,0.010112,0.012734,0.024692,0.744589,0.806496])
+
+    def test_p_valores_ajustados(self):
+		"""Verifica los p_valores ajustados."""
+		datos_devueltos = tnp.li_multitest("friedman", nombres1, datos4, 30, 0.05)
+		self.assertEqual(datos_devueltos["p_valores ajustados"], [0.0,1e-06,0.014745,0.024445,0.039619,0.049664,0.061743,0.113166,0.793726,0.806496])
+
+if __name__ == '__main__':
+    unittest.main()
