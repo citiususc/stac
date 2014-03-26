@@ -293,6 +293,18 @@ def holm_test(test_principal,nombres,ranking,n,alpha=0.05):
     return resultado
 
 
+#Servicio para el test de Hochberg.
+@route('/hochberg/<test_principal>/<nombres>/<ranking>/<n:int>', method="GET")
+@route('/hochberg/<test_principal>/<nombres>/<ranking>/<n:int>/<alpha:float>', method="GET")
+def hochberg_test(test_principal,nombres,ranking,n,alpha=0.05):
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    response.content_type = "application/json"
+    nombres = nombres.split(",")
+    ranking = [float(x) for x in ranking.split(",")]
+    resultado = tnp.hochberg_test(test_principal,nombres,ranking,n,alpha)
+    return resultado
+
+
 #Servicio para el test de Li.
 @route('/li/<test_principal>/<nombres>/<ranking>/<n:int>', method="GET")
 @route('/li/<test_principal>/<nombres>/<ranking>/<n:int>/<alpha:float>', method="GET")
@@ -302,6 +314,54 @@ def li_test(test_principal,nombres,ranking,n,alpha=0.05):
     nombres = nombres.split(",")
     ranking = [float(x) for x in ranking.split(",")]
     resultado = tnp.li_test(test_principal,nombres,ranking,n,alpha)
+    return resultado
+
+
+#Servicio para el test de Nemenyi (Bonferroni-Dunn Multitest).
+@route('/nemenyi/<test_principal>/<nombres>/<ranking>/<n:int>', method="GET")
+@route('/nemenyi/<test_principal>/<nombres>/<ranking>/<n:int>/<alpha:float>', method="GET")
+def nemenyi_multitest(test_principal,nombres,ranking,n,alpha=0.05):
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    response.content_type = "application/json"
+    nombres = nombres.split(",")
+    ranking = [float(x) for x in ranking.split(",")]
+    resultado = tnp.nemenyi_multitest(test_principal,nombres,ranking,n,alpha)
+    return resultado
+
+
+#Servicio para el Multitest de Holm.
+@route('/holm-multitest/<test_principal>/<nombres>/<ranking>/<n:int>', method="GET")
+@route('/holm-multitest/<test_principal>/<nombres>/<ranking>/<n:int>/<alpha:float>', method="GET")
+def holm_multitest(test_principal,nombres,ranking,n,alpha=0.05):
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    response.content_type = "application/json"
+    nombres = nombres.split(",")
+    ranking = [float(x) for x in ranking.split(",")]
+    resultado = tnp.holm_multitest(test_principal,nombres,ranking,n,alpha)
+    return resultado
+
+
+#Servicio para el Multitest de Hochberg.
+@route('/hochberg-multitest/<test_principal>/<nombres>/<ranking>/<n:int>', method="GET")
+@route('/hochberg-multitest/<test_principal>/<nombres>/<ranking>/<n:int>/<alpha:float>', method="GET")
+def hochberg_multitest(test_principal,nombres,ranking,n,alpha=0.05):
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    response.content_type = "application/json"
+    nombres = nombres.split(",")
+    ranking = [float(x) for x in ranking.split(",")]
+    resultado = tnp.hochberg_multitest(test_principal,nombres,ranking,n,alpha)
+    return resultado
+
+
+#Servicio para el Multitest de Li.
+@route('/li-multitest/<test_principal>/<nombres>/<ranking>/<n:int>', method="GET")
+@route('/li-multitest/<test_principal>/<nombres>/<ranking>/<n:int>/<alpha:float>', method="GET")
+def li_multitest(test_principal,nombres,ranking,n,alpha=0.05):
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    response.content_type = "application/json"
+    nombres = nombres.split(",")
+    ranking = [float(x) for x in ranking.split(",")]
+    resultado = tnp.li_multitest(test_principal,nombres,ranking,n,alpha)
     return resultado
 
 run(reloader=True, host='localhost', port=8080)
