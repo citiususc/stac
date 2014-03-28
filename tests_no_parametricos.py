@@ -166,7 +166,7 @@ def friedman_test(nombres_algoritmos, matriz_datos, alpha, tipo):
         rankings_medios[i] = round(rankings_medios[i],3)
 
     return {"resultado" : str(p_valor < alpha), "p_valor": round(p_valor,6), "estadistico" : round(chi2,3), 
-    "nombres" : ranking_nombres, "ranking" : rankings_medios, "N" : N}
+    "nombres" : ranking_nombres, "ranking" : rankings_medios}
 
 
 
@@ -193,7 +193,7 @@ def iman_davenport_test(nombres_algoritmos, matriz_datos, alpha, tipo):
     p_valor = 1 - st.f.cdf(iman_davenport, K-1, (K-1)*(N-1))
 
     return {"resultado" : str(p_valor < alpha), "p_valor": round(p_valor,6), "estadistico" : round(iman_davenport,3), 
-    "nombres": friedman["nombres"], "ranking": friedman["ranking"], "N" : friedman["N"]}
+    "nombres": friedman["nombres"], "ranking": friedman["ranking"]}
 
 
 
@@ -269,7 +269,7 @@ def friedman_rangos_alineados_test(nombres_algoritmos, matriz_datos, alpha, tipo
         rankings_medios[i] = round(rankings_medios[i],3)
         
     return {"resultado" : str(p_valor < alpha), "p_valor": round(p_valor,6), "estadistico" : round(T,3), 
-    "nombres" : ranking_nombres, "ranking" : rankings_medios, "N" : N}
+    "nombres" : ranking_nombres, "ranking" : rankings_medios}
 
 
 
@@ -358,7 +358,7 @@ def quade_test(nombres_algoritmos, matriz_datos, alpha, tipo):
         rankings_medios[i] = round(rankings_medios[i],3)
             
     return {"resultado" : str(p_valor < alpha), "p_valor": round(p_valor,6), "estadistico" : round(T,3), 
-    "nombres" : ranking_nombres, "ranking" : rankings_medios, "N" : N}
+    "nombres" : ranking_nombres, "ranking" : rankings_medios}
 
 
 

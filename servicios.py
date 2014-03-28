@@ -63,7 +63,6 @@ def leer_datos(archivo):
 
 #Función para generar el resumen hash MD5 de los ficheros.
 def generar_md5(archivo):
-
     tam_bloque = 65536
     md5 = hashlib.md5()
     bufer = archivo.read(tam_bloque)
@@ -176,7 +175,8 @@ def friedman_test(id_fichero, alpha=0.05, tipo=0, test_comparacion="bonferroni_d
         return {"fallo" : "No existe ningun fichero con esa clave"}
     res_ranking = tnp.friedman_test(datos["nombres_algoritmos"],datos["matriz_datos"],alpha,tipo)
     if res_ranking["resultado"] == "True":
-        res_comparacion = getattr(tnp, test_comparacion)("friedman",res_ranking["nombres"],res_ranking["ranking"],res_ranking["N"],alpha)
+        print len(datos["matriz_datos"])
+        res_comparacion = getattr(tnp, test_comparacion)("friedman",res_ranking["nombres"],res_ranking["ranking"],len(datos["matriz_datos"]),alpha)
         return {"test_ranking" : res_ranking, "test_comparacion" : res_comparacion}
     return {"test_ranking" : res_ranking}
 
@@ -220,7 +220,7 @@ def iman_davenport_test(id_fichero, alpha=0.05, tipo=0, test_comparacion="bonfer
         return {"fallo" : "No existe ningun fichero con esa clave"}
     res_ranking = tnp.iman_davenport_test(datos["nombres_algoritmos"],datos["matriz_datos"],alpha,tipo)
     if res_ranking["resultado"] == "True":
-        res_comparacion = getattr(tnp, test_comparacion)("iman-davenport",res_ranking["nombres"],res_ranking["ranking"],res_ranking["N"],alpha)
+        res_comparacion = getattr(tnp, test_comparacion)("iman-davenport",res_ranking["nombres"],res_ranking["ranking"],len(datos["matriz_datos"]),alpha)
         return {"test_ranking" : res_ranking, "test_comparacion" : res_comparacion}
     return {"test_ranking" : res_ranking}
 
@@ -264,7 +264,7 @@ def friedman_rangos_alineados_test(id_fichero, alpha=0.05, tipo=0, test_comparac
         return {"fallo" : "No existe ningun fichero con esa clave"}
     res_ranking = tnp.friedman_rangos_alineados_test(datos["nombres_algoritmos"],datos["matriz_datos"],alpha,tipo)
     if res_ranking["resultado"] == "True":
-        res_comparacion = getattr(tnp, test_comparacion)("rangos-alineados",res_ranking["nombres"],res_ranking["ranking"],res_ranking["N"],alpha)
+        res_comparacion = getattr(tnp, test_comparacion)("rangos-alineados",res_ranking["nombres"],res_ranking["ranking"],len(datos["matriz_datos"]),alpha)
         return {"test_ranking" : res_ranking, "test_comparacion" : res_comparacion}
     return {"test_ranking" : res_ranking}
 
@@ -308,7 +308,7 @@ def quade_test(id_fichero, alpha=0.05, tipo=0, test_comparacion="bonferroni_dunn
         return {"fallo" : "No existe ningun fichero con esa clave"}
     res_ranking = tnp.quade_test(datos["nombres_algoritmos"],datos["matriz_datos"],alpha,tipo)
     if res_ranking["resultado"] == "True":
-        res_comparacion = getattr(tnp, test_comparacion)("quade",res_ranking["nombres"],res_ranking["ranking"],res_ranking["N"],alpha)
+        res_comparacion = getattr(tnp, test_comparacion)("quade",res_ranking["nombres"],res_ranking["ranking"],len(datos["matriz_datos"]),alpha)
         return {"test_ranking" : res_ranking, "test_comparacion" : res_comparacion}
     return {"test_ranking" : res_ranking}
 
