@@ -86,8 +86,8 @@ def subir_fichero():
             return {"fallo" : "El fichero con hash \"" + clave + "\" ya se encuentra el servidor"}
     try:
         datos = leer_datos(subida.file)
-    except Exception, error:
-        return {"fallo" : str(error)}
+    except Exception, fallo:
+        return {"fallo" : str(fallo)}
     lista_ficheros[clave_hash] = datos
     return {"clave" : clave_hash}
 
@@ -132,33 +132,41 @@ def wilcoxon_test(id_fichero, alpha=0.05):
         return {"fallo" : "No existe ningun fichero con esa clave"}
     try:
         resultado = tnp.wilcoxon_test(datos["matriz_datos"],alpha)
-    except Exception, error:
-        return {"fallo" : str(error)}
+    except Exception, fallo:
+        return {"fallo" : str(fallo)}
     return resultado
 
 
 #Servicio para el test de Friedman.
+@route('/friedman/<id_fichero>/<test_comparacion>', method="GET")
+@route('/friedman/<id_fichero>/<alpha:float>/<test_comparacion>', method="GET")
+@route('/friedman/<id_fichero>/<tipo:int>/<test_comparacion>', method="GET")
+@route('/friedman/<id_fichero>/<alpha:float>/<tipo:int>/<test_comparacion>', method="GET")
 @route('/friedman/<id_fichero>', method="GET")
 @route('/friedman/<id_fichero>/<alpha:float>', method="GET")
 @route('/friedman/<id_fichero>/<tipo:int>', method="GET")
 @route('/friedman/<id_fichero>/<alpha:float>/<tipo:int>', method="GET")
-def friedman_test(id_fichero, alpha=0.05, tipo=0):
+def friedman_test(id_fichero, alpha=0.05, tipo=0, test_comparacion="bonferroni_dunn_test"):
     """
-    Servicio web para el test de Friedman
+    Servicio web para el test de Friedman.
     
     Argumentos
     ----------
     id_fichero: string
-        Identificador HASH MD5 del fichero sobre el que se quiere aplicar el test
+        Identificador HASH MD5 del fichero sobre el que se quiere aplicar el test.
     alpha: string
-        Nivel de significancia. Probabilidad de rechazar la hipótesis nula siendo cierta
+        Nivel de significancia. Probabilidad de rechazar la hipótesis nula siendo cierta.
     tipo: string
-        Indica si lo que se quiere es minimizar ("0") o maximizar ("1")
+        Indica si lo que se quiere es minimizar ("0") o maximizar ("1").
+    test_comparacion: string
+        Test POST-HOC a aplicar si el test de ranking encuentra diferencias
+        significativas.
         
     Salida
     ------
     resultado: dict (JSON)
-        Resultado devuelto al aplicar el test de Friedman
+        Resultado devuelto al aplicar el test de Friedman y si procede el resultado de
+        aplicar el test de comparación.
     """
     response.headers['Access-Control-Allow-Origin'] = '*'
     response.content_type = "application/json"
@@ -166,32 +174,43 @@ def friedman_test(id_fichero, alpha=0.05, tipo=0):
         datos = lista_ficheros[id_fichero]
     except Exception:
         return {"fallo" : "No existe ningun fichero con esa clave"}
-    resultado = tnp.friedman_test(datos["nombres_algoritmos"],datos["matriz_datos"],alpha,tipo)
-    return resultado
+    res_ranking = tnp.friedman_test(datos["nombres_algoritmos"],datos["matriz_datos"],alpha,tipo)
+    if res_ranking["resultado"] == "True":
+        res_comparacion = getattr(tnp, test_comparacion)("friedman",res_ranking["nombres"],res_ranking["ranking"],res_ranking["N"],alpha)
+        return {"test_ranking" : res_ranking, "test_comparacion" : res_comparacion}
+    return {"test_ranking" : res_ranking}
 
 
 #Servicio para el test de Iman-Davenport.
+@route('/iman-davenport/<id_fichero>/<test_comparacion>', method="GET")
+@route('/iman-davenport/<id_fichero>/<alpha:float>/<test_comparacion>', method="GET")
+@route('/iman-davenport/<id_fichero>/<tipo:int>/<test_comparacion>', method="GET")
+@route('/iman-davenport/<id_fichero>/<alpha:float>/<tipo:int>/<test_comparacion>', method="GET")
 @route('/iman-davenport/<id_fichero>', method="GET")
 @route('/iman-davenport/<id_fichero>/<alpha:float>', method="GET")
 @route('/iman-davenport/<id_fichero>/<tipo:int>', method="GET")
 @route('/iman-davenport/<id_fichero>/<alpha:float>/<tipo:int>', method="GET")
-def iman_davenport_test(id_fichero, alpha=0.05, tipo=0):
+def iman_davenport_test(id_fichero, alpha=0.05, tipo=0, test_comparacion="bonferroni_dunn_test"):
     """
-    Servicio web para el test de Iman-Davenport
+    Servicio web para el test de Iman-Davenport.
     
     Argumentos
     ----------
     id_fichero: string
-        Identificador HASH MD5 del fichero sobre el que se quiere aplicar el test
+        Identificador HASH MD5 del fichero sobre el que se quiere aplicar el test.
     alpha: string
-        Nivel de significancia. Probabilidad de rechazar la hipótesis nula siendo cierta
+        Nivel de significancia. Probabilidad de rechazar la hipótesis nula siendo cierta.
     tipo: string
-        Indica si lo que se quiere es minimizar ("0") o maximizar ("1")
+        Indica si lo que se quiere es minimizar ("0") o maximizar ("1").
+    test_comparacion: string
+        Test POST-HOC a aplicar si el test de ranking encuentra diferencias
+        significativas.
         
     Salida
     ------
     resultado: dict (JSON)
-        Resultado devuelto al aplicar el test de Iman-Davenport
+        Resultado devuelto al aplicar el test de Iman-Davenport y si procede el resultado
+        de aplicar el test de comparación.
     """
     response.headers['Access-Control-Allow-Origin'] = '*'
     response.content_type = "application/json"
@@ -199,32 +218,43 @@ def iman_davenport_test(id_fichero, alpha=0.05, tipo=0):
         datos = lista_ficheros[id_fichero]
     except Exception:
         return {"fallo" : "No existe ningun fichero con esa clave"}
-    resultado = tnp.iman_davenport_test(datos["nombres_algoritmos"],datos["matriz_datos"],alpha,tipo)
-    return resultado
+    res_ranking = tnp.iman_davenport_test(datos["nombres_algoritmos"],datos["matriz_datos"],alpha,tipo)
+    if res_ranking["resultado"] == "True":
+        res_comparacion = getattr(tnp, test_comparacion)("iman-davenport",res_ranking["nombres"],res_ranking["ranking"],res_ranking["N"],alpha)
+        return {"test_ranking" : res_ranking, "test_comparacion" : res_comparacion}
+    return {"test_ranking" : res_ranking}
 
 
 #Servicio para el test de los Rangos Alineados de Friedman.
+@route('/rangos-alineados/<id_fichero>/<test_comparacion>', method="GET")
+@route('/rangos-alineados/<id_fichero>/<alpha:float>/<test_comparacion>', method="GET")
+@route('/rangos-alineados/<id_fichero>/<tipo:int>/<test_comparacion>', method="GET")
+@route('/rangos-alineados/<id_fichero>/<alpha:float>/<tipo:int>/<test_comparacion>', method="GET")
 @route('/rangos-alineados/<id_fichero>', method="GET")
 @route('/rangos-alineados/<id_fichero>/<alpha:float>', method="GET")
 @route('/rangos-alineados/<id_fichero>/<tipo:int>', method="GET")
 @route('/rangos-alineados/<id_fichero>/<alpha:float>/<tipo:int>', method="GET")
-def friedman_rangos_alineados_test(id_fichero, alpha=0.05, tipo=0):
+def friedman_rangos_alineados_test(id_fichero, alpha=0.05, tipo=0, test_comparacion="bonferroni_dunn_test"):
     """
-    Servicio web para el test de los Rangos Alineados de Friedman
+    Servicio web para el test de los Rangos Alineados de Friedman.
     
     Argumentos
     ----------
     id_fichero: string
-        Identificador HASH MD5 del fichero sobre el que se quiere aplicar el test
+        Identificador HASH MD5 del fichero sobre el que se quiere aplicar el test.
     alpha: string
-        Nivel de significancia. Probabilidad de rechazar la hipótesis nula siendo cierta
+        Nivel de significancia. Probabilidad de rechazar la hipótesis nula siendo cierta.
     tipo: string
-        Indica si lo que se quiere es minimizar ("0") o maximizar ("1")
+        Indica si lo que se quiere es minimizar ("0") o maximizar ("1").
+    test_comparacion: string
+        Test POST-HOC a aplicar si el test de ranking encuentra diferencias
+        significativas.
         
     Salida
     ------
     resultado: dict (JSON)
-        Resultado devuelto al aplicar el test de los Rangos Alineados de Friedman
+        Resultado devuelto al aplicar el test de los Rangos Alineados de Friedman y si
+        procede el resultado de aplicar el test de comparación.
     """
     response.headers['Access-Control-Allow-Origin'] = '*'
     response.content_type = "application/json"
@@ -232,16 +262,23 @@ def friedman_rangos_alineados_test(id_fichero, alpha=0.05, tipo=0):
         datos = lista_ficheros[id_fichero]
     except Exception:
         return {"fallo" : "No existe ningun fichero con esa clave"}
-    resultado = tnp.friedman_rangos_alineados_test(datos["nombres_algoritmos"],datos["matriz_datos"],alpha,tipo)
-    return resultado
+    res_ranking = tnp.friedman_rangos_alineados_test(datos["nombres_algoritmos"],datos["matriz_datos"],alpha,tipo)
+    if res_ranking["resultado"] == "True":
+        res_comparacion = getattr(tnp, test_comparacion)("rangos-alineados",res_ranking["nombres"],res_ranking["ranking"],res_ranking["N"],alpha)
+        return {"test_ranking" : res_ranking, "test_comparacion" : res_comparacion}
+    return {"test_ranking" : res_ranking}
 
 
 #Servicio para el test Quade.
+@route('/quade/<id_fichero>/<test_comparacion>', method="GET")
+@route('/quade/<id_fichero>/<alpha:float>/<test_comparacion>', method="GET")
+@route('/quade/<id_fichero>/<tipo:int>/<test_comparacion>', method="GET")
+@route('/quade/<id_fichero>/<alpha:float>/<tipo:int>/<test_comparacion>', method="GET")
 @route('/quade/<id_fichero>', method="GET")
 @route('/quade/<id_fichero>/<alpha:float>', method="GET")
 @route('/quade/<id_fichero>/<tipo:int>', method="GET")
 @route('/quade/<id_fichero>/<alpha:float>/<tipo:int>', method="GET")
-def quade_test(id_fichero, alpha=0.05, tipo=0):
+def quade_test(id_fichero, alpha=0.05, tipo=0, test_comparacion="bonferroni_dunn_test"):
     """
     Servicio web para el test de Quade
     
@@ -253,11 +290,15 @@ def quade_test(id_fichero, alpha=0.05, tipo=0):
         Nivel de significancia. Probabilidad de rechazar la hipótesis nula siendo cierta
     tipo: string
         Indica si lo que se quiere es minimizar ("0") o maximizar ("1")
+    test_comparacion: string
+        Test POST-HOC a aplicar si el test de ranking encuentra diferencias
+        significativas.
         
     Salida
     ------
     resultado: dict (JSON)
-        Resultado devuelto al aplicar el test de Quade
+        Resultado devuelto al aplicar el test de Quade y si procede el resultado de
+        aplicar el test de comparación.
     """
     response.headers['Access-Control-Allow-Origin'] = '*'
     response.content_type = "application/json"
@@ -265,103 +306,11 @@ def quade_test(id_fichero, alpha=0.05, tipo=0):
         datos = lista_ficheros[id_fichero]
     except Exception:
         return {"fallo" : "No existe ningun fichero con esa clave"}
-    resultado = tnp.quade_test(datos["nombres_algoritmos"],datos["matriz_datos"],alpha,tipo)
-    return resultado
+    res_ranking = tnp.quade_test(datos["nombres_algoritmos"],datos["matriz_datos"],alpha,tipo)
+    if res_ranking["resultado"] == "True":
+        res_comparacion = getattr(tnp, test_comparacion)("quade",res_ranking["nombres"],res_ranking["ranking"],res_ranking["N"],alpha)
+        return {"test_ranking" : res_ranking, "test_comparacion" : res_comparacion}
+    return {"test_ranking" : res_ranking}
 
-
-#Servicio para el test de Bonferroni-Dunn.
-@route('/bonferroni-dunn/<test_principal>/<nombres>/<ranking>/<n:int>', method="GET")
-@route('/bonferroni-dunn/<test_principal>/<nombres>/<ranking>/<n:int>/<alpha:float>', method="GET")
-def bonferroni_dunn_test(test_principal,nombres,ranking,n,alpha=0.05):
-    response.headers['Access-Control-Allow-Origin'] = '*'
-    response.content_type = "application/json"
-    nombres = nombres.split(",")
-    ranking = [float(x) for x in ranking.split(",")]
-    resultado = tnp.bonferroni_dunn_test(test_principal,nombres,ranking,n,alpha)
-    return resultado
-
-
-#Servicio para el test de Holm.
-@route('/holm/<test_principal>/<nombres>/<ranking>/<n:int>', method="GET")
-@route('/holm/<test_principal>/<nombres>/<ranking>/<n:int>/<alpha:float>', method="GET")
-def holm_test(test_principal,nombres,ranking,n,alpha=0.05):
-    response.headers['Access-Control-Allow-Origin'] = '*'
-    response.content_type = "application/json"
-    nombres = nombres.split(",")
-    ranking = [float(x) for x in ranking.split(",")]
-    resultado = tnp.holm_test(test_principal,nombres,ranking,n,alpha)
-    return resultado
-
-
-#Servicio para el test de Hochberg.
-@route('/hochberg/<test_principal>/<nombres>/<ranking>/<n:int>', method="GET")
-@route('/hochberg/<test_principal>/<nombres>/<ranking>/<n:int>/<alpha:float>', method="GET")
-def hochberg_test(test_principal,nombres,ranking,n,alpha=0.05):
-    response.headers['Access-Control-Allow-Origin'] = '*'
-    response.content_type = "application/json"
-    nombres = nombres.split(",")
-    ranking = [float(x) for x in ranking.split(",")]
-    resultado = tnp.hochberg_test(test_principal,nombres,ranking,n,alpha)
-    return resultado
-
-
-#Servicio para el test de Li.
-@route('/li/<test_principal>/<nombres>/<ranking>/<n:int>', method="GET")
-@route('/li/<test_principal>/<nombres>/<ranking>/<n:int>/<alpha:float>', method="GET")
-def li_test(test_principal,nombres,ranking,n,alpha=0.05):
-    response.headers['Access-Control-Allow-Origin'] = '*'
-    response.content_type = "application/json"
-    nombres = nombres.split(",")
-    ranking = [float(x) for x in ranking.split(",")]
-    resultado = tnp.li_test(test_principal,nombres,ranking,n,alpha)
-    return resultado
-
-
-#Servicio para el test de Nemenyi (Bonferroni-Dunn Multitest).
-@route('/nemenyi/<test_principal>/<nombres>/<ranking>/<n:int>', method="GET")
-@route('/nemenyi/<test_principal>/<nombres>/<ranking>/<n:int>/<alpha:float>', method="GET")
-def nemenyi_multitest(test_principal,nombres,ranking,n,alpha=0.05):
-    response.headers['Access-Control-Allow-Origin'] = '*'
-    response.content_type = "application/json"
-    nombres = nombres.split(",")
-    ranking = [float(x) for x in ranking.split(",")]
-    resultado = tnp.nemenyi_multitest(test_principal,nombres,ranking,n,alpha)
-    return resultado
-
-
-#Servicio para el Multitest de Holm.
-@route('/holm-multitest/<test_principal>/<nombres>/<ranking>/<n:int>', method="GET")
-@route('/holm-multitest/<test_principal>/<nombres>/<ranking>/<n:int>/<alpha:float>', method="GET")
-def holm_multitest(test_principal,nombres,ranking,n,alpha=0.05):
-    response.headers['Access-Control-Allow-Origin'] = '*'
-    response.content_type = "application/json"
-    nombres = nombres.split(",")
-    ranking = [float(x) for x in ranking.split(",")]
-    resultado = tnp.holm_multitest(test_principal,nombres,ranking,n,alpha)
-    return resultado
-
-
-#Servicio para el Multitest de Hochberg.
-@route('/hochberg-multitest/<test_principal>/<nombres>/<ranking>/<n:int>', method="GET")
-@route('/hochberg-multitest/<test_principal>/<nombres>/<ranking>/<n:int>/<alpha:float>', method="GET")
-def hochberg_multitest(test_principal,nombres,ranking,n,alpha=0.05):
-    response.headers['Access-Control-Allow-Origin'] = '*'
-    response.content_type = "application/json"
-    nombres = nombres.split(",")
-    ranking = [float(x) for x in ranking.split(",")]
-    resultado = tnp.hochberg_multitest(test_principal,nombres,ranking,n,alpha)
-    return resultado
-
-
-#Servicio para el Multitest de Li.
-@route('/li-multitest/<test_principal>/<nombres>/<ranking>/<n:int>', method="GET")
-@route('/li-multitest/<test_principal>/<nombres>/<ranking>/<n:int>/<alpha:float>', method="GET")
-def li_multitest(test_principal,nombres,ranking,n,alpha=0.05):
-    response.headers['Access-Control-Allow-Origin'] = '*'
-    response.content_type = "application/json"
-    nombres = nombres.split(",")
-    ranking = [float(x) for x in ranking.split(",")]
-    resultado = tnp.li_multitest(test_principal,nombres,ranking,n,alpha)
-    return resultado
 
 run(reloader=True, host='localhost', port=8080)

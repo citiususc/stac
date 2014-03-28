@@ -27,7 +27,15 @@ $(document).on('ready', function() {
         else{
 
             var url;
-            if(alpha != "no" & tipo !="no")
+            if(alpha != "no" && tipo != "no" && test_post_hoc != "no")
+                url = "http://localhost:8080/"+test+"/"+id_fichero+"/"+alpha+"/"+tipo+"/"+test_post_hoc;
+            else if(test_post_hoc != "no" && alpha != "no")
+                url = "http://localhost:8080/"+test+"/"+id_fichero+"/"+alpha+"/"+test_post_hoc;
+            else if(test_post_hoc != "no" && tipo != "no")
+                url = "http://localhost:8080/"+test+"/"+id_fichero+"/"+tipo+"/"+test_post_hoc;
+            else if(test_post_hoc != "no")
+                url = "http://localhost:8080/"+test+"/"+id_fichero+"/"+test_post_hoc;
+            else if(alpha != "no" & tipo !="no")
                 url = "http://localhost:8080/"+test+"/"+id_fichero+"/"+alpha+"/"+tipo;
             else if(alpha != "no")
                 url = "http://localhost:8080/"+test+"/"+id_fichero+"/"+alpha;
@@ -43,41 +51,41 @@ $(document).on('ready', function() {
                 url: url,
                 dataType: "json",
                 success : function(data) {
-                    salida = "<u>Resultado test: "+test+"</u>";
-                    $.each(data, function(key, val) {
-                        salida = salida + "<p>" + key + " = " + val + "</p>";
-                    });
-                    "--------------"
-                    if(data.resultado == "True" && test_post_hoc != "no"){
-
-                        var url2;
-                        if(alpha != "no")
-                            url2 = "http://localhost:8080/"+test_post_hoc+"/"+test+"/"+data.nombres+"/"+data.ranking+"/"+data.N+"/"+alpha;
-                        else
-                            url2 = "http://localhost:8080/"+test_post_hoc+"/"+test+"/"+data.nombres+"/"+data.ranking+"/"+data.N;
-
-                        $.ajax({
-                            type: "GET",
-                            url: url2,
-                            dataType: "json",
-                            success : function(data) {
-                                salida = salida + "<p>---------------------------</p>"
-                                salida = salida + "<u>Resultado POST-HOC "+test_post_hoc+":</u>";
-                                $.each(data, function(key, val) {
+                    if(test == "wilcoxon"){
+                        salida = "<u>Resultado test Wilcoxon:</u>";
+                        if(data.fallo){
+                            salida = salida + "<p>" + data.fallo + "</p>";
+                        }
+                        else{
+                            $.each(data, function(key, val) {
+                                salida = salida + "<p>" + key + " = " + val + "</p>";
+                            });
+                        }
+                    }
+                    else{
+                        salida = "<u>Resultado test Ranking:</u>";
+                        if(data.fallo){
+                            salida = salida + "<p>" + data.fallo + "</p>";
+                        }
+                        else{
+                            $.each(data.test_ranking, function(key, val) {
+                                salida = salida + "<p>" + key + " = " + val + "</p>";
+                            });
+                            salida = salida + "<u>Resultado test Comparación:</u>";
+                            if(!data.test_comparacion){
+                                salida = salida + "<p>El test de ranking no es estadísticamente significativo</p>";
+                            }
+                            else{
+                                $.each(data.test_comparacion, function(key, val) {
                                     salida = salida + "<p>" + key + " = " + val + "</p>";
                                 });
-                                $("#resultado").html(salida);
-                            },
-                            error : function(e) {
-                                alert('Error: ' + e);
                             }
-                        });
+                        }
                     }
-                    "--------------"
                     $("#resultado").html(salida);
                 },
-                error : function(e) {
-                    alert('Error: ' + e);
+                fallo : function(e) {
+                    alert('fallo: ' + e);
                 }
             });
         }
@@ -101,7 +109,7 @@ $(document).on('ready', function() {
                 contentType: false,
                 processData: false,
                 success : function(data) {
-                    resultado = "<p>Hash MD5 del fichero:</p>";
+                    resultado = "<u>Resumen HASH del fichero:</u>";
                     if(!data.fallo)
                         resultado = resultado + "<p>" + data.clave + "</p>";
                     else
@@ -109,8 +117,8 @@ $(document).on('ready', function() {
                     $('#hash_fichero').html(resultado);
                     $('#formfichero').trigger('reset');
                 },
-                error : function(e) {
-                    alert('Error: ' + e);
+                fallo : function(e) {
+                    alert('fallo: ' + e);
                 }
             });
         }
@@ -126,15 +134,20 @@ $(document).on('ready', function() {
                 type: "GET",
                 url: "http://localhost:8080/fichero/"+consulta_id,
                 success : function(data) {
-                    salida = "<p>Contenido del fichero:</p>";
-                    $.each(data, function(key, val) {
-                        salida = salida + "<p>" + key + " = " + val + "</p>";
-                    });
+                    salida = "<u>Contenido del fichero:</u>";
+                    if(data.fallo){
+                        salida = salida + "<p>" + data.fallo + "</p>";
+                    }
+                    else{
+                        $.each(data, function(key, val) {
+                            salida = salida + "<p>" + key + " = " + val + "</p>";
+                        });
+                    }
                     $('#contenido_fichero').html(salida);
                     $('#consultar_hashmd5').val("");
                 },
-                error : function(e) {
-                    alert('Error: ' + e);
+                fallo : function(e) {
+                    alert('fallo: ' + e);
                 }
             });
         }
