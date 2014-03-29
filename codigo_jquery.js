@@ -13,7 +13,49 @@ $(document).on('ready', function() {
     })
     .change();
 
-    //Ejecución de los tests.
+    //Ejecución de los tests de normalidad.
+    $(document).on('click', '#datos_normalidad', function() {
+
+        var test = $('#test_normalidad').val();
+        var id_fichero = $('#hashmd5_normalidad').val();
+        var alpha = $('#alpha_normalidad').val();
+
+        if(id_fichero == "")
+            alert("Falta HASH fichero")
+        else{
+
+            var url;
+            if(alpha != "no")
+                url = "http://localhost:8080/"+test+"/"+id_fichero+"/"+alpha;
+            else
+                url = "http://localhost:8080/"+test+"/"+id_fichero;
+
+            var salida;
+
+            $.ajax({
+                type: "GET",
+                url: url,
+                dataType: "json",
+                success : function(data) {
+                    salida = "<u>Resultado test normalidad:</u>";
+                    if(data.fallo){
+                        salida = salida + "<p>" + data.fallo + "</p>";
+                    }
+                    else{
+                        $.each(data, function(key, val) {
+                            salida = salida + "<p>" + key + " = " + val + "</p>";
+                        });
+                    }
+                    $("#resultado_normalidad").html(salida);
+                },
+                error : function(e) {
+                    alert('Error: ' + e);
+                }
+            });
+        }
+    });
+
+    //Ejecución de los tests no paramétricos.
     $(document).on('click', '#datos', function() {
 
         var test = $('#test').val();
@@ -84,8 +126,8 @@ $(document).on('ready', function() {
                     }
                     $("#resultado").html(salida);
                 },
-                fallo : function(e) {
-                    alert('fallo: ' + e);
+                error : function(e) {
+                    alert('Error: ' + e);
                 }
             });
         }
@@ -117,8 +159,8 @@ $(document).on('ready', function() {
                     $('#hash_fichero').html(resultado);
                     $('#formfichero').trigger('reset');
                 },
-                fallo : function(e) {
-                    alert('fallo: ' + e);
+                error : function(e) {
+                    alert('Error: ' + e);
                 }
             });
         }
@@ -146,8 +188,8 @@ $(document).on('ready', function() {
                     $('#contenido_fichero').html(salida);
                     $('#consultar_hashmd5').val("");
                 },
-                fallo : function(e) {
-                    alert('fallo: ' + e);
+                error : function(e) {
+                    alert('Error: ' + e);
                 }
             });
         }
