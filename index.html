@@ -8,9 +8,32 @@
     </head>
     <body>
         <h2>Sprint 4</h2>
-        <!--Selección de datos para aplicar los tests-->
-        <form id="formulario">
-            <strong>Test a aplicar:</strong><br><br>
+        <!--Tests de normalidad-->
+        <form id="formulario_normalidad">
+            <strong>Test de normalidad:</strong><br><br>
+            <select id="test_normalidad">
+                <option value="shapiro">Shapiro-Wilk</option>
+                <option value="kolmogorov">Kolmogorov-Smirnov</option>
+                <option value="agostino">D'Agostino-Pearson</option>
+            </select><br><br>
+            Nivel de Significancia:<br><br>
+            <select id="alpha_normalidad">
+                <option value="no">Elige</option>
+                <option value="0.10">0.10</option>
+                <option value="0.05">0.05</option>
+                <option value="0.02">0.02</option>
+                <option value="0.01">0.01</option>
+                <option value="0.005">0.005</option>
+                <option value="0.001">0.001</option>
+            </select><br><br>
+            Seleccionar fichero:<br><br>
+            <input type="text" size="32" maxlength="32" placeholder="Introduce HASH" id="hashmd5_normalidad"><br><br>
+            <input type="button" value="Enviar" id="datos_normalidad"><br><br>
+        <div id="resultado_normalidad"></div>
+        </form>
+        <!--Tests no paramétricos-->
+        <form id="formulario_no_parametricos">
+            <strong>Test no paramétrico:</strong><br><br>
             <select id="test">
                 <option value="wilcoxon">RS de Wilcoxon</option>
                 <option value="friedman">Friedman</option>
@@ -18,7 +41,7 @@
                 <option value="rangos-alineados">Rangos Alineados</option>
                 <option value="quade">Quade</option>
             </select><br><br>
-            <strong>Nivel de Significancia:</strong><br><br>
+            Nivel de Significancia:<br><br>
             <select id="alpha">
                 <option value="no">Elige</option>
                 <option value="0.10">0.10</option>
@@ -29,7 +52,7 @@
                 <option value="0.001">0.001</option>
             </select><br><br>
             <div id="mostrar_tipo">
-                <strong>Maximización / Minimización:</strong><br><br>
+                Maximización / Minimización:<br><br>
                 <select id="tipo">
                     <option value="no">Elige</option>
                     <option value="0">Minimización</option>
@@ -37,7 +60,7 @@
                 </select><br><br>
             </div>
             <div id="mostrar_comparacion">
-                <strong>Test POST-HOC:</strong><br><br>
+                Test POST-HOC:<br><br>
                 <select id="test_post_hoc">
                     <option value="no">Elige</option>
                     <option value="bonferroni_dunn_test">Bonferroni-Dunn</option>
@@ -50,7 +73,7 @@
                     <option value="li_multitest">Li Multitest</option>
                 </select><br><br>
             </div>
-            <strong>Seleccionar fichero:</strong><br><br>
+            Seleccionar fichero:<br><br>
             <input type="text" size="32" maxlength="32" placeholder="Introduce HASH" id="seleccionar_hashmd5"><br><br>
             <input type="button" value="Enviar" id="datos"><br><br>
         </form>
