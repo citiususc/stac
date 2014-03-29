@@ -6,6 +6,7 @@ Created on Fri Jan 31 12:49:31 2014
 """
 
 from bottle import route, run, response, request
+import scipy.stats as st
 import tests_no_parametricos as tnp
 import csv, re, hashlib
 
@@ -311,6 +312,45 @@ def quade_test(id_fichero, alpha=0.05, tipo=0, test_comparacion="bonferroni_dunn
         res_comparacion = getattr(tnp, test_comparacion)("quade",res_ranking["nombres"],res_ranking["ranking"],len(datos["matriz_datos"]),alpha)
         return {"test_ranking" : res_ranking, "test_comparacion" : res_comparacion}
     return {"test_ranking" : res_ranking}
+
+
+#Servicio para el test de normalidad de Shapiro-Wilk.
+@route('/shapiro/<id_fichero>', method="GET")
+@route('/shapiro/<id_fichero>/<alpha:float>', method="GET")
+def shapiro_test(id_fichero, alpha=0.05):
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    response.content_type = "application/json"
+    try:
+        datos = lista_ficheros[id_fichero]
+    except Exception:
+        return {"fallo" : "No existe ningun fichero con esa clave"}
+    estadisticos_w = []
+    p_valores = []
+    resultados = []
+    for i in range(len(datos["matriz_datos"][0])):
+        resultado_shapiro = st.shapiro([conjunto[i] for conjunto in datos["matriz_datos"]])
+        estadisticos_w.append(resultado_shapiro[0])
+        p_valores.append(resultado_shapiro[1])
+        #Si p_valor < alpha, se rechaza la hipótesis "True" de que la muestra provenga de una
+        #distribución normal.
+        resultados.append(str(resultado_shapiro[1]<alpha))
+    return {"resultado" : resultados, "estadisticos_w" : estadisticos_w, "p_valores" : p_valores}
+
+
+#Servicio para el test de normalidad de D'Agostino-Pearson.
+@route('/agostino/<id_fichero>', method="GET")
+@route('/agostino/<id_fichero>/<alpha:float>', method="GET")
+def agostino_test(id_fichero, alpha=0.05):
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    response.content_type = "application/json"
+    try:
+        datos = lista_ficheros[id_fichero]
+    except Exception:
+        return {"fallo" : "No existe ningun fichero con esa clave"}
+    estadisticos_k2 = []
+    p_valores = []
+    resultados = []
+    resultado_agostino = st.normaltest(datos["matriz_datos"],axis=0)
 
 
 run(reloader=True, host='localhost', port=8080)
