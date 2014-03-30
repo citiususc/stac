@@ -7,6 +7,7 @@ Created on Fri Jan 31 12:49:31 2014
 
 from bottle import route, run, response, request
 import scipy.stats as st
+import itertools
 import tests_no_parametricos as tnp
 import csv, re, hashlib
 
@@ -27,7 +28,7 @@ def leer_datos(archivo):
 
     for fila in lector:
         if len(fila)<3:
-            raise Exception("Error formato datos")
+            raise Exception("Error formato datos.")
         if numero_linea == 0:
             for i in range(len(fila)):
                 if i == 0:
@@ -36,7 +37,7 @@ def leer_datos(archivo):
                     if nombres_algoritmos.count(fila[i]) == 0:
                         nombres_algoritmos.append(fila[i])
                     else:
-                        raise Exception("Nombre de algoritmo repetido")
+                        raise Exception("Nombre de algoritmo repetido.")
         else:
             numero_algoritmos = len(nombres_algoritmos)
             if len(fila) != numero_algoritmos + 1:
@@ -47,14 +48,14 @@ def leer_datos(archivo):
                     if nombres_conj_datos.count(fila[i]) == 0:
                         nombres_conj_datos.append(fila[i])
                     else:
-                        raise Exception("Nombre conjunto datos repetido")
+                        raise Exception("Nombre conjunto datos repetido.")
                 else:
                     m = patron_numeros.match(fila[i])
                     if m:
                         dato = float(fila[i])
                         lista_datos.append(dato)
                     else:
-                        raise Exception("Numero \"" + fila[i] + "\" no valido en linea " + str(numero_linea+1))
+                        raise Exception("Número \"" + fila[i] + "\" no valido en línea " + str(numero_linea+1) +".")
             matriz_datos.append(lista_datos)
         numero_linea = numero_linea + 1
         
@@ -83,7 +84,7 @@ def subir_fichero():
     clave_hash = generar_md5(subida.file)
     for clave in lista_ficheros.keys():
         if clave == clave_hash:
-            return {"fallo" : "El fichero con hash \"" + clave + "\" ya se encuentra el servidor"}
+            return {"fallo" : "El fichero con hash \"" + clave + "\" ya se encuentra el servidor."}
     try:
         datos = leer_datos(subida.file)
     except Exception, fallo:
@@ -101,7 +102,7 @@ def consultar_fichero(id_fichero):
     try:
         datos = lista_ficheros[id_fichero]
     except Exception:
-        return {"fallo" : "No existe ningun fichero con esa clave"}
+        return {"fallo" : "No existe ningún fichero con esa clave."}
     return datos
 
 
@@ -129,7 +130,7 @@ def wilcoxon_test(id_fichero, alpha=0.05):
     try:
         datos = lista_ficheros[id_fichero]
     except Exception:
-        return {"fallo" : "No existe ningun fichero con esa clave"}
+        return {"fallo" : "No existe ningún fichero con esa clave."}
     try:
         resultado = tnp.wilcoxon_test(datos["matriz_datos"],alpha)
     except Exception, fallo:
@@ -173,7 +174,7 @@ def friedman_test(id_fichero, alpha=0.05, tipo=0, test_comparacion="bonferroni_d
     try:
         datos = lista_ficheros[id_fichero]
     except Exception:
-        return {"fallo" : "No existe ningun fichero con esa clave"}
+        return {"fallo" : "No existe ningún fichero con esa clave."}
     res_ranking = tnp.friedman_test(datos["nombres_algoritmos"],datos["matriz_datos"],alpha,tipo)
     if res_ranking["resultado"] == "True":
         print len(datos["matriz_datos"])
@@ -218,7 +219,7 @@ def iman_davenport_test(id_fichero, alpha=0.05, tipo=0, test_comparacion="bonfer
     try:
         datos = lista_ficheros[id_fichero]
     except Exception:
-        return {"fallo" : "No existe ningun fichero con esa clave"}
+        return {"fallo" : "No existe ningún fichero con esa clave."}
     res_ranking = tnp.iman_davenport_test(datos["nombres_algoritmos"],datos["matriz_datos"],alpha,tipo)
     if res_ranking["resultado"] == "True":
         res_comparacion = getattr(tnp, test_comparacion)("iman-davenport",res_ranking["nombres"],res_ranking["ranking"],len(datos["matriz_datos"]),alpha)
@@ -262,7 +263,7 @@ def friedman_rangos_alineados_test(id_fichero, alpha=0.05, tipo=0, test_comparac
     try:
         datos = lista_ficheros[id_fichero]
     except Exception:
-        return {"fallo" : "No existe ningun fichero con esa clave"}
+        return {"fallo" : "No existe ningún fichero con esa clave."}
     res_ranking = tnp.friedman_rangos_alineados_test(datos["nombres_algoritmos"],datos["matriz_datos"],alpha,tipo)
     if res_ranking["resultado"] == "True":
         res_comparacion = getattr(tnp, test_comparacion)("rangos-alineados",res_ranking["nombres"],res_ranking["ranking"],len(datos["matriz_datos"]),alpha)
@@ -306,7 +307,7 @@ def quade_test(id_fichero, alpha=0.05, tipo=0, test_comparacion="bonferroni_dunn
     try:
         datos = lista_ficheros[id_fichero]
     except Exception:
-        return {"fallo" : "No existe ningun fichero con esa clave"}
+        return {"fallo" : "No existe ningún fichero con esa clave."}
     res_ranking = tnp.quade_test(datos["nombres_algoritmos"],datos["matriz_datos"],alpha,tipo)
     if res_ranking["resultado"] == "True":
         res_comparacion = getattr(tnp, test_comparacion)("quade",res_ranking["nombres"],res_ranking["ranking"],len(datos["matriz_datos"]),alpha)
@@ -323,7 +324,7 @@ def shapiro_test(id_fichero, alpha=0.05):
     try:
         datos = lista_ficheros[id_fichero]
     except Exception:
-        return {"fallo" : "No existe ningun fichero con esa clave"}
+        return {"fallo" : "No existe ningún fichero con esa clave."}
     estadisticos_w = []
     p_valores = []
     resultados = []
@@ -331,10 +332,31 @@ def shapiro_test(id_fichero, alpha=0.05):
         resultado_shapiro = st.shapiro([conjunto[i] for conjunto in datos["matriz_datos"]])
         estadisticos_w.append(resultado_shapiro[0])
         p_valores.append(resultado_shapiro[1])
-        #Si p_valor < alpha, se rechaza la hipótesis "True" de que la muestra provenga de una
-        #distribución normal.
+        #Si p_valor < alpha, se rechaza la hipótesis "True" de que la muestra provenga de una distribución normal.
         resultados.append(str(resultado_shapiro[1]<alpha))
     return {"resultado" : resultados, "estadisticos_w" : estadisticos_w, "p_valores" : p_valores}
+
+
+#Servicio para el test de normalidad de Kolmogorov-Smirnov.
+@route('/kolmogorov/<id_fichero>', method="GET")
+@route('/kolmogorov/<id_fichero>/<alpha:float>', method="GET")
+def kolmogorov_test(id_fichero, alpha=0.05):
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    response.content_type = "application/json"
+    try:
+        datos = lista_ficheros[id_fichero]
+    except Exception:
+        return {"fallo" : "No existe ningún fichero con esa clave."}
+    estadisticos_d = []
+    p_valores = []
+    resultados = []
+    for i in range(len(datos["matriz_datos"][0])):
+        resultado_kolmogorov = st.kstest([conjunto[i] for conjunto in datos["matriz_datos"]],'norm')
+        estadisticos_d.append(resultado_kolmogorov[0])
+        p_valores.append(resultado_kolmogorov[1])
+        #Si p_valor < alpha, se rechaza la hipótesis "True" de que la muestra provenga de una distribución normal.
+        resultados.append(str(resultado_kolmogorov[1]<alpha))
+    return {"resultado" : resultados, "estadisticos_d" : estadisticos_d, "p_valores" : p_valores}
 
 
 #Servicio para el test de normalidad de D'Agostino-Pearson.
@@ -346,11 +368,30 @@ def agostino_test(id_fichero, alpha=0.05):
     try:
         datos = lista_ficheros[id_fichero]
     except Exception:
-        return {"fallo" : "No existe ningun fichero con esa clave"}
-    estadisticos_k2 = []
-    p_valores = []
-    resultados = []
-    resultado_agostino = st.normaltest(datos["matriz_datos"],axis=0)
+        return {"fallo" : "No existe ningún fichero con esa clave."}
+    estadisticos_k2, p_valores = st.normaltest(datos["matriz_datos"],axis=0)
+    #Si p_valor < alpha, se rechaza la hipótesis "True" de que la muestra provenga de una distribución normal.
+    resultados = [str(p_valores[i]<alpha) for i in range(len(p_valores))]
+    return {"resultado" : resultados, "estadisticos_k2" : estadisticos_k2.tolist(), "p_valores" : p_valores.tolist()}
+
+
+#Servicio para el test de homocedasticidad de Levene.
+@route('/levene/<id_fichero>', method="GET")
+@route('/levene/<id_fichero>/<alpha:float>', method="GET")
+def agostino_test(id_fichero, alpha=0.05):
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    response.content_type = "application/json"
+    try:
+        datos = lista_ficheros[id_fichero]
+    except Exception:
+        return {"fallo" : "No existe ningún fichero con esa clave."}
+    print list(itertools.chain.from_iterable(datos["matriz_datos"]))
+    for muestra in datos["matriz_datos"]:
+        estadisticos_w, p_valores = st.levene(muestra[i] for i in range(len(datos["matriz_datos"])))
+    #Si p_valor < alpha, se rechaza la hipótesis "True" de que las muestras de entrada provengan de poblaciones con
+    #varianzas similares.
+    resultados = [str(p_valores[i]<alpha) for i in range(len(p_valores))]
+    return {"resultado" : resultados, "estadisticos_w" : estadisticos_w, "p_valores" : p_valores}
 
 
 run(reloader=True, host='localhost', port=8080)
