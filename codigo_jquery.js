@@ -55,6 +55,47 @@ $(document).on('ready', function() {
         }
     });
 
+    //Ejecución del test de homocedasticidad de Levene.
+    $(document).on('click', '#datos_homocedasticidad', function() {
+
+        var id_fichero = $('#hashmd5_homocedasticidad').val();
+        var alpha = $('#alpha_homocedasticidad').val();
+
+        if(id_fichero == "")
+            alert("Falta HASH fichero")
+        else{
+
+            var url;
+            if(alpha != "no")
+                url = "http://localhost:8080/levene/"+id_fichero+"/"+alpha;
+            else
+                url = "http://localhost:8080/levene/"+id_fichero;
+
+            var salida;
+
+            $.ajax({
+                type: "GET",
+                url: url,
+                dataType: "json",
+                success : function(data) {
+                    salida = "<u>Resultado test homocedasticidad:</u>";
+                    if(data.fallo){
+                        salida = salida + "<p>" + data.fallo + "</p>";
+                    }
+                    else{
+                        $.each(data, function(key, val) {
+                            salida = salida + "<p>" + key + " = " + val + "</p>";
+                        });
+                    }
+                    $("#resultado_homocedasticidad").html(salida);
+                },
+                error : function(e) {
+                    alert('Error: ' + e);
+                }
+            });
+        }
+    });
+
     //Ejecución de los tests no paramétricos.
     $(document).on('click', '#datos', function() {
 
