@@ -27,10 +27,28 @@
                 <option value="0.001">0.001</option>
             </select><br><br>
             Seleccionar fichero:<br><br>
-            <input type="text" size="32" maxlength="32" placeholder="Introduce HASH" id="hashmd5_normalidad"><br><br>
+            <input type="text" size="23" maxlength="32" placeholder="Introduce HASH" id="hashmd5_normalidad"><br><br>
             <input type="button" value="Enviar" id="datos_normalidad"><br><br>
-        <div id="resultado_normalidad"></div>
         </form>
+        <div id="resultado_normalidad"></div>
+        <!--Test de homocedasticidad (Levene)-->
+        <form id="formulario_homocedasticidad">
+            <strong>Test de homocedasticidad (Levene):</strong><br><br>
+            Nivel de Significancia:<br><br>
+            <select id="alpha_homocedasticidad">
+                <option value="no">Elige</option>
+                <option value="0.10">0.10</option>
+                <option value="0.05">0.05</option>
+                <option value="0.02">0.02</option>
+                <option value="0.01">0.01</option>
+                <option value="0.005">0.005</option>
+                <option value="0.001">0.001</option>
+            </select><br><br>
+            Seleccionar fichero:<br><br>
+            <input type="text" size="23" maxlength="32"placeholder="Introduce HASH" id="hashmd5_homocedasticidad"><br><br>
+            <input type="button" value="Enviar" id="datos_homocedasticidad"><br><br>
+        </form>
+        <div id="resultado_homocedasticidad"></div>
         <!--Tests no paramétricos-->
         <form id="formulario_no_parametricos">
             <strong>Test no paramétrico:</strong><br><br>
@@ -74,7 +92,7 @@
                 </select><br><br>
             </div>
             Seleccionar fichero:<br><br>
-            <input type="text" size="32" maxlength="32" placeholder="Introduce HASH" id="seleccionar_hashmd5"><br><br>
+            <input type="text" size="23" maxlength="32" placeholder="Introduce HASH" id="seleccionar_hashmd5"><br><br>
             <input type="button" value="Enviar" id="datos"><br><br>
         </form>
         <div id="resultado"></div>
@@ -88,7 +106,7 @@
         <!--Consulta de ficheros-->
         <form id="consfichero">
         <strong>Consultar Fichero:</strong><br><br>
-            <input type="text" size="32" maxlength="32" placeholder="Introduce HASH" id="consultar_hashmd5"><br><br>
+            <input type="text" size="23" maxlength="32" placeholder="Introduce HASH" id="consultar_hashmd5"><br><br>
             <input type="button" value="Consultar" id="boton_consulta"/><br><br>
         </form>
         <div id="contenido_fichero"></div>
