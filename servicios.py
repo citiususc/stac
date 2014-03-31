@@ -7,7 +7,6 @@ Created on Fri Jan 31 12:49:31 2014
 
 from bottle import route, run, response, request
 import scipy.stats as st
-import itertools
 import tests_no_parametricos as tnp
 import csv, re, hashlib
 
@@ -378,7 +377,7 @@ def agostino_test(id_fichero, alpha=0.05):
 #Servicio para el test de homocedasticidad de Levene.
 @route('/levene/<id_fichero>', method="GET")
 @route('/levene/<id_fichero>/<alpha:float>', method="GET")
-def agostino_test(id_fichero, alpha=0.05):
+def levene_test(id_fichero, alpha=0.05):
     response.headers['Access-Control-Allow-Origin'] = '*'
     response.content_type = "application/json"
     try:
