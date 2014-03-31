@@ -385,13 +385,14 @@ def agostino_test(id_fichero, alpha=0.05):
         datos = lista_ficheros[id_fichero]
     except Exception:
         return {"fallo" : "No existe ningún fichero con esa clave."}
-    print list(itertools.chain.from_iterable(datos["matriz_datos"]))
-    for muestra in datos["matriz_datos"]:
-        estadisticos_w, p_valores = st.levene(muestra[i] for i in range(len(datos["matriz_datos"])))
+    argumentos = ()
+    for i in range(len(datos["matriz_datos"][0])):
+        argumentos = argumentos + ([conjunto[i] for conjunto in datos["matriz_datos"]],)
+    estadistico_w, p_valor = st.levene(*argumentos)
     #Si p_valor < alpha, se rechaza la hipótesis "True" de que las muestras de entrada provengan de poblaciones con
     #varianzas similares.
-    resultados = [str(p_valores[i]<alpha) for i in range(len(p_valores))]
-    return {"resultado" : resultados, "estadisticos_w" : estadisticos_w, "p_valores" : p_valores}
+    resultado = str(p_valor<alpha)
+    return {"resultado" : resultado, "estadistico_w" : estadistico_w, "p_valor" : p_valor}
 
 
 run(reloader=True, host='localhost', port=8080)
