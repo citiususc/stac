@@ -394,4 +394,27 @@ def levene_test(id_fichero, alpha=0.05):
     return {"resultado" : resultado, "estadistico_w" : estadistico_w, "p_valor" : p_valor}
 
 
+#Servicio para el test paramétrico T-Test.
+@route('/ttest/<id_fichero>', method="GET")
+@route('/ttest/<id_fichero>/<alpha:float>', method="GET")
+def ttest_test(id_fichero, alpha=0.05):
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    response.content_type = "application/json"
+    try:
+        datos = lista_ficheros[id_fichero]
+    except Exception:
+        return {"fallo" : "No existe ningún fichero con esa clave."}
+    if len(datos["matriz_datos"][0]) != 2:
+        return {"fallo" : "Se requieren únicamente dos muestras."}
+    else:
+        argumentos = ()
+        for i in range(len(datos["matriz_datos"][0])):
+            argumentos = argumentos + ([conjunto[i] for conjunto in datos["matriz_datos"]],)
+        estadistico_t, p_valor = st.ttest_rel(*argumentos)
+        #Si p_valor < alpha, se rechaza la hipótesis "True" de que las 2 muestras relacionadas o repetidas
+        #tienen idénticos valores promedio (esperados).
+        resultado = str(p_valor<alpha)
+        return {"resultado" : resultado, "estadistico_t" : estadistico_t.tolist(), "p_valor" : p_valor}
+
+
 run(reloader=True, host='localhost', port=8080)
