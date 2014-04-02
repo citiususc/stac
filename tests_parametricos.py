@@ -73,12 +73,56 @@ def anova_test(matriz_datos, alpha):
     #Cáculo de los p_valores.
     p_valor_F1 = 1 - st.f.cdf(F1, GLTR, GLE)
     p_valor_F2 = 1 - st.f.cdf(F2, GLBL, GLE)
+    print 1 - st.f.cdf(178.9, 2, 12)
     
     #Resultados.
     resultados = [str(p_valor_F1 < alpha), str(p_valor_F2 < alpha)]
     
     return {"resultados" : resultados, "p_valores" : [p_valor_F1, p_valor_F2], "estadisticos" : [F1,F2],
-            "cuadrados medios" : [CMTR,CMBL], "cuadrado medio error" : CME}
+            "cuadrados_medios" : [CMTR,CMBL], "cuadrado_medio_error" : CME, "medias_algoritmos" : media_algoritmos,
+            "medias_conjuntos" : media_conjunto_datos, "media_global" : media_total}
+
+
+
+def bonferroni_test(nombres_algoritmos, nombres_conj_datos, medias_algoritmos, cuadrado_medio_error, alpha):
+    
+    #Número de algoritmos K.
+    K = len(medias_algoritmos)
+    
+    #Número de conjuntos de datos N.
+    N = len(nombres_conj_datos)
+
+    #Número posible de comparaciones.
+    m = (K*(K-1))/2
+
+    #Nombres de las comparaciones.
+    comparaciones = []
+    for i in range(K-1):
+        for j in range(i+1,K):
+            comparaciones.append(nombres_algoritmos[i] + " vs " + nombres_algoritmos[j])
+    
+    #Cálculo del estadístico T (distribución t de student).
+    valores_t = []
+    for i in range(K-1):
+        for j in range(i+1,K):
+            valores_t.append((abs(medias_algoritmos[i]-medias_algoritmos[j]))/float(sp.sqrt(cuadrado_medio_error)*sp.sqrt(2/float(N))))
+    
+    #Cálculo de los p_valores.
+    p_valores = []
+    for i in range(m):
+        p_valores.append(1-st.t.cdf(valores_t[i],(N*K)-K))
+    
+    #Ordenamiento de las comparaciones, valores_t y p_valores segun el p_valor.
+    tabla = zip(comparaciones,valores_t,p_valores)
+    tabla.sort(key=lambda valor: valor[2])
+    c, z, p = zip(*tabla)
+    comparaciones = list(c)
+    valores_t = list(z)
+    p_valores = list(p)
+    
+    print comparaciones
+    print valores_t
+    print p_valores
     
 
 datos = [[0.752,0.773,0.785,0.795],
@@ -105,4 +149,5 @@ datos = [[0.752,0.773,0.785,0.795],
 [0.837,0.643,0.602,0.554],
 [0.972,0.956,0.944,0.922],
 [0.958,0.959,0.964,0.964]]
-print anova_test(datos, 0.05)
+#print anova_test(datos, 0.05)
+bonferroni_test(["PDFC","NNEP","IS-CHC+INN","FH-GBML"],["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24"],[0.84937499999999977, 0.8085416666666666, 0.79345833333333315, 0.75516666666666665],0.022017531250000003,0.05)
