@@ -61,7 +61,7 @@ def anova_test(matriz_datos, alpha):
 
 
 
-def bonferroni_test(nombres_algoritmos, N, medias_algoritmos, cuadrado_medio_error, alpha):
+def bonferroni_test(nombres_algoritmos, medias_algoritmos, cuadrado_medio_error, N, alpha):
     
     #Número de algoritmos K.
     K = len(medias_algoritmos)
@@ -112,10 +112,4 @@ def bonferroni_test(nombres_algoritmos, N, medias_algoritmos, cuadrado_medio_err
     resultado = [str(x) for x in resultado]
     
     return {"valores_t" : valores_t, "p_valores" : p_valores, "comparaciones" : comparaciones, "alpha" : alpha2,
-            "resultado" : resultado, "p_valores ajustados" : p_valores_ajustados}
-
-
-
-datos = [[27,21,25],[31,33,35],[42,39,39],[38,41,37],[45,46,45]]
-print anova_test(datos, 0.05)
-print bonferroni_test(["A","B","C"],5,[36.600000000000001, 36.0, 36.200000000000003],67.166666666666671,0.05)
+            "resultado" : resultado, "p_valores_ajustados" : p_valores_ajustados}
