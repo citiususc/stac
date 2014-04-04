@@ -10,6 +10,7 @@ las pruebas para los tests no parmétricos de ranking y los tests POST-HOC."""
 
 import unittest
 import tests_no_parametricos as tnp
+import tests_parametricos as tp
 
 #Datos para relizar las pruebas del test de Wilcoxon. Los argumentos del test son (matriz_datos, alpha).
 #Caso normal N<25 y >= 5 y número de algoritmos = 2.
@@ -560,6 +561,93 @@ class TestLiMultitest(unittest.TestCase):
 		"""Verifica los p_valores ajustados."""
 		datos_devueltos = tnp.li_multitest("friedman", nombres1, datos4, 30, 0.05)
 		self.assertEqual(datos_devueltos["p_valores ajustados"], [0.0,1e-06,0.014745,0.024445,0.039619,0.049664,0.061743,0.113166,0.793726,0.806496])
+
+
+#Datos para relizar las pruebas de los tests paramétricos ANOVA y Bonferroni POST-HOC (multitest).
+#Los argumentos para el test de ANOVA son (matriz_datos, alpha).
+#Para el test de Bonferroni son (nombres_algoritmos, medias_algoritmos, cuadrado_medio_error, N, alpha)
+nombres3 = ["A","B","C"]
+datos6 = [[27,21,25],[31,33,35],[42,39,39],[38,41,37],[45,46,45]]
+
+"""TestCase que contiene las pruebas a realizar sobre el test ANOVA. El nivel de
+signficancia considerado es el más habitual: 0.05."""
+class TestAnova(unittest.TestCase):
+
+	def test_resultado(self):
+		"""Verifica si el test aplicado sobre los datos es o no estadísticamente significativo)."""
+		datos_devueltos = tp.anova_test(datos6, 0.05)
+		self.assertEqual(datos_devueltos["resultado"], "False")
+
+	def test_estadistico(self):
+		"""Verifica el valor del estadístico."""
+		datos_devueltos = tp.anova_test(datos6, 0.05)
+		self.assertEqual(round(datos_devueltos["estadistico"],3), 0.007)
+
+	def test_p_valor(self):
+		"""Verifica el p_valor."""
+		datos_devueltos = tp.anova_test(datos6, 0.05)
+		self.assertEqual(round(datos_devueltos["p_valor"],6), 0.993080)
+
+	def test_variaciones(self):
+		"""Verifica los valores de las variaciones total, tratamiento y error (SCT, SCTR, SCE)."""
+		datos_devueltos = tp.anova_test(datos6, 0.05)
+		self.assertEqual([round(valor,3) for valor in datos_devueltos["variaciones"]], [806.933,0.933,806.000])
+
+	def test_grados_libertad(self):
+		"""Verifica los valores de los grados de libertad (GLT, GLTR, GLE)."""
+		datos_devueltos = tp.anova_test(datos6, 0.05)
+		self.assertEqual(datos_devueltos["grados_libertad"], [14,2,12])
+
+	def test_cuadrados_medios(self):
+		"""Verifica los valores de los cuadrados medios (CMT, CMTR, CME)."""
+		datos_devueltos = tp.anova_test(datos6, 0.05)
+		self.assertEqual([round(valor,3) for valor in datos_devueltos["cuadrados_medios"]], [57.638,0.467,67.167])
+
+	def test_medias_algoritmos(self):
+		"""Verifica las medias de los K tratamientos o algoritmos."""
+		datos_devueltos = tp.anova_test(datos6, 0.05)
+		self.assertEqual([round(valor,3) for valor in datos_devueltos["medias_algoritmos"]], [36.600,36.000,36.200])
+
+	def test_media_general(self):
+		"""Verifica la media general (media de medias de los tratamientos o algoritmos)."""
+		datos_devueltos = tp.anova_test(datos6, 0.05)
+		self.assertEqual(round(datos_devueltos["media_general"],3), 36.267)
+
+
+"""TestCase que contiene las pruebas a realizar sobre el test POST-HOC Bonferroni. El nivel de
+signficancia considerado es el más habitual: 0.05."""
+class TestBonferroni(unittest.TestCase):
+
+    def test_resultado(self):
+    		"""Verifica si los tests aplicados sobre todas las hipótesis son o no significativos."""
+    		datos_devueltos = tp.bonferroni_test(nombres3, [36.600,36.000,36.200], 67.167, 5, 0.05)
+    		self.assertEqual(datos_devueltos["resultado"], ['False', 'False', 'False'])
+    
+    def test_valores_t(self):
+    		"""Verifica el valor de los estadisticos correspondientes a las comparaciones."""
+    		datos_devueltos = tp.bonferroni_test(nombres3, [36.600,36.000,36.200], 67.167, 5, 0.05)
+    		self.assertEqual([round(valor,3) for valor in datos_devueltos["valores_t"]], [0.116,0.077,0.039])
+    
+    def test_p_valores(self):
+    		"""Verifica los p_valores."""
+    		datos_devueltos = tp.bonferroni_test(nombres3, [36.600,36.000,36.200], 67.167, 5, 0.05)
+    		self.assertEqual([round(valor,6) for valor in datos_devueltos["p_valores"]], [0.454880,0.469880,0.484928])
+    
+    def test_alpha(self):
+    		"""Verifica el valor de alpha."""
+    		datos_devueltos = tp.bonferroni_test(nombres3, [36.600,36.000,36.200], 67.167, 5, 0.05)
+    		self.assertEqual(round(datos_devueltos["alpha"],3), 0.017)
+    
+    def test_comparaciones(self):
+    		"""Verifica la lista de posibles comparaciones (m = K(K-1)/2)."""
+    		datos_devueltos = tp.bonferroni_test(nombres3, [36.600,36.000,36.200], 67.167, 5, 0.05)
+    		self.assertEqual(datos_devueltos["comparaciones"], ['A vs B','A vs C','B vs C'])
+    
+    def test_p_valores_ajustados(self):
+    		"""Verifica los p_valores ajustados."""
+    		datos_devueltos = tp.bonferroni_test(nombres3, [36.600,36.000,36.200], 67.167, 5, 0.05)
+    		self.assertEqual(datos_devueltos["p_valores_ajustados"], [1,1,1])
+
 
 if __name__ == '__main__':
     unittest.main()
