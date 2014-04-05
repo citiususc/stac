@@ -8,6 +8,7 @@ Created on Fri Jan 31 12:49:31 2014
 from bottle import route, run, response, request
 import scipy.stats as st
 import tests_no_parametricos as tnp
+import tests_parametricos as tp
 import csv, re, hashlib
 
 lista_ficheros = {}
@@ -415,6 +416,23 @@ def ttest_test(id_fichero, alpha=0.05):
         #tienen idénticos valores promedio (esperados).
         resultado = str(p_valor<alpha)
         return {"resultado" : resultado, "estadistico_t" : estadistico_t.tolist(), "p_valor" : p_valor}
+
+
+#Servicio para el test paramétrico ANOVA.
+@route('/anova/<id_fichero>', method="GET")
+@route('/anova/<id_fichero>/<alpha:float>', method="GET")
+def anova_test(id_fichero, alpha=0.05):
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    response.content_type = "application/json"
+    try:
+        datos = lista_ficheros[id_fichero]
+    except Exception:
+        return {"fallo" : "No existe ningún fichero con esa clave."}
+    res_anova = tp.anova_test(datos["matriz_datos"],alpha)
+    if res_anova["resultado"] == "True":
+        res_comparacion = tp.bonferroni_test(datos["nombres_algoritmos"],res_anova["medias_algoritmos"],res_anova["cuadrados_medios"][2],len(datos["matriz_datos"]),alpha)
+        return {"test_anova" : res_anova, "test_comparacion" : res_comparacion}
+    return {"test_anova" : res_anova}
 
 
 run(reloader=True, host='localhost', port=8080)
