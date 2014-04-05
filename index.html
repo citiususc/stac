@@ -35,7 +35,10 @@
         <!--Tests paramétricos-->
         <form id="formulario_parametricos">
             <strong>Test paramétrico:</strong><br><br>
-            <strong>(ANOVA) + POST-HOC Bonferroni</strong><br><br>
+            <select id="test_parametricos">
+                <option value="ttest">T-Test</option>
+                <option value="anova">ANOVA (POST-HOC Bonferroni)</option>
+            </select><br><br>
             Nivel de Significancia:<br><br>
             <select id="alpha_parametricos">
                 <option value="no">Elige</option>
