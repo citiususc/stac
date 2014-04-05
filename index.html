@@ -8,16 +8,17 @@
     </head>
     <body>
         <h2>Sprint 4</h2>
-        <!--Tests de normalidad-->
-        <form id="formulario_normalidad">
-            <strong>Test de normalidad:</strong><br><br>
-            <select id="test_normalidad">
-                <option value="shapiro">Shapiro-Wilk</option>
-                <option value="kolmogorov">Kolmogorov-Smirnov</option>
-                <option value="agostino">D'Agostino-Pearson</option>
+        <!--Tests para comprobar los criterios paramétricos de normalidad y homocedasticidad-->
+        <form id="formulario_criterios">
+            <strong>Test criterio paramétrico:</strong><br><br>
+            <select id="test_criterios">
+                <option value="shapiro">Shapiro-Wilk (Normalidad)</option>
+                <option value="kolmogorov">Kolmogorov-Smirnov (Normalidad)</option>
+                <option value="agostino">D'Agostino-Pearson (Normalidad)</option>
+                <option value="levene">Levene (Homocedasticidad)</option>
             </select><br><br>
             Nivel de Significancia:<br><br>
-            <select id="alpha_normalidad">
+            <select id="alpha_criterios">
                 <option value="no">Elige</option>
                 <option value="0.10">0.10</option>
                 <option value="0.05">0.05</option>
@@ -27,15 +28,16 @@
                 <option value="0.001">0.001</option>
             </select><br><br>
             Seleccionar fichero:<br><br>
-            <input type="text" size="23" maxlength="32" placeholder="Introduce HASH" id="hashmd5_normalidad"><br><br>
-            <input type="button" value="Enviar" id="datos_normalidad"><br><br>
+            <input type="text" size="23" maxlength="32" placeholder="Introduce HASH" id="hashmd5_criterios"><br><br>
+            <input type="button" value="Enviar" id="datos_criterios"><br><br>
         </form>
-        <div id="resultado_normalidad"></div>
-        <!--Test de homocedasticidad (Levene)-->
-        <form id="formulario_homocedasticidad">
-            <strong>Test de homocedasticidad (Levene):</strong><br><br>
+        <div id="resultado_criterios"></div>
+        <!--Tests paramétricos-->
+        <form id="formulario_parametricos">
+            <strong>Test paramétrico:</strong><br><br>
+            <strong>(ANOVA) + POST-HOC Bonferroni</strong><br><br>
             Nivel de Significancia:<br><br>
-            <select id="alpha_homocedasticidad">
+            <select id="alpha_parametricos">
                 <option value="no">Elige</option>
                 <option value="0.10">0.10</option>
                 <option value="0.05">0.05</option>
@@ -45,10 +47,10 @@
                 <option value="0.001">0.001</option>
             </select><br><br>
             Seleccionar fichero:<br><br>
-            <input type="text" size="23" maxlength="32"placeholder="Introduce HASH" id="hashmd5_homocedasticidad"><br><br>
-            <input type="button" value="Enviar" id="datos_homocedasticidad"><br><br>
+            <input type="text" size="23" maxlength="32" placeholder="Introduce HASH" id="hashmd5_parametricos"><br><br>
+            <input type="button" value="Enviar" id="datos_parametricos"><br><br>
         </form>
-        <div id="resultado_homocedasticidad"></div>
+        <div id="resultado_parametricos"></div>
         <!--Tests no paramétricos-->
         <form id="formulario_no_parametricos">
             <strong>Test no paramétrico:</strong><br><br>
