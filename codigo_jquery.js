@@ -55,6 +55,70 @@ $(document).on('ready', function() {
         }
     });
 
+    //Ejecución de los tests paramétricos.
+    $(document).on('click', '#datos_parametricos', function() {
+
+        var test = $('#test_parametricos').val();
+        var alpha = $('#alpha_parametricos').val();
+        var id_fichero = $('#hashmd5_parametricos').val();
+
+        if(id_fichero == "")
+            alert("Falta HASH fichero")
+        else{
+
+            var url;
+            if(alpha != "no")
+                url = "http://localhost:8080/"+test+"/"+id_fichero+"/"+alpha;
+            else
+                url = "http://localhost:8080/"+test+"/"+id_fichero;
+
+            var salida;
+
+            $.ajax({
+                type: "GET",
+                url: url,
+                dataType: "json",
+                success : function(data) {
+                    if(test == "ttest"){
+                        salida = "<u>Resultado T-Test:</u>";
+                        if(data.fallo){
+                            salida = salida + "<p>" + data.fallo + "</p>";
+                        }
+                        else{
+                            $.each(data, function(key, val) {
+                                salida = salida + "<p>" + key + " = " + val + "</p>";
+                            });
+                        }
+                    }
+                    else{
+                        salida = "<u>Resultado test ANOVA:</u>";
+                        if(data.fallo){
+                            salida = salida + "<p>" + data.fallo + "</p>";
+                        }
+                        else{
+                            $.each(data.test_anova, function(key, val) {
+                                salida = salida + "<p>" + key + " = " + val + "</p>";
+                            });
+                            salida = salida + "<u>Resultado test POST-HOC Bonferroni:</u>";
+                            if(!data.test_comparacion){
+                                salida = salida + "<p>El test de ranking no es estadísticamente significativo</p>";
+                            }
+                            else{
+                                $.each(data.test_comparacion, function(key, val) {
+                                    salida = salida + "<p>" + key + " = " + val + "</p>";
+                                });
+                            }
+                        }
+                    }
+                    $("#resultado_parametricos").html(salida);
+                },
+                error : function(e) {
+                    alert('Error: ' + e);
+                }
+            });
+        }
+    });
+
     //Ejecución de los tests no paramétricos.
     $(document).on('click', '#datos', function() {
 
