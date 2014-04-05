@@ -13,12 +13,12 @@ $(document).on('ready', function() {
     })
     .change();
 
-    //Ejecución de los tests de normalidad.
-    $(document).on('click', '#datos_normalidad', function() {
+    //Ejecución de los tests para comprobar los criterios paramétricos de normalidad y homocedasticidad.
+    $(document).on('click', '#datos_criterios', function() {
 
-        var test = $('#test_normalidad').val();
-        var id_fichero = $('#hashmd5_normalidad').val();
-        var alpha = $('#alpha_normalidad').val();
+        var test = $('#test_criterios').val();
+        var id_fichero = $('#hashmd5_criterios').val();
+        var alpha = $('#alpha_criterios').val();
 
         if(id_fichero == "")
             alert("Falta HASH fichero")
@@ -37,7 +37,7 @@ $(document).on('ready', function() {
                 url: url,
                 dataType: "json",
                 success : function(data) {
-                    salida = "<u>Resultado test normalidad:</u>";
+                    salida = "<u>Resultado test criterio paramétrico:</u>";
                     if(data.fallo){
                         salida = salida + "<p>" + data.fallo + "</p>";
                     }
@@ -46,48 +46,7 @@ $(document).on('ready', function() {
                             salida = salida + "<p>" + key + " = " + val + "</p>";
                         });
                     }
-                    $("#resultado_normalidad").html(salida);
-                },
-                error : function(e) {
-                    alert('Error: ' + e);
-                }
-            });
-        }
-    });
-
-    //Ejecución del test de homocedasticidad de Levene.
-    $(document).on('click', '#datos_homocedasticidad', function() {
-
-        var id_fichero = $('#hashmd5_homocedasticidad').val();
-        var alpha = $('#alpha_homocedasticidad').val();
-
-        if(id_fichero == "")
-            alert("Falta HASH fichero")
-        else{
-
-            var url;
-            if(alpha != "no")
-                url = "http://localhost:8080/levene/"+id_fichero+"/"+alpha;
-            else
-                url = "http://localhost:8080/levene/"+id_fichero;
-
-            var salida;
-
-            $.ajax({
-                type: "GET",
-                url: url,
-                dataType: "json",
-                success : function(data) {
-                    salida = "<u>Resultado test homocedasticidad:</u>";
-                    if(data.fallo){
-                        salida = salida + "<p>" + data.fallo + "</p>";
-                    }
-                    else{
-                        $.each(data, function(key, val) {
-                            salida = salida + "<p>" + key + " = " + val + "</p>";
-                        });
-                    }
-                    $("#resultado_homocedasticidad").html(salida);
+                    $("#resultado_criterios").html(salida);
                 },
                 error : function(e) {
                     alert('Error: ' + e);
