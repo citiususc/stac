@@ -13,6 +13,22 @@ $(document).on('ready', function() {
     })
     .change();
 
+    //Función que redondea los datos devueltos por los tests.
+    var redondear_valor = function(valor){
+        if($.isArray(valor)){
+            $.each(valor, function(indice,elemento){
+                elementoFloat = parseFloat(elemento);
+                if($.isNumeric(elementoFloat))
+                    valor[indice] = elementoFloat.toFixed(3);
+            });
+        }
+        else{
+            if($.isNumeric(valor))
+                valor = valor.toFixed(3);
+        }
+        return valor;
+    };
+
     //Ejecución de los tests para comprobar los criterios paramétricos de normalidad y homocedasticidad.
     $(document).on('click', '#datos_criterios', function() {
 
@@ -43,7 +59,7 @@ $(document).on('ready', function() {
                     }
                     else{
                         $.each(data, function(key, val) {
-                            salida = salida + "<p>" + key + " = " + val + "</p>";
+                            salida = salida + "<p>" + key + " = " + redondear_valor(val) + "</p>";
                         });
                     }
                     $("#resultado_criterios").html(salida);
@@ -86,7 +102,7 @@ $(document).on('ready', function() {
                         }
                         else{
                             $.each(data, function(key, val) {
-                                salida = salida + "<p>" + key + " = " + val + "</p>";
+                                salida = salida + "<p>" + key + " = " + redondear_valor(val) + "</p>";
                             });
                         }
                     }
@@ -97,7 +113,7 @@ $(document).on('ready', function() {
                         }
                         else{
                             $.each(data.test_anova, function(key, val) {
-                                salida = salida + "<p>" + key + " = " + val + "</p>";
+                                salida = salida + "<p>" + key + " = " + redondear_valor(val) + "</p>";
                             });
                             salida = salida + "<u>Resultado test POST-HOC Bonferroni:</u>";
                             if(!data.test_comparacion){
@@ -105,7 +121,7 @@ $(document).on('ready', function() {
                             }
                             else{
                                 $.each(data.test_comparacion, function(key, val) {
-                                    salida = salida + "<p>" + key + " = " + val + "</p>";
+                                    salida = salida + "<p>" + key + " = " + redondear_valor(val) + "</p>";
                                 });
                             }
                         }
@@ -164,7 +180,7 @@ $(document).on('ready', function() {
                         }
                         else{
                             $.each(data, function(key, val) {
-                                salida = salida + "<p>" + key + " = " + val + "</p>";
+                                salida = salida + "<p>" + key + " = " + redondear_valor(val) + "</p>";
                             });
                         }
                     }
@@ -175,7 +191,7 @@ $(document).on('ready', function() {
                         }
                         else{
                             $.each(data.test_ranking, function(key, val) {
-                                salida = salida + "<p>" + key + " = " + val + "</p>";
+                                salida = salida + "<p>" + key + " = " + redondear_valor(val) + "</p>";
                             });
                             salida = salida + "<u>Resultado test Comparación:</u>";
                             if(!data.test_comparacion){
@@ -183,7 +199,7 @@ $(document).on('ready', function() {
                             }
                             else{
                                 $.each(data.test_comparacion, function(key, val) {
-                                    salida = salida + "<p>" + key + " = " + val + "</p>";
+                                    salida = salida + "<p>" + key + " = " + redondear_valor(val) + "</p>";
                                 });
                             }
                         }
