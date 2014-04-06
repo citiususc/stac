@@ -105,7 +105,7 @@ def wilcoxon_test(matriz_datos, alpha):
         #como el estadístico Z.
         p_valor = 2*(1-st.norm.cdf(abs(Z)))
         
-        return {"resultado" : str(p_valor < alpha), "p_valor" : round(p_valor,6), "estadistico" : round(Z,3),
+        return {"resultado" : str(p_valor < alpha), "p_valor" : p_valor, "estadistico" : Z,
         "suma rangos pos" : T_Mas, "suma rangos neg" : T_Men}
 
 
@@ -152,12 +152,10 @@ def friedman_test(nombres_algoritmos, matriz_datos, alpha, tipo):
     for i in sorted({nombres_algoritmos[i] : rankings_medios[i] for i in range(K)}.items(), key = lambda t:t[1]):
         ranking_nombres.append(i[0])
 
-    #Ordenamiento de menor a mayor de los rankings medios obtenidos y redondeo de sus datos.
+    #Ordenamiento de menor a mayor de los rankings medios obtenidos.
     rankings_medios.sort()
-    for i in range(K):
-        rankings_medios[i] = round(rankings_medios[i],3)
 
-    return {"resultado" : str(p_valor < alpha), "p_valor": round(p_valor,6), "estadistico" : round(chi2,3),
+    return {"resultado" : str(p_valor < alpha), "p_valor" : p_valor, "estadistico" : chi2,
     "nombres" : ranking_nombres, "ranking" : rankings_medios}
 
 
@@ -184,8 +182,8 @@ def iman_davenport_test(nombres_algoritmos, matriz_datos, alpha, tipo):
     #iman_davenport.
     p_valor = 1 - st.f.cdf(iman_davenport, K-1, (K-1)*(N-1))
 
-    return {"resultado" : str(p_valor < alpha), "p_valor": round(p_valor,6), "estadistico" : round(iman_davenport,3),
-    "nombres": friedman["nombres"], "ranking": friedman["ranking"]}
+    return {"resultado" : str(p_valor < alpha), "p_valor" : p_valor, "estadistico" : iman_davenport,
+    "nombres" : friedman["nombres"], "ranking" : friedman["ranking"]}
 
 
 
@@ -255,12 +253,10 @@ def friedman_rangos_alineados_test(nombres_algoritmos, matriz_datos, alpha, tipo
     for i in sorted({nombres_algoritmos[i] : rankings_medios[i] for i in range(K)}.items(), key = lambda t:t[1]):
         ranking_nombres.append(i[0])
 
-    #Ordenamiento de menor a mayor de los rankings medios obtenidos y redondeo de sus datos.
+    #Ordenamiento de menor a mayor de los rankings medios obtenidos.
     rankings_medios.sort()
-    for i in range(K):
-        rankings_medios[i] = round(rankings_medios[i],3)
         
-    return {"resultado" : str(p_valor < alpha), "p_valor": round(p_valor,6), "estadistico" : round(T,3),
+    return {"resultado" : str(p_valor < alpha), "p_valor" : p_valor, "estadistico" : T,
     "nombres" : ranking_nombres, "ranking" : rankings_medios}
 
 
@@ -344,12 +340,10 @@ def quade_test(nombres_algoritmos, matriz_datos, alpha, tipo):
     for i in sorted({nombres_algoritmos[i] : rankings_medios[i] for i in range(K)}.items(), key = lambda t:t[1]):
         ranking_nombres.append(i[0])
 
-    #Ordenamiento de menor a mayor de los rankings medios obtenidos y redondeo de sus datos.
+    #Ordenamiento de menor a mayor de los rankings medios obtenidos.
     rankings_medios.sort()
-    for i in range(K):
-        rankings_medios[i] = round(rankings_medios[i],3)
             
-    return {"resultado" : str(p_valor < alpha), "p_valor": round(p_valor,6), "estadistico" : round(T,3),
+    return {"resultado" : str(p_valor < alpha), "p_valor" : p_valor, "estadistico" : T,
     "nombres" : ranking_nombres, "ranking" : rankings_medios}
 
 
@@ -415,13 +409,9 @@ def bonferroni_dunn_test(test_principal, nombres, ranking, N, alpha):
     
     #Para seralizar JSON.
     resultado = [str(x) for x in resultado]
-    #Redondeos.
-    valores_z = [round(x,3) for x in valores_z]
-    p_valores = [round(x,6) for x in p_valores]
-    p_valores_ajustados = [round(x,6) for x in p_valores_ajustados]
     
     return {"valores z" : valores_z, "p_valores" : p_valores, "metodo de control" : metodo_control,
-            "nombres" : nombres, "alpha" : round(alpha2,3), "resultado" : resultado, "p_valores ajustados" : p_valores_ajustados}
+            "nombres" : nombres, "alpha" : alpha2, "resultado" : resultado, "p_valores ajustados" : p_valores_ajustados}
 
 
 
@@ -452,11 +442,6 @@ def holm_test(test_principal, nombres, ranking, N, alpha):
         
     #Para seralizar JSON.
     resultado = [str(x) for x in resultado]
-    #Redondeos.
-    valores_z = [round(x,3) for x in valores_z]
-    p_valores = [round(x,6) for x in p_valores]
-    p_valores_ajustados = [round(x,6) for x in p_valores_ajustados]
-    alphas = [round(x,3) for x in alphas]
 
     return {"valores z" : valores_z, "p_valores" : p_valores, "metodo de control" : metodo_control,
             "nombres" : nombres, "alphas" : alphas, "resultado" : resultado, "p_valores ajustados" : p_valores_ajustados}
@@ -490,12 +475,7 @@ def hochberg_test(test_principal, nombres, ranking, N, alpha):
         
     #Para seralizar JSON.
     resultado = [str(x) for x in resultado]
-    #Redondeos.
-    valores_z = [round(x,3) for x in valores_z]
-    p_valores = [round(x,6) for x in p_valores]
-    p_valores_ajustados = [round(x,6) for x in p_valores_ajustados]
-    alphas = [round(x,3) for x in alphas]
-        
+
     return {"valores z" : valores_z, "p_valores" : p_valores, "metodo de control" : metodo_control,
             "nombres" : nombres, "alphas" : alphas, "resultado" : resultado, "p_valores ajustados" : p_valores_ajustados}
 
@@ -523,11 +503,7 @@ def li_test(test_principal, nombres, ranking, N, alpha):
         
     #Para seralizar JSON.
     resultado = [str(x) for x in resultado]
-    #Redondeos.
-    valores_z = [round(x,3) for x in valores_z]
-    p_valores = [round(x,6) for x in p_valores]
-    p_valores_ajustados = [round(x,6) for x in p_valores_ajustados]
-        
+    
     return {"valores z" : valores_z, "p_valores" : p_valores, "metodo de control" : metodo_control,
             "nombres" : nombres, "resultado" : resultado, "p_valores ajustados" : p_valores_ajustados}
 
@@ -603,10 +579,6 @@ def nemenyi_multitest(test_principal, nombres, ranking, N, alpha):
     
     #Para seralizar JSON.
     resultado = [str(x) for x in resultado]
-    #Redondeos.
-    valores_z = [round(x,3) for x in valores_z]
-    p_valores = [round(x,6) for x in p_valores]
-    p_valores_ajustados = [round(x,6) for x in p_valores_ajustados]
     
     return {"valores z" : valores_z, "p_valores" : p_valores, "comparaciones" : comparaciones, "alpha" : alpha2,
             "resultado" : resultado, "p_valores ajustados" : p_valores_ajustados}
@@ -640,12 +612,7 @@ def holm_multitest(test_principal, nombres, ranking, N, alpha):
         
     #Para seralizar JSON.
     resultado = [str(x) for x in resultado]
-    #Redondeos.
-    valores_z = [round(x,3) for x in valores_z]
-    p_valores = [round(x,6) for x in p_valores]
-    p_valores_ajustados = [round(x,6) for x in p_valores_ajustados]
-    alphas = [round(x,3) for x in alphas]
-        
+    
     return {"valores z" : valores_z, "p_valores" : p_valores, "comparaciones" : comparaciones, "alphas" : alphas,
             "resultado" : resultado, "p_valores ajustados" : p_valores_ajustados}
 
@@ -678,12 +645,7 @@ def hochberg_multitest(test_principal, nombres, ranking, N, alpha):
         
     #Para seralizar JSON.
     resultado = [str(x) for x in resultado]
-    #Redondeos.
-    valores_z = [round(x,3) for x in valores_z]
-    p_valores = [round(x,6) for x in p_valores]
-    p_valores_ajustados = [round(x,6) for x in p_valores_ajustados]
-    alphas = [round(x,3) for x in alphas]
-        
+    
     return {"valores z" : valores_z, "p_valores" : p_valores, "comparaciones" : comparaciones, "alphas" : alphas,
             "resultado" : resultado, "p_valores ajustados" : p_valores_ajustados}
 
@@ -711,10 +673,6 @@ def li_multitest(test_principal, nombres, ranking, N, alpha):
         
     #Para seralizar JSON.
     resultado = [str(x) for x in resultado]
-    #Redondeos.
-    valores_z = [round(x,3) for x in valores_z]
-    p_valores = [round(x,6) for x in p_valores]
-    p_valores_ajustados = [round(x,6) for x in p_valores_ajustados]
         
     return {"valores z" : valores_z, "p_valores" : p_valores, "comparaciones" : comparaciones,
             "resultado" : resultado, "p_valores ajustados" : p_valores_ajustados} 
