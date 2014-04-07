@@ -5,6 +5,7 @@ Created on Thu Jan 23 14:33:54 2014
 @author: Adrián
 """
 
+import numpy as np
 import scipy as sp
 import scipy.stats as st
 
@@ -95,7 +96,7 @@ def wilcoxon_test(matriz_datos, alpha):
         #Límite inferior del intervalo de aceptación.
         punto_critico = tabla_wilcoxon[alpha][N]
 
-        return {"resultado" : str(T <= punto_critico), "estadistico" : T, "suma rangos pos" : T_Mas,
+        return {"resultado" : np.asscalar(T <= punto_critico), "estadistico" : T, "suma rangos pos" : T_Mas,
         "suma rangos neg" : T_Men, "punto critico" : punto_critico}
     else:
         #Cálculo del valor Z
@@ -105,7 +106,7 @@ def wilcoxon_test(matriz_datos, alpha):
         #como el estadístico Z.
         p_valor = 2*(1-st.norm.cdf(abs(Z)))
         
-        return {"resultado" : str(p_valor < alpha), "p_valor" : p_valor, "estadistico" : Z,
+        return {"resultado" : np.asscalar(p_valor < alpha), "p_valor" : p_valor, "estadistico" : Z,
         "suma rangos pos" : T_Mas, "suma rangos neg" : T_Men}
 
 
@@ -155,7 +156,7 @@ def friedman_test(nombres_algoritmos, matriz_datos, alpha, tipo):
     #Ordenamiento de menor a mayor de los rankings medios obtenidos.
     rankings_medios.sort()
 
-    return {"resultado" : str(p_valor < alpha), "p_valor" : p_valor, "estadistico" : chi2,
+    return {"resultado" : np.asscalar(p_valor < alpha), "p_valor" : p_valor, "estadistico" : chi2,
     "nombres" : ranking_nombres, "ranking" : rankings_medios}
 
 
@@ -182,7 +183,7 @@ def iman_davenport_test(nombres_algoritmos, matriz_datos, alpha, tipo):
     #iman_davenport.
     p_valor = 1 - st.f.cdf(iman_davenport, K-1, (K-1)*(N-1))
 
-    return {"resultado" : str(p_valor < alpha), "p_valor" : p_valor, "estadistico" : iman_davenport,
+    return {"resultado" : np.asscalar(p_valor < alpha), "p_valor" : p_valor, "estadistico" : iman_davenport,
     "nombres" : friedman["nombres"], "ranking" : friedman["ranking"]}
 
 
@@ -256,7 +257,7 @@ def friedman_rangos_alineados_test(nombres_algoritmos, matriz_datos, alpha, tipo
     #Ordenamiento de menor a mayor de los rankings medios obtenidos.
     rankings_medios.sort()
         
-    return {"resultado" : str(p_valor < alpha), "p_valor" : p_valor, "estadistico" : T,
+    return {"resultado" : np.asscalar(p_valor < alpha), "p_valor" : p_valor, "estadistico" : T,
     "nombres" : ranking_nombres, "ranking" : rankings_medios}
 
 
@@ -343,7 +344,7 @@ def quade_test(nombres_algoritmos, matriz_datos, alpha, tipo):
     #Ordenamiento de menor a mayor de los rankings medios obtenidos.
     rankings_medios.sort()
             
-    return {"resultado" : str(p_valor < alpha), "p_valor" : p_valor, "estadistico" : T,
+    return {"resultado" : np.asscalar(p_valor < alpha), "p_valor" : p_valor, "estadistico" : T,
     "nombres" : ranking_nombres, "ranking" : rankings_medios}
 
 
@@ -399,16 +400,13 @@ def bonferroni_dunn_test(test_principal, nombres, ranking, N, alpha):
     #Cálculo de los resultados.
     resultado = []
     for i in range(K-1):
-        resultado.append(p_valores[i]<alpha2)
+        resultado.append(np.asscalar(p_valores[i]<alpha2))
         
     #Cálculo de los p_valores ajustados.
     p_valores_ajustados = []
     for i in range(K-1):
         v = (K-1)*p_valores[i]
         p_valores_ajustados.append(min(v,1))
-    
-    #Para seralizar JSON.
-    resultado = [str(x) for x in resultado]
     
     return {"valores z" : valores_z, "p_valores" : p_valores, "metodo de control" : metodo_control,
             "nombres" : nombres, "alpha" : alpha2, "resultado" : resultado, "p_valores ajustados" : p_valores_ajustados}
@@ -439,9 +437,6 @@ def holm_test(test_principal, nombres, ranking, N, alpha):
     for i in range(K-1):
         v = max([(K-(j+1))*p_valores[j] for j in range(i+1)])
         p_valores_ajustados.append(min(v,1))
-        
-    #Para seralizar JSON.
-    resultado = [str(x) for x in resultado]
 
     return {"valores z" : valores_z, "p_valores" : p_valores, "metodo de control" : metodo_control,
             "nombres" : nombres, "alphas" : alphas, "resultado" : resultado, "p_valores ajustados" : p_valores_ajustados}
@@ -472,9 +467,6 @@ def hochberg_test(test_principal, nombres, ranking, N, alpha):
     p_valores_ajustados = []
     for i in range(K-1):
         p_valores_ajustados.append(min([(K-j)*p_valores[j-1] for j in range(K-1,i,-1)]))
-        
-    #Para seralizar JSON.
-    resultado = [str(x) for x in resultado]
 
     return {"valores z" : valores_z, "p_valores" : p_valores, "metodo de control" : metodo_control,
             "nombres" : nombres, "alphas" : alphas, "resultado" : resultado, "p_valores ajustados" : p_valores_ajustados}
@@ -500,9 +492,6 @@ def li_test(test_principal, nombres, ranking, N, alpha):
     p_valores_ajustados = []
     for i in range(K-1):
         p_valores_ajustados.append(p_valores[i]/float(p_valores[i]+1-p_valores[K-2]))
-        
-    #Para seralizar JSON.
-    resultado = [str(x) for x in resultado]
     
     return {"valores z" : valores_z, "p_valores" : p_valores, "metodo de control" : metodo_control,
             "nombres" : nombres, "resultado" : resultado, "p_valores ajustados" : p_valores_ajustados}
@@ -569,16 +558,13 @@ def nemenyi_multitest(test_principal, nombres, ranking, N, alpha):
     #Cálculo de los resultados.
     resultado = []
     for i in range(m):
-        resultado.append(p_valores[i]<alpha2)
+        resultado.append(np.asscalar(p_valores[i]<alpha2))
         
     #Cálculo de los p_valores ajustados.
     p_valores_ajustados = []
     for i in range(m):
         v = m*p_valores[i]
         p_valores_ajustados.append(min(v,1))
-    
-    #Para seralizar JSON.
-    resultado = [str(x) for x in resultado]
     
     return {"valores z" : valores_z, "p_valores" : p_valores, "comparaciones" : comparaciones, "alpha" : alpha2,
             "resultado" : resultado, "p_valores ajustados" : p_valores_ajustados}
@@ -609,9 +595,6 @@ def holm_multitest(test_principal, nombres, ranking, N, alpha):
     for i in range(m):
         v = max([(m-j)*p_valores[j] for j in range(i+1)])
         p_valores_ajustados.append(min(v,1))
-        
-    #Para seralizar JSON.
-    resultado = [str(x) for x in resultado]
     
     return {"valores z" : valores_z, "p_valores" : p_valores, "comparaciones" : comparaciones, "alphas" : alphas,
             "resultado" : resultado, "p_valores ajustados" : p_valores_ajustados}
@@ -642,9 +625,6 @@ def hochberg_multitest(test_principal, nombres, ranking, N, alpha):
     p_valores_ajustados = []
     for i in range(m):
         p_valores_ajustados.append(min([(m+1-j)*p_valores[j-1] for j in range(m,i,-1)]))
-        
-    #Para seralizar JSON.
-    resultado = [str(x) for x in resultado]
     
     return {"valores z" : valores_z, "p_valores" : p_valores, "comparaciones" : comparaciones, "alphas" : alphas,
             "resultado" : resultado, "p_valores ajustados" : p_valores_ajustados}
@@ -670,9 +650,6 @@ def li_multitest(test_principal, nombres, ranking, N, alpha):
     p_valores_ajustados = []
     for i in range(m):
         p_valores_ajustados.append(p_valores[i]/float(p_valores[i]+1-p_valores[m-1]))
-        
-    #Para seralizar JSON.
-    resultado = [str(x) for x in resultado]
         
     return {"valores z" : valores_z, "p_valores" : p_valores, "comparaciones" : comparaciones,
             "resultado" : resultado, "p_valores ajustados" : p_valores_ajustados} 

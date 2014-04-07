@@ -5,6 +5,7 @@ Created on Mon Mar 31 17:11:34 2014
 @author: Adrián
 """
 
+import numpy as np
 import scipy as sp
 import scipy.stats as st
 
@@ -54,7 +55,7 @@ def anova_test(matriz_datos, alpha):
     #Cáculo del p_valor.
     p_valor = 1 - st.f.cdf(F, GLTR, GLE)
     
-    return {"resultado" : str(p_valor<alpha), "p_valor" : p_valor, "estadistico" : F,
+    return {"resultado" : np.asscalar(p_valor < alpha), "p_valor" : p_valor, "estadistico" : F,
             "variaciones" : [SCT,SCTR,SCE], "grados_libertad" : [GLT,GLTR,GLE],
             "cuadrados_medios" : [CMT,CMTR,CME], "medias_algoritmos" : medias_algoritmos,
             "media_general" : media_general}
@@ -100,16 +101,13 @@ def bonferroni_test(nombres_algoritmos, medias_algoritmos, cuadrado_medio_error,
     #Cálculo de los resultados.
     resultado = []
     for i in range(m):
-        resultado.append(p_valores[i]<alpha2)
+        resultado.append(np.asscalar(p_valores[i]<alpha2))
         
     #Cálculo de los p_valores ajustados.
     p_valores_ajustados = []
     for i in range(m):
         v = m*p_valores[i]
         p_valores_ajustados.append(min(v,1))
-        
-    #Para seralizar JSON.
-    resultado = [str(x) for x in resultado]
     
     return {"valores_t" : valores_t, "p_valores" : p_valores, "comparaciones" : comparaciones, "alpha" : alpha2,
             "resultado" : resultado, "p_valores_ajustados" : p_valores_ajustados}
