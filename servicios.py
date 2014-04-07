@@ -9,6 +9,8 @@ from bottle import route, run, response, request
 import scipy.stats as st
 import tests_no_parametricos as tnp
 import tests_parametricos as tp
+import numpy as np
+import json
 import csv, re, hashlib
 
 lista_ficheros = {}
@@ -135,7 +137,7 @@ def wilcoxon_test(id_fichero, alpha=0.05):
         resultado = tnp.wilcoxon_test(datos["matriz_datos"],alpha)
     except Exception, fallo:
         return {"fallo" : str(fallo)}
-    return resultado
+    return json.dumps(resultado)
 
 
 #Servicio para el test de Friedman.
@@ -176,11 +178,11 @@ def friedman_test(id_fichero, alpha=0.05, tipo=0, test_comparacion="bonferroni_d
     except Exception:
         return {"fallo" : "No existe ningún fichero con esa clave."}
     res_ranking = tnp.friedman_test(datos["nombres_algoritmos"],datos["matriz_datos"],alpha,tipo)
-    if res_ranking["resultado"] == "True":
+    if res_ranking["resultado"] == True:
         print len(datos["matriz_datos"])
         res_comparacion = getattr(tnp, test_comparacion)("friedman",res_ranking["nombres"],res_ranking["ranking"],len(datos["matriz_datos"]),alpha)
-        return {"test_ranking" : res_ranking, "test_comparacion" : res_comparacion}
-    return {"test_ranking" : res_ranking}
+        return json.dumps({"test_ranking" : res_ranking, "test_comparacion" : res_comparacion})
+    return json.dumps({"test_ranking" : res_ranking})
 
 
 #Servicio para el test de Iman-Davenport.
@@ -221,10 +223,10 @@ def iman_davenport_test(id_fichero, alpha=0.05, tipo=0, test_comparacion="bonfer
     except Exception:
         return {"fallo" : "No existe ningún fichero con esa clave."}
     res_ranking = tnp.iman_davenport_test(datos["nombres_algoritmos"],datos["matriz_datos"],alpha,tipo)
-    if res_ranking["resultado"] == "True":
+    if res_ranking["resultado"] == True:
         res_comparacion = getattr(tnp, test_comparacion)("iman-davenport",res_ranking["nombres"],res_ranking["ranking"],len(datos["matriz_datos"]),alpha)
-        return {"test_ranking" : res_ranking, "test_comparacion" : res_comparacion}
-    return {"test_ranking" : res_ranking}
+        return json.dumps({"test_ranking" : res_ranking, "test_comparacion" : res_comparacion})
+    return json.dumps({"test_ranking" : res_ranking})
 
 
 #Servicio para el test de los Rangos Alineados de Friedman.
@@ -265,10 +267,10 @@ def friedman_rangos_alineados_test(id_fichero, alpha=0.05, tipo=0, test_comparac
     except Exception:
         return {"fallo" : "No existe ningún fichero con esa clave."}
     res_ranking = tnp.friedman_rangos_alineados_test(datos["nombres_algoritmos"],datos["matriz_datos"],alpha,tipo)
-    if res_ranking["resultado"] == "True":
+    if res_ranking["resultado"] == True:
         res_comparacion = getattr(tnp, test_comparacion)("rangos-alineados",res_ranking["nombres"],res_ranking["ranking"],len(datos["matriz_datos"]),alpha)
-        return {"test_ranking" : res_ranking, "test_comparacion" : res_comparacion}
-    return {"test_ranking" : res_ranking}
+        return json.dumps({"test_ranking" : res_ranking, "test_comparacion" : res_comparacion})
+    return json.dumps({"test_ranking" : res_ranking})
 
 
 #Servicio para el test Quade.
@@ -309,10 +311,10 @@ def quade_test(id_fichero, alpha=0.05, tipo=0, test_comparacion="bonferroni_dunn
     except Exception:
         return {"fallo" : "No existe ningún fichero con esa clave."}
     res_ranking = tnp.quade_test(datos["nombres_algoritmos"],datos["matriz_datos"],alpha,tipo)
-    if res_ranking["resultado"] == "True":
+    if res_ranking["resultado"] == True:
         res_comparacion = getattr(tnp, test_comparacion)("quade",res_ranking["nombres"],res_ranking["ranking"],len(datos["matriz_datos"]),alpha)
-        return {"test_ranking" : res_ranking, "test_comparacion" : res_comparacion}
-    return {"test_ranking" : res_ranking}
+        return json.dumps({"test_ranking" : res_ranking, "test_comparacion" : res_comparacion})
+    return json.dumps({"test_ranking" : res_ranking})
 
 
 #Servicio para el test de normalidad de Shapiro-Wilk.
@@ -333,8 +335,8 @@ def shapiro_test(id_fichero, alpha=0.05):
         estadisticos_w.append(resultado_shapiro[0])
         p_valores.append(resultado_shapiro[1])
         #Si p_valor < alpha, se rechaza la hipótesis "True" de que la muestra provenga de una distribución normal.
-        resultados.append(str(resultado_shapiro[1]<alpha))
-    return {"resultado" : resultados, "estadisticos_w" : estadisticos_w, "p_valores" : p_valores}
+        resultados.append(resultado_shapiro[1]<alpha)
+    return json.dumps({"resultado" : resultados, "estadisticos_w" : estadisticos_w, "p_valores" : p_valores})
 
 
 #Servicio para el test de normalidad de Kolmogorov-Smirnov.
@@ -355,8 +357,8 @@ def kolmogorov_test(id_fichero, alpha=0.05):
         estadisticos_d.append(resultado_kolmogorov[0])
         p_valores.append(resultado_kolmogorov[1])
         #Si p_valor < alpha, se rechaza la hipótesis "True" de que la muestra provenga de una distribución normal.
-        resultados.append(str(resultado_kolmogorov[1]<alpha))
-    return {"resultado" : resultados, "estadisticos_d" : estadisticos_d, "p_valores" : p_valores}
+        resultados.append(np.asscalar(resultado_kolmogorov[1]<alpha))
+    return json.dumps({"resultado" : resultados, "estadisticos_d" : estadisticos_d, "p_valores" : p_valores})
 
 
 #Servicio para el test de normalidad de D'Agostino-Pearson.
@@ -371,8 +373,8 @@ def agostino_test(id_fichero, alpha=0.05):
         return {"fallo" : "No existe ningún fichero con esa clave."}
     estadisticos_k2, p_valores = st.normaltest(datos["matriz_datos"],axis=0)
     #Si p_valor < alpha, se rechaza la hipótesis "True" de que la muestra provenga de una distribución normal.
-    resultados = [str(p_valores[i]<alpha) for i in range(len(p_valores))]
-    return {"resultado" : resultados, "estadisticos_k2" : estadisticos_k2.tolist(), "p_valores" : p_valores.tolist()}
+    resultados = [np.asscalar(p_valores[i]<alpha) for i in range(len(p_valores))]
+    return json.dumps({"resultado" : resultados, "estadisticos_k2" : estadisticos_k2.tolist(), "p_valores" : p_valores.tolist()})
 
 
 #Servicio para el test de homocedasticidad de Levene.
@@ -391,8 +393,8 @@ def levene_test(id_fichero, alpha=0.05):
     estadistico_w, p_valor = st.levene(*argumentos)
     #Si p_valor < alpha, se rechaza la hipótesis "True" de que las muestras de entrada provengan de poblaciones con
     #varianzas similares.
-    resultado = str(p_valor<alpha)
-    return {"resultado" : resultado, "estadistico_w" : estadistico_w, "p_valor" : p_valor}
+    resultado = np.asscalar(p_valor<alpha)
+    return json.dumps({"resultado" : resultado, "estadistico_w" : estadistico_w, "p_valor" : p_valor})
 
 
 #Servicio para el test paramétrico T-Test.
@@ -414,8 +416,8 @@ def ttest_test(id_fichero, alpha=0.05):
         estadistico_t, p_valor = st.ttest_rel(*argumentos)
         #Si p_valor < alpha, se rechaza la hipótesis "True" de que las 2 muestras relacionadas o repetidas
         #tienen idénticos valores promedio (esperados).
-        resultado = str(p_valor<alpha)
-        return {"resultado" : resultado, "estadistico_t" : estadistico_t.tolist(), "p_valor" : p_valor}
+        resultado = np.asscalar(p_valor<alpha)
+        return json.dumps({"resultado" : resultado, "estadistico_t" : estadistico_t.tolist(), "p_valor" : p_valor})
 
 
 #Servicio para el test paramétrico ANOVA.
@@ -429,10 +431,10 @@ def anova_test(id_fichero, alpha=0.05):
     except Exception:
         return {"fallo" : "No existe ningún fichero con esa clave."}
     res_anova = tp.anova_test(datos["matriz_datos"],alpha)
-    if res_anova["resultado"] == "True":
+    if res_anova["resultado"] == True:
         res_comparacion = tp.bonferroni_test(datos["nombres_algoritmos"],res_anova["medias_algoritmos"],res_anova["cuadrados_medios"][2],len(datos["matriz_datos"]),alpha)
-        return {"test_anova" : res_anova, "test_comparacion" : res_comparacion}
-    return {"test_anova" : res_anova}
+        return json.dumps({"test_anova" : res_anova, "test_comparacion" : res_comparacion})
+    return json.dumps({"test_anova" : res_anova})
 
 
 run(reloader=True, host='localhost', port=8080)
