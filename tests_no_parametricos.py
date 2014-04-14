@@ -34,7 +34,7 @@ def wilcoxon_test(matriz_datos, alpha):
     #El test de Wilcoxon compara dos algoritmos.
     if len(matriz_datos[0]) != 2:
         raise Exception("Test de Wilcoxon solo aplicable a dos algoritmos")
-    
+
     #Paso de una matriz de conjuntos de datos a dos listas: lista "a", que contiene
     #los resultados de aplicar el primer algoritmo a los datos y una lista "b" que
     #contiene los resultados de aplicar el segundo algoritmo sobre los mismos datos.
@@ -43,13 +43,13 @@ def wilcoxon_test(matriz_datos, alpha):
     for lista_datos in matriz_datos:
         a.append(lista_datos[0])
         b.append(lista_datos[1])
-    
+
     #Cálculo del número de veces que se aplican los dos algoritmos, es decir,
     #el número de individuos o datos sobre los que se aplican los algoritmos. El
     #tamaño de a y b deben ser iguales. Se conoce como tamaño muestral. Hay
     #dos muestras: a y b.
     N = len(a)
-    
+
     #Cálculo de las diferencias sin signos y con signos. Se excluye el 0.
     diferencias = []
     signos = []
@@ -58,7 +58,7 @@ def wilcoxon_test(matriz_datos, alpha):
         if diferencia != 0:
             diferencias.append(abs(diferencia))
             signos.append(diferencia)
-    
+
     #Tamaño muestral después de eliminar las diferencias 0.
     N = len(diferencias)
 
@@ -74,7 +74,7 @@ def wilcoxon_test(matriz_datos, alpha):
     rangos = []
     for i in diferencias:
         rangos.append((copia.count(i)+copia.index(i)*2+1)/float(2))
-    
+
     #Sumas de los rangos de las Di mayores que 0 y menores que 0.
     mayor0 = []
     menor0 = []
@@ -88,11 +88,13 @@ def wilcoxon_test(matriz_datos, alpha):
 
     #T es el valor mínimo de T_Mas y T_Men.
     T = min(T_Mas,T_Men)
-    
+
     #Para tamaños muestrales pequeños, se puede determinar el test de Wilcoxon mediante la comparación
     #de T con el valor crítico de la tabla de Wilcoxon. Para tamaños muestrales grandes, el test se puede
     #aproximar con la distribución normal.
     if N <= 25:
+        if alpha not in tabla_wilcoxon:
+            raise Exception("Valor de alpha no contenido en la tabla de Wilcoxon")
         #Límite inferior del intervalo de aceptación.
         punto_critico = tabla_wilcoxon[alpha][N]
 
@@ -105,22 +107,22 @@ def wilcoxon_test(matriz_datos, alpha):
         #Cálculo del p_valor: Probabilidad de obtener un valor al menos tan extremo
         #como el estadístico Z.
         p_valor = 2*(1-st.norm.cdf(abs(Z)))
-        
+
         return {"resultado" : np.asscalar(p_valor < alpha), "p_valor" : p_valor, "estadistico" : Z,
         "suma rangos pos" : T_Mas, "suma rangos neg" : T_Men}
 
 
 
-"""Test de Friedman."""      
+"""Test de Friedman."""
 def friedman_test(nombres_algoritmos, matriz_datos, alpha, tipo):
-    
+
     #Número de algoritmos.
     K = len(nombres_algoritmos)
-    
+
     #Número de conjuntos de datos (Número de veces que se aplican los algoritmos o número de
     #problemas).
     N = len(matriz_datos)
-    
+
     #Asignación de rankings a los resultados obtenidos por cada algoritmo en cada problema.
     #Cada fila representa un conjunto de datos compuesto por los valores (rankings) asignados.
     #Los valores se asignan de forma ascencente: 1 al mejor resultado, 2 al segundo, etc. En
@@ -134,20 +136,20 @@ def friedman_test(nombres_algoritmos, matriz_datos, alpha, tipo):
         for dato in conj_datos:
             ranking_conj.append((copia.count(dato)+copia.index(dato)*2+1)/float(2))
         rankings.append(ranking_conj)
-        
+
     #Cálculo de los rankings medios de los algoritmos sobre los N problemas.
     rankings_medios = []
     for i in range(K):
         rankings_medios.append(sp.mean([fila[i] for fila in rankings]))
-        
+
     #Cálculo del estadístico de Friedman, que se distribuye como una distribución chi-cuadrado
     #con K-1 grados de libertad, siendo K el número de variables relacionadas (o número de algoritmos).
     chi2 = ((12*N)/float((K*(K+1))))*((sp.sum(r**2 for r in rankings_medios))-((K*(K+1)**2)/float(4)))
-    
-    #Cálculo del p_valor: Probabilidad de obtener un valor al menos tan extremo como el estadístico 
+
+    #Cálculo del p_valor: Probabilidad de obtener un valor al menos tan extremo como el estadístico
     #chi2.
     p_valor = 1 - st.chi2.cdf(chi2, K-1)
-    
+
     #Cálculo del ranking de los nombres de los algoritmos (de acuerdo a los rankings medios obtenidos).
     ranking_nombres = []
     for i in sorted({nombres_algoritmos[i] : rankings_medios[i] for i in range(K)}.items(), key = lambda t:t[1]):
@@ -166,11 +168,11 @@ def iman_davenport_test(nombres_algoritmos, matriz_datos, alpha, tipo):
 
     #Número de algoritmos.
     K = len(nombres_algoritmos)
-    
+
     #Número de conjuntos de datos (Número de veces que se aplican los algoritmos o número de
     #problemas).
     N = len(matriz_datos)
-    
+
     # Cálculo del estadistico de Friedman.
     friedman = friedman_test(nombres_algoritmos, matriz_datos, alpha, tipo)
     chi2 = friedman["estadistico"]
@@ -178,8 +180,8 @@ def iman_davenport_test(nombres_algoritmos, matriz_datos, alpha, tipo):
     # Cálculo del estadistico de Iman-Davenport, que se distribuye de acuerdo a una distribución
     #f con (K-1) y (K-1)(N-1) grados de libertad.
     iman_davenport = ((N-1)*chi2)/float((N*(K-1)-chi2))
-    
-    #Cálculo del p_valor: Probabilidad de obtener un valor al menos tan extremo como el estadístico 
+
+    #Cálculo del p_valor: Probabilidad de obtener un valor al menos tan extremo como el estadístico
     #iman_davenport.
     p_valor = 1 - st.f.cdf(iman_davenport, K-1, (K-1)*(N-1))
 
@@ -193,11 +195,11 @@ def friedman_rangos_alineados_test(nombres_algoritmos, matriz_datos, alpha, tipo
 
     #Número de algoritmos.
     K = len(nombres_algoritmos)
-    
+
     #Número de conjuntos de datos (Número de veces que se aplican los algoritmos o número de
     #problemas).
     N = len(matriz_datos)
-    
+
     #Cálculo de las observaciones alienadas: Primero se halla el valor de localización, que es el
     #rendimiento medio alcanzado por cada algoritmo en cada conjunto de datos. Luego, se calculan
     #las diferencias entre el rendimiento obtenido por cada algoritmo con respecto al valor de localización.
@@ -209,16 +211,16 @@ def friedman_rangos_alineados_test(nombres_algoritmos, matriz_datos, alpha, tipo
         for dato in conj_datos:
             fila_observaciones.append(dato-valor_localizacion)
         observaciones_alineadas.append(fila_observaciones)
-        
+
     # Creación de una lista a partir de la tabla observaciones_alineadas.
     tabla_a_lista = []
     for fila in observaciones_alineadas:
         for dato in fila:
             tabla_a_lista.append(dato)
-    
+
     # Ordenación de la lista.
     tabla_a_lista.sort(reverse=tipo)
-    
+
     #Asignación de rankings a los resultados obtenidos por cada algoritmo en cada problema.
     #Cada fila representa un conjunto de datos compuesto por los rankings asignados. Los
     #rankings se asignan de forma ascencente: 1 al mejor resultado, 2 al segundo, ... hasta
@@ -229,7 +231,7 @@ def friedman_rangos_alineados_test(nombres_algoritmos, matriz_datos, alpha, tipo
         for dato in fila:
             ranking_conj.append((tabla_a_lista.count(dato)+tabla_a_lista.index(dato)*2+1)/float(2))
         rankings.append(ranking_conj)
-    
+
     #Cálculo de los rankings medios de los algoritmos sobre los N problemas y de la suma de los
     #ranking obtenidos por cada algoritmo.
     rankings_medios = []
@@ -237,18 +239,18 @@ def friedman_rangos_alineados_test(nombres_algoritmos, matriz_datos, alpha, tipo
     for i in range(K):
         rankings_medios.append(sp.mean([fila[i] for fila in rankings]))
         totales_algoritmos.append(sp.sum([fila[i] for fila in rankings]))
-        
+
     #Cálculo de suma de los rankings obtenidos para cada conjunto de datos.
     totales_conjuntos = []
     for i in rankings:
         totales_conjuntos.append(sp.sum(i))
-        
+
     #Cálculo del estadístico de los Rangos Alineados de Friedman.
     T = (K-1)*(sp.sum(total**2 for total in totales_algoritmos)-(K*N**2/float(4))*(K*N+1)**2)/float(((K*N*(K*N+1)*(2*K*N+1))/float(6))-(1/float(K))*sp.sum(total**2 for total in totales_conjuntos))
 
     #Cálculo del p_valor: Probabilidad de obtener un valor al menos tan extremo como el estadístico T.
     p_valor = 1 - st.chi2.cdf(T, K-1)
-    
+
     #Cálculo del ranking de los nombres de los algoritmos (de acuerdo a los rankings medios obtenidos).
     ranking_nombres = []
     for i in sorted({nombres_algoritmos[i] : rankings_medios[i] for i in range(K)}.items(), key = lambda t:t[1]):
@@ -256,7 +258,7 @@ def friedman_rangos_alineados_test(nombres_algoritmos, matriz_datos, alpha, tipo
 
     #Ordenamiento de menor a mayor de los rankings medios obtenidos.
     rankings_medios.sort()
-        
+
     return {"resultado" : np.asscalar(p_valor < alpha), "p_valor" : p_valor, "estadistico" : T,
     "nombres" : ranking_nombres, "ranking" : rankings_medios}
 
@@ -264,16 +266,16 @@ def friedman_rangos_alineados_test(nombres_algoritmos, matriz_datos, alpha, tipo
 
 """Test de Quade."""
 def quade_test(nombres_algoritmos, matriz_datos, alpha, tipo):
-    
+
     #Número de algoritmos.
     K = len(nombres_algoritmos)
-    
+
     #Número de conjuntos de datos (Número de veces que se aplican los algoritmos o número de
     #problemas).
     N = len(matriz_datos)
-    
+
     #Asignación de rankings a los resultados obtenidos por cada algoritmo en cada problema de forma
-    #similar al test de Friedman: cada fila representa un conjunto de datos compuesto por los 
+    #similar al test de Friedman: cada fila representa un conjunto de datos compuesto por los
     #valores (rankings) asignados. Los valores se asignan de forma ascencente: 1 al mejor resultado,
     #2 al segundo, etc. En caso de empates, se asignan valores medios.
     rankings_resultados = []
@@ -298,7 +300,7 @@ def quade_test(nombres_algoritmos, matriz_datos, alpha, tipo):
     copia.sort()
     for rango in rangos:
         rankings_problemas.append((copia.count(rango)+copia.index(rango)*2+1)/float(2))
-    
+
     #S, W.
     S = []
     W = []
@@ -313,29 +315,29 @@ def quade_test(nombres_algoritmos, matriz_datos, alpha, tipo):
         contador_problemas+=1
         S.append(fila_s)
         W.append(fila_w)
-      
+
     #Sj, Wj.
     Sj = []
     Wj = []
     for i in range(K):
         Sj.append(sp.sum(fila[i] for fila in S))
         Wj.append(sp.sum(fila[i] for fila in W))
-    
+
     #Rankings medios.
     rankings_medios = []
     for i in range(K):
         rankings_medios.append(Wj[i]/float((N*(N+1))/float(2)))
-    
+
     #Términos A, B.
     A = N*(N+1)*(2*N+1)*K*(K+1)*(K-1)/float(72)
     B = sp.sum(x**2 for x in Sj)/float(N)
-    
+
     #Cáculo del estadístico.
     T = (N-1)*B/float(A-B)
-    
+
     #Cálculo del p_valor: Probabilidad de obtener un valor al menos tan extremo como el estadístico T.
     p_valor = 1 - st.f.cdf(T, K-1, (K-1)*(N-1))
-    
+
     #Cálculo del ranking de los nombres de los algoritmos (de acuerdo a los rankings medios obtenidos).
     ranking_nombres = []
     for i in sorted({nombres_algoritmos[i] : rankings_medios[i] for i in range(K)}.items(), key = lambda t:t[1]):
@@ -343,7 +345,7 @@ def quade_test(nombres_algoritmos, matriz_datos, alpha, tipo):
 
     #Ordenamiento de menor a mayor de los rankings medios obtenidos.
     rankings_medios.sort()
-            
+
     return {"resultado" : np.asscalar(p_valor < alpha), "p_valor" : p_valor, "estadistico" : T,
     "nombres" : ranking_nombres, "ranking" : rankings_medios}
 
@@ -354,7 +356,7 @@ def datos_comunes_tests(test_principal, nombres, ranking, N):
 
     #Número de algoritmos K (incluyendo método de control).
     K = len(ranking)
-    
+
     #Cálculo del estadístico Z (distribución normal). El valor cambia en función de si el
     #test principal es Friedman o Iman-Davenport, Rangos Alineados de Friedman o Quade.
     valores_z = []
@@ -367,15 +369,15 @@ def datos_comunes_tests(test_principal, nombres, ranking, N):
     else:
         for j in range(1,K):
             valores_z.append((ranking[0]-ranking[j])/sp.sqrt((K*(K+1)*((2*N)+1)*(K-1))/float(18*N*(N+1))))
-    
+
     #Cálculo de los p_valores.
     p_valores = []
     for i in range(K-1):
         p_valores.append(2*(1-st.norm.cdf(abs(valores_z[i]))))
-        
+
     #Método de control (Primero del ranking).
     metodo_control = nombres[0]
-    
+
     #Ordenamiento de los nombres, valores_z y p_valores segun el p_valor.
     tabla = zip(nombres[1:],valores_z,p_valores)
     tabla.sort(key=lambda valor: valor[2])
@@ -393,7 +395,7 @@ def bonferroni_dunn_test(test_principal, nombres, ranking, N, alpha):
 
     #Cálculo de los datos comunes a los tests de comparación.
     K, nombres, valores_z, p_valores, metodo_control = datos_comunes_tests(test_principal, nombres, ranking, N)
-    
+
     #Nuevo alpha.
     alpha2 = alpha/float(K-1)
 
@@ -401,13 +403,13 @@ def bonferroni_dunn_test(test_principal, nombres, ranking, N, alpha):
     resultado = []
     for i in range(K-1):
         resultado.append(np.asscalar(p_valores[i]<alpha2))
-        
+
     #Cálculo de los p_valores ajustados.
     p_valores_ajustados = []
     for i in range(K-1):
         v = (K-1)*p_valores[i]
         p_valores_ajustados.append(min(v,1))
-    
+
     return {"valores z" : valores_z, "p_valores" : p_valores, "metodo de control" : metodo_control,
             "nombres" : nombres, "alpha" : alpha2, "resultado" : resultado, "p_valores ajustados" : p_valores_ajustados}
 
@@ -415,15 +417,15 @@ def bonferroni_dunn_test(test_principal, nombres, ranking, N, alpha):
 
 """Test de Holm."""
 def holm_test(test_principal, nombres, ranking, N, alpha):
-    
+
     #Cálculo de los datos comunes a los tests de comparación.
     K, nombres, valores_z, p_valores, metodo_control = datos_comunes_tests(test_principal, nombres, ranking, N)
-    
+
     #Valores alphas.
     alphas = []
     for i in range(1,K):
         alphas.append(alpha/float(K-i))
-    
+
     #Cálculo de los resultados.
     resultado = [False]*(K-1)
     for i in range(K-1):
@@ -431,7 +433,7 @@ def holm_test(test_principal, nombres, ranking, N, alpha):
             resultado[i] = True
         else:
             break
-    
+
     #Cálculo de los p_valores ajustados.
     p_valores_ajustados = []
     for i in range(K-1):
@@ -445,15 +447,15 @@ def holm_test(test_principal, nombres, ranking, N, alpha):
 
 """Test de Hochberg."""
 def hochberg_test(test_principal, nombres, ranking, N, alpha):
-    
+
     #Cálculo de los datos comunes a los tests de comparación.
     K, nombres, valores_z, p_valores, metodo_control = datos_comunes_tests(test_principal, nombres, ranking, N)
-    
+
     #Valores alphas.
     alphas = []
     for i in range(K-1,0,-1):
         alphas.append(alpha/float(i))
-    
+
     #Cálculo de los resultados.
     resultado = [True]*(K-1)
     for i in range(K-2,-1,-1):
@@ -461,7 +463,7 @@ def hochberg_test(test_principal, nombres, ranking, N, alpha):
             resultado[i] = False
         else:
             break
-    
+
     #Cálculo de los p_valores ajustados (La pág. 137 pone max. Si no se pone min no da lo mismo
     #que la pág. 142).
     p_valores_ajustados = []
@@ -475,10 +477,10 @@ def hochberg_test(test_principal, nombres, ranking, N, alpha):
 
 """Test de Li."""
 def li_test(test_principal, nombres, ranking, N, alpha):
-    
+
     #Cálculo de los datos comunes a los tests de comparación.
     K, nombres, valores_z, p_valores, metodo_control = datos_comunes_tests(test_principal, nombres, ranking, N)
-    
+
     #Cálculo de los resultados.
     resultado = [True]*(K-1)
     if p_valores[K-2] > alpha:
@@ -492,7 +494,7 @@ def li_test(test_principal, nombres, ranking, N, alpha):
     p_valores_ajustados = []
     for i in range(K-1):
         p_valores_ajustados.append(p_valores[i]/float(p_valores[i]+1-p_valores[K-2]))
-    
+
     return {"valores z" : valores_z, "p_valores" : p_valores, "metodo de control" : metodo_control,
             "nombres" : nombres, "resultado" : resultado, "p_valores ajustados" : p_valores_ajustados}
 
@@ -512,7 +514,7 @@ def datos_comunes_multitests(test_principal, nombres, ranking, N):
     for i in range(K-1):
         for j in range(i+1,K):
             comparaciones.append(nombres[i] + " vs " + nombres[j])
-    
+
     #Cálculo del estadístico Z (distribución normal). El valor cambia en función de si el
     #test principal es Friedman o Iman-Davenport, Rangos Alineados de Friedman o Quade.
     valores_z = []
@@ -528,12 +530,12 @@ def datos_comunes_multitests(test_principal, nombres, ranking, N):
         for i in range(K-1):
             for j in range(i+1,K):
                 valores_z.append((ranking[i]-ranking[j])/sp.sqrt((K*(K+1)*((2*N)+1)*(K-1))/float(18*N*(N+1))))
-    
+
     #Cálculo de los p_valores.
     p_valores = []
     for i in range(m):
         p_valores.append(2*(1-st.norm.cdf(abs(valores_z[i]))))
-    
+
     #Ordenamiento de las comparaciones, valores_z y p_valores segun el p_valor.
     tabla = zip(comparaciones,valores_z,p_valores)
     tabla.sort(key=lambda valor: valor[2])
@@ -548,10 +550,10 @@ def datos_comunes_multitests(test_principal, nombres, ranking, N):
 
 """MultiTest de Nemenyi (Bonferroni-Dunn)."""
 def nemenyi_multitest(test_principal, nombres, ranking, N, alpha):
-    
+
     #Cálculo de los datos comunes a los multitests de comparación.
     K, m, comparaciones, valores_z, p_valores = datos_comunes_multitests(test_principal, nombres, ranking, N)
-    
+
     #Nuevo alpha.
     alpha2 = alpha/float(m)
 
@@ -559,13 +561,13 @@ def nemenyi_multitest(test_principal, nombres, ranking, N, alpha):
     resultado = []
     for i in range(m):
         resultado.append(np.asscalar(p_valores[i]<alpha2))
-        
+
     #Cálculo de los p_valores ajustados.
     p_valores_ajustados = []
     for i in range(m):
         v = m*p_valores[i]
         p_valores_ajustados.append(min(v,1))
-    
+
     return {"valores z" : valores_z, "p_valores" : p_valores, "comparaciones" : comparaciones, "alpha" : alpha2,
             "resultado" : resultado, "p_valores ajustados" : p_valores_ajustados}
 
@@ -573,15 +575,15 @@ def nemenyi_multitest(test_principal, nombres, ranking, N, alpha):
 
 """MultiTest de Holm."""
 def holm_multitest(test_principal, nombres, ranking, N, alpha):
-    
+
     #Cálculo de los datos comunes a los multitests de comparación.
     K, m, comparaciones, valores_z, p_valores = datos_comunes_multitests(test_principal, nombres, ranking, N)
-    
+
     #Valores alphas.
     alphas = []
     for i in range(1,m+1):
         alphas.append(alpha/float(m+1-i))
-    
+
     #Cálculo de los resultados.
     resultado = [False]*m
     for i in range(m):
@@ -589,13 +591,13 @@ def holm_multitest(test_principal, nombres, ranking, N, alpha):
             resultado[i] = True
         else:
             break
-    
+
     #Cálculo de los p_valores ajustados.
     p_valores_ajustados = []
     for i in range(m):
         v = max([(m-j)*p_valores[j] for j in range(i+1)])
         p_valores_ajustados.append(min(v,1))
-    
+
     return {"valores z" : valores_z, "p_valores" : p_valores, "comparaciones" : comparaciones, "alphas" : alphas,
             "resultado" : resultado, "p_valores ajustados" : p_valores_ajustados}
 
@@ -603,15 +605,15 @@ def holm_multitest(test_principal, nombres, ranking, N, alpha):
 
 """MultiTest de Hochberg."""
 def hochberg_multitest(test_principal, nombres, ranking, N, alpha):
-    
+
     #Cálculo de los datos comunes a los multitests de comparación.
     K, m, comparaciones, valores_z, p_valores = datos_comunes_multitests(test_principal, nombres, ranking, N)
-    
+
     #Valores alphas.
     alphas = []
     for i in range(m,0,-1):
         alphas.append(alpha/float(i))
-    
+
     #Cálculo de los resultados.
     resultado = [True]*m
     for i in range(m-1,-1,-1):
@@ -619,13 +621,13 @@ def hochberg_multitest(test_principal, nombres, ranking, N, alpha):
             resultado[i] = False
         else:
             break
-    
+
     #Cálculo de los p_valores ajustados (La pág. 137 pone max. Si no se pone min no da lo mismo
     #que la pág. 142).
     p_valores_ajustados = []
     for i in range(m):
         p_valores_ajustados.append(min([(m+1-j)*p_valores[j-1] for j in range(m,i,-1)]))
-    
+
     return {"valores z" : valores_z, "p_valores" : p_valores, "comparaciones" : comparaciones, "alphas" : alphas,
             "resultado" : resultado, "p_valores ajustados" : p_valores_ajustados}
 
@@ -633,10 +635,10 @@ def hochberg_multitest(test_principal, nombres, ranking, N, alpha):
 
 """MultiTest de Li."""
 def li_multitest(test_principal, nombres, ranking, N, alpha):
-    
+
     #Cálculo de los datos comunes a los multitests de comparación.
     K, m, comparaciones, valores_z, p_valores = datos_comunes_multitests(test_principal, nombres, ranking, N)
-    
+
     #Cálculo de los resultados.
     resultado = [True]*m
     if p_valores[m-1] > alpha:
@@ -650,6 +652,6 @@ def li_multitest(test_principal, nombres, ranking, N, alpha):
     p_valores_ajustados = []
     for i in range(m):
         p_valores_ajustados.append(p_valores[i]/float(p_valores[i]+1-p_valores[m-1]))
-        
+
     return {"valores z" : valores_z, "p_valores" : p_valores, "comparaciones" : comparaciones,
-            "resultado" : resultado, "p_valores ajustados" : p_valores_ajustados} 
+            "resultado" : resultado, "p_valores ajustados" : p_valores_ajustados}
