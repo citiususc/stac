@@ -485,7 +485,7 @@ def li_test(test_principal, nombres, ranking, N, alpha):
     resultado = [True]*(K-1)
     if p_valores[K-2] > alpha:
         resultado[K-2] =  False
-        valor = (1-p_valores[K-2])/float((1-alpha)*alpha)
+        valor = ((1-p_valores[K-2])/float(1-alpha))*alpha
         for i in range(K-2):
             if p_valores[i] > valor:
                 resultado[i] = False
