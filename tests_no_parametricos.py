@@ -113,6 +113,34 @@ def wilcoxon_test(matriz_datos, alpha):
 
 
 
+"Función general que sirve para ejecutar test de ranking + POST-HOC sin acoplamiento."
+def test_ranking(test, post_hoc, nombres_algoritmos, matriz_datos, N, alpha, tipo):
+
+    #Cálculo del resultado del test de ranking elegido.
+    resultado_ranking = test(nombres_algoritmos, matriz_datos, alpha, tipo)
+
+    #Lista de tests POST-HOC de método de control (no multitests).
+    post_hoc_metodo_control = ["bonferroni_dunn_test", "holm_test", "hochberg_test", "li_test"]
+
+    #Si el test de ranking es estadísticamente significativo, se caculan los datos comunes del POST-HOC de comparación
+    #múltiple o del POST-HOC con método de control y se calcula el resultado del mismo.
+    if resultado_ranking["resultado"] == True:
+
+        resultado_post_hoc = {}
+        if post_hoc.__name__ in post_hoc_metodo_control:
+            K, nombres, valores_z, p_valores, metodo_control = datos_comunes_tests(test.__name__, resultado_ranking["nombres"], resultado_ranking["ranking"], N)
+            resultado_post_hoc = post_hoc(K, nombres, valores_z, p_valores, metodo_control, alpha)
+        else:
+            m, comparaciones, valores_z, p_valores = datos_comunes_multitests(test.__name__, resultado_ranking["nombres"], resultado_ranking["ranking"], N)
+            resultado_post_hoc = post_hoc(m, comparaciones, valores_z, p_valores, alpha)
+
+        return {"test_ranking" : resultado_ranking, "test_comparacion" : resultado_post_hoc}
+
+    else:
+        return {"test_ranking" : resultado_ranking}
+
+
+
 """Test de Friedman."""
 def friedman_test(nombres_algoritmos, matriz_datos, alpha, tipo):
 
@@ -391,10 +419,7 @@ def datos_comunes_tests(test_principal, nombres, ranking, N):
 
 
 """Test de Bonferroni Dunn."""
-def bonferroni_dunn_test(test_principal, nombres, ranking, N, alpha):
-
-    #Cálculo de los datos comunes a los tests de comparación.
-    K, nombres, valores_z, p_valores, metodo_control = datos_comunes_tests(test_principal, nombres, ranking, N)
+def bonferroni_dunn_test(K, nombres, valores_z, p_valores, metodo_control, alpha):
 
     #Nuevo alpha.
     alpha2 = alpha/float(K-1)
@@ -404,22 +429,19 @@ def bonferroni_dunn_test(test_principal, nombres, ranking, N, alpha):
     for i in range(K-1):
         resultado.append(np.asscalar(p_valores[i]<alpha2))
 
-    #Cálculo de los p_valores ajustados.
+    #Cálculo de los p_valores_ajustados.
     p_valores_ajustados = []
     for i in range(K-1):
         v = (K-1)*p_valores[i]
         p_valores_ajustados.append(min(v,1))
 
-    return {"valores z" : valores_z, "p_valores" : p_valores, "metodo de control" : metodo_control,
-            "nombres" : nombres, "alpha" : alpha2, "resultado" : resultado, "p_valores ajustados" : p_valores_ajustados}
+    return {"valores_z" : valores_z, "p_valores" : p_valores, "metodo_control" : metodo_control,
+            "nombres" : nombres, "alpha" : alpha2, "resultado" : resultado, "p_valores_ajustados" : p_valores_ajustados}
 
 
 
 """Test de Holm."""
-def holm_test(test_principal, nombres, ranking, N, alpha):
-
-    #Cálculo de los datos comunes a los tests de comparación.
-    K, nombres, valores_z, p_valores, metodo_control = datos_comunes_tests(test_principal, nombres, ranking, N)
+def holm_test(K, nombres, valores_z, p_valores, metodo_control, alpha):
 
     #Valores alphas.
     alphas = []
@@ -434,22 +456,19 @@ def holm_test(test_principal, nombres, ranking, N, alpha):
         else:
             break
 
-    #Cálculo de los p_valores ajustados.
+    #Cálculo de los p_valores_ajustados.
     p_valores_ajustados = []
     for i in range(K-1):
         v = max([(K-(j+1))*p_valores[j] for j in range(i+1)])
         p_valores_ajustados.append(min(v,1))
 
-    return {"valores z" : valores_z, "p_valores" : p_valores, "metodo de control" : metodo_control,
-            "nombres" : nombres, "alphas" : alphas, "resultado" : resultado, "p_valores ajustados" : p_valores_ajustados}
+    return {"valores_z" : valores_z, "p_valores" : p_valores, "valores_z" : metodo_control,
+            "nombres" : nombres, "alphas" : alphas, "resultado" : resultado, "p_valores_ajustados" : p_valores_ajustados}
 
 
 
 """Test de Hochberg."""
-def hochberg_test(test_principal, nombres, ranking, N, alpha):
-
-    #Cálculo de los datos comunes a los tests de comparación.
-    K, nombres, valores_z, p_valores, metodo_control = datos_comunes_tests(test_principal, nombres, ranking, N)
+def hochberg_test(K, nombres, valores_z, p_valores, metodo_control, alpha):
 
     #Valores alphas.
     alphas = []
@@ -464,22 +483,19 @@ def hochberg_test(test_principal, nombres, ranking, N, alpha):
         else:
             break
 
-    #Cálculo de los p_valores ajustados (La pág. 137 pone max. Si no se pone min no da lo mismo
+    #Cálculo de los p_valores_ajustados (La pág. 137 pone max. Si no se pone min no da lo mismo
     #que la pág. 142).
     p_valores_ajustados = []
     for i in range(K-1):
         p_valores_ajustados.append(min([(K-j)*p_valores[j-1] for j in range(K-1,i,-1)]))
 
-    return {"valores z" : valores_z, "p_valores" : p_valores, "metodo de control" : metodo_control,
-            "nombres" : nombres, "alphas" : alphas, "resultado" : resultado, "p_valores ajustados" : p_valores_ajustados}
+    return {"valores_z" : valores_z, "p_valores" : p_valores, "metodo_control" : metodo_control,
+            "nombres" : nombres, "alphas" : alphas, "resultado" : resultado, "p_valores_ajustados" : p_valores_ajustados}
 
 
 
 """Test de Li."""
-def li_test(test_principal, nombres, ranking, N, alpha):
-
-    #Cálculo de los datos comunes a los tests de comparación.
-    K, nombres, valores_z, p_valores, metodo_control = datos_comunes_tests(test_principal, nombres, ranking, N)
+def li_test(K, nombres, valores_z, p_valores, metodo_control, alpha):
 
     #Cálculo de los resultados.
     resultado = [True]*(K-1)
@@ -490,13 +506,13 @@ def li_test(test_principal, nombres, ranking, N, alpha):
             if p_valores[i] > valor:
                 resultado[i] = False
 
-    #Cálculo de los p_valores ajustados.
+    #Cálculo de los p_valores_ajustados.
     p_valores_ajustados = []
     for i in range(K-1):
         p_valores_ajustados.append(p_valores[i]/float(p_valores[i]+1-p_valores[K-2]))
 
-    return {"valores z" : valores_z, "p_valores" : p_valores, "metodo de control" : metodo_control,
-            "nombres" : nombres, "resultado" : resultado, "p_valores ajustados" : p_valores_ajustados}
+    return {"valores_z" : valores_z, "p_valores" : p_valores, "metodo_control" : metodo_control,
+            "nombres" : nombres, "resultado" : resultado, "p_valores_ajustados" : p_valores_ajustados}
 
 
 
@@ -544,15 +560,12 @@ def datos_comunes_multitests(test_principal, nombres, ranking, N):
     valores_z = list(z)
     p_valores = list(p)
 
-    return K, m, comparaciones, valores_z, p_valores
+    return m, comparaciones, valores_z, p_valores
 
 
 
 """MultiTest de Nemenyi (Bonferroni-Dunn)."""
-def nemenyi_multitest(test_principal, nombres, ranking, N, alpha):
-
-    #Cálculo de los datos comunes a los multitests de comparación.
-    K, m, comparaciones, valores_z, p_valores = datos_comunes_multitests(test_principal, nombres, ranking, N)
+def nemenyi_multitest(m, comparaciones, valores_z, p_valores, alpha):
 
     #Nuevo alpha.
     alpha2 = alpha/float(m)
@@ -562,22 +575,19 @@ def nemenyi_multitest(test_principal, nombres, ranking, N, alpha):
     for i in range(m):
         resultado.append(np.asscalar(p_valores[i]<alpha2))
 
-    #Cálculo de los p_valores ajustados.
+    #Cálculo de los p_valores_ajustados.
     p_valores_ajustados = []
     for i in range(m):
         v = m*p_valores[i]
         p_valores_ajustados.append(min(v,1))
 
-    return {"valores z" : valores_z, "p_valores" : p_valores, "comparaciones" : comparaciones, "alpha" : alpha2,
-            "resultado" : resultado, "p_valores ajustados" : p_valores_ajustados}
+    return {"valores_z" : valores_z, "p_valores" : p_valores, "comparaciones" : comparaciones, "alpha" : alpha2,
+            "resultado" : resultado, "p_valores_ajustados" : p_valores_ajustados}
 
 
 
 """MultiTest de Holm."""
-def holm_multitest(test_principal, nombres, ranking, N, alpha):
-
-    #Cálculo de los datos comunes a los multitests de comparación.
-    K, m, comparaciones, valores_z, p_valores = datos_comunes_multitests(test_principal, nombres, ranking, N)
+def holm_multitest(m, comparaciones, valores_z, p_valores, alpha):
 
     #Valores alphas.
     alphas = []
@@ -592,22 +602,19 @@ def holm_multitest(test_principal, nombres, ranking, N, alpha):
         else:
             break
 
-    #Cálculo de los p_valores ajustados.
+    #Cálculo de los p_valores_ajustados.
     p_valores_ajustados = []
     for i in range(m):
         v = max([(m-j)*p_valores[j] for j in range(i+1)])
         p_valores_ajustados.append(min(v,1))
 
-    return {"valores z" : valores_z, "p_valores" : p_valores, "comparaciones" : comparaciones, "alphas" : alphas,
-            "resultado" : resultado, "p_valores ajustados" : p_valores_ajustados}
+    return {"valores_z" : valores_z, "p_valores" : p_valores, "comparaciones" : comparaciones, "alphas" : alphas,
+            "resultado" : resultado, "p_valores_ajustados" : p_valores_ajustados}
 
 
 
 """MultiTest de Hochberg."""
-def hochberg_multitest(test_principal, nombres, ranking, N, alpha):
-
-    #Cálculo de los datos comunes a los multitests de comparación.
-    K, m, comparaciones, valores_z, p_valores = datos_comunes_multitests(test_principal, nombres, ranking, N)
+def hochberg_multitest(m, comparaciones, valores_z, p_valores, alpha):
 
     #Valores alphas.
     alphas = []
@@ -622,22 +629,19 @@ def hochberg_multitest(test_principal, nombres, ranking, N, alpha):
         else:
             break
 
-    #Cálculo de los p_valores ajustados (La pág. 137 pone max. Si no se pone min no da lo mismo
+    #Cálculo de los p_valores_ajustados (La pág. 137 pone max. Si no se pone min no da lo mismo
     #que la pág. 142).
     p_valores_ajustados = []
     for i in range(m):
         p_valores_ajustados.append(min([(m+1-j)*p_valores[j-1] for j in range(m,i,-1)]))
 
-    return {"valores z" : valores_z, "p_valores" : p_valores, "comparaciones" : comparaciones, "alphas" : alphas,
-            "resultado" : resultado, "p_valores ajustados" : p_valores_ajustados}
+    return {"valores_z" : valores_z, "p_valores" : p_valores, "comparaciones" : comparaciones, "alphas" : alphas,
+            "resultado" : resultado, "p_valores_ajustados" : p_valores_ajustados}
 
 
 
 """MultiTest de Li."""
-def li_multitest(test_principal, nombres, ranking, N, alpha):
-
-    #Cálculo de los datos comunes a los multitests de comparación.
-    K, m, comparaciones, valores_z, p_valores = datos_comunes_multitests(test_principal, nombres, ranking, N)
+def li_multitest(m, comparaciones, valores_z, p_valores, alpha):
 
     #Cálculo de los resultados.
     resultado = [True]*m
@@ -648,10 +652,10 @@ def li_multitest(test_principal, nombres, ranking, N, alpha):
             if p_valores[i] > valor:
                 resultado[i] = False
 
-    #Cálculo de los p_valores ajustados.
+    #Cálculo de los p_valores_ajustados.
     p_valores_ajustados = []
     for i in range(m):
         p_valores_ajustados.append(p_valores[i]/float(p_valores[i]+1-p_valores[m-1]))
 
-    return {"valores z" : valores_z, "p_valores" : p_valores, "comparaciones" : comparaciones,
-            "resultado" : resultado, "p_valores ajustados" : p_valores_ajustados}
+    return {"valores_z" : valores_z, "p_valores" : p_valores, "comparaciones" : comparaciones,
+            "resultado" : resultado, "p_valores_ajustados" : p_valores_ajustados}

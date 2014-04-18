@@ -60,7 +60,7 @@ def leer_datos(archivo):
                         raise Exception("Número \"" + fila[i] + "\" no valido en línea " + str(numero_linea+1) +".")
             matriz_datos.append(lista_datos)
         numero_linea = numero_linea + 1
-        
+
     return {"palabra" : palabra, "nombres_conj_datos" : nombres_conj_datos, "nombres_algoritmos" : nombres_algoritmos,
         "matriz_datos" : matriz_datos}
 
@@ -112,21 +112,7 @@ def consultar_fichero(id_fichero):
 @route('/wilcoxon/<id_fichero>', method="GET")
 @route('/wilcoxon/<id_fichero>/<alpha:float>', method="GET")
 def wilcoxon_test(id_fichero, alpha=0.05):
-    """
-    Servicio web para el test de los rangos signados de Wilcoxon
-    
-    Argumentos
-    ----------
-    id_fichero: string
-        Identificador HASH MD5 del fichero sobre el que se quiere aplicar el test
-    alpha: string
-        Nivel de significancia. Probabilidad de rechazar la hipótesis nula siendo cierta
-        
-    Salida
-    ------
-    resultado: dict (JSON)
-        Resultado devuelto al aplicar el test de Wilcoxon
-    """
+
     response.headers['Access-Control-Allow-Origin'] = '*'
     response.content_type = "application/json"
     try:
@@ -150,39 +136,15 @@ def wilcoxon_test(id_fichero, alpha=0.05):
 @route('/friedman/<id_fichero>/<tipo:int>', method="GET")
 @route('/friedman/<id_fichero>/<alpha:float>/<tipo:int>', method="GET")
 def friedman_test(id_fichero, alpha=0.05, tipo=0, test_comparacion="bonferroni_dunn_test"):
-    """
-    Servicio web para el test de Friedman.
-    
-    Argumentos
-    ----------
-    id_fichero: string
-        Identificador HASH MD5 del fichero sobre el que se quiere aplicar el test.
-    alpha: string
-        Nivel de significancia. Probabilidad de rechazar la hipótesis nula siendo cierta.
-    tipo: string
-        Indica si lo que se quiere es minimizar ("0") o maximizar ("1").
-    test_comparacion: string
-        Test POST-HOC a aplicar si el test de ranking encuentra diferencias
-        significativas.
-        
-    Salida
-    ------
-    resultado: dict (JSON)
-        Resultado devuelto al aplicar el test de Friedman y si procede el resultado de
-        aplicar el test de comparación.
-    """
+
     response.headers['Access-Control-Allow-Origin'] = '*'
     response.content_type = "application/json"
     try:
         datos = lista_ficheros[id_fichero]
     except Exception:
         return {"fallo" : "No existe ningún fichero con esa clave."}
-    res_ranking = tnp.friedman_test(datos["nombres_algoritmos"],datos["matriz_datos"],alpha,tipo)
-    if res_ranking["resultado"] == True:
-        print len(datos["matriz_datos"])
-        res_comparacion = getattr(tnp, test_comparacion)("friedman",res_ranking["nombres"],res_ranking["ranking"],len(datos["matriz_datos"]),alpha)
-        return json.dumps({"test_ranking" : res_ranking, "test_comparacion" : res_comparacion})
-    return json.dumps({"test_ranking" : res_ranking})
+    resultado = tnp.test_ranking(tnp.friedman_test, getattr(tnp, test_comparacion), datos["nombres_algoritmos"], datos["matriz_datos"], len(datos["matriz_datos"]), alpha, tipo)
+    return json.dumps(resultado)
 
 
 #Servicio para el test de Iman-Davenport.
@@ -195,38 +157,15 @@ def friedman_test(id_fichero, alpha=0.05, tipo=0, test_comparacion="bonferroni_d
 @route('/iman-davenport/<id_fichero>/<tipo:int>', method="GET")
 @route('/iman-davenport/<id_fichero>/<alpha:float>/<tipo:int>', method="GET")
 def iman_davenport_test(id_fichero, alpha=0.05, tipo=0, test_comparacion="bonferroni_dunn_test"):
-    """
-    Servicio web para el test de Iman-Davenport.
-    
-    Argumentos
-    ----------
-    id_fichero: string
-        Identificador HASH MD5 del fichero sobre el que se quiere aplicar el test.
-    alpha: string
-        Nivel de significancia. Probabilidad de rechazar la hipótesis nula siendo cierta.
-    tipo: string
-        Indica si lo que se quiere es minimizar ("0") o maximizar ("1").
-    test_comparacion: string
-        Test POST-HOC a aplicar si el test de ranking encuentra diferencias
-        significativas.
-        
-    Salida
-    ------
-    resultado: dict (JSON)
-        Resultado devuelto al aplicar el test de Iman-Davenport y si procede el resultado
-        de aplicar el test de comparación.
-    """
+
     response.headers['Access-Control-Allow-Origin'] = '*'
     response.content_type = "application/json"
     try:
         datos = lista_ficheros[id_fichero]
     except Exception:
         return {"fallo" : "No existe ningún fichero con esa clave."}
-    res_ranking = tnp.iman_davenport_test(datos["nombres_algoritmos"],datos["matriz_datos"],alpha,tipo)
-    if res_ranking["resultado"] == True:
-        res_comparacion = getattr(tnp, test_comparacion)("iman-davenport",res_ranking["nombres"],res_ranking["ranking"],len(datos["matriz_datos"]),alpha)
-        return json.dumps({"test_ranking" : res_ranking, "test_comparacion" : res_comparacion})
-    return json.dumps({"test_ranking" : res_ranking})
+    resultado = tnp.test_ranking(tnp.iman_davenport_test, getattr(tnp, test_comparacion), datos["nombres_algoritmos"], datos["matriz_datos"], len(datos["matriz_datos"]), alpha, tipo)
+    return json.dumps(resultado)
 
 
 #Servicio para el test de los Rangos Alineados de Friedman.
@@ -239,38 +178,15 @@ def iman_davenport_test(id_fichero, alpha=0.05, tipo=0, test_comparacion="bonfer
 @route('/rangos-alineados/<id_fichero>/<tipo:int>', method="GET")
 @route('/rangos-alineados/<id_fichero>/<alpha:float>/<tipo:int>', method="GET")
 def friedman_rangos_alineados_test(id_fichero, alpha=0.05, tipo=0, test_comparacion="bonferroni_dunn_test"):
-    """
-    Servicio web para el test de los Rangos Alineados de Friedman.
-    
-    Argumentos
-    ----------
-    id_fichero: string
-        Identificador HASH MD5 del fichero sobre el que se quiere aplicar el test.
-    alpha: string
-        Nivel de significancia. Probabilidad de rechazar la hipótesis nula siendo cierta.
-    tipo: string
-        Indica si lo que se quiere es minimizar ("0") o maximizar ("1").
-    test_comparacion: string
-        Test POST-HOC a aplicar si el test de ranking encuentra diferencias
-        significativas.
-        
-    Salida
-    ------
-    resultado: dict (JSON)
-        Resultado devuelto al aplicar el test de los Rangos Alineados de Friedman y si
-        procede el resultado de aplicar el test de comparación.
-    """
+
     response.headers['Access-Control-Allow-Origin'] = '*'
     response.content_type = "application/json"
     try:
         datos = lista_ficheros[id_fichero]
     except Exception:
         return {"fallo" : "No existe ningún fichero con esa clave."}
-    res_ranking = tnp.friedman_rangos_alineados_test(datos["nombres_algoritmos"],datos["matriz_datos"],alpha,tipo)
-    if res_ranking["resultado"] == True:
-        res_comparacion = getattr(tnp, test_comparacion)("rangos-alineados",res_ranking["nombres"],res_ranking["ranking"],len(datos["matriz_datos"]),alpha)
-        return json.dumps({"test_ranking" : res_ranking, "test_comparacion" : res_comparacion})
-    return json.dumps({"test_ranking" : res_ranking})
+    resultado = tnp.test_ranking(tnp.friedman_rangos_alineados_test, getattr(tnp, test_comparacion), datos["nombres_algoritmos"], datos["matriz_datos"], len(datos["matriz_datos"]), alpha, tipo)
+    return json.dumps(resultado)
 
 
 #Servicio para el test Quade.
@@ -283,38 +199,15 @@ def friedman_rangos_alineados_test(id_fichero, alpha=0.05, tipo=0, test_comparac
 @route('/quade/<id_fichero>/<tipo:int>', method="GET")
 @route('/quade/<id_fichero>/<alpha:float>/<tipo:int>', method="GET")
 def quade_test(id_fichero, alpha=0.05, tipo=0, test_comparacion="bonferroni_dunn_test"):
-    """
-    Servicio web para el test de Quade
-    
-    Argumentos
-    ----------
-    id_fichero: string
-        Identificador HASH MD5 del fichero sobre el que se quiere aplicar el test
-    alpha: string
-        Nivel de significancia. Probabilidad de rechazar la hipótesis nula siendo cierta
-    tipo: string
-        Indica si lo que se quiere es minimizar ("0") o maximizar ("1")
-    test_comparacion: string
-        Test POST-HOC a aplicar si el test de ranking encuentra diferencias
-        significativas.
-        
-    Salida
-    ------
-    resultado: dict (JSON)
-        Resultado devuelto al aplicar el test de Quade y si procede el resultado de
-        aplicar el test de comparación.
-    """
+
     response.headers['Access-Control-Allow-Origin'] = '*'
     response.content_type = "application/json"
     try:
         datos = lista_ficheros[id_fichero]
     except Exception:
         return {"fallo" : "No existe ningún fichero con esa clave."}
-    res_ranking = tnp.quade_test(datos["nombres_algoritmos"],datos["matriz_datos"],alpha,tipo)
-    if res_ranking["resultado"] == True:
-        res_comparacion = getattr(tnp, test_comparacion)("quade",res_ranking["nombres"],res_ranking["ranking"],len(datos["matriz_datos"]),alpha)
-        return json.dumps({"test_ranking" : res_ranking, "test_comparacion" : res_comparacion})
-    return json.dumps({"test_ranking" : res_ranking})
+    resultado = tnp.test_ranking(tnp.quade_test, getattr(tnp, test_comparacion), datos["nombres_algoritmos"], datos["matriz_datos"], len(datos["matriz_datos"]), alpha, tipo)
+    return json.dumps(resultado)
 
 
 #Servicio para el test de normalidad de Shapiro-Wilk.
