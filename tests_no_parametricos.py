@@ -120,7 +120,7 @@ def test_ranking(test, post_hoc, nombres_algoritmos, matriz_datos, N, alpha, tip
     resultado_ranking = test(nombres_algoritmos, matriz_datos, alpha, tipo)
 
     #Lista de tests POST-HOC de método de control (no multitests).
-    post_hoc_metodo_control = ["bonferroni_dunn_test", "holm_test", "hochberg_test", "li_test"]
+    post_hoc_metodo_control = ["bonferroni_dunn_test", "holm_test", "hochberg_test", "li_test", "finner_test"]
 
     #Si el test de ranking es estadísticamente significativo, se caculan los datos comunes del POST-HOC de comparación
     #múltiple o del POST-HOC con método de control y se calcula el resultado del mismo.
@@ -435,8 +435,8 @@ def bonferroni_dunn_test(K, nombres, valores_z, p_valores, metodo_control, alpha
         v = (K-1)*p_valores[i]
         p_valores_ajustados.append(min(v,1))
 
-    return {"valores_z" : valores_z, "p_valores" : p_valores, "metodo_control" : metodo_control,
-            "nombres" : nombres, "alpha" : alpha2, "resultado" : resultado, "p_valores_ajustados" : p_valores_ajustados}
+    return {"valores_z" : valores_z, "p_valores" : p_valores, "metodo_control" : metodo_control, "nombres" : nombres,
+    "alpha" : alpha2, "resultado" : resultado, "p_valores_ajustados" : p_valores_ajustados}
 
 
 
@@ -462,8 +462,8 @@ def holm_test(K, nombres, valores_z, p_valores, metodo_control, alpha):
         v = max([(K-(j+1))*p_valores[j] for j in range(i+1)])
         p_valores_ajustados.append(min(v,1))
 
-    return {"valores_z" : valores_z, "p_valores" : p_valores, "valores_z" : metodo_control,
-            "nombres" : nombres, "alphas" : alphas, "resultado" : resultado, "p_valores_ajustados" : p_valores_ajustados}
+    return {"valores_z" : valores_z, "p_valores" : p_valores, "valores_z" : metodo_control, "nombres" : nombres,
+    "alphas" : alphas, "resultado" : resultado, "p_valores_ajustados" : p_valores_ajustados}
 
 
 
@@ -489,8 +489,8 @@ def hochberg_test(K, nombres, valores_z, p_valores, metodo_control, alpha):
     for i in range(K-1):
         p_valores_ajustados.append(min([(K-j)*p_valores[j-1] for j in range(K-1,i,-1)]))
 
-    return {"valores_z" : valores_z, "p_valores" : p_valores, "metodo_control" : metodo_control,
-            "nombres" : nombres, "alphas" : alphas, "resultado" : resultado, "p_valores_ajustados" : p_valores_ajustados}
+    return {"valores_z" : valores_z, "p_valores" : p_valores, "metodo_control" : metodo_control, "nombres" : nombres,
+    "alphas" : alphas, "resultado" : resultado, "p_valores_ajustados" : p_valores_ajustados}
 
 
 
@@ -512,7 +512,34 @@ def li_test(K, nombres, valores_z, p_valores, metodo_control, alpha):
         p_valores_ajustados.append(p_valores[i]/float(p_valores[i]+1-p_valores[K-2]))
 
     return {"valores_z" : valores_z, "p_valores" : p_valores, "metodo_control" : metodo_control,
-            "nombres" : nombres, "resultado" : resultado, "p_valores_ajustados" : p_valores_ajustados}
+    "nombres" : nombres, "resultado" : resultado, "p_valores_ajustados" : p_valores_ajustados}
+
+
+
+"""Test de Finner."""
+def finner_test(K, nombres, valores_z, p_valores, metodo_control, alpha):
+
+    #Valores alphas.
+    alphas = []
+    for i in range(1,K):
+        alphas.append(1-(1-alpha)**((K-1)/float(i)))
+
+    #Cálculo de los resultados.
+    resultado = [False]*(K-1)
+    for i in range(K-1):
+        if p_valores[i] <= alphas[i]:
+            resultado[i] = True
+        else:
+            break
+
+    #Cálculo de los p_valores ajustados.
+    p_valores_ajustados = []
+    for i in range(K-1):
+        v = max([1-(1-p_valores[j])**((K-1)/float(j+1)) for j in range(i+1)])
+        p_valores_ajustados.append(min(v,1))
+
+    return {"valores_z" : valores_z, "p_valores" : p_valores, "metodo_control" : metodo_control, "nombres" : nombres,
+    "alphas" : alphas, "resultado" : resultado, "p_valores_ajustados" : p_valores_ajustados}
 
 
 
@@ -582,7 +609,7 @@ def nemenyi_multitest(m, comparaciones, valores_z, p_valores, alpha):
         p_valores_ajustados.append(min(v,1))
 
     return {"valores_z" : valores_z, "p_valores" : p_valores, "comparaciones" : comparaciones, "alpha" : alpha2,
-            "resultado" : resultado, "p_valores_ajustados" : p_valores_ajustados}
+    "resultado" : resultado, "p_valores_ajustados" : p_valores_ajustados}
 
 
 
@@ -609,7 +636,7 @@ def holm_multitest(m, comparaciones, valores_z, p_valores, alpha):
         p_valores_ajustados.append(min(v,1))
 
     return {"valores_z" : valores_z, "p_valores" : p_valores, "comparaciones" : comparaciones, "alphas" : alphas,
-            "resultado" : resultado, "p_valores_ajustados" : p_valores_ajustados}
+    "resultado" : resultado, "p_valores_ajustados" : p_valores_ajustados}
 
 
 
@@ -636,7 +663,7 @@ def hochberg_multitest(m, comparaciones, valores_z, p_valores, alpha):
         p_valores_ajustados.append(min([(m+1-j)*p_valores[j-1] for j in range(m,i,-1)]))
 
     return {"valores_z" : valores_z, "p_valores" : p_valores, "comparaciones" : comparaciones, "alphas" : alphas,
-            "resultado" : resultado, "p_valores_ajustados" : p_valores_ajustados}
+    "resultado" : resultado, "p_valores_ajustados" : p_valores_ajustados}
 
 
 
@@ -658,4 +685,79 @@ def li_multitest(m, comparaciones, valores_z, p_valores, alpha):
         p_valores_ajustados.append(p_valores[i]/float(p_valores[i]+1-p_valores[m-1]))
 
     return {"valores_z" : valores_z, "p_valores" : p_valores, "comparaciones" : comparaciones,
-            "resultado" : resultado, "p_valores_ajustados" : p_valores_ajustados}
+    "resultado" : resultado, "p_valores_ajustados" : p_valores_ajustados}
+
+
+
+"""MultiTest de Finner."""
+def finner_multitest(m, comparaciones, valores_z, p_valores, alpha):
+
+    #Valores alphas.
+    alphas = []
+    for i in range(1,m+1):
+        alphas.append(1-(1-alpha)**(m/float(i)))
+
+    #Cálculo de los resultados.
+    resultado = [False]*m
+    for i in range(m):
+        if p_valores[i] <= alphas[i]:
+            resultado[i] = True
+        else:
+            break
+
+    #Cálculo de los p_valores_ajustados.
+    p_valores_ajustados = []
+    for i in range(m):
+        v = max([1-(1-p_valores[j])**(m/float(j+1)) for j in range(i+1)])
+        p_valores_ajustados.append(min(v,1))
+
+    return {"valores_z" : valores_z, "p_valores" : p_valores, "comparaciones" : comparaciones, "alphas" : alphas,
+    "resultado" : resultado, "p_valores_ajustados" : p_valores_ajustados}
+
+
+
+"""Función para obtener el número de hipótesis que pueden ser ciertas."""
+def S(K):
+
+    if K == 0 or K == 1:
+        return {0}
+    else:
+        result = set()
+        for j in reversed(range(1, K+1)):
+            tmp = S(K - j)
+            for s in tmp:
+                result = result.union({sp.special.binom(j, 2) + s})
+        return list(result)
+
+
+
+"""MultiTest de Shaffer."""
+def shaffer_multitest(m, comparaciones, valores_z, p_valores, alpha):
+
+    #Número máximo de hipótesis posibles.
+    K = int((1 + sp.sqrt(1+4*m*2))/2)
+    A = S(K)
+    t = []
+
+    #Valores alphas.
+    alphas = []
+    for i in range(1,m+1):
+        t.insert(i-1,max([a for a in A if a <= m-i+1]))
+        alphas.append(alpha/float(t[i-1]))
+
+    #Cálculo de los resultados.
+    resultado = [False]*m
+    for i in range(m):
+        if p_valores[i] <= alphas[i]:
+            resultado[i] = True
+        else:
+            break
+
+    #Cálculo de los p_valores ajustados.
+    p_valores_ajustados = []
+    for i in range(m):
+        v = max([t[j]*p_valores[j] for j in range(i+1)])
+        p_valores_ajustados.append(min(v,1))
+
+    return {"valores z" : valores_z, "p_valores" : p_valores, "comparaciones" : comparaciones, "alphas" : alphas,
+            "resultado" : resultado, "p_valores ajustados" : p_valores_ajustados}
