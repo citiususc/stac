@@ -9,72 +9,11 @@ from bottle import route, run, response, request
 import scipy.stats as st
 import tests_no_parametricos as tnp
 import tests_parametricos as tp
+from utils import LimitedSizeDict, leer_datos, generar_md5
 import numpy as np
 import json
-import csv, re, hashlib
 
-lista_ficheros = {}
-
-#Función para leer los datos de un fichero.
-def leer_datos(archivo):
-    patron_numeros = re.compile('^\d+(\.\d+)?([eE][+-]?\d+)?$')
-
-    palabra = ""
-    nombres_conj_datos = []
-    nombres_algoritmos = []
-    matriz_datos = []
-
-    lector = csv.reader(archivo)
-
-    numero_linea = 0
-
-    for fila in lector:
-        if len(fila)<3:
-            raise Exception("Error formato datos.")
-        if numero_linea == 0:
-            for i in range(len(fila)):
-                if i == 0:
-                    palabra = fila[i]
-                else:
-                    if nombres_algoritmos.count(fila[i]) == 0:
-                        nombres_algoritmos.append(fila[i])
-                    else:
-                        raise Exception("Nombre de algoritmo repetido.")
-        else:
-            numero_algoritmos = len(nombres_algoritmos)
-            if len(fila) != numero_algoritmos + 1:
-                raise Exception("Error formato datos")
-            lista_datos = []
-            for i in range(len(fila)):
-                if i == 0:
-                    if nombres_conj_datos.count(fila[i]) == 0:
-                        nombres_conj_datos.append(fila[i])
-                    else:
-                        raise Exception("Nombre conjunto datos repetido.")
-                else:
-                    m = patron_numeros.match(fila[i])
-                    if m:
-                        dato = float(fila[i])
-                        lista_datos.append(dato)
-                    else:
-                        raise Exception("Número \"" + fila[i] + "\" no valido en línea " + str(numero_linea+1) +".")
-            matriz_datos.append(lista_datos)
-        numero_linea = numero_linea + 1
-
-    return {"palabra" : palabra, "nombres_conj_datos" : nombres_conj_datos, "nombres_algoritmos" : nombres_algoritmos,
-        "matriz_datos" : matriz_datos}
-
-
-#Función para generar el resumen hash MD5 de los ficheros.
-def generar_md5(archivo):
-    tam_bloque = 65536
-    md5 = hashlib.md5()
-    bufer = archivo.read(tam_bloque)
-    while len(bufer) > 0:
-        md5.update(bufer)
-        bufer = archivo.read(tam_bloque)
-    archivo.seek(0, 0);
-    return md5.hexdigest()
+lista_ficheros = LimitedSizeDict(size_limit=3)
 
 
 #Servicio para la subida de ficheros.
