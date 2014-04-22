@@ -667,28 +667,6 @@ def hochberg_multitest(m, comparaciones, valores_z, p_valores, alpha):
 
 
 
-"""MultiTest de Li."""
-def li_multitest(m, comparaciones, valores_z, p_valores, alpha):
-
-    #Cálculo de los resultados.
-    resultado = [True]*m
-    if p_valores[m-1] > alpha:
-        resultado[m-1] =  False
-        valor = (1-p_valores[m-1])/float((1-alpha)*alpha)
-        for i in range(m-1):
-            if p_valores[i] > valor:
-                resultado[i] = False
-
-    #Cálculo de los p_valores_ajustados.
-    p_valores_ajustados = []
-    for i in range(m):
-        p_valores_ajustados.append(p_valores[i]/float(p_valores[i]+1-p_valores[m-1]))
-
-    return {"valores_z" : valores_z, "p_valores" : p_valores, "comparaciones" : comparaciones,
-    "resultado" : resultado, "p_valores_ajustados" : p_valores_ajustados}
-
-
-
 """MultiTest de Finner."""
 def finner_multitest(m, comparaciones, valores_z, p_valores, alpha):
 
@@ -760,4 +738,4 @@ def shaffer_multitest(m, comparaciones, valores_z, p_valores, alpha):
         p_valores_ajustados.append(min(v,1))
 
     return {"valores z" : valores_z, "p_valores" : p_valores, "comparaciones" : comparaciones, "alphas" : alphas,
-            "resultado" : resultado, "p_valores ajustados" : p_valores_ajustados}
+            "resultado" : resultado, "p_valores_ajustados" : p_valores_ajustados}
