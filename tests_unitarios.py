@@ -304,7 +304,7 @@ class TestDatosComunesTests(unittest.TestCase):
 
 
 class TestBonferroni_Dunn(unittest.TestCase):
-    """TestCase que contiene las pruebas a realizar sobre el mutitest de Bonferroni-Dunn. El nivel
+    """TestCase que contiene las pruebas a realizar sobre el POST-HOC (método control) de Bonferroni-Dunn. El nivel
     de signficancia considerado es el más habitual: 0.05."""
 
     @classmethod
@@ -326,7 +326,7 @@ class TestBonferroni_Dunn(unittest.TestCase):
 
 
 class TestHolm(unittest.TestCase):
-    """TestCase que contiene las pruebas a realizar sobre el mutitest de Holm. El nivel
+    """TestCase que contiene las pruebas a realizar sobre el POST-HOC (método control) de Holm. El nivel
     de signficancia considerado es el más habitual: 0.05."""
 
     @classmethod
@@ -348,7 +348,7 @@ class TestHolm(unittest.TestCase):
 
 
 class TestHochberg(unittest.TestCase):
-    """TestCase que contiene las pruebas a realizar sobre el mutitest de Hochberg. El nivel
+    """TestCase que contiene las pruebas a realizar sobre el POST-HOC (método control) de Hochberg. El nivel
     de signficancia considerado es el más habitual: 0.05."""
 
     @classmethod
@@ -370,7 +370,7 @@ class TestHochberg(unittest.TestCase):
 
 
 class TestLi(unittest.TestCase):
-    """TestCase que contiene las pruebas a realizar sobre el mutitest de Li. El nivel
+    """TestCase que contiene las pruebas a realizar sobre el POST-HOC (método control) de Li. El nivel
     de signficancia considerado es el más habitual: 0.05."""
 
     @classmethod
@@ -385,6 +385,28 @@ class TestLi(unittest.TestCase):
     def test_p_valores_ajustados(self):
         """Verifica los p_valores ajustados."""
         self.assertEqual([round(valor,3) for valor in self.datos_devueltos["p_valores_ajustados"]], [0.000, 0.057, 0.057])
+
+
+class TestFinner(unittest.TestCase):
+    """TestCase que contiene las pruebas a realizar sobre el POST-HOC (método control) de Finner. El nivel
+    de signficancia considerado es el más habitual: 0.05."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.K, cls.nombres, cls.valores_z, cls.p_valores, cls.metodo_control = tnp.datos_comunes_tests("friedman", nombres2, datos5, 24)
+        cls.datos_devueltos = tnp.finner_test(cls.K, cls.nombres, cls.valores_z, cls.p_valores, cls.metodo_control, 0.05)
+
+    def test_resultado(self):
+        """Verifica si los tests aplicados sobre todas las hipótesis son o no significativos."""
+        self.assertEqual(self.datos_devueltos["resultado"], [True, True, False])
+
+    def test_p_valores_ajustados(self):
+        """Verifica los p_valores ajustados."""
+        self.assertEqual([round(valor,3) for valor in self.datos_devueltos["p_valores_ajustados"]], [0.0, 0.085, 0.085])
+
+    def test_alphas(self):
+        """Verifica los valores alpha."""
+        self.assertEqual([round(valor,3) for valor in self.datos_devueltos["alphas"]], [0.143, 0.074, 0.05])
 
 
 #Datos para relizar las pruebas de los tests no paramétricos de comparación POST-HOC (multitest).
@@ -420,7 +442,7 @@ class TestDatosComunesMultiTests(unittest.TestCase):
 
 
 class TestNemenyi(unittest.TestCase):
-    """TestCase que contiene las pruebas a realizar sobre el mutitest de Nemenyi (Bonferroni-Dunn
+    """TestCase que contiene las pruebas a realizar sobre el POST-HOC mutitest de Nemenyi (Bonferroni-Dunn
     multitest). El nivel de signficancia considerado es el más habitual: 0.05."""
 
     @classmethod
@@ -442,7 +464,7 @@ class TestNemenyi(unittest.TestCase):
 
 
 class TestHolmMultitest(unittest.TestCase):
-    """TestCase que contiene las pruebas a realizar sobre el mutitest de Holm. El nivel de signficancia
+    """TestCase que contiene las pruebas a realizar sobre el POST-HOC mutitest de Holm. El nivel de signficancia
     considerado es el más habitual: 0.05."""
 
     @classmethod
@@ -464,7 +486,7 @@ class TestHolmMultitest(unittest.TestCase):
 
 
 class TestHochbergMultitest(unittest.TestCase):
-    """TestCase que contiene las pruebas a realizar sobre el mutitest de Hochberg. El nivel de
+    """TestCase que contiene las pruebas a realizar sobre el POST-HOC mutitest de Hochberg. El nivel de
     signficancia considerado es el más habitual: 0.05."""
 
     @classmethod
@@ -483,6 +505,50 @@ class TestHochbergMultitest(unittest.TestCase):
     def test_p_valores_ajustados(self):
         """Verifica los p_valores ajustados."""
         self.assertEqual([round(valor,3) for valor in self.datos_devueltos["p_valores_ajustados"]], [0.0,0.000,0.023,0.034,0.048,0.051,0.051,0.074,0.806,0.806])
+
+
+class TestFinnerMultitest(unittest.TestCase):
+    """TestCase que contiene las pruebas a realizar sobre el POST-HOC mutitest de Finner. El nivel de
+    signficancia considerado es el más habitual: 0.05."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.m, cls.comparaciones, cls.valores_z, cls.p_valores = tnp.datos_comunes_multitests("friedman", nombres1, datos4, 30)
+        cls.datos_devueltos = tnp.finner_multitest(cls.m, cls.comparaciones, cls.valores_z, cls.p_valores, 0.05)
+
+    def test_resultado(self):
+        """Verifica si los tests aplicados sobre todas las hipótesis son o no significativos."""
+        self.assertEqual(self.datos_devueltos["resultado"], [True,True,True,True,True,True,True,True,False,False])
+
+    def test_alphas(self):
+        """Verifica los valores alpha."""
+        self.assertEqual([round(valor,3) for valor in self.datos_devueltos["alphas"]], [0.401,0.226,0.157,0.12,0.098,0.082,0.071,0.062,0.055,0.05])
+
+    def test_p_valores_ajustados(self):
+        """Verifica los p_valores ajustados."""
+        self.assertEqual([round(valor,3) for valor in self.datos_devueltos["p_valores_ajustados"]], [0.0,0.0,0.01,0.012,0.016,0.017,0.018,0.031,0.781,0.806])
+
+
+class TestShafferMultitest(unittest.TestCase):
+    """TestCase que contiene las pruebas a realizar sobre el POST-HOC mutitest de Shaffer. El nivel de
+    signficancia considerado es el más habitual: 0.05."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.m, cls.comparaciones, cls.valores_z, cls.p_valores = tnp.datos_comunes_multitests("friedman", nombres1, datos4, 30)
+        cls.datos_devueltos = tnp.shaffer_multitest(cls.m, cls.comparaciones, cls.valores_z, cls.p_valores, 0.05)
+
+    def test_resultado(self):
+        """Verifica si los tests aplicados sobre todas las hipótesis son o no significativos."""
+        self.assertEqual(self.datos_devueltos["resultado"], [True,True,True,True,True,True,False,False,False,False])
+
+    def test_alphas(self):
+        """Verifica los valores alpha."""
+        self.assertEqual([round(valor,3) for valor in self.datos_devueltos["alphas"]], [0.005,0.008,0.008,0.008,0.008,0.013,0.013,0.017,0.025,0.05])
+
+    def test_p_valores_ajustados(self):
+        """Verifica los p_valores ajustados."""
+        self.assertEqual([round(valor,3) for valor in self.datos_devueltos["p_valores_ajustados"]], [0.0,0.0,0.017,0.029,0.048,0.048,0.051,0.074,1.0,1.0])
 
 
 #Datos para relizar las pruebas de los tests paramétricos ANOVA y Bonferroni POST-HOC (multitest).
