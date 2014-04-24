@@ -269,4 +269,4 @@ def anova_test(id_fichero, alpha=0.05):
 
 
 if __name__ == '__main__':
-    run(reloader=True, host='localhost', port=8080)
+    run(reloader=True, host='localhost', port=8080, quiet=True)
