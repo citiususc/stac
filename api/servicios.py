@@ -7,12 +7,13 @@ Created on Fri Jan 31 12:49:31 2014
 
 from bottle import route, run, response, request
 import scipy.stats as st
+import numpy as np
+from stac import tests_no_parametricos as tnp
 from stac import *
 from utils import LimitedSizeDict, leer_datos, generar_md5
-import numpy as np
 import json
 
-lista_ficheros = LimitedSizeDict(size_limit=3)
+lista_ficheros = LimitedSizeDict(size_limit=5)
 
 
 #Servicio para la subida de ficheros.
@@ -49,7 +50,7 @@ def consultar_fichero(id_fichero):
 #Servicio para el test de Wilcoxon.
 @route('/wilcoxon/<id_fichero>', method="GET")
 @route('/wilcoxon/<id_fichero>/<alpha:float>', method="GET")
-def wilcoxon_test(id_fichero, alpha=0.05):
+def wilcoxon(id_fichero, alpha=0.05):
 
     response.headers['Access-Control-Allow-Origin'] = '*'
     response.content_type = "application/json"
@@ -73,7 +74,7 @@ def wilcoxon_test(id_fichero, alpha=0.05):
 @route('/friedman/<id_fichero>/<alpha:float>', method="GET")
 @route('/friedman/<id_fichero>/<tipo:int>', method="GET")
 @route('/friedman/<id_fichero>/<alpha:float>/<tipo:int>', method="GET")
-def friedman_test(id_fichero, alpha=0.05, tipo=0, test_comparacion="bonferroni_dunn_test"):
+def friedman(id_fichero, alpha=0.05, tipo=0, test_comparacion="bonferroni_dunn_test"):
 
     response.headers['Access-Control-Allow-Origin'] = '*'
     response.content_type = "application/json"
@@ -94,7 +95,7 @@ def friedman_test(id_fichero, alpha=0.05, tipo=0, test_comparacion="bonferroni_d
 @route('/iman-davenport/<id_fichero>/<alpha:float>', method="GET")
 @route('/iman-davenport/<id_fichero>/<tipo:int>', method="GET")
 @route('/iman-davenport/<id_fichero>/<alpha:float>/<tipo:int>', method="GET")
-def iman_davenport_test(id_fichero, alpha=0.05, tipo=0, test_comparacion="bonferroni_dunn_test"):
+def iman_davenport(id_fichero, alpha=0.05, tipo=0, test_comparacion="bonferroni_dunn_test"):
 
     response.headers['Access-Control-Allow-Origin'] = '*'
     response.content_type = "application/json"
@@ -115,7 +116,7 @@ def iman_davenport_test(id_fichero, alpha=0.05, tipo=0, test_comparacion="bonfer
 @route('/rangos-alineados/<id_fichero>/<alpha:float>', method="GET")
 @route('/rangos-alineados/<id_fichero>/<tipo:int>', method="GET")
 @route('/rangos-alineados/<id_fichero>/<alpha:float>/<tipo:int>', method="GET")
-def friedman_rangos_alineados_test(id_fichero, alpha=0.05, tipo=0, test_comparacion="bonferroni_dunn_test"):
+def friedman_rangos_alineados(id_fichero, alpha=0.05, tipo=0, test_comparacion="bonferroni_dunn_test"):
 
     response.headers['Access-Control-Allow-Origin'] = '*'
     response.content_type = "application/json"
@@ -136,7 +137,7 @@ def friedman_rangos_alineados_test(id_fichero, alpha=0.05, tipo=0, test_comparac
 @route('/quade/<id_fichero>/<alpha:float>', method="GET")
 @route('/quade/<id_fichero>/<tipo:int>', method="GET")
 @route('/quade/<id_fichero>/<alpha:float>/<tipo:int>', method="GET")
-def quade_test(id_fichero, alpha=0.05, tipo=0, test_comparacion="bonferroni_dunn_test"):
+def quade(id_fichero, alpha=0.05, tipo=0, test_comparacion="bonferroni_dunn_test"):
 
     response.headers['Access-Control-Allow-Origin'] = '*'
     response.content_type = "application/json"
@@ -151,7 +152,7 @@ def quade_test(id_fichero, alpha=0.05, tipo=0, test_comparacion="bonferroni_dunn
 #Servicio para el test de normalidad de Shapiro-Wilk.
 @route('/shapiro/<id_fichero>', method="GET")
 @route('/shapiro/<id_fichero>/<alpha:float>', method="GET")
-def shapiro_test(id_fichero, alpha=0.05):
+def shapiro(id_fichero, alpha=0.05):
     response.headers['Access-Control-Allow-Origin'] = '*'
     response.content_type = "application/json"
     try:
@@ -173,7 +174,7 @@ def shapiro_test(id_fichero, alpha=0.05):
 #Servicio para el test de normalidad de Kolmogorov-Smirnov.
 @route('/kolmogorov/<id_fichero>', method="GET")
 @route('/kolmogorov/<id_fichero>/<alpha:float>', method="GET")
-def kolmogorov_test(id_fichero, alpha=0.05):
+def kolmogorov(id_fichero, alpha=0.05):
     response.headers['Access-Control-Allow-Origin'] = '*'
     response.content_type = "application/json"
     try:
@@ -195,7 +196,7 @@ def kolmogorov_test(id_fichero, alpha=0.05):
 #Servicio para el test de normalidad de D'Agostino-Pearson.
 @route('/agostino/<id_fichero>', method="GET")
 @route('/agostino/<id_fichero>/<alpha:float>', method="GET")
-def agostino_test(id_fichero, alpha=0.05):
+def agostino(id_fichero, alpha=0.05):
     response.headers['Access-Control-Allow-Origin'] = '*'
     response.content_type = "application/json"
     try:
@@ -211,7 +212,7 @@ def agostino_test(id_fichero, alpha=0.05):
 #Servicio para el test de homocedasticidad de Levene.
 @route('/levene/<id_fichero>', method="GET")
 @route('/levene/<id_fichero>/<alpha:float>', method="GET")
-def levene_test(id_fichero, alpha=0.05):
+def levene(id_fichero, alpha=0.05):
     response.headers['Access-Control-Allow-Origin'] = '*'
     response.content_type = "application/json"
     try:
@@ -231,7 +232,7 @@ def levene_test(id_fichero, alpha=0.05):
 #Servicio para el test paramétrico T-Test.
 @route('/ttest/<id_fichero>', method="GET")
 @route('/ttest/<id_fichero>/<alpha:float>', method="GET")
-def ttest_test(id_fichero, alpha=0.05):
+def ttest(id_fichero, alpha=0.05):
     response.headers['Access-Control-Allow-Origin'] = '*'
     response.content_type = "application/json"
     try:
@@ -254,7 +255,7 @@ def ttest_test(id_fichero, alpha=0.05):
 #Servicio para el test paramétrico ANOVA.
 @route('/anova/<id_fichero>', method="GET")
 @route('/anova/<id_fichero>/<alpha:float>', method="GET")
-def anova_test(id_fichero, alpha=0.05):
+def anova(id_fichero, alpha=0.05):
     response.headers['Access-Control-Allow-Origin'] = '*'
     response.content_type = "application/json"
     try:
