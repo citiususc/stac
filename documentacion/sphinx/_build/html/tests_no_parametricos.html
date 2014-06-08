@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -15,7 +13,7 @@
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
+        URL_ROOT:    './',
         VERSION:     'v0.5',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
@@ -28,7 +26,6 @@
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="Plataforma Web STAC v0.5 documentation" href="index.html" />
     <link rel="up" title="Tests Estadísticos" href="tests_estadisticos.html" />
-    <link rel="next" title="API REST" href="api_rest.html" />
     <link rel="prev" title="Tests Paramétricos" href="tests_parametricos.html" /> 
   </head>
   <body>
@@ -41,9 +38,6 @@
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="right" >
-          <a href="api_rest.html" title="API REST"
-             accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="tests_parametricos.html" title="Tests Paramétricos"
              accesskey="P">previous</a> |</li>
@@ -59,6 +53,973 @@
             
   <div class="section" id="tests-no-parametricos">
 <h1>Tests no Paramétricos<a class="headerlink" href="#tests-no-parametricos" title="Permalink to this headline">¶</a></h1>
+<p>Cuando los datos proporcionados <strong>no</strong> cumplen los criterios paramétricos de (independencia, normalidad y homocedasticidad) podemos realizar contrastes sobre datos con los siguientes tests no paramétricos:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#tests_no_parametricos.wilcoxon_test" title="tests_no_parametricos.wilcoxon_test"><tt class="xref py py-mod docutils literal"><span class="pre">Test</span> <span class="pre">de</span> <span class="pre">Wilcoxon</span></tt></a></li>
+<li><a class="reference internal" href="#tests_no_parametricos.friedman_test" title="tests_no_parametricos.friedman_test"><tt class="xref py py-mod docutils literal"><span class="pre">Test</span> <span class="pre">de</span> <span class="pre">Friedman</span></tt></a></li>
+<li><a class="reference internal" href="#tests_no_parametricos.iman_davenport_test" title="tests_no_parametricos.iman_davenport_test"><tt class="xref py py-mod docutils literal"><span class="pre">Test</span> <span class="pre">de</span> <span class="pre">Iman-Davenport</span></tt></a></li>
+<li><a class="reference internal" href="#tests_no_parametricos.friedman_rangos_alineados_test" title="tests_no_parametricos.friedman_rangos_alineados_test"><tt class="xref py py-mod docutils literal"><span class="pre">Test</span> <span class="pre">de</span> <span class="pre">los</span> <span class="pre">Rangos</span> <span class="pre">Alineados</span> <span class="pre">de</span> <span class="pre">Friedman</span></tt></a></li>
+<li><a class="reference internal" href="#tests_no_parametricos.quade_test" title="tests_no_parametricos.quade_test"><tt class="xref py py-mod docutils literal"><span class="pre">Test</span> <span class="pre">de</span> <span class="pre">Quade</span></tt></a></li>
+<li><a class="reference internal" href="#tests_no_parametricos.bonferroni_dunn_test" title="tests_no_parametricos.bonferroni_dunn_test"><tt class="xref py py-mod docutils literal"><span class="pre">Test</span> <span class="pre">de</span> <span class="pre">Bonferroni-Dunn</span></tt></a></li>
+<li><a class="reference internal" href="#tests_no_parametricos.holm_test" title="tests_no_parametricos.holm_test"><tt class="xref py py-mod docutils literal"><span class="pre">Test</span> <span class="pre">de</span> <span class="pre">Holm</span></tt></a></li>
+<li><a class="reference internal" href="#tests_no_parametricos.hochberg_test" title="tests_no_parametricos.hochberg_test"><tt class="xref py py-mod docutils literal"><span class="pre">Test</span> <span class="pre">de</span> <span class="pre">Hochberg</span></tt></a></li>
+<li><a class="reference internal" href="#tests_no_parametricos.li_test" title="tests_no_parametricos.li_test"><tt class="xref py py-mod docutils literal"><span class="pre">Test</span> <span class="pre">de</span> <span class="pre">Li</span></tt></a></li>
+<li><a class="reference internal" href="#tests_no_parametricos.finner_test" title="tests_no_parametricos.finner_test"><tt class="xref py py-mod docutils literal"><span class="pre">Test</span> <span class="pre">de</span> <span class="pre">Finner</span></tt></a></li>
+<li><a class="reference internal" href="#tests_no_parametricos.nemenyi_multitest" title="tests_no_parametricos.nemenyi_multitest"><tt class="xref py py-mod docutils literal"><span class="pre">Multitest</span> <span class="pre">de</span> <span class="pre">Bonferroni-Dunn</span></tt></a></li>
+<li><a class="reference internal" href="#tests_no_parametricos.holm_multitest" title="tests_no_parametricos.holm_multitest"><tt class="xref py py-mod docutils literal"><span class="pre">Multitest</span> <span class="pre">de</span> <span class="pre">Holm</span></tt></a></li>
+<li><a class="reference internal" href="#tests_no_parametricos.hochberg_multitest" title="tests_no_parametricos.hochberg_multitest"><tt class="xref py py-mod docutils literal"><span class="pre">Multitest</span> <span class="pre">de</span> <span class="pre">Hochberg</span></tt></a></li>
+<li><a class="reference internal" href="#tests_no_parametricos.finner_multitest" title="tests_no_parametricos.finner_multitest"><tt class="xref py py-mod docutils literal"><span class="pre">Multitest</span> <span class="pre">de</span> <span class="pre">Finner</span></tt></a></li>
+<li><a class="reference internal" href="#tests_no_parametricos.shaffer_multitest" title="tests_no_parametricos.shaffer_multitest"><tt class="xref py py-mod docutils literal"><span class="pre">Multitest</span> <span class="pre">de</span> <span class="pre">Shaffer</span></tt></a></li>
+</ul>
+<p>Funciones auxialiares:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#tests_no_parametricos.datos_comunes_tests" title="tests_no_parametricos.datos_comunes_tests"><tt class="xref py py-mod docutils literal"><span class="pre">Datos</span> <span class="pre">comunes</span> <span class="pre">tests</span> <span class="pre">POST-HOC</span></tt></a></li>
+<li><a class="reference internal" href="#tests_no_parametricos.datos_comunes_multitests" title="tests_no_parametricos.datos_comunes_multitests"><tt class="xref py py-mod docutils literal"><span class="pre">Datos</span> <span class="pre">comunes</span> <span class="pre">multitests</span> <span class="pre">POST-HOC</span></tt></a></li>
+<li><a class="reference internal" href="#tests_no_parametricos.S" title="tests_no_parametricos.S"><tt class="xref py py-mod docutils literal"><span class="pre">S</span> <span class="pre">para</span> <span class="pre">Shaffer</span></tt></a></li>
+</ul>
+<span class="target" id="module-tests_no_parametricos"></span><p>Created on Thu Jan 23 14:33:54 2014</p>
+<p>&#64;author: Adrián</p>
+<dl class="function">
+<dt id="tests_no_parametricos.wilcoxon_test">
+<tt class="descclassname">tests_no_parametricos.</tt><tt class="descname">wilcoxon_test</tt><big>(</big><em>matriz_datos</em>, <em>alpha=0.05</em><big>)</big><a class="reference internal" href="_modules/tests_no_parametricos.html#wilcoxon_test"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests_no_parametricos.wilcoxon_test" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test de los Rangos Signados de Wilcoxon.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Contrasta la hipótesis nula de que las medianas de las diferencias de dos muestras (resultados de dos algoritmos)
+relacionadas son iguales. Para tamaños muestrales pequeños, se puede determinar mediante la comparación del
+estadístico con el valor crítico de la tabla de Wilcoxon. Para tamaños muestrales grandes (&gt; 25), el test se puede
+aproximar con la distribución normal. Se deben tener al menos 5 conjuntos de datos cuyas diferencias sean distintas
+de 0.</p>
+</div>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>matriz_datos: lista de listas de float [N_conjuntos_datos * K_algoritmos]</dt>
+<dd>Lista que contiene una serie de listas que a su vez contienen los resultados en floats obtenidos por los distintos
+algoritmos.</dd>
+<dt>alpha: float, optional (default = 0.05)</dt>
+<dd>Nivel de significancia (probabilidad de error tipo 1) que se quiere utilizar para contrastar la hipótesis nula del
+test.</dd>
+</dl>
+</dd>
+<dt>Returns:</dt>
+<dd><p class="first">dict: diccionario que contiene los siguientes elementos (tamaño muestral &lt;= 25):</p>
+<div class="highlight-python"><div class="highlight"><pre>resultado: boolean
+    Resultado del test de contraste de hipótesis. True indica que se rechaza la hipótesis nula. False indica que no
+    se rechaza.
+estadistico: float
+    Estadístico T calculado durante el test, donde T = min(T_Mas,T_Men) y donde T_Mas = suma rangos positivos y
+    T_Men = suma rangos negativos.
+suma rangos pos: float
+    Suma de los rangos de las diferencias mayores que 0.
+suma rangos neg: float
+    Suma de los rangos de las diferencias menores que 0.
+punto critico: float
+    Límite inferior del intervalo de aceptación. El contraste será estadísticamente significativo si: T &lt;= límite
+    inferior correspondiente.
+</pre></div>
+</div>
+<p>dict: diccionario que contiene los siguientes elementos (tamaño muestral &gt; 25):</p>
+<div class="last highlight-python"><div class="highlight"><pre>resultado: boolean
+    Resultado del test de contraste de hipótesis. True indica que se rechaza la hipótesis nula. False indica que no
+    se rechaza.
+p_valor: float
+    p-valor calculado para comparar (contrastar H0) con el nivel de significancia.
+estadistico: float
+    Estadístico Z calculado durante el test. Sigue una distribución normal.
+suma rangos pos: float
+    Suma de los rangos de las diferencias mayores que 0.
+suma rangos neg: float
+    Suma de los rangos de las diferencias menores que 0.
+</pre></div>
+</div>
+</dd>
+<dt>References:</dt>
+<dd><ol class="first last arabic simple">
+<li>Manuel Oviedo - Beatriz Pateiro. <em>Test de los Rangos Signados de Wilcoxon para muestras apareadas.</em></li>
+<li>Universidad de Salamanca (Jul. 2013). <em>Estadística para investigadores. Test no paramétricos: Test de Wilcoxon. Modulo
+6</em> [Vídeo]. URL <a class="reference external" href="https://www.youtube.com/watch?v=B_7Wt49dTos">https://www.youtube.com/watch?v=B_7Wt49dTos</a></li>
+<li>Wikipedia. <em>Prueba de los rangos con signo de Wilcoxon</em> [Documento WWW]. URL <a class="reference external" href="http://es.wikipedia.org/wiki/Prueba_de_los_rangos_con_signo_de_Wilcoxon">http://es.wikipedia.org/wiki/Prueba_de_los_rangos_con_signo_de_Wilcoxon</a></li>
+</ol>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="tests_no_parametricos.friedman_test">
+<tt class="descclassname">tests_no_parametricos.</tt><tt class="descname">friedman_test</tt><big>(</big><em>nombres_algoritmos</em>, <em>matriz_datos</em>, <em>alpha=0.05</em>, <em>tipo=0</em><big>)</big><a class="reference internal" href="_modules/tests_no_parametricos.html#friedman_test"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests_no_parametricos.friedman_test" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test de Friedman.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Contrasta la hipótesis nula de que todos los algoritmos se comportan de forma similar, por lo que sus rankings deben
+de ser similares y por tanto se puedan considerar iguales todos los algoritmos. El estadístico se distribuye como
+una distribución chi-cuadrado con K-1 grados de libertad, siendo K el número de variables relacionadas (o número de algoritmos).
+Realiza comparaciones y asigna rankings dentro de cada conjunto de datos. Se asignan rankings medios en caso de empate.</p>
+</div>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>nombres_algoritmos: lista de string [K_algoritmos]</dt>
+<dd>Lista que contiene los nombres de los algoritmos involucrados en el contraste.</dd>
+<dt>matriz_datos: lista de listas de float [N_conjuntos_datos * K_algoritmos]</dt>
+<dd>Lista que contiene una serie de listas que a su vez contienen los resultados en floats obtenidos por los distintos
+algoritmos.</dd>
+<dt>alpha: float, optional (default = 0.05)</dt>
+<dd>Nivel de significancia (probabilidad de error tipo 1) que se quiere utilizar para contrastar la hipótesis nula del
+test.</dd>
+<dt>tipo: int, optional (default = 0)</dt>
+<dd>Valor que indica si lo que se quiere es minimizar (0) o maximizar (1). Influye en la asignación de rankings.</dd>
+</dl>
+</dd>
+<dt>Returns:</dt>
+<dd><p class="first">dict: diccionario que contiene los siguientes elementos:</p>
+<div class="last highlight-python"><div class="highlight"><pre>resultado: boolean
+    Resultado del test de contraste de hipótesis. True indica que se rechaza la hipótesis nula. False indica que no
+    se rechaza.
+p_valor: float
+    p-valor calculado para comparar (contrastar H0) con el nivel de significancia.
+estadistico: float
+    Estadístico de Friedman, que se distribuye como una distribución chi-cuadrado con K-1 grados de libertad, siendo
+    K el número de variables relacionadas (o número de algoritmos).
+nombres: lista de string [K_algoritmos]
+    Lista que contiene los nombres de los algoritmos involucrados en el contraste en el orden del ranking.
+ranking: lista de float [K_algoritmos]
+    Lista que contiene los rankings medios (de todos los conjuntos de datos) de los algoritmos involucrados en el
+    contraste ordenados de peor a mejor.
+</pre></div>
+</div>
+</dd>
+<dt>References:</dt>
+<dd><ol class="first last arabic simple">
+<li>Salvador García, Francisco Herrera. <em>Statistical Analysis of Experiments in Data Mining and Computational Intelligence
+Computational Intelligence.</em></li>
+</ol>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="tests_no_parametricos.iman_davenport_test">
+<tt class="descclassname">tests_no_parametricos.</tt><tt class="descname">iman_davenport_test</tt><big>(</big><em>nombres_algoritmos</em>, <em>matriz_datos</em>, <em>alpha=0.05</em>, <em>tipo=0</em><big>)</big><a class="reference internal" href="_modules/tests_no_parametricos.html#iman_davenport_test"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests_no_parametricos.iman_davenport_test" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test de Iman-Davenport.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Contrasta la hipótesis nula de que todos los algoritmos se comportan de forma similar, por lo que sus rankings deben
+de ser similares y por tanto se puedan considerar iguales todos los algoritmos. Es una mejora del test de Friedman
+(para evitar el comportamiento conservativo de éste) por lo que presenta un estadístico más ajustado que se distribuye
+de acuerdo a una distribución f con (K-1) y (K-1)*(N-1) grados de libertad. Realiza comparaciones y asigna rankings
+dentro de cada conjunto de datos. Se asignan rankings medios en caso de empate.</p>
+</div>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>nombres_algoritmos: lista de string [K_algoritmos]</dt>
+<dd>Lista que contiene los nombres de los algoritmos involucrados en el contraste.</dd>
+<dt>matriz_datos: lista de listas de float [N_conjuntos_datos * K_algoritmos]</dt>
+<dd>Lista que contiene una serie de listas que a su vez contienen los resultados en floats obtenidos por los distintos
+algoritmos.</dd>
+<dt>alpha: float, optional (default = 0.05)</dt>
+<dd>Nivel de significancia (probabilidad de error tipo 1) que se quiere utilizar para contrastar la hipótesis nula del
+test.</dd>
+<dt>tipo: int, optional (default = 0)</dt>
+<dd>Valor que indica si lo que se quiere es minimizar (0) o maximizar (1). Influye en la asignación de rankings.</dd>
+</dl>
+</dd>
+<dt>Returns:</dt>
+<dd><p class="first">dict: diccionario que contiene los siguientes elementos:</p>
+<div class="last highlight-python"><div class="highlight"><pre>resultado: boolean
+    Resultado del test de contraste de hipótesis. True indica que se rechaza la hipótesis nula. False indica que no
+    se rechaza.
+p_valor: float
+    p-valor calculado para comparar (contrastar H0) con el nivel de significancia.
+estadistico: float
+    Estadístico de Iman-Davenport, que se distribuye de acuerdo a una distribución f con (K-1) y (K-1)*(N-1) grados de
+    libertad.
+nombres: lista de string [K_algoritmos]
+    Lista que contiene los nombres de los algoritmos involucrados en el contraste en el orden del ranking.
+ranking: lista de float [K_algoritmos]
+    Lista que contiene los rankings medios (de todos los conjuntos de datos) de los algoritmos involucrados en el
+    contraste ordenados de peor a mejor.
+</pre></div>
+</div>
+</dd>
+<dt>References:</dt>
+<dd><ol class="first last arabic simple">
+<li>Salvador García, Francisco Herrera. <em>Statistical Analysis of Experiments in Data Mining and Computational Intelligence
+Computational Intelligence.</em></li>
+</ol>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="tests_no_parametricos.friedman_rangos_alineados_test">
+<tt class="descclassname">tests_no_parametricos.</tt><tt class="descname">friedman_rangos_alineados_test</tt><big>(</big><em>nombres_algoritmos</em>, <em>matriz_datos</em>, <em>alpha=0.05</em>, <em>tipo=0</em><big>)</big><a class="reference internal" href="_modules/tests_no_parametricos.html#friedman_rangos_alineados_test"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests_no_parametricos.friedman_rangos_alineados_test" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test de los Rangos Alineados de Friedman.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Contrasta la hipótesis nula de que todos los algoritmos se comportan de forma similar, por lo que sus rankings deben
+de ser similares y por tanto se puedan considerar iguales todos los algoritmos. El estadístico se distribuye como
+una distribución chi-cuadrado con K-1 grados de libertad, siendo K el número de variables relacionadas (o número de algoritmos).
+Realiza comparaciones y asigna rankings teniendo en cuenta a todos los conjuntos de datos. Se asignan rankings medios
+en caso de empate. Suele emplearse cuando el número de algoritmos en la comparación es pequeño.</p>
+</div>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>nombres_algoritmos: lista de string [K_algoritmos]</dt>
+<dd>Lista que contiene los nombres de los algoritmos involucrados en el contraste.</dd>
+<dt>matriz_datos: lista de listas de float [N_conjuntos_datos * K_algoritmos]</dt>
+<dd>Lista que contiene una serie de listas que a su vez contienen los resultados en floats obtenidos por los distintos
+algoritmos.</dd>
+<dt>alpha: float, optional (default = 0.05)</dt>
+<dd>Nivel de significancia (probabilidad de error tipo 1) que se quiere utilizar para contrastar la hipótesis nula del
+test.</dd>
+<dt>tipo: int, optional (default = 0)</dt>
+<dd>Valor que indica si lo que se quiere es minimizar (0) o maximizar (1). Influye en la asignación de rankings.</dd>
+</dl>
+</dd>
+<dt>Returns:</dt>
+<dd><p class="first">dict: diccionario que contiene los siguientes elementos:</p>
+<div class="last highlight-python"><div class="highlight"><pre>resultado: boolean
+    Resultado del test de contraste de hipótesis. True indica que se rechaza la hipótesis nula. False indica que no
+    se rechaza.
+p_valor: float
+    p-valor calculado para comparar (contrastar H0) con el nivel de significancia.
+estadistico: float
+    Estadístico de los Rangos Alineados de Friedman, que se distribuye como una distribución chi-cuadrado con K-1 grados
+    de libertad, siendo K el número de variables relacionadas (o número de algoritmos).
+nombres: lista de string [K_algoritmos]
+    Lista que contiene los nombres de los algoritmos involucrados en el contraste en el orden del ranking.
+ranking: lista de float [K_algoritmos]
+    Lista que contiene los rankings medios (de todos los conjuntos de datos) de los algoritmos involucrados en el
+    contraste ordenados de peor a mejor.
+</pre></div>
+</div>
+</dd>
+<dt>References:</dt>
+<dd><ol class="first last arabic simple">
+<li>Salvador García, Francisco Herrera. <em>Statistical Analysis of Experiments in Data Mining and Computational Intelligence
+Computational Intelligence.</em></li>
+</ol>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="tests_no_parametricos.quade_test">
+<tt class="descclassname">tests_no_parametricos.</tt><tt class="descname">quade_test</tt><big>(</big><em>nombres_algoritmos</em>, <em>matriz_datos</em>, <em>alpha=0.05</em>, <em>tipo=0</em><big>)</big><a class="reference internal" href="_modules/tests_no_parametricos.html#quade_test"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests_no_parametricos.quade_test" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test de Quade.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Contrasta la hipótesis nula de que todos los algoritmos se comportan de forma similar, por lo que sus rankings deben
+de ser similares y por tanto se puedan considerar iguales todos los algoritmos. El estadístico se distribuye como una
+distribución F con (K-1) y (K-1)*(N-1) grados de libertad siendo K el número de variables relacionadas (o número de algoritmos)
+y N el número de conjuntos de datos. El test de Quade considera que algunos problemas son más difíciles o que los
+resultados que obtienen los algoritmos sobre ellos son más distantes (ponderación). Se asignan rankings medios en caso
+de empate.</p>
+</div>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>nombres_algoritmos: lista de string [K_algoritmos]</dt>
+<dd>Lista que contiene los nombres de los algoritmos involucrados en el contraste.</dd>
+<dt>matriz_datos: lista de listas de float [N_conjuntos_datos * K_algoritmos]</dt>
+<dd>Lista que contiene una serie de listas que a su vez contienen los resultados en floats obtenidos por los distintos
+algoritmos.</dd>
+<dt>alpha: float, optional (default = 0.05)</dt>
+<dd>Nivel de significancia (probabilidad de error tipo 1) que se quiere utilizar para contrastar la hipótesis nula del
+test.</dd>
+<dt>tipo: int, optional (default = 0)</dt>
+<dd>Valor que indica si lo que se quiere es minimizar (0) o maximizar (1). Influye en la asignación de rankings.</dd>
+</dl>
+</dd>
+<dt>Returns:</dt>
+<dd><p class="first">dict: diccionario que contiene los siguientes elementos:</p>
+<div class="last highlight-python"><div class="highlight"><pre>resultado: boolean
+    Resultado del test de contraste de hipótesis. True indica que se rechaza la hipótesis nula. False indica que no
+    se rechaza.
+p_valor: float
+    p-valor calculado para comparar (contrastar H0) con el nivel de significancia.
+estadistico: float
+    Estadístico de Quade, que se distribuye como una distribución F con (K-1) y (K-1)*(N-1) grados de libertad siendo K
+    el número de variables relacionadas (o número de algoritmos) y N el número de conjuntos de datos.
+nombres: lista de string [K_algoritmos]
+    Lista que contiene los nombres de los algoritmos involucrados en el contraste en el orden del ranking.
+ranking: lista de float [K_algoritmos]
+    Lista que contiene los rankings medios (de todos los conjuntos de datos) de los algoritmos involucrados en el
+    contraste ordenados de peor a mejor.
+</pre></div>
+</div>
+</dd>
+<dt>References:</dt>
+<dd><ol class="first last arabic simple">
+<li>Salvador García, Francisco Herrera. <em>Statistical Analysis of Experiments in Data Mining and Computational Intelligence
+Computational Intelligence.</em></li>
+</ol>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="tests_no_parametricos.bonferroni_dunn_test">
+<tt class="descclassname">tests_no_parametricos.</tt><tt class="descname">bonferroni_dunn_test</tt><big>(</big><em>K</em>, <em>nombres</em>, <em>valores_z</em>, <em>p_valores</em>, <em>metodo_control</em>, <em>alpha=0.05</em><big>)</big><a class="reference internal" href="_modules/tests_no_parametricos.html#bonferroni_dunn_test"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests_no_parametricos.bonferroni_dunn_test" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test POST-HOC de Bonferroni-Dunn.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">El contraste de las hipótesis se realiza comparando cada p_valor con <span class="math">\(\frac{\alpha}{(K-1)}.\)</span> Si el p_valor
+es menor que dicho alpha ajustado se rechaza la hipótesis nula.</p>
+</div>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>K: int</dt>
+<dd>Número de algoritmos (incluyendo método de control).</dd>
+<dt>nombres: lista de string [K-1]</dt>
+<dd>Nombres de los algoritmos (con los que el método de control se compara) ordenados según los p_valores.</dd>
+<dt>valores_z: lista de float [K-1]</dt>
+<dd>Estadísticos calculados durante el test. Siguen una normal (0, 1) y están ordenados según los p_valores.</dd>
+<dt>p_valores: lista de float [K-1]</dt>
+<dd>p-valores calculados para comparar con los niveles de significancia ajustados.</dd>
+<dt>metodo_control: string</dt>
+<dd>Método de control del test, por convención es el test de menor ranking.</dd>
+<dt>alpha: float, optional (default = 0.05)</dt>
+<dd>Nivel de significancia (probabilidad de error tipo 1) del test de ranking principal.</dd>
+</dl>
+</dd>
+<dt>Returns:</dt>
+<dd><p class="first">dict: diccionario que contiene los siguientes elementos:</p>
+<div class="last highlight-python"><div class="highlight"><pre>valores_z: lista de float [K-1]
+    Estadísticos calculados durante el test. Siguen una normal (0, 1) y están ordenados según los p_valores.
+p_valores: lista de float [K-1]
+    p-valores calculados para comparar con los niveles de significancia ajustados.
+metodo de control: string
+    Método de control del test, por convención es el test de menor ranking.
+nombres: lista de string [K-1]
+    Nombres de los algoritmos (con los que el método de control se compara) ordenados según los p_valores.
+alpha: float
+    Nivel de significancia ajustado.
+resultado: lista de boolean [K-1]
+    Resultado de los tests de contraste de hipótesis. True es que se rechaza la hipótesis nula y False que no se
+    rechaza.
+p_valores_ajustados: lista de float [K-1]
+    p-valores ajustados, los cuales pueden ser comparados con el nivel de significancia proporcionado sin ajustar.
+</pre></div>
+</div>
+</dd>
+<dt>References:</dt>
+<dd><ol class="first last arabic simple">
+<li>Salvador García, Francisco Herrera. <em>Statistical Analysis of Experiments in Data Mining and Computational Intelligence
+Computational Intelligence.</em></li>
+</ol>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="tests_no_parametricos.holm_test">
+<tt class="descclassname">tests_no_parametricos.</tt><tt class="descname">holm_test</tt><big>(</big><em>K</em>, <em>nombres</em>, <em>valores_z</em>, <em>p_valores</em>, <em>metodo_control</em>, <em>alpha=0.05</em><big>)</big><a class="reference internal" href="_modules/tests_no_parametricos.html#holm_test"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests_no_parametricos.holm_test" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test POST-HOC de Holm.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Compara cada p_valor (empezando por el más significativo) con <span class="math">\(\frac{\alpha}{(K-i)},\)</span> donde i in range(1,K).
+Si se rechaza una hipótesis continúa contrastando. En el caso de que una hipótesis se rechace se rechazan todas las demás.</p>
+</div>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>K: int</dt>
+<dd>Número de algoritmos (incluyendo método de control).</dd>
+<dt>nombres: lista de string [K-1]</dt>
+<dd>Nombres de los algoritmos (con los que el método de control se compara) ordenados según los p_valores.</dd>
+<dt>valores_z: lista de float [K-1]</dt>
+<dd>Estadísticos calculados durante el test. Siguen una normal (0, 1) y están ordenados según los p_valores.</dd>
+<dt>p_valores: lista de float [K-1]</dt>
+<dd>p-valores calculados para comparar con los niveles de significancia ajustados.</dd>
+<dt>metodo_control: string</dt>
+<dd>Método de control del test, por convención es el test de menor ranking.</dd>
+<dt>alpha: float, optional (default = 0.05)</dt>
+<dd>Nivel de significancia (probabilidad de error tipo 1) del test de ranking principal.</dd>
+</dl>
+</dd>
+<dt>Returns:</dt>
+<dd><p class="first">dict: diccionario que contiene los siguientes elementos:</p>
+<div class="last highlight-python"><div class="highlight"><pre>valores_z: lista de float [K-1]
+    Estadísticos calculados durante el test. Siguen una normal (0, 1) y están ordenados según los p_valores.
+p_valores: lista de float [K-1]
+    p-valores calculados para comparar con los niveles de significancia ajustados.
+metodo de control: string
+    Método de control del test, por convención es el test de menor ranking.
+nombres: lista de string [K-1]
+    Nombres de los algoritmos (con los que el método de control se compara) ordenados según los p_valores.
+alphas: lista de float [K-1]
+    Niveles de significancia ajustados.
+resultado: lista de boolean [K-1]
+    Resultado de los tests de contraste de hipótesis. True es que se rechaza la hipótesis nula y False que no se
+    rechaza.
+p_valores_ajustados: lista de float [K-1]
+    p-valores ajustados, los cuales pueden ser comparados con el nivel de significancia proporcionado sin ajustar.
+</pre></div>
+</div>
+</dd>
+<dt>References:</dt>
+<dd><ol class="first last arabic simple">
+<li>Salvador García, Francisco Herrera. <em>Statistical Analysis of Experiments in Data Mining and Computational Intelligence
+Computational Intelligence.</em></li>
+</ol>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="tests_no_parametricos.hochberg_test">
+<tt class="descclassname">tests_no_parametricos.</tt><tt class="descname">hochberg_test</tt><big>(</big><em>K</em>, <em>nombres</em>, <em>valores_z</em>, <em>p_valores</em>, <em>metodo_control</em>, <em>alpha=0.05</em><big>)</big><a class="reference internal" href="_modules/tests_no_parametricos.html#hochberg_test"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests_no_parametricos.hochberg_test" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test POST-HOC de Hochberg.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Compara en la dirección opuesta a Holm. En el momento que encuentra una hipótesis que pueda aceptar, acepta todas
+las demás.</p>
+</div>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>K: int</dt>
+<dd>Número de algoritmos (incluyendo método de control).</dd>
+<dt>nombres: lista de string [K-1]</dt>
+<dd>Nombres de los algoritmos (con los que el método de control se compara) ordenados según los p_valores.</dd>
+<dt>valores_z: lista de float [K-1]</dt>
+<dd>Estadísticos calculados durante el test. Siguen una normal (0, 1) y están ordenados según los p_valores.</dd>
+<dt>p_valores: lista de float [K-1]</dt>
+<dd>p-valores calculados para comparar con los niveles de significancia ajustados.</dd>
+<dt>metodo_control: string</dt>
+<dd>Método de control del test, por convención es el test de menor ranking.</dd>
+<dt>alpha: float, optional (default = 0.05)</dt>
+<dd>Nivel de significancia (probabilidad de error tipo 1) del test de ranking principal.</dd>
+</dl>
+</dd>
+<dt>Returns:</dt>
+<dd><p class="first">dict: diccionario que contiene los siguientes elementos:</p>
+<div class="last highlight-python"><div class="highlight"><pre>valores_z: lista de float [K-1]
+    Estadísticos calculados durante el test. Siguen una normal (0, 1) y están ordenados según los p_valores.
+p_valores: lista de float [K-1]
+    p-valores calculados para comparar con los niveles de significancia ajustados.
+metodo de control: string
+    Método de control del test, por convención es el test de menor ranking.
+nombres: lista de string [K-1]
+    Nombres de los algoritmos (con los que el método de control se compara) ordenados según los p_valores.
+alphas: lista de float [K-1]
+    Niveles de significancia ajustados.
+resultado: lista de boolean [K-1]
+    Resultado de los tests de contraste de hipótesis. True es que se rechaza la hipótesis nula y False que no se
+    rechaza.
+p_valores_ajustados: lista de float [K-1]
+    p-valores ajustados, los cuales pueden ser comparados con el nivel de significancia proporcionado sin ajustar.
+</pre></div>
+</div>
+</dd>
+<dt>References:</dt>
+<dd><ol class="first last arabic simple">
+<li>Salvador García, Francisco Herrera. <em>Statistical Analysis of Experiments in Data Mining and Computational Intelligence
+Computational Intelligence.</em></li>
+</ol>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="tests_no_parametricos.li_test">
+<tt class="descclassname">tests_no_parametricos.</tt><tt class="descname">li_test</tt><big>(</big><em>K</em>, <em>nombres</em>, <em>valores_z</em>, <em>p_valores</em>, <em>metodo_control</em>, <em>alpha=0.05</em><big>)</big><a class="reference internal" href="_modules/tests_no_parametricos.html#li_test"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests_no_parametricos.li_test" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test POST-HOC de Li.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Rechaza todas las hipótesis si el p_valor menos significativo es menor que alpha. En otro caso, acepta dicha
+hipótesis y rechaza cualquier hipótesis restante cuyo p_valor sea menor que un valor calculado.</p>
+</div>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>K: int</dt>
+<dd>Número de algoritmos (incluyendo método de control).</dd>
+<dt>nombres: lista de string [K-1]</dt>
+<dd>Nombres de los algoritmos (con los que el método de control se compara) ordenados según los p_valores.</dd>
+<dt>valores_z: lista de float [K-1]</dt>
+<dd>Estadísticos calculados durante el test. Siguen una normal (0, 1) y están ordenados según los p_valores.</dd>
+<dt>p_valores: lista de float [K-1]</dt>
+<dd>p-valores calculados para comparar con los niveles de significancia ajustados.</dd>
+<dt>metodo_control: string</dt>
+<dd>Método de control del test, por convención es el test de menor ranking.</dd>
+<dt>alpha: float, optional (default = 0.05)</dt>
+<dd>Nivel de significancia (probabilidad de error tipo 1) del test de ranking principal.</dd>
+</dl>
+</dd>
+<dt>Returns:</dt>
+<dd><p class="first">dict: diccionario que contiene los siguientes elementos:</p>
+<div class="last highlight-python"><div class="highlight"><pre>valores_z: lista de float [K-1]
+    Estadísticos calculados durante el test. Siguen una normal (0, 1) y están ordenados según los p_valores.
+p_valores: lista de float [K-1]
+    p-valores calculados para comparar con los niveles de significancia ajustados.
+metodo de control: string
+    Método de control del test, por convención es el test de menor ranking.
+nombres: lista de string [K-1]
+    Nombres de los algoritmos (con los que el método de control se compara) ordenados según los p_valores.
+resultado: lista de boolean [K-1]
+    Resultado de los tests de contraste de hipótesis. True es que se rechaza la hipótesis nula y False que no se
+    rechaza.
+p_valores_ajustados: lista de float [K-1]
+    p-valores ajustados, los cuales pueden ser comparados con el nivel de significancia proporcionado sin ajustar.
+</pre></div>
+</div>
+</dd>
+<dt>References:</dt>
+<dd><ol class="first last arabic simple">
+<li>Salvador García, Francisco Herrera. <em>Statistical Analysis of Experiments in Data Mining and Computational Intelligence
+Computational Intelligence.</em></li>
+</ol>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="tests_no_parametricos.finner_test">
+<tt class="descclassname">tests_no_parametricos.</tt><tt class="descname">finner_test</tt><big>(</big><em>K</em>, <em>nombres</em>, <em>valores_z</em>, <em>p_valores</em>, <em>metodo_control</em>, <em>alpha=0.05</em><big>)</big><a class="reference internal" href="_modules/tests_no_parametricos.html#finner_test"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests_no_parametricos.finner_test" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test POST-HOC de Finner.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Sigue un proceso igual al test de Holm pero cada p-valor asociado con la hipótesis H_i se compara como:
+<span class="math">\(p_i &lt;= \frac{\alpha}{1-(1-\alpha)^{(k-1)/i}}.\)</span></p>
+</div>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>K: int</dt>
+<dd>Número de algoritmos (incluyendo método de control).</dd>
+<dt>nombres: lista de string [K-1]</dt>
+<dd>Nombres de los algoritmos (con los que el método de control se compara) ordenados según los p_valores.</dd>
+<dt>valores_z: lista de float [K-1]</dt>
+<dd>Estadísticos calculados durante el test. Siguen una normal (0, 1) y están ordenados según los p_valores.</dd>
+<dt>p_valores: lista de float [K-1]</dt>
+<dd>p-valores calculados para comparar con los niveles de significancia ajustados.</dd>
+<dt>metodo_control: string</dt>
+<dd>Método de control del test, por convención es el test de menor ranking.</dd>
+<dt>alpha: float, optional (default = 0.05)</dt>
+<dd>Nivel de significancia (probabilidad de error tipo 1) del test de ranking principal.</dd>
+</dl>
+</dd>
+<dt>Returns:</dt>
+<dd><p class="first">dict: diccionario que contiene los siguientes elementos:</p>
+<div class="last highlight-python"><div class="highlight"><pre>valores_z: lista de float [K-1]
+    Estadísticos calculados durante el test. Siguen una normal (0, 1) y están ordenados según los p_valores.
+p_valores: lista de float [K-1]
+    p-valores calculados para comparar con los niveles de significancia ajustados.
+metodo de control: string
+    Método de control del test, por convención es el test de menor ranking.
+nombres: lista de string [K-1]
+    Nombres de los algoritmos (con los que el método de control se compara) ordenados según los p_valores.
+alphas: lista de float [K-1]
+    Niveles de significancia ajustados.
+resultado: lista de boolean [K-1]
+    Resultado de los tests de contraste de hipótesis. True es que se rechaza la hipótesis nula y False que no se
+    rechaza.
+p_valores_ajustados: lista de float [K-1]
+    p-valores ajustados, los cuales pueden ser comparados con el nivel de significancia proporcionado sin ajustar.
+</pre></div>
+</div>
+</dd>
+<dt>References:</dt>
+<dd><ol class="first last arabic simple">
+<li><ol class="first upperalpha" start="8">
+<li>Finner, &#8220;On a monotonicity problem in step-down multiple test procedures&#8221;, Journal of the American Statistical Association 88 (1993) 920–923</li>
+</ol>
+</li>
+</ol>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="tests_no_parametricos.nemenyi_multitest">
+<tt class="descclassname">tests_no_parametricos.</tt><tt class="descname">nemenyi_multitest</tt><big>(</big><em>m</em>, <em>comparaciones</em>, <em>valores_z</em>, <em>p_valores</em>, <em>alpha=0.05</em><big>)</big><a class="reference internal" href="_modules/tests_no_parametricos.html#nemenyi_multitest"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests_no_parametricos.nemenyi_multitest" title="Permalink to this definition">¶</a></dt>
+<dd><p>MultiTest POST-HOC de Nemenyi (Bonferroni-Dunn).</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">El contraste de las hipótesis se realiza comparando cada p_valor con <span class="math">\(\frac{\alpha}{m},\)</span> donde <span class="math">\(m = \frac{(K*(K-1))}{2}\)</span>.
+Si el p_valor es menor que dicho alpha ajustado se rechaza la hipótesis nula.</p>
+</div>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>m: int</dt>
+<dd>Número de comparaciones.</dd>
+<dt>comparaciones: lista de string [K*(K-1)/2]</dt>
+<dd>Nombres de las hipótesis contrastadas. Por ejemplo &#8220;algoritmoA vs algoritmoB&#8221;.</dd>
+<dt>valores_z: lista de float [K*(K-1)/2]</dt>
+<dd>Estadísticos calculados durante el test. Siguen una normal (0, 1) y están ordenados según los p_valores.</dd>
+<dt>p_valores: lista de float [K*(K-1)/2]</dt>
+<dd>p-valores calculados para comparar con los niveles de significancia ajustados.</dd>
+<dt>alpha: float, optional (default = 0.05)</dt>
+<dd>Nivel de significancia (probabilidad de error tipo 1) del test de ranking principal.</dd>
+</dl>
+</dd>
+<dt>Returns:</dt>
+<dd><p class="first">dict: diccionario que contiene los siguientes elementos:</p>
+<div class="last highlight-python"><div class="highlight"><pre>valores_z: lista de float [K*(K-1)/2]
+    Estadísticos calculados durante el test. Siguen una normal (0, 1) y están ordenados según los p_valores.
+p_valores: lista de float [K*(K-1)/2]
+    p-valores calculados para comparar con los niveles de significancia ajustados.
+comparaciones: lista de string [K*(K-1)/2]
+    Nombres de las hipótesis contrastadas. Por ejemplo &quot;algoritmoA vs algoritmoB&quot;.
+alpha: float
+    Nivel de significancia ajustado.
+resultado: lista de boolean [K*(K-1)/2]
+    Resultado de los tests de contraste de hipótesis. True es que se rechaza la hipótesis nula y False que no se
+    rechaza.
+p_valores_ajustados: lista de float [K*(K-1)/2]
+    p-valores ajustados, los cuales pueden ser comparados con el nivel de significancia proporcionado sin ajustar.
+</pre></div>
+</div>
+</dd>
+<dt>References:</dt>
+<dd><ol class="first last arabic simple">
+<li>Salvador García, Francisco Herrera. <em>Statistical Analysis of Experiments in Data Mining and Computational Intelligence
+Computational Intelligence.</em></li>
+</ol>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="tests_no_parametricos.holm_multitest">
+<tt class="descclassname">tests_no_parametricos.</tt><tt class="descname">holm_multitest</tt><big>(</big><em>m</em>, <em>comparaciones</em>, <em>valores_z</em>, <em>p_valores</em>, <em>alpha=0.05</em><big>)</big><a class="reference internal" href="_modules/tests_no_parametricos.html#holm_multitest"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests_no_parametricos.holm_multitest" title="Permalink to this definition">¶</a></dt>
+<dd><p>MultiTest POST-HOC de Holm.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Compara cada p_valor (empezando por el más significativo) con <span class="math">\(\frac{\alpha}{(m+1-i)},\)</span> donde i in range(1,m+1) y
+<span class="math">\(m = \frac{(K*(K-1))}{2}.\)</span> Si se rechaza una hipótesis continúa contrastando. En el caso de que una hipótesis se
+rechace se rechazan todas las demás.</p>
+</div>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>m: int</dt>
+<dd>Número de comparaciones.</dd>
+<dt>comparaciones: lista de string [K*(K-1)/2]</dt>
+<dd>Nombres de las hipótesis contrastadas. Por ejemplo &#8220;algoritmoA vs algoritmoB&#8221;.</dd>
+<dt>valores_z: lista de float [K*(K-1)/2]</dt>
+<dd>Estadísticos calculados durante el test. Siguen una normal (0, 1) y están ordenados según los p_valores.</dd>
+<dt>p_valores: lista de float [K*(K-1)/2]</dt>
+<dd>p-valores calculados para comparar con los niveles de significancia ajustados.</dd>
+<dt>alpha: float, optional (default = 0.05)</dt>
+<dd>Nivel de significancia (probabilidad de error tipo 1) del test de ranking principal.</dd>
+</dl>
+</dd>
+<dt>Returns:</dt>
+<dd><p class="first">dict: diccionario que contiene los siguientes elementos:</p>
+<div class="last highlight-python"><div class="highlight"><pre>valores_z: lista de float [K*(K-1)/2]
+    Estadísticos calculados durante el test. Siguen una normal (0, 1) y están ordenados según los p_valores.
+p_valores: lista de float [K*(K-1)/2]
+    p-valores calculados para comparar con los niveles de significancia ajustados.
+comparaciones: lista de string [K*(K-1)/2]
+    Nombres de las hipótesis contrastadas. Por ejemplo &quot;algoritmoA vs algoritmoB&quot;.
+alphas: array de float [K*(K-1)/2]
+    Niveles de significancia ajustados
+resultado: lista de boolean [K*(K-1)/2]
+    Resultado de los tests de contraste de hipótesis. True es que se rechaza la hipótesis nula y False que no se
+    rechaza.
+p_valores_ajustados: lista de float [K*(K-1)/2]
+    p-valores ajustados, los cuales pueden ser comparados con el nivel de significancia proporcionado sin ajustar.
+</pre></div>
+</div>
+</dd>
+<dt>References:</dt>
+<dd><ol class="first last arabic simple">
+<li>Salvador García, Francisco Herrera. <em>Statistical Analysis of Experiments in Data Mining and Computational Intelligence
+Computational Intelligence.</em></li>
+</ol>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="tests_no_parametricos.hochberg_multitest">
+<tt class="descclassname">tests_no_parametricos.</tt><tt class="descname">hochberg_multitest</tt><big>(</big><em>m</em>, <em>comparaciones</em>, <em>valores_z</em>, <em>p_valores</em>, <em>alpha=0.05</em><big>)</big><a class="reference internal" href="_modules/tests_no_parametricos.html#hochberg_multitest"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests_no_parametricos.hochberg_multitest" title="Permalink to this definition">¶</a></dt>
+<dd><p>MultiTest POST-HOC de Hochberg.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Compara en la dirección opuesta a Holm. En el momento que encuentra una hipótesis que pueda aceptar, acepta todas
+las demás. m es el número de comparaciones o contrastes, <span class="math">\(m = \frac{(K*(K-1))}{2}.\)</span></p>
+</div>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>m: int</dt>
+<dd>Número de comparaciones.</dd>
+<dt>comparaciones: lista de string [K*(K-1)/2]</dt>
+<dd>Nombres de las hipótesis contrastadas. Por ejemplo &#8220;algoritmoA vs algoritmoB&#8221;.</dd>
+<dt>valores_z: lista de float [K*(K-1)/2]</dt>
+<dd>Estadísticos calculados durante el test. Siguen una normal (0, 1) y están ordenados según los p_valores.</dd>
+<dt>p_valores: lista de float [K*(K-1)/2]</dt>
+<dd>p-valores calculados para comparar con los niveles de significancia ajustados.</dd>
+<dt>alpha: float, optional (default = 0.05)</dt>
+<dd>Nivel de significancia (probabilidad de error tipo 1) del test de ranking principal.</dd>
+</dl>
+</dd>
+<dt>Returns:</dt>
+<dd><p class="first">dict: diccionario que contiene los siguientes elementos:</p>
+<div class="last highlight-python"><div class="highlight"><pre>valores_z: lista de float [K*(K-1)/2]
+    Estadísticos calculados durante el test. Siguen una normal (0, 1) y están ordenados según los p_valores.
+p_valores: lista de float [K*(K-1)/2]
+    p-valores calculados para comparar con los niveles de significancia ajustados.
+comparaciones: lista de string [K*(K-1)/2]
+    Nombres de las hipótesis contrastadas. Por ejemplo &quot;algoritmoA vs algoritmoB&quot;.
+alphas: array de float [K*(K-1)/2]
+    Niveles de significancia ajustados
+resultado: lista de boolean [K*(K-1)/2]
+    Resultado de los tests de contraste de hipótesis. True es que se rechaza la hipótesis nula y False que no se
+    rechaza.
+p_valores_ajustados: lista de float [K*(K-1)/2]
+    p-valores ajustados, los cuales pueden ser comparados con el nivel de significancia proporcionado sin ajustar.
+</pre></div>
+</div>
+</dd>
+<dt>References:</dt>
+<dd><ol class="first last arabic simple">
+<li>Salvador García, Francisco Herrera. <em>Statistical Analysis of Experiments in Data Mining and Computational Intelligence
+Computational Intelligence.</em></li>
+</ol>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="tests_no_parametricos.finner_multitest">
+<tt class="descclassname">tests_no_parametricos.</tt><tt class="descname">finner_multitest</tt><big>(</big><em>m</em>, <em>comparaciones</em>, <em>valores_z</em>, <em>p_valores</em>, <em>alpha=0.05</em><big>)</big><a class="reference internal" href="_modules/tests_no_parametricos.html#finner_multitest"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests_no_parametricos.finner_multitest" title="Permalink to this definition">¶</a></dt>
+<dd><p>MultiTest POST-HOC de Finner.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Sigue un proceso igual al test de Holm pero cada p-valor asociado con la hipótesis H_i se compara como:
+<span class="math">\(p_i &lt;= \frac{\alpha}{1-(1-\alpha)^{m/i}}.\)</span></p>
+</div>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>m: int</dt>
+<dd>Número de comparaciones.</dd>
+<dt>comparaciones: lista de string [K*(K-1)/2]</dt>
+<dd>Nombres de las hipótesis contrastadas. Por ejemplo &#8220;algoritmoA vs algoritmoB&#8221;.</dd>
+<dt>valores_z: lista de float [K*(K-1)/2]</dt>
+<dd>Estadísticos calculados durante el test. Siguen una normal (0, 1) y están ordenados según los p_valores.</dd>
+<dt>p_valores: lista de float [K*(K-1)/2]</dt>
+<dd>p-valores calculados para comparar con los niveles de significancia ajustados.</dd>
+<dt>alpha: float, optional (default = 0.05)</dt>
+<dd>Nivel de significancia (probabilidad de error tipo 1) del test de ranking principal.</dd>
+</dl>
+</dd>
+<dt>Returns:</dt>
+<dd><p class="first">dict: diccionario que contiene los siguientes elementos:</p>
+<div class="last highlight-python"><div class="highlight"><pre>valores_z: lista de float [K*(K-1)/2]
+    Estadísticos calculados durante el test. Siguen una normal (0, 1) y están ordenados según los p_valores.
+p_valores: lista de float [K*(K-1)/2]
+    p-valores calculados para comparar con los niveles de significancia ajustados.
+comparaciones: lista de string [K*(K-1)/2]
+    Nombres de las hipótesis contrastadas. Por ejemplo &quot;algoritmoA vs algoritmoB&quot;.
+alphas: array de float [K*(K-1)/2]
+    Niveles de significancia ajustados
+resultado: lista de boolean [K*(K-1)/2]
+    Resultado de los tests de contraste de hipótesis. True es que se rechaza la hipótesis nula y False que no se
+    rechaza.
+p_valores_ajustados: lista de float [K*(K-1)/2]
+    p-valores ajustados, los cuales pueden ser comparados con el nivel de significancia proporcionado sin ajustar.
+</pre></div>
+</div>
+</dd>
+<dt>References:</dt>
+<dd><ol class="first last arabic simple">
+<li><ol class="first upperalpha" start="8">
+<li>Finner, &#8220;On a monotonicity problem in step-down multiple test procedures&#8221;, Journal of the American Statistical Association 88 (1993) 920–923</li>
+</ol>
+</li>
+</ol>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="tests_no_parametricos.shaffer_multitest">
+<tt class="descclassname">tests_no_parametricos.</tt><tt class="descname">shaffer_multitest</tt><big>(</big><em>m</em>, <em>comparaciones</em>, <em>valores_z</em>, <em>p_valores</em>, <em>alpha=0.05</em><big>)</big><a class="reference internal" href="_modules/tests_no_parametricos.html#shaffer_multitest"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests_no_parametricos.shaffer_multitest" title="Permalink to this definition">¶</a></dt>
+<dd><p>MultiTest POST-HOC de Shaffer.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Sigue un proceso igual al test de holm multi-test pero cada p-valor asociado con la hipótesis H_i se compara como
+<span class="math">\(p_i &lt;= \frac{\alpha}{t_i},\)</span> donde t_i es el número máximo de hipótesis posibles suponiendo que las (j-1)
+anteriores han sido rechazadas.</p>
+</div>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>m: int</dt>
+<dd>Número de comparaciones.</dd>
+<dt>comparaciones: lista de string [K*(K-1)/2]</dt>
+<dd>Nombres de las hipótesis contrastadas. Por ejemplo &#8220;algoritmoA vs algoritmoB&#8221;.</dd>
+<dt>valores_z: lista de float [K*(K-1)/2]</dt>
+<dd>Estadísticos calculados durante el test. Siguen una normal (0, 1) y están ordenados según los p_valores.</dd>
+<dt>p_valores: lista de float [K*(K-1)/2]</dt>
+<dd>p-valores calculados para comparar con los niveles de significancia ajustados.</dd>
+<dt>alpha: float, optional (default = 0.05)</dt>
+<dd>Nivel de significancia (probabilidad de error tipo 1) del test de ranking principal.</dd>
+</dl>
+</dd>
+<dt>Returns:</dt>
+<dd><p class="first">dict: diccionario que contiene los siguientes elementos:</p>
+<div class="last highlight-python"><div class="highlight"><pre>valores_z: lista de float [K*(K-1)/2]
+    Estadísticos calculados durante el test. Siguen una normal (0, 1) y están ordenados según los p_valores.
+p_valores: lista de float [K*(K-1)/2]
+    p-valores calculados para comparar con los niveles de significancia ajustados.
+comparaciones: lista de string [K*(K-1)/2]
+    Nombres de las hipótesis contrastadas. Por ejemplo &quot;algoritmoA vs algoritmoB&quot;.
+alphas: array de float [K*(K-1)/2]
+    Niveles de significancia ajustados
+resultado: lista de boolean [K*(K-1)/2]
+    Resultado de los tests de contraste de hipótesis. True es que se rechaza la hipótesis nula y False que no se
+    rechaza.
+p_valores_ajustados: lista de float [K*(K-1)/2]
+    p-valores ajustados, los cuales pueden ser comparados con el nivel de significancia proporcionado sin ajustar.
+</pre></div>
+</div>
+</dd>
+<dt>References:</dt>
+<dd><ol class="first last arabic simple">
+<li>J.P. Shaffer. Modified sequentially rejective multiple test procedures. Journal of the American Statistical Association, 81(395):826–831, 1986.</li>
+</ol>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="tests_no_parametricos.datos_comunes_tests">
+<tt class="descclassname">tests_no_parametricos.</tt><tt class="descname">datos_comunes_tests</tt><big>(</big><em>test_principal</em>, <em>nombres</em>, <em>ranking</em>, <em>N</em><big>)</big><a class="reference internal" href="_modules/tests_no_parametricos.html#datos_comunes_tests"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests_no_parametricos.datos_comunes_tests" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cálculo de los datos comunes a los tests de comparación POST-HOC.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Función utilizada por todos los tests de comparación POST-HOC para obtener los datos comunes. Los estadísticos Z
+siguen una distribución normal. Los valores de los estadísticos cambian en función de si el test principal es
+Friedman o Iman-Davenport, Rangos Alineados de Friedman o Quade.</p>
+</div>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>test_principal: {&#8216;friedman&#8217;, &#8216;iman-davenport&#8217;, quade&#8217;, &#8216;rangos-alineados&#8217;}</dt>
+<dd>Nombre del test principal o test de ranking ejecutado.</dd>
+<dt>nombres: lista de string [K_algoritmos]</dt>
+<dd>Lista que contiene los nombres de los algoritmos involucrados en el contraste en el orden del ranking obtenido por el
+test principal.</dd>
+<dt>ranking: lista de float [K_algoritmos]</dt>
+<dd>Lista que contiene los rankings medios (de todos los conjuntos de datos) de los algoritmos involucrados en el
+contraste ordenados de peor a mejor obtenidos por el test principal.</dd>
+<dt>N: int</dt>
+<dd>Número de conjuntos de datos o problemas sobre los que se aplican los algoritmos.</dd>
+</dl>
+</dd>
+<dt>Returns:</dt>
+<dd><p class="first">dict: diccionario que contiene los siguientes elementos:</p>
+<div class="last highlight-python"><div class="highlight"><pre>K: int
+    Número de algoritmos (incluyendo método de control).
+nombres: lista de string [K-1]
+    Nombres de los algoritmos (con los que el método de control se compara) ordenados según los p_valores.
+valores_z: lista de float [K-1]
+    Estadísticos calculados durante el test. Siguen una normal (0, 1) y están ordenados según los p_valores.
+p_valores: lista de float [K-1]
+    p-valores calculados para comparar con los niveles de significancia ajustados.
+metodo_control: string
+    Método de control del test, por convención es el test de menor ranking.
+</pre></div>
+</div>
+</dd>
+<dt>References:</dt>
+<dd><ol class="first last arabic simple">
+<li>Salvador García, Francisco Herrera. <em>Statistical Analysis of Experiments in Data Mining and Computational Intelligence
+Computational Intelligence.</em></li>
+</ol>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="tests_no_parametricos.datos_comunes_multitests">
+<tt class="descclassname">tests_no_parametricos.</tt><tt class="descname">datos_comunes_multitests</tt><big>(</big><em>test_principal</em>, <em>nombres</em>, <em>ranking</em>, <em>N</em><big>)</big><a class="reference internal" href="_modules/tests_no_parametricos.html#datos_comunes_multitests"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests_no_parametricos.datos_comunes_multitests" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cálculo de los datos comunes a los multitests de comparación POST-HOC.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Función utilizada por todos los multitests de comparación POST-HOC para obtener los datos comunes. Los estadísticos
+Z siguen una distribución normal. Los valores de los estadísticos cambian en función de si el test principal es
+Friedman o Iman-Davenport, Rangos Alineados de Friedman o Quade. Se realizan m comparaciones, donde <span class="math">\(m = \frac{(K*(K-1))}{2}\)</span>.</p>
+</div>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>test_principal: {&#8216;friedman&#8217;, &#8216;iman-davenport&#8217;, quade&#8217;, &#8216;rangos-alineados&#8217;}</dt>
+<dd>Nombre del test principal o test de ranking ejecutado.</dd>
+<dt>nombres: lista de string [K_algoritmos]</dt>
+<dd>Lista que contiene los nombres de los algoritmos involucrados en el contraste en el orden del ranking obtenido por el
+test principal.</dd>
+<dt>ranking: lista de float [K_algoritmos]</dt>
+<dd>Lista que contiene los rankings medios (de todos los conjuntos de datos) de los algoritmos involucrados en el
+contraste ordenados de peor a mejor obtenidos por el test principal.</dd>
+<dt>N: int</dt>
+<dd>Número de conjuntos de datos o problemas sobre los que se aplican los algoritmos.</dd>
+</dl>
+</dd>
+<dt>Returns:</dt>
+<dd><p class="first">dict: diccionario que contiene los siguientes elementos:</p>
+<div class="last highlight-python"><div class="highlight"><pre>m: int
+    Número de comparaciones.
+comparaciones: lista de string [K*(K-1)/2]
+    Nombres de las hipótesis contrastadas. Por ejemplo &quot;algoritmoA vs algoritmoB&quot;.
+valores_z: lista de float [K*(K-1)/2]
+    Estadísticos calculados durante el test. Siguen una normal (0, 1) y están ordenados según los p_valores.
+p_valores: lista de float [K*(K-1)/2]
+    p-valores calculados para comparar con los niveles de significancia ajustados.
+</pre></div>
+</div>
+</dd>
+<dt>References:</dt>
+<dd><ol class="first last arabic simple">
+<li>Salvador García, Francisco Herrera. <em>Statistical Analysis of Experiments in Data Mining and Computational Intelligence
+Computational Intelligence.</em></li>
+</ol>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="tests_no_parametricos.S">
+<tt class="descclassname">tests_no_parametricos.</tt><tt class="descname">S</tt><big>(</big><em>K</em><big>)</big><a class="reference internal" href="_modules/tests_no_parametricos.html#S"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests_no_parametricos.S" title="Permalink to this definition">¶</a></dt>
+<dd><p>Función auxiliar del test de Shaffer.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Calcula la secuencia de número máximo de hipótesis que pueden ser ciertas en una comparación secuencial entre &#8216;K&#8217;
+distribuciones.</p>
+</div>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>k: int</dt>
+<dd>Número de distribuciones a comparar entre sí.</dd>
+</dl>
+</dd>
+<dt>Returns:</dt>
+<dd><dl class="first last docutils">
+<dt>lista de int</dt>
+<dd>Secuencia del número hipótesis que pueden ser ciertas.</dd>
+</dl>
+</dd>
+<dt>References:</dt>
+<dd><ol class="first last arabic simple">
+<li>J.P. Shaffer. Modified sequentially rejective multiple test procedures. Journal of the American Statistical Association, 81(395):826–831, 1986.</li>
+</ol>
+</dd>
+</dl>
+</dd></dl>
+
 </div>
 
 
@@ -70,9 +1031,6 @@
   <h4>Previous topic</h4>
   <p class="topless"><a href="tests_parametricos.html"
                         title="previous chapter">Tests Paramétricos</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="api_rest.html"
-                        title="next chapter">API REST</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="_sources/tests_no_parametricos.txt"
@@ -105,9 +1063,6 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="api_rest.html" title="API REST"
-             >next</a> |</li>
-        <li class="right" >
           <a href="tests_parametricos.html" title="Tests Paramétricos"
              >previous</a> |</li>
         <li><a href="index.html">Plataforma Web STAC v0.5 documentation</a> &raquo;</li>
@@ -116,7 +1071,7 @@
     </div>
     <div class="footer">
         &copy; Copyright 2014, Adrián Canosa Mouzo.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
     </div>
   </body>
 </html>

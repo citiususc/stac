@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -15,7 +13,7 @@
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
+        URL_ROOT:    './',
         VERSION:     'v0.5',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
@@ -65,6 +63,11 @@
 <li><em>Normalidad</em></li>
 <li><em>Homocedasticidad</em></li>
 </ul>
+<p>podemos utilizar los siguientes tests paramétricos:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#tests_parametricos.anova_test" title="tests_parametricos.anova_test"><tt class="xref py py-mod docutils literal"><span class="pre">Test</span> <span class="pre">de</span> <span class="pre">Anova</span></tt></a></li>
+<li><a class="reference internal" href="#tests_parametricos.bonferroni_test" title="tests_parametricos.bonferroni_test"><tt class="xref py py-mod docutils literal"><span class="pre">Test</span> <span class="pre">de</span> <span class="pre">Bonferroni</span></tt></a></li>
+</ul>
 <span class="target" id="module-tests_parametricos"></span><dl class="function">
 <dt id="tests_parametricos.anova_test">
 <tt class="descclassname">tests_parametricos.</tt><tt class="descname">anova_test</tt><big>(</big><em>matriz_datos</em>, <em>alpha=0.05</em><big>)</big><a class="reference internal" href="_modules/tests_parametricos.html#anova_test"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests_parametricos.anova_test" title="Permalink to this definition">¶</a></dt>
@@ -87,39 +90,37 @@ utilizar para contrastar la hipótesis nula del test.</dd>
 </dd>
 <dt>Returns:</dt>
 <dd><p class="first">dict: diccionario que contiene los siguientes elementos:</p>
-<div class="highlight-python"><pre>resultado: boolean
-        Resultado del test de contraste de hipótesis. True indica que se
-        rechaza la hipótesis nula. False indica que no se rechaza.
+<div class="last highlight-python"><div class="highlight"><pre>resultado: boolean
+    Resultado del test de contraste de hipótesis. True indica que se
+    rechaza la hipótesis nula. False indica que no se rechaza.
 p_valor: float
-        p-valor calculado para comparar (contrastar H0) con el nivel de 
-        significancia.
+    p-valor calculado para comparar (contrastar H0) con el nivel de
+    significancia.
 estadistico: float
-        Estadístico calculado durante el test. Sigue una distribución F.
+    Estadístico calculado durante el test. Sigue una distribución F.
 variaciones: lista de float [3]
-        Lista de variaciones (variación total o respecto a la media general, 
-        variación dentro del tratamiento o variación del error y variación
-        entre los tratamientos o algoritmos).
+    Lista de variaciones (variación total o respecto a la media general,
+    variación dentro del tratamiento o variación del error y variación
+    entre los tratamientos o algoritmos).
 grados_libertad: lista de float [3]
-        Lista que contiene los grados de libertad totales, de los
-        tratamientos y del error.
+    Lista que contiene los grados de libertad totales, de los
+    tratamientos y del error.
 cuadrados_medios: lista de float [3]
-        Lista de contiene los cuadrados medios (variaciones / grados de libertad)
-        totales, del tratamiento y del error.
+    Lista de contiene los cuadrados medios (variaciones / grados de libertad)
+    totales, del tratamiento y del error.
 medias_algoritmos: lista de float [K_algoritmos]
-        Media de los resultados obtenidos por cada uno de los algoritmos.
+    Media de los resultados obtenidos por cada uno de los algoritmos.
 media_general: float
-        Media de medias de los algoritmos.</pre>
+    Media de medias de los algoritmos.
+</pre></div>
 </div>
-<dl class="last docutils">
+</dd>
 <dt>References:</dt>
 <dd><ol class="first last arabic simple">
-<li><a class="reference external" href="http://www.icicm.com/files/AN_LISIS_DE_VARIANZA.doc">http://www.icicm.com/files/AN_LISIS_DE_VARIANZA.doc</a></li>
-<li>Contraste sobre la igualdad de medias en dos o más poblaciones normales, 
-Manuel Oviedo - Beatriz Pateiro.</li>
-<li><a class="reference external" href="http://biplot.usal.es/problemas/anova/ANOVA.html">http://biplot.usal.es/problemas/anova/ANOVA.html</a></li>
+<li>Primitivo Reyes (Sept. 2007). <em>Análisis de Varianza Anova de una Vía</em> [Documento WWW]. URL <a class="reference external" href="http://www.icicm.com/files/AN_LISIS_DE_VARIANZA.doc">http://www.icicm.com/files/AN_LISIS_DE_VARIANZA.doc</a></li>
+<li>Manuel Oviedo - Beatriz Pateiro. <em>Contraste sobre la igualdad de medias en dos o más poblaciones normales.</em></li>
+<li>José Luis Vicente Villardón. <em>Introducción al Análisis de la Varianza</em> [Documento WWW]. URL <a class="reference external" href="http://biplot.usal.es/problemas/anova/ANOVA.html">http://biplot.usal.es/problemas/anova/ANOVA.html</a></li>
 </ol>
-</dd>
-</dl>
 </dd>
 </dl>
 </dd></dl>
@@ -131,10 +132,10 @@ Manuel Oviedo - Beatriz Pateiro.</li>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">Este tests compara las medias de todos los algoritmos entre sí. Se utiliza
-una vez se tenga constancia gracias al análisis de varianzas Anova de que 
+una vez se tenga constancia gracias al análisis de varianzas Anova de que
 existen diferencias significativas entre las medias de los algoritmos.
 Cada p-valor asociado con la hipótesis H_i se compara con un alpha ajustado
-a todas las comparaciones: <span class="math">\(p_i &lt; \frac{\alpha}{m}\)</span>, donde m se 
+a todas las comparaciones: <span class="math">\(p_i &lt; \frac{\alpha}{m}\)</span>, donde m se
 corresponde con el número de comparaciones: <span class="math">\(m = \frac{(K*(K-1))}{2}\)</span>.</p>
 </div>
 <dl class="docutils">
@@ -143,48 +144,46 @@ corresponde con el número de comparaciones: <span class="math">\(m = \frac{(K*(
 <dt>nombres_algoritmos: lista de string [K_algoritmos]</dt>
 <dd>Lista que contiene los nombres de los algoritmos involucrados en el contraste.</dd>
 <dt>medias_algoritmos: lista de float [K_algoritmos]</dt>
-<dd>Lista que contiene la media de los resultados obtenidos por cada uno de los 
+<dd>Lista que contiene la media de los resultados obtenidos por cada uno de los
 algoritmos en el test de análisis de varianzas (Anova).</dd>
 <dt>cuadrado_medio_error: float</dt>
 <dd>Varianza dentro del tratamiento o algoritmo o del error (se obtiene del test
 de análisis de varianzas Anova)</dd>
 <dt>N: int</dt>
-<dd>Número de conjuntos de datos que se corresponden con el número de problemas sobre 
+<dd>Número de conjuntos de datos que se corresponden con el número de problemas sobre
 los que se aplica el test de análisis de varianzas Anova.</dd>
 <dt>alpha: float, optional (default = 0.05)</dt>
-<dd>Nivel de significancia (probabilidad de error tipo 1) que se quiere utilizar para 
+<dd>Nivel de significancia (probabilidad de error tipo 1) que se quiere utilizar para
 contrastar la hipótesis nula del test.</dd>
 </dl>
 </dd>
 <dt>Returns:</dt>
 <dd><p class="first">dict: diccionario que contiene los siguientes elementos:</p>
-<div class="highlight-python"><pre>resultado: lista de boolean [m_comparaciones]
-        Lista que contiene los resultados del test de contraste de hipótesis. True indica 
-        que se rechaza la hipótesis nula. False indica que no se rechaza.
+<div class="last highlight-python"><div class="highlight"><pre>resultado: lista de boolean [m_comparaciones]
+    Lista que contiene los resultados del test de contraste de hipótesis. True indica
+    que se rechaza la hipótesis nula. False indica que no se rechaza.
 p_valores: lista de float [m_comparaciones]
-        Lista de p-valores ordenada según los valor (de más a menos significancia o de menor
-        a mayor) calculados para comparar (contrastar las H0 de igualdad de medias) con el 
-        nivel de significancia ajustado.
+    Lista de p-valores ordenada según los valor (de más a menos significancia o de menor
+    a mayor) calculados para comparar (contrastar las H0 de igualdad de medias) con el
+    nivel de significancia ajustado.
 valores_t: lista de float [m_comparaciones]
-        Lista ordenada (según p_valores) de estadísticos calculados durante el test. Siguen 
-        una distribución F con (N*K)-K grados de libertad.
+    Lista ordenada (según p_valores) de estadísticos calculados durante el test. Siguen
+    una distribución F con (N*K)-K grados de libertad.
 comparaciones: lista de string [m_comparaciones]
-        Lista ordenada (según p_valores) que contiene los nombres de las comparaciones realizadas 
-        en el test port ejemplo: "Alg1 vs Alg2".
+    Lista ordenada (según p_valores) que contiene los nombres de las comparaciones realizadas
+    en el test port ejemplo: &quot;Alg1 vs Alg2&quot;.
 alpha: float
-        Nivel de significancia (probabilidad de error tipo 1) ajustado a las m comparaciones.
+    Nivel de significancia (probabilidad de error tipo 1) ajustado a las m comparaciones.
 p_valores_ajustados: lista de float [m_comparaciones]
-        p-valores ajustados, los cuales pueden ser comparados con el nivel de significancia 
-        proporcionado sin ajustar</pre>
+    p-valores ajustados, los cuales pueden ser comparados con el nivel de significancia
+    proporcionado sin ajustar
+</pre></div>
 </div>
-<dl class="last docutils">
+</dd>
 <dt>References:</dt>
 <dd><ol class="first last arabic simple">
-<li>Contraste sobre la igualdad de medias en dos o más poblaciones normales, 
-Manuel Oviedo - Beatriz Pateiro.</li>
+<li>Manuel Oviedo - Beatriz Pateiro. <em>Contraste sobre la igualdad de medias en dos o más poblaciones normales.</em></li>
 </ol>
-</dd>
-</dl>
 </dd>
 </dl>
 </dd></dl>
@@ -246,7 +245,7 @@ Manuel Oviedo - Beatriz Pateiro.</li>
     </div>
     <div class="footer">
         &copy; Copyright 2014, Adrián Canosa Mouzo.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
     </div>
   </body>
 </html>

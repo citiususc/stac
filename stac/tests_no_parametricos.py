@@ -28,8 +28,60 @@ tabla_wilcoxon = {0.10:{5:0,6:2,7:3,8:5,9:8,10:10,11:13,12:17,13:21,14:25,15:30,
                   0.001:{11:0,12:1,13:2,14:4,15:6,16:8,17:11,18:14,19:18,20:21,21:25,22:30,
                     23:35,24:40,25:45}}
 
-"""Test de los Rangos Signados de Wilcoxon."""
-def wilcoxon_test(matriz_datos, alpha):
+def wilcoxon_test(matriz_datos, alpha=0.05):
+    """Test de los Rangos Signados de Wilcoxon.
+
+    .. note:: Contrasta la hipótesis nula de que las medianas de las diferencias de dos muestras (resultados de dos algoritmos)
+              relacionadas son iguales. Para tamaños muestrales pequeños, se puede determinar mediante la comparación del
+              estadístico con el valor crítico de la tabla de Wilcoxon. Para tamaños muestrales grandes (> 25), el test se puede
+              aproximar con la distribución normal. Se deben tener al menos 5 conjuntos de datos cuyas diferencias sean distintas
+              de 0.
+
+    Args:
+        matriz_datos: lista de listas de float [N_conjuntos_datos * K_algoritmos]
+            Lista que contiene una serie de listas que a su vez contienen los resultados en floats obtenidos por los distintos
+            algoritmos.
+        alpha: float, optional (default = 0.05)
+            Nivel de significancia (probabilidad de error tipo 1) que se quiere utilizar para contrastar la hipótesis nula del
+            test.
+
+    Returns:
+        dict: diccionario que contiene los siguientes elementos (tamaño muestral <= 25)::
+
+            resultado: boolean
+                Resultado del test de contraste de hipótesis. True indica que se rechaza la hipótesis nula. False indica que no
+                se rechaza.
+            estadistico: float
+                Estadístico T calculado durante el test, donde T = min(T_Mas,T_Men) y donde T_Mas = suma rangos positivos y
+                T_Men = suma rangos negativos.
+            suma rangos pos: float
+                Suma de los rangos de las diferencias mayores que 0.
+            suma rangos neg: float
+                Suma de los rangos de las diferencias menores que 0.
+            punto critico: float
+                Límite inferior del intervalo de aceptación. El contraste será estadísticamente significativo si: T <= límite
+                inferior correspondiente.
+
+        dict: diccionario que contiene los siguientes elementos (tamaño muestral > 25)::
+
+            resultado: boolean
+                Resultado del test de contraste de hipótesis. True indica que se rechaza la hipótesis nula. False indica que no
+                se rechaza.
+            p_valor: float
+                p-valor calculado para comparar (contrastar H0) con el nivel de significancia.
+            estadistico: float
+                Estadístico Z calculado durante el test. Sigue una distribución normal.
+            suma rangos pos: float
+                Suma de los rangos de las diferencias mayores que 0.
+            suma rangos neg: float
+                Suma de los rangos de las diferencias menores que 0.
+
+    References:
+        1. Manuel Oviedo - Beatriz Pateiro. *Test de los Rangos Signados de Wilcoxon para muestras apareadas.*
+        2. Universidad de Salamanca (Jul. 2013). *Estadística para investigadores. Test no paramétricos: Test de Wilcoxon. Modulo
+           6* [Vídeo]. URL https://www.youtube.com/watch?v=B_7Wt49dTos
+        3. Wikipedia. *Prueba de los rangos con signo de Wilcoxon* [Documento WWW]. URL http://es.wikipedia.org/wiki/Prueba_de_los_rangos_con_signo_de_Wilcoxon
+    """
 
     #El test de Wilcoxon compara dos algoritmos.
     if len(matriz_datos[0]) != 2:
@@ -113,8 +165,8 @@ def wilcoxon_test(matriz_datos, alpha):
 
 
 
-"Función general que sirve para ejecutar test de ranking + POST-HOC sin acoplamiento."
-def test_ranking(test, post_hoc, nombres_algoritmos, matriz_datos, N, alpha, tipo):
+def test_ranking(test, post_hoc, nombres_algoritmos, matriz_datos, N, alpha=0.05, tipo=0):
+    """Función general que sirve para ejecutar test de ranking + POST-HOC sin acoplamiento."""
 
     #Cálculo del resultado del test de ranking elegido.
     resultado_ranking = test(nombres_algoritmos, matriz_datos, alpha, tipo)
@@ -141,8 +193,47 @@ def test_ranking(test, post_hoc, nombres_algoritmos, matriz_datos, N, alpha, tip
 
 
 
-"""Test de Friedman."""
-def friedman_test(nombres_algoritmos, matriz_datos, alpha, tipo):
+def friedman_test(nombres_algoritmos, matriz_datos, alpha=0.05, tipo=0):
+    """Test de Friedman.
+
+    .. note:: Contrasta la hipótesis nula de que todos los algoritmos se comportan de forma similar, por lo que sus rankings deben
+              de ser similares y por tanto se puedan considerar iguales todos los algoritmos. El estadístico se distribuye como
+              una distribución chi-cuadrado con K-1 grados de libertad, siendo K el número de variables relacionadas (o número de algoritmos).
+              Realiza comparaciones y asigna rankings dentro de cada conjunto de datos. Se asignan rankings medios en caso de empate.
+
+    Args:
+        nombres_algoritmos: lista de string [K_algoritmos]
+            Lista que contiene los nombres de los algoritmos involucrados en el contraste.
+        matriz_datos: lista de listas de float [N_conjuntos_datos * K_algoritmos]
+            Lista que contiene una serie de listas que a su vez contienen los resultados en floats obtenidos por los distintos
+            algoritmos.
+        alpha: float, optional (default = 0.05)
+            Nivel de significancia (probabilidad de error tipo 1) que se quiere utilizar para contrastar la hipótesis nula del
+            test.
+        tipo: int, optional (default = 0)
+            Valor que indica si lo que se quiere es minimizar (0) o maximizar (1). Influye en la asignación de rankings.
+
+    Returns:
+        dict: diccionario que contiene los siguientes elementos::
+
+            resultado: boolean
+                Resultado del test de contraste de hipótesis. True indica que se rechaza la hipótesis nula. False indica que no
+                se rechaza.
+            p_valor: float
+                p-valor calculado para comparar (contrastar H0) con el nivel de significancia.
+            estadistico: float
+                Estadístico de Friedman, que se distribuye como una distribución chi-cuadrado con K-1 grados de libertad, siendo
+                K el número de variables relacionadas (o número de algoritmos).
+            nombres: lista de string [K_algoritmos]
+                Lista que contiene los nombres de los algoritmos involucrados en el contraste en el orden del ranking.
+            ranking: lista de float [K_algoritmos]
+                Lista que contiene los rankings medios (de todos los conjuntos de datos) de los algoritmos involucrados en el
+                contraste ordenados de peor a mejor.
+
+    References:
+        1. Salvador García, Francisco Herrera. *Statistical Analysis of Experiments in Data Mining and Computational Intelligence
+           Computational Intelligence.*
+    """
 
     #Número de algoritmos.
     K = len(nombres_algoritmos)
@@ -191,8 +282,48 @@ def friedman_test(nombres_algoritmos, matriz_datos, alpha, tipo):
 
 
 
-"""Test de Iman-Davenport."""
-def iman_davenport_test(nombres_algoritmos, matriz_datos, alpha, tipo):
+def iman_davenport_test(nombres_algoritmos, matriz_datos, alpha=0.05, tipo=0):
+    """Test de Iman-Davenport.
+
+    .. note:: Contrasta la hipótesis nula de que todos los algoritmos se comportan de forma similar, por lo que sus rankings deben
+              de ser similares y por tanto se puedan considerar iguales todos los algoritmos. Es una mejora del test de Friedman
+              (para evitar el comportamiento conservativo de éste) por lo que presenta un estadístico más ajustado que se distribuye
+              de acuerdo a una distribución f con (K-1) y (K-1)*(N-1) grados de libertad. Realiza comparaciones y asigna rankings
+              dentro de cada conjunto de datos. Se asignan rankings medios en caso de empate.
+
+    Args:
+        nombres_algoritmos: lista de string [K_algoritmos]
+            Lista que contiene los nombres de los algoritmos involucrados en el contraste.
+        matriz_datos: lista de listas de float [N_conjuntos_datos * K_algoritmos]
+            Lista que contiene una serie de listas que a su vez contienen los resultados en floats obtenidos por los distintos
+            algoritmos.
+        alpha: float, optional (default = 0.05)
+            Nivel de significancia (probabilidad de error tipo 1) que se quiere utilizar para contrastar la hipótesis nula del
+            test.
+        tipo: int, optional (default = 0)
+            Valor que indica si lo que se quiere es minimizar (0) o maximizar (1). Influye en la asignación de rankings.
+
+    Returns:
+        dict: diccionario que contiene los siguientes elementos::
+
+            resultado: boolean
+                Resultado del test de contraste de hipótesis. True indica que se rechaza la hipótesis nula. False indica que no
+                se rechaza.
+            p_valor: float
+                p-valor calculado para comparar (contrastar H0) con el nivel de significancia.
+            estadistico: float
+                Estadístico de Iman-Davenport, que se distribuye de acuerdo a una distribución f con (K-1) y (K-1)*(N-1) grados de
+                libertad.
+            nombres: lista de string [K_algoritmos]
+                Lista que contiene los nombres de los algoritmos involucrados en el contraste en el orden del ranking.
+            ranking: lista de float [K_algoritmos]
+                Lista que contiene los rankings medios (de todos los conjuntos de datos) de los algoritmos involucrados en el
+                contraste ordenados de peor a mejor.
+
+    References:
+        1. Salvador García, Francisco Herrera. *Statistical Analysis of Experiments in Data Mining and Computational Intelligence
+           Computational Intelligence.*
+    """
 
     #Número de algoritmos.
     K = len(nombres_algoritmos)
@@ -218,8 +349,48 @@ def iman_davenport_test(nombres_algoritmos, matriz_datos, alpha, tipo):
 
 
 
-"""Test de los Rangos Alineados de Friedman."""
-def friedman_rangos_alineados_test(nombres_algoritmos, matriz_datos, alpha, tipo):
+def friedman_rangos_alineados_test(nombres_algoritmos, matriz_datos, alpha=0.05, tipo=0):
+    """Test de los Rangos Alineados de Friedman.
+
+    .. note:: Contrasta la hipótesis nula de que todos los algoritmos se comportan de forma similar, por lo que sus rankings deben
+              de ser similares y por tanto se puedan considerar iguales todos los algoritmos. El estadístico se distribuye como
+              una distribución chi-cuadrado con K-1 grados de libertad, siendo K el número de variables relacionadas (o número de algoritmos).
+              Realiza comparaciones y asigna rankings teniendo en cuenta a todos los conjuntos de datos. Se asignan rankings medios
+              en caso de empate. Suele emplearse cuando el número de algoritmos en la comparación es pequeño.
+
+    Args:
+        nombres_algoritmos: lista de string [K_algoritmos]
+            Lista que contiene los nombres de los algoritmos involucrados en el contraste.
+        matriz_datos: lista de listas de float [N_conjuntos_datos * K_algoritmos]
+            Lista que contiene una serie de listas que a su vez contienen los resultados en floats obtenidos por los distintos
+            algoritmos.
+        alpha: float, optional (default = 0.05)
+            Nivel de significancia (probabilidad de error tipo 1) que se quiere utilizar para contrastar la hipótesis nula del
+            test.
+        tipo: int, optional (default = 0)
+            Valor que indica si lo que se quiere es minimizar (0) o maximizar (1). Influye en la asignación de rankings.
+
+    Returns:
+        dict: diccionario que contiene los siguientes elementos::
+
+            resultado: boolean
+                Resultado del test de contraste de hipótesis. True indica que se rechaza la hipótesis nula. False indica que no
+                se rechaza.
+            p_valor: float
+                p-valor calculado para comparar (contrastar H0) con el nivel de significancia.
+            estadistico: float
+                Estadístico de los Rangos Alineados de Friedman, que se distribuye como una distribución chi-cuadrado con K-1 grados
+                de libertad, siendo K el número de variables relacionadas (o número de algoritmos).
+            nombres: lista de string [K_algoritmos]
+                Lista que contiene los nombres de los algoritmos involucrados en el contraste en el orden del ranking.
+            ranking: lista de float [K_algoritmos]
+                Lista que contiene los rankings medios (de todos los conjuntos de datos) de los algoritmos involucrados en el
+                contraste ordenados de peor a mejor.
+
+    References:
+        1. Salvador García, Francisco Herrera. *Statistical Analysis of Experiments in Data Mining and Computational Intelligence
+           Computational Intelligence.*
+    """
 
     #Número de algoritmos.
     K = len(nombres_algoritmos)
@@ -292,8 +463,49 @@ def friedman_rangos_alineados_test(nombres_algoritmos, matriz_datos, alpha, tipo
 
 
 
-"""Test de Quade."""
-def quade_test(nombres_algoritmos, matriz_datos, alpha, tipo):
+def quade_test(nombres_algoritmos, matriz_datos, alpha=0.05, tipo=0):
+    """Test de Quade.
+
+    .. note:: Contrasta la hipótesis nula de que todos los algoritmos se comportan de forma similar, por lo que sus rankings deben
+              de ser similares y por tanto se puedan considerar iguales todos los algoritmos. El estadístico se distribuye como una
+              distribución F con (K-1) y (K-1)*(N-1) grados de libertad siendo K el número de variables relacionadas (o número de algoritmos)
+              y N el número de conjuntos de datos. El test de Quade considera que algunos problemas son más difíciles o que los
+              resultados que obtienen los algoritmos sobre ellos son más distantes (ponderación). Se asignan rankings medios en caso
+              de empate.
+
+    Args:
+        nombres_algoritmos: lista de string [K_algoritmos]
+            Lista que contiene los nombres de los algoritmos involucrados en el contraste.
+        matriz_datos: lista de listas de float [N_conjuntos_datos * K_algoritmos]
+            Lista que contiene una serie de listas que a su vez contienen los resultados en floats obtenidos por los distintos
+            algoritmos.
+        alpha: float, optional (default = 0.05)
+            Nivel de significancia (probabilidad de error tipo 1) que se quiere utilizar para contrastar la hipótesis nula del
+            test.
+        tipo: int, optional (default = 0)
+            Valor que indica si lo que se quiere es minimizar (0) o maximizar (1). Influye en la asignación de rankings.
+
+    Returns:
+        dict: diccionario que contiene los siguientes elementos::
+
+            resultado: boolean
+                Resultado del test de contraste de hipótesis. True indica que se rechaza la hipótesis nula. False indica que no
+                se rechaza.
+            p_valor: float
+                p-valor calculado para comparar (contrastar H0) con el nivel de significancia.
+            estadistico: float
+                Estadístico de Quade, que se distribuye como una distribución F con (K-1) y (K-1)*(N-1) grados de libertad siendo K
+                el número de variables relacionadas (o número de algoritmos) y N el número de conjuntos de datos.
+            nombres: lista de string [K_algoritmos]
+                Lista que contiene los nombres de los algoritmos involucrados en el contraste en el orden del ranking.
+            ranking: lista de float [K_algoritmos]
+                Lista que contiene los rankings medios (de todos los conjuntos de datos) de los algoritmos involucrados en el
+                contraste ordenados de peor a mejor.
+
+    References:
+        1. Salvador García, Francisco Herrera. *Statistical Analysis of Experiments in Data Mining and Computational Intelligence
+           Computational Intelligence.*
+    """
 
     #Número de algoritmos.
     K = len(nombres_algoritmos)
@@ -379,8 +591,43 @@ def quade_test(nombres_algoritmos, matriz_datos, alpha, tipo):
 
 
 
-"""Cálculo de los datos comunes a los tests de comparación."""
 def datos_comunes_tests(test_principal, nombres, ranking, N):
+    """Cálculo de los datos comunes a los tests de comparación POST-HOC.
+
+    .. note:: Función utilizada por todos los tests de comparación POST-HOC para obtener los datos comunes. Los estadísticos Z
+              siguen una distribución normal. Los valores de los estadísticos cambian en función de si el test principal es
+              Friedman o Iman-Davenport, Rangos Alineados de Friedman o Quade.
+
+    Args:
+        test_principal: {'friedman', 'iman-davenport', quade', 'rangos-alineados'}
+            Nombre del test principal o test de ranking ejecutado.
+        nombres: lista de string [K_algoritmos]
+            Lista que contiene los nombres de los algoritmos involucrados en el contraste en el orden del ranking obtenido por el
+            test principal.
+        ranking: lista de float [K_algoritmos]
+            Lista que contiene los rankings medios (de todos los conjuntos de datos) de los algoritmos involucrados en el
+            contraste ordenados de peor a mejor obtenidos por el test principal.
+        N: int
+            Número de conjuntos de datos o problemas sobre los que se aplican los algoritmos.
+
+    Returns:
+        dict: diccionario que contiene los siguientes elementos::
+
+            K: int
+                Número de algoritmos (incluyendo método de control).
+            nombres: lista de string [K-1]
+                Nombres de los algoritmos (con los que el método de control se compara) ordenados según los p_valores.
+            valores_z: lista de float [K-1]
+                Estadísticos calculados durante el test. Siguen una normal (0, 1) y están ordenados según los p_valores.
+            p_valores: lista de float [K-1]
+                p-valores calculados para comparar con los niveles de significancia ajustados.
+            metodo_control: string
+                Método de control del test, por convención es el test de menor ranking.
+
+    References:
+        1. Salvador García, Francisco Herrera. *Statistical Analysis of Experiments in Data Mining and Computational Intelligence
+           Computational Intelligence.*
+    """
 
     #Número de algoritmos K (incluyendo método de control).
     K = len(ranking)
@@ -418,8 +665,49 @@ def datos_comunes_tests(test_principal, nombres, ranking, N):
 
 
 
-"""Test de Bonferroni Dunn."""
-def bonferroni_dunn_test(K, nombres, valores_z, p_valores, metodo_control, alpha):
+def bonferroni_dunn_test(K, nombres, valores_z, p_valores, metodo_control, alpha=0.05):
+    """Test POST-HOC de Bonferroni-Dunn.
+
+    .. note:: El contraste de las hipótesis se realiza comparando cada p_valor con :math:`\\frac{\\alpha}{(K-1)}.` Si el p_valor
+              es menor que dicho alpha ajustado se rechaza la hipótesis nula.
+
+    Args:
+        K: int
+            Número de algoritmos (incluyendo método de control).
+        nombres: lista de string [K-1]
+            Nombres de los algoritmos (con los que el método de control se compara) ordenados según los p_valores.
+        valores_z: lista de float [K-1]
+            Estadísticos calculados durante el test. Siguen una normal (0, 1) y están ordenados según los p_valores.
+        p_valores: lista de float [K-1]
+            p-valores calculados para comparar con los niveles de significancia ajustados.
+        metodo_control: string
+            Método de control del test, por convención es el test de menor ranking.
+        alpha: float, optional (default = 0.05)
+            Nivel de significancia (probabilidad de error tipo 1) del test de ranking principal.
+
+    Returns:
+        dict: diccionario que contiene los siguientes elementos::
+
+            valores_z: lista de float [K-1]
+                Estadísticos calculados durante el test. Siguen una normal (0, 1) y están ordenados según los p_valores.
+            p_valores: lista de float [K-1]
+                p-valores calculados para comparar con los niveles de significancia ajustados.
+            metodo de control: string
+                Método de control del test, por convención es el test de menor ranking.
+            nombres: lista de string [K-1]
+                Nombres de los algoritmos (con los que el método de control se compara) ordenados según los p_valores.
+            alpha: float
+                Nivel de significancia ajustado.
+            resultado: lista de boolean [K-1]
+                Resultado de los tests de contraste de hipótesis. True es que se rechaza la hipótesis nula y False que no se
+                rechaza.
+            p_valores_ajustados: lista de float [K-1]
+                p-valores ajustados, los cuales pueden ser comparados con el nivel de significancia proporcionado sin ajustar.
+
+    References:
+        1. Salvador García, Francisco Herrera. *Statistical Analysis of Experiments in Data Mining and Computational Intelligence
+           Computational Intelligence.*
+    """
 
     #Nuevo alpha.
     alpha2 = alpha/float(K-1)
@@ -440,8 +728,49 @@ def bonferroni_dunn_test(K, nombres, valores_z, p_valores, metodo_control, alpha
 
 
 
-"""Test de Holm."""
-def holm_test(K, nombres, valores_z, p_valores, metodo_control, alpha):
+def holm_test(K, nombres, valores_z, p_valores, metodo_control, alpha=0.05):
+    """Test POST-HOC de Holm.
+
+    .. note:: Compara cada p_valor (empezando por el más significativo) con :math:`\\frac{\\alpha}{(K-i)},` donde i in range(1,K).
+              Si se rechaza una hipótesis continúa contrastando. En el caso de que una hipótesis se rechace se rechazan todas las demás.
+
+    Args:
+        K: int
+            Número de algoritmos (incluyendo método de control).
+        nombres: lista de string [K-1]
+            Nombres de los algoritmos (con los que el método de control se compara) ordenados según los p_valores.
+        valores_z: lista de float [K-1]
+            Estadísticos calculados durante el test. Siguen una normal (0, 1) y están ordenados según los p_valores.
+        p_valores: lista de float [K-1]
+            p-valores calculados para comparar con los niveles de significancia ajustados.
+        metodo_control: string
+            Método de control del test, por convención es el test de menor ranking.
+        alpha: float, optional (default = 0.05)
+            Nivel de significancia (probabilidad de error tipo 1) del test de ranking principal.
+
+    Returns:
+        dict: diccionario que contiene los siguientes elementos::
+
+            valores_z: lista de float [K-1]
+                Estadísticos calculados durante el test. Siguen una normal (0, 1) y están ordenados según los p_valores.
+            p_valores: lista de float [K-1]
+                p-valores calculados para comparar con los niveles de significancia ajustados.
+            metodo de control: string
+                Método de control del test, por convención es el test de menor ranking.
+            nombres: lista de string [K-1]
+                Nombres de los algoritmos (con los que el método de control se compara) ordenados según los p_valores.
+            alphas: lista de float [K-1]
+                Niveles de significancia ajustados.
+            resultado: lista de boolean [K-1]
+                Resultado de los tests de contraste de hipótesis. True es que se rechaza la hipótesis nula y False que no se
+                rechaza.
+            p_valores_ajustados: lista de float [K-1]
+                p-valores ajustados, los cuales pueden ser comparados con el nivel de significancia proporcionado sin ajustar.
+
+    References:
+        1. Salvador García, Francisco Herrera. *Statistical Analysis of Experiments in Data Mining and Computational Intelligence
+           Computational Intelligence.*
+    """
 
     #Valores alphas.
     alphas = []
@@ -467,8 +796,49 @@ def holm_test(K, nombres, valores_z, p_valores, metodo_control, alpha):
 
 
 
-"""Test de Hochberg."""
-def hochberg_test(K, nombres, valores_z, p_valores, metodo_control, alpha):
+def hochberg_test(K, nombres, valores_z, p_valores, metodo_control, alpha=0.05):
+    """Test POST-HOC de Hochberg.
+
+    .. note:: Compara en la dirección opuesta a Holm. En el momento que encuentra una hipótesis que pueda aceptar, acepta todas
+              las demás.
+
+    Args:
+        K: int
+            Número de algoritmos (incluyendo método de control).
+        nombres: lista de string [K-1]
+            Nombres de los algoritmos (con los que el método de control se compara) ordenados según los p_valores.
+        valores_z: lista de float [K-1]
+            Estadísticos calculados durante el test. Siguen una normal (0, 1) y están ordenados según los p_valores.
+        p_valores: lista de float [K-1]
+            p-valores calculados para comparar con los niveles de significancia ajustados.
+        metodo_control: string
+            Método de control del test, por convención es el test de menor ranking.
+        alpha: float, optional (default = 0.05)
+            Nivel de significancia (probabilidad de error tipo 1) del test de ranking principal.
+
+    Returns:
+        dict: diccionario que contiene los siguientes elementos::
+
+            valores_z: lista de float [K-1]
+                Estadísticos calculados durante el test. Siguen una normal (0, 1) y están ordenados según los p_valores.
+            p_valores: lista de float [K-1]
+                p-valores calculados para comparar con los niveles de significancia ajustados.
+            metodo de control: string
+                Método de control del test, por convención es el test de menor ranking.
+            nombres: lista de string [K-1]
+                Nombres de los algoritmos (con los que el método de control se compara) ordenados según los p_valores.
+            alphas: lista de float [K-1]
+                Niveles de significancia ajustados.
+            resultado: lista de boolean [K-1]
+                Resultado de los tests de contraste de hipótesis. True es que se rechaza la hipótesis nula y False que no se
+                rechaza.
+            p_valores_ajustados: lista de float [K-1]
+                p-valores ajustados, los cuales pueden ser comparados con el nivel de significancia proporcionado sin ajustar.
+
+    References:
+        1. Salvador García, Francisco Herrera. *Statistical Analysis of Experiments in Data Mining and Computational Intelligence
+           Computational Intelligence.*
+    """
 
     #Valores alphas.
     alphas = []
@@ -494,8 +864,47 @@ def hochberg_test(K, nombres, valores_z, p_valores, metodo_control, alpha):
 
 
 
-"""Test de Li."""
-def li_test(K, nombres, valores_z, p_valores, metodo_control, alpha):
+def li_test(K, nombres, valores_z, p_valores, metodo_control, alpha=0.05):
+    """Test POST-HOC de Li.
+
+    .. note:: Rechaza todas las hipótesis si el p_valor menos significativo es menor que alpha. En otro caso, acepta dicha
+              hipótesis y rechaza cualquier hipótesis restante cuyo p_valor sea menor que un valor calculado.
+
+    Args:
+        K: int
+            Número de algoritmos (incluyendo método de control).
+        nombres: lista de string [K-1]
+            Nombres de los algoritmos (con los que el método de control se compara) ordenados según los p_valores.
+        valores_z: lista de float [K-1]
+            Estadísticos calculados durante el test. Siguen una normal (0, 1) y están ordenados según los p_valores.
+        p_valores: lista de float [K-1]
+            p-valores calculados para comparar con los niveles de significancia ajustados.
+        metodo_control: string
+            Método de control del test, por convención es el test de menor ranking.
+        alpha: float, optional (default = 0.05)
+            Nivel de significancia (probabilidad de error tipo 1) del test de ranking principal.
+
+    Returns:
+        dict: diccionario que contiene los siguientes elementos::
+
+            valores_z: lista de float [K-1]
+                Estadísticos calculados durante el test. Siguen una normal (0, 1) y están ordenados según los p_valores.
+            p_valores: lista de float [K-1]
+                p-valores calculados para comparar con los niveles de significancia ajustados.
+            metodo de control: string
+                Método de control del test, por convención es el test de menor ranking.
+            nombres: lista de string [K-1]
+                Nombres de los algoritmos (con los que el método de control se compara) ordenados según los p_valores.
+            resultado: lista de boolean [K-1]
+                Resultado de los tests de contraste de hipótesis. True es que se rechaza la hipótesis nula y False que no se
+                rechaza.
+            p_valores_ajustados: lista de float [K-1]
+                p-valores ajustados, los cuales pueden ser comparados con el nivel de significancia proporcionado sin ajustar.
+
+    References:
+        1. Salvador García, Francisco Herrera. *Statistical Analysis of Experiments in Data Mining and Computational Intelligence
+           Computational Intelligence.*
+    """
 
     #Cálculo de los resultados.
     resultado = [True]*(K-1)
@@ -516,8 +925,48 @@ def li_test(K, nombres, valores_z, p_valores, metodo_control, alpha):
 
 
 
-"""Test de Finner."""
-def finner_test(K, nombres, valores_z, p_valores, metodo_control, alpha):
+def finner_test(K, nombres, valores_z, p_valores, metodo_control, alpha=0.05):
+    """Test POST-HOC de Finner.
+
+    .. note:: Sigue un proceso igual al test de Holm pero cada p-valor asociado con la hipótesis H_i se compara como:
+              :math:`p_i <= \\frac{\\alpha}{1-(1-\\alpha)^{(k-1)/i}}.`
+
+    Args:
+        K: int
+            Número de algoritmos (incluyendo método de control).
+        nombres: lista de string [K-1]
+            Nombres de los algoritmos (con los que el método de control se compara) ordenados según los p_valores.
+        valores_z: lista de float [K-1]
+            Estadísticos calculados durante el test. Siguen una normal (0, 1) y están ordenados según los p_valores.
+        p_valores: lista de float [K-1]
+            p-valores calculados para comparar con los niveles de significancia ajustados.
+        metodo_control: string
+            Método de control del test, por convención es el test de menor ranking.
+        alpha: float, optional (default = 0.05)
+            Nivel de significancia (probabilidad de error tipo 1) del test de ranking principal.
+
+    Returns:
+        dict: diccionario que contiene los siguientes elementos::
+
+            valores_z: lista de float [K-1]
+                Estadísticos calculados durante el test. Siguen una normal (0, 1) y están ordenados según los p_valores.
+            p_valores: lista de float [K-1]
+                p-valores calculados para comparar con los niveles de significancia ajustados.
+            metodo de control: string
+                Método de control del test, por convención es el test de menor ranking.
+            nombres: lista de string [K-1]
+                Nombres de los algoritmos (con los que el método de control se compara) ordenados según los p_valores.
+            alphas: lista de float [K-1]
+                Niveles de significancia ajustados.
+            resultado: lista de boolean [K-1]
+                Resultado de los tests de contraste de hipótesis. True es que se rechaza la hipótesis nula y False que no se
+                rechaza.
+            p_valores_ajustados: lista de float [K-1]
+                p-valores ajustados, los cuales pueden ser comparados con el nivel de significancia proporcionado sin ajustar.
+
+    References:
+        1. H. Finner, "On a monotonicity problem in step-down multiple test procedures", Journal of the American Statistical Association 88 (1993) 920–923
+    """
 
     #Valores alphas.
     alphas = []
@@ -543,8 +992,41 @@ def finner_test(K, nombres, valores_z, p_valores, metodo_control, alpha):
 
 
 
-"""Cálculo de los datos comunes a los multitests de comparación."""
 def datos_comunes_multitests(test_principal, nombres, ranking, N):
+    """Cálculo de los datos comunes a los multitests de comparación POST-HOC.
+
+    .. note:: Función utilizada por todos los multitests de comparación POST-HOC para obtener los datos comunes. Los estadísticos
+              Z siguen una distribución normal. Los valores de los estadísticos cambian en función de si el test principal es
+              Friedman o Iman-Davenport, Rangos Alineados de Friedman o Quade. Se realizan m comparaciones, donde :math:`m = \\frac{(K*(K-1))}{2}`.
+
+    Args:
+        test_principal: {'friedman', 'iman-davenport', quade', 'rangos-alineados'}
+            Nombre del test principal o test de ranking ejecutado.
+        nombres: lista de string [K_algoritmos]
+            Lista que contiene los nombres de los algoritmos involucrados en el contraste en el orden del ranking obtenido por el
+            test principal.
+        ranking: lista de float [K_algoritmos]
+            Lista que contiene los rankings medios (de todos los conjuntos de datos) de los algoritmos involucrados en el
+            contraste ordenados de peor a mejor obtenidos por el test principal.
+        N: int
+            Número de conjuntos de datos o problemas sobre los que se aplican los algoritmos.
+
+    Returns:
+        dict: diccionario que contiene los siguientes elementos::
+
+            m: int
+                Número de comparaciones.
+            comparaciones: lista de string [K*(K-1)/2]
+                Nombres de las hipótesis contrastadas. Por ejemplo "algoritmoA vs algoritmoB".
+            valores_z: lista de float [K*(K-1)/2]
+                Estadísticos calculados durante el test. Siguen una normal (0, 1) y están ordenados según los p_valores.
+            p_valores: lista de float [K*(K-1)/2]
+                p-valores calculados para comparar con los niveles de significancia ajustados.
+
+    References:
+        1. Salvador García, Francisco Herrera. *Statistical Analysis of Experiments in Data Mining and Computational Intelligence
+           Computational Intelligence.*
+    """
 
     #Número de algoritmos K.
     K = len(ranking)
@@ -591,8 +1073,45 @@ def datos_comunes_multitests(test_principal, nombres, ranking, N):
 
 
 
-"""MultiTest de Nemenyi (Bonferroni-Dunn)."""
-def nemenyi_multitest(m, comparaciones, valores_z, p_valores, alpha):
+def nemenyi_multitest(m, comparaciones, valores_z, p_valores, alpha=0.05):
+    """MultiTest POST-HOC de Nemenyi (Bonferroni-Dunn).
+
+    .. note:: El contraste de las hipótesis se realiza comparando cada p_valor con :math:`\\frac{\\alpha}{m},` donde :math:`m = \\frac{(K*(K-1))}{2}`.
+              Si el p_valor es menor que dicho alpha ajustado se rechaza la hipótesis nula.
+
+    Args:
+        m: int
+            Número de comparaciones.
+        comparaciones: lista de string [K*(K-1)/2]
+            Nombres de las hipótesis contrastadas. Por ejemplo "algoritmoA vs algoritmoB".
+        valores_z: lista de float [K*(K-1)/2]
+            Estadísticos calculados durante el test. Siguen una normal (0, 1) y están ordenados según los p_valores.
+        p_valores: lista de float [K*(K-1)/2]
+            p-valores calculados para comparar con los niveles de significancia ajustados.
+        alpha: float, optional (default = 0.05)
+            Nivel de significancia (probabilidad de error tipo 1) del test de ranking principal.
+
+    Returns:
+        dict: diccionario que contiene los siguientes elementos::
+
+            valores_z: lista de float [K*(K-1)/2]
+                Estadísticos calculados durante el test. Siguen una normal (0, 1) y están ordenados según los p_valores.
+            p_valores: lista de float [K*(K-1)/2]
+                p-valores calculados para comparar con los niveles de significancia ajustados.
+            comparaciones: lista de string [K*(K-1)/2]
+                Nombres de las hipótesis contrastadas. Por ejemplo "algoritmoA vs algoritmoB".
+            alpha: float
+                Nivel de significancia ajustado.
+            resultado: lista de boolean [K*(K-1)/2]
+                Resultado de los tests de contraste de hipótesis. True es que se rechaza la hipótesis nula y False que no se
+                rechaza.
+            p_valores_ajustados: lista de float [K*(K-1)/2]
+                p-valores ajustados, los cuales pueden ser comparados con el nivel de significancia proporcionado sin ajustar.
+
+    References:
+        1. Salvador García, Francisco Herrera. *Statistical Analysis of Experiments in Data Mining and Computational Intelligence
+           Computational Intelligence.*
+    """
 
     #Nuevo alpha.
     alpha2 = alpha/float(m)
@@ -613,8 +1132,46 @@ def nemenyi_multitest(m, comparaciones, valores_z, p_valores, alpha):
 
 
 
-"""MultiTest de Holm."""
-def holm_multitest(m, comparaciones, valores_z, p_valores, alpha):
+def holm_multitest(m, comparaciones, valores_z, p_valores, alpha=0.05):
+    """MultiTest POST-HOC de Holm.
+
+    .. note:: Compara cada p_valor (empezando por el más significativo) con :math:`\\frac{\\alpha}{(m+1-i)},` donde i in range(1,m+1) y
+              :math:`m = \\frac{(K*(K-1))}{2}.` Si se rechaza una hipótesis continúa contrastando. En el caso de que una hipótesis se
+              rechace se rechazan todas las demás.
+
+    Args:
+        m: int
+            Número de comparaciones.
+        comparaciones: lista de string [K*(K-1)/2]
+            Nombres de las hipótesis contrastadas. Por ejemplo "algoritmoA vs algoritmoB".
+        valores_z: lista de float [K*(K-1)/2]
+            Estadísticos calculados durante el test. Siguen una normal (0, 1) y están ordenados según los p_valores.
+        p_valores: lista de float [K*(K-1)/2]
+            p-valores calculados para comparar con los niveles de significancia ajustados.
+        alpha: float, optional (default = 0.05)
+            Nivel de significancia (probabilidad de error tipo 1) del test de ranking principal.
+
+    Returns:
+        dict: diccionario que contiene los siguientes elementos::
+
+            valores_z: lista de float [K*(K-1)/2]
+                Estadísticos calculados durante el test. Siguen una normal (0, 1) y están ordenados según los p_valores.
+            p_valores: lista de float [K*(K-1)/2]
+                p-valores calculados para comparar con los niveles de significancia ajustados.
+            comparaciones: lista de string [K*(K-1)/2]
+                Nombres de las hipótesis contrastadas. Por ejemplo "algoritmoA vs algoritmoB".
+            alphas: array de float [K*(K-1)/2]
+                Niveles de significancia ajustados
+            resultado: lista de boolean [K*(K-1)/2]
+                Resultado de los tests de contraste de hipótesis. True es que se rechaza la hipótesis nula y False que no se
+                rechaza.
+            p_valores_ajustados: lista de float [K*(K-1)/2]
+                p-valores ajustados, los cuales pueden ser comparados con el nivel de significancia proporcionado sin ajustar.
+
+    References:
+        1. Salvador García, Francisco Herrera. *Statistical Analysis of Experiments in Data Mining and Computational Intelligence
+           Computational Intelligence.*
+    """
 
     #Valores alphas.
     alphas = []
@@ -640,8 +1197,45 @@ def holm_multitest(m, comparaciones, valores_z, p_valores, alpha):
 
 
 
-"""MultiTest de Hochberg."""
-def hochberg_multitest(m, comparaciones, valores_z, p_valores, alpha):
+def hochberg_multitest(m, comparaciones, valores_z, p_valores, alpha=0.05):
+    """MultiTest POST-HOC de Hochberg.
+
+    .. note:: Compara en la dirección opuesta a Holm. En el momento que encuentra una hipótesis que pueda aceptar, acepta todas
+              las demás. m es el número de comparaciones o contrastes, :math:`m = \\frac{(K*(K-1))}{2}.`
+
+    Args:
+        m: int
+            Número de comparaciones.
+        comparaciones: lista de string [K*(K-1)/2]
+            Nombres de las hipótesis contrastadas. Por ejemplo "algoritmoA vs algoritmoB".
+        valores_z: lista de float [K*(K-1)/2]
+            Estadísticos calculados durante el test. Siguen una normal (0, 1) y están ordenados según los p_valores.
+        p_valores: lista de float [K*(K-1)/2]
+            p-valores calculados para comparar con los niveles de significancia ajustados.
+        alpha: float, optional (default = 0.05)
+            Nivel de significancia (probabilidad de error tipo 1) del test de ranking principal.
+
+    Returns:
+        dict: diccionario que contiene los siguientes elementos::
+
+            valores_z: lista de float [K*(K-1)/2]
+                Estadísticos calculados durante el test. Siguen una normal (0, 1) y están ordenados según los p_valores.
+            p_valores: lista de float [K*(K-1)/2]
+                p-valores calculados para comparar con los niveles de significancia ajustados.
+            comparaciones: lista de string [K*(K-1)/2]
+                Nombres de las hipótesis contrastadas. Por ejemplo "algoritmoA vs algoritmoB".
+            alphas: array de float [K*(K-1)/2]
+                Niveles de significancia ajustados
+            resultado: lista de boolean [K*(K-1)/2]
+                Resultado de los tests de contraste de hipótesis. True es que se rechaza la hipótesis nula y False que no se
+                rechaza.
+            p_valores_ajustados: lista de float [K*(K-1)/2]
+                p-valores ajustados, los cuales pueden ser comparados con el nivel de significancia proporcionado sin ajustar.
+
+    References:
+        1. Salvador García, Francisco Herrera. *Statistical Analysis of Experiments in Data Mining and Computational Intelligence
+           Computational Intelligence.*
+    """
 
     #Valores alphas.
     alphas = []
@@ -667,8 +1261,44 @@ def hochberg_multitest(m, comparaciones, valores_z, p_valores, alpha):
 
 
 
-"""MultiTest de Finner."""
-def finner_multitest(m, comparaciones, valores_z, p_valores, alpha):
+def finner_multitest(m, comparaciones, valores_z, p_valores, alpha=0.05):
+    """MultiTest POST-HOC de Finner.
+
+    .. note:: Sigue un proceso igual al test de Holm pero cada p-valor asociado con la hipótesis H_i se compara como:
+              :math:`p_i <= \\frac{\\alpha}{1-(1-\\alpha)^{m/i}}.`
+
+    Args:
+        m: int
+            Número de comparaciones.
+        comparaciones: lista de string [K*(K-1)/2]
+            Nombres de las hipótesis contrastadas. Por ejemplo "algoritmoA vs algoritmoB".
+        valores_z: lista de float [K*(K-1)/2]
+            Estadísticos calculados durante el test. Siguen una normal (0, 1) y están ordenados según los p_valores.
+        p_valores: lista de float [K*(K-1)/2]
+            p-valores calculados para comparar con los niveles de significancia ajustados.
+        alpha: float, optional (default = 0.05)
+            Nivel de significancia (probabilidad de error tipo 1) del test de ranking principal.
+
+    Returns:
+        dict: diccionario que contiene los siguientes elementos::
+
+            valores_z: lista de float [K*(K-1)/2]
+                Estadísticos calculados durante el test. Siguen una normal (0, 1) y están ordenados según los p_valores.
+            p_valores: lista de float [K*(K-1)/2]
+                p-valores calculados para comparar con los niveles de significancia ajustados.
+            comparaciones: lista de string [K*(K-1)/2]
+                Nombres de las hipótesis contrastadas. Por ejemplo "algoritmoA vs algoritmoB".
+            alphas: array de float [K*(K-1)/2]
+                Niveles de significancia ajustados
+            resultado: lista de boolean [K*(K-1)/2]
+                Resultado de los tests de contraste de hipótesis. True es que se rechaza la hipótesis nula y False que no se
+                rechaza.
+            p_valores_ajustados: lista de float [K*(K-1)/2]
+                p-valores ajustados, los cuales pueden ser comparados con el nivel de significancia proporcionado sin ajustar.
+
+    References:
+        1. H. Finner, "On a monotonicity problem in step-down multiple test procedures", Journal of the American Statistical Association 88 (1993) 920–923
+    """
 
     #Valores alphas.
     alphas = []
@@ -694,8 +1324,23 @@ def finner_multitest(m, comparaciones, valores_z, p_valores, alpha):
 
 
 
-"""Función para obtener el número de hipótesis que pueden ser ciertas."""
 def S(K):
+    """Función auxiliar del test de Shaffer.
+
+    .. note:: Calcula la secuencia de número máximo de hipótesis que pueden ser ciertas en una comparación secuencial entre 'K'
+              distribuciones.
+
+    Args:
+        k: int
+            Número de distribuciones a comparar entre sí.
+
+    Returns:
+        lista de int
+            Secuencia del número hipótesis que pueden ser ciertas.
+
+    References:
+        1. J.P. Shaffer. Modified sequentially rejective multiple test procedures. Journal of the American Statistical Association, 81(395):826–831, 1986.
+    """
 
     if K == 0 or K == 1:
         return {0}
@@ -709,8 +1354,45 @@ def S(K):
 
 
 
-"""MultiTest de Shaffer."""
-def shaffer_multitest(m, comparaciones, valores_z, p_valores, alpha):
+def shaffer_multitest(m, comparaciones, valores_z, p_valores, alpha=0.05):
+    """MultiTest POST-HOC de Shaffer.
+
+    .. note:: Sigue un proceso igual al test de holm multi-test pero cada p-valor asociado con la hipótesis H_i se compara como
+              :math:`p_i <= \\frac{\\alpha}{t_i},` donde t_i es el número máximo de hipótesis posibles suponiendo que las (j-1)
+              anteriores han sido rechazadas.
+
+    Args:
+        m: int
+            Número de comparaciones.
+        comparaciones: lista de string [K*(K-1)/2]
+            Nombres de las hipótesis contrastadas. Por ejemplo "algoritmoA vs algoritmoB".
+        valores_z: lista de float [K*(K-1)/2]
+            Estadísticos calculados durante el test. Siguen una normal (0, 1) y están ordenados según los p_valores.
+        p_valores: lista de float [K*(K-1)/2]
+            p-valores calculados para comparar con los niveles de significancia ajustados.
+        alpha: float, optional (default = 0.05)
+            Nivel de significancia (probabilidad de error tipo 1) del test de ranking principal.
+
+    Returns:
+        dict: diccionario que contiene los siguientes elementos::
+
+            valores_z: lista de float [K*(K-1)/2]
+                Estadísticos calculados durante el test. Siguen una normal (0, 1) y están ordenados según los p_valores.
+            p_valores: lista de float [K*(K-1)/2]
+                p-valores calculados para comparar con los niveles de significancia ajustados.
+            comparaciones: lista de string [K*(K-1)/2]
+                Nombres de las hipótesis contrastadas. Por ejemplo "algoritmoA vs algoritmoB".
+            alphas: array de float [K*(K-1)/2]
+                Niveles de significancia ajustados
+            resultado: lista de boolean [K*(K-1)/2]
+                Resultado de los tests de contraste de hipótesis. True es que se rechaza la hipótesis nula y False que no se
+                rechaza.
+            p_valores_ajustados: lista de float [K*(K-1)/2]
+                p-valores ajustados, los cuales pueden ser comparados con el nivel de significancia proporcionado sin ajustar.
+
+    References:
+        1. J.P. Shaffer. Modified sequentially rejective multiple test procedures. Journal of the American Statistical Association, 81(395):826–831, 1986.
+    """
 
     #Número máximo de hipótesis posibles.
     K = int((1 + sp.sqrt(1+4*m*2))/2)

@@ -6,7 +6,7 @@
 Plataforma Web STAC - Documentación
 ===================================
 
-Plataforma Web para la Validación de Experimientación en Apredizaje 
+Plataforma Web para la Validación de Experimientación en Apredizaje
 Automático y Minería de Datos: STAC.
 
 Contents:
@@ -15,7 +15,6 @@ Contents:
    :maxdepth: 2
 
    tests_estadisticos
-   api_rest
 
 Indices and tables
 ==================

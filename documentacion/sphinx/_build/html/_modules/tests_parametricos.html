@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -64,50 +62,49 @@
 <div class="viewcode-block" id="anova_test"><a class="viewcode-back" href="../tests_parametricos.html#tests_parametricos.anova_test">[docs]</a><span class="k">def</span> <span class="nf">anova_test</span><span class="p">(</span><span class="n">matriz_datos</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.05</span><span class="p">):</span>
 	<span class="sd">&quot;&quot;&quot;Test paramétrico Anova.</span>
 
-<span class="sd">	.. note:: Contrasta la hipótesis nula de que las medias de los resultados de</span>
-<span class="sd">			  dos o más algoritmos son iguales.</span>
+<span class="sd">    .. note:: Contrasta la hipótesis nula de que las medias de los resultados de</span>
+<span class="sd">              dos o más algoritmos son iguales.</span>
 
-<span class="sd">	Args:</span>
-<span class="sd">		matriz_datos: lista de listas de float [N_conjuntos_datos * K_algoritmos]</span>
-<span class="sd">			Lista que contiene una serie de listas que a su vez contienen los</span>
-<span class="sd">			resultados en floats obtenidos por los distintos algoritmos.</span>
-<span class="sd">		alpha: float, optional (default = 0.05)</span>
-<span class="sd">			Nivel de significancia (probabilidad de error tipo 1) que se quiere</span>
-<span class="sd">			utilizar para contrastar la hipótesis nula del test.</span>
+<span class="sd">    Args:</span>
+<span class="sd">        matriz_datos: lista de listas de float [N_conjuntos_datos * K_algoritmos]</span>
+<span class="sd">            Lista que contiene una serie de listas que a su vez contienen los</span>
+<span class="sd">            resultados en floats obtenidos por los distintos algoritmos.</span>
+<span class="sd">        alpha: float, optional (default = 0.05)</span>
+<span class="sd">            Nivel de significancia (probabilidad de error tipo 1) que se quiere</span>
+<span class="sd">            utilizar para contrastar la hipótesis nula del test.</span>
 
-<span class="sd">	Returns:</span>
-<span class="sd">		dict: diccionario que contiene los siguientes elementos::</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        dict: diccionario que contiene los siguientes elementos::</span>
 
-<span class="sd">			resultado: boolean</span>
-<span class="sd">				Resultado del test de contraste de hipótesis. True indica que se</span>
-<span class="sd">				rechaza la hipótesis nula. False indica que no se rechaza.</span>
-<span class="sd">			p_valor: float</span>
-<span class="sd">				p-valor calculado para comparar (contrastar H0) con el nivel de </span>
-<span class="sd">				significancia.</span>
-<span class="sd">			estadistico: float</span>
-<span class="sd">				Estadístico calculado durante el test. Sigue una distribución F.</span>
-<span class="sd">			variaciones: lista de float [3]</span>
-<span class="sd">				Lista de variaciones (variación total o respecto a la media general, </span>
-<span class="sd">				variación dentro del tratamiento o variación del error y variación</span>
-<span class="sd">				entre los tratamientos o algoritmos).</span>
-<span class="sd">			grados_libertad: lista de float [3]</span>
-<span class="sd">				Lista que contiene los grados de libertad totales, de los</span>
-<span class="sd">				tratamientos y del error.</span>
-<span class="sd">			cuadrados_medios: lista de float [3]</span>
-<span class="sd">				Lista de contiene los cuadrados medios (variaciones / grados de libertad)</span>
-<span class="sd">				totales, del tratamiento y del error.</span>
-<span class="sd">			medias_algoritmos: lista de float [K_algoritmos]</span>
-<span class="sd">				Media de los resultados obtenidos por cada uno de los algoritmos.</span>
-<span class="sd">			media_general: float</span>
-<span class="sd">				Media de medias de los algoritmos.</span>
+<span class="sd">            resultado: boolean</span>
+<span class="sd">                Resultado del test de contraste de hipótesis. True indica que se</span>
+<span class="sd">                rechaza la hipótesis nula. False indica que no se rechaza.</span>
+<span class="sd">            p_valor: float</span>
+<span class="sd">                p-valor calculado para comparar (contrastar H0) con el nivel de</span>
+<span class="sd">                significancia.</span>
+<span class="sd">            estadistico: float</span>
+<span class="sd">                Estadístico calculado durante el test. Sigue una distribución F.</span>
+<span class="sd">            variaciones: lista de float [3]</span>
+<span class="sd">                Lista de variaciones (variación total o respecto a la media general,</span>
+<span class="sd">                variación dentro del tratamiento o variación del error y variación</span>
+<span class="sd">                entre los tratamientos o algoritmos).</span>
+<span class="sd">            grados_libertad: lista de float [3]</span>
+<span class="sd">                Lista que contiene los grados de libertad totales, de los</span>
+<span class="sd">                tratamientos y del error.</span>
+<span class="sd">            cuadrados_medios: lista de float [3]</span>
+<span class="sd">                Lista de contiene los cuadrados medios (variaciones / grados de libertad)</span>
+<span class="sd">                totales, del tratamiento y del error.</span>
+<span class="sd">            medias_algoritmos: lista de float [K_algoritmos]</span>
+<span class="sd">                Media de los resultados obtenidos por cada uno de los algoritmos.</span>
+<span class="sd">            media_general: float</span>
+<span class="sd">                Media de medias de los algoritmos.</span>
 
-<span class="sd">		References:</span>
-<span class="sd">			1. http://www.icicm.com/files/AN_LISIS_DE_VARIANZA.doc</span>
-<span class="sd">			2. Contraste sobre la igualdad de medias en dos o más poblaciones normales, </span>
-<span class="sd">			   Manuel Oviedo - Beatriz Pateiro.</span>
-<span class="sd">			3. http://biplot.usal.es/problemas/anova/ANOVA.html</span>
+<span class="sd">    References:</span>
+<span class="sd">        1. Primitivo Reyes (Sept. 2007). *Análisis de Varianza Anova de una Vía* [Documento WWW]. URL http://www.icicm.com/files/AN_LISIS_DE_VARIANZA.doc</span>
+<span class="sd">        2. Manuel Oviedo - Beatriz Pateiro. *Contraste sobre la igualdad de medias en dos o más poblaciones normales.*</span>
+<span class="sd">        3. José Luis Vicente Villardón. *Introducción al Análisis de la Varianza* [Documento WWW]. URL http://biplot.usal.es/problemas/anova/ANOVA.html</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    
+
 	<span class="c">#Número de conjuntos de datos.</span>
 	<span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">matriz_datos</span><span class="p">)</span>
 	<span class="c">#Número de algoritmos.</span>
@@ -135,12 +132,12 @@
 		    <span class="n">SCT</span> <span class="o">=</span> <span class="n">SCT</span> <span class="o">+</span> <span class="p">(</span><span class="n">elem</span><span class="o">-</span><span class="n">media_general</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
 		    <span class="n">SCE</span> <span class="o">=</span> <span class="n">SCE</span> <span class="o">+</span> <span class="p">(</span><span class="n">elem</span><span class="o">-</span><span class="n">medias_algoritmos</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span>
 		<span class="n">SCTR</span> <span class="o">=</span> <span class="n">SCTR</span> <span class="o">+</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">medias_algoritmos</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="n">media_general</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
-		
+
 	<span class="c">#Grados de libertad.</span>
 	<span class="n">GLT</span> <span class="o">=</span> <span class="p">(</span><span class="n">N</span><span class="o">*</span><span class="n">K</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span>
 	<span class="n">GLTR</span> <span class="o">=</span> <span class="n">K</span><span class="o">-</span><span class="mi">1</span>
 	<span class="n">GLE</span> <span class="o">=</span> <span class="n">GLT</span> <span class="o">-</span> <span class="n">GLTR</span>
-		
+
 	<span class="c">#Cuadrados medios (suma cuadrados / grados de libertad)</span>
 	<span class="n">CMT</span> <span class="o">=</span> <span class="n">SCT</span><span class="o">/</span><span class="n">GLT</span>
 	<span class="n">CMTR</span> <span class="o">=</span> <span class="n">SCTR</span><span class="o">/</span><span class="n">GLTR</span>
@@ -162,55 +159,54 @@
 <div class="viewcode-block" id="bonferroni_test"><a class="viewcode-back" href="../tests_parametricos.html#tests_parametricos.bonferroni_test">[docs]</a><span class="k">def</span> <span class="nf">bonferroni_test</span><span class="p">(</span><span class="n">nombres_algoritmos</span><span class="p">,</span> <span class="n">medias_algoritmos</span><span class="p">,</span> <span class="n">cuadrado_medio_error</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.05</span><span class="p">):</span>
 	<span class="sd">&quot;&quot;&quot;Test POST-HOC (comparaciones múltiples) de Anova: Bonferroni.</span>
 
-<span class="sd">	.. note:: Este tests compara las medias de todos los algoritmos entre sí. Se utiliza</span>
-<span class="sd">			  una vez se tenga constancia gracias al análisis de varianzas Anova de que </span>
-<span class="sd">			  existen diferencias significativas entre las medias de los algoritmos.</span>
-<span class="sd">			  Cada p-valor asociado con la hipótesis H_i se compara con un alpha ajustado</span>
-<span class="sd">			  a todas las comparaciones: :math:`p_i &lt; \\frac{\\alpha}{m}`, donde m se </span>
-<span class="sd">			  corresponde con el número de comparaciones: :math:`m = \\frac{(K*(K-1))}{2}`.</span>
+<span class="sd">    .. note:: Este tests compara las medias de todos los algoritmos entre sí. Se utiliza</span>
+<span class="sd">              una vez se tenga constancia gracias al análisis de varianzas Anova de que</span>
+<span class="sd">              existen diferencias significativas entre las medias de los algoritmos.</span>
+<span class="sd">              Cada p-valor asociado con la hipótesis H_i se compara con un alpha ajustado</span>
+<span class="sd">              a todas las comparaciones: :math:`p_i &lt; \\frac{\\alpha}{m}`, donde m se</span>
+<span class="sd">              corresponde con el número de comparaciones: :math:`m = \\frac{(K*(K-1))}{2}`.</span>
 
-<span class="sd">	Args:</span>
-<span class="sd">		nombres_algoritmos: lista de string [K_algoritmos]</span>
-<span class="sd">			Lista que contiene los nombres de los algoritmos involucrados en el contraste.</span>
-<span class="sd">		medias_algoritmos: lista de float [K_algoritmos]</span>
-<span class="sd">			Lista que contiene la media de los resultados obtenidos por cada uno de los </span>
-<span class="sd">			algoritmos en el test de análisis de varianzas (Anova).</span>
-<span class="sd">		cuadrado_medio_error: float</span>
-<span class="sd">			Varianza dentro del tratamiento o algoritmo o del error (se obtiene del test</span>
-<span class="sd">			de análisis de varianzas Anova)</span>
-<span class="sd">		N: int</span>
-<span class="sd">			Número de conjuntos de datos que se corresponden con el número de problemas sobre </span>
-<span class="sd">			los que se aplica el test de análisis de varianzas Anova.</span>
-<span class="sd">		alpha: float, optional (default = 0.05)</span>
-<span class="sd">			Nivel de significancia (probabilidad de error tipo 1) que se quiere utilizar para </span>
-<span class="sd">			contrastar la hipótesis nula del test.</span>
+<span class="sd">    Args:</span>
+<span class="sd">        nombres_algoritmos: lista de string [K_algoritmos]</span>
+<span class="sd">            Lista que contiene los nombres de los algoritmos involucrados en el contraste.</span>
+<span class="sd">        medias_algoritmos: lista de float [K_algoritmos]</span>
+<span class="sd">            Lista que contiene la media de los resultados obtenidos por cada uno de los</span>
+<span class="sd">            algoritmos en el test de análisis de varianzas (Anova).</span>
+<span class="sd">        cuadrado_medio_error: float</span>
+<span class="sd">            Varianza dentro del tratamiento o algoritmo o del error (se obtiene del test</span>
+<span class="sd">            de análisis de varianzas Anova)</span>
+<span class="sd">        N: int</span>
+<span class="sd">            Número de conjuntos de datos que se corresponden con el número de problemas sobre</span>
+<span class="sd">            los que se aplica el test de análisis de varianzas Anova.</span>
+<span class="sd">        alpha: float, optional (default = 0.05)</span>
+<span class="sd">            Nivel de significancia (probabilidad de error tipo 1) que se quiere utilizar para</span>
+<span class="sd">            contrastar la hipótesis nula del test.</span>
 
-<span class="sd">	Returns:</span>
-<span class="sd">		dict: diccionario que contiene los siguientes elementos::</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        dict: diccionario que contiene los siguientes elementos::</span>
 
-<span class="sd">			resultado: lista de boolean [m_comparaciones]</span>
-<span class="sd">				Lista que contiene los resultados del test de contraste de hipótesis. True indica </span>
-<span class="sd">				que se rechaza la hipótesis nula. False indica que no se rechaza.</span>
-<span class="sd">			p_valores: lista de float [m_comparaciones]</span>
-<span class="sd">				Lista de p-valores ordenada según los valor (de más a menos significancia o de menor</span>
-<span class="sd">				a mayor) calculados para comparar (contrastar las H0 de igualdad de medias) con el </span>
-<span class="sd">				nivel de significancia ajustado.</span>
-<span class="sd">			valores_t: lista de float [m_comparaciones]</span>
-<span class="sd">				Lista ordenada (según p_valores) de estadísticos calculados durante el test. Siguen </span>
-<span class="sd">				una distribución F con (N*K)-K grados de libertad.</span>
-<span class="sd">			comparaciones: lista de string [m_comparaciones]</span>
-<span class="sd">				Lista ordenada (según p_valores) que contiene los nombres de las comparaciones realizadas </span>
-<span class="sd">				en el test port ejemplo: &quot;Alg1 vs Alg2&quot;.</span>
-<span class="sd">			alpha: float</span>
-<span class="sd">				Nivel de significancia (probabilidad de error tipo 1) ajustado a las m comparaciones.</span>
-<span class="sd">			p_valores_ajustados: lista de float [m_comparaciones]</span>
-<span class="sd">				p-valores ajustados, los cuales pueden ser comparados con el nivel de significancia </span>
-<span class="sd">				proporcionado sin ajustar</span>
+<span class="sd">            resultado: lista de boolean [m_comparaciones]</span>
+<span class="sd">                Lista que contiene los resultados del test de contraste de hipótesis. True indica</span>
+<span class="sd">                que se rechaza la hipótesis nula. False indica que no se rechaza.</span>
+<span class="sd">            p_valores: lista de float [m_comparaciones]</span>
+<span class="sd">                Lista de p-valores ordenada según los valor (de más a menos significancia o de menor</span>
+<span class="sd">                a mayor) calculados para comparar (contrastar las H0 de igualdad de medias) con el</span>
+<span class="sd">                nivel de significancia ajustado.</span>
+<span class="sd">            valores_t: lista de float [m_comparaciones]</span>
+<span class="sd">                Lista ordenada (según p_valores) de estadísticos calculados durante el test. Siguen</span>
+<span class="sd">                una distribución F con (N*K)-K grados de libertad.</span>
+<span class="sd">            comparaciones: lista de string [m_comparaciones]</span>
+<span class="sd">                Lista ordenada (según p_valores) que contiene los nombres de las comparaciones realizadas</span>
+<span class="sd">                en el test port ejemplo: &quot;Alg1 vs Alg2&quot;.</span>
+<span class="sd">            alpha: float</span>
+<span class="sd">                Nivel de significancia (probabilidad de error tipo 1) ajustado a las m comparaciones.</span>
+<span class="sd">            p_valores_ajustados: lista de float [m_comparaciones]</span>
+<span class="sd">                p-valores ajustados, los cuales pueden ser comparados con el nivel de significancia</span>
+<span class="sd">                proporcionado sin ajustar</span>
 
-<span class="sd">		References:</span>
-<span class="sd">			1. Contraste sobre la igualdad de medias en dos o más poblaciones normales, </span>
-<span class="sd">			   Manuel Oviedo - Beatriz Pateiro.</span>
-<span class="sd">	&quot;&quot;&quot;</span>
+<span class="sd">    References:</span>
+<span class="sd">        1. Manuel Oviedo - Beatriz Pateiro. *Contraste sobre la igualdad de medias en dos o más poblaciones normales.*</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
 	<span class="c">#Número de algoritmos K.</span>
 	<span class="n">K</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">medias_algoritmos</span><span class="p">)</span>
@@ -298,7 +294,7 @@
     </div>
     <div class="footer">
         &copy; Copyright 2014, Adrián Canosa Mouzo.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
     </div>
   </body>
 </html>
