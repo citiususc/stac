@@ -25,7 +25,8 @@ def subir_fichero():
     clave_hash = generar_md5(subida.file)
     for clave in lista_ficheros.keys():
         if clave == clave_hash:
-            return {"fallo" : "El fichero con hash \"" + clave + "\" ya se encuentra el servidor."}
+            #return {"fallo" : "El fichero con hash \"" + clave + "\" ya se encuentra el servidor."}
+			return {"clave" : clave_hash}
     try:
         datos = leer_datos(subida.file)
     except Exception, fallo:
