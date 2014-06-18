@@ -1,254 +1,196 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="shortcut icon" href="bootstrap-3.1.1/docs/assets/ico/favicon.ico">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link rel="shortcut icon" href="bootstrap-3.1.1/docs/assets/ico/favicon.ico">
 
-    <title>Plataforma Web STAC</title>
+        <title>Plataforma Web STAC</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="bootstrap-3.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Bootstrap core CSS -->
+        <link href="bootstrap-3.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Custom styles for this template -->
-    <link href="css/dashboard.css" rel="stylesheet">
+        <!-- Custom styles for this template -->
+        <link href="css/dashboard.css" rel="stylesheet">
 
-    <!-- Just for debugging purposes. Don't actually copy this line! -->
-    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+        <!-- Just for debugging purposes. Don't actually copy this line! -->
+        <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
 
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-  </head>
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
 
-  <body>
+    <body>
 
-    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="index.html">STAC - Statistical Tests for Algorithm Comparison</a>
-        </div>
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-			<!--Subir el fichero-->
-			<li class="dropdown">
-				<a href="#" class="dropdown-toggle" data-toggle="dropdown">Subir Fichero</a>
-             	<div class="dropdown-menu">
-               		<form id="formfichero" enctype="multipart/form-data">
-						<fieldset class='textbox' style="padding:10px">
-							<input type="file" name="fichero" id="fichero"/><br>
-							<center><input type="button" class="btn btn-default" value="Subir" id="boton_fichero"/></center><br>
-							<div id="hash_fichero" align="center"></div>
-                 		</fieldset>
-               		</form>
-             	</div>
-			</li>
-			<!--Consulta de fichero-->
-			<li><a href="consultar_fichero.html">Consultar fichero</a></li>
-			<!--Ayuda-->
-            <li><a href="ayuda.html">Ayuda</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
-          <ul class="nav nav-sidebar">
-            <li><a href="index.html">Principal</a></li>
-            <li><a href="condiciones_parametricas.html">Condiciones Paramétricas</a></li>
-            <li class="active"><a href="#">Tests Paramétricos</a></li>
-            <li><a href="tests_no_parametricos.html">Tests no Paramétricos</a></li>
-          </ul>
-          <!--<ul class="nav nav-sidebar">
-            <li><a href="">Nav item</a></li>
-            <li><a href="">Nav item again</a></li>
-            <li><a href="">One more nav</a></li>
-            <li><a href="">Another nav item</a></li>
-            <li><a href="">More navigation</a></li>
-          </ul>-->
-          <!--<ul class="nav nav-sidebar">
-            <li><a href="">Nav item again</a></li>
-            <li><a href="">One more nav</a></li>
-            <li><a href="">Another nav item</a></li>
-          </ul>-->
-        </div>
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h1 class="page-header">Tests Paramétricos</h1>
-
-          <!--<div class="row placeholders">
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img data-src="holder.js/200x200/auto/sky" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
+        <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="index.html">STAC - Statistical Tests for Algorithm Comparison</a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <!--Subir el fichero-->
+                        <li class="dropdown">
+                            <a id="a_subida" class="dropdown-toggle" href="#" data-toggle="dropdown">Subir fichero</a>
+                            <div class="dropdown-menu" style="padding:17px;">
+                                <form class="form" id="formfichero" enctype="multipart/form-data"> 
+                                    <div class="input-group">
+                                        <span class="input-group-btn">
+                                            <span class="btn btn-primary btn-file">
+                                                Buscar <input type="file" name="fichero" id="fichero"/>
+                                            </span>
+                                        </span>
+                                        <input type="text" class="form-control" style="width:150px;" readonly>
+                                    </div>
+                                    <br>
+                                    <center><input type="button" class="btn btn-default" value="Subir" id="boton_fichero"/></center>
+                                    <div id="mensaje_subida" align="center"></div>
+                                </form>
+                            </div>
+                        </li>
+                        <!--Consulta de fichero-->
+                        <li><a href="consultar_fichero.html">Consultar fichero</a></li>
+                        <!--Ayuda-->
+                        <li><a href="ayuda.html">Ayuda</a></li>
+                    </ul>
+                </div>
             </div>
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img data-src="holder.js/200x200/auto/vine" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img data-src="holder.js/200x200/auto/sky" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img data-src="holder.js/200x200/auto/vine" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
-            </div>
-          </div>-->
-
-          <!--<h2 class="sub-header">Section title</h2>
-          <div class="table-responsive">
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Header</th>
-                  <th>Header</th>
-                  <th>Header</th>
-                  <th>Header</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>1,001</td>
-                  <td>Lorem</td>
-                  <td>ipsum</td>
-                  <td>dolor</td>
-                  <td>sit</td>
-                </tr>
-                <tr>
-                  <td>1,002</td>
-                  <td>amet</td>
-                  <td>consectetur</td>
-                  <td>adipiscing</td>
-                  <td>elit</td>
-                </tr>
-                <tr>
-                  <td>1,003</td>
-                  <td>Integer</td>
-                  <td>nec</td>
-                  <td>odio</td>
-                  <td>Praesent</td>
-                </tr>
-                <tr>
-                  <td>1,003</td>
-                  <td>libero</td>
-                  <td>Sed</td>
-                  <td>cursus</td>
-                  <td>ante</td>
-                </tr>
-                <tr>
-                  <td>1,004</td>
-                  <td>dapibus</td>
-                  <td>diam</td>
-                  <td>Sed</td>
-                  <td>nisi</td>
-                </tr>
-                <tr>
-                  <td>1,005</td>
-                  <td>Nulla</td>
-                  <td>quis</td>
-                  <td>sem</td>
-                  <td>at</td>
-                </tr>
-                <tr>
-                  <td>1,006</td>
-                  <td>nibh</td>
-                  <td>elementum</td>
-                  <td>imperdiet</td>
-                  <td>Duis</td>
-                </tr>
-                <tr>
-                  <td>1,007</td>
-                  <td>sagittis</td>
-                  <td>ipsum</td>
-                  <td>Praesent</td>
-                  <td>mauris</td>
-                </tr>
-                <tr>
-                  <td>1,008</td>
-                  <td>Fusce</td>
-                  <td>nec</td>
-                  <td>tellus</td>
-                  <td>sed</td>
-                </tr>
-                <tr>
-                  <td>1,009</td>
-                  <td>augue</td>
-                  <td>semper</td>
-                  <td>porta</td>
-                  <td>Mauris</td>
-                </tr>
-                <tr>
-                  <td>1,010</td>
-                  <td>massa</td>
-                  <td>Vestibulum</td>
-                  <td>lacinia</td>
-                  <td>arcu</td>
-                </tr>
-                <tr>
-                  <td>1,011</td>
-                  <td>eget</td>
-                  <td>nulla</td>
-                  <td>Class</td>
-                  <td>aptent</td>
-                </tr>
-                <tr>
-                  <td>1,012</td>
-                  <td>taciti</td>
-                  <td>sociosqu</td>
-                  <td>ad</td>
-                  <td>litora</td>
-                </tr>
-                <tr>
-                  <td>1,013</td>
-                  <td>torquent</td>
-                  <td>per</td>
-                  <td>conubia</td>
-                  <td>nostra</td>
-                </tr>
-                <tr>
-                  <td>1,014</td>
-                  <td>per</td>
-                  <td>inceptos</td>
-                  <td>himenaeos</td>
-                  <td>Curabitur</td>
-                </tr>
-                <tr>
-                  <td>1,015</td>
-                  <td>sodales</td>
-                  <td>ligula</td>
-                  <td>in</td>
-                  <td>libero</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>-->
         </div>
-      </div>
-    </div>
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script src="bootstrap-3.1.1/dist/js/bootstrap.min.js"></script>
-    <script src="bootstrap-3.1.1/docs/assets/js/docs.min.js"></script>
-	<script src="js/codigo_jquery.js"></script>
-  </body>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-3 col-md-2 sidebar">
+                    <ul class="nav nav-sidebar">
+                        <li><a href="index.html">Principal</a></li>
+                        <li><a href="condiciones_parametricas.html">Condiciones Paramétricas</a></li>
+                        <li class="active"><a href="tests_parametricos.html">Tests Paramétricos</a></li>
+                        <li><a href="tests_no_parametricos.html">Tests no Paramétricos</a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+                    <h1 class="page-header">Tests Paramétricos</h1>
+                    <!--*****************************Tests paramétricos*****************************************-->
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a data-toggle="tab" href="#descripcion">Descripción</a></li>
+                        <li><a data-toggle="tab" href="#anova">Anova</a></li>
+                        <li><a data-toggle="tab" href="#ttest">T-test</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div id="descripcion" class="tab-pane fade in active">
+                            <h3>Descripción</h3>
+                            <p>Los tests paramétricos son aquellos que cumplen las condiciones establecidas para los tests paramétricos:</p>
+                            <ul>
+                                <li>Normalidad: Las muestras siguen una distribución normal.</li>
+                                <li>Independencia: Las muestras no dependen de otras.</li>
+                                <li>Homocedasticidad: Igualdad de varianzas en las muestras.</li>
+                            </ul>
+                            <a href="condiciones_parametricas.html">Ir a Condiciones paramétricas</a>
+                            <br><br><p>En las siguientes pestañas <b>"Anova"</b> y <b>"T-test"</b> puedes encontrar los diferentes tests no paramétricos implementados en la web.</p>
+                        </div>
+                        <div id="anova" class="tab-pane fade">
+                            <h3>Test de Anova</h3>
+                            <p align="justify"><b>Anova:</b> Contrasta la hipótesis nula de que las medias de los resultados de dos o más algoritmos son iguales, es decir si la media de dos o más muestras o poblaciones son iguales. Para ello, analiza la variación entre muestras y la variación en el interior de las mismas mediante la determinación de varianzas. El estadístico de la prueba de Anova, se aproxima mediante la distribución f, y se rechazará la hipótesis nula si el p-valor < nivel de significación (alpha), aceptando la hipótesis alternativa de que al menos dos medias poblacionales son diferentes.</p>
+                            <p>Se deben cumplir las condiciones paramétricas:</p>
+                            <ul>
+                                <li>Normalidad</li>
+                                <li>Homocedasticidad</li>
+                                <li>Independencia</li>
+                            </ul>
+                            <p align="justify"><b>Bonferroni:</b> Una vez se tenga constancia gracias al análisis de varianzas Anova de que existen diferencias significativas entre las medias de los algoritmos, se procede con el test Post-Hoc de <b>Bonferroni</b> para determinar las diferencias entre todas las muestras, comparando las medias de todos los algoritmos entre sí. Cada p-valor asociado con la hipótesis H<sub>i</sub> se compara con un alpha ajustado a todas las comparaciones: p<sub>i</sub> < (alpha/m), donde m se corresponde con el número de comparaciones: m=(K∗(K−1))2 y K es el número de algoritmos.</p>
+                            <br>
+                            <!--Selección nivel de significancia-->
+                            <p>Nivel de significancia (alpha) o probabilidad de rechazar la hipótesis nula siendo cierta (defecto 0.05):</p>
+                            <select class="form-control" id="alpha_anova" style="width:100px;">
+                                <option value="no">Elige</option>
+                                <option value="0.10">0.10</option>
+                                <option value="0.05">0.05</option>
+                                <option value="0.02">0.02</option>
+                                <option value="0.01">0.01</option>
+                                <option value="0.005">0.005</option>
+                                <option value="0.001">0.001</option>
+                            </select>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-2 col-md-offset-5">
+                                    <a data-toggle="tab" href="#ver_resultados_anova"><button type="button" class="btn btn-success" id="datos_anova">Aplicar</button></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="ttest" class="tab-pane fade">
+                            <h3>T-test</h3>
+                            <p align="justify">Si p_valor < alpha, se rechaza la hipótesis nula de que 2 muestras relacionadas o repetidas tienen idénticos valores promedio (esperados). La prueba mide si la puntuación media difiere significativamente entre las muestras. p-valores pequeños están asociados a altos estadísticos t.</p>
+                            <p>Se deben cumplir las condiciones paramétricas:</p>
+                            <ul>
+                                <li>Normalidad</li>
+                                <li>Homocedasticidad</li>
+                                <li>Independencia</li>
+                            </ul>
+                            <p>También se dede cumplir que el número de algoritmos o muestras sea de dos.</p>
+                            <br>
+                            <!--Selección nivel de significancia-->
+                            <p>Nivel de significancia (alpha) o probabilidad de rechazar la hipótesis nula siendo cierta (defecto 0.05):</p>
+                            <select class="form-control" id="alpha_ttest" style="width:100px;">
+                                <option value="no">Elige</option>
+                                <option value="0.10">0.10</option>
+                                <option value="0.05">0.05</option>
+                                <option value="0.02">0.02</option>
+                                <option value="0.01">0.01</option>
+                                <option value="0.005">0.005</option>
+                                <option value="0.001">0.001</option>
+                            </select>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-2 col-md-offset-5">
+                                    <a data-toggle="tab" href="#ver_resultados_ttest"><button type="button" class="btn btn-success" id="datos_ttest">Aplicar</button></a>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Mostrar resultados anova-->
+                        <div id="ver_resultados_anova" class="tab-pane fade">
+                            <div id="resultado"></div>
+                            <br>
+                            <div id="alerta_fichero" class="alert alert-info" style="display:none">
+                                <strong>¡Sube un fichero!</strong> A la derecha de la barra la barra de navegación superior puedes seleccionar y
+                                subir un fichero en "Subir fichero". A continuación, pulsa en "Consultar fichero" para ver su contenido. 
+                            </div>
+                            <div id="fallo_test" class="alert alert-info alert-danger" style="display:none"></div>
+                            <a data-toggle="tab" href="#anova"><button type="button" class="btn btn-default">Volver atrás</button></a>
+                        </div>
+                        <!--Mostrar resultados ttest-->
+                        <div id="ver_resultados_ttest" class="tab-pane fade">
+                            <div id="resultado_ttest"></div>
+                            <br>
+                            <div id="alerta_fichero_ttest" class="alert alert-info" style="display:none">
+                                <strong>¡Sube un fichero!</strong> A la derecha de la barra la barra de navegación superior puedes seleccionar y
+                                subir un fichero en "Subir fichero". A continuación, pulsa en "Consultar fichero" para ver su contenido. 
+                            </div>
+                            <div id="fallo_test_ttest" class="alert alert-info alert-danger" style="display:none"></div>
+                            <a data-toggle="tab" href="#ttest"><button type="button" class="btn btn-default">Volver atrás</button></a>
+                        </div>
+                    </div>
+                    <!--*******************************************************************************************************-->
+                </div>
+            </div>
+        </div>
+
+        <!-- Bootstrap core JavaScript
+        ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script src="bootstrap-3.1.1/dist/js/bootstrap.min.js"></script>
+        <script src="bootstrap-3.1.1/docs/assets/js/docs.min.js"></script>
+        <script src="js/codigo_jquery.js"></script>
+    </body>
 </html>

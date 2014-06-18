@@ -1,302 +1,281 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="shortcut icon" href="bootstrap-3.1.1/docs/assets/ico/favicon.ico">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link rel="shortcut icon" href="bootstrap-3.1.1/docs/assets/ico/favicon.ico">
 
-    <title>Plataforma Web STAC</title>
+        <title>Plataforma Web STAC</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="bootstrap-3.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Bootstrap core CSS -->
+        <link href="bootstrap-3.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Custom styles for this template -->
-    <link href="css/dashboard.css" rel="stylesheet">
+        <!-- Custom styles for this template -->
+        <link href="css/dashboard.css" rel="stylesheet">
 
-    <!-- Just for debugging purposes. Don't actually copy this line! -->
-    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+        <!-- Just for debugging purposes. Don't actually copy this line! -->
+        <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
 
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-  </head>
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
 
-  <body>
+    <body>
 
-    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="index.html">STAC - Statistical Tests for Algorithm Comparison</a>
-        </div>
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-			<!--Subir el fichero-->
-			<li class="dropdown">
-				<a href="#" class="dropdown-toggle" data-toggle="dropdown">Subir fichero</a>
-             	<div class="dropdown-menu">
-               		<form id="formfichero" enctype="multipart/form-data">
-						<fieldset class='textbox' style="padding:10px">
-							<input type="file" name="fichero" id="fichero"/><br>
-							<center><input type="button" class="btn btn-default" value="Subir" id="boton_fichero"/></center><br>
-							<div id="hash_fichero" align="center"></div>
-                 		</fieldset>
-               		</form>
-             	</div>
-			</li>
-			<!--Consulta de fichero-->
-			<li><a href="consultar_fichero.html">Consultar fichero</a></li>
-			<!--Ayuda-->
-            <li><a href="ayuda.html">Ayuda</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
-          <ul class="nav nav-sidebar">
-            <li><a href="index.html">Principal</a></li>
-            <li><a href="condiciones_parametricas.html">Condiciones Paramétricas</a></li>
-            <li><a href="tests_parametricos.html">Tests Paramétricos</a></li>
-            <li class="active"><a href="#">Tests no Paramétricos</a></li>
-          </ul>
-          <!--<ul class="nav nav-sidebar">
-            <li><a href="">Nav item</a></li>
-            <li><a href="">Nav item again</a></li>
-            <li><a href="">One more nav</a></li>
-            <li><a href="">Another nav item</a></li>
-            <li><a href="">More navigation</a></li>
-          </ul>-->
-          <!--<ul class="nav nav-sidebar">
-            <li><a href="">Nav item again</a></li>
-            <li><a href="">One more nav</a></li>
-            <li><a href="">Another nav item</a></li>
-          </ul>-->
-        </div>
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h1 class="page-header">Tests no Paramétricos</h1>
-
-		    <!--Tests no paramétricos-->
-		    <form id="formulario_no_parametricos">
-		        <strong>Test no paramétrico:</strong><br><br>
-		        <select id="test">
-		            <option value="wilcoxon">RS de Wilcoxon</option>
-		            <option value="friedman">Friedman</option>
-		            <option value="iman-davenport">Iman-Davenport</option>
-		            <option value="rangos-alineados">Rangos Alineados</option>
-		            <option value="quade">Quade</option>
-		        </select><br><br>
-		        Nivel de Significancia:<br><br>
-		        <select id="alpha">
-		            <option value="no">Elige</option>
-		            <option value="0.10">0.10</option>
-		            <option value="0.05">0.05</option>
-		            <option value="0.02">0.02</option>
-		            <option value="0.01">0.01</option>
-		            <option value="0.005">0.005</option>
-		            <option value="0.001">0.001</option>
-		        </select><br><br>
-		        <div id="mostrar_tipo">
-		            Maximización / Minimización:<br><br>
-		            <select id="tipo">
-		                <option value="no">Elige</option>
-		                <option value="0">Minimización</option>
-		                <option value="1">Maximización</option>
-		            </select><br><br>
-		        </div>
-		        <div id="mostrar_comparacion">
-		            Test POST-HOC:<br><br>
-		            <select id="test_post_hoc">
-		                <option value="no">Elige</option>
-		                <option value="bonferroni_dunn_test">Bonferroni-Dunn</option>
-		                <option value="holm_test">Holm</option>
-		                <option value="hochberg_test">Hochberg</option>
-		                <option value="li_test">Li</option>
-		                <option value="finner_test">Finner</option>
-		                <option value="nemenyi_multitest">Bonferroni-Dunn Multitest</option>
-		                <option value="holm_multitest">Holm Multitest</option>
-		                <option value="hochberg_multitest">Hochberg Multitest</option>
-		                <option value="finner_multitest">Finner Multitest</option>
-		                <option value="shaffer_multitest">Shaffer</option>
-		            </select><br><br>
-		        </div>
-		        <input type="button" value="Enviar" id="datos"><br><br>
-		    </form>
-			<div id="resultado"></div>
-
-          <!--<div class="row placeholders">
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img data-src="holder.js/200x200/auto/sky" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
+        <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="index.html">STAC - Statistical Tests for Algorithm Comparison</a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <!--Subir el fichero-->
+                        <li class="dropdown">
+                            <a id="a_subida" class="dropdown-toggle" href="#" data-toggle="dropdown">Subir fichero</a>
+                            <div class="dropdown-menu" style="padding:17px;">
+                                <form class="form" id="formfichero" enctype="multipart/form-data"> 
+                                    <div class="input-group">
+                                        <span class="input-group-btn">
+                                            <span class="btn btn-primary btn-file">
+                                                Buscar <input type="file" name="fichero" id="fichero"/>
+                                            </span>
+                                        </span>
+                                        <input type="text" class="form-control" style="width:150px;" readonly>
+                                    </div>
+                                    <br>
+                                    <center><input type="button" class="btn btn-default" value="Subir" id="boton_fichero"/></center>
+                                    <div id="mensaje_subida" align="center"></div>
+                                </form>
+                            </div>
+                        </li>
+                        <!--Consulta de fichero-->
+                        <li><a href="consultar_fichero.html">Consultar fichero</a></li>
+                        <!--Ayuda-->
+                        <li><a href="ayuda.html">Ayuda</a></li>
+                    </ul>
+                </div>
             </div>
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img data-src="holder.js/200x200/auto/vine" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img data-src="holder.js/200x200/auto/sky" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img data-src="holder.js/200x200/auto/vine" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
-            </div>
-          </div>-->
-
-          <!--<h2 class="sub-header">Section title</h2>
-          <div class="table-responsive">
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Header</th>
-                  <th>Header</th>
-                  <th>Header</th>
-                  <th>Header</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>1,001</td>
-                  <td>Lorem</td>
-                  <td>ipsum</td>
-                  <td>dolor</td>
-                  <td>sit</td>
-                </tr>
-                <tr>
-                  <td>1,002</td>
-                  <td>amet</td>
-                  <td>consectetur</td>
-                  <td>adipiscing</td>
-                  <td>elit</td>
-                </tr>
-                <tr>
-                  <td>1,003</td>
-                  <td>Integer</td>
-                  <td>nec</td>
-                  <td>odio</td>
-                  <td>Praesent</td>
-                </tr>
-                <tr>
-                  <td>1,003</td>
-                  <td>libero</td>
-                  <td>Sed</td>
-                  <td>cursus</td>
-                  <td>ante</td>
-                </tr>
-                <tr>
-                  <td>1,004</td>
-                  <td>dapibus</td>
-                  <td>diam</td>
-                  <td>Sed</td>
-                  <td>nisi</td>
-                </tr>
-                <tr>
-                  <td>1,005</td>
-                  <td>Nulla</td>
-                  <td>quis</td>
-                  <td>sem</td>
-                  <td>at</td>
-                </tr>
-                <tr>
-                  <td>1,006</td>
-                  <td>nibh</td>
-                  <td>elementum</td>
-                  <td>imperdiet</td>
-                  <td>Duis</td>
-                </tr>
-                <tr>
-                  <td>1,007</td>
-                  <td>sagittis</td>
-                  <td>ipsum</td>
-                  <td>Praesent</td>
-                  <td>mauris</td>
-                </tr>
-                <tr>
-                  <td>1,008</td>
-                  <td>Fusce</td>
-                  <td>nec</td>
-                  <td>tellus</td>
-                  <td>sed</td>
-                </tr>
-                <tr>
-                  <td>1,009</td>
-                  <td>augue</td>
-                  <td>semper</td>
-                  <td>porta</td>
-                  <td>Mauris</td>
-                </tr>
-                <tr>
-                  <td>1,010</td>
-                  <td>massa</td>
-                  <td>Vestibulum</td>
-                  <td>lacinia</td>
-                  <td>arcu</td>
-                </tr>
-                <tr>
-                  <td>1,011</td>
-                  <td>eget</td>
-                  <td>nulla</td>
-                  <td>Class</td>
-                  <td>aptent</td>
-                </tr>
-                <tr>
-                  <td>1,012</td>
-                  <td>taciti</td>
-                  <td>sociosqu</td>
-                  <td>ad</td>
-                  <td>litora</td>
-                </tr>
-                <tr>
-                  <td>1,013</td>
-                  <td>torquent</td>
-                  <td>per</td>
-                  <td>conubia</td>
-                  <td>nostra</td>
-                </tr>
-                <tr>
-                  <td>1,014</td>
-                  <td>per</td>
-                  <td>inceptos</td>
-                  <td>himenaeos</td>
-                  <td>Curabitur</td>
-                </tr>
-                <tr>
-                  <td>1,015</td>
-                  <td>sodales</td>
-                  <td>ligula</td>
-                  <td>in</td>
-                  <td>libero</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>-->
         </div>
-      </div>
-    </div>
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-	<script src="bootstrap-3.1.1/dist/js/bootstrap.min.js"></script>
-    <script src="bootstrap-3.1.1/docs/assets/js/docs.min.js"></script>
-	<script src="js/codigo_jquery.js"></script>
-  </body>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-3 col-md-2 sidebar">
+                    <ul class="nav nav-sidebar">
+                        <li><a href="index.html">Principal</a></li>
+                        <li><a href="condiciones_parametricas.html">Condiciones Paramétricas</a></li>
+                        <li><a href="tests_parametricos.html">Tests Paramétricos</a></li>
+                        <li class="active"><a href="tests_no_parametricos.html">Tests no Paramétricos</a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+                    <h1 class="page-header">Tests no Paramétricos</h1>
+                    <!--*****************************Tests no paramétricos**************************************************-->
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a data-toggle="tab" href="#descripcion">Descripción</a></li>
+                        <li><a data-toggle="tab" href="#wilcoxon">Test de Wilcoxon</a></li>
+                        <li><a data-toggle="tab" href="#ranking">Tests de Ranking</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div id="descripcion" class="tab-pane fade in active">
+                            <h3>Descripción</h3>
+                            <p>Los tests no paramétricos son aquellos que no cumplen alguna de las condiciones establecidas para los tests paramétricos:</p>
+                            <ul>
+                                <li>Normalidad: Las muestras siguen una distribución normal.</li>
+                                <li>Independencia: Las muestras no dependen de otras.</li>
+                                <li>Homocedasticidad: Igualdad de varianzas en las muestras.</li>
+                            </ul>
+                            <a href="condiciones_parametricas.html">Ir a Condiciones paramétricas</a>
+                            <br><br><p>Así, por ejemplo, los tests por lo general se aproximarán con otro tipo de distribuciones. En el caso del test de Friedman, por ejemplo, se habla de distribución chi-cuadrado:</p>
+                            <img src="imagenes/chi-cuadrado.png" class="img-responsive" alt="Distribución chi-cuadrado" width="250px;" height="250px;">
+                            <br><p>En las siguientes pestañas <b>"Test de Wilcoxon"</b> y <b>"Tests de Ranking"</b> puedes encontrar los diferentes tests no paramétricos implementados en la web.</p>
+                        </div>
+                        <div id="wilcoxon" class="tab-pane fade">
+                            <h3>Test de Wilcoxon</h3>
+                            <p>Contrasta la hipótesis nula de que las medianas de las diferencias de dos muestras (resultados de dos algoritmos) relacionadas son iguales. Para tamaños muestrales pequeños, se puede determinar mediante la comparación del estadístico con el valor crítico de la tabla de Wilcoxon (si estadistico < valor crítico se rechaza H<sub>0</sub>). Para tamaños muestrales grandes (> 25), el test se puede aproximar con la distribución normal (en cuyo caso H<sub>0</sub> sería rechazada si p-valor < alpha).</p>
+                            <p><strong>Restricciones:</strong></p>
+                            <ul>
+                                <li>Número de algortimos >= 2</li>
+                                <li>Se deben tener al menos 5 conjuntos de datos cuyas diferencias sean distintas de 0.</li>
+                            </ul>
+                            <br>
+                            <p>Nivel de significancia (alpha) o probabilidad de rechazar la hipótesis nula siendo cierta (defecto 0.05):</p>
+                            <select class="form-control" id="alpha" style="width:100px;">
+                                <option value="no">Elige</option>
+                                <option value="0.10">0.10</option>
+                                <option value="0.05">0.05</option>
+                                <option value="0.02">0.02</option>
+                                <option value="0.01">0.01</option>
+                                <option value="0.005">0.005</option>
+                                <option value="0.001">0.001</option>
+                            </select>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-2 col-md-offset-5">
+                                    <a data-toggle="tab" href="#ver_resultados_wilcoxon"><button type="button" class="btn btn-success" id="datos_wilcoxon">Aplicar</button></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="ranking" class="tab-pane fade">
+                            <h3>Inicio:</h3>
+                            <br><p>Los <b>tests no paramétricos de ranking</b>, contrastan la hipótesis nula de que todos los algoritmos se comportan de forma similar, en cuyo caso sus rankings deberían de ser similares y por tanto se podrían considerar iguales todos los algoritmos. Los tests de ranking se diferencian en la forma de calcular los rankings o en la forma de calcular el estadístico.</p>
+                            <p>Estos tests, dan como resultado la existencia o no de diferencias significativas entre los algoritmos sobre los que se han aplicado. Es decir, nos dice si el contraste de hipótesis es o no estadísticamente significativo. Si se rechaza la hipótesis nula de “todos los algoritmos son iguales”, sabremos que entre los algoritmos existen diferencias. Sin embargo, puede ocurrir que un algoritmo presente un rendimiento similar a otro u otros y por tanto se pueda considerar igual.</p>
+                            <p>Por este motivo, después de aplicar los tests de ranking se aplican los <b>tests Post-Hoc</b>. Estos tests comparan los algoritmos y realizan contrastes de hipótesis entre ellos para determinar diferencias. Se distinguen dos tipos de comparación:</p>
+                            <ul>
+                                <li>Método de control: Se compara el primer algoritmo del ranking devuelto por el test de ranking con el resto de algoritmos y por tanto habrá K-1 comparaciones.</li>
+                                <li>Comparación múltiple (multitest): Compara todos los algoritmos con todos. Habrá K*(K-1)/2 comparaciones.</li>
+                            </ul>
+                            <div class="row">
+                                <div class="col-md-2 col-md-offset-5">
+                                    <br><a data-toggle="tab" href="#empezar"><button type="button" name="test" class="btn btn-success">Empezar</button></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="empezar" class="tab-pane fade">
+                            <h3>Selecciona un test de ranking:</h3>
+                            <p><b>Friedman:</b> Realiza comparaciones y asigna rankings dentro de cada conjunto de datos. El estadístico se distribuye como una distribución chi-cuadrado con K-1 grados de libertad, siendo K el número de variables relacionadas (o número de algoritmos).</p>
+                            <p><b>Iman-Davenport:</b> Mejora del test de Friedman con un estadístico más ajustado, que se distribuye de acuerdo a una distribución f con (K-1) y (K-1)*(N-1) grados de libertad, siendo N el número de conjunto de datos.</p>
+                            <p><b>Rangos Alineados de Friedman:</b> Realiza comparaciones y asigna rankings teniendo en cuenta a todos los conjuntos de datos. Suele emplearse cuando el número de algoritmos en la comparación es pequeño.</p>
+                            <p><b>Quade:</b> Similar a Iman-Davenport, pero considera que algunos problemas son más difíciles o que los resultados que obtienen los algoritmos sobre ellos son más distantes (ponderación).</p>
+                            <div class="row">
+                                <!--Selección de Test, nivel de significacia y tipo-->
+                                <div class="col-md-2">
+                                    <div class="btn-group-vertical" data-toggle="buttons">
+                                        <label class="btn btn-primary active">
+                                            <input type="radio" name="test" id="option1" value="friedman" checked> Friedman
+                                        </label>
+                                        <label class="btn btn-primary">
+                                            <input type="radio" name="test" id="option2" value="iman-davenport"> Iman-Davenport
+                                        </label>
+                                        <label class="btn btn-primary">
+                                            <input type="radio" name="test" id="option3" value="rangos-alineados"> Rangos Alineados de Friedman
+                                        </label>
+                                        <label class="btn btn-primary">
+                                            <input type="radio" name="test" id="option3" value="quade"> Quade
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-8 col-md-offset-1">
+                                    <p>Nivel de significancia (alpha) o probabilidad de rechazar la hipótesis nula siendo cierta (defecto 0.05):</p>
+                                    <select class="form-control" id="alpha" style="width:100px;">
+                                        <option value="no">Elige</option>
+                                        <option value="0.10">0.10</option>
+                                        <option value="0.05">0.05</option>
+                                        <option value="0.02">0.02</option>
+                                        <option value="0.01">0.01</option>
+                                        <option value="0.005">0.005</option>
+                                        <option value="0.001">0.001</option>
+                                    </select>
+                                    <p>Maximización o minimización (defecto minimización):</p>
+                                    <select class="form-control" id="tipo" style="width:150px;">
+                                        <option value="no">Elige</option>
+                                        <option value="0">Minimización</option>
+                                        <option value="1">Maximización</option>
+                                    </select>
+                                    <br>
+                                    <a data-toggle="tab" href="#ranking"><button type="button" class="btn btn-default">Volver atrás</button></a>
+                                    <a class="btn btn-success" data-toggle="tab" href="#post-hoc" id="friedman">Seguir</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Selección de tests Post-Hoc-->
+                        <div id="post-hoc" class="tab-pane fade">
+                            <h3>Selecciona el test Post-Hoc a aplicar:</h3>
+                            <div class="alert alert-info"><p>Por defecto se aplica Bonferroni-Dunn</p></div>
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <div class="btn-group-vertical" data-toggle="buttons">
+                                        <label class="btn btn-primary">
+                                            <input type="radio" name="post_hoc" value="bonferroni_dunn_test"> Bonferroni-Dunn
+                                        </label>
+                                        <label class="btn btn-primary">
+                                            <input type="radio" name="post_hoc" value="holm_test"> Holm
+                                        </label>
+                                        <label class="btn btn-primary">
+                                            <input type="radio" name="post_hoc" value="hochberg_test"> Hochberg
+                                        </label>
+                                        <label class="btn btn-primary">
+                                            <input type="radio" name="post_hoc" value="li_test"> Li
+                                        </label>
+                                        <label class="btn btn-primary">
+                                            <input type="radio" name="post_hoc" value="finner_test"> Finner
+                                        </label>
+                                        <label class="btn btn-primary">
+                                            <input type="radio" name="post_hoc" value="nemenyi_multitest"> Bonferroni-Dunn Multitest
+                                        </label>
+                                        <label class="btn btn-primary">
+                                            <input type="radio" name="post_hoc" value="holm_multitest"> Holm Multitest
+                                        </label>
+                                        <label class="btn btn-primary">
+                                            <input type="radio" name="post_hoc" value="hochberg_multitest"> Hochberg Multitest
+                                        </label>
+                                        <label class="btn btn-primary">
+                                            <input type="radio" name="post_hoc" value="finner_multitest"> Finner Multitest
+                                        </label>
+                                        <label class="btn btn-primary">
+                                            <input type="radio" name="post_hoc" value="shaffer_multitest"> Shaffer
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-8 col-md-offset-1">
+                                    <p><strong>Bonferroni-Dunn: </strong>Rechaza la hipótesis nula si: p-valor < alpha / (K-1)</p>
+                                    <p><strong>Holm: </strong>Compara cada p<sub>i</sub> (empezando por el más significativo o pequeño) con alpha / (K−i), donde i [1,K-1]. Si se rechaza una hipótesis continúa contrastando. En el caso de que una hipótesis se acepte se aceptan todas las demás.</p>
+                                    <p><strong>Hochberg: </strong>Compara en la dirección opuesta a Holm. En el momento que encuentra una hipótesis que pueda aceptar, acepta todas las demás.</p>
+                                    <p><strong>Li: </strong>Rechaza todas las hipótesis si el p-valor menos significativo es menor que alpha. En otro caso, acepta dicha hipótesis y rechaza cualquier hipótesis restante cuyo p-valor sea menor que un valor calculado.</p>
+                                    <p><strong>Finner: </strong>Sigue un proceso igual al test de Holm pero cada p-valor asociado con la hipótesis H<sub>i</sub> se compara como: p<sub>i</sub> <= alpha / 1−(1−alpha)^(K−1)/i, donde i [1,K-1]</p>
+                                    <p><strong>Multitests: </strong>Iguales que los demás pero en lugar de K-1 comparaciones se relizan m donde, m=(K∗(K−1))/2.</p>
+                                    <p><strong>Shaffer: </strong>Igual a Holm pero cada p-valor asociado con la hipótesis H<sub>i</sub> se compara como p<sub>i</sub> <= alpha / t<sub>i</sub>, donde t<sub>i</sub> es el número máximo de hipótesis posibles suponiendo que las (j-1) anteriores han sido rechazadas.</p><br>
+                                    <a data-toggle="tab" href="#empezar"><button type="button" class="btn btn-default">Volver atrás</button></a>
+                                    <a data-toggle="tab" href="#ver_resultados_ranking"><button type="button" class="btn btn-success" id="datos_ranking">Aplicar</button></a>
+                                </div>
+                            </div>
+                            <br>
+                        </div>
+                        <!--Mostrar resultados Wilcoxon-->
+                        <div id="ver_resultados_wilcoxon" class="tab-pane fade">
+                            <div id="resultado"></div>
+                            <br>
+                            <div id="alerta_fichero" class="alert alert-info" style="display:none">
+                                <strong>¡Sube un fichero!</strong> A la derecha de la barra la barra de navegación superior puedes seleccionar y
+                                subir un fichero en "Subir fichero". A continuación, pulsa en "Consultar fichero" para ver su contenido. 
+                            </div>
+                            <div id="fallo_test" class="alert alert-info alert-danger" style="display:none"></div>
+                            <a data-toggle="tab" href="#wilcoxon"><button type="button" class="btn btn-default">Volver atrás</button></a>
+                        </div>
+                        <!--Mostrar resultados Ranking-->
+                        <div id="ver_resultados_ranking" class="tab-pane fade">
+                            <div id="resultado_ranking"></div>
+                            <br>
+                            <div id="alerta_fichero_ranking" class="alert alert-info" style="display:none">
+                                <strong>¡Sube un fichero!</strong> A la derecha de la barra la barra de navegación superior puedes seleccionar y
+                                subir un fichero en "Subir fichero". A continuación, pulsa en "Consultar fichero" para ver su contenido. 
+                            </div>
+                            <div id="fallo_test_ranking" class="alert alert-info alert-danger" style="display:none"></div>
+                            <a data-toggle="tab" href="#post-hoc"><button type="button" class="btn btn-default">Volver atrás</button></a>
+                        </div>
+                    </div>
+                    <!--*******************************************************************************************************-->
+                </div>
+            </div>
+        </div>
+
+        <!-- Bootstrap core JavaScript
+        ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script src="bootstrap-3.1.1/dist/js/bootstrap.min.js"></script>
+        <script src="bootstrap-3.1.1/docs/assets/js/docs.min.js"></script>
+        <script src="js/codigo_jquery.js"></script>
+    </body>
 </html>
