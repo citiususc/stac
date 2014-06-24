@@ -1,0 +1,63 @@
+----------------------------------------------------------------------------------------
+MODELO LATEX PARA EL TRABALLO DE FIN DE GRAO (MEMORIA, CARÁTULA DE CD y PRESENTACIÓN)
+
+El fichero principal de la memoria es: traballo.tex
+
+PARA GALLEGO
+En traballo.tex, usar la linea 12: \usepackage[galician]{babel}
+
+PARA CASTELLANO: cambiarla por linea 13: \usepackage[spanish]{babel}
+
+Para los acentos usamos codificacion UTF-8 (LINEA 10): \usepackage[utf8]{inputenc} 
+Si se usase la codificacion es_ES.ISO-8859-1 (LINEA 11): \usepackage[latin1]{inputenc}
+La conversión de acentos se hace con: iconv -f UTF-8 -t ISO-8859-1 filename.tex
+
+Edición y compilación:
+
+Opción 1. Existen múltiples editores latex que integran el compilador
+
+  http://en.wikipedia.org/wiki/Comparison_of_TeX_editors
+
+Opción 2. Vía latex. Esta forma requiere ejecutar dos comandos:
+
+  1) latex traballo
+     latex traballo
+     (hay que ejecutar dos veces para generar los índices, actualizar las referencias cruzadas, etc)
+     (se visualiza con: xdvi traballo.dvi)
+  
+  2) dvipdf traballo (convierte dvi en pdf)
+     o bien primero: dvips traballo (obtiene un postscript) y luego: ps2pdf traballo.ps (pasa a pdf)
+
+Opción 3. Vía pdflatex. Ejecutar dos veces el siguiente comando para obtener un pdf con referencias actualizadas 
+  pdflatex traballo
+  pdflatex traballo
+
+Figuras. Los dos métodos trabajan con diferentes formatos de figuras:
+
+- Incluir solo figuras eps (postscript encapsulado) si se usa la vía latex -> dvipdf
+
+- Incluir solo figuras pdf, png, jpeg y gif si se usa la vía pdflatex
+
+  Para convertir formatos hay multitud de programa de conversión, por ejemplo,
+  epstopdf (convierte de eps a pdf)
+
+No olvidarse de pasar el diccionario:
+   aspell --master=galician check traballo.tex
+   aspell --master=spanish check traballo.tex
+
+Para el lenguaje gallego algunas palabras se parten mal (por ejemplo, inter-ese), se corrigen con el comando
+   \hyphenation{in-te-re-se} (véase capitulos/introducion.tex)
+
+------------------------------------------------
+
+Caratula del CD: caratula.tex
+
+------------------------------------------------
+
+Presentacion: presentacion.tex
+(Elegir el estilo que se desee, hay cientos en la red)
+(Para la visualización correcta se requiere generar el PDF, no se ve bien DVI ni PS)
+
+------------------------------------------------
+Correcciones y sugerencias a: francisco.arguello@usc.es
+

@@ -1,0 +1,29 @@
+%Paquetes.
+\documentclass[10pt,twoside,a4paper]{book}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage[right=2.5cm]{geometry}
+
+% Comienza el documento.
+\begin{document}
+\include{capitulos/titulo}
+
+\pagestyle{plain}
+\pagenumbering{Roman}
+\setcounter{page}{1}
+\tableofcontents
+\listoffigures
+
+% Ahora se incluyen los capítulos. Se cambia la numeración y las cabeceras.
+\pagestyle{headings}
+\pagenumbering{arabic}
+\setcounter{page}{1}
+\include{capitulos/introduccion}
+
+% Aquí empiezan los apéndices.
+%\appendix
+%\include{capitulos/bibliografia}
+
+\end{document}
