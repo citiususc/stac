@@ -6,7 +6,7 @@ los datos obtenidos con el objetivo de sacar ciertas conclusiones de ellos y as�
 decisiones, con las que aumentar la productividad. El analista de datos combina diferentes
 habilidades, especialmente las técnicas de la minería de datos y del aprendizaje automático (DM\&M).
 
-Según Mitchell, una definición de aprendizaje automático sería la siguiente: Un programa de
+Según Mitchell \cite{mitchell}, una definición de aprendizaje automático sería la siguiente: Un programa de
 ordenador aprende a partir de una experiencia E a realizar una tarea T (de acuerdo con una medida
 de rendimiento P), si su rendimiento al realizar T, medido con P, mejora gracias a la experiencia E.
 
@@ -121,9 +121,46 @@ muestra aleatoria proporcionará la evidencia. Si el juicio (test o prueba de hi
 es inocente, sólo se puede decir que no se tiene suficiente evidencia para asegurar que el acusado es culpable,
 mientras que si aceptamos la hipótesis alternativa, se estará bastante seguro de que el acusado sí es culpable.
 
-
 \subsection{Decisiones y tipos de error}
-\subsection{Etapas en la resolución de un contraste de hipótesis}
-\subsection{Tests paramétricos y no paramétricos}
-\subsection{Concepto de p-valor}
-\section{Organización del documento}
+Cuando se lleva a cabo un contraste de hipótesis sólo se pueden tomar dos decisiones. Los datos de la muestra,
+evidenciarán qué decisión se debe tomar:
+\begin{enumerate}
+\item Aceptar la hipótesis nula ($H_0$) (Rechazar la hipótesis alternativa $H_1$)
+\item Rechazar $H_0$ (Aceptar la hipótesis alternativa)
+\end{enumerate}
+\begin{figure}[h]
+\centering
+\includegraphics[height=2.5cm]{figuras/figura1.png}
+\caption{Decisiones y tipos de error.}
+\label{fig:decision}
+\end{figure}
+La muestra, en el caso de este proyecto, vendrá dada por los resultados obtenidos por los algoritmos. Sin embargo,
+cuando se toma la decisión se pueden cometer dos tipos de error. La figura \ref{fig:decision}, nos muestra las
+decisiones y los dos tipos de errores que se pueden cometer.
+
+Se puede tomar una decisión correcta o errónea. La probabilidad de \textit{``Error tipo I"} se denota por $\alpha$
+y se denomina nivel de significación:
+\begin{center}
+$P(\mbox{Error tipo I}) = P(\mbox{Rechazar } H_0|H_0 \mbox{ es cierta}) =\alpha.$
+\end{center}
+La probabilidad de \textit{``Error tipo II"} se denota por $\beta$:
+\begin{center}
+$P(\mbox{Error tipo II}) = P(\mbox{Aceptar } H_0|H_0 \mbox{ es falsa}) =\beta.$
+\end{center}
+Por otra parte, la \textit{``Potencia"} es la probabilidad de detectar que una hipótesis es falsa. Los tests
+estadísticos o pruebas de hipótesis implementados en el presente proyecto serán mejores o peores dependiendo
+de su potencia:
+\begin{center}
+$P(\mbox{Potencia}) = P(\mbox{Rechazar } H_0|H_0 \mbox{ es falsa}) =1-\beta.$
+\end{center}
+
+El \textit{``Error tipo I"}, es lo más peligroso que puede ocurrir, mientras que el \textit{``Error tipo II"}
+no es tan importante. Volviendo al ejemplo de la analogía del juicio, es mucho peor condenar a un inocente que
+absolver a un culpable. Obviamente, lo ideal sería que tanto $\alpha$ como $\beta$ fuesen nulos y que no se
+cometiese ningún error, o que ambos valores fuesen muy pequeños. Como no se pueden disminuir ambos errores a la
+vez, se controla el \textit{``Error tipo I"}, que es el más importante.
+
+%\subsection{Etapas en la resolución de un contraste de hipótesis}
+%\subsection{Tests paramétricos y no paramétricos}
+%\subsection{Concepto de p-valor}
+%\section{Organización del documento}
