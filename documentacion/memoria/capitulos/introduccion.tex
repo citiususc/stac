@@ -1,3 +1,5 @@
+%***************************************************************************************************************************
+
 \chapter{Introducción}
 En el contexto tecnológico actual, en donde el Big Data es un recurso cada vez más
 utilizado, el rol del analista de datos (data scientist) se está convirtiendo en una profesión
@@ -28,6 +30,8 @@ CiTIUS para su uso. El impacto y difusión del resultado del proyecto va a ser a
 actualidad no existe ninguna herramienta que centralice la aplicación de los test estadísticos de mayor
 utilidad y que resulte fácil de usar.
 
+%***************************************************************************************************************************
+
 \section{Objetivos del proyecto}
 El proyecto se centra en crear y desarrollar una plataforma web para asistir al analista de datos
 en el proceso de validación de resultados obtenidos de diferentes algoritmos de aprendizaje.
@@ -40,6 +44,8 @@ tests estadísticos vía web.
 \item Desarrollar una interfaz web (HTML + JavaScript) para facilitar el uso de los tests sobre los
 datos introducidos por el analista de datos.
 \end{enumerate}
+
+%***************************************************************************************************************************
 
 \section{Contraste de hipótesis}
 El contraste de hipótesis, o lo que se conoce como tests estadísticos se engloba dentro de la rama de la
@@ -69,6 +75,8 @@ supone un problema y es el hecho de cuándo considerar que la media es lo sufici
 determinar que la afirmación del ingeniero es errónea. Por ejemplo si la media de la muestra es 8.5, ¿se
 podría desmentir la afirmación inicial? El contraste de hipótesis nos proporciona una forma de establecer
 este criterio y poder rechazar o aceptar la afirmación inicial.
+
+%***************************************************************************************************************************
 
 \subsection{Hipótesis nula y alternativa}
 En todo contraste de hipótesis siempre siempre se dan dos posibilidades o hipótesis, las cuales se representan
@@ -102,8 +110,8 @@ la hipótesis nula si ésta es rechazada. $H_1$ establece que lo que indica la m
 a toda la población.
 
 En este caso, los programadores están preocupados de que la hipótesis nula sea cierta. Un test estadístico o prueba
-de hipótesis hallará, entre otras cosas  una medida cuantitativa de la factibilidad de la hipótesis nula (denominado estadístico de contraste) y se podrá decir a los programadores (después de que el test tome la decisión) si su
-preocupación está o no justificada. Por tanto, a modo de resumen este ejemplo nos proporciona dos hipótesis:
+de hipótesis hallará, entre otras cosas  una medida cuantitativa de la factibilidad de la hipótesis nula (denominado estadístico de contraste que para este ejemplo viene dado por la media obtenida en la muestra) y se podrá decir a los programadores (después de que el test tome la decisión) si su preocupación está o no justificada. Por tanto, a modo
+de resumen este ejemplo nos proporciona dos hipótesis:
 $$H_0: \mu \geq 100 \mbox{ vs. } H_1: \mu < 100$$
 
 La realización de un contraste de hipótesis no consiste en decidir cuál de las dos hipótesis ($H_0$, $H_1$) es más
@@ -121,6 +129,25 @@ muestra aleatoria proporcionará la evidencia. Si el juicio (test o prueba de hi
 es inocente, sólo se puede decir que no se tiene suficiente evidencia para asegurar que el acusado es culpable,
 mientras que si aceptamos la hipótesis alternativa, se estará bastante seguro de que el acusado sí es culpable.
 
+%***************************************************************************************************************************
+
+\subsection{Estadístico de contraste}
+Los tests estadísticos o pruebas de hipótesis, calculan internamente una medida cuantitativa que proporciona la
+factibilidad de la hipótesis nula. Esta medición se extrae de la muestra proporcionada. Por ejemplo, si queremos
+contrastar la hipótesis de que la media poblacional es 5, un estadístico a calcular puede ser la media de una
+muestra. En este caso, la muestra viene determinada por los resultados obtenidos por los algoritmos y cada uno de
+los tests tienen una forma particular de hallar este estadístico mediante una fórmula que lo caracteriza. Estos
+estadísticos siguen una determinada distribución de probabilidad. Por ejemplo en esta plataforma web, los tests
+implementados harán uso de estadísticos que siguen distribuciones como:
+\begin{itemize}
+\item Distribución normal (p. ej. test de Wilcoxon).
+\item Distribución chi cuadrado $\chi^2$ (p. ej. test de Friedman).
+\item Distribución f de Snedecor (p. ej. test de Iman-Davenport).
+\item Distribución t de Student (p. ej. t-test).
+\end{itemize}
+
+%***************************************************************************************************************************
+
 \subsection{Decisiones y tipos de error}
 Cuando se lleva a cabo un contraste de hipótesis sólo se pueden tomar dos decisiones. Los datos de la muestra,
 evidenciarán qué decisión se debe tomar:
@@ -130,7 +157,7 @@ evidenciarán qué decisión se debe tomar:
 \end{enumerate}
 \begin{figure}[h]
 \centering
-\includegraphics[height=2.5cm]{figuras/figura1.png}
+\includegraphics{figuras/figura1.png}
 \caption{Decisiones y tipos de error.}
 \label{fig:decision}
 \end{figure}
@@ -158,9 +185,52 @@ El \textit{``Error tipo I"}, es lo más peligroso que puede ocurrir, mientras qu
 no es tan importante. Volviendo al ejemplo de la analogía del juicio, es mucho peor condenar a un inocente que
 absolver a un culpable. Obviamente, lo ideal sería que tanto $\alpha$ como $\beta$ fuesen nulos y que no se
 cometiese ningún error, o que ambos valores fuesen muy pequeños. Como no se pueden disminuir ambos errores a la
-vez, se controla el \textit{``Error tipo I"}, que es el más importante.
+vez, se controla el \textit{``Error tipo I"}, que es el más importante. Este nivel de significación $\alpha$
+es un parámetro que debe seleccionar la persona que quiere realizar un test estadístico en base a cómo de
+importante considere rechazar $H_0$ cuando es cierta.
 
-%\subsection{Etapas en la resolución de un contraste de hipótesis}
-%\subsection{Tests paramétricos y no paramétricos}
-%\subsection{Concepto de p-valor}
-%\section{Organización del documento}
+%***************************************************************************************************************************
+
+\subsection{Intervalos de confianza}
+
+%***************************************************************************************************************************
+
+\subsection{Decisión final y Concepto de p-valor}
+
+%***************************************************************************************************************************
+
+\subsection{Tests paramétricos y no paramétricos}
+
+%***************************************************************************************************************************
+
+\subsection{Etapas en la resolución de un contraste de hipótesis}
+En un contraste de hipótesis siempre se siguen una serie de pasos definidos. Como se ha ido viendo a lo largo
+del capítulo, los pasos para la realización de una prueba de hipótesis o test estadístico son las siguientes:
+\begin{enumerate}
+\item Especificación de la hipótesis nula $H_0$ y de la hipótesis alternativa $H_1$.
+\item Suponer que $H_0$ es verdadera (el test sirve para que a partir de la muestra de datos podamos rechazar
+$H_0$ en beneficio de $H_1$).
+\item Calcular un estadístico de prueba o estadístico de contraste. Este estadístico se usa para evaluar la
+fuerza de la evidencia en contra de $H_0$ (medir la discrepancia entre la hipótesis y la muestra).
+\item Establecer un nivel de significación $\alpha$ en base a cómo de importante se considere rechazar $H_0$
+cuando realmente es verdadera.
+\item El nivel de significación fijado divide en dos regiones el conjunto de posibles valores del estadístico
+de contraste: la región de aceptación y la región de rechazo o región crítica.
+\item Si el valor del estadístico cae en la región de rechazo, se rechaza la hipótesis nula, ya que esto
+evidencia que los datos obtenidos de la muestra no son compatibles con $H_0$. Por tanto, en este caso se diría
+que el contraste es estadísticamente significativo, es decir, existe evidencia estadísticamente significativa en
+favor de $H_1$.
+\item Si el valor del estadístico cae en la región de aceptación, se acepta la hipótesis nula, ya que no existen
+razones suficientes para rechazar $H_0$ con el nivel de significación dado. Por tanto, en este caso se diría
+que el contraste es estadísticamente no significativo, es decir, no existe evidencia estadísticamente significativa
+en favor de $H_1$.
+\item La decisión de rechazar o aceptar la hipótesis nula, se puede determinar también mediante el p-valor,
+que es el parámetro utilizado para realizar los tests estadísticos en esta plataforma web. El p-valor proporciona
+un forma más eficiente de determinar si el contraste es o no estadísticamente significativo, ya que no sería
+necesario recalcular regiones de aceptación y rechazo cada vez que el usuario de los tests cambia de nivel de
+significación.
+\end{enumerate}
+
+%***************************************************************************************************************************
+
+\section{Organización del documento}

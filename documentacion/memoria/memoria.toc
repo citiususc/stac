@@ -1,0 +1,12 @@
+\select@language {spanish}
+\contentsline {chapter}{\numberline {1}Introducci\IeC {\'o}n}{1}{chapter.1}
+\contentsline {section}{\numberline {1.1}Objetivos del proyecto}{1}{section.1.1}
+\contentsline {section}{\numberline {1.2}Contraste de hip\IeC {\'o}tesis}{2}{section.1.2}
+\contentsline {subsection}{\numberline {1.2.1}Hip\IeC {\'o}tesis nula y alternativa}{2}{subsection.1.2.1}
+\contentsline {subsection}{\numberline {1.2.2}Estad\IeC {\'\i }stico de contraste}{3}{subsection.1.2.2}
+\contentsline {subsection}{\numberline {1.2.3}Decisiones y tipos de error}{4}{subsection.1.2.3}
+\contentsline {subsection}{\numberline {1.2.4}Intervalos de confianza}{4}{subsection.1.2.4}
+\contentsline {subsection}{\numberline {1.2.5}Decisi\IeC {\'o}n final y Concepto de p-valor}{4}{subsection.1.2.5}
+\contentsline {subsection}{\numberline {1.2.6}Tests param\IeC {\'e}tricos y no param\IeC {\'e}tricos}{4}{subsection.1.2.6}
+\contentsline {subsection}{\numberline {1.2.7}Etapas en la resoluci\IeC {\'o}n de un contraste de hip\IeC {\'o}tesis}{4}{subsection.1.2.7}
+\contentsline {section}{\numberline {1.3}Organizaci\IeC {\'o}n del documento}{5}{section.1.3}

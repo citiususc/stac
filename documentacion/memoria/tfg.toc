@@ -1,7 +1,0 @@
-\select@language {spanish}
-\contentsline {chapter}{\numberline {1}Introducci\IeC {\'o}n}{3}{chapter.1}
-\contentsline {section}{\numberline {1.1}Objetivos del proyecto}{3}{section.1.1}
-\contentsline {section}{\numberline {1.2}Contraste de hip\IeC {\'o}tesis}{4}{section.1.2}
-\contentsline {subsection}{\numberline {1.2.1}Hip\IeC {\'o}tesis nula y alternativa}{4}{subsection.1.2.1}
-\contentsline {subsection}{\numberline {1.2.2}Decisiones y tipos de error}{5}{subsection.1.2.2}
-\contentsline {chapter}{Bibliograf\IeC {\'\i }a}{7}{figure.1.1}
