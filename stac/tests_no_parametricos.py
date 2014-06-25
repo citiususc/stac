@@ -791,7 +791,7 @@ def holm_test(K, nombres, valores_z, p_valores, metodo_control, alpha=0.05):
         v = max([(K-(j+1))*p_valores[j] for j in range(i+1)])
         p_valores_ajustados.append(min(v,1))
 
-    return {"valores_z" : valores_z, "p_valores" : p_valores, "valores_z" : metodo_control, "nombres" : nombres,
+    return {"valores_z" : valores_z, "p_valores" : p_valores, "metodo_control" : metodo_control, "nombres" : nombres,
     "alphas" : alphas, "resultado" : resultado, "p_valores_ajustados" : p_valores_ajustados}
 
 
@@ -1419,5 +1419,5 @@ def shaffer_multitest(m, comparaciones, valores_z, p_valores, alpha=0.05):
         v = max([t[j]*p_valores[j] for j in range(i+1)])
         p_valores_ajustados.append(min(v,1))
 
-    return {"valores z" : valores_z, "p_valores" : p_valores, "comparaciones" : comparaciones, "alphas" : alphas,
+    return {"valores_z" : valores_z, "p_valores" : p_valores, "comparaciones" : comparaciones, "alphas" : alphas,
             "resultado" : resultado, "p_valores_ajustados" : p_valores_ajustados}

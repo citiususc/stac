@@ -73,22 +73,50 @@
             <div class="row">
                 <div class="col-sm-3 col-md-2 sidebar">
                     <ul class="nav nav-sidebar">
-                        <li class="active"><a href="index.html">Principal</a></li>
+                        <li><a href="index.html">Principal</a></li>
                         <li><a href="condiciones_parametricas.html">Condiciones Paramétricas</a></li>
                         <li><a href="tests_parametricos.html">Tests Paramétricos</a></li>
                         <li><a href="tests_no_parametricos.html">Tests no Paramétricos</a></li>
                     </ul>
                 </div>
                 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-                    <h1 class="page-header">Validación de experimentación en aprendizaje automática y minería de datos</h1>
-                    <div class="alert alert-info"><p>En la esquina superior derecha puedes consultar la ayuda, subir un fichero o consultar su contenido. A continuación, puedes aplicar los tests de condiciones paramétricas para determinar cómo son tus datos o aplicar otros tests en la columna de la izquierda.</p></div>
-                    <p align="justify">En esta plataforma web puedes llevar a cabo la validación de resultados obtenidos por los algoritmos de aprendizaje mediante la aplicación de tests estadísticos sobre los experimentos, que, entre otras utilidades, apoyan la toma de decisiones (por ejemplo la elección del algoritmo más adecuado). Actualmente, es el método estándar más aceptado para validar este tipo de experimentación.</p>
-                    <div class="row">
-                        <div class="col-md-5 col-md-offset-3">
-                            <img src="imagenes/grafico.png" class="img-responsive" alt="grafico" width="350px;" height="300px;">
+                    <h1 class="page-header">Ayuda</h1>
+                    <div class="panel-group" id="accordion">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">1. ¿Formato fichero de datos?</a>
+                                </h4>
+                            </div>
+                            <div id="collapseOne" class="panel-collapse collapse in">
+                                <div class="panel-body">
+                                    <p>El fichero de datos sigue el estándar csv, donde sus elementos están separados por comas. En esta imagen podemos ver un ejemplo:</p>
+                                    <img src="imagenes/fichero.png" class="img-responsive" alt="Formato fichero" width="130px;" height="290px;">
+                                    <br>
+                                    <p>Se compone de los siguientes elementos:</p>
+                                    <ul>
+                                        <li>Primera fila: datasets(aquí podría ir cualquier palabra antes de la primera coma),nombreAlgoritmo1,nombreAlgoritmo2,...,nombreAlgoritmoN</li>
+                                        <li>Siguientes filas: nombreDataset,resultadoAlgoritmo1,resultadoAlgoritmo2,...,resultadoAlgoritmoN</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">2. Conceptos</a>
+                                </h4>
+                            </div>
+                            <div id="collapseTwo" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <p><b>Contraste de hipótesis:</b> Problema estadístico que considera una hipótesis inicial H<sub>0</sub>, y una hipótesis alternativa H<sub>1</sub> e intenta determinar cuál de las dos es la hipótesis verdadera, tras aplicar un problema estadístico a un cierto número de experimentos. <a href="http://es.wikipedia.org/wiki/Contraste_de_hip%C3%B3tesis" target="_blank">Aprender más.</a></p>
+                                    <p><b>p-valor:</b> Probabilidad de obtener un valor al menos tan extremo como el estadístico de contraste obtenido. El estadístico es un valor que sigue una determinada distribución muestral (normal, chi-cuadrado, etc.) <a href="http://es.wikipedia.org/wiki/Valor_P" target="_blank">Aprender más.</a></p>
+                                    <p><b>Nivel de significación (alpha):</b> Probabilidad de rechazar la hipótesis nula siendo cierta. También se conoce como nivel de confianza o error tipo 1. Divide la distribución en dos regiones: la región de aceptación y la región de rechazo. <a href="http://es.wikipedia.org/wiki/Significaci%C3%B3n_estad%C3%ADstica" target="_blank">Aprender más.</a></p>
+                                    <p><b>Rechazo de H<sub>0:</sub></b> Si el p-valor es menor que el nivel de significación alpha, el contraste se considerará estadísticamente significativo y por tanto se rechazaría la hipótesis nula. <a href="http://es.wikipedia.org/wiki/Contraste_de_hip%C3%B3tesis" target="_blank">Aprender más.</a></p>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <p align="justify">Los tests se basan en el contraste de hipótesis. Por ejemplo: se puede contrastar la hipótesis nula o H<sub>0</sub> de que las medias de los datos obtenidos por un algoritmo son iguales. Estos tests, verifican si es o no cierta esta hipótesis inicial. Para ello, se obtiene un estadístico (sujeto a una determinada distribución estadística) y se halla la probabilidad de obtener un estadístico al menos tan extremo como el que se obtuvo (p-valor). Si este p-valor es menor que un nivel de confianza dado (valor alpha), se rechazará la hipótesis nula. En caso contrario, se aceptará.</p>
                 </div>
             </div>
         </div>

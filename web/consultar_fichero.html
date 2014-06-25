@@ -73,22 +73,22 @@
             <div class="row">
                 <div class="col-sm-3 col-md-2 sidebar">
                     <ul class="nav nav-sidebar">
-                        <li class="active"><a href="index.html">Principal</a></li>
+                        <li><a href="index.html">Principal</a></li>
                         <li><a href="condiciones_parametricas.html">Condiciones Paramétricas</a></li>
                         <li><a href="tests_parametricos.html">Tests Paramétricos</a></li>
                         <li><a href="tests_no_parametricos.html">Tests no Paramétricos</a></li>
                     </ul>
                 </div>
                 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-                    <h1 class="page-header">Validación de experimentación en aprendizaje automática y minería de datos</h1>
-                    <div class="alert alert-info"><p>En la esquina superior derecha puedes consultar la ayuda, subir un fichero o consultar su contenido. A continuación, puedes aplicar los tests de condiciones paramétricas para determinar cómo son tus datos o aplicar otros tests en la columna de la izquierda.</p></div>
-                    <p align="justify">En esta plataforma web puedes llevar a cabo la validación de resultados obtenidos por los algoritmos de aprendizaje mediante la aplicación de tests estadísticos sobre los experimentos, que, entre otras utilidades, apoyan la toma de decisiones (por ejemplo la elección del algoritmo más adecuado). Actualmente, es el método estándar más aceptado para validar este tipo de experimentación.</p>
-                    <div class="row">
-                        <div class="col-md-5 col-md-offset-3">
-                            <img src="imagenes/grafico.png" class="img-responsive" alt="grafico" width="350px;" height="300px;">
-                        </div>
+                    <h1 class="page-header">Contenido del fichero</h1>
+                    <div id="alerta_fichero" class="alert alert-info alert-dismissable" style="display:none">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        <strong>¡Sube un fichero!</strong> A la derecha de la barra la barra de navegación superior puedes seleccionar y
+                        subir un fichero en "Subir fichero". A continuación, pulsa en "Consultar fichero" para ver su contenido. 
                     </div>
-                    <p align="justify">Los tests se basan en el contraste de hipótesis. Por ejemplo: se puede contrastar la hipótesis nula o H<sub>0</sub> de que las medias de los datos obtenidos por un algoritmo son iguales. Estos tests, verifican si es o no cierta esta hipótesis inicial. Para ello, se obtiene un estadístico (sujeto a una determinada distribución estadística) y se halla la probabilidad de obtener un estadístico al menos tan extremo como el que se obtuvo (p-valor). Si este p-valor es menor que un nivel de confianza dado (valor alpha), se rechazará la hipótesis nula. En caso contrario, se aceptará.</p>
+                    <div class="table-responsive">
+                        <table id="contenido_fichero" class="table table-striped"></table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -100,5 +100,6 @@
         <script src="bootstrap-3.1.1/dist/js/bootstrap.min.js"></script>
         <script src="bootstrap-3.1.1/docs/assets/js/docs.min.js"></script>
         <script src="js/codigo_jquery.js"></script>
+        <script src="js/consultar_fichero.js"></script>
     </body>
 </html>
