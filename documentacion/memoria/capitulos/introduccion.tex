@@ -142,9 +142,45 @@ implementados harán uso de estadísticos que siguen distribuciones como:
 \begin{itemize}
 \item Distribución normal (p. ej. test de Wilcoxon).
 \item Distribución chi cuadrado $\chi^2$ (p. ej. test de Friedman).
-\item Distribución f de Snedecor (p. ej. test de Iman-Davenport).
+\item Distribución f de Fisher-Snedecor (p. ej. test de Iman-Davenport).
 \item Distribución t de Student (p. ej. t-test).
 \end{itemize}
+\begin{figure}[h]
+\centering
+\subfigure[Distribución normal.]{
+\includegraphics[width=5cm,height=3cm]{figuras/pdf_normal.png} }
+\subfigure[Distribución chi cuadrado.]{
+\includegraphics[width=5cm,height=3cm]{figuras/pdf_chi_cuadrado.png} }
+\end{figure}
+\begin{figure}[h]
+\centering
+\subfigure[Distribución f.]{
+\includegraphics[width=5cm,height=3cm]{figuras/pdf_f.png} }
+\subfigure[Distribución t.]{
+\includegraphics[width=5cm,height=3cm]{figuras/pdf_t_student.jpg} }
+\caption{Funciones de distribución de probabilidad \cite{distribuciones_continuas}.}
+\label{fig:pdf}
+\end{figure}
+La figura \ref{fig:pdf}, nos muestra el aspecto que presentan las distintas distribuciones de probabilidad. Todas ellas
+son continuas, pues se puede tomar cualquier valor dentro de un intervalo, a diferencia de las distribuciones discretas.
+
+Atendiendo a la distribución normal, $\mu$ y $\sigma^2$ son la media y la varianza respectivamente. La varianza, es una
+medida de dispersión que indica cómo se distribuye la población. Por ejemplo: en una distribución normal de media 0 y
+varianza 1, aproximadamente el $68\%$ de la población se encuentra en el intervalo $[-1,1]$. Si un estadístico sigue
+una distribución normal con media $\mu$ y varianza $\sigma^2$, se expresa como:
+\[ \mbox{Estadístico} \sim N(\mu,\sigma^2) \]
+
+En las otras tres distribuciones se habla del parámetro $K$ o grados de libertad. Los grados de libertad son el
+número de valores que pueden ser asignados de forma arbitraria, antes de que el resto de las variables tomen un
+valor automáticamente, producto de establecerse las que son libres \cite{grados_libertad}. En nuestro caso, $K$ viene
+determinado por el número de algoritmos o variables relacionadas que tiene la muestra de datos con la que se están
+aplicando los tests, y cada test que use este parámetro lo modifica de acuerdo a su fórmula característica para el
+estadístico. La media y la varianza de estas tres distribuciones vendrán determinadas por el parámetro $k$.
+
+Las distribuciones de probabilidad que pueda seguir un estadístico nos dan un valor diferente de probabilidad para
+cada valor diferente del estadístico. Este valor de probabilidad indica lo probable que es obtener ese valor del
+estadístico siendo la hipótesis nula cierta. Por ej. si es cierta la hipótesis nula de que la media de una población
+es 5, es más probable que obtengamos una media de una muestra igual a 4.5 que a 3.
 
 %***************************************************************************************************************************
 
@@ -157,7 +193,7 @@ evidenciarán qué decisión se debe tomar:
 \end{enumerate}
 \begin{figure}[h]
 \centering
-\includegraphics{figuras/figura1.png}
+\includegraphics[width=7cm,height=2cm]{figuras/figura1.png}
 \caption{Decisiones y tipos de error.}
 \label{fig:decision}
 \end{figure}
@@ -192,10 +228,63 @@ importante considere rechazar $H_0$ cuando es cierta.
 %***************************************************************************************************************************
 
 \subsection{Intervalos de confianza}
+El nivel de significación fijado divide en dos regiones el conjunto de posibles valores del estadístico de
+contraste: la región de aceptación y la región de rechazo o región crítica. Se denomina región de aceptación
+a la región que conduce a la aceptación de $H_0$ y región de rechazo a la región que conduce al rechazo de $H_0$
+en favor de $H_1$.
+
+La determinación de las regiones de aceptación o de rechazo dependen de cómo se establezca la hipótesis
+alternativa $H_1$. Por ejemplo, si hablamos de un contraste en el que se esté contrastando una determinada
+media ($\mu_0$) se podría establecer como $H_1$ que la media en realidad sea menor, mayor o distinta a
+($\mu_0$):\\\\
+Media menor (test unilateral con cola a la izquierda):
+\[ H_0: \mu = \mu_0 \]
+\[ H_1: \mu < \mu_0 \]
+Media mayor (test unilateral con cola a la derecha):
+\[ H_0: \mu = \mu_0 \]
+\[ H_1: \mu > \mu_0 \]
+Media distinta (test bilateral o de dos colas):
+\[ H_0: \mu = \mu_0 \]
+\[ H_1: \mu \neq \mu_0 \]
+\\
+En la figura \ref{fig:intervalos_normal}, podemos ver cómo quedarían establecidos los intervalos para el ejemplo:
+\begin{figure}[h]
+\centering
+\subfigure[Test unilateral. Cola a la izquierda.]{
+\includegraphics[width=5cm,height=3cm]{figuras/test_unilateral_izq.png} }
+\subfigure[Test unilateral. Cola a la derecha.]{
+\includegraphics[width=5cm,height=3cm]{figuras/test_unilateral_der.png} }
+\end{figure}
+\begin{figure}[h]
+\centering
+\subfigure[Test bilateral o de dos colas.]{
+\includegraphics[width=5cm,height=3cm]{figuras/test_bilateral.png} }
+\caption{Regiones de aceptación y rechazo.}
+\label{fig:intervalos_normal}
+\end{figure}
 
 %***************************************************************************************************************************
 
 \subsection{Decisión final y Concepto de p-valor}
+Si el valor del estadístico cae en la región de aceptación, se acepta la hipótesis nula, ya que no existen
+razones suficientes para rechazar $H_0$ con el nivel de significación dado. Por tanto, en este caso se diría
+que el contraste es estadísticamente no significativo, es decir, no existe evidencia estadísticamente significativa
+en favor de $H_1$.
+\begin{figure}[h]
+\centering
+\includegraphics[width=5cm,height=3cm]{figuras/test_unilateral_critico.png}
+\caption{Punto crítico.}
+\label{fig:punto_critico}
+\end{figure}
+La figura \ref{fig:punto_critico} nos muestra el punto crítico: si se supone por ejemplo que el estadístico
+obtenido por el test o prueba de hipótesis es 5 y el punto crítico fuese por ejemplo 4.5, ya no se podría
+aceptar $H_0$ ya que se caería en la región de rechazo.
+
+La decisión de rechazar o aceptar la hipótesis nula, se puede determinar también mediante el p-valor,
+que es el parámetro utilizado para realizar los tests estadísticos en esta plataforma web. El p-valor proporciona
+un forma más eficiente de determinar si el contraste es o no estadísticamente significativo, ya que no sería
+necesario recalcular regiones de aceptación y rechazo cada vez que el usuario de los tests cambia de nivel de
+significación.
 
 %***************************************************************************************************************************
 
