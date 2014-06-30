@@ -1,5 +1,9 @@
 $(document).on('ready', function() {
 
+    //Para mostrar "Consultar fichero" en caso de que halla algún fichero subido.
+    if(sessionStorage.getItem("fichero_actual") != null)
+        $("#mostrar_consulta_fichero").show();
+
 	//Para obtener la url base. Compatible con los navegadores: Chrome 27, Firefox 23, Safari 6, Internet Explorer 10.
 	if (!window.location.origin)
  		window.location.origin = window.location.protocol+"//"+window.location.host;
@@ -9,15 +13,15 @@ $(document).on('ready', function() {
 
         var alpha = $('#alpha_homocedasticidad').val();
 
-        if(localStorage.getItem("fichero_actual") == null)
+        if(sessionStorage.getItem("fichero_actual") == null)
             $("#alerta_fichero_homocedasticidad").show();
         else{
 
             var url;
             if(alpha != "no")
-                url = window.location.origin+"/stac/beta/api/levene/"+localStorage.getItem("fichero_actual")+"/"+alpha;
+                url = window.location.origin+"/stac/beta/api/levene/"+sessionStorage.getItem("fichero_actual")+"/"+alpha;
             else
-                url = window.location.origin+"/stac/beta/api/levene/"+localStorage.getItem("fichero_actual");
+                url = window.location.origin+"/stac/beta/api/levene/"+sessionStorage.getItem("fichero_actual");
 
             var salida;
 
@@ -36,9 +40,9 @@ $(document).on('ready', function() {
                     else{
                         salida = salida + generar_tabla_levene(data);
                         if(data.resultado==false)
-                            localStorage.setItem("homocedasticidad", "cumple");
+                            sessionStorage.setItem("homocedasticidad", "cumple");
                         else
-                            localStorage.setItem("homocedasticidad", "no_cumple");
+                            sessionStorage.setItem("homocedasticidad", "no_cumple");
                     }
                     $("#resultado_homocedasticidad").html(salida);
                 },
@@ -55,15 +59,15 @@ $(document).on('ready', function() {
         var test = $('input[name=test]:checked').val();
         var alpha = $('#alpha_normalidad').val();
 
-        if(localStorage.getItem("fichero_actual") == null)
+        if(sessionStorage.getItem("fichero_actual") == null)
             $("#alerta_fichero").show();
         else{
 
             var url;
             if(alpha != "no")
-                url = window.location.origin+"/stac/beta/api/"+test+"/"+localStorage.getItem("fichero_actual")+"/"+alpha;
+                url = window.location.origin+"/stac/beta/api/"+test+"/"+sessionStorage.getItem("fichero_actual")+"/"+alpha;
             else
-                url = window.location.origin+"/stac/beta/api/"+test+"/"+localStorage.getItem("fichero_actual");
+                url = window.location.origin+"/stac/beta/api/"+test+"/"+sessionStorage.getItem("fichero_actual");
 
             var salida;
 
@@ -88,9 +92,9 @@ $(document).on('ready', function() {
                                 cumple = 0;
                         }
                         if(cumple == 0)
-                            localStorage.setItem("normalidad", "no_cumple");
+                            sessionStorage.setItem("normalidad", "no_cumple");
                         else
-                            localStorage.setItem("normalidad", "cumple");
+                            sessionStorage.setItem("normalidad", "cumple");
                     }
                     $("#resultado").html(salida);
                 },
@@ -105,33 +109,25 @@ $(document).on('ready', function() {
     $(document).on('click', '#datos_anova', function() {
 
         var alpha = $('#alpha_anova').val();
+        var salida = "";
 
-        if(localStorage.getItem("fichero_actual") == null)
+        if(sessionStorage.getItem("fichero_actual") == null)
             $("#alerta_fichero").show();
-        else if(localStorage.getItem("homocedasticidad") == "no" && localStorage.getItem("normalidad") == "no")
-            $("#fallo_test").html("Realiza los tests de condiciones paramétricas para determinar si se pueden aplicar los tests paramétricos.").show();
-        else if(localStorage.getItem("homocedasticidad") == "no")
-            $("#fallo_test").html("Realiza el test de Levene en \"Condiciones paramétricas\" para determinar si los datos cumplen con la característica de homocedasticidad.").show();
-        else if(localStorage.getItem("normalidad") == "no")
-            $("#fallo_test").html("Realiza algún test de normalidad en \"Condiciones paramétricas\" para determinar si los datos cumplen con la característica de normalidad.").show();
-        else if(localStorage.getItem("homocedasticidad") == "no_cumple" || localStorage.getItem("normalidad") == "no_cumple")
-            $("#fallo_test").html("No se pueden aplicar los tests paramétricos, ya que no cumplen las condiciones paramétricas. Prueba a realizar de nuevo los tests de condiciones paramétricas con distintos niveles de confianza.").show();
+        
         else{
 
             var url;
             if(alpha != "no")
-                url = window.location.origin+"/stac/beta/api/anova/"+localStorage.getItem("fichero_actual")+"/"+alpha;
+                url = window.location.origin+"/stac/beta/api/anova/"+sessionStorage.getItem("fichero_actual")+"/"+alpha;
             else
-                url = window.location.origin+"/stac/beta/api/anova/"+localStorage.getItem("fichero_actual");
-
-            var salida;
+                url = window.location.origin+"/stac/beta/api/anova/"+sessionStorage.getItem("fichero_actual");
 
             $.ajax({
                 type: "GET",
                 url: url,
                 dataType: "json",
                 success : function(data) {
-                    salida = "<br><u>Resultado test ANOVA:</u>";
+                    salida = salida + "<br><u>Resultado test ANOVA:</u>";
                 
                     $("#fallo_test").hide();
                     $("#alerta_fichero").hide();
@@ -140,6 +136,16 @@ $(document).on('ready', function() {
                         $("#alerta_fichero").show();
                     }
                     else{
+                        /*------------Avisos condiciones paramétricas.-----------*/
+                        if(sessionStorage.getItem("homocedasticidad") == "no" && sessionStorage.getItem("normalidad") == "no")
+                            salida = salida + "<br><br><p class=\"alert alert-info alert-danger\">No se han aplicado los tests de condiciones paramétricas. Puede que los resultados no sean fiables.</p>";
+                        else if(sessionStorage.getItem("homocedasticidad") == "no")
+                            salida = salida + "<br><br><p class=\"alert alert-info alert-danger\">No se ha aplicado el test de condición paramétrica de homocedasticidad. Puede que los resultados no sean fiables.</p>";
+                        else if(sessionStorage.getItem("normalidad") == "no")
+                            salida = salida + "<br><br><p class=\"alert alert-info alert-danger\">No se ha realizado ningún test de condición paramétrica de normalidad. Puede que los resultados no sean fiables.</p>";
+                        else if(sessionStorage.getItem("homocedasticidad") == "no_cumple" || sessionStorage.getItem("normalidad") == "no_cumple")
+                            salida = salida + "<br><br><p class=\"alert alert-info alert-danger\">Los datos no cumplen las condiciones paramétricas a los niveles de significancia proporcionados. Puede que los resultados no sean fiables.</p>";
+                        /*--------------------------------------------------------*/
                         salida = salida + generar_tabla_parametricos(data.test_anova,"anova");
                         salida = salida + "<br><u>Resultado test POST-HOC Bonferroni:</u>";
                         if(!data.test_comparacion){
@@ -162,33 +168,25 @@ $(document).on('ready', function() {
     $(document).on('click', '#datos_ttest', function() {
 
         var alpha = $('#alpha_ttest').val();
+        var salida = "";
 
-        if(localStorage.getItem("fichero_actual") == null)
+        if(sessionStorage.getItem("fichero_actual") == null)
             $("#alerta_fichero_ttest").show();
-        else if(localStorage.getItem("homocedasticidad") == "no" && localStorage.getItem("normalidad") == "no")
-            $("#fallo_test_ttest").html("Realiza los tests de condiciones paramétricas para determinar si se pueden aplicar los tests paramétricos.").show();
-        else if(localStorage.getItem("homocedasticidad") == "no")
-            $("#fallo_test_ttest").html("Realiza el test de Levene en \"Condiciones paramétricas\" para determinar si los datos cumplen con la característica de homocedasticidad.").show();
-        else if(localStorage.getItem("normalidad") == "no")
-            $("#fallo_test_ttest").html("Realiza algún test de normalidad en \"Condiciones paramétricas\" para determinar si los datos cumplen con la característica de normalidad.").show();
-        else if(localStorage.getItem("homocedasticidad") == "no_cumple" || localStorage.getItem("normalidad") == "no_cumple")
-            $("#fallo_test_ttest").html("No se pueden aplicar los tests paramétricos, ya que no cumplen las condiciones paramétricas. Prueba a realizar de nuevo los tests de condiciones paramétricas con distintos niveles de confianza.").show();
+        
         else{
 
             var url;
             if(alpha != "no")
-                url = window.location.origin+"/stac/beta/api/ttest/"+localStorage.getItem("fichero_actual")+"/"+alpha;
+                url = window.location.origin+"/stac/beta/api/ttest/"+sessionStorage.getItem("fichero_actual")+"/"+alpha;
             else
-                url = window.location.origin+"/stac/beta/api/ttest/"+localStorage.getItem("fichero_actual");
-
-            var salida;
+                url = window.location.origin+"/stac/beta/api/ttest/"+sessionStorage.getItem("fichero_actual");
 
             $.ajax({
                 type: "GET",
                 url: url,
                 dataType: "json",
                 success : function(data) {
-                    salida = "<br><u>Resultado T-test:</u>";
+                    salida = salida + "<br><u>Resultado T-test:</u>";
                 
                     $("#fallo_test_ttest").hide();
                     $("#alerta_fichero_ttest").hide();
@@ -200,6 +198,16 @@ $(document).on('ready', function() {
                             $("#fallo_test_ttest").html(data.fallo).show();
                     }
                     else{
+                        /*------------Avisos condiciones paramétricas.-----------*/
+                        if(sessionStorage.getItem("homocedasticidad") == "no" && sessionStorage.getItem("normalidad") == "no")
+                            salida = salida + "<br><br><p class=\"alert alert-info alert-danger\">No se han aplicado los tests de condiciones paramétricas. Puede que los resultados no sean fiables.</p>";
+                        else if(sessionStorage.getItem("homocedasticidad") == "no")
+                            salida = salida + "<br><br><p class=\"alert alert-info alert-danger\">No se ha aplicado el test de condición paramétrica de homocedasticidad. Puede que los resultados no sean fiables.</p>";
+                        else if(sessionStorage.getItem("normalidad") == "no")
+                            salida = salida + "<br><br><p class=\"alert alert-info alert-danger\">No se ha realizado ningún test de condición paramétrica de normalidad. Puede que los resultados no sean fiables.</p>";
+                        else if(sessionStorage.getItem("homocedasticidad") == "no_cumple" || sessionStorage.getItem("normalidad") == "no_cumple")
+                            salida = salida + "<br><br><p class=\"alert alert-info alert-danger\">Los datos no cumplen las condiciones paramétricas a los niveles de significancia proporcionados. Puede que los resultados no sean fiables.</p>";
+                        /*--------------------------------------------------------*/
                         salida = salida + generar_tabla_parametricos(data,"ttest");
                     }
                     $("#resultado_ttest").html(salida);
@@ -216,16 +224,16 @@ $(document).on('ready', function() {
 
         var alpha = $('#alpha').val();
         
-        if(localStorage.getItem("fichero_actual") == null)
+        if(sessionStorage.getItem("fichero_actual") == null)
             $("#alerta_fichero").show();
         else{
             
             var url;
             
             if(alpha != "no")
-                url = window.location.origin+"/stac/beta/api/wilcoxon/"+localStorage.getItem("fichero_actual")+"/"+alpha;
+                url = window.location.origin+"/stac/beta/api/wilcoxon/"+sessionStorage.getItem("fichero_actual")+"/"+alpha;
             else
-                url = window.location.origin+"/stac/beta/api/wilcoxon/"+localStorage.getItem("fichero_actual");
+                url = window.location.origin+"/stac/beta/api/wilcoxon/"+sessionStorage.getItem("fichero_actual");
 
             var salida = "";
         
@@ -269,28 +277,28 @@ $(document).on('ready', function() {
         if(test_post_hoc === undefined)
             test_post_hoc = "no";
 
-        if(localStorage.getItem("fichero_actual") == null)
+        if(sessionStorage.getItem("fichero_actual") == null)
             $("#alerta_fichero_ranking").show();
         else{
             
             var url;
             
             if(alpha != "no" && tipo != "no" && test_post_hoc != "no")
-                url = window.location.origin+"/stac/beta/api/"+test+"/"+localStorage.getItem("fichero_actual")+"/"+alpha+"/"+tipo+"/"+test_post_hoc;
+                url = window.location.origin+"/stac/beta/api/"+test+"/"+sessionStorage.getItem("fichero_actual")+"/"+alpha+"/"+tipo+"/"+test_post_hoc;
             else if(test_post_hoc != "no" && alpha != "no")
-                url = window.location.origin+"/stac/beta/api/"+test+"/"+localStorage.getItem("fichero_actual")+"/"+alpha+"/"+test_post_hoc;
+                url = window.location.origin+"/stac/beta/api/"+test+"/"+sessionStorage.getItem("fichero_actual")+"/"+alpha+"/"+test_post_hoc;
             else if(test_post_hoc != "no" && tipo != "no")
-                url = window.location.origin+"/stac/beta/api/"+test+"/"+localStorage.getItem("fichero_actual")+"/"+tipo+"/"+test_post_hoc;
+                url = window.location.origin+"/stac/beta/api/"+test+"/"+sessionStorage.getItem("fichero_actual")+"/"+tipo+"/"+test_post_hoc;
             else if(test_post_hoc != "no")
-                url = window.location.origin+"/stac/beta/api/"+test+"/"+localStorage.getItem("fichero_actual")+"/"+test_post_hoc;
+                url = window.location.origin+"/stac/beta/api/"+test+"/"+sessionStorage.getItem("fichero_actual")+"/"+test_post_hoc;
             else if(alpha != "no" & tipo !="no")
-                url = window.location.origin+"/stac/beta/api/"+test+"/"+localStorage.getItem("fichero_actual")+"/"+alpha+"/"+tipo;
+                url = window.location.origin+"/stac/beta/api/"+test+"/"+sessionStorage.getItem("fichero_actual")+"/"+alpha+"/"+tipo;
             else if(alpha != "no")
-                url = window.location.origin+"/stac/beta/api/"+test+"/"+localStorage.getItem("fichero_actual")+"/"+alpha;
+                url = window.location.origin+"/stac/beta/api/"+test+"/"+sessionStorage.getItem("fichero_actual")+"/"+alpha;
             else if(tipo != "no")
-                url = window.location.origin+"/stac/beta/api/"+test+"/"+localStorage.getItem("fichero_actual")+"/"+tipo;
+                url = window.location.origin+"/stac/beta/api/"+test+"/"+sessionStorage.getItem("fichero_actual")+"/"+tipo;
             else
-                url = window.location.origin+"/stac/beta/api/"+test+"/"+localStorage.getItem("fichero_actual");
+                url = window.location.origin+"/stac/beta/api/"+test+"/"+sessionStorage.getItem("fichero_actual");
 
             var salida = "";
         
@@ -350,9 +358,10 @@ $(document).on('ready', function() {
                     resultado = "";
                     if(!data.fallo){
                         resultado = "<p style=\"color:green\";><strong>Fichero subido con éxito</strong></p>";
-						localStorage.setItem("fichero_actual", data.clave);
-                        localStorage.setItem("homocedasticidad", "no");
-                        localStorage.setItem("normalidad", "no");
+						sessionStorage.setItem("fichero_actual", data.clave);
+                        sessionStorage.setItem("homocedasticidad", "no");
+                        sessionStorage.setItem("normalidad", "no");
+                        $("#mostrar_consulta_fichero").show();
 					}
                     else
                         resultado = resultado + "<p style=\"color:red\";><strong>" + data.fallo + "</strong></p>";
@@ -390,6 +399,14 @@ $(document).on('ready', function() {
             if( log ) alert(log);
         }
         
+    });
+
+    /*Despliegue menú para subida de fichero.*/
+    $('#boton_subida').click(function() {
+        $('.dropdown-menu').slideToggle();
+    });
+    $('#a_subida').click(function() {
+        $('.dropdown-menu').slideToggle();
     });
 });
 
