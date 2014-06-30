@@ -1,7 +1,7 @@
 //Consulta de ficheros.
 $(document).on('ready', function() {
 
-	var fichero = localStorage.getItem("fichero_actual");
+	var fichero = sessionStorage.getItem("fichero_actual");
 
 	if(fichero!=null) {
         $.ajax({
@@ -54,3 +54,4 @@ function generar_tabla(data) {
 
     return salida;
 }
+
