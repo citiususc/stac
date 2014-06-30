@@ -37,10 +37,12 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="index.html">STAC - Statistical Tests for Algorithm Comparison</a>
+                    <a class="navbar-brand" href="index.html">Web Platform STAC</a>
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
+                        <!--Consulta de fichero-->
+                        <li><a href="consultar_fichero.html">Consultar fichero</a></li>
                         <!--Subir el fichero-->
                         <li class="dropdown">
                             <a id="a_subida" class="dropdown-toggle" href="#" data-toggle="dropdown">Subir fichero</a>
@@ -49,19 +51,17 @@
                                     <div class="input-group">
                                         <span class="input-group-btn">
                                             <span class="btn btn-primary btn-file">
-                                                Buscar <input type="file" name="fichero" id="fichero"/>
+                                                Abrir <input type="file" name="fichero" id="fichero"/>
                                             </span>
                                         </span>
                                         <input type="text" class="form-control" style="width:150px;" readonly>
                                     </div>
                                     <br>
-                                    <center><input type="button" class="btn btn-default" value="Subir" id="boton_fichero"/></center>
+                                    <center><input type="button" class="btn btn-default" value="Subir" id="boton_fichero"/>&nbsp;&nbsp;&nbsp;<a href="ayuda.html#collapseOne" id="ayuda_fichero" target="_parent">?</a></center>
                                     <div id="mensaje_subida" align="center"></div>
                                 </form>
                             </div>
                         </li>
-                        <!--Consulta de fichero-->
-                        <li><a href="consultar_fichero.html">Consultar fichero</a></li>
                         <!--Ayuda-->
                         <li><a href="ayuda.html">Ayuda</a></li>
                     </ul>
@@ -87,7 +87,7 @@
                         subir un fichero en "Subir fichero". A continuación, pulsa en "Consultar fichero" para ver su contenido. 
                     </div>
                     <div class="table-responsive">
-                        <table id="contenido_fichero" class="table table-striped"></table>
+                        <table id="contenido_fichero" class="table table-hover"></table>
                     </div>
                 </div>
             </div>

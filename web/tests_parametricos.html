@@ -37,10 +37,12 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="index.html">STAC - Statistical Tests for Algorithm Comparison</a>
+                    <a class="navbar-brand" href="index.html">Web Platform STAC</a>
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
+                        <!--Consulta de fichero-->
+                        <li id="mostrar_consulta_fichero" style="display:none"><a href="consultar_fichero.html">Consultar fichero</a></li>
                         <!--Subir el fichero-->
                         <li class="dropdown">
                             <a id="a_subida" class="dropdown-toggle" href="#" data-toggle="dropdown">Subir fichero</a>
@@ -49,19 +51,17 @@
                                     <div class="input-group">
                                         <span class="input-group-btn">
                                             <span class="btn btn-primary btn-file">
-                                                Buscar <input type="file" name="fichero" id="fichero"/>
+                                                Abrir <input type="file" name="fichero" id="fichero"/>
                                             </span>
                                         </span>
                                         <input type="text" class="form-control" style="width:150px;" readonly>
                                     </div>
                                     <br>
-                                    <center><input type="button" class="btn btn-default" value="Subir" id="boton_fichero"/></center>
+                                    <center><input type="button" class="btn btn-default" value="Subir" id="boton_fichero"/>&nbsp;&nbsp;&nbsp;<a href="ayuda.html#collapseOne" id="ayuda_fichero" target="_parent">?</a></center>
                                     <div id="mensaje_subida" align="center"></div>
                                 </form>
                             </div>
                         </li>
-                        <!--Consulta de fichero-->
-                        <li><a href="consultar_fichero.html">Consultar fichero</a></li>
                         <!--Ayuda-->
                         <li><a href="ayuda.html">Ayuda</a></li>
                     </ul>
@@ -160,6 +160,19 @@
                         <!--Mostrar resultados anova-->
                         <div id="ver_resultados_anova" class="tab-pane fade">
                             <div id="resultado"></div>
+                            <!--<table id="probo" style="width:300px">
+                            <tr>
+                              <td>Jill</td>
+                              <td>Smith</td>
+                              <td>50</td>
+                            </tr>
+                            <tr>
+                              <td>Eve</td>
+                              <td>Jackson</td>
+                              <td>94</td>
+                            </tr>
+                            </table>
+                            <p onclick="$('#probo').table2CSV()">dsg</p>-->
                             <br>
                             <div id="alerta_fichero" class="alert alert-info" style="display:none">
                                 <strong>¡Sube un fichero!</strong> A la derecha de la barra la barra de navegación superior puedes seleccionar y
@@ -192,5 +205,6 @@
         <script src="bootstrap-3.1.1/dist/js/bootstrap.min.js"></script>
         <script src="bootstrap-3.1.1/docs/assets/js/docs.min.js"></script>
         <script src="js/codigo_jquery.js"></script>
+        <!--<script type="text/javascript" src="http://www.kunalbabre.com/projects/table2CSV.js" > </script>-->
     </body>
 </html>

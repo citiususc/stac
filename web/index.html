@@ -37,31 +37,32 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="index.html">STAC - Statistical Tests for Algorithm Comparison</a>
+                    <a class="navbar-brand" href="index.html">Web Platform STAC</a>
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
+                        <!--Consulta de fichero-->
+                        <li id="mostrar_consulta_fichero" style="display:none"><a href="consultar_fichero.html">Consultar fichero</a></li>
                         <!--Subir el fichero-->
-                        <li class="dropdown">
+                        <li id="funciona_puta" class="dropdown">
                             <a id="a_subida" class="dropdown-toggle" href="#" data-toggle="dropdown">Subir fichero</a>
                             <div class="dropdown-menu" style="padding:17px;">
-                                <form class="form" id="formfichero" enctype="multipart/form-data"> 
+                                <!--<button onclick="$('.dropdown-menu').slideToggle();" type="button" class="close" aria-hidden="true">&times;</button><p>&nbsp;</p>-->
+                                <form class="form" id="formfichero" enctype="multipart/form-data">
                                     <div class="input-group">
                                         <span class="input-group-btn">
                                             <span class="btn btn-primary btn-file">
-                                                Buscar <input type="file" name="fichero" id="fichero"/>
+                                                Abrir <input type="file" name="fichero" id="fichero"/>
                                             </span>
                                         </span>
                                         <input type="text" class="form-control" style="width:150px;" readonly>
                                     </div>
                                     <br>
-                                    <center><input type="button" class="btn btn-default" value="Subir" id="boton_fichero"/></center>
+                                    <center><input type="button" class="btn btn-default" value="Subir" id="boton_fichero"/>&nbsp;&nbsp;&nbsp;<a href="ayuda.html#collapseOne" id="ayuda_fichero" target="_parent">?</a></center>
                                     <div id="mensaje_subida" align="center"></div>
                                 </form>
                             </div>
                         </li>
-                        <!--Consulta de fichero-->
-                        <li><a href="consultar_fichero.html">Consultar fichero</a></li>
                         <!--Ayuda-->
                         <li><a href="ayuda.html">Ayuda</a></li>
                     </ul>
@@ -80,9 +81,14 @@
                     </ul>
                 </div>
                 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-                    <h1 class="page-header">Validación de experimentación en aprendizaje automática y minería de datos</h1>
-                    <div class="alert alert-info"><p>En la esquina superior derecha puedes consultar la ayuda, subir un fichero o consultar su contenido. A continuación, puedes aplicar los tests de condiciones paramétricas para determinar cómo son tus datos o aplicar otros tests en la columna de la izquierda.</p></div>
-                    <p align="justify">En esta plataforma web puedes llevar a cabo la validación de resultados obtenidos por los algoritmos de aprendizaje mediante la aplicación de tests estadísticos sobre los experimentos, que, entre otras utilidades, apoyan la toma de decisiones (por ejemplo la elección del algoritmo más adecuado). Actualmente, es el método estándar más aceptado para validar este tipo de experimentación.</p>
+                    <h1 class="page-header"> STAC - Statistical Tests for Algorithm Comparison</h1>
+                    <!--************Subir el fichero************-->
+                    <div align="center">
+                        <p>Para empezar, puedes subir un fichero:</p>
+                        <a id="boton_subida" class="btn btn-primary btn-lg btn-block">Subir fichero</a>
+                    </div>
+                    <!--****************************************-->
+                    <br><br><p align="justify">En esta plataforma web puedes llevar a cabo la validación de resultados obtenidos por los algoritmos de aprendizaje mediante la aplicación de tests estadísticos sobre los experimentos, que, entre otras utilidades, apoyan la toma de decisiones (por ejemplo la elección del algoritmo más adecuado). Actualmente, es el método estándar más aceptado para validar este tipo de experimentación.</p>
                     <div class="row">
                         <div class="col-md-5 col-md-offset-3">
                             <img src="imagenes/grafico.png" class="img-responsive" alt="grafico" width="350px;" height="300px;">
