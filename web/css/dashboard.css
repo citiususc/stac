@@ -22,9 +22,9 @@ body {
  * Sidebar
  */
 
-/* Hide for mobile, show later */
+/* Mostrar para móbiles. */
 .sidebar {
-  display: none;
+  display: block;
 }
 @media (min-width: 768px) {
   .sidebar {
@@ -93,6 +93,26 @@ body {
 .placeholder img {
   display: inline-block;
   border-radius: 50%;
+}
+
+
+/*
+ * Resaltar color hover consulta de fichero.
+ */
+
+.table-hover > tbody > tr:hover > td,
+.table-hover > tbody > tr:hover > th {
+  background-color: #C8C8C8;
+}
+
+
+/*
+ * Ajustar botón subir fichero de index.html
+ */
+
+.btn-block {
+    width: 30%;
+    padding: 30px 28px;
 }
 
 
