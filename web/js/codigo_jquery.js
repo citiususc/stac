@@ -379,6 +379,9 @@ $(document).on('ready', function() {
     $(document).on('click', '#a_subida', function() {
         $('#mensaje_subida').html("");
     });
+    $(document).on('click', '#boton_subida', function() {
+        $('#mensaje_subida').html("");
+    });
 
     //Gestión botón de subida de ficheros.
     $(document).on('change', '.btn-file :file', function() {
@@ -401,13 +404,25 @@ $(document).on('ready', function() {
         
     });
 
-    /*Despliegue menú para subida de fichero.*/
+    /*Despliegue menú para subida de fichero. Se despliega la ventana de subida cuando se hace
+    click en #boton_subida o #a_subida y cuando se hace click en cualquier otro lugar de la página
+    se cierra la ventana de subida con hide().*/
     $('#boton_subida').click(function() {
-        $('.dropdown-menu').slideToggle();
+        $('.dropdown-menu').show();
     });
     $('#a_subida').click(function() {
-        $('.dropdown-menu').slideToggle();
+        $('.dropdown-menu').show();
     });
+    $("body").on("click",function(e) {
+        if($(e.target).is('a#boton_subida') || $(e.target).is('a#a_subida') || $(e.target).is('div.dropdown-menu') || 
+            $(e.target).closest('div.dropdown-menu').length) {
+            //No hago nada.
+        }
+        else{
+            $('.dropdown-menu').hide();
+        }
+    });
+
 });
 
 
