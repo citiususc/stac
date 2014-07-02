@@ -110,9 +110,30 @@ body {
  * Ajustar botón subir fichero de index.html
  */
 
-.btn-block {
-    width: 30%;
-    padding: 30px 28px;
+.btn-xl {
+    padding: 30px 75px;
+    font-size: 20px;
+}
+
+
+/*
+ * Ajustar padding del body del modal de subir fichero.
+ */
+
+.modal-body {
+  padding-right: 20px;
+  padding-left: 20px;
+  padding-top: 10px;
+  padding-bottom: 0px;
+}
+
+
+/*
+ * Justificar textos <p>.
+ */
+
+p {
+  text-align:justify;
 }
 
 
