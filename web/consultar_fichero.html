@@ -44,30 +44,44 @@
                         <!--Consulta de fichero-->
                         <li><a href="consultar_fichero.html">Consultar fichero</a></li>
                         <!--Subir el fichero-->
-                        <li class="dropdown">
-                            <a id="a_subida" class="dropdown-toggle" href="#" data-toggle="dropdown">Subir fichero</a>
-                            <div class="dropdown-menu" style="padding:17px;">
-                                <form class="form" id="formfichero" enctype="multipart/form-data"> 
-                                    <div class="input-group">
-                                        <span class="input-group-btn">
-                                            <span class="btn btn-primary btn-file">
-                                                Abrir <input type="file" name="fichero" id="fichero"/>
-                                            </span>
-                                        </span>
-                                        <input type="text" class="form-control" style="width:150px;" readonly>
-                                    </div>
-                                    <br>
-                                    <center><input type="button" class="btn btn-default" value="Subir" id="boton_fichero"/>&nbsp;&nbsp;&nbsp;<a href="ayuda.html#collapseOne" id="ayuda_fichero" target="_parent">?</a></center>
-                                    <div id="mensaje_subida" align="center"></div>
-                                </form>
-                            </div>
-                        </li>
+                        <li><a href="#modal_fichero" data-toggle="modal">Subir fichero</a></li>
                         <!--Ayuda-->
                         <li><a href="ayuda.html">Ayuda</a></li>
                     </ul>
                 </div>
             </div>
         </div>
+
+        <!--***************************************Modal de Subir el fichero***************************************-->
+        <div id="modal_fichero" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Subir fichero</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form" id="formfichero" enctype="multipart/form-data">
+                            <p class="text-warning"><small>El formato del archivo sigue el estándar .csv</small>&nbsp;&nbsp;<a href="ayuda.html#collapseOne" id="ayuda_fichero" target="_parent">?</a></p>
+                            <div class="input-group">
+                                <span class="input-group-btn">
+                                    <span class="btn btn-primary btn-file">
+                                        Abrir <input type="file" name="fichero" id="fichero"/>
+                                    </span>
+                                </span>
+                                <input type="text" class="form-control" style="width:150px;" readonly>
+                            </div>
+                            <div id="mensaje_subida" align="center"></div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-primary" id="boton_fichero">Subir fichero</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--*******************************************************************************************************-->
 
         <div class="container-fluid">
             <div class="row">

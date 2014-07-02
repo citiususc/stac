@@ -44,24 +44,7 @@
                         <!--Consulta de fichero-->
                         <li id="mostrar_consulta_fichero" style="display:none"><a href="consultar_fichero.html">Consultar fichero</a></li>
                         <!--Subir el fichero-->
-                        <li class="dropdown">
-                            <a id="a_subida" class="dropdown-toggle" href="#" data-toggle="dropdown">Subir fichero</a>
-                            <div class="dropdown-menu" style="padding:17px;">
-                                <form class="form" id="formfichero" enctype="multipart/form-data">
-                                    <div class="input-group">
-                                        <span class="input-group-btn">
-                                            <span class="btn btn-primary btn-file">
-                                                Abrir <input type="file" name="fichero" id="fichero"/>
-                                            </span>
-                                        </span>
-                                        <input type="text" class="form-control" style="width:150px;" readonly>
-                                    </div>
-                                    <br>
-                                    <center><input type="button" class="btn btn-default" value="Subir" id="boton_fichero"/>&nbsp;&nbsp;&nbsp;<a href="ayuda.html#collapseOne" id="ayuda_fichero" target="_parent">?</a></center>
-                                    <div id="mensaje_subida" align="center"></div>
-                                </form>
-                            </div>
-                        </li>
+                        <li><a href="#modal_fichero" data-toggle="modal">Subir fichero</a></li>
                         <!--Ayuda-->
                         <li><a href="ayuda.html">Ayuda</a></li>
                     </ul>
@@ -81,19 +64,42 @@
                 </div>
                 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
                     <h1 class="page-header"> STAC - Statistical Tests for Algorithm Comparison</h1>
-                    <!--************Subir el fichero************-->
-                    <div align="center">
+                    <p align="justify">En esta plataforma web puedes llevar a cabo la validación de resultados obtenidos por los algoritmos de aprendizaje mediante la aplicación de tests estadísticos sobre los experimentos, que, entre otras utilidades, apoyan la toma de decisiones (por ejemplo la elección del algoritmo más adecuado). <a href="ayuda.html#collapseThree" target="_parent">Aprender más acerca de esta web.</a></p>
+                    <!--***Botón de subir fichero***-->
+                    <br><br><div align="center">
                         <p>Para empezar, puedes subir un fichero:</p>
-                        <a id="boton_subida" class="btn btn-primary btn-lg btn-block">Subir fichero</a>
+                        <a href="#modal_fichero" id="boton_subida" class="btn btn-primary btn-xl" data-toggle="modal">Subir fichero</a>
                     </div>
-                    <!--****************************************-->
-                    <br><br><p align="justify">En esta plataforma web puedes llevar a cabo la validación de resultados obtenidos por los algoritmos de aprendizaje mediante la aplicación de tests estadísticos sobre los experimentos, que, entre otras utilidades, apoyan la toma de decisiones (por ejemplo la elección del algoritmo más adecuado). Actualmente, es el método estándar más aceptado para validar este tipo de experimentación.</p>
-                    <div class="row">
-                        <div class="col-md-5 col-md-offset-3">
-                            <img src="imagenes/grafico.png" class="img-responsive" alt="grafico" width="350px;" height="300px;">
+                    <!--***************************************Modal de Subir el fichero***************************************-->
+                    <div id="modal_fichero" class="modal fade">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    <h4 class="modal-title">Subir fichero</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <form class="form" id="formfichero" enctype="multipart/form-data">
+                                        <p class="text-warning"><small>El formato del archivo sigue el estándar .csv</small>&nbsp;&nbsp;<a href="ayuda.html#collapseOne" id="ayuda_fichero" target="_parent">?</a></p>
+                                        <div class="input-group">
+                                            <span class="input-group-btn">
+                                                <span class="btn btn-primary btn-file">
+                                                    Abrir <input type="file" name="fichero" id="fichero"/>
+                                                </span>
+                                            </span>
+                                            <input type="text" class="form-control" style="width:150px;" readonly>
+                                        </div>
+                                        <div id="mensaje_subida" align="center"></div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                    <button type="button" class="btn btn-primary" id="boton_fichero">Subir fichero</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <p align="justify">Los tests se basan en el contraste de hipótesis. Por ejemplo: se puede contrastar la hipótesis nula o H<sub>0</sub> de que las medias de los datos obtenidos por un algoritmo son iguales. Estos tests, verifican si es o no cierta esta hipótesis inicial. Para ello, se obtiene un estadístico (sujeto a una determinada distribución estadística) y se halla la probabilidad de obtener un estadístico al menos tan extremo como el que se obtuvo (p-valor). Si este p-valor es menor que un nivel de confianza dado (valor alpha), se rechazará la hipótesis nula. En caso contrario, se aceptará.</p>
+                    <!--*******************************************************************************************************-->
                 </div>
             </div>
         </div>

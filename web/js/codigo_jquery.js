@@ -404,25 +404,6 @@ $(document).on('ready', function() {
         
     });
 
-    /*Despliegue menú para subida de fichero. Se despliega la ventana de subida cuando se hace
-    click en #boton_subida o #a_subida y cuando se hace click en cualquier otro lugar de la página
-    se cierra la ventana de subida con hide().*/
-    $('#boton_subida').click(function() {
-        $('.dropdown-menu').show();
-    });
-    $('#a_subida').click(function() {
-        $('.dropdown-menu').show();
-    });
-    $("body").on("click",function(e) {
-        if($(e.target).is('a#boton_subida') || $(e.target).is('a#a_subida') || $(e.target).is('div.dropdown-menu') || 
-            $(e.target).closest('div.dropdown-menu').length) {
-            //No hago nada.
-        }
-        else{
-            $('.dropdown-menu').hide();
-        }
-    });
-
 });
 
 
