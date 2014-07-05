@@ -76,7 +76,8 @@ $(document).on('ready', function() {
                 url: url,
                 dataType: "json",
                 success : function(data) {
-                    salida = "<br><u>Resultado test criterio paramétrico:</u>";
+                    var nombre = $('label[name="test_cond"].active').text();
+                    salida = "<br><u>Resultado test "+nombre+":</u>";
 
                     $("#alerta_fichero").hide();
 
@@ -270,10 +271,10 @@ $(document).on('ready', function() {
     $(document).on('click', '#datos_ranking', function() {
 
         var test = $('input[name=test]:checked').val();
-        var alpha = $('#alpha').val();
-        var tipo = $('#tipo').val();
+        var alpha = $('#alpha_ranking').val();
+        var tipo = $('input[name=tipo]:checked').val();
         var test_post_hoc = $('input[name=post_hoc]:checked').val();
-        
+
         if(test_post_hoc === undefined)
             test_post_hoc = "no";
 
@@ -308,7 +309,9 @@ $(document).on('ready', function() {
                 dataType: "json",
 
                 success : function(data) {
-                    salida = salida + "<br><u>Resultado test Ranking:</u>";
+                    var nombre_ranking = $('label[name="nombre_test"].active').text();
+                    var nombre_post = $('label[name="nombre_post"].active').text();
+                    salida = salida + "<br><u>Resultado test "+nombre_ranking+":</u>";
 
                     $("#alerta_fichero_ranking").hide();
 
@@ -317,7 +320,7 @@ $(document).on('ready', function() {
                     }
                     else{
                         salida = salida + generar_tabla_ranking(data.test_ranking)
-                        salida = salida + "<br><u>Resultado test Post-Hoc:</u>";
+                        salida = salida + "<br><u>Resultado test "+nombre_post+":</u>";
                         if(!data.test_comparacion){
                             salida = salida + "<p>El test de ranking no es estadísticamente significativo.</p>";
                         }
@@ -407,20 +410,77 @@ $(document).on('ready', function() {
 });
 
 
+//Función para exportar archivos .csv
+function exportTableToCSV($table, filename) {
+
+    var $rows = $table.find('tr:has(th,td)'),
+
+        // Temporary delimiter characters unlikely to be typed by keyboard
+        // This is to avoid accidentally splitting the actual contents
+        tmpColDelim = String.fromCharCode(11), // vertical tab character
+        tmpRowDelim = String.fromCharCode(0), // null character
+
+        // actual delimiter characters for CSV format
+        colDelim = '","',
+        rowDelim = '"\r\n"',
+
+        // Grab text from table into CSV formatted string
+        csv = '"' + $rows.map(function (i, row) {
+            var $row = $(row),
+                $cols = $row.find('th,td');
+
+            return $cols.map(function (j, col) {
+                var $col = $(col),
+                    text = $col.text();
+
+                return text.replace('"', '""'); // escape double quotes
+
+            }).get().join(tmpColDelim);
+
+        }).get().join(tmpRowDelim)
+            .split(tmpRowDelim).join(rowDelim)
+            .split(tmpColDelim).join(colDelim) + '"',
+
+        // Data URI
+        csvData = 'data:application/csv;charset=utf-8,' + encodeURIComponent(csv);
+
+    $(this)
+        .attr({
+        'download': filename,
+            'href': csvData,
+            'target': '_blank'
+    });
+}
+
 //Función javascript para generar la tabla de resultados para los tests paramétricos de Anova y T-test.
 function generar_tabla_parametricos(data,test) {
 
-    var salida = "<div class=\"table-responsive\"><br><table class=\"table table-hover\"><tbody>";
+    var salida = "<div class=\"table-responsive\"><br>";
+
+    //Botón para exportar a .csv
     if(test == "anova")
-        salida = salida + "<tr><th>Estadístico:</th><td>" +data.estadistico.toFixed(3)+ "</td></tr>";
+        salida = salida + "<a href=\"#\" onclick=\"exportTableToCSV.apply(this, [$('table'), 'anova.csv'])\"><button class=\"btn btn-default\">Exportar csv</button></a>";
     else
-        salida = salida + "<tr><th>Estadístico T:</th><td>" +data.estadistico_t.toFixed(3)+ "</td></tr>";
-    salida = salida + "<tr><th>p-valor:</th><td>" +data.p_valor.toFixed(3)+ "</td></tr>";
+        salida = salida + "<a href=\"#\" onclick=\"exportTableToCSV.apply(this, [$('table'), 'ttest.csv'])\"><button class=\"btn btn-default\">Exportar csv</button></a>";
+
+    salida = salida + "<br><br><table class=\"table table-hover\">";
+
+    if(test == "anova"){
+        salida = salida + "<thead><tr><th>Estadístico</th><th>p-valor</th><th>Resultado</th></tr></thead>";
+        salida = salida + "<tbody><tr><td>" +data.estadistico.toFixed(3)+ "</td>";
+    }    
+    else{
+        salida = salida + "<thead><tr><th>Estadístico T</th><th>p-valor</th><th>Resultado</th></tr></thead>";
+        salida = salida + "<tbody><tr><td>" +data.estadistico_t.toFixed(3)+ "</td>";
+    }
+    salida = salida + "<td>" +data.p_valor.toFixed(3)+ "</td>";
     if(data.resulado == true)
-        salida = salida + "<tr><th>Resultado:</th><td>Se rechaza H0</td></tr>";
+        salida = salida + "<td>Se rechaza H0</td></tr></tbody></table>";
     else
-        salida = salida + "<tr><th>Resultado:</th><td>Se acepta H0</td></tr>";
-    salida = salida + "</tbody></table></div>";
+        salida = salida + "<td>Se acepta H0</td></tr></tbody></table>";
+    
+    //Ayuda.
+    salida = salida + "<a href=\"ayuda.html#collapseTwo\" id=\"ayuda_fichero\" target=\"_blank\">Ir a ayuda.</a></div>";
 
     return salida;
 }
@@ -428,14 +488,21 @@ function generar_tabla_parametricos(data,test) {
 //Función javascript para generar la tabla de resultados para el test de condición de homocedasticidad de Levene.
 function generar_tabla_levene(data) {
 
-    var salida = "<div class=\"table-responsive\"><br><table class=\"table table-hover\"><tbody>";
-    salida = salida + "<tr><th>Estadístico W:</th><td>" +data.estadistico_w.toFixed(3)+ "</td></tr>";
-    salida = salida + "<tr><th>p-valor:</th><td>" +data.p_valor.toFixed(3)+ "</td></tr>";
-    if(data.resulado == true)
-        salida = salida + "<tr><th>Resultado:</th><td>Se rechaza H0</td></tr>";
+    var salida = "<div class=\"table-responsive\"><br>";
+
+    //Botón para exportar a .csv
+    salida = salida + "<a href=\"#\" onclick=\"exportTableToCSV.apply(this, [$('table'), 'levene_test.csv'])\"><button class=\"btn btn-default\">Exportar csv</button></a>";
+
+    salida = salida + "<br><br><table class=\"table table-hover\"><thead>";
+    salida = salida + "<tr><th>Estadístico W</th><th>p-valor</th><th>Resultado</th></tr></thead>";
+    salida = salida + "<tbody><tr><td>" +data.estadistico_w.toFixed(3)+ "</td><td>" +data.p_valor.toFixed(3)+ "</td>";
+    if(data.resultado == true)
+        salida = salida + "<td>Se rechaza H0</td></tr></tbody></table>";
     else
-        salida = salida + "<tr><th>Resultado:</th><td>Se acepta H0</td></tr>";
-    salida = salida + "</tbody></table></div>";
+        salida = salida + "<td>Se acepta H0</td></tr></tbody></table>";
+    
+    //Ayuda.
+    salida = salida + "<a href=\"ayuda.html#collapseTwo\" id=\"ayuda_fichero\" target=\"_blank\">Ir a ayuda.</a></div>";
 
     return salida;
 }
@@ -443,52 +510,49 @@ function generar_tabla_levene(data) {
 //Función javascript para generar la tabla de resultados de los tests de condición de normalidad.
 function generar_tabla_normalidad(data, test) {
 
-    //Primera fila de la tabla.
-    var salida = "<div class=\"table-responsive\"><br><table class=\"table table-hover\"><thead><tr><th></th>";
-    
-	$.each(data.p_valores, function(index, value) {
-		salida = salida + "<th>Población " + (index+1) + "</th>";
-	});
+    var salida = "<div class=\"table-responsive\"><br>";
 
-    //Resto de filas de la tabla.
+    //Botón para exportar a .csv
+    salida = salida + "<a href=\"#\" onclick=\"exportTableToCSV.apply(this, [$('table'), $('input[name=test]:checked').val()+'.csv'])\"><button class=\"btn btn-default\">Exportar csv</button></a>";
+
+    //Primera fila de la tabla.
+    salida = salida + "<br><br><table class=\"table table-hover\"><thead><tr><th>Conjunto datos</th>";
+    
     if(test == "shapiro"){
-	    salida = salida + "</tr></thead><tbody><tr><th>Estadísticos W:</th>";
-	    $.each(data.estadisticos_w, function(index, value) {
-		    salida = salida + "<td>" + value.toFixed(3) + "</td>";
-	    });
-        salida = salida + "</tr>";
+        salida = salida + "<th>Estadísticos W</th><th>p-valores</th><th>Resultados</th></tr></thead><tbody>";
+        $.each(data.p_valores, function(index, value) {
+		    salida = salida + "<tr><td>" + (index+1) + "</td><td>" + data.estadisticos_w[index].toFixed(3) + "</td><td>" + data.p_valores[index].toFixed(3) + "</td>";
+            if(data.resultado[index] == true)
+                salida = salida + "<td>Se rechaza H0</td></tr>";
+            else
+                salida = salida + "<td>Se acepta H0</td></tr>";
+	        });
     }
     else if(test == "kolmogorov"){
-	    salida = salida + "</tr></thead><tbody><th>Estadísticos D:</th>";
-	    $.each(data.estadisticos_d, function(index, value) {
-		    salida = salida + "<td>" + value.toFixed(3) + "</td>";
-	    });
-        salida = salida + "</tr>";
+        salida = salida + "<th>Estadísticos D</th><th>p-valores</th><th>Resultados</th></tr></thead><tbody>";
+        $.each(data.p_valores, function(index, value) {
+		    salida = salida + "<tr><td>" + (index+1) + "</td><td>" + data.estadisticos_d[index].toFixed(3) + "</td><td>" + data.p_valores[index].toFixed(3) + "</td>";
+            if(data.resultado[index] == true)
+                salida = salida + "<td>Se rechaza H0</td></tr>";
+            else
+                salida = salida + "<td>Se acepta H0</td></tr>";
+	        });
     }
     else{
-	    salida = salida + "</tr></thead><tbody><th>Estadísticos K2:</th>";
-	    $.each(data.estadisticos_k2, function(index, value) {
-		    salida = salida + "<td>" + value.toFixed(3) + "</td>";
-	    });
-        salida = salida + "</tr>";
+        salida = salida + "<th>Estadísticos K2</th><th>p-valores</th><th>Resultados</th></tr></thead><tbody>";
+        $.each(data.p_valores, function(index, value) {
+		    salida = salida + "<tr><td>" + (index+1) + "</td><td>" + data.estadisticos_k2[index].toFixed(3) + "</td><td>" + data.p_valores[index].toFixed(3) + "</td>";
+            if(data.resultado[index] == true)
+                salida = salida + "<td>Se rechaza H0</td></tr>";
+            else
+                salida = salida + "<td>Se acepta H0</td></tr>";
+	        });
     }
 
-    salida = salida + "<tr><th>p-valores:</th>";
+	salida = salida + "</tbody></table>";
 
-	$.each(data.p_valores, function(index, value) {
-		salida = salida + "<td>" + value.toFixed(3) + "</td>";
-	});
-
-    salida = salida + "</tr><tr><th>Resultados:</th>";
-
-    $.each(data.resultado, function(index, value) {
-		if(value == true)
-            salida = salida + "<td>Se rechaza H0</td>";
-        else
-            salida = salida + "<td>Se acepta H0</td>";
-	});
-
-	salida = salida + "</tr></tbody></table></div>";
+    //Ayuda.
+    salida = salida + "<a href=\"ayuda.html#collapseTwo\" id=\"ayuda_fichero\" target=\"_blank\">Ir a ayuda.</a></div>";
 
     return salida;
 }
@@ -496,16 +560,21 @@ function generar_tabla_normalidad(data, test) {
 //Función javascript para generar la tabla de resultados del test de Wilcoxon.
 function generar_tabla_wilcoxon(data) {
 
-    var salida = "<div class=\"table-responsive\"><br><table class=\"table table-hover\"><tbody>";
-    salida = salida + "<tr><th>Estadístico:</th><td>" +data.estadistico+ "</td></tr>";
-    salida = salida + "<tr><th>Punto crítico:</th><td>" +data["punto critico"]+ "</td></tr>";
-    salida = salida + "<tr><th>Suma de rangos positivos:</th><td>" +data["suma rangos pos"]+ "</td></tr>";
-    salida = salida + "<tr><th>Suma de rangos negativos:</th><td>" +data["suma rangos neg"]+ "</td></tr>";
-    if(data.resulado == true)
-        salida = salida + "<tr><th>Resultado:</th><td>Se rechaza H0</td></tr>";
+    var salida = "<div class=\"table-responsive\"><br>";
+
+    //Botón para exportar a .csv
+    salida = salida + "<a href=\"#\" onclick=\"exportTableToCSV.apply(this, [$('table'), 'wilcoxon_test.csv'])\"><button class=\"btn btn-default\">Exportar csv</button></a>";
+
+    salida = salida + "<br><br><table class=\"table table-hover\"><thead>";
+    salida = salida + "<tr><th>Estadístico</th><th>Punto crítico</th><th>Suma Rangos Positivos</th><th>Suma Rangos Negativos</th><th>Resultado</th></tr></thead>";
+    salida = salida + "<tbody><tr><td>" +data.estadistico+ "</td><td>" +data["punto critico"]+ "</td><td>" +data["suma rangos pos"]+ "</td><td>" +data["suma rangos neg"]+ "</td>";
+    if(data.resultado == true)
+        salida = salida + "<td>Se rechaza H0</td></tr></tbody></table>";
     else
-        salida = salida + "<tr><th>Resultado:</th><td>Se acepta H0</td></tr>";
-    salida = salida + "</tbody></table></div>";
+        salida = salida + "<td>Se acepta H0</td></tr></tbody></table>";
+    
+    //Ayuda.
+    salida = salida + "<a href=\"ayuda.html#collapseTwo\" id=\"ayuda_fichero\" target=\"_blank\">Ir a ayuda.</a></div>";
 
     return salida;
 }
@@ -513,26 +582,29 @@ function generar_tabla_wilcoxon(data) {
 //Función javascript para generar la tabla de resultados de los tests de ranking.
 function generar_tabla_ranking(data) {
 
-    var salida = "<div class=\"table-responsive\"><br><table class=\"table table-hover\"><tbody><tr><th>Ranking:</th>";
+    var salida = "<div class=\"table-responsive\"><br>";
+
+    //Botón para exportar a .csv
+    salida = salida + "<a href=\"#\" onclick=\"exportTableToCSV.apply(this, [$('table'), $('input[name=test]:checked').val()+'.csv'])\"><button class=\"btn btn-default\">Exportar csv</button></a>";
+
+    salida = salida + "<br><br><table class=\"table table-hover\"><thead>";
+    salida = salida + "<tr><th>Ranking</th><th>Algoritmos</th><th>Estadístico</th><th>p-valor</th><th>Resultado:</th></tr></thead><tbody>";
+    $.each(data.ranking, function(index, value) {
+        if(index==0){
+		    salida = salida + "<tr><td>" + value.toFixed(3) + "</td><td>" + data.nombres[index] + "</td><td>" + data.estadistico.toFixed(3) + "</td><td>" + data.p_valor.toFixed(3) + "</td>";
+            if(data.resultado == true)
+                salida = salida + "<td>Se rechaza H0</td></tr>";
+            else
+                salida = salida + "<td>Se acepta H0</td></tr>";
+        }
+        else
+            salida = salida + "<tr><td>" + value.toFixed(3) + "</td><td>" + data.nombres[index] + "</td><td>-</td><td>-</td><td>-</td></tr>";
+	});
+
+    salida = salida + "</tbody></table>";
     
-	$.each(data.ranking, function(index, value) {
-		salida = salida + "<td>" + value.toFixed(3); + "</td>";
-	});
-
-    salida = salida + "</tr><th>Algoritmos:</th>";
-
-	$.each(data.nombres, function(index, value) {
-		salida = salida + "<td>" + value + "</td>";
-	});
-
-    salida = salida + "</tr><th>Estadístico:</th><td>" + data.estadistico.toFixed(3); + "</td></tr>";
-    salida = salida + "</tr><th>p-valor:</th><td>" + data.p_valor.toFixed(3); + "</td></tr>";
-    if(data.resultado == true)
-        salida = salida + "</tr><th>Resultado:</th><td>Se rechaza H0</td></tr>";
-    else
-        salida = salida + "</tr><th>Resultado:</th><td>Se acepta H0</td></tr>";
-
-    salida = salida + "</tbody></table></div>";
+    //Ayuda.
+    salida = salida + "<a href=\"ayuda.html#collapseTwo\" id=\"ayuda_fichero\" target=\"_blank\">Ir a ayuda.</a></div>";
 
     return salida;
 }
@@ -540,113 +612,97 @@ function generar_tabla_ranking(data) {
 //Función javascript para generar la tabla de resultados de los tests Post-Hoc con método de control.
 function generar_tabla_control(data, test) {
 
-    var salida = "<div class=\"table-responsive\"><br><table class=\"table table-hover\"><tbody><tr><th>Método de Control:</th><td>" +data.metodo_control+ "</td></tr>";
+    var salida = "<div class=\"table-responsive\"><br>";
 
-    if(test != "li_test"){
-        if(test == "no" || test == "bonferroni_dunn_test")
-            salida = salida + "<tr><th>alpha Ajustado:</th><td>" + data.alpha.toFixed(3) + "</td></tr>";
-        else{
-            salida = salida + "</tr><tr><th>alphas ajustados:</th>";
-            $.each(data.alphas, function(index, value) {
-		        salida = salida + "<td>" + value.toFixed(3) + "</td>";
-	        });
-        }
+    //Botón para exportar a .csv
+    salida = salida + "<a href=\"#\" onclick=\"exportTableToCSV.apply(this, [$('table'), $('input[name=post_hoc]:checked').val()+'.csv'])\"><button class=\"btn btn-default\">Exportar csv</button></a>";
+
+    salida = salida + "<br><br><table class=\"table table-hover\"><thead>";
+    if(test != "li_test")
+        salida = salida + "<tr><th>Método de Control</th><th>alpha ajustado</th><th>Método Control VS</th><th>Estadístico</th><th>p-valor</th><th>p-valor ajustado</th><th>Resultado</th></tr></thead><tbody>";
+    else
+        salida = salida + "<tr><th>Método de Control</th><th>Método Control VS</th><th>Estadístico</th><th>p-valor</th><th>p-valor ajustado</th><th>Resultado</th></tr></thead><tbody>";
+    if(test == "no" || test == "bonferroni_dunn_test"){
+        salida = salida + "<tr><td>" +data.metodo_control+ "</td><td>" +data.alpha.toFixed(3)+ "</td>";
+        $.each(data.nombres, function(index, value) {
+            if(index==0)
+                salida = salida + "<td>" +value+ "</td><td>" +data.valores_z[index].toFixed(3)+ "</td><td>" +data.p_valores[index].toFixed(3)+ "</td><td>" +data.p_valores_ajustados[index].toFixed(3)+ "</td>";
+            else
+                salida = salida + "<tr><td>-</td><td>-</td><td>" +value+ "</td><td>" +data.valores_z[index].toFixed(3)+ "</td><td>" +data.p_valores[index].toFixed(3)+ "</td><td>" +data.p_valores_ajustados[index].toFixed(3)+ "</td>";
+            if(data.resultado[index] == true)
+                salida = salida + "<td>Se rechaza H0</td></tr>";
+            else
+                salida = salida + "<td>Se acepta H0</td></tr>";
+	        
+        });
     }
+    else{
+        salida = salida + "<tr><td>" +data.metodo_control+ "</td>";
+        $.each(data.nombres, function(index, value) {
+            if(test != "li_test"){
+                if(index==0)
+                    salida = salida + "<td>" +data.alphas[index].toFixed(3)+ "</td><td>" +value+ "</td><td>" +data.valores_z[index].toFixed(3)+ "</td><td>" +data.p_valores[index].toFixed(3)+ "</td><td>" +data.p_valores_ajustados[index].toFixed(3)+ "</td>";
+                else
+                    salida = salida + "<td>-</td><td>" +data.alphas[index].toFixed(3)+ "</td><td>" +value+ "</td><td>" +data.valores_z[index].toFixed(3)+ "</td><td>" +data.p_valores[index].toFixed(3)+ "</td><td>" +data.p_valores_ajustados[index].toFixed(3)+ "</td>";
+            }
+            else{
+                if(index==0)
+                    salida = salida + "<td>" +value+ "</td><td>" +data.valores_z[index].toFixed(3)+ "</td><td>" +data.p_valores[index].toFixed(3)+ "</td><td>" +data.p_valores_ajustados[index].toFixed(3)+ "</td>";
+                else
+                    salida = salida + "<td>-</td><td>" +value+ "</td><td>" +data.valores_z[index].toFixed(3)+ "</td><td>" +data.p_valores[index].toFixed(3)+ "</td><td>" +data.p_valores_ajustados[index].toFixed(3)+ "</td>";
+            }
+            if(data.resultado[index] == true)
+                salida = salida + "<td>Se rechaza H0</td></tr>";
+            else
+                salida = salida + "<td>Se acepta H0</td></tr>";
+        });
+    }
+
+    salida = salida + "</tbody></table>";
     
-    salida = salida + "</tr><tr><th>Método control VS:</th>";
+    //Ayuda.
+    salida = salida + "<a href=\"ayuda.html#collapseTwo\" id=\"ayuda_fichero\" target=\"_blank\">Ir a ayuda.</a></div>";
 
-	$.each(data.nombres, function(index, value) {
-		salida = salida + "<td>" + value + "</td>";
-	});
-
-    salida = salida + "</tr><tr><th>Estadísticos:</th>";
-
-	$.each(data.valores_z, function(index, value) {
-		salida = salida + "<td>" + value.toFixed(3) + "</td>";
-	});
-
-    salida = salida + "</tr><tr><th>p-valores:</th>";
-
-	$.each(data.p_valores, function(index, value) {
-		salida = salida + "<td>" + value.toFixed(3) + "</td>";
-	});
-
-    salida = salida + "</tr><tr><th>p-valores ajustados:</th>";
-
-	$.each(data.p_valores_ajustados, function(index, value) {
-		salida = salida + "<td>" + value.toFixed(3) + "</td>";
-	});
-
-    salida = salida + "</tr><tr><th>Resultados:</th>";
-
-    $.each(data.resultado, function(index, value) {
-		if(value == true)
-            salida = salida + "<td>Se rechaza H0</td>";
-        else
-            salida = salida + "<td>Se acepta H0</td>";
-	});
-
-    salida = salida + "</tbody></table></div>";
-    
     return salida;
 }
 
 //Función javascript para generar la tabla de resultados de los tests Post-Hoc multitests.
 function generar_tabla_multitests(data, test) {
 
-    var salida = "<div class=\"table-responsive\"><br><table class=\"table table-hover\"><tbody>";
+    var salida = "<div class=\"table-responsive\"><br>";
 
-    if(test == "nemenyi_multitest" || test == "bonferroni")
-        salida = salida + "<tr><th>alpha ajustado:</th><td>" + data.alpha.toFixed(3) + "</td></tr>";
-    else{
-        salida = salida + "<tr><th>alphas ajustados:</th>";
-        $.each(data.alphas, function(index, value) {
-	        salida = salida + "<td>" + value.toFixed(3) + "</td>";
+    //Botón para exportar a .csv
+    salida = salida + "<a href=\"#\" onclick=\"exportTableToCSV.apply(this, [$('table'), $('input[name=post_hoc]:checked').val()+'.csv'])\"><button class=\"btn btn-default\">Exportar csv</button></a>";
+
+    salida = salida + "<br><br><table class=\"table table-hover\"><thead>";
+    salida = salida + "<tr><th>alpha ajustado</th><th>Comparación</th><th>Estadístico</th><th>p-valor</th><th>p-valor ajustado</th><th>Resultado</th></tr></thead><tbody>";
+    if(test == "nemenyi_multitest"){
+        salida = salida + "<tr><td>" +data.alpha.toFixed(3)+ "</td>";
+        $.each(data.comparaciones, function(index, value) {
+            if(index==0)
+	            salida = salida + "<td>" + value + "</td><td>" +data.valores_z[index].toFixed(3)+ "</td><td>" +data.p_valores[index].toFixed(3)+ "</td><td>" +data.p_valores_ajustados[index].toFixed(3)+ "</td>";
+            else
+                salida = salida + "<td>-</td><td>" + value + "</td><td>" +data.valores_z[index].toFixed(3)+ "</td><td>" +data.p_valores[index].toFixed(3)+ "</td><td>" +data.p_valores_ajustados[index].toFixed(3)+ "</td>";
+            if(data.resultado[index] == true)
+                salida = salida + "<td>Se rechaza H0</td></tr>";
+            else
+                salida = salida + "<td>Se acepta H0</td></tr>";
         });
-        salida = salida + "</tr>";
     }
-
-    salida = salida + "<tr><th>Comparaciones:</th>"
-    
-	$.each(data.comparaciones, function(index, value) {
-		salida = salida + "<td>" + value + "</td>";
-	});
-
-    salida = salida + "</tr><th>Estadísticos:</th>";
-
-    if(test == "bonferroni"){
-        $.each(data.valores_t, function(index, value) {
-		    salida = salida + "<td>" + value.toFixed(3) + "</td>";
-	    });
-	}
     else{
-        $.each(data.valores_z, function(index, value) {
-		    salida = salida + "<td>" + value.toFixed(3) + "</td>";
-	    });
+        $.each(data.alphas, function(index, value) {
+	        salida = salida + "<td>" + value.toFixed(3) + "</td><td>" +data.comparaciones[index]+ "</td><td>" +data.valores_z[index].toFixed(3)+ "</td><td>" +data.p_valores[index].toFixed(3)+ "</td><td>" +data.p_valores_ajustados[index].toFixed(3)+ "</td>";
+            if(data.resultado[index] == true)
+                salida = salida + "<td>Se rechaza H0</td></tr>";
+            else
+                salida = salida + "<td>Se acepta H0</td></tr>";
+        });
     }
-
-    salida = salida + "</tr><tr><th>p-valores:</th>";
-
-	$.each(data.p_valores, function(index, value) {
-		salida = salida + "<td>" + value.toFixed(3) + "</td>";
-	});
-
-    salida = salida + "</tr><tr><th>p-valores Ajustados:</th>";
-
-	$.each(data.p_valores_ajustados, function(index, value) {
-		salida = salida + "<td>" + value.toFixed(3) + "</td>";
-	});
-
-    salida = salida + "</tr><tr><th>Resultados:</th>";
-
-    $.each(data.resultado, function(index, value) {
-		if(value == true)
-            salida = salida + "<td>Se rechaza H0</td>";
-        else
-            salida = salida + "<td>Se acepta H0</td>";
-	});
-
-    salida = salida + "</tbody></table></div>";
     
+    salida = salida + "</tbody></table>";
+    
+    //Ayuda.
+    salida = salida + "<a href=\"ayuda.html#collapseTwo\" id=\"ayuda_fichero\" target=\"_blank\">Ir a ayuda.</a></div>";
+
     return salida;
 }
