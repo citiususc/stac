@@ -114,22 +114,14 @@
                             <br><br><p>En las siguientes pestañas <b>"Anova"</b> y <b>"T-test"</b> puedes encontrar los diferentes tests no paramétricos implementados en la web.</p>
                         </div>
                         <div id="anova" class="tab-pane fade">
-                            <h3>Test de Anova</h3>
-                            <p align="justify"><b>Anova:</b> Contrasta la hipótesis nula de que las medias de los resultados de dos o más algoritmos son iguales, es decir si la media de dos o más muestras o poblaciones son iguales. Para ello, analiza la variación entre muestras y la variación en el interior de las mismas mediante la determinación de varianzas. El estadístico de la prueba de Anova, se aproxima mediante la distribución f, y se rechazará la hipótesis nula si el p-valor < nivel de significación (alpha), aceptando la hipótesis alternativa de que al menos dos medias poblacionales son diferentes.</p>
-                            <p>Se deben cumplir las condiciones paramétricas:</p>
-                            <ul>
-                                <li>Normalidad</li>
-                                <li>Homocedasticidad</li>
-                                <li>Independencia</li>
-                            </ul>
-                            <p align="justify"><b>Bonferroni:</b> Una vez se tenga constancia gracias al análisis de varianzas Anova de que existen diferencias significativas entre las medias de los algoritmos, se procede con el test Post-Hoc de <b>Bonferroni</b> para determinar las diferencias entre todas las muestras, comparando las medias de todos los algoritmos entre sí. Cada p-valor asociado con la hipótesis H<sub>i</sub> se compara con un alpha ajustado a todas las comparaciones: p<sub>i</sub> < (alpha/m), donde m se corresponde con el número de comparaciones: m=(K∗(K−1))2 y K es el número de algoritmos.</p>
-                            <br>
+                            <h3>Test de Anova y test de Bonferroni</h3>
+                            <a href="ayuda.html#collapseEleven" id="ayuda_fichero" target="_blank">Aprender más acerca del test de Anova y Bonferroni.</a>
+                            <br><br>
                             <!--Selección nivel de significancia-->
-                            <p>Nivel de significancia (alpha) o probabilidad de rechazar la hipótesis nula siendo cierta (defecto 0.05):</p>
+                            <p>Nivel de significancia alpha: &nbsp;<a href="ayuda.html#collapseTwo" id="ayuda_fichero" target="_blank">?</a></p>
                             <select class="form-control" id="alpha_anova" style="width:100px;">
-                                <option value="no">Elige</option>
                                 <option value="0.10">0.10</option>
-                                <option value="0.05">0.05</option>
+                                <option value="0.05" selected="selected">0.05</option>
                                 <option value="0.02">0.02</option>
                                 <option value="0.01">0.01</option>
                                 <option value="0.005">0.005</option>
@@ -141,24 +133,29 @@
                                     <a data-toggle="tab" href="#ver_resultados_anova"><button type="button" class="btn btn-success" id="datos_anova">Aplicar</button></a>
                                 </div>
                             </div>
+                            <br><br>
+                            <p><u>Información general:</u></p>
+                                <p>Anova:</p>
+                                <p><strong>Hipótesis nula (H<sub>0</sub>):</strong> Las medias de los resultados de dos o más algoritmos son iguales.</p>
+                                <p><strong>Se debería cumplir:</strong></p>
+                                <ul type = square>
+                                    <li>Normalidad
+                                    <li>Homocedasticidad
+                                    <li>Independencia
+                                </ul>
+                                <p>Bonferroni:</p>
+                                <p><strong>Hipótesis nulas (H<sub>0</sub>):</strong> La media de los resultados del "Algoritmo A" y el "Algoritmo B" es igual (compara todos los algoritmos entre sí).</p>
+                                <p><strong>Se aplica si:</strong> Anova indica que existen diferencias.</p>
                         </div>
                         <div id="ttest" class="tab-pane fade">
                             <h3>T-test</h3>
-                            <p align="justify">Si p_valor < alpha, se rechaza la hipótesis nula de que 2 muestras relacionadas o repetidas tienen idénticos valores promedio (esperados). La prueba mide si la puntuación media difiere significativamente entre las muestras. p-valores pequeños están asociados a altos estadísticos t.</p>
-                            <p>Se deben cumplir las condiciones paramétricas:</p>
-                            <ul>
-                                <li>Normalidad</li>
-                                <li>Homocedasticidad</li>
-                                <li>Independencia</li>
-                            </ul>
-                            <p>También se dede cumplir que el número de algoritmos o muestras sea de dos.</p>
-                            <br>
+                            <a href="ayuda.html#collapseTwelve" id="ayuda_fichero" target="_blank">Aprender más acerca del test T-test.</a>
+                            <br><br>
                             <!--Selección nivel de significancia-->
-                            <p>Nivel de significancia (alpha) o probabilidad de rechazar la hipótesis nula siendo cierta (defecto 0.05):</p>
+                            <p>Nivel de significancia alpha: &nbsp;<a href="ayuda.html#collapseTwo" id="ayuda_fichero" target="_blank">?</a></p>
                             <select class="form-control" id="alpha_ttest" style="width:100px;">
-                                <option value="no">Elige</option>
                                 <option value="0.10">0.10</option>
-                                <option value="0.05">0.05</option>
+                                <option value="0.05" selected="selected">0.05</option>
                                 <option value="0.02">0.02</option>
                                 <option value="0.01">0.01</option>
                                 <option value="0.005">0.005</option>
@@ -170,6 +167,16 @@
                                     <a data-toggle="tab" href="#ver_resultados_ttest"><button type="button" class="btn btn-success" id="datos_ttest">Aplicar</button></a>
                                 </div>
                             </div>
+                            <br><br>
+                            <p><u>Información general:</u></p>
+                            <p><strong>Hipótesis nula (H<sub>0</sub>):</strong> 2 muestras relacionadas o repetidas tienen idénticos valores promedio (esperados).</p>
+                            <p><strong>Se debería cumplir:</strong></p>
+                            <ul type = square>
+                                <li>Normalidad
+                                <li>Homocedasticidad
+                                <li>Independencia
+                                <li>Número de algoritmos o muestras = 2.
+                            </ul>
                         </div>
                         <!--Mostrar resultados anova-->
                         <div id="ver_resultados_anova" class="tab-pane fade">

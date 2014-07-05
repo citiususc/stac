@@ -62,7 +62,7 @@
                     </div>
                     <div class="modal-body">
                         <form class="form" id="formfichero" enctype="multipart/form-data">
-                            <p class="text-warning"><small>El formato del archivo sigue el estándar .csv</small>&nbsp;&nbsp;<a href="ayuda.html#collapseOne" id="ayuda_fichero" target="_parent">?</a></p>
+                            <p class="text-warning"><small>El formato del archivo sigue el estándar .csv</small>&nbsp;&nbsp;<a href="ayuda.html#collapseOne" id="ayuda_fichero" onclick="location.href='ayuda.html#collapseOne'; window.location.reload()">?</a></p>
                             <div class="input-group">
                                 <span class="input-group-btn">
                                     <span class="btn btn-primary btn-file">
@@ -124,15 +124,175 @@
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h4 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">2. Conceptos</a>
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">2. Conceptos básicos</a>
                                 </h4>
                             </div>
                             <div id="collapseTwo" class="panel-collapse collapse">
                                 <div class="panel-body">
                                     <p><b>Contraste de hipótesis:</b> Problema estadístico que considera una hipótesis inicial H<sub>0</sub>, y una hipótesis alternativa H<sub>1</sub> e intenta determinar cuál de las dos es la hipótesis verdadera, tras aplicar un problema estadístico a un cierto número de experimentos. <a href="http://es.wikipedia.org/wiki/Contraste_de_hip%C3%B3tesis" target="_blank">Aprender más.</a></p>
                                     <p><b>p-valor:</b> Probabilidad de obtener un valor al menos tan extremo como el estadístico de contraste obtenido. El estadístico es un valor que sigue una determinada distribución muestral (normal, chi-cuadrado, etc.) <a href="http://es.wikipedia.org/wiki/Valor_P" target="_blank">Aprender más.</a></p>
+                                    <p><b>p-valores ajustados:</b> p_valores que dependen de toda la familia de comparaciones y no sólo de una comparación. Es resultado de los tests Post-Hoc (que se aplican si un test de ranking encuentra alguna diferencia).</p>
+                                    <p><b>Estadístico:</b> Medida cuantitativa calculada por los tests que proporciona la factibilidad de la hipótesis nula. Cada test tiene su forma característica de hallar este valor y estos estadísticos siguen una determinada distribución de probabilidad (como distribución normal, etc.). Es una medición que se extrae de la muestra de datos (fichero subido).</p>
+                                    <p><b>Ranking:</b> En los tests de ranking, proporciona la posición que ocupa el algoritmo comparado con los demás algoritmos (¿cuál es el mejor?), que se ordenan de arriba a abajo dependiendo de si la función objetivo de los algoritmos es maximizar o minimizar. </p>
+                                    <p><b>Suma rangos positivos / negativos:</b> En el test de Wilcoxon, la suma de rangos positivos indica la suma de los rangos de las diferencias mayores que 0 y la suma de rangos negativos indica la suma de los rangos de las diferencias menores que 0. </p>
+                                    <p><b>Punto crítico:</b> En el test de Wilcoxon, cuando el número de conjunto de datos sin ligaduras (diferencias 0) es menor o igual que 25, el resultado final se determina mediante la comparación del estadístico con el valor crítico de la tabla de Wilcoxon (diferente para cada nivel de significación y número de conjunto de datos sin ligaduras). </p>
                                     <p><b>Nivel de significación (alpha):</b> Probabilidad de rechazar la hipótesis nula siendo cierta. También se conoce como nivel de confianza o error tipo 1. Divide la distribución en dos regiones: la región de aceptación y la región de rechazo. <a href="http://es.wikipedia.org/wiki/Significaci%C3%B3n_estad%C3%ADstica" target="_blank">Aprender más.</a></p>
                                     <p><b>Rechazo de H<sub>0:</sub></b> Si el p-valor es menor que el nivel de significación alpha, el contraste se considerará estadísticamente significativo y por tanto se rechazaría la hipótesis nula. <a href="http://es.wikipedia.org/wiki/Contraste_de_hip%C3%B3tesis" target="_blank">Aprender más.</a></p>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Normalidad-->
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseNine">3. Tests de normalidad disponibles</a>
+                                </h4>
+                            </div>
+                            <div id="collapseNine" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <p><b>Shapiro-Wilk:</b> Contrasta la hipótesis nula de que las muestras o poblaciones provienen de una población normalmente distribuida. Se considera de los más potentes, sobre todo para muestras de menos de 30 elementos.</p>
+                                    <p><b>Kolmogorov-Smirnov:</b> Realiza una prueba de bondad de ajuste, para determinar si los datos se ajustan a la distribución normal. Tiene como H<sub>0</sub> que la distribución obtenida de los datos observados es idéntica a la distribución normal. Es menos potente que el test de Shapiro.</p>
+                                    <p><b>D'Agostino-Pearson:</b> Contrasta la hipótesis nula de que las muestras o poblaciones provienen de una población normalmente distribuida. Combina el coeficiente de asimetría (en qué medida la normal es simétrica ó coeficiente 0) y el coeficiente de Kurtosis (grado de amplitud, donde lo normal es coeficiente 0) para obtener un estadístico y p-valor.</p>
+                                    <p><b>En los tres casos</b>, si el p-valor es menor a alfa (nivel de confianza) entonces la hipótesis nula es rechazada.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Test de Anova-->
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseEleven">4. Test de Anova</a>
+                                </h4>
+                            </div>
+                            <div id="collapseEleven" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <p><b>Anova:</b> Contrasta la hipótesis nula de que las medias de los resultados de dos o más algoritmos son iguales, es decir si la media de dos o más muestras o poblaciones son iguales. Para ello, analiza la variación entre muestras y la variación en el interior de las mismas mediante la determinación de varianzas. El estadístico de la prueba de Anova, se aproxima mediante la distribución f, y se rechazará la hipótesis nula si el p-valor < nivel de significación (alpha), aceptando la hipótesis alternativa de que al menos dos medias poblacionales son diferentes.</p>
+                                    <p>Se deben cumplir las condiciones paramétricas:</p>
+                                    <ul>
+                                    <li>Normalidad</li>
+                                    <li>Homocedasticidad</li>
+                                    <li>Independencia</li>
+                                    </ul>
+                                    <p><b>Bonferroni:</b> Una vez se tenga constancia gracias al análisis de varianzas Anova de que existen diferencias significativas entre las medias de los algoritmos, se procede con el test Post-Hoc de <b>Bonferroni</b> para determinar las diferencias entre todas las muestras, comparando las medias de todos los algoritmos entre sí. Cada p-valor asociado con la hipótesis H<sub>i</sub> se compara con un alpha ajustado a todas las comparaciones: p<sub>i</sub> < (alpha/m), donde m se corresponde con el número de comparaciones: m=(K∗(K−1))2 y K es el número de algoritmos.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Test T-test-->
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwelve">5. Test T-test</a>
+                                </h4>
+                            </div>
+                            <div id="collapseTwelve" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                     <p>Si p_valor < alpha, se rechaza la hipótesis nula de que 2 muestras relacionadas o repetidas tienen idénticos valores promedio (esperados). La prueba mide si la puntuación media difiere significativamente entre las muestras. p-valores pequeños están asociados a altos estadísticos t.</p>
+                                    <p>Se deben cumplir las condiciones paramétricas:</p>
+                                    <ul>
+                                    <li>Normalidad</li>
+                                    <li>Homocedasticidad</li>
+                                    <li>Independencia</li>
+                                    </ul>
+                                    <p>También se dede cumplir que el número de algoritmos o muestras sea de dos.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Test de homocedasticidad-->
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTen">6. Test de homocedasticidad de Levene</a>
+                                </h4>
+                            </div>
+                            <div id="collapseTen" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                     <p>Contrasta la hipótesis nula de que todas las poblaciones de entrada proceden de poblaciones con varianzas iguales. Si el p-valor resultante del test de Levene es menor que el nivel de significancia, se rechaza la hipótesis. Tests paramétricos como Anova o t-test, asumen homocedasticidad en las poblaciones.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Test de Wilcoxon-->
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseEight">7. Test de Wilcoxon</a>
+                                </h4>
+                            </div>
+                            <div id="collapseEight" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <p>Contrasta la hipótesis nula de que las medianas de las diferencias de dos muestras (resultados de dos algoritmos) relacionadas son iguales. Para tamaños muestrales pequeños, se puede determinar mediante la comparación del estadístico con el valor crítico de la tabla de Wilcoxon (si estadistico < valor crítico se rechaza H<sub>0</sub>). Para tamaños muestrales grandes (> 25), el test se puede aproximar con la distribución normal (en cuyo caso H<sub>0</sub> sería rechazada si p-valor < alpha).</p>
+                                    <p><strong>Restricciones:</strong></p>
+                                    <ul>
+                                        <li>Número de algortimos >= 2</li>
+                                        <li>Se deben tener al menos 5 conjuntos de datos cuyas diferencias sean distintas de 0.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Explicación tests de ranking-->
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">8. Tests de ranking: ¿para qué sirven?</a>
+                                </h4>
+                            </div>
+                            <div id="collapseFour" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <p>Los <b>tests no paramétricos de ranking</b>, contrastan la hipótesis nula de que todos los algoritmos se comportan de forma similar, en cuyo caso sus rankings deberían de ser similares y por tanto se podrían considerar iguales todos los algoritmos. Los tests de ranking se diferencian en la forma de calcular los rankings o en la forma de calcular el estadístico.</p>
+                                    <p>Estos tests, dan como resultado la existencia o no de diferencias significativas entre los algoritmos sobre los que se han aplicado. Es decir, nos dice si el contraste de hipótesis es o no estadísticamente significativo. Si se rechaza la hipótesis nula de “todos los algoritmos son iguales”, sabremos que entre los algoritmos existen diferencias. Sin embargo, puede ocurrir que un algoritmo presente un rendimiento similar a otro u otros y por tanto se pueda considerar igual.</p>
+                                    <p>Por este motivo, después de aplicar los tests de ranking se aplican los <b>tests Post-Hoc</b>. Estos tests comparan los algoritmos y realizan contrastes de hipótesis entre ellos para determinar diferencias. Se distinguen dos tipos de comparación:</p>
+                                    <ul>
+                                        <li>Método de control: Se compara el primer algoritmo del ranking devuelto por el test de ranking con el resto de algoritmos y por tanto habrá K-1 comparaciones.</li>
+                                        <li>Comparación múltiple (multitest): Compara todos los algoritmos con todos. Habrá K*(K-1)/2 comparaciones.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Minimización / Maximización.-->
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseSeven">9. Minimización / Maximización</a>
+                                </h4>
+                            </div>
+                            <div id="collapseSeven" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <p>Indica la función objetivo de los algoritmos que se están contrastando, es decir, si lo que pretendían los algoritmos era obtener el resultado más pequeño posible o el resultado más grande.</p>
+                                    <p>Influye en la asignación de rankings, ya que el orden cambiaría (el primero del ranking podría ser el de mayor o el de menor valor).</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Tests de ranking disponibles.-->
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive">10. Tests de ranking disponibles</a>
+                                </h4>
+                            </div>
+                            <div id="collapseFive" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <p><b>Friedman:</b> Realiza comparaciones y asigna rankings dentro de cada conjunto de datos. El estadístico se distribuye como una distribución chi-cuadrado con K-1 grados de libertad, siendo K el número de variables relacionadas (o número de algoritmos).</p>
+                                    <p><b>Iman-Davenport:</b> Mejora del test de Friedman con un estadístico más ajustado, que se distribuye de acuerdo a una distribución f con (K-1) y (K-1)*(N-1) grados de libertad, siendo N el número de conjunto de datos. El comportamiento es menos conservativo que el test de Friedman, ya que se rechazan más hipótesis (mayor potencia).</p>
+                                    <p><b>Rangos Alineados de Friedman:</b> Realiza comparaciones y asigna rankings teniendo en cuenta a todos los conjuntos de datos. Suele emplearse cuando el número de algoritmos en la comparación es pequeño.</p>
+                                    <p><b>Quade:</b> Similar a Iman-Davenport, pero considera que algunos problemas son más difíciles o que los resultados que obtienen los algoritmos sobre ellos son más distantes (ponderación).</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Tests Post-Hoc disponibles.-->
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseSix">11. Tests Post-Hoc disponibles</a>
+                                </h4>
+                            </div>
+                            <div id="collapseSix" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <p><strong>Bonferroni-Dunn: </strong>Rechaza la hipótesis nula si: p-valor < alpha / (K-1)</p>
+                                    <p><strong>Holm: </strong>Compara cada p<sub>i</sub> (empezando por el más significativo o pequeño) con alpha / (K−i), donde i [1,K-1]. Si se rechaza una hipótesis continúa contrastando. En el caso de que una hipótesis se acepte se aceptan todas las demás.</p>
+                                    <p><strong>Hochberg: </strong>Compara en la dirección opuesta a Holm. En el momento que encuentra una hipótesis que pueda aceptar, acepta todas las demás.</p>
+                                    <p><strong>Li: </strong>Rechaza todas las hipótesis si el p-valor menos significativo es menor que alpha. En otro caso, acepta dicha hipótesis y rechaza cualquier hipótesis restante cuyo p-valor sea menor que un valor calculado.</p>
+                                    <p><strong>Finner: </strong>Sigue un proceso igual al test de Holm pero cada p-valor asociado con la hipótesis H<sub>i</sub> se compara como: p<sub>i</sub> <= alpha / 1−(1−alpha)^(K−1)/i, donde i [1,K-1]</p>
+                                    <p><strong>Multitests: </strong>Iguales que los demás pero en lugar de K-1 comparaciones se relizan m donde, m=(K∗(K−1))/2.</p>
+                                    <p><strong>Shaffer: </strong>Igual a Holm pero cada p-valor asociado con la hipótesis H<sub>i</sub> se compara como p<sub>i</sub> <= alpha / t<sub>i</sub>, donde t<sub>i</sub> es el número máximo de hipótesis posibles suponiendo que las (j-1) anteriores han sido rechazadas.</p>
                                 </div>
                             </div>
                         </div>
@@ -140,7 +300,7 @@
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h4 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">3. Acerca de la web</a>
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">12. Acerca de la web</a>
                                 </h4>
                             </div>
                             <div id="collapseThree" class="panel-collapse collapse">

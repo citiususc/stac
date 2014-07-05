@@ -93,15 +93,16 @@
                         <li class="active"><a href="tests_no_parametricos.html">Tests no Paramétricos</a></li>
                     </ul>
                 </div>
+                <!--*****************************Tests no paramétricos**************************************************-->
                 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
                     <h1 class="page-header">Tests no Paramétricos</h1>
-                    <!--*****************************Tests no paramétricos**************************************************-->
                     <ul class="nav nav-tabs">
                         <li class="active"><a data-toggle="tab" href="#descripcion">Descripción</a></li>
                         <li><a data-toggle="tab" href="#wilcoxon">Test de Wilcoxon</a></li>
                         <li><a data-toggle="tab" href="#ranking">Tests de Ranking</a></li>
                     </ul>
                     <div class="tab-content">
+                        <!--Pestaña descripción-->
                         <div id="descripcion" class="tab-pane fade in active">
                             <h3>Descripción</h3>
                             <p>Los tests no paramétricos son aquellos que no cumplen alguna de las condiciones establecidas para los tests paramétricos:</p>
@@ -115,143 +116,138 @@
                             <img src="imagenes/chi-cuadrado.png" class="img-responsive" alt="Distribución chi-cuadrado" width="250px;" height="250px;">
                             <br><p>En las siguientes pestañas <b>"Test de Wilcoxon"</b> y <b>"Tests de Ranking"</b> puedes encontrar los diferentes tests no paramétricos implementados en la web.</p>
                         </div>
+                        <!--Pestaña test de Wilcoxon-->
                         <div id="wilcoxon" class="tab-pane fade">
                             <h3>Test de Wilcoxon</h3>
-                            <p>Contrasta la hipótesis nula de que las medianas de las diferencias de dos muestras (resultados de dos algoritmos) relacionadas son iguales. Para tamaños muestrales pequeños, se puede determinar mediante la comparación del estadístico con el valor crítico de la tabla de Wilcoxon (si estadistico < valor crítico se rechaza H<sub>0</sub>). Para tamaños muestrales grandes (> 25), el test se puede aproximar con la distribución normal (en cuyo caso H<sub>0</sub> sería rechazada si p-valor < alpha).</p>
-                            <p><strong>Restricciones:</strong></p>
-                            <ul>
-                                <li>Número de algortimos >= 2</li>
-                                <li>Se deben tener al menos 5 conjuntos de datos cuyas diferencias sean distintas de 0.</li>
-                            </ul>
-                            <br>
-                            <p>Nivel de significancia (alpha) o probabilidad de rechazar la hipótesis nula siendo cierta (defecto 0.05):</p>
-                            <select class="form-control" id="alpha" style="width:100px;">
-                                <option value="no">Elige</option>
-                                <option value="0.10">0.10</option>
-                                <option value="0.05">0.05</option>
-                                <option value="0.02">0.02</option>
-                                <option value="0.01">0.01</option>
-                                <option value="0.005">0.005</option>
-                                <option value="0.001">0.001</option>
-                            </select>
-                            <br>
+                            <a href="ayuda.html#collapseEight" id="ayuda_fichero" target="_blank">Aprender más acerca del test de Wilcoxon.</a>
                             <div class="row">
-                                <div class="col-md-2 col-md-offset-5">
-                                    <a data-toggle="tab" href="#ver_resultados_wilcoxon"><button type="button" class="btn btn-success" id="datos_wilcoxon">Aplicar</button></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="ranking" class="tab-pane fade">
-                            <h3>Inicio:</h3>
-                            <br><p>Los <b>tests no paramétricos de ranking</b>, contrastan la hipótesis nula de que todos los algoritmos se comportan de forma similar, en cuyo caso sus rankings deberían de ser similares y por tanto se podrían considerar iguales todos los algoritmos. Los tests de ranking se diferencian en la forma de calcular los rankings o en la forma de calcular el estadístico.</p>
-                            <p>Estos tests, dan como resultado la existencia o no de diferencias significativas entre los algoritmos sobre los que se han aplicado. Es decir, nos dice si el contraste de hipótesis es o no estadísticamente significativo. Si se rechaza la hipótesis nula de “todos los algoritmos son iguales”, sabremos que entre los algoritmos existen diferencias. Sin embargo, puede ocurrir que un algoritmo presente un rendimiento similar a otro u otros y por tanto se pueda considerar igual.</p>
-                            <p>Por este motivo, después de aplicar los tests de ranking se aplican los <b>tests Post-Hoc</b>. Estos tests comparan los algoritmos y realizan contrastes de hipótesis entre ellos para determinar diferencias. Se distinguen dos tipos de comparación:</p>
-                            <ul>
-                                <li>Método de control: Se compara el primer algoritmo del ranking devuelto por el test de ranking con el resto de algoritmos y por tanto habrá K-1 comparaciones.</li>
-                                <li>Comparación múltiple (multitest): Compara todos los algoritmos con todos. Habrá K*(K-1)/2 comparaciones.</li>
-                            </ul>
-                            <div class="row">
-                                <div class="col-md-2 col-md-offset-5">
-                                    <br><a data-toggle="tab" href="#empezar"><button type="button" name="test" class="btn btn-success">Empezar</button></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="empezar" class="tab-pane fade">
-                            <h3>Selecciona un test de ranking:</h3>
-                            <p><b>Friedman:</b> Realiza comparaciones y asigna rankings dentro de cada conjunto de datos. El estadístico se distribuye como una distribución chi-cuadrado con K-1 grados de libertad, siendo K el número de variables relacionadas (o número de algoritmos).</p>
-                            <p><b>Iman-Davenport:</b> Mejora del test de Friedman con un estadístico más ajustado, que se distribuye de acuerdo a una distribución f con (K-1) y (K-1)*(N-1) grados de libertad, siendo N el número de conjunto de datos.</p>
-                            <p><b>Rangos Alineados de Friedman:</b> Realiza comparaciones y asigna rankings teniendo en cuenta a todos los conjuntos de datos. Suele emplearse cuando el número de algoritmos en la comparación es pequeño.</p>
-                            <p><b>Quade:</b> Similar a Iman-Davenport, pero considera que algunos problemas son más difíciles o que los resultados que obtienen los algoritmos sobre ellos son más distantes (ponderación).</p>
-                            <div class="row">
-                                <!--Selección de Test, nivel de significacia y tipo-->
-                                <div class="col-md-2">
-                                    <div class="btn-group-vertical" data-toggle="buttons">
-                                        <label class="btn btn-primary active">
-                                            <input type="radio" name="test" id="option1" value="friedman" checked> Friedman
-                                        </label>
-                                        <label class="btn btn-primary">
-                                            <input type="radio" name="test" id="option2" value="iman-davenport"> Iman-Davenport
-                                        </label>
-                                        <label class="btn btn-primary">
-                                            <input type="radio" name="test" id="option3" value="rangos-alineados"> Rangos Alineados de Friedman
-                                        </label>
-                                        <label class="btn btn-primary">
-                                            <input type="radio" name="test" id="option3" value="quade"> Quade
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-md-8 col-md-offset-1">
-                                    <p>Nivel de significancia (alpha) o probabilidad de rechazar la hipótesis nula siendo cierta (defecto 0.05):</p>
+                                <br>
+                                <div class="col-md-3">
+                                    <p>Nivel de significancia alpha: &nbsp;<a href="ayuda.html#collapseTwo" id="ayuda_fichero" target="_blank">?</a></p>
                                     <select class="form-control" id="alpha" style="width:100px;">
-                                        <option value="no">Elige</option>
                                         <option value="0.10">0.10</option>
-                                        <option value="0.05">0.05</option>
+                                        <option value="0.05" selected="selected">0.05</option>
                                         <option value="0.02">0.02</option>
                                         <option value="0.01">0.01</option>
                                         <option value="0.005">0.005</option>
                                         <option value="0.001">0.001</option>
                                     </select>
-                                    <p>Maximización o minimización (defecto minimización):</p>
-                                    <select class="form-control" id="tipo" style="width:150px;">
-                                        <option value="no">Elige</option>
-                                        <option value="0">Minimización</option>
-                                        <option value="1">Maximización</option>
-                                    </select>
                                     <br>
-                                    <a data-toggle="tab" href="#ranking"><button type="button" class="btn btn-default">Volver atrás</button></a>
-                                    <a class="btn btn-success" data-toggle="tab" href="#post-hoc" id="friedman">Seguir</a>
+                                </div>
+                            
+                                <div class="col-md-9">
+                                    <a data-toggle="tab" href="#ver_resultados_wilcoxon"><button type="button" class="btn btn-success" id="datos_wilcoxon">Aplicar</button></a>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+<div class="col-md-12">
+                                <p><u>Información general:</u></p>
+                                <p><strong>Hipótesis nula (H<sub>0</sub>):</strong> Las medianas de las diferencias de dos muestras (resultados de dos algoritmos) relacionadas son iguales.</p>
+                                <p><strong>Restricciones:</strong></p>
+                                <ul type = square>
+                                    <li>Número de algortimos >= 2
+                                    <li>Se deben tener al menos 5 conjuntos de datos cuyas diferencias sean distintas de 0.
+                                </ul>
+</div>
+                            </div>
+                        </div>
+                        <!--Pestaña tests de ranking-->
+                        <div id="ranking" class="tab-pane fade">
+                            <h3>Selecciona un test de ranking:</h3>
+                            <a href="ayuda.html#collapseFour" id="ayuda_fichero" target="_blank">Aprender más acerca de los tests de ranking.</a>
+                            <div class="row">
+                                <!--Selección de Test, nivel de significacia y tipo-->
+                                <br>
+                                <div class="col-sm-6 col-md-4">
+                                    <p>Test de ranking: &nbsp;<a href="ayuda.html#collapseFive" id="ayuda_fichero" target="_blank">?</a></p>
+                                    <div class="btn-group-vertical" data-toggle="buttons">
+                                        <label name="nombre_test" class="btn btn-primary active"><input type="radio" name="test" id="option1" value="friedman" checked>Friedman</label>
+                                        <label name="nombre_test" class="btn btn-primary"><input type="radio" name="test" id="option2" value="iman-davenport">Iman-Davenport</label>
+                                        <label name="nombre_test" class="btn btn-primary"><input type="radio" name="test" id="option3" value="rangos-alineados">Rangos Alineados de Friedman</label>
+                                        <label name="nombre_test" class="btn btn-primary"><input type="radio" name="test" id="option3" value="quade">Quade</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-8">
+                                    <p>Nivel de significancia alpha: &nbsp;<a href="ayuda.html#collapseTwo" id="ayuda_fichero" target="_blank">?</a></p>
+                                    <select class="form-control" id="alpha_ranking" style="width:100px;">
+                                        <option value="0.10">0.10</option>
+                                        <option value="0.05" selected="selected">0.05</option>
+                                        <option value="0.02">0.02</option>
+                                        <option value="0.01">0.01</option>
+                                        <option value="0.005">0.005</option>
+                                        <option value="0.001">0.001</option>
+                                    </select>
+                                    <br><p>Maximización o minimización: &nbsp;<a href="ayuda.html#collapseSeven" id="ayuda_fichero" target="_blank">?</a></p>
+                                    <div class="btn-group-vertical" data-toggle="buttons">
+                                        <label class="btn btn-primary active">
+                                            <input type="radio" name="tipo" value="0" checked> Minimización
+                                        </label>
+                                        <label class="btn btn-primary">
+                                            <input type="radio" name="tipo" value="1"> Maximización
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <br><br>
+                                <script>
+                                    function obtener_nombre(){
+                                        var nombre_test = $('label[name="nombre_test"].active').text();
+                                        $('#texto_tests').html("<h3>Selecciona el test Post-Hoc a aplicar después del test de "+nombre_test+":<h3>");
+                                    }
+                                </script>
+                                <div class="col-md-12">
+                                    <a class="btn btn-success" onclick="obtener_nombre()" data-toggle="tab" href="#post-hoc" id="friedman">Seguir</a>
+                                </div>
+                                <div class="col-md-12">
+                                    <br><br>
+                                    <p><u>Información general:</u></p>
+                                    <p><strong>Hipótesis nula (H<sub>0</sub>):</strong> No existen diferencias entre los grupos o algoritmos.</p>
+                                    <p><strong>Comentarios:</strong></p>
+                                    <ul type = square>
+                                        <li>Friedman: Comparaciones intra-conjunto.
+                                        <li>Iman-davenport: Comportamiento menos conservativo que Friedman.
+                                        <li>Rangos Alineados de Friedman: Comparaciones entre conjuntos de datos. Cuando el número de algoritmos a comparar pequeño.
+                                        <li>Quade: Los rankings se escalan dependiendo de las diferencias observadas en los rendimientos de los algoritmos.
+                                    </ul>
                                 </div>
                             </div>
                         </div>
                         <!--Selección de tests Post-Hoc-->
                         <div id="post-hoc" class="tab-pane fade">
-                            <h3>Selecciona el test Post-Hoc a aplicar:</h3>
-                            <div class="alert alert-info"><p>Por defecto se aplica Bonferroni-Dunn</p></div>
+                            <div id="texto_tests"></div>
+                            <a href="ayuda.html#collapseFour" id="ayuda_fichero" target="_blank">Aprender más acerca de los tests de ranking.</a>
                             <div class="row">
-                                <div class="col-md-2">
+                                <br>
+                                <div class="col-md-3">
+                                    <p>Test Post-Hoc: &nbsp;<a href="ayuda.html#collapseSix" id="ayuda_fichero" target="_blank">?</a></p>
                                     <div class="btn-group-vertical" data-toggle="buttons">
-                                        <label class="btn btn-primary">
-                                            <input type="radio" name="post_hoc" value="bonferroni_dunn_test"> Bonferroni-Dunn
-                                        </label>
-                                        <label class="btn btn-primary">
-                                            <input type="radio" name="post_hoc" value="holm_test"> Holm
-                                        </label>
-                                        <label class="btn btn-primary">
-                                            <input type="radio" name="post_hoc" value="hochberg_test"> Hochberg
-                                        </label>
-                                        <label class="btn btn-primary">
-                                            <input type="radio" name="post_hoc" value="li_test"> Li
-                                        </label>
-                                        <label class="btn btn-primary">
-                                            <input type="radio" name="post_hoc" value="finner_test"> Finner
-                                        </label>
-                                        <label class="btn btn-primary">
-                                            <input type="radio" name="post_hoc" value="nemenyi_multitest"> Bonferroni-Dunn Multitest
-                                        </label>
-                                        <label class="btn btn-primary">
-                                            <input type="radio" name="post_hoc" value="holm_multitest"> Holm Multitest
-                                        </label>
-                                        <label class="btn btn-primary">
-                                            <input type="radio" name="post_hoc" value="hochberg_multitest"> Hochberg Multitest
-                                        </label>
-                                        <label class="btn btn-primary">
-                                            <input type="radio" name="post_hoc" value="finner_multitest"> Finner Multitest
-                                        </label>
-                                        <label class="btn btn-primary">
-                                            <input type="radio" name="post_hoc" value="shaffer_multitest"> Shaffer
-                                        </label>
+                                        <label name="nombre_post" class="btn btn-primary active"><input type="radio" name="post_hoc" value="bonferroni_dunn_test" checked>Bonferroni-Dunn</label>
+                                        <label name="nombre_post" class="btn btn-primary"><input type="radio" name="post_hoc" value="holm_test">Holm</label>
+                                        <label name="nombre_post" class="btn btn-primary"><input type="radio" name="post_hoc" value="hochberg_test">Hochberg</label>
+                                        <label name="nombre_post" class="btn btn-primary"><input type="radio" name="post_hoc" value="li_test">Li</label>
+                                        <label name="nombre_post" class="btn btn-primary"><input type="radio" name="post_hoc" value="finner_test">Finner</label>
+                                        <label name="nombre_post" class="btn btn-primary"><input type="radio" name="post_hoc" value="nemenyi_multitest">Bonferroni-Dunn Multitest</label>
+                                        <label name="nombre_post" class="btn btn-primary"><input type="radio" name="post_hoc" value="holm_multitest">Holm Multitest</label>
+                                        <label name="nombre_post" class="btn btn-primary"><input type="radio" name="post_hoc" value="hochberg_multitest">Hochberg Multitest</label>
+                                        <label name="nombre_post" class="btn btn-primary"><input type="radio" name="post_hoc" value="finner_multitest">Finner Multitest</label>
+                                        <label name="nombre_post" class="btn btn-primary"><input type="radio" name="post_hoc" value="shaffer_multitest">Shaffer</label>
                                     </div>
                                 </div>
-                                <div class="col-md-8 col-md-offset-1">
-                                    <p><strong>Bonferroni-Dunn: </strong>Rechaza la hipótesis nula si: p-valor < alpha / (K-1)</p>
-                                    <p><strong>Holm: </strong>Compara cada p<sub>i</sub> (empezando por el más significativo o pequeño) con alpha / (K−i), donde i [1,K-1]. Si se rechaza una hipótesis continúa contrastando. En el caso de que una hipótesis se acepte se aceptan todas las demás.</p>
-                                    <p><strong>Hochberg: </strong>Compara en la dirección opuesta a Holm. En el momento que encuentra una hipótesis que pueda aceptar, acepta todas las demás.</p>
-                                    <p><strong>Li: </strong>Rechaza todas las hipótesis si el p-valor menos significativo es menor que alpha. En otro caso, acepta dicha hipótesis y rechaza cualquier hipótesis restante cuyo p-valor sea menor que un valor calculado.</p>
-                                    <p><strong>Finner: </strong>Sigue un proceso igual al test de Holm pero cada p-valor asociado con la hipótesis H<sub>i</sub> se compara como: p<sub>i</sub> <= alpha / 1−(1−alpha)^(K−1)/i, donde i [1,K-1]</p>
-                                    <p><strong>Multitests: </strong>Iguales que los demás pero en lugar de K-1 comparaciones se relizan m donde, m=(K∗(K−1))/2.</p>
-                                    <p><strong>Shaffer: </strong>Igual a Holm pero cada p-valor asociado con la hipótesis H<sub>i</sub> se compara como p<sub>i</sub> <= alpha / t<sub>i</sub>, donde t<sub>i</sub> es el número máximo de hipótesis posibles suponiendo que las (j-1) anteriores han sido rechazadas.</p><br>
-                                    <a data-toggle="tab" href="#empezar"><button type="button" class="btn btn-default">Volver atrás</button></a>
+                                <br><br>
+                                <div class="col-md-9">
+                                    <a data-toggle="tab" href="#ranking"><button type="button" class="btn btn-default">Volver atrás</button></a>
                                     <a data-toggle="tab" href="#ver_resultados_ranking"><button type="button" class="btn btn-success" id="datos_ranking">Aplicar</button></a>
+                                    <br><br>
+                                    <p><u>Información general:</u></p>
+                                    <p><strong>Hipótesis nulas (H<sub>0</sub>):</strong> No existe diferencia entre el "Algoritmo A" y el "Algoritmo B".</p>
+                                    <p><strong>Comentarios:</strong></p>
+                                    <ul type = square>
+                                        <li>Para los tests Post-Hoc normales, se compara el mejor algoritmo del ranking con los demás.
+                                        <li>Para los tests Post-Hoc multitests, se comparan todos los algoritmos con todos, con lo que habrá más hipótesis a contrastar.
+                                        <li>Los tests están ordenados de menor a mayor potencia (tanto normales como multitests).
+                                    </ul>
                                 </div>
                             </div>
                             <br>
