@@ -44,9 +44,9 @@
                         <!--Consulta de fichero-->
                         <li id="mostrar_consulta_fichero" style="display:none"><a href="consultar_fichero.html">Consultar fichero</a></li>
                         <!--Subir el fichero-->
-                        <li><a href="#modal_fichero" data-toggle="modal">Subir fichero</a></li>
+                        <li><a id="a_subida" href="#modal_fichero" data-toggle="modal">Subir fichero</a></li>
                         <!--Ayuda-->
-                        <li><a href="ayuda.html">Ayuda</a></li>
+                        <li><a href="ayuda.html" target="_blank">Ayuda</a></li>
                     </ul>
                 </div>
             </div>
@@ -64,7 +64,7 @@
                 </div>
                 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
                     <h1 class="page-header"> STAC - Statistical Tests for Algorithm Comparison</h1>
-                    <p align="justify">En esta plataforma web puedes llevar a cabo la validación de resultados obtenidos por los algoritmos de aprendizaje mediante la aplicación de tests estadísticos sobre los experimentos, que, entre otras utilidades, apoyan la toma de decisiones (por ejemplo la elección del algoritmo más adecuado). <a href="ayuda.html#collapseThree" target="_parent">Aprender más acerca de esta web.</a></p>
+                    <p align="justify">En esta plataforma web puedes llevar a cabo la validación de resultados obtenidos por los algoritmos de aprendizaje mediante la aplicación de tests estadísticos sobre los experimentos, que, entre otras utilidades, apoyan la toma de decisiones (por ejemplo la elección del algoritmo más adecuado). <a href="ayuda.html#collapseThree" target="_blank">Aprender más acerca de esta web.</a></p>
                     <!--***Botón de subir fichero***-->
                     <br><br><div align="center">
                         <p>Para empezar, puedes subir un fichero:</p>
@@ -80,7 +80,7 @@
                                 </div>
                                 <div class="modal-body">
                                     <form class="form" id="formfichero" enctype="multipart/form-data">
-                                        <p class="text-warning"><small>El formato del archivo sigue el estándar .csv</small>&nbsp;&nbsp;<a href="ayuda.html#collapseOne" id="ayuda_fichero" target="_parent">?</a></p>
+                                        <p class="text-warning"><small>El formato del archivo sigue el estándar .csv</small>&nbsp;&nbsp;<a href="ayuda.html#collapseOne" target="_blank" id="ayuda_fichero">?</a></p>
                                         <div class="input-group">
                                             <span class="input-group-btn">
                                                 <span class="btn btn-primary btn-file">
