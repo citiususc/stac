@@ -582,10 +582,10 @@ function generar_tabla_wilcoxon(data) {
 //Función javascript para generar la tabla de resultados de los tests de ranking.
 function generar_tabla_ranking(data) {
 
-    var salida = "<div class=\"table-responsive\"><br>";
+    var salida = "<div id=\"result_ranking\" class=\"table-responsive\"><br>";
 
     //Botón para exportar a .csv
-    salida = salida + "<a href=\"#\" onclick=\"exportTableToCSV.apply(this, [$('table'), $('input[name=test]:checked').val()+'.csv'])\"><button class=\"btn btn-default\">Exportar csv</button></a>";
+    salida = salida + "<a href=\"#\" onclick=\"exportTableToCSV.apply(this, [$('#result_ranking'), $('input[name=test]:checked').val()+'.csv'])\"><button class=\"btn btn-default\">Exportar csv</button></a>";
 
     salida = salida + "<br><br><table class=\"table table-hover\"><thead>";
     salida = salida + "<tr><th>Ranking</th><th>Algoritmos</th><th>Estadístico</th><th>p-valor</th><th>Resultado:</th></tr></thead><tbody>";
@@ -612,10 +612,10 @@ function generar_tabla_ranking(data) {
 //Función javascript para generar la tabla de resultados de los tests Post-Hoc con método de control.
 function generar_tabla_control(data, test) {
 
-    var salida = "<div class=\"table-responsive\"><br>";
+    var salida = "<div id=\"post_hoc_metodoc\" class=\"table-responsive\"><br>";
 
     //Botón para exportar a .csv
-    salida = salida + "<a href=\"#\" onclick=\"exportTableToCSV.apply(this, [$('table'), $('input[name=post_hoc]:checked').val()+'.csv'])\"><button class=\"btn btn-default\">Exportar csv</button></a>";
+    salida = salida + "<a href=\"#\" onclick=\"exportTableToCSV.apply(this, [$('#post_hoc_metodoc'), $('input[name=post_hoc]:checked').val()+'.csv'])\"><button class=\"btn btn-default\">Exportar csv</button></a>";
 
     salida = salida + "<br><br><table class=\"table table-hover\"><thead>";
     if(test != "li_test")
@@ -669,10 +669,10 @@ function generar_tabla_control(data, test) {
 //Función javascript para generar la tabla de resultados de los tests Post-Hoc multitests.
 function generar_tabla_multitests(data, test) {
 
-    var salida = "<div class=\"table-responsive\"><br>";
+    var salida = "<div id=\"post_hoc_multi\" class=\"table-responsive\"><br>";
 
     //Botón para exportar a .csv
-    salida = salida + "<a href=\"#\" onclick=\"exportTableToCSV.apply(this, [$('table'), $('input[name=post_hoc]:checked').val()+'.csv'])\"><button class=\"btn btn-default\">Exportar csv</button></a>";
+    salida = salida + "<a href=\"#\" onclick=\"exportTableToCSV.apply(this, [$('#post_hoc_multi'), $('input[name=post_hoc]:checked').val()+'.csv'])\"><button class=\"btn btn-default\">Exportar csv</button></a>";
 
     salida = salida + "<br><br><table class=\"table table-hover\"><thead>";
     salida = salida + "<tr><th>alpha ajustado</th><th>Comparación</th><th>Estadístico</th><th>p-valor</th><th>p-valor ajustado</th><th>Resultado</th></tr></thead><tbody>";
