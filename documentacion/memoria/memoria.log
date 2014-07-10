@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2014.4.28)  9 JUL 2014 22:10
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2014.4.28)  10 JUL 2014 19:35
 entering extended mode
 **memoria.tex
 (C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\memoria.tex
@@ -616,7 +616,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 11--16
 
 
 
-] [4] <figuras/pdf_normal.png, id=128, 803.0pt x 602.25pt>
+] [4] <figuras/pdf_normal.png, id=130, 803.0pt x 602.25pt>
 File: figuras/pdf_normal.png Graphic file (type png)
 
 <use figuras/pdf_normal.png>
@@ -627,20 +627,20 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <6> on input line 113.
 
-<figuras/pdf_chi_cuadrado.png, id=129, 338.76563pt x 253.69781pt>
+<figuras/pdf_chi_cuadrado.png, id=131, 338.76563pt x 253.69781pt>
 File: figuras/pdf_chi_cuadrado.png Graphic file (type png)
 
 <use figuras/pdf_chi_cuadrado.png>
 Package pdftex.def Info: figuras/pdf_chi_cuadrado.png used on input line 116.
 (pdftex.def)             Requested size: 142.26508pt x 85.35802pt.
 
-<figuras/pdf_f.png, id=131, 192.72pt x 144.54pt>
+<figuras/pdf_f.png, id=133, 192.72pt x 144.54pt>
 File: figuras/pdf_f.png Graphic file (type png)
  <use figuras/pdf_f.png>
 Package pdftex.def Info: figuras/pdf_f.png used on input line 122.
 (pdftex.def)             Requested size: 142.26355pt x 85.35724pt.
 
-<figuras/pdf_t_student.jpg, id=132, 451.6875pt x 278.03876pt>
+<figuras/pdf_t_student.jpg, id=134, 451.6875pt x 278.03876pt>
 File: figuras/pdf_t_student.jpg Graphic file (type jpg)
 
 <use figuras/pdf_t_student.jpg>
@@ -651,57 +651,56 @@ Package pdftex.def Info: figuras/pdf_t_student.jpg used on input line 125.
 cuadrado.png> <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/
 pdf_f.png> <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/pdf
 _t_student.jpg>]
-<figuras/figura1.png, id=150, 301.125pt x 85.06781pt>
-File: figuras/figura1.png Graphic file (type png)
+<figuras/tipos_error.png, id=152, 301.125pt x 85.06781pt>
+File: figuras/tipos_error.png Graphic file (type png)
 
-<use figuras/figura1.png>
-Package pdftex.def Info: figuras/figura1.png used on input line 180.
+<use figuras/tipos_error.png>
+Package pdftex.def Info: figuras/tipos_error.png used on input line 179.
 (pdftex.def)             Requested size: 199.17502pt x 56.90556pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [6]
-Underfull \hbox (badness 10000) in paragraph at lines 226--230
+Underfull \hbox (badness 10000) in paragraph at lines 225--229
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 226--230
+Underfull \hbox (badness 10000) in paragraph at lines 225--229
 
  []
 
-[7 <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/figura1.png
->] <figuras/test_unilateral_izq.png, id=163, 240.14719pt x 159.59625pt>
+[7 <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/tipos_error
+.png>] <figuras/test_unilateral_izq.png, id=165, 555.07375pt x 554.07pt>
 File: figuras/test_unilateral_izq.png Graphic file (type png)
 
 <use figuras/test_unilateral_izq.png>
 Package pdftex.def Info: figuras/test_unilateral_izq.png used on input line 255
 .
-(pdftex.def)             Requested size: 142.26456pt x 85.35756pt.
+(pdftex.def)             Requested size: 142.26608pt x 85.35579pt.
 
-<figuras/test_unilateral_der.png, id=164, 227.34938pt x 150.5625pt>
+<figuras/test_unilateral_der.png, id=166, 555.07375pt x 554.07pt>
 File: figuras/test_unilateral_der.png Graphic file (type png)
 
 <use figuras/test_unilateral_der.png>
 Package pdftex.def Info: figuras/test_unilateral_der.png used on input line 257
 .
-(pdftex.def)             Requested size: 142.26645pt x 85.36203pt.
+(pdftex.def)             Requested size: 142.26608pt x 85.35579pt.
 
-<figuras/test_bilateral.png, id=165, 197.23688pt x 142.28156pt>
+<figuras/test_bilateral.png, id=167, 555.07375pt x 554.07pt>
 File: figuras/test_bilateral.png Graphic file (type png)
 
 <use figuras/test_bilateral.png>
 Package pdftex.def Info: figuras/test_bilateral.png used on input line 262.
-(pdftex.def)             Requested size: 142.26323pt x 85.3609pt.
+(pdftex.def)             Requested size: 142.26608pt x 85.35579pt.
 
-<figuras/test_unilateral_critico.png, id=166, 227.34938pt x 150.5625pt>
-File: figuras/test_unilateral_critico.png Graphic file (type png)
+<figuras/critico.png, id=168, 416.30531pt x 415.5525pt>
+File: figuras/critico.png Graphic file (type png)
 
-<use figuras/test_unilateral_critico.png>
-Package pdftex.def Info: figuras/test_unilateral_critico.png used on input line
- 276.
-(pdftex.def)             Requested size: 142.26645pt x 85.36203pt.
+<use figuras/critico.png>
+Package pdftex.def Info: figuras/critico.png used on input line 280.
+(pdftex.def)             Requested size: 142.26608pt x 85.35367pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
@@ -709,8 +708,21 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 [8 <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/test_unilat
 eral_izq.png> <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/
 test_unilateral_der.png> <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memor
-ia/figuras/test_bilateral.png>]) [9 <C:/Users/Adrián/Desktop/tfg/stac/document
-acion/memoria/figuras/test_unilateral_critico.png>] [10]
+ia/figuras/test_bilateral.png>]
+File: figuras/pdf_chi_cuadrado.png Graphic file (type png)
+ <use figuras/pdf_chi_cuadrado.png>
+Package pdftex.def Info: figuras/pdf_chi_cuadrado.png used on input line 312.
+(pdftex.def)             Requested size: 142.26508pt x 85.35802pt.
+
+<figuras/cdf_chi_cuadrado.png, id=183, 803.0pt x 602.25pt>
+File: figuras/cdf_chi_cuadrado.png Graphic file (type png)
+
+<use figuras/cdf_chi_cuadrado.png>
+Package pdftex.def Info: figuras/cdf_chi_cuadrado.png used on input line 314.
+(pdftex.def)             Requested size: 142.25475pt x 85.35284pt.
+ [9 <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/critico.pn
+g> <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/cdf_chi_cua
+drado.png>]) [10]
 (C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\capitulos/bibliografia
 .tex) [11
 
@@ -736,10 +748,10 @@ Package rerunfilecheck Info: File `memoria.out' has not changed.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 37.
  ) 
 Here is how much of TeX's memory you used:
- 6567 strings out of 493921
- 96900 string characters out of 3144870
- 187696 words of memory out of 3000000
- 9709 multiletter control sequences out of 15000+200000
+ 6580 strings out of 493921
+ 97115 string characters out of 3144870
+ 187837 words of memory out of 3000000
+ 9718 multiletter control sequences out of 15000+200000
  8594 words of font info for 30 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
  29i,7n,30p,241b,413s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -754,9 +766,9 @@ les (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Program Files
 )/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsl10.pfb><C:/Program Files (x86)/
 MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files (x86)/Mi
 KTeX 2.9/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on memoria.pdf (17 pages, 467512 bytes).
+Output written on memoria.pdf (17 pages, 510749 bytes).
 PDF statistics:
- 247 PDF objects out of 1000 (max. 8388607)
- 59 named destinations out of 1000 (max. 500000)
- 139 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 261 PDF objects out of 1000 (max. 8388607)
+ 62 named destinations out of 1000 (max. 500000)
+ 144 words of extra memory for PDF output out of 10000 (max. 10000000)
 

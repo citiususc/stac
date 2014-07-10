@@ -8,5 +8,5 @@
 \contentsline {section}{\numberline {2.3}Decisiones y tipos de error}{6}{section.2.3}
 \contentsline {section}{\numberline {2.4}Intervalos de confianza}{7}{section.2.4}
 \contentsline {section}{\numberline {2.5}Decisi\IeC {\'o}n final y Concepto de p-valor}{8}{section.2.5}
-\contentsline {section}{\numberline {2.6}Etapas en la resoluci\IeC {\'o}n de un contraste de hip\IeC {\'o}tesis}{9}{section.2.6}
+\contentsline {section}{\numberline {2.6}Etapas en la resoluci\IeC {\'o}n de un contraste de hip\IeC {\'o}tesis}{10}{section.2.6}
 \contentsline {section}{\numberline {2.7}Tests param\IeC {\'e}tricos y no param\IeC {\'e}tricos}{10}{section.2.7}

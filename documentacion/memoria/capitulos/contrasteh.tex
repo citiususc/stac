@@ -90,13 +90,13 @@ mientras que si aceptamos la hipótesis alternativa, se estará bastante seguro 
 
 %***************************************************************************************************************************
 
-\section{Estadístico de contraste}
+\section{Estadístico de contraste} \label{estadistico}
 Los tests estadísticos o pruebas de hipótesis, calculan internamente una medida cuantitativa que proporciona la
 factibilidad de la hipótesis nula. Esta medición se extrae de la muestra proporcionada. Por ejemplo, si queremos
 contrastar la hipótesis de que la media poblacional es 5, un estadístico a calcular puede ser la media de una
 muestra. En este caso, la muestra viene determinada por los resultados obtenidos por los algoritmos y cada uno de
 los tests tiene una forma particular de hallar este estadístico mediante una fórmula que lo caracteriza. Estos
-estadísticos siguen una determinada distribución de probabilidad. Por ejemplo en esta plataforma web, los tests
+estadísticos siguen una determinada distribución de probabilidad. Por ejemplo en este proyecto, los tests
 implementados harán uso de estadísticos que siguen distribuciones como:
 \begin{itemize}
 \item Distribución normal (p. ej. test de Wilcoxon).
@@ -123,7 +123,7 @@ distribuciones dependen de ciertos parámetros para determinar su forma ($\mu$, 
 \subfigure[Distribución t con $K$ grados de libertad.]{
 \label{fig:pdfd}
 \includegraphics[width=5cm,height=3cm]{figuras/pdf_t_student.jpg} }
-\caption{Funciones de distribución de probabilidad.}
+\caption{Distribuciones de probabilidad.}
 \label{fig:pdf}
 \end{figure}
 \newline
@@ -139,8 +139,7 @@ En las distribuciones chi cuadrado y t de Student se habla del parámetro $K$ o 
 la distribución f de Fisher-Snedecor). La media y la varianza de estas tres distribuciones vendrán determinadas por
 el parámetro $K$. Cuando se habla de grados de libertad se está refiriendo al número de valores que se pueden elegir
 libremente en una muestra. Por ejemplo: una muestra con dos datos y media 5 si el primer dato toma el valor 4 entonces
-necesariamente el segundo dato debe de ser 6 (para lograr la media de 5). En este caso,
-se tienen:
+necesariamente el segundo dato debe de ser 6 (para lograr la media de 5). En este caso, se tienen:
 \begin{center}
 $N - 1$ grados de libertad, donde $N$ es el tamaño de la muestra.
 \end{center}
@@ -165,7 +164,7 @@ es 5, es más probable que obtengamos una media de una muestra igual a 4.5 que a
 
 %***************************************************************************************************************************
 
-\section{Decisiones y tipos de error}
+\section{Decisiones y tipos de error} \label{tipos_error}
 Cuando se lleva a cabo un contraste de hipótesis sólo se pueden tomar dos decisiones. Los datos de la muestra,
 que en este proyecto vendrá dada por los resultados obtenidos por los algoritmos, evidenciarán qué decisión se
 debe tomar:
@@ -177,7 +176,7 @@ Sin embargo, cuando se toma la decisión se pueden cometer dos tipos de error. L
 muestra las decisiones y los dos tipos de errores que se pueden cometer:
 \begin{figure}[h]
 \centering
-\includegraphics[width=7cm,height=2cm]{figuras/figura1.png}
+\includegraphics[width=7cm,height=2cm]{figuras/tipos_error.png}
 \caption{Decisiones y tipos de error.}
 \label{fig:decision}
 \end{figure}
@@ -221,7 +220,7 @@ El nivel de significación fijado divide en dos regiones el conjunto de posibles
 contraste: la región de aceptación y la región de rechazo o región crítica. Se denomina región de aceptación
 a la región que conduce a la aceptación de $H_0$ y región de rechazo a la región que conduce al rechazo de $H_0$
 en favor de $H_1$. Aquí surge el concepto de ``Cola", que indica la porción o porciones de una distribución
-de probabilidad en la cual se rechaza la hipótesis nula.
+de probabilidad en la cual se rechaza la hipótesis nula, es decir, la región de rechazo.
 
 La determinación de las regiones de aceptación o de rechazo depende de cómo se establezca la hipótesis
 alternativa $H_1$. Por ejemplo, si hablamos de un contraste en el que se esté contrastando una determinada
@@ -248,7 +247,8 @@ $H_0: \mu = \mu_0$
 $H_0: \mu = \mu_0$
 \\$H_1: \mu \neq \mu_0$
 \end{center}
-En la figura \ref{fig:intervalos_normal}, podemos ver cómo quedarían establecidos los intervalos para el ejemplo:
+En la figura \ref{fig:intervalos_normal}, podemos ver cómo quedarían establecidos los intervalos para el ejemplo. En
+rojo se muestra la región de rechazo:
 \begin{figure}[h]
 \centering
 \subfigure[Test unilateral. Cola a la izquierda.]{
@@ -264,6 +264,10 @@ En la figura \ref{fig:intervalos_normal}, podemos ver cómo quedarían estableci
 \label{fig:intervalos_normal}
 \end{figure}
 
+Como se puede observar en el caso del test bilateral o de dos colas, el $\alpha$ se divide en dos porciones iguales:
+$\alpha / 2$, que constituye la región de rechazo. La región de aceptación tendrá en todos los casos probabilidad
+$1 - \alpha$.
+
 %***************************************************************************************************************************
 
 \section{Decisión final y Concepto de p-valor}
@@ -273,7 +277,7 @@ que el contraste es estadísticamente no significativo, es decir, no existe evid
 en favor de $H_1$.
 \begin{figure}[h]
 \centering
-\includegraphics[width=5cm,height=3cm]{figuras/test_unilateral_critico.png}
+\includegraphics[width=5cm,height=3cm]{figuras/critico.png}
 \caption{Punto crítico.}
 \label{fig:punto_critico}
 \end{figure}
@@ -286,6 +290,47 @@ que es el parámetro utilizado para realizar los tests estadísticos en este pro
 un forma más eficiente de determinar si el contraste es o no estadísticamente significativo, ya que no sería
 necesario recalcular regiones de aceptación y rechazo cada vez que el usuario de los tests cambia de nivel de
 significación.
+
+\begin{center}
+``El p-valor, es la probabilidad que hay de obtener un valor al menos tan extremo como el estadístico en cuestión
+que se ha obtenido."
+\end{center}
+
+Para entender mejor el concepto de p-valor, conviene hablar de las distribuciones de probabilidad vistas en la
+figura \ref{fig:pdf} de la sección \ref{estadistico} donde se hablaba del estadístico de contraste. Estas
+distribuciones son funciones que se denominan ``Funciones de densidad de probabilidad" (FDP). Como bien se
+expuso, estas funciones proporcionan la probabilidad que existe para cada valor diferente del estadístico (cómo
+de probable es obtener ese valor del estadístico). Si en vez de trabajar con las funciones de densidad de 
+probabilidad, se trabaja con las funciones de distribución acumuladas (FDA), para cada valor del estadístico
+éstas devolverían la probabilidad de obtener un valor igual o menor que ese estadístico siendo la hipótesis nula
+cierta. En la figura \ref{fig:comparativa_pdf_cdf} podemos ver una comparación entre los dos tipos de funciones
+para el caso de la distribución chi cuadrado:
+
+\begin{figure}[h]
+\centering
+\subfigure[Función de densidad de probabilidad.]{
+\includegraphics[width=5cm,height=3cm]{figuras/pdf_chi_cuadrado.png} }
+\subfigure[Función de distribución acumulada.]{
+\includegraphics[width=5cm,height=3cm]{figuras/cdf_chi_cuadrado.png} }
+\caption{Comparativa FDP y FDA.}
+\label{fig:comparativa_pdf_cdf}
+\end{figure}
+
+Visto de otro modo, con la distribución acumulada, dado un estadístico, nos devuelve la probabilidad que hay de
+obtener un valor al menos tan extremo como el estadístico en cuestión. Esto es el p-valor. Por ejemplo si el valor
+del estadístico es 3 y el test da como resultado un p-valor igual a 0.1, esto quiere decir que un 10\% de las veces
+vamos a obtener un valor similar. Si el p-valor es muy bajo, es decir, la probabilidad de obtener un valor al menos
+tan extremo como ese estadístico es muy baja, se puede concluir que la hipótesis nula no es cierta, ya que sería
+poco probable que siendo cierta se obtuviese ese estadístico.
+
+El criterio para saber si el p-valor es lo suficientemente bajo como para rechazar que la hipótesis nula sea cierta
+es tomado de acuerdo al nivel de significancia establecido. Como se ha mencionado en la sección \ref{tipos_error}, el
+nivel de significancia o $\alpha$ indica la probabilidad de rechazar la hipótesis nula siendo ésta cierta. Si el
+p-valor es menor que el nivel de significancia se rechaza la hipótesis nula.
+
+Según se disminuye $\alpha$, cada vez es más difícil de rechazar la hipótesis nula, ya que se necesita mucha más
+evidencia para justificar el rechazo. Por ejemplo si $\alpha$ es 0.05 y la probabilidad de obtener un estadístico
+igual a 1 es 0.03, se rechaza la hipótesis nula. Sin embargo, si el $\alpha$ fuese 0.01, no se podría rechazar: no hay suficiente evidencia de que la hipótesis nula sea falsa.
 
 %***************************************************************************************************************************
 
