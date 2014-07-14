@@ -1,7 +1,7 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2014.4.28)  14 JUL 2014 16:14
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2014.4.28)  14 JUL 2014 16:46
 entering extended mode
 **memoria.tex
-(C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\memoria.tex
+(C:\Users\Adrián\Desktop\TFG\stac\documentacion\memoria\memoria.tex
 LaTeX2e <2011/06/27>
 Babel <v3.8m> and hyphenation patterns for english, afrikaans, ancientgreek, ar
 abic, armenian, assamese, basque, bengali, bokmal, bulgarian, catalan, coptic, 
@@ -458,15 +458,15 @@ Package: geometry 2010/09/12 v5.6 Page Geometry
 \Gm@dimlist=\toks18
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\geometry\geometry.cfg"))
-(C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\memoria.aux
-(C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\capitulos/titulo.aux)
-(C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\capitulos/introduccion
+(C:\Users\Adrián\Desktop\TFG\stac\documentacion\memoria\memoria.aux
+(C:\Users\Adrián\Desktop\TFG\stac\documentacion\memoria\capitulos/titulo.aux)
+(C:\Users\Adrián\Desktop\TFG\stac\documentacion\memoria\capitulos/introduccion
 .aux)
-(C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\capitulos/contrasteh.a
+(C:\Users\Adrián\Desktop\TFG\stac\documentacion\memoria\capitulos/contrasteh.a
 ux)
-(C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\capitulos/analisisreq.
+(C:\Users\Adrián\Desktop\TFG\stac\documentacion\memoria\capitulos/analisisreq.
 aux)
-(C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\capitulos/bibliografia
+(C:\Users\Adrián\Desktop\TFG\stac\documentacion\memoria\capitulos/bibliografia
 .aux))
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 11.
 LaTeX Font Info:    ... okay on input line 11.
@@ -510,8 +510,8 @@ LaTeX Info: Redefining \ref on input line 11.
 LaTeX Info: Redefining \pageref on input line 11.
 LaTeX Info: Redefining \nameref on input line 11.
 
-(C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\memoria.out)
-(C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\memoria.out)
+(C:\Users\Adrián\Desktop\TFG\stac\documentacion\memoria\memoria.out)
+(C:\Users\Adrián\Desktop\TFG\stac\documentacion\memoria\memoria.out)
 \@outlinefile=\write3
 
 *geometry* driver: auto-detecting
@@ -548,7 +548,7 @@ LaTeX Info: Redefining \nameref on input line 11.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-(C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\capitulos/titulo.tex
+(C:\Users\Adrián\Desktop\TFG\stac\documentacion\memoria\capitulos/titulo.tex
 <figuras/logo_usc.jpg, id=107, 589.20125pt x 382.42876pt>
 File: figuras/logo_usc.jpg Graphic file (type jpg)
 
@@ -559,10 +559,10 @@ Package pdftex.def Info: figuras/logo_usc.jpg used on input line 10.
 
 
 {C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map} <C:/Users/Adrián/Desktop/
-tfg/stac/documentacion/memoria/figuras/logo_usc.jpg>] [2
+TFG/stac/documentacion/memoria/figuras/logo_usc.jpg>] [2
 
 
-] (C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\memoria.toc
+] (C:\Users\Adrián\Desktop\TFG\stac\documentacion\memoria\memoria.toc
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <7> on input line 3.
 LaTeX Font Info:    External font `cmex10' loaded for size
@@ -574,13 +574,13 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 
 ] [2
 
-] (C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\memoria.lof)
+] (C:\Users\Adrián\Desktop\TFG\stac\documentacion\memoria\memoria.lof)
 \tf@lof=\write5
 
 [3] [4
 
 ]
-(C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\capitulos/introduccion
+(C:\Users\Adrián\Desktop\TFG\stac\documentacion\memoria\capitulos/introduccion
 .tex
 Cap\'{\i }tulo 1.
 
@@ -600,7 +600,7 @@ s been already used, duplicate ignored
                    \relax 
 l.27 \include{capitulos/introduccion}
                                       [2]
-(C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\capitulos/contrasteh.t
+(C:\Users\Adrián\Desktop\TFG\stac\documentacion\memoria\capitulos/contrasteh.t
 ex
 Cap\'{\i }tulo 2.
 
@@ -648,10 +648,10 @@ File: figuras/pdf_t_student.jpg Graphic file (type jpg)
 <use figuras/pdf_t_student.jpg>
 Package pdftex.def Info: figuras/pdf_t_student.jpg used on input line 125.
 (pdftex.def)             Requested size: 142.26163pt x 85.35957pt.
- [5 <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/pdf_normal
-.png> <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/pdf_chi_
-cuadrado.png> <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/
-pdf_f.png> <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/pdf
+ [5 <C:/Users/Adrián/Desktop/TFG/stac/documentacion/memoria/figuras/pdf_normal
+.png> <C:/Users/Adrián/Desktop/TFG/stac/documentacion/memoria/figuras/pdf_chi_
+cuadrado.png> <C:/Users/Adrián/Desktop/TFG/stac/documentacion/memoria/figuras/
+pdf_f.png> <C:/Users/Adrián/Desktop/TFG/stac/documentacion/memoria/figuras/pdf
 _t_student.jpg>]
 <figuras/tipos_error.png, id=231, 301.125pt x 85.06781pt>
 File: figuras/tipos_error.png Graphic file (type png)
@@ -673,7 +673,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 225--229
 
  []
 
-[7 <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/tipos_error
+[7 <C:/Users/Adrián/Desktop/TFG/stac/documentacion/memoria/figuras/tipos_error
 .png>] <figuras/test_unilateral_izq.png, id=244, 555.07375pt x 554.07pt>
 File: figuras/test_unilateral_izq.png Graphic file (type png)
 
@@ -717,9 +717,9 @@ Package pdftex.def Info: figuras/critico.png used on input line 280.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[8 <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/test_unilat
-eral_izq.png> <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/
-test_unilateral_der.png> <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memor
+[8 <C:/Users/Adrián/Desktop/TFG/stac/documentacion/memoria/figuras/test_unilat
+eral_izq.png> <C:/Users/Adrián/Desktop/TFG/stac/documentacion/memoria/figuras/
+test_unilateral_der.png> <C:/Users/Adrián/Desktop/TFG/stac/documentacion/memor
 ia/figuras/test_bilateral.png>]
 File: figuras/pdf_chi_cuadrado.png Graphic file (type png)
  <use figuras/pdf_chi_cuadrado.png>
@@ -732,8 +732,8 @@ File: figuras/cdf_chi_cuadrado.png Graphic file (type png)
 <use figuras/cdf_chi_cuadrado.png>
 Package pdftex.def Info: figuras/cdf_chi_cuadrado.png used on input line 314.
 (pdftex.def)             Requested size: 142.25475pt x 85.35284pt.
- [9 <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/critico.pn
-g> <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/cdf_chi_cua
+ [9 <C:/Users/Adrián/Desktop/TFG/stac/documentacion/memoria/figuras/critico.pn
+g> <C:/Users/Adrián/Desktop/TFG/stac/documentacion/memoria/figuras/cdf_chi_cua
 drado.png>] [10]
 <figuras/normalidad.jpg, id=290, 504.38437pt x 221.32687pt>
 File: figuras/normalidad.jpg Graphic file (type jpg)
@@ -741,7 +741,7 @@ File: figuras/normalidad.jpg Graphic file (type jpg)
 <use figuras/normalidad.jpg>
 Package pdftex.def Info: figuras/normalidad.jpg used on input line 395.
 (pdftex.def)             Requested size: 256.07817pt x 85.358pt.
- [11 <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/normalida
+ [11 <C:/Users/Adrián/Desktop/TFG/stac/documentacion/memoria/figuras/normalida
 d.jpg>]
 <figuras/homocedasticidad.png, id=299, 526.96875pt x 292.84406pt>
 File: figuras/homocedasticidad.png Graphic file (type png)
@@ -749,10 +749,10 @@ File: figuras/homocedasticidad.png Graphic file (type png)
 <use figuras/homocedasticidad.png>
 Package pdftex.def Info: figuras/homocedasticidad.png used on input line 431.
 (pdftex.def)             Requested size: 170.71602pt x 85.35603pt.
- [12 <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/homocedas
+ [12 <C:/Users/Adrián/Desktop/TFG/stac/documentacion/memoria/figuras/homocedas
 ticidad.png>] [13] [14] [15] [16] [17]
 [18] [19]) [20]
-(C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\capitulos/analisisreq.
+(C:\Users\Adrián\Desktop\TFG\stac\documentacion\memoria\capitulos/analisisreq.
 tex
 Cap\'{\i }tulo 3.
 ) [21
@@ -764,7 +764,7 @@ Cap\'{\i }tulo 3.
 
 
 ]
-(C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\capitulos/bibliografia
+(C:\Users\Adrián\Desktop\TFG\stac\documentacion\memoria\capitulos/bibliografia
 .tex) [23
 
 
@@ -772,15 +772,15 @@ Cap\'{\i }tulo 3.
 ]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 39.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 39.
- (C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\memoria.aux (C:\Users
-\Adrián\Desktop\tfg\stac\documentacion\memoria\capitulos/titulo.aux)
-(C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\capitulos/introduccion
+ (C:\Users\Adrián\Desktop\TFG\stac\documentacion\memoria\memoria.aux (C:\Users
+\Adrián\Desktop\TFG\stac\documentacion\memoria\capitulos/titulo.aux)
+(C:\Users\Adrián\Desktop\TFG\stac\documentacion\memoria\capitulos/introduccion
 .aux)
-(C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\capitulos/contrasteh.a
+(C:\Users\Adrián\Desktop\TFG\stac\documentacion\memoria\capitulos/contrasteh.a
 ux)
-(C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\capitulos/analisisreq.
+(C:\Users\Adrián\Desktop\TFG\stac\documentacion\memoria\capitulos/analisisreq.
 aux)
-(C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\capitulos/bibliografia
+(C:\Users\Adrián\Desktop\TFG\stac\documentacion\memoria\capitulos/bibliografia
 .aux))
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 39.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 39.
@@ -814,7 +814,7 @@ ts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts
 /type1/public/amsfonts/cm/cmsy5.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/ty
 pe1/public/amsfonts/cm/cmsy7.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1
 /public/amsfonts/cm/cmti10.pfb>
-Output written on memoria.pdf (29 pages, 687715 bytes).
+Output written on memoria.pdf (29 pages, 687709 bytes).
 PDF statistics:
  462 PDF objects out of 1000 (max. 8388607)
  114 named destinations out of 1000 (max. 500000)
