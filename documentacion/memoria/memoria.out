@@ -8,4 +8,19 @@
 \BOOKMARK [1][-]{section.2.4}{Intervalos de confianza}{chapter.2}% 8
 \BOOKMARK [1][-]{section.2.5}{Decisi\363n final y Concepto de p-valor}{chapter.2}% 9
 \BOOKMARK [1][-]{section.2.6}{Etapas en la resoluci\363n de un contraste de hip\363tesis}{chapter.2}% 10
-\BOOKMARK [1][-]{section.2.7}{Tests param\351tricos y no param\351tricos}{chapter.2}% 11
+\BOOKMARK [1][-]{section.2.7}{Tests param\351tricos}{chapter.2}% 11
+\BOOKMARK [2][-]{subsection.2.7.1}{Condiciones Param\351tricas}{section.2.7}% 12
+\BOOKMARK [2][-]{subsection.2.7.2}{Test Anova}{section.2.7}% 13
+\BOOKMARK [2][-]{subsection.2.7.3}{T-test}{section.2.7}% 14
+\BOOKMARK [1][-]{section.2.8}{Tests no param\351tricos}{chapter.2}% 15
+\BOOKMARK [2][-]{subsection.2.8.1}{Test de Wilcoxon}{section.2.8}% 16
+\BOOKMARK [2][-]{subsection.2.8.2}{Test de Friedman}{section.2.8}% 17
+\BOOKMARK [2][-]{subsection.2.8.3}{Test de Iman-Davenport}{section.2.8}% 18
+\BOOKMARK [2][-]{subsection.2.8.4}{Test de los Rangos Alineados de Friedman}{section.2.8}% 19
+\BOOKMARK [2][-]{subsection.2.8.5}{Test de Quade}{section.2.8}% 20
+\BOOKMARK [2][-]{subsection.2.8.6}{Tests POST-HOC}{section.2.8}% 21
+\BOOKMARK [0][-]{chapter.3}{An\341lisis de requisitos}{}% 22
+\BOOKMARK [1][-]{section.3.1}{Epics}{chapter.3}% 23
+\BOOKMARK [1][-]{section.3.2}{Historias de usuario}{chapter.3}% 24
+\BOOKMARK [2][-]{subsection.3.2.1}{Historias de usuario desarrollador}{section.3.2}% 25
+\BOOKMARK [2][-]{subsection.3.2.2}{Historias de usuario cliente}{section.3.2}% 26

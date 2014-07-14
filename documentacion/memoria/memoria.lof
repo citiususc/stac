@@ -2,7 +2,7 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Distribuci\IeC {\'o}n normal con media $\mu $ y varianza $\sigma ^2$.}}}{5}{subfigure.2.1.2}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Distribuci\IeC {\'o}n chi cuadrado con $K$ grados de libertad.}}}{5}{subfigure.2.1.2}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Distribuci\IeC {\'o}n $\chi ^2$ con $K$ grados de libertad.}}}{5}{subfigure.2.1.2}
 \contentsline {figure}{\numberline {2.1}{\ignorespaces Distribuciones de probabilidad.}}{5}{figure.2.1}
 \contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Distribuci\IeC {\'o}n f con $d1$ y $d2$ grados de libertad.}}}{5}{figure.2.1}
 \contentsline {subfigure}{\numberline {(d)}{\ignorespaces {Distribuci\IeC {\'o}n t con $K$ grados de libertad.}}}{5}{figure.2.1}
@@ -15,3 +15,6 @@
 \contentsline {figure}{\numberline {2.5}{\ignorespaces Comparativa FDP y FDA.}}{9}{figure.2.5}
 \contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Funci\IeC {\'o}n de densidad de probabilidad.}}}{9}{figure.2.5}
 \contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Funci\IeC {\'o}n de distribuci\IeC {\'o}n acumulada.}}}{9}{figure.2.5}
+\contentsline {figure}{\numberline {2.6}{\ignorespaces Normalidad VS No normalidad.}}{11}{figure.2.6}
+\contentsline {figure}{\numberline {2.7}{\ignorespaces Homocedasticidad VS Heterocedasticidad.}}{12}{figure.2.7}
+\addvspace {10\p@ }
