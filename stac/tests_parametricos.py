@@ -10,99 +10,54 @@ import scipy as sp
 import scipy.stats as st
 
 def anova_test(matriz_datos, alpha=0.05):
-	"""Test paramétrico Anova.
+    #Número de conjuntos de datos.
+    N = len(matriz_datos)
+    #Número de algoritmos.
+    K = len(matriz_datos[0])
 
-    .. note:: Contrasta la hipótesis nula de que las medias de los resultados de
-              dos o más algoritmos son iguales.
-
-    Args:
-        matriz_datos: lista de listas de float [N_conjuntos_datos * K_algoritmos]
-            Lista que contiene una serie de listas que a su vez contienen los
-            resultados en floats obtenidos por los distintos algoritmos.
-        alpha: float, optional (default = 0.05)
-            Nivel de significancia (probabilidad de error tipo 1) que se quiere
-            utilizar para contrastar la hipótesis nula del test.
-
-    Returns:
-        dict: diccionario que contiene los siguientes elementos::
-
-            resultado: boolean
-                Resultado del test de contraste de hipótesis. True indica que se
-                rechaza la hipótesis nula. False indica que no se rechaza.
-            p_valor: float
-                p-valor calculado para comparar (contrastar H0) con el nivel de
-                significancia.
-            estadistico: float
-                Estadístico calculado durante el test. Sigue una distribución F.
-            variaciones: lista de float [3]
-                Lista de variaciones (variación total o respecto a la media general,
-                variación dentro del tratamiento o variación del error y variación
-                entre los tratamientos o algoritmos).
-            grados_libertad: lista de float [3]
-                Lista que contiene los grados de libertad totales, de los
-                tratamientos y del error.
-            cuadrados_medios: lista de float [3]
-                Lista de contiene los cuadrados medios (variaciones / grados de libertad)
-                totales, del tratamiento y del error.
-            medias_algoritmos: lista de float [K_algoritmos]
-                Media de los resultados obtenidos por cada uno de los algoritmos.
-            media_general: float
-                Media de medias de los algoritmos.
-
-    References:
-        1. Primitivo Reyes (Sept. 2007). *Análisis de Varianza Anova de una Vía* [Documento WWW]. URL http://www.icicm.com/files/AN_LISIS_DE_VARIANZA.doc
-        2. Manuel Oviedo - Beatriz Pateiro. *Contraste sobre la igualdad de medias en dos o más poblaciones normales.*
-        3. José Luis Vicente Villardón. *Introducción al Análisis de la Varianza* [Documento WWW]. URL http://biplot.usal.es/problemas/anova/ANOVA.html
-    """
-
-	#Número de conjuntos de datos.
-	N = len(matriz_datos)
-	#Número de algoritmos.
-	K = len(matriz_datos[0])
-
-	#Medias algoritmos.
-	medias_algoritmos = []
-	for i in range(len(matriz_datos[0])):
-		medias_algoritmos.append(sp.mean([conjunto[i] for conjunto in matriz_datos]))
+    #Medias algoritmos.
+    medias_algoritmos = []
+    for columna in zip(*matriz_datos):
+        medias_algoritmos.append(sp.mean(columna))
 
 	#Media general.
-	media_general = sp.mean(medias_algoritmos)
+    media_general = sp.mean(medias_algoritmos)
 
-	#Variación total (respecto a la media general).
-	SCT = 0
-	#Variación dentro del tratamiento o variación del error (cada valor respecto a la
-	#media de su tratamiento).
-	SCE = 0
-	#Variación entre los diferentes tratamientos o algoritmos (efecto de la media de cada
-	#tratamiento respecto a la media general).
-	SCTR = 0
-	for i in range(len(matriz_datos[0])):
-		x  = [conjunto[i] for conjunto in matriz_datos]
-		for elem in x:
-		    SCT = SCT + (elem-media_general)**2
-		    SCE = SCE + (elem-medias_algoritmos[i])**2
-		SCTR = SCTR + (len(x)*(medias_algoritmos[i]-media_general)**2)
+    #Variación total (respecto a la media general).
+    SCT = 0
+    #Variación dentro del tratamiento o variación del error (cada valor respecto a la
+    #media de su tratamiento).
+    SCE = 0
+    #Variación entre los diferentes tratamientos o algoritmos (efecto de la media de cada
+    #tratamiento respecto a la media general).
+    SCTR = 0
+    for i in range(len(matriz_datos[0])):
+    	x  = [conjunto[i] for conjunto in matriz_datos]
+    	for elem in x:
+    	    SCT = SCT + (elem-media_general)**2
+    	    SCE = SCE + (elem-medias_algoritmos[i])**2
+    	SCTR = SCTR + (len(x)*(medias_algoritmos[i]-media_general)**2)
 
-	#Grados de libertad.
-	GLT = (N*K)-1
-	GLTR = K-1
-	GLE = GLT - GLTR
+    #Grados de libertad.
+    GLT = (N*K)-1
+    GLTR = K-1
+    GLE = GLT - GLTR
 
-	#Cuadrados medios (suma cuadrados / grados de libertad)
-	CMT = SCT/GLT
-	CMTR = SCTR/GLTR
-	CME = SCE/GLE
+    #Cuadrados medios (suma cuadrados / grados de libertad)
+    CMT = SCT/GLT
+    CMTR = SCTR/GLTR
+    CME = SCE/GLE
 
-	#Estadístico (para contrastar diferencia en las medias del factor de columna TR).
-	F = CMTR/CME
+    #Estadístico (para contrastar diferencia en las medias del factor de columna TR).
+    F = CMTR/CME
 
-	#Cáculo del p_valor.
-	p_valor = 1 - st.f.cdf(F, GLTR, GLE)
+    #Cáculo del p_valor.
+    p_valor = 1 - st.f.cdf(F, GLTR, GLE)
 
-	return {"resultado" : np.asscalar(p_valor < alpha), "p_valor" : p_valor, "estadistico" : F,
-		    "variaciones" : [SCT,SCTR,SCE], "grados_libertad" : [GLT,GLTR,GLE],
-		    "cuadrados_medios" : [CMT,CMTR,CME], "medias_algoritmos" : medias_algoritmos,
-		    "media_general" : media_general}
+    return {"resultado" : np.asscalar(p_valor < alpha), "p_valor" : p_valor, "estadistico" : F,
+    	    "variaciones" : [SCT,SCTR,SCE], "grados_libertad" : [GLT,GLTR,GLE],
+    	    "cuadrados_medios" : [CMT,CMTR,CME], "medias_algoritmos" : medias_algoritmos,
+    	    "media_general" : media_general}
 
 
 
