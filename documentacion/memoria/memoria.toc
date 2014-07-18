@@ -11,35 +11,35 @@
 \contentsline {section}{\numberline {2.6}Etapas en la resoluci\IeC {\'o}n de un contraste de hip\IeC {\'o}tesis}{10}{section.2.6}
 \contentsline {section}{\numberline {2.7}Tests param\IeC {\'e}tricos}{10}{section.2.7}
 \contentsline {subsection}{\numberline {2.7.1}Condiciones Param\IeC {\'e}tricas}{11}{subsection.2.7.1}
-\contentsline {subsubsection}{Independencia}{11}{section*.3}
-\contentsline {subsubsection}{Normalidad}{11}{section*.4}
-\contentsline {subsubsection}{Homocedasticidad}{12}{section*.5}
+\contentsline {subsubsection}{Independencia}{11}{section*.4}
+\contentsline {subsubsection}{Normalidad}{11}{section*.5}
+\contentsline {subsubsection}{Homocedasticidad}{12}{section*.6}
 \contentsline {subsection}{\numberline {2.7.2}Test Anova}{12}{subsection.2.7.2}
-\contentsline {subsubsection}{Hip\IeC {\'o}tesis}{12}{section*.6}
-\contentsline {subsubsection}{Pasos a desarrollar}{13}{section*.7}
+\contentsline {subsubsection}{Hip\IeC {\'o}tesis}{12}{section*.7}
+\contentsline {subsubsection}{Pasos a desarrollar}{13}{section*.8}
 \contentsline {subsection}{\numberline {2.7.3}T-test}{13}{subsection.2.7.3}
-\contentsline {subsubsection}{Hip\IeC {\'o}tesis}{14}{section*.8}
+\contentsline {subsubsection}{Hip\IeC {\'o}tesis}{14}{section*.9}
 \contentsline {section}{\numberline {2.8}Tests no param\IeC {\'e}tricos}{14}{section.2.8}
 \contentsline {subsection}{\numberline {2.8.1}Test de Wilcoxon}{14}{subsection.2.8.1}
-\contentsline {subsubsection}{Hip\IeC {\'o}tesis}{14}{section*.9}
-\contentsline {subsubsection}{Pasos a desarrollar}{15}{section*.10}
+\contentsline {subsubsection}{Hip\IeC {\'o}tesis}{14}{section*.10}
+\contentsline {subsubsection}{Pasos a desarrollar}{15}{section*.11}
 \contentsline {subsection}{\numberline {2.8.2}Test de Friedman}{15}{subsection.2.8.2}
-\contentsline {subsubsection}{Hip\IeC {\'o}tesis}{15}{section*.11}
-\contentsline {subsubsection}{Pasos a desarrollar}{16}{section*.12}
+\contentsline {subsubsection}{Hip\IeC {\'o}tesis}{15}{section*.12}
+\contentsline {subsubsection}{Pasos a desarrollar}{16}{section*.13}
 \contentsline {subsection}{\numberline {2.8.3}Test de Iman-Davenport}{16}{subsection.2.8.3}
-\contentsline {subsubsection}{Hip\IeC {\'o}tesis}{16}{section*.13}
-\contentsline {subsubsection}{Pasos a desarrollar}{16}{section*.14}
+\contentsline {subsubsection}{Hip\IeC {\'o}tesis}{16}{section*.14}
+\contentsline {subsubsection}{Pasos a desarrollar}{16}{section*.15}
 \contentsline {subsection}{\numberline {2.8.4}Test de los Rangos Alineados de Friedman}{17}{subsection.2.8.4}
-\contentsline {subsubsection}{Hip\IeC {\'o}tesis}{17}{section*.15}
-\contentsline {subsubsection}{Pasos a desarrollar}{17}{section*.16}
+\contentsline {subsubsection}{Hip\IeC {\'o}tesis}{17}{section*.16}
+\contentsline {subsubsection}{Pasos a desarrollar}{17}{section*.17}
 \contentsline {subsection}{\numberline {2.8.5}Test de Quade}{17}{subsection.2.8.5}
-\contentsline {subsubsection}{Hip\IeC {\'o}tesis}{17}{section*.17}
-\contentsline {subsubsection}{Pasos a desarrollar}{18}{section*.18}
+\contentsline {subsubsection}{Hip\IeC {\'o}tesis}{17}{section*.18}
+\contentsline {subsubsection}{Pasos a desarrollar}{18}{section*.19}
 \contentsline {subsection}{\numberline {2.8.6}Tests POST-HOC}{18}{subsection.2.8.6}
-\contentsline {subsubsection}{Hip\IeC {\'o}tesis}{18}{section*.19}
-\contentsline {subsubsection}{Tests}{19}{section*.20}
+\contentsline {subsubsection}{Hip\IeC {\'o}tesis}{18}{section*.20}
+\contentsline {subsubsection}{Tests}{19}{section*.21}
 \contentsline {chapter}{\numberline {3}An\IeC {\'a}lisis de requisitos}{21}{chapter.3}
-\contentsline {section}{\numberline {3.1}Epics}{21}{section.3.1}
-\contentsline {section}{\numberline {3.2}Historias de usuario}{21}{section.3.2}
-\contentsline {subsection}{\numberline {3.2.1}Historias de usuario desarrollador}{21}{subsection.3.2.1}
-\contentsline {subsection}{\numberline {3.2.2}Historias de usuario cliente}{21}{subsection.3.2.2}
+\contentsline {section}{\numberline {3.1}Epics}{22}{section.3.1}
+\contentsline {section}{\numberline {3.2}Historias de usuario}{22}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}Historias de usuario desarrollador}{23}{subsection.3.2.1}
+\contentsline {subsection}{\numberline {3.2.2}Historias de usuario cliente}{24}{subsection.3.2.2}

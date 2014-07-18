@@ -1,7 +1,7 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2014.4.28)  14 JUL 2014 16:46
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2014.4.28)  18 JUL 2014 13:37
 entering extended mode
 **memoria.tex
-(C:\Users\Adrián\Desktop\TFG\stac\documentacion\memoria\memoria.tex
+(C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\memoria.tex
 LaTeX2e <2011/06/27>
 Babel <v3.8m> and hyphenation patterns for english, afrikaans, ancientgreek, ar
 abic, armenian, assamese, basque, bengali, bokmal, bulgarian, catalan, coptic, 
@@ -458,60 +458,73 @@ Package: geometry 2010/09/12 v5.6 Page Geometry
 \Gm@dimlist=\toks18
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\geometry\geometry.cfg"))
-(C:\Users\Adrián\Desktop\TFG\stac\documentacion\memoria\memoria.aux
-(C:\Users\Adrián\Desktop\TFG\stac\documentacion\memoria\capitulos/titulo.aux)
-(C:\Users\Adrián\Desktop\TFG\stac\documentacion\memoria\capitulos/introduccion
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\multirow\multirow.sty"
+\bigstrutjot=\dimen120
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\float\float.sty"
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count109
+\float@exts=\toks19
+\float@box=\box26
+\@float@everytoks=\toks20
+\@floatcapt=\box27
+)
+(C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\memoria.aux
+(C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\capitulos/titulo.aux)
+(C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\capitulos/agradecimien
+tos.aux)
+(C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\capitulos/introduccion
 .aux)
-(C:\Users\Adrián\Desktop\TFG\stac\documentacion\memoria\capitulos/contrasteh.a
+(C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\capitulos/contrasteh.a
 ux)
-(C:\Users\Adrián\Desktop\TFG\stac\documentacion\memoria\capitulos/analisisreq.
+(C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\capitulos/analisisreq.
 aux)
-(C:\Users\Adrián\Desktop\TFG\stac\documentacion\memoria\capitulos/bibliografia
+(C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\capitulos/bibliografia
 .aux))
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
  ("C:\Program Files (x86)\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count109
-\scratchdimen=\dimen120
-\scratchbox=\box26
-\nofMPsegments=\count110
-\nofMParguments=\count111
-\everyMPshowfont=\toks19
-\MPscratchCnt=\count112
-\MPscratchDim=\dimen121
-\MPnumerator=\count113
-\makeMPintoPDFobject=\count114
-\everyMPtoPDFconversion=\toks20
+\scratchcounter=\count110
+\scratchdimen=\dimen121
+\scratchbox=\box28
+\nofMPsegments=\count111
+\nofMParguments=\count112
+\everyMPshowfont=\toks21
+\MPscratchCnt=\count113
+\MPscratchDim=\dimen122
+\MPnumerator=\count114
+\makeMPintoPDFobject=\count115
+\everyMPtoPDFconversion=\toks22
 )
-\AtBeginShipoutBox=\box27
-Package hyperref Info: Link coloring OFF on input line 11.
+\AtBeginShipoutBox=\box29
+Package hyperref Info: Link coloring OFF on input line 13.
  ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\hyperref\nameref.sty"
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\gettitlestring.sty"
 Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
-\c@section@level=\count115
+\c@section@level=\count116
 )
-LaTeX Info: Redefining \ref on input line 11.
-LaTeX Info: Redefining \pageref on input line 11.
-LaTeX Info: Redefining \nameref on input line 11.
+LaTeX Info: Redefining \ref on input line 13.
+LaTeX Info: Redefining \pageref on input line 13.
+LaTeX Info: Redefining \nameref on input line 13.
 
-(C:\Users\Adrián\Desktop\TFG\stac\documentacion\memoria\memoria.out)
-(C:\Users\Adrián\Desktop\TFG\stac\documentacion\memoria\memoria.out)
+(C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\memoria.out)
+(C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\memoria.out)
 \@outlinefile=\write3
 
 *geometry* driver: auto-detecting
@@ -548,7 +561,7 @@ LaTeX Info: Redefining \nameref on input line 11.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-(C:\Users\Adrián\Desktop\TFG\stac\documentacion\memoria\capitulos/titulo.tex
+(C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\capitulos/titulo.tex
 <figuras/logo_usc.jpg, id=107, 589.20125pt x 382.42876pt>
 File: figuras/logo_usc.jpg Graphic file (type jpg)
 
@@ -559,28 +572,37 @@ Package pdftex.def Info: figuras/logo_usc.jpg used on input line 10.
 
 
 {C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map} <C:/Users/Adrián/Desktop/
-TFG/stac/documentacion/memoria/figuras/logo_usc.jpg>] [2
+tfg/stac/documentacion/memoria/figuras/logo_usc.jpg>] [2
 
 
-] (C:\Users\Adrián\Desktop\TFG\stac\documentacion\memoria\memoria.toc
+]
+(C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\capitulos/agradecimien
+tos.tex) [3
+
+
+] [4
+
+
+]
+(C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\memoria.toc
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <7> on input line 3.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <5> on input line 3.
 )
 \tf@toc=\write4
+ [1
 
-[1
+]
+[2
 
-] [2
-
-] (C:\Users\Adrián\Desktop\TFG\stac\documentacion\memoria\memoria.lof)
+] (C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\memoria.lof)
 \tf@lof=\write5
 
 [3] [4
 
 ]
-(C:\Users\Adrián\Desktop\TFG\stac\documentacion\memoria\capitulos/introduccion
+(C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\capitulos/introduccion
 .tex
 Cap\'{\i }tulo 1.
 
@@ -598,9 +620,9 @@ l.47 \begin{enumerate}
 s been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.27 \include{capitulos/introduccion}
+l.31 \include{capitulos/introduccion}
                                       [2]
-(C:\Users\Adrián\Desktop\TFG\stac\documentacion\memoria\capitulos/contrasteh.t
+(C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\capitulos/contrasteh.t
 ex
 Cap\'{\i }tulo 2.
 
@@ -613,12 +635,23 @@ Underfull \hbox (badness 10000) in paragraph at lines 11--16
 
  []
 
+pdfTeX warning (ext4): destination with the same identifier (name{page.3}) has 
+been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.46 \item $
+            H_1$: Es la hipótesis alternativa y es la que reemplazará a la...
 [3
 
 
 
 
-] [4] <figuras/pdf_normal.png, id=209, 803.0pt x 602.25pt>
+]pdfTeX warning (ext4): destination with the same identifier (name{page.4}) has
+ been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.101 \begin{itemize}
+                      [4] <figuras/pdf_normal.png, id=217, 803.0pt x 602.25pt>
 File: figuras/pdf_normal.png Graphic file (type png)
 
 <use figuras/pdf_normal.png>
@@ -629,31 +662,37 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <6> on input line 113.
 
-<figuras/pdf_chi_cuadrado.png, id=210, 338.76563pt x 253.69781pt>
+<figuras/pdf_chi_cuadrado.png, id=218, 338.76563pt x 253.69781pt>
 File: figuras/pdf_chi_cuadrado.png Graphic file (type png)
 
 <use figuras/pdf_chi_cuadrado.png>
 Package pdftex.def Info: figuras/pdf_chi_cuadrado.png used on input line 116.
 (pdftex.def)             Requested size: 142.26508pt x 85.35802pt.
 
-<figuras/pdf_f.png, id=212, 192.72pt x 144.54pt>
+<figuras/pdf_f.png, id=220, 192.72pt x 144.54pt>
 File: figuras/pdf_f.png Graphic file (type png)
  <use figuras/pdf_f.png>
 Package pdftex.def Info: figuras/pdf_f.png used on input line 122.
 (pdftex.def)             Requested size: 142.26355pt x 85.35724pt.
 
-<figuras/pdf_t_student.jpg, id=213, 451.6875pt x 278.03876pt>
+<figuras/pdf_t_student.jpg, id=221, 451.6875pt x 278.03876pt>
 File: figuras/pdf_t_student.jpg Graphic file (type jpg)
 
 <use figuras/pdf_t_student.jpg>
 Package pdftex.def Info: figuras/pdf_t_student.jpg used on input line 125.
 (pdftex.def)             Requested size: 142.26163pt x 85.35957pt.
- [5 <C:/Users/Adrián/Desktop/TFG/stac/documentacion/memoria/figuras/pdf_normal
-.png> <C:/Users/Adrián/Desktop/TFG/stac/documentacion/memoria/figuras/pdf_chi_
-cuadrado.png> <C:/Users/Adrián/Desktop/TFG/stac/documentacion/memoria/figuras/
-pdf_f.png> <C:/Users/Adrián/Desktop/TFG/stac/documentacion/memoria/figuras/pdf
-_t_student.jpg>]
-<figuras/tipos_error.png, id=231, 301.125pt x 85.06781pt>
+ [5pdfTeX warning (ext4): destination with the same identifier (name{figure.2.1
+}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.137 ...box{Estadístico} \sim N(\mu,\sigma^2) \]
+                                                   <C:/Users/Adrián/Desktop/tf
+g/stac/documentacion/memoria/figuras/pdf_normal.png> <C:/Users/Adrián/Desktop/
+tfg/stac/documentacion/memoria/figuras/pdf_chi_cuadrado.png> <C:/Users/Adrián/
+Desktop/tfg/stac/documentacion/memoria/figuras/pdf_f.png> <C:/Users/Adrián/Des
+ktop/tfg/stac/documentacion/memoria/figuras/pdf_t_student.jpg>]
+<figuras/tipos_error.png, id=240, 301.125pt x 85.06781pt>
 File: figuras/tipos_error.png Graphic file (type png)
 
 <use figuras/tipos_error.png>
@@ -673,8 +712,15 @@ Underfull \hbox (badness 10000) in paragraph at lines 225--229
 
  []
 
-[7 <C:/Users/Adrián/Desktop/TFG/stac/documentacion/memoria/figuras/tipos_error
-.png>] <figuras/test_unilateral_izq.png, id=244, 555.07375pt x 554.07pt>
+[7pdfTeX warning (ext4): destination with the same identifier (name{figure.2.2}
+) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.234 \\$
+         H_1: \mu < \mu_0$ <C:/Users/Adrián/Desktop/tfg/stac/documentacion/mem
+oria/figuras/tipos_error.png>]
+<figuras/test_unilateral_izq.png, id=252, 555.07375pt x 554.07pt>
 File: figuras/test_unilateral_izq.png Graphic file (type png)
 
 <use figuras/test_unilateral_izq.png>
@@ -682,7 +728,7 @@ Package pdftex.def Info: figuras/test_unilateral_izq.png used on input line 255
 .
 (pdftex.def)             Requested size: 142.26608pt x 85.35579pt.
 
-<figuras/test_unilateral_der.png, id=245, 555.07375pt x 554.07pt>
+<figuras/test_unilateral_der.png, id=253, 555.07375pt x 554.07pt>
 File: figuras/test_unilateral_der.png Graphic file (type png)
 
 <use figuras/test_unilateral_der.png>
@@ -690,7 +736,7 @@ Package pdftex.def Info: figuras/test_unilateral_der.png used on input line 257
 .
 (pdftex.def)             Requested size: 142.26608pt x 85.35579pt.
 
-<figuras/test_bilateral.png, id=246, 555.07375pt x 554.07pt>
+<figuras/test_bilateral.png, id=254, 555.07375pt x 554.07pt>
 File: figuras/test_bilateral.png Graphic file (type png)
 
 <use figuras/test_bilateral.png>
@@ -707,7 +753,7 @@ Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `math shift' on input line 273.
 
-<figuras/critico.png, id=247, 416.30531pt x 415.5525pt>
+<figuras/critico.png, id=255, 416.30531pt x 415.5525pt>
 File: figuras/critico.png Graphic file (type png)
 
 <use figuras/critico.png>
@@ -717,106 +763,292 @@ Package pdftex.def Info: figuras/critico.png used on input line 280.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[8 <C:/Users/Adrián/Desktop/TFG/stac/documentacion/memoria/figuras/test_unilat
-eral_izq.png> <C:/Users/Adrián/Desktop/TFG/stac/documentacion/memoria/figuras/
-test_unilateral_der.png> <C:/Users/Adrián/Desktop/TFG/stac/documentacion/memor
-ia/figuras/test_bilateral.png>]
+[8pdfTeX warning (ext4): destination with the same identifier (name{figure.2.3}
+) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.293 
+       <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/test_un
+ilateral_izq.png> <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figu
+ras/test_unilateral_der.png> <C:/Users/Adrián/Desktop/tfg/stac/documentacion/m
+emoria/figuras/test_bilateral.png>]
 File: figuras/pdf_chi_cuadrado.png Graphic file (type png)
  <use figuras/pdf_chi_cuadrado.png>
 Package pdftex.def Info: figuras/pdf_chi_cuadrado.png used on input line 312.
 (pdftex.def)             Requested size: 142.26508pt x 85.35802pt.
 
-<figuras/cdf_chi_cuadrado.png, id=263, 803.0pt x 602.25pt>
+<figuras/cdf_chi_cuadrado.png, id=271, 803.0pt x 602.25pt>
 File: figuras/cdf_chi_cuadrado.png Graphic file (type png)
 
 <use figuras/cdf_chi_cuadrado.png>
 Package pdftex.def Info: figuras/cdf_chi_cuadrado.png used on input line 314.
 (pdftex.def)             Requested size: 142.25475pt x 85.35284pt.
- [9 <C:/Users/Adrián/Desktop/TFG/stac/documentacion/memoria/figuras/critico.pn
-g> <C:/Users/Adrián/Desktop/TFG/stac/documentacion/memoria/figuras/cdf_chi_cua
-drado.png>] [10]
-<figuras/normalidad.jpg, id=290, 504.38437pt x 221.32687pt>
+ [9pdfTeX warning (ext4): destination with the same identifier (name{figure.2.4
+}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.325 
+      pdfTeX warning (ext4): destination with the same identifier (name{figure.
+2.5}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.325 
+       <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/critico
+.png> <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/cdf_chi_
+cuadrado.png>] [10]
+<figuras/normalidad.jpg, id=298, 504.38437pt x 221.32687pt>
 File: figuras/normalidad.jpg Graphic file (type jpg)
 
 <use figuras/normalidad.jpg>
 Package pdftex.def Info: figuras/normalidad.jpg used on input line 395.
 (pdftex.def)             Requested size: 256.07817pt x 85.358pt.
- [11 <C:/Users/Adrián/Desktop/TFG/stac/documentacion/memoria/figuras/normalida
-d.jpg>]
-<figuras/homocedasticidad.png, id=299, 526.96875pt x 292.84406pt>
+ [11pdfTeX warning (ext4): destination with the same identifier (name{figure.2.
+6}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.420 \end{itemize}
+                    <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/fi
+guras/normalidad.jpg>]
+<figuras/homocedasticidad.png, id=308, 526.96875pt x 292.84406pt>
 File: figuras/homocedasticidad.png Graphic file (type png)
 
 <use figuras/homocedasticidad.png>
 Package pdftex.def Info: figuras/homocedasticidad.png used on input line 431.
 (pdftex.def)             Requested size: 170.71602pt x 85.35603pt.
- [12 <C:/Users/Adrián/Desktop/TFG/stac/documentacion/memoria/figuras/homocedas
-ticidad.png>] [13] [14] [15] [16] [17]
-[18] [19]) [20]
-(C:\Users\Adrián\Desktop\TFG\stac\documentacion\memoria\capitulos/analisisreq.
+ [12pdfTeX warning (ext4): destination with the same identifier (name{figure.2.
+7}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.468 \[
+         variacion\_t = \sum_{i=1}^{N} \sum_{j=1}^{K} (X_{ij} - \bar{X})^2 \] <
+C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/homocedasticida
+d.png>] [13] [14] [15] [16] [17] [18] [19]) [20]
+(C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\capitulos/analisisreq.
 tex
 Cap\'{\i }tulo 3.
-) [21
+[21
 
-
-
-
-] [22
-
-
-]
-(C:\Users\Adrián\Desktop\TFG\stac\documentacion\memoria\capitulos/bibliografia
-.tex) [23
 
 
 
 ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 39.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 39.
- (C:\Users\Adrián\Desktop\TFG\stac\documentacion\memoria\memoria.aux (C:\Users
-\Adrián\Desktop\TFG\stac\documentacion\memoria\capitulos/titulo.aux)
-(C:\Users\Adrián\Desktop\TFG\stac\documentacion\memoria\capitulos/introduccion
+Overfull \hbox (256.0748pt too wide) in paragraph at lines 73--73
+[][]| 
+ []
+
+[22]
+Overfull \hbox (256.0748pt too wide) in paragraph at lines 89--89
+[][]| 
+ []
+
+
+Overfull \hbox (256.0748pt too wide) in paragraph at lines 118--118
+[][]| 
+ []
+
+[23]
+Overfull \hbox (256.0748pt too wide) in paragraph at lines 148--148
+[][]| 
+ []
+
+
+Overfull \hbox (256.0748pt too wide) in paragraph at lines 169--169
+[][]| 
+ []
+
+
+Overfull \hbox (256.0748pt too wide) in paragraph at lines 185--185
+[][]| 
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [24]
+Overfull \hbox (256.0748pt too wide) in paragraph at lines 204--204
+[][]| 
+ []
+
+
+Overfull \hbox (256.0748pt too wide) in paragraph at lines 221--221
+[][]| 
+ []
+
+
+Overfull \hbox (256.0748pt too wide) in paragraph at lines 237--237
+[][]| 
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [25]
+Overfull \hbox (256.0748pt too wide) in paragraph at lines 253--253
+[][]| 
+ []
+
+
+Overfull \hbox (256.0748pt too wide) in paragraph at lines 269--269
+[][]| 
+ []
+
+
+Overfull \hbox (256.0748pt too wide) in paragraph at lines 285--285
+[][]| 
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [26]
+Overfull \hbox (256.0748pt too wide) in paragraph at lines 301--301
+[][]| 
+ []
+
+
+Overfull \hbox (256.0748pt too wide) in paragraph at lines 317--317
+[][]| 
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [27]
+Overfull \hbox (256.0748pt too wide) in paragraph at lines 333--333
+[][]| 
+ []
+
+
+Overfull \hbox (256.0748pt too wide) in paragraph at lines 349--349
+[][]| 
+ []
+
+
+Overfull \hbox (256.0748pt too wide) in paragraph at lines 365--365
+[][]| 
+ []
+
+
+Underfull \vbox (badness 3849) has occurred while \output is active []
+
+ [28]
+Overfull \hbox (256.0748pt too wide) in paragraph at lines 383--383
+[][]| 
+ []
+
+
+Overfull \hbox (256.0748pt too wide) in paragraph at lines 398--398
+[][]| 
+ []
+
+[29]
+Overfull \hbox (256.0748pt too wide) in paragraph at lines 416--416
+[][]| 
+ []
+
+
+Overfull \hbox (256.0748pt too wide) in paragraph at lines 431--431
+[][]| 
+ []
+
+
+Overfull \hbox (256.0748pt too wide) in paragraph at lines 448--448
+[][]| 
+ []
+
+
+Overfull \hbox (256.0748pt too wide) in paragraph at lines 463--463
+[][]| 
+ []
+
+
+Overfull \hbox (256.0748pt too wide) in paragraph at lines 478--478
+[][]| 
+ []
+
+[30]
+Overfull \hbox (256.0748pt too wide) in paragraph at lines 525--525
+[][]| 
+ []
+
+[31]
+Overfull \hbox (256.0748pt too wide) in paragraph at lines 554--554
+[][]| 
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [32]
+Overfull \hbox (256.0748pt too wide) in paragraph at lines 639--639
+[][]| 
+ []
+
+) [33] [34
+
+
+]
+(C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\capitulos/bibliografia
+.tex) [35
+
+
+
+]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 43.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 43.
+ (C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\memoria.aux (C:\Users
+\Adrián\Desktop\tfg\stac\documentacion\memoria\capitulos/titulo.aux)
+(C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\capitulos/agradecimien
+tos.aux)
+(C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\capitulos/introduccion
 .aux)
-(C:\Users\Adrián\Desktop\TFG\stac\documentacion\memoria\capitulos/contrasteh.a
+(C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\capitulos/contrasteh.a
 ux)
-(C:\Users\Adrián\Desktop\TFG\stac\documentacion\memoria\capitulos/analisisreq.
+(C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\capitulos/analisisreq.
 aux)
-(C:\Users\Adrián\Desktop\TFG\stac\documentacion\memoria\capitulos/bibliografia
+(C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\capitulos/bibliografia
 .aux))
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 39.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 39.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 43.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 43.
 Package rerunfilecheck Info: File `memoria.out' has not changed.
 (rerunfilecheck)             Checksum: 6CA66690613AAAE468E6FEE443F8A209;1900.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 39.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 43.
  ) 
 Here is how much of TeX's memory you used:
- 6683 strings out of 493921
- 98998 string characters out of 3144870
- 188563 words of memory out of 3000000
- 9759 multiletter control sequences out of 15000+200000
- 9507 words of font info for 33 fonts, out of 3000000 for 9000
+ 6776 strings out of 493921
+ 100721 string characters out of 3144870
+ 196620 words of memory out of 3000000
+ 9823 multiletter control sequences out of 15000+200000
+ 9808 words of font info for 34 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 29i,7n,33p,348b,419s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 29i,12n,33p,808b,419s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx10.pfb>
 <C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C
-:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/
-Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Pr
-ogram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Prog
-ram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Program
- Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Program Fi
-les (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files
- (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files (x
-86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Program Files (x86)/
-MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Program Files (x86)/MiKT
-eX 2.9/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Program Files (x86)/MiKTeX 2
-.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files (x86)/MiKTeX 2.9/f
-onts/type1/public/amsfonts/cm/cmsl10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fon
-ts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts
-/type1/public/amsfonts/cm/cmsy5.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/ty
-pe1/public/amsfonts/cm/cmsy7.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1
-/public/amsfonts/cm/cmti10.pfb>
-Output written on memoria.pdf (29 pages, 687709 bytes).
+:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C:
+/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/P
+rogram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Pro
+gram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Progr
+am Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Program 
+Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Program Fil
+es (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files 
+(x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files (x8
+6)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Program Files (x86)/M
+iKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Program Files (x86)/MiKTe
+X 2.9/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Program Files (x86)/MiKTeX 2.
+9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files (x86)/MiKTeX 2.9/fo
+nts/type1/public/amsfonts/cm/cmsl10.pfb><C:/Program Files (x86)/MiKTeX 2.9/font
+s/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/
+type1/public/amsfonts/cm/cmsy5.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/typ
+e1/public/amsfonts/cm/cmsy7.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/
+public/amsfonts/cm/cmti10.pfb>
+Output written on memoria.pdf (43 pages, 738093 bytes).
 PDF statistics:
- 462 PDF objects out of 1000 (max. 8388607)
- 114 named destinations out of 1000 (max. 500000)
+ 529 PDF objects out of 1000 (max. 8388607)
+ 127 named destinations out of 1000 (max. 500000)
  274 words of extra memory for PDF output out of 10000 (max. 10000000)
 
