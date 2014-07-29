@@ -123,8 +123,8 @@
                                     <div class="col-xs-8 col-sm-9 col-md-10 col-lg-10">
                                         <div class="btn-group-vertical" data-toggle="buttons">
                                             <label name="test_cond" class="btn btn-primary active"><input type="radio" name="test" id="option1" value="shapiro" checked> Shapiro-Wilk</label>
-                                            <label name="test_cond" class="btn btn-primary"><input type="radio" name="test" id="option2" value="kolmogorov"> Kolmogorov-Smirnov</label>
                                             <label name="test_cond" class="btn btn-primary"><input type="radio" name="test" id="option3" value="agostino"> D'Agostino-Pearson</label>
+                                            <label name="test_cond" class="btn btn-primary"><input type="radio" name="test" id="option2" value="kolmogorov"> Kolmogorov-Smirnov</label>
                                         </div>
                                     </div>
                                 </div>
@@ -154,14 +154,14 @@
                                 <li>Hipótesis nula (H<sub>0</sub>): Las muestras siguen una distribución normal.
                                 <li>Potencia: La mayor de los tres métodos, sobre todo para muestras de menos de 30 elementos.
                             </ul>
-                            <p><strong>Kolmogorov-Smirnov:</strong></p>
-                            <ul type = square>
-                                <li>Hipótesis nula (H<sub>0</sub>): La distribución obtenida de los datos es idéntica a la distribución normal.
-                                <li>Potencia: Menor que el test de Shapiro-Wilk.
-                            </ul>
                             <p><strong>D'Agostino-Pearson:</strong></p>
                             <ul type = square>
                                 <li>Hipótesis nula (H<sub>0</sub>): Las muestras provienen de una población normalmente distribuida
+                                <li>Potencia: Menor que el test de Shapiro-Wilk.
+                            </ul>
+                            <p><strong>Kolmogorov-Smirnov:</strong></p>
+                            <ul type = square>
+                                <li>Hipótesis nula (H<sub>0</sub>): La distribución obtenida de los datos es idéntica a la distribución normal.
                                 <li>Potencia: Menos potente de los tres.
                             </ul>
                         </div>

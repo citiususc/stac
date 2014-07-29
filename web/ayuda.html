@@ -116,8 +116,8 @@
                                     </ul>
                                     <br>
                                     <p>Ejemplos:</p>
-                                    <a href="./samples/data_sample1.csv" download="data_ranking.csv">Muestra de datos 2 algoritmos</a><br>
-                                    <a href="./samples/data_sample2.csv" download="data_ranking.csv">Muestra de datos 4 algoritmos</a>
+                                    <a href="./samples/data_sample1.csv" download="data_2_algorithm.csv">Muestra de datos 2 algoritmos</a><br>
+                                    <a href="./samples/data_sample2.csv" download="data_4_algorithm.csv">Muestra de datos 4 algoritmos</a>
                                 </div>
                             </div>
                         </div>
@@ -138,7 +138,7 @@
                                     <p><b>Suma rangos positivos / negativos:</b> En el test de Wilcoxon, la suma de rangos positivos indica la suma de los rangos de las diferencias mayores que 0 y la suma de rangos negativos indica la suma de los rangos de las diferencias menores que 0. </p>
                                     <p><b>Punto crítico:</b> En el test de Wilcoxon, cuando el número de conjunto de datos sin ligaduras (diferencias 0) es menor o igual que 25, el resultado final se determina mediante la comparación del estadístico con el valor crítico de la tabla de Wilcoxon (diferente para cada nivel de significación y número de conjunto de datos sin ligaduras). </p>
                                     <p><b>Nivel de significación (\({\alpha}\)):</b> Probabilidad de rechazar la hipótesis nula siendo cierta. También se conoce como nivel de confianza o error tipo 1. Divide la distribución en dos regiones: la región de aceptación y la región de rechazo. <a href="http://es.wikipedia.org/wiki/Significaci%C3%B3n_estad%C3%ADstica" target="_blank">Aprender más.</a></p>
-                                    <p><b>Rechazo de \(H_0\):</sub></b> Si el p-valor es menor que el nivel de significación alpha, el contraste se considerará estadísticamente significativo y por tanto se rechazaría la hipótesis nula. <a href="http://es.wikipedia.org/wiki/Contraste_de_hip%C3%B3tesis" target="_blank">Aprender más.</a></p>
+                                    <p><b>Rechazo de \(H_0\):</sub></b> Si el p-valor es menor que el nivel de significación \({\alpha}\), el contraste se considerará estadísticamente significativo y por tanto se rechazaría la hipótesis nula. <a href="http://es.wikipedia.org/wiki/Contraste_de_hip%C3%B3tesis" target="_blank">Aprender más.</a></p>
                                 </div>
                             </div>
                         </div>
@@ -287,11 +287,11 @@
                             </div>
                             <div id="collapseSix" class="panel-collapse collapse">
                                 <div class="panel-body">
-                                    <p><strong>Bonferroni-Dunn: </strong>Rechaza la hipótesis nula si: \(p-valor &lt; {\alpha \over (K-1)}\).</p>
+                                    <p><strong>Bonferroni-Dunn: </strong>Rechaza la hipótesis nula si: \(p-valor &lt; {\alpha \over (K-1)}\), donde \({K}\) es el número de algoritmos de la muestra.</p>
                                     <p><strong>Holm: </strong>Compara cada \({p_i}\) (empezando por el más significativo o pequeño) con: \({\alpha \over (K-i)}\), donde \({i \in [1,K-1]}\). Si se rechaza una hipótesis continúa contrastando. En el caso de que una hipótesis se acepte se aceptan todas las demás.</p>
                                     <p><strong>Finner: </strong>Sigue un proceso igual al test de Holm pero cada p-valor asociado con la hipótesis \({H_i}\) se compara como: \(p_i \leq {1-(1-\alpha)^{\frac{(K-1)}{i}}}\), donde \({i \in [1,K-1]}\)</p>
                                     <p><strong>Hochberg: </strong>Compara en la dirección opuesta a Holm. En el momento que encuentra una hipótesis que pueda aceptar, acepta todas las demás.</p>
-                                    <p><strong>Li: </strong>Rechaza todas las hipótesis si el p-valor menos significativo es menor que alpha. En otro caso, acepta dicha hipótesis y rechaza cualquier hipótesis restante cuyo p-valor sea menor que un valor calculado.</p>
+                                    <p><strong>Li: </strong>Rechaza todas las hipótesis si el p-valor menos significativo es menor que \({\alpha}\) (nivel de significación). En otro caso, acepta dicha hipótesis y rechaza cualquier hipótesis restante cuyo p-valor sea menor que un valor calculado: \(valor = \frac{(1-p-valor_{K-1})}{(1-\alpha)\alpha}\)</p>
                                     <p><strong>Multitests: </strong>Iguales que los demás pero en lugar de \({K-1}\) comparaciones se relizan \({m}\) donde, \(m = {K*(K-1) \over 2}\).</p>
                                     <p><strong>Shaffer: </strong>Igual a Holm pero cada p-valor asociado con la hipótesis \({H_i}\) se compara como \(p_i \leq {\alpha \over t_i}\), donde \({t_i}\) es el número máximo de hipótesis posibles suponiendo que las \({(j-1)}\) anteriores han sido rechazadas.</p>
                                 </div>
@@ -307,11 +307,11 @@
                             <div id="collapseThree" class="panel-collapse collapse">
                                 <div class="panel-body">
                                     <p>En esta plataforma web puedes llevar a cabo la validación de resultados obtenidos por los algoritmos de aprendizaje mediante la aplicación de tests estadísticos sobre los experimentos, que, entre otras utilidades, apoyan la toma de decisiones (por ejemplo la elección del algoritmo más adecuado). Actualmente, es el método estándar más aceptado para validar este tipo de experimentación.</p>
-                                    <p>Los tests se basan en el contraste de hipótesis. Por ejemplo: se puede contrastar la hipótesis nula o \({H_0}\) de que las medias de los datos obtenidos por un algoritmo son iguales. Estos tests, verifican si es o no cierta esta hipótesis inicial. Para ello, se obtiene un estadístico (sujeto a una determinada distribución estadística) y se halla la probabilidad de obtener un estadístico al menos tan extremo como el que se obtuvo (p-valor). Si este p-valor es menor que un nivel de confianza dado (valor alpha), se rechazará la hipótesis nula. En caso contrario, se aceptará.</p>
+                                    <p>Los tests se basan en el contraste de hipótesis. Por ejemplo: se puede contrastar la hipótesis nula o \({H_0}\) de que las medias de los datos obtenidos por un algoritmo son iguales. Estos tests, verifican si es o no cierta esta hipótesis inicial. Para ello, se obtiene un estadístico (sujeto a una determinada distribución estadística) y se halla la probabilidad de obtener un estadístico al menos tan extremo como el que se obtuvo (p-valor). Si este p-valor es menor que un nivel de confianza dado (valor \({alpha}\)), se rechazará la hipótesis nula. En caso contrario, se aceptará.</p>
                                     <div class="col-xs-offset-3 col-sm-offset-3 col-md-offset-4">
                                         <img src="imagenes/grafico.png" class="img-responsive" alt="grafico" width="350px;" height="300px;">
                                     </div>
-                                    <p>En la imagen se pueden ver la dos regiones en las que se divide una función de distribución de probabilidad (en este ejemplo la distribución chi-cuadrado) después de establecer un nivel de significación alpha: la región de aceptación y la región de rechazo. El p-valor, determina si el estadístico cae en la región de aceptación o en la región de rechazo. El punto crítico (en este ejemplo 1 punto), es el valor que separa las dos regiones.</p>
+                                    <p>En la imagen se pueden ver la dos regiones en las que se divide una función de distribución de probabilidad (en este ejemplo la distribución chi-cuadrado) después de establecer un nivel de significación (valor \({alpha}\)): la región de aceptación y la región de rechazo. El p-valor, determina si el estadístico cae en la región de aceptación o en la región de rechazo. El punto crítico (en este ejemplo 1 punto), es el valor que separa las dos regiones.</p>
                                     <i><b>Trabajo de Fin de Grado realizado por: Adrián Canosa Mouzo. Universidad de Santiago de Compostela - Escuela Técnica Superior de Ingeniería.</b></i>
                                 </div>
                             </div>
