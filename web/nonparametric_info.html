@@ -42,11 +42,11 @@
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
                         <!--Consulta de fichero-->
-                        <li><a href="consultar_fichero.html">Consultar fichero</a></li>
+                        <li id="mostrar_consulta_fichero" style="display:none"><a href="consultar_fichero.html">Consultar fichero</a></li>
                         <!--Subir el fichero-->
                         <li><a id="a_subida" href="#modal_fichero" data-toggle="modal">Subir fichero</a></li>
                         <!--Ayuda-->
-                        <li><a href="ayuda.html">Ayuda</a></li>
+                        <li><a href="ayuda.html" target="_blank">Ayuda</a></li>
                     </ul>
                 </div>
             </div>
@@ -101,7 +101,7 @@
                                 <a href="anova.html" class="list-group-item">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-asterisk"></span>&nbsp;&nbsp;Anova</a>
                                 <a href="ttest.html" class="list-group-item">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-asterisk"></span>&nbsp;&nbsp;T-test</a>
                             </div>
-                            <a href="#lista3" class="list-group-item" data-toggle="collapse" data-parent="#MainMenu">Tests no Paramétricos <i class="caret"></i></a>
+                            <a href="#lista3" class="list-group-item active" data-toggle="collapse" data-parent="#MainMenu">Tests no Paramétricos <i class="caret"></i></a>
                             <div class="collapse" id="lista3">
                                 <a href="nonparametric_info.html" class="list-group-item">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-asterisk"></span>&nbsp;&nbsp;Descripción</a>
                                 <a href="wilcoxon.html" class="list-group-item">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-asterisk"></span>&nbsp;&nbsp;Wilcoxon</a>
@@ -110,16 +110,21 @@
                         </div>
                     </div>
                 </div>
+                <!--*****************************Tests no paramétricos**************************************************-->
                 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-                    <h1 class="page-header">Contenido del fichero</h1>
-                    <div id="alerta_fichero" class="alert alert-info alert-dismissable" style="display:none">
-                        <button type="button" class="close" data-dismiss="alert">&times;</button>
-                        <strong>¡Sube un fichero!</strong> A la derecha de la barra la barra de navegación superior puedes seleccionar y
-                        subir un fichero en "Subir fichero". A continuación, pulsa en "Consultar fichero" para ver su contenido. 
-                    </div>
-                    <div class="table-responsive">
-                        <table id="contenido_fichero" class="table table-hover"></table>
-                    </div>
+                    <h1 class="page-header">Nonparametric Tests</h1>
+                    <h3>Descripción</h3>
+                    <p>Los tests no paramétricos son aquellos que no cumplen alguna de las condiciones establecidas para los tests paramétricos:</p>
+                    <ul>
+                        <li>Normalidad: Las muestras siguen una distribución normal.</li>
+                        <li>Independencia: Las muestras no dependen de otras.</li>
+                        <li>Homocedasticidad: Igualdad de varianzas en las muestras.</li>
+                    </ul>
+                    <a href="parametric_info.html">Ir a Condiciones paramétricas</a>
+                    <br><br><p>Así, por ejemplo, los tests por lo general se aproximarán con otro tipo de distribuciones. En el caso del test de Friedman, por ejemplo, se habla de distribución chi-cuadrado:</p>
+                    <br>
+                    <img src="imagenes/chi-cuadrado.png" class="img-responsive" alt="Distribución chi-cuadrado" width="250px;" height="250px;">
+                    <!--*******************************************************************************************************-->
                 </div>
             </div>
         </div>
@@ -131,6 +136,5 @@
         <script src="bootstrap-3.1.1/dist/js/bootstrap.min.js"></script>
         <script src="bootstrap-3.1.1/docs/assets/js/docs.min.js"></script>
         <script src="js/codigo_jquery.js"></script>
-        <script src="js/consultar_fichero.js"></script>
     </body>
 </html>

@@ -360,16 +360,18 @@ $(document).on('ready', function() {
                 success : function(data) {
                     resultado = "";
                     if(!data.fallo){
-                        resultado = "<p style=\"color:green\";><strong>Fichero subido con éxito</strong></p>";
+                        //resultado = "<p style=\"color:green\";><strong>Fichero subido con éxito</strong></p>";
 						sessionStorage.setItem("fichero_actual", data.clave);
                         sessionStorage.setItem("homocedasticidad", "no");
                         sessionStorage.setItem("normalidad", "no");
                         $("#mostrar_consulta_fichero").show();
+                        window.location.replace("/stac/beta/consultar_fichero.html");
 					}
-                    else
+                    else{
                         resultado = resultado + "<p style=\"color:red\";><strong>" + data.fallo + "</strong></p>";
-                    $('#mensaje_subida').html("<br>"+resultado);
-                    $('#formfichero').trigger('reset');
+                        $('#mensaje_subida').html("<br>"+resultado);
+                        $('#formfichero').trigger('reset');
+                    }
                 },
                 error : function(e) {
                     alert('Error: ' + e);
@@ -474,7 +476,7 @@ function generar_tabla_parametricos(data,test) {
         salida = salida + "<tbody><tr><td>" +data.estadistico_t.toFixed(3)+ "</td>";
     }
     salida = salida + "<td>" +data.p_valor.toFixed(3)+ "</td>";
-    if(data.resulado == true)
+    if(data.resultado == true)
         salida = salida + "<td>Se rechaza H0</td></tr></tbody></table>";
     else
         salida = salida + "<td>Se acepta H0</td></tr></tbody></table>";
@@ -683,6 +685,19 @@ function generar_tabla_multitests(data, test) {
 	            salida = salida + "<td>" + value + "</td><td>" +data.valores_z[index].toFixed(3)+ "</td><td>" +data.p_valores[index].toFixed(3)+ "</td><td>" +data.p_valores_ajustados[index].toFixed(3)+ "</td>";
             else
                 salida = salida + "<td>-</td><td>" + value + "</td><td>" +data.valores_z[index].toFixed(3)+ "</td><td>" +data.p_valores[index].toFixed(3)+ "</td><td>" +data.p_valores_ajustados[index].toFixed(3)+ "</td>";
+            if(data.resultado[index] == true)
+                salida = salida + "<td>Se rechaza H0</td></tr>";
+            else
+                salida = salida + "<td>Se acepta H0</td></tr>";
+        });
+    }
+    else if(test == "bonferroni"){
+        salida = salida + "<tr><td>" +data.alpha.toFixed(3)+ "</td>";
+        $.each(data.comparaciones, function(index, value) {
+            if(index==0)
+                salida = salida + "<td>" + value + "</td><td>" +data.valores_t[index].toFixed(3)+ "</td><td>" +data.p_valores[index].toFixed(3)+ "</td><td>" +data.p_valores_ajustados[index].toFixed(3)+ "</td>";
+            else
+                salida = salida + "<td>-</td><td>" + value + "</td><td>" +data.valores_t[index].toFixed(3)+ "</td><td>" +data.p_valores[index].toFixed(3)+ "</td><td>" +data.p_valores_ajustados[index].toFixed(3)+ "</td>";
             if(data.resultado[index] == true)
                 salida = salida + "<td>Se rechaza H0</td></tr>";
             else

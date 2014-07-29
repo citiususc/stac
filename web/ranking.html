@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link rel="shortcut icon" href="bootstrap-3.1.1/docs/assets/ico/favicon.ico">
+
+        <title>STAC Web Platform</title>
+
+        <!-- Bootstrap core CSS -->
+        <link href="bootstrap-3.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Custom styles for this template -->
+        <link href="css/dashboard.css" rel="stylesheet">
+
+        <!-- Just for debugging purposes. Don't actually copy this line! -->
+        <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="index.html">STAC Web Platform</a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <!--Consulta de fichero-->
+                        <li id="mostrar_consulta_fichero" style="display:none"><a href="consultar_fichero.html">Consultar fichero</a></li>
+                        <!--Subir el fichero-->
+                        <li><a id="a_subida" href="#modal_fichero" data-toggle="modal">Subir fichero</a></li>
+                        <!--Ayuda-->
+                        <li><a href="ayuda.html" target="_blank">Ayuda</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!--***************************************Modal de Subir el fichero***************************************-->
+        <div id="modal_fichero" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Subir fichero</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form" id="formfichero" enctype="multipart/form-data">
+                            <p class="text-warning"><small>El formato del archivo sigue el estándar .csv &nbsp;&nbsp;<label><a href="ayuda.html#collapseOne" id="ayuda_fichero" target="_blank">[More info]</a></label></small></p>
+                            <div class="input-group">
+                                <span class="input-group-btn">
+                                    <span class="btn btn-primary btn-file">
+                                        Abrir <input type="file" name="fichero" id="fichero"/>
+                                    </span>
+                                </span>
+                                <input type="text" class="form-control" style="width:150px;" readonly>
+                            </div>
+                            <div id="mensaje_subida" align="center"></div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-primary" id="boton_fichero">Subir fichero</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--*******************************************************************************************************-->
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-3 col-md-2 sidebar">
+                    <div id="MainMenu">
+                        <div class="nav nav-sidebar list-group panel">
+                            <a href="index.html" class="list-group-item"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;&nbsp;&nbsp;Principal</a>
+                            <a href="#lista1" class="list-group-item" data-toggle="collapse" style="display=show;" data-parent="#MainMenu">Condiciones Paramétricas <i class="caret"></i></a>
+                            <div class="collapse" id="lista1">
+                                <a href="conditions_info.html" class="list-group-item">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-asterisk"></span>&nbsp;&nbsp;Descripción</a>
+                                <a href="normality.html" class="list-group-item">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-asterisk"></span>&nbsp;&nbsp;Normalidad</a>
+                                <a href="homocedasticity.html" class="list-group-item">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-asterisk"></span>&nbsp;&nbsp;Homocedasticidad</a>
+                            </div>
+                            <a href="#lista2" class="list-group-item" data-toggle="collapse" data-parent="#MainMenu">Tests Paramétricos <i class="caret"></i></a>
+                            <div class="collapse" id="lista2">
+                                <a href="parametric_info.html" class="list-group-item">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-asterisk"></span>&nbsp;&nbsp;Descripción</a>
+                                <a href="anova.html" class="list-group-item">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-asterisk"></span>&nbsp;&nbsp;Anova</a>
+                                <a href="ttest.html" class="list-group-item">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-asterisk"></span>&nbsp;&nbsp;T-test</a>
+                            </div>
+                            <a href="#lista3" class="list-group-item active" data-toggle="collapse" data-parent="#MainMenu">Tests no Paramétricos <i class="caret"></i></a>
+                            <div class="collapse" id="lista3">
+                                <a href="nonparametric_info.html" class="list-group-item">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-asterisk"></span>&nbsp;&nbsp;Descripción</a>
+                                <a href="wilcoxon.html" class="list-group-item">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-asterisk"></span>&nbsp;&nbsp;Wilcoxon</a>
+                                <a href="ranking.html" class="list-group-item">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-asterisk"></span>&nbsp;&nbsp;Tests de Ranking</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--*****************************Tests no paramétricos**************************************************-->
+                <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+                    <h1 class="page-header">Nonparametric Tests</h1>
+                    <div class="tab-content">
+                        <!--Pestaña tests de ranking-->
+                        <div id="ranking" class="tab-pane fade tab-pane fade in active">
+                            <h3>Choose a ranking test:</h3>
+                            <br>
+                            <form class="form-horizontal" role="form">
+                                <div class="form-group">
+                                    <label class="col-xs-4 col-sm-3 col-md-2 col-lg-2 control-label">Ranking test: <br><a href="ayuda.html#collapseFive" id="ayuda_fichero" target="_blank">[More info]</a></label>
+                                    <div class="col-xs-8 col-sm-9 col-md-10 col-lg-10">
+                                        <div class="btn-group-vertical" data-toggle="buttons">
+                                            <label name="nombre_test" class="btn btn-primary active"><input type="radio" name="test" id="option1" value="friedman" checked>Friedman</label>
+                                            <label name="nombre_test" class="btn btn-primary"><input type="radio" name="test" id="option2" value="iman-davenport">Iman-Davenport</label>
+                                            <label name="nombre_test" class="btn btn-primary"><input type="radio" name="test" id="option3" value="rangos-alineados">Rangos Alineados de Friedman</label>
+                                            <label name="nombre_test" class="btn btn-primary"><input type="radio" name="test" id="option3" value="quade">Quade</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-xs-4 col-sm-3 col-md-2 col-lg-2 control-label">Maximization or minimization: <br><a href="ayuda.html#collapseSeven" id="ayuda_fichero" target="_blank">[More info]</a></label>
+                                    <div class="col-xs-8 col-sm-9 col-md-10 col-lg-10 btn-group-vertical" style="width:150px;" data-toggle="buttons">
+                                        <label class="btn btn-primary active">
+                                            <input type="radio" name="tipo" value="0" checked> Minimización
+                                        </label>
+                                        <label class="btn btn-primary">
+                                            <input type="radio" name="tipo" value="1"> Maximización
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-xs-4 col-sm-3 col-md-2 col-lg-2 control-label">Significance level: <br><a href="ayuda.html#collapseTwo" id="ayuda_fichero" target="_blank">[More info]</a></label>
+                                    <div class="col-xs-8 col-sm-9 col-md-10 col-lg-10">
+                                        <select class="form-control" id="alpha_ranking" style="width:100px;">
+                                            <option value="0.10">0.10</option>
+                                            <option value="0.05" selected="selected">0.05</option>
+                                            <option value="0.02">0.02</option>
+                                            <option value="0.01">0.01</option>
+                                            <option value="0.005">0.005</option>
+                                            <option value="0.001">0.001</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <script>
+                                        function obtener_nombre(){
+                                            var nombre_test = $('label[name="nombre_test"].active').text();
+                                            $('#texto_tests').html("<h3>Select the Post-Hoc test to apply after "+nombre_test+" test:<h3>");
+                                        }
+                                    </script>
+                                    <div class="col-xs-offset-4 col-xs-8 col-sm-offset-3 col-sm-9 col-md-offset-2 col-md-10 col-lg-offset-2 col-lg-10">
+                                        <a onclick="obtener_nombre()" data-toggle="tab" href="#post-hoc"><button type="button" class="btn btn-success" id="friedman" style="width:100px;">Next</button></a>
+                                    </div>
+                                </div>
+                            </form>
+                            <br>
+                            <p><u>Información general:</u></p>
+                            <p><strong>Hipótesis nula (H<sub>0</sub>):</strong> No existen diferencias entre los grupos o algoritmos.</p>
+                            <p><strong>Comentarios:</strong></p>
+                            <ul type = square>
+                                <li>Friedman: Comparaciones intra-conjunto.
+                                <li>Iman-davenport: Comportamiento menos conservativo que Friedman.
+                                <li>Rangos Alineados de Friedman: Comparaciones entre conjuntos de datos. Cuando el número de algoritmos a comparar pequeño.
+                                <li>Quade: Los rankings se escalan dependiendo de las diferencias observadas en los rendimientos de los algoritmos.
+                            </ul>
+                        </div>
+                        <!--Selección de tests Post-Hoc-->
+                        <div id="post-hoc" class="tab-pane fade">
+                            <div id="texto_tests"></div>
+                            <form class="form-horizontal" role="form">
+                                <div class="form-group">
+                                    <label class="col-xs-4 col-sm-3 col-md-2 col-lg-2 control-label">Post-Hoc test: <br><a href="ayuda.html#collapseSix" id="ayuda_fichero" target="_blank">[More info]</a></label>
+                                    <div class="col-xs-8 col-sm-9 col-md-10 col-lg-10">
+                                        <div class="btn-group-vertical" data-toggle="buttons">
+                                            <label name="nombre_post" class="btn btn-primary active"><input type="radio" name="post_hoc" value="bonferroni_dunn_test" checked>Bonferroni-Dunn</label>
+                                            <label name="nombre_post" class="btn btn-primary"><input type="radio" name="post_hoc" value="holm_test">Holm</label>
+                                            <label name="nombre_post" class="btn btn-primary"><input type="radio" name="post_hoc" value="hochberg_test">Hochberg</label>
+                                            <label name="nombre_post" class="btn btn-primary"><input type="radio" name="post_hoc" value="li_test">Li</label>
+                                            <label name="nombre_post" class="btn btn-primary"><input type="radio" name="post_hoc" value="finner_test">Finner</label>
+                                            <label name="nombre_post" class="btn btn-primary"><input type="radio" name="post_hoc" value="nemenyi_multitest">Bonferroni-Dunn Multitest</label>
+                                            <label name="nombre_post" class="btn btn-primary"><input type="radio" name="post_hoc" value="holm_multitest">Holm Multitest</label>
+                                            <label name="nombre_post" class="btn btn-primary"><input type="radio" name="post_hoc" value="hochberg_multitest">Hochberg Multitest</label>
+                                            <label name="nombre_post" class="btn btn-primary"><input type="radio" name="post_hoc" value="finner_multitest">Finner Multitest</label>
+                                            <label name="nombre_post" class="btn btn-primary"><input type="radio" name="post_hoc" value="shaffer_multitest">Shaffer</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="form-group">
+                                    <div class="col-xs-offset-4 col-xs-8 col-sm-offset-3 col-sm-9 col-md-offset-2 col-md-10 col-lg-offset-2 col-lg-10">
+                                        <a data-toggle="tab" href="#ranking"><button type="button" class="btn btn-default">Go back</button></a>
+                                        <a data-toggle="tab" href="#ver_resultados_ranking"><button type="button" class="btn btn-success" id="datos_ranking">Apply</button></a>
+                                    </div>
+                                </div>
+                                <p><u>Información general:</u></p>
+                                <p><strong>Hipótesis nulas (H<sub>0</sub>):</strong> No existe diferencia entre el "Algoritmo A" y el "Algoritmo B".</p>
+                                <p><strong>Comentarios:</strong></p>
+                                <ul type = square>
+                                    <li>Para los tests Post-Hoc normales, se compara el mejor algoritmo del ranking con los demás.
+                                    <li>Para los tests Post-Hoc multitests, se comparan todos los algoritmos con todos, con lo que habrá más hipótesis a contrastar.
+                                    <li>Los tests están ordenados de menor a mayor potencia (tanto normales como multitests).
+                                </ul>
+                            </form>
+                            <br>
+                        </div>
+                        <!--Mostrar resultados Ranking-->
+                        <div id="ver_resultados_ranking" class="tab-pane fade">
+                            <div id="resultado_ranking"></div>
+                            <br>
+                            <div id="alerta_fichero_ranking" class="alert alert-info" style="display:none">
+                                <strong>¡Sube un fichero!</strong> A la derecha de la barra la barra de navegación superior puedes seleccionar y
+                                subir un fichero en "Subir fichero". A continuación, pulsa en "Consultar fichero" para ver su contenido.
+                            </div>
+                            <div id="fallo_test_ranking" class="alert alert-info alert-danger" style="display:none"></div>
+                            <a data-toggle="tab" href="#post-hoc"><button type="button" class="btn btn-default">Volver atrás</button></a>
+                        </div>
+                    </div>
+                    <!--*******************************************************************************************************-->
+                </div>
+            </div>
+        </div>
+
+        <!-- Bootstrap core JavaScript
+        ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script src="bootstrap-3.1.1/dist/js/bootstrap.min.js"></script>
+        <script src="bootstrap-3.1.1/docs/assets/js/docs.min.js"></script>
+        <script src="js/codigo_jquery.js"></script>
+    </body>
+</html>

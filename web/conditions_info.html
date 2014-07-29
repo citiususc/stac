@@ -42,11 +42,11 @@
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
                         <!--Consulta de fichero-->
-                        <li><a href="consultar_fichero.html">Consultar fichero</a></li>
+                        <li id="mostrar_consulta_fichero" style="display:none"><a href="consultar_fichero.html">Consultar fichero</a></li>
                         <!--Subir el fichero-->
                         <li><a id="a_subida" href="#modal_fichero" data-toggle="modal">Subir fichero</a></li>
                         <!--Ayuda-->
-                        <li><a href="ayuda.html">Ayuda</a></li>
+                        <li><a href="ayuda.html" target="blank">Ayuda</a></li>
                     </ul>
                 </div>
             </div>
@@ -89,7 +89,7 @@
                     <div id="MainMenu">
                         <div class="nav nav-sidebar list-group panel">
                             <a href="index.html" class="list-group-item"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;&nbsp;&nbsp;Principal</a>
-                            <a href="#lista1" class="list-group-item" data-toggle="collapse" style="display=show;" data-parent="#MainMenu">Condiciones Paramétricas <i class="caret"></i></a>
+                            <a href="#lista1" class="list-group-item active" data-toggle="collapse" style="display=show;" data-parent="#MainMenu">Condiciones Paramétricas <i class="caret"></i></a>
                             <div class="collapse" id="lista1">
                                 <a href="conditions_info.html" class="list-group-item">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-asterisk"></span>&nbsp;&nbsp;Descripción</a>
                                 <a href="normality.html" class="list-group-item">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-asterisk"></span>&nbsp;&nbsp;Normalidad</a>
@@ -111,15 +111,25 @@
                     </div>
                 </div>
                 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-                    <h1 class="page-header">Contenido del fichero</h1>
-                    <div id="alerta_fichero" class="alert alert-info alert-dismissable" style="display:none">
-                        <button type="button" class="close" data-dismiss="alert">&times;</button>
-                        <strong>¡Sube un fichero!</strong> A la derecha de la barra la barra de navegación superior puedes seleccionar y
-                        subir un fichero en "Subir fichero". A continuación, pulsa en "Consultar fichero" para ver su contenido. 
-                    </div>
-                    <div class="table-responsive">
-                        <table id="contenido_fichero" class="table table-hover"></table>
-                    </div>
+                    <h1 class="page-header">Parametric Conditions</h1>
+                    <!--*******************************************************************************************************-->
+                    <h3>Description</h3>
+                    <p>Para la ejecución de los tests paramétricos se deben cumplir tres condiciones:</p>
+                    <ul>
+                        <li>
+                            <b>Normalidad:</b> Las muestras o datos obtenidos por los algoritmos siguen una distribución normal.<br>Ejemplo:<br><br>
+                            <img src="imagenes/normalidad.jpg" class="img-responsive" alt="Distribución normal" width="400px;" height="200px;">
+                        </li>
+                        <br>
+                        <li><b>Independencia:</b> Las muestras o datos obtenidos por los algoritmos no dependen de unas de otras (asumida por el usuario).</li>
+                        <br>
+                        <li>
+                            <b>Homocedasticidad:</b> Es la condición que dice que las poblaciones de entrada o datos obtenidos por los algoritmos proceden de poblaciones con varianzas iguales. El caso contrario sería heterocedasticidad.
+                            <br><br>
+                            <img src="imagenes/homocedasticidad.png" class="img-responsive" alt="Heterocedasticidad y Homocedasticidad" width="300px;" height="225px;">
+                        </li>
+                    </ul>
+                    <!--*******************************************************************************************************-->
                 </div>
             </div>
         </div>
@@ -131,6 +141,5 @@
         <script src="bootstrap-3.1.1/dist/js/bootstrap.min.js"></script>
         <script src="bootstrap-3.1.1/docs/assets/js/docs.min.js"></script>
         <script src="js/codigo_jquery.js"></script>
-        <script src="js/consultar_fichero.js"></script>
     </body>
 </html>
