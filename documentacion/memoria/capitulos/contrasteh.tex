@@ -1,7 +1,7 @@
 %***************************************************************************************************************************
 
 \chapter{Contraste de hipótesis}
-El contraste de hipótesis, o lo que se conoce como tests estadísticos, se engloba en el ámbito de la
+El contraste de hipótesis, también conocido como tests estadísticos, se engloba en el ámbito de la
 Inferencia Estadística, que es la parte de la estadística que estudia cómo sacar conclusiones generales
 (sujetas a un determinado grado de fiabilidad o significancia) para toda la población a partir del
 estudio de una muestra. En nuestro caso, se tratará de sacar conclusiones de los resultados obtenidos por
@@ -101,8 +101,8 @@ implementados harán uso de estadísticos que siguen distribuciones como:
 \begin{itemize}
 \item Distribución normal (p. ej. test de Wilcoxon).
 \item Distribución chi-cuadrado $\chi^2$ (p. ej. test de Friedman).
-\item Distribución f de Fisher-Snedecor (p. ej. test de Iman-Davenport).
-\item Distribución t de Student (p. ej. t-test).
+\item Distribución \textit{f} de Fisher-Snedecor (p. ej. test de Iman-Davenport).
+\item Distribución \textit{t} de Student (p. ej. t-test).
 \end{itemize}
 La figura \ref{fig:pdf}, nos muestra el aspecto que presentan las distintas distribuciones de probabilidad. Las
 distribuciones dependen de ciertos parámetros para determinar su forma ($\mu$, $\sigma^2$...): 
@@ -117,10 +117,10 @@ distribuciones dependen de ciertos parámetros para determinar su forma ($\mu$, 
 \end{figure}
 \begin{figure}[h]
 \centering
-\subfigure[Distribución f con $d1$ y $d2$ grados de libertad.]{
+\subfigure[Distribución \textit{f} con $d1$ y $d2$ grados de libertad.]{
 \label{fig:pdfc}
 \includegraphics[width=5cm,height=3cm]{figuras/pdf_f.png} }
-\subfigure[Distribución t con $K$ grados de libertad.]{
+\subfigure[Distribución \textit{t} con $K$ grados de libertad.]{
 \label{fig:pdfd}
 \includegraphics[width=5cm,height=3cm]{figuras/pdf_t_student.jpg} }
 \caption{Distribuciones de probabilidad.}
@@ -136,7 +136,7 @@ encuentre en ese intervalo es del 68\%. Si un estadístico sigue una distribuci�
 varianza $\sigma^2$, se expresa como:
 \[ \mbox{Estadístico} \sim N(\mu,\sigma^2) \]
 En las distribuciones $\chi^2$ y t de Student se habla del parámetro $K$ o grados de libertad ($d1$ y $d2$  en
-la distribución f de Fisher-Snedecor). La media y la varianza de estas tres distribuciones vendrán determinadas por
+la distribución \textit{f} de Fisher-Snedecor). La media y la varianza de estas tres distribuciones vendrán determinadas por
 el parámetro $K$. Cuando se habla de grados de libertad se está refiriendo al número de valores que se pueden elegir
 libremente en una muestra. Por ejemplo: una muestra con dos datos y media 5 si el primer dato toma el valor 4 entonces
 necesariamente el segundo dato debe de ser 6 (para lograr la media de 5). En este caso, se tienen:
@@ -154,7 +154,7 @@ de datos con la que se están aplicando los tests (número de columnas de la mat
 de grados de libertad lo calcula de acuerdo a su fórmula característica para el estadístico. 
 
 Todas las distribuciones de la figura \ref{fig:pdf} son continuas, pues se puede tomar cualquier valor dentro de un
-intervalo, a diferencia de las distribuciones discretas. Por otra parte, en la distribución t de Student a medida que
+intervalo, a diferencia de las distribuciones discretas. Por otra parte, en la distribución \textit{t} de Student a medida que
 aumentan los grados de libertad se tiende más a una distribución normal estandarizada (de $\mu = 0$ y $\sigma^2 = 1$).
 
 Las distribuciones de probabilidad que puedan seguir un estadístico nos dan un valor diferente de probabilidad para
@@ -219,8 +219,8 @@ disminuir ambos errores a la vez, se controla el ``Error tipo I".
 El nivel de significación fijado divide en dos regiones el conjunto de posibles valores del estadístico de
 contraste: la región de aceptación y la región de rechazo o región crítica. Se denomina región de aceptación
 a la región que conduce a la aceptación de $H_0$ y región de rechazo a la región que conduce al rechazo de $H_0$
-en favor de $H_1$. Aquí surge el concepto de ``Cola", que indica la porción o porciones de una distribución
-de probabilidad en la cual se rechaza la hipótesis nula, es decir, la región de rechazo.
+en favor de $H_1$. Aquí surge el concepto de \textbf{Cola}, que indica la porción o porciones de una distribución
+de probabilidad en la cual se rechaza la hipótesis nula, es decir, la \textbf{región de rechazo}.
 
 La determinación de las regiones de aceptación o de rechazo depende de cómo se establezca la hipótesis
 alternativa $H_1$. Por ejemplo, si hablamos de un contraste en el que se esté contrastando una determinada
@@ -298,13 +298,13 @@ que se ha obtenido."
 
 Para entender mejor el concepto de $p-valor$, conviene hablar de las distribuciones de probabilidad vistas en la
 figura \ref{fig:pdf} de la sección \ref{estadistico} donde se hablaba del estadístico de contraste. Estas
-distribuciones son funciones que se denominan ``Funciones de densidad de probabilidad" (FDP). Como bien se
-expuso, estas funciones proporcionan la probabilidad que existe para cada valor diferente del estadístico (cómo
-de probable es obtener ese valor del estadístico). Si en vez de trabajar con las funciones de densidad de 
-probabilidad, se trabaja con las funciones de distribución acumuladas (FDA), para cada valor del estadístico
-éstas devolverían la probabilidad de obtener un valor igual o menor que ese estadístico siendo la hipótesis nula
-cierta. En la figura \ref{fig:comparativa_pdf_cdf} podemos ver una comparación entre los dos tipos de funciones
-para el caso de la distribución $\chi^2$:
+distribuciones son funciones que se denominan ``Funciones de densidad de probabilidad" (FDP). Como expusimos en
+la sección \ref{estadistico}, estas funciones proporcionan la probabilidad que existe para cada valor
+diferente del estadístico (cómo de probable es obtener ese valor del estadístico). Si, en vez de trabajar con las
+funciones de densidad de probabilidad, se trabaja con las funciones de distribución acumuladas (FDA), para cada
+valor del estadístico éstas devolverían la probabilidad de obtener un valor igual o menor que ese estadístico siendo
+la hipótesis nula cierta. En la figura \ref{fig:comparativa_pdf_cdf} podemos ver una comparación entre los dos
+tipos de funciones para el caso de la distribución $\chi^2$:
 
 \begin{figure}[h]
 \centering
@@ -317,11 +317,11 @@ para el caso de la distribución $\chi^2$:
 \end{figure}
 
 Visto de otro modo, con la distribución acumulada, dado un estadístico, nos devuelve la probabilidad que hay de
-obtener un valor al menos tan extremo como el estadístico en cuestión. Esto es el $p-valor$. Por ejemplo si el valor
-del estadístico es 3 y el test da como resultado un $p-valor$ igual a 0.1, esto quiere decir que un 10\% de las veces
-vamos a obtener un valor similar. Si el $p-valor$ es muy bajo, es decir, la probabilidad de obtener un valor al menos
-tan extremo como ese estadístico es muy baja, se puede concluir que la hipótesis nula no es cierta, ya que sería
-poco probable que siendo cierta se obtuviese ese estadístico.
+obtener un valor al menos tan extremo como el estadístico en cuestión. Esto es el \textbf{$p-valor$}. Por ejemplo si
+el valor del estadístico es 3 y el test da como resultado un $p-valor$ igual a 0.1, esto quiere decir que un 10\% de
+las veces vamos a obtener un valor similar. Si el $p-valor$ es muy bajo, es decir, la probabilidad de obtener un valor
+al menos tan extremo como ese estadístico es muy baja, se puede concluir que la hipótesis nula no es cierta, ya que
+sería poco probable que siendo cierta se obtuviese ese estadístico.
 
 El criterio para saber si el $p-valor$ es lo suficientemente bajo como para rechazar que la hipótesis nula sea cierta
 es tomado de acuerdo al nivel de significancia establecido. Como se ha mencionado en la sección \ref{tipos_error}, el
@@ -367,8 +367,8 @@ significación.
 
 \section{Tests paramétricos}
 Uno de los tipos más comunes de tests son los tests paramétricos. En general, estos tests son más robustos y
-tienen mayor potencia que los tests no paramétricos, que se verán más adelante en \ref{no_parametricos}. Sin
-embargo, las pruebas paramétricas se basan en supuestos que muy probablemente se violan cuando se analiza el
+tienen mayor potencia que los tests no paramétricos, que se verán más adelante en la sección \ref{no_parametricos}.
+Sin embargo, las pruebas paramétricas se basan en supuestos que muy probablemente se violan cuando se analiza el
 rendimiento de algoritmos de inteligencia computacional y minería de datos \cite{parametricos}. Estas suposiciones
 o condiciones paramétricas que deben cumplir los resultados de los algoritmos son explicadas a continuación.
 
@@ -443,7 +443,7 @@ K algoritmos presentan o no homogeneidad de varianzas.
 
 %----------------------------------
 
-\subsection{Test Anova}
+\subsection{Test ANOVA}
 El análisis de la varianza (ANOVA) es uno de los tests estadísticos más ampliamente utilizados para probar
 la igualdad de más de dos medias de la población. Se trata de una versión más general del T-test, ya que permite
 comparar más de 2 poblaciones (en este proyecto resultados de más de dos algoritmos). Dado que es un test
@@ -461,7 +461,7 @@ por tanto, un contraste o prueba unilateral con cola a la derecha. En este proye
 determinado por el número de algoritmos que existe en la muestra de datos.
 
 \subsubsection{Pasos a desarrollar}
-Los pasos a seguir para realizar el test de Anova son los siguientes:
+Los pasos a seguir para realizar el test de ANOVA son los siguientes:
 \begin{itemize}
 \item Se analiza la variación total (respecto a la media general o media de medias de los resultados de cada
 algoritmo):
@@ -481,7 +481,7 @@ tratamiento respecto a la media general):
 \[ GLE = GLT - GLTR \]
 \item Luego, se determinan los cuadrados medios totales ($CMT$), del tratamiento ($CMTR$) y del error ($CME$),
 que son las variaciones divididas entre los grados de libertad correspondientes.
-\item Se halla el estadístico, que se distribuye como una distribución f con $K-1$ y $(KN)-K$ grados de libertad:
+\item Se halla el estadístico, que se distribuye como una distribución \textit{f} con $K-1$ y $(KN)-K$ grados de libertad:
 \[ anova = CMT / CME \]
 \item Por último se halla el $p-valor$ y se toma la decisión en función del nivel de significancia.
 \end{itemize}
@@ -489,7 +489,7 @@ que son las variaciones divididas entre los grados de libertad correspondientes.
 %----------------------------------
 
 \subsection{T-test}
-El caso más simple de Anova donde intervienen únicamente 2 muestras o algoritmos es realizado por este test.
+El caso más simple de ANOVA donde intervienen únicamente 2 muestras o algoritmos es realizado por este test.
 Dado que es un test paramétrico, se asume que se dan las condiciones de independencia, normalidad y homocedasticidad
 en su aplicación. De no ser el caso, los resultados de esta prueba no son fiables.
 
@@ -501,7 +501,7 @@ en su aplicación. De no ser el caso, los resultados de esta prueba no son fiabl
 La hipótesis nula indica que las medias de las 2 poblaciones o muestras coinciden, frente a la hipótesis alternativa
 de que son distintas. Se trata, por tanto, de un contraste o prueba bilateral.
 
-El estadístico de este test, se distribuye como una distribución t de Student con $2N-2$ grados de libertad.
+El estadístico de este test, se distribuye como una distribución \textit{t} de Student con $2N-2$ grados de libertad.
 
 %----------------------------------
 
@@ -517,7 +517,7 @@ de un marco experimental exhaustivo y la parte crítica de estas comparaciones r
 estadística de los resultados, contrastando las diferencias encontradas entre métodos. Dentro de las técnicas
 disponibles, destacan los tests no paramétricos debido a su flexibilidad y a las pocas restricciones de
 uso que presentan (a diferencia de los tests paramétricos, los cuales sufren a menudo problemas derivados
-de la imposibilidad de cumplir las condiciones paramétricas para su uso). \cite{no_parametricos}
+de la imposibilidad de cumplir las condiciones paramétricas para su uso) \cite{no_parametricos}.
 
 %----------------------------------
 
@@ -545,7 +545,7 @@ son iguales, es decir, las dos medianas son iguales (los resultados de los algor
 $H_1$ indica, por otra parte, que las medianas son diferentes. Se trata, por tanto, de una prueba bilateral.
 
 \subsubsection{Pasos a desarrollar}
-Los pasos a seguir para realizar la prueba de los rangos signados de Wilcoxon son los siguientes:
+Los pasos a seguir para realizar la prueba de los rangos de Wilcoxon son los siguientes:
 \begin{itemize}
 \item Se calculan las diferencias entre las muestras. Por ejemplo: diferencias entre los resultados del algoritmo
 A y B.
@@ -571,7 +571,7 @@ se toma la decisión en función del $p-valor$ y del nivel de significancia:
 \subsection{Test de Friedman}
 El test de Friedman es una prueba no paramétrica que puede realizar comparaciones entre dos o más algoritmos, es
 decir, se trata de una prueba de comparaciones múltiples. Fue desarrollada por el economista Milton Friedman y
-trabaja asignando rankings para establecer quién es el mejor algoritmo de la muestra de datos proporcionada.
+trabaja asignando rankings para establecer cuál es el mejor algoritmo de la muestra de datos proporcionada.
 
 \subsubsection{Hipótesis}
 \begin{itemize}
@@ -592,10 +592,10 @@ comprendidos entre $1$ y $K$, donde $K$ representa el número de algoritmos que 
 se asignan de forma ascendente (1 al mejor resultado, 2 al segundo mejor, etc.) y se tiene en cuenta la función
 objetivo de los algoritmos, es decir, si lo que se pretende es minimizar o maximizar resultados.
 \item En caso de que haya empates en la asignación de rankings anterior, se asignan rankings medios:
-\[ r_{ij} = \frac{rep + (2pos) + 1}{2} \]
-, donde $rep$ representa el número de veces que se repite el dato y $pos$ representa la posición que ocupa
+\[ r_{ij} = \frac{rep + (2pos) + 1}{2}, \]
+donde $rep$ representa el número de veces que se repite el dato y $pos$ representa la posición que ocupa
 el dato repetido.
-\item Luego, se calculan los rankings medios de cada algoritmo en los $N$ problemas:
+\item A continuación, se calculan los rankings medios de cada algoritmo en los $N$ problemas:
 \[ R_j = \frac{\sum_{i=1}^{N} r_{ij}}{N} \]
 \item El estadístico de Friedman se distribuye de acuerdo a una distribución $\chi^2$ con $K-1$ grados de
 libertad:
@@ -607,7 +607,7 @@ libertad:
 
 \subsection{Test de Iman-Davenport}
 El estadístico de Friedman fue mejorado por Iman y Davenport, que demostraron que tenía un comportamiento
-demasiado conservativo (se tiende a aceptar la hipótesis nula y, por tanto, la potencia del test es menor).
+demasiado conservador (se tiende a aceptar la hipótesis nula y, por tanto, la potencia del test es menor).
 
 \subsubsection{Hipótesis}
 \begin{itemize}
@@ -618,7 +618,7 @@ demasiado conservativo (se tiende a aceptar la hipótesis nula y, por tanto, la 
 \begin{itemize}
 \item El test de Iman-Davenport hace las mismas operaciones que el test de Friedman pero en él se calcula
 un estadístico más ajustado (en el que también interviene el estadístico de Friedman). Este nuevo estadístico,
-se distribuye de acuerdo a una distribución f con $(K-1)$ y $(K-1)*(N-1)$ grados de libertad, donde $N$
+se distribuye de acuerdo a una distribución \textit{f} con $(K-1)$ y $(K-1)*(N-1)$ grados de libertad, donde $N$
 representa el número de problemas o conjuntos de datos y $K$ el número de algoritmos:
 \[ iman_d = \frac{(N-1)friedman}{N(K-1)-friedman} \]
 \end{itemize}
@@ -650,8 +650,8 @@ hasta $K*N$. En caso de empates se procede asignando valores medios igual que en
 \item El estadístico para esta prueba se distribuye de acuerdo a una distribución $\chi^2$ con $K-1$ grados de
 libertad:
 \[ rangos\_al = \frac{(K-1) \left[ \sum_{j=1}^{K} \hat{R_{j}^{2}} - (\frac{KN^2}{4})(KN+1)^2 \right]}
-{\left[\frac{KN(KN+1)(2KN+1)}{6}\right] - (\frac{1}{K}) \sum_{i=1}^{N} \hat{R_{i}^{2}}} \]
-, donde $\hat{R_{i}}$ y $\hat{R_{j}}$ son la suma total de los rankings del problema $i$ y del algoritmo $j$
+{\left[\frac{KN(KN+1)(2KN+1)}{6}\right] - (\frac{1}{K}) \sum_{i=1}^{N} \hat{R_{i}^{2}}}, \]
+donde $\hat{R_{i}}$ y $\hat{R_{j}}$ son la suma total de los rankings del problema $i$ y del algoritmo $j$
 respectivamente.
 \item Por último se halla el $p-valor$ y se toma la decisión en función del nivel de significancia.
 \end{itemize}
@@ -675,7 +675,7 @@ sobre ellos son más distantes (se realiza una ponderación).
 uno (diferencia entre el valor observado más alto y el más bajo). Este ranking de $1$ a $N$ usa también
 rankings medios en caso de empate.
 \item A partir de estos datos se pueden obtener los rankings medios finales para cada algoritmo y obtener
-el estadístico, que se distribuye como una distribución f con $(K-1)$ y $(K-1)*(N-1)$ grados de libertad.
+el estadístico, que se distribuye como una distribución \textit{f} con $(K-1)$ y $(K-1)*(N-1)$ grados de libertad.
 \item Por último se halla el $p-valor$ y se toma la decisión en función del nivel de significancia.
 \end{itemize}
 
@@ -714,16 +714,16 @@ donde se provenga:
 
 \begin{itemize}
 \item Test de Friedman / Iman-Davenport:
-\[ Z = \frac{(R_i - R_j)}{\sqrt{\frac{K(K+1)}{6N}}} \]
-, donde $R_i$ y $R_j$ son los rankings medios obtenidos por el algoritmo $i$ y $j$ respectivamente en el test
+\[ Z = \frac{(R_i - R_j)}{\sqrt{\frac{K(K+1)}{6N}}}, \]
+donde $R_i$ y $R_j$ son los rankings medios obtenidos por el algoritmo $i$ y $j$ respectivamente en el test
 de Friedman.
 \item Test de los Rangos Alineados de Friedman:
-\[ Z = \frac{\hat{R_{i}} - \hat{R_{j}}}{\sqrt{\frac{K(K+1)}{6N}}} \]
-, donde $\hat{R_{i}}$ y $\hat{R_{j}}$ son los rankings medios obtenidos por el algoritmo $i$ y $j$ respectivamente en el test
+\[ Z = \frac{\hat{R_{i}} - \hat{R_{j}}}{\sqrt{\frac{K(K+1)}{6N}}}, \]
+donde $\hat{R_{i}}$ y $\hat{R_{j}}$ son los rankings medios obtenidos por el algoritmo $i$ y $j$ respectivamente en el test
 de los Rangos Alineados de Friedman.
 \item Test de Quade:
-\[ Z = \frac {T_i - T_j}{\sqrt{\frac{K(K+1)(2N+1)(K-1)}{18N(N+1)}}} \]
-, donde $T_i$ y $T_j$ son los rankings medios obtenidos por el algoritmo $i$ y $j$ respectivamente en el test
+\[ Z = \frac {T_i - T_j}{\sqrt{\frac{K(K+1)(2N+1)(K-1)}{18N(N+1)}}}, \]
+donde $T_i$ y $T_j$ son los rankings medios obtenidos por el algoritmo $i$ y $j$ respectivamente en el test
 de Quade.
 \end{itemize}
 
@@ -764,14 +764,14 @@ para comparaciones múltiples en este proyecto se implementa el test de Shaffer:
 
 \begin{itemize}
 \item \textbf{Test de Shaffer:} Rechaza cada $H_i$ si:
-\[ p-valor_{i} \leq \frac{\alpha}{t_i} \]
-, donde $t_i$ puede ser obtenido mediante:
+\[ p-valor_{i} \leq \frac{\alpha}{t_i}, \]
+donde $t_i$ puede ser obtenido mediante:
 \[ S(K) = \bigcup_{j=1}^{K} \{{j \choose 2}  + x: x \in S(K-j)\} \]
 , que calcula la secuencia de número máximo de hipótesis que pueden ser ciertas en una comparación secuencial
 entre $K$ distribuciones, donde $K \geq 2$ y $S(0) = S(1) = \{0\}$
 \end{itemize}
 
-Los tests POST-HOC de la lista anterior están ordenados de menor a mayor potencia, siendo, como se puede apreciar,
+Los tests de la lista anterior están ordenados de menor a mayor potencia, siendo, como se puede apreciar,
 el test de Bonferroni-Dunn el menos potente de todos y el test de Li el que mayor potencia presenta \cite{potencia}.
 
 %----------------------------------

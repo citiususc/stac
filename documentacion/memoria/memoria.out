@@ -10,7 +10,7 @@
 \BOOKMARK [1][-]{section.2.6}{Etapas en la resoluci\363n de un contraste de hip\363tesis}{chapter.2}% 10
 \BOOKMARK [1][-]{section.2.7}{Tests param\351tricos}{chapter.2}% 11
 \BOOKMARK [2][-]{subsection.2.7.1}{Condiciones Param\351tricas}{section.2.7}% 12
-\BOOKMARK [2][-]{subsection.2.7.2}{Test Anova}{section.2.7}% 13
+\BOOKMARK [2][-]{subsection.2.7.2}{Test ANOVA}{section.2.7}% 13
 \BOOKMARK [2][-]{subsection.2.7.3}{T-test}{section.2.7}% 14
 \BOOKMARK [1][-]{section.2.8}{Tests no param\351tricos}{chapter.2}% 15
 \BOOKMARK [2][-]{subsection.2.8.1}{Test de Wilcoxon}{section.2.8}% 16
@@ -24,3 +24,11 @@
 \BOOKMARK [1][-]{section.3.2}{Historias de usuario}{chapter.3}% 24
 \BOOKMARK [2][-]{subsection.3.2.1}{Historias de usuario desarrollador}{section.3.2}% 25
 \BOOKMARK [2][-]{subsection.3.2.2}{Historias de usuario cliente}{section.3.2}% 26
+\BOOKMARK [0][-]{chapter.4}{Gesti\363n del proyecto}{}% 27
+\BOOKMARK [1][-]{section.4.1}{An\341lisis de riesgos}{chapter.4}% 28
+\BOOKMARK [1][-]{section.4.2}{Metodolog\355a de desarrollo}{chapter.4}% 29
+\BOOKMARK [2][-]{subsection.4.2.1}{Metodolog\355as \341giles}{section.4.2}% 30
+\BOOKMARK [2][-]{subsection.4.2.2}{Scrum}{section.4.2}% 31
+\BOOKMARK [1][-]{section.4.3}{Gesti\363n de la configuraci\363n}{chapter.4}% 32
+\BOOKMARK [1][-]{section.4.4}{Planificaci\363n temporal}{chapter.4}% 33
+\BOOKMARK [1][-]{section.4.5}{Estimaci\363n de costes}{chapter.4}% 34

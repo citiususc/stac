@@ -3,7 +3,7 @@
 \chapter{Análisis de requisitos}
 El análisis de requisitos es el primer paso técnico del proceso de ingeniería del software. Es aquí donde se refina la declaración general del ámbito del software en una especificación concreta que se convierte en la base de todas las actividades de ingeniería del software que siguen.
 
-En este proyecto, se utilizará el enfoque de metodología de desarrollo ágil Scrum (explicada más en detalle en el capítulo 3) para realizar el análisis de requisitos. A diferencia del enfoque de tradicional en el que los requisitos son descritos de una forma muy estricta y formal, esta metodología permite describir las necesidades del usuario de una manera más simple. Para ello, se establecen los requisitos mediante las historias de usuario. Las historias de usuario son requisitos escritos en un lenguaje coloquial como un recordatorio de la conversación con el cliente o escritas por ellos mismos. Consisten en una o dos frases en donde de una forma no precisa se detalla lo que el usuario requiere de la aplicación. Además, deben ser:
+En este proyecto, hemos utilizado el enfoque de metodología de desarrollo ágil Scrum \cite{libroscrum}. Los detalles de esta metodología y la razón de su utilización en este proyecto se detallan en la sección \ref{metodologia} del capítulo 4. Para realizar el análisis de requisitos, a diferencia del enfoque de tradicional en el que los requisitos son descritos de una forma muy estricta y formal, esta metodología permite describir las necesidades del usuario de una manera más simple. Para ello, se establecen los requisitos mediante las \textbf{historias de usuario}. Las historias de usuario son requisitos escritos en un lenguaje coloquial bien directamente por el mismo cliente, o bien como un recordatorio posterior de las conversaciones mantenidas con el cliente. Consisten en una o dos frases en donde de una forma no precisa se detalla lo que el usuario requiere de la aplicación. Además, deben ser:
 
 \begin{itemize}
 \item \textbf{Independientes:} No depender de otras para su compleción.
@@ -64,13 +64,13 @@ Las historias de usuario se identifican mediante HU-x, donde x representa un nú
 Desglosando el Epic \textbf{EP-1:} Proporcionar una API REST de los tests estadísticos, se obtienen las siguientes historias de usuario:
 
 \begin{table}[H]
-	\begin{tabular}{| p{3cm}| p{12cm} |}
+	\begin{tabular}{| p{3cm}| p{11cm} |}
 		\hline
 		\multicolumn{2}{|c|}{\textbf{HU-1} - Acceder a tests} \\ \hline
 		\textbf{Como:} & Desarrollador \\ \hline
 		\textbf{Me gustaría:} & acceder a los tests como recursos independientes con parámetros opcionales \\ \hline
 		\textbf{Ya que:} & esto facilita su utilización y los hace más flexibles \\ \hline
-		\multirow{3}{12cm}{\textbf{C. Aceptación:}} & - Los tests estadísticos son accesibles individualmente como un recurso \\
+		\multirow{3}{11cm}{\textbf{C. Aceptación:}} & - Los tests estadísticos son accesibles individualmente como un recurso \\
 		& - Los métodos de POST-HOC pueden ser también accedidos individualmente como un sub recurso dentro del recurso de acceso del test principal \\
 		& - Se proporcionan varias URIs (identificador de recursos uniforme) para cada test cuyos parámetros (como el nivel de significación, la función objetivo o el test POST-HOC) son opcionales, teniendo un valor común por defecto \\ \hline
 		\textbf{\textbf{Prioridad:}} & alta \\ \hline
@@ -80,13 +80,13 @@ Desglosando el Epic \textbf{EP-1:} Proporcionar una API REST de los tests estad�
 % *****************HISTORIA USUARIO 2****************** %
 
 \begin{table}[H]
-	\begin{tabular}{| p{3cm}| p{12cm} |}
+	\begin{tabular}{| p{3cm}| p{11cm} |}
 		\hline
 		\multicolumn{2}{|c|}{\textbf{HU-2} - Gestionar ficheros} \\ \hline
 		\textbf{Como:} & Desarrollador \\ \hline
 		\textbf{Me gustaría:} & poder gestionar un fichero como un recurso independiente \\ \hline
 		\textbf{Ya que:} & esto facilita la subida y consulta de ficheros \\ \hline
-		\multirow{2}{12cm}{\textbf{C. Aceptación:}} & - Los ficheros son accesibles individualmente como un recurso \\
+		\multirow{2}{11cm}{\textbf{C. Aceptación:}} & - Los ficheros son accesibles individualmente como un recurso \\
 		& - Los recursos de fichero son creados de forma individual \\ \hline 
 		\textbf{\textbf{Prioridad:}} & alta \\ \hline
 	\end{tabular}
@@ -95,7 +95,7 @@ Desglosando el Epic \textbf{EP-1:} Proporcionar una API REST de los tests estad�
 % *****************HISTORIA USUARIO 3****************** %
 
 \begin{table}[H]
-	\begin{tabular}{| p{3cm}| p{12cm} |}
+	\begin{tabular}{| p{3cm}| p{11cm} |}
 		\hline
 		\multicolumn{2}{|c|}{\textbf{HU-3} - Devolver datos JSON} \\ \hline
 		\textbf{Como:} & Desarrollador \\ \hline
@@ -109,13 +109,13 @@ Desglosando el Epic \textbf{EP-1:} Proporcionar una API REST de los tests estad�
 % *****************HISTORIA USUARIO 4****************** %
 
 \begin{table}[H]
-	\begin{tabular}{| p{3cm}| p{12cm} |}
+	\begin{tabular}{| p{3cm}| p{11cm} |}
 		\hline
 		\multicolumn{2}{|c|}{\textbf{HU-4} - Analizar datos subidos} \\ \hline
 		\textbf{Como:} & Desarrollador \\ \hline
 		\textbf{Me gustaría:} & que el fichero de datos subido al servidor tuviese siempre el formato csv \\ \hline
 		\textbf{Ya que:} & es un formato abierto y sencillo para representar datos en forma de tabla y los tests reciben siempre los datos en forma de matriz, donde las filas representan los conjuntos de datos de cada problema y las columnas los resultados obtenidos de cada algoritmo \\ \hline
-		\multirow{2}{12cm}{\textbf{C. Aceptación:}} & - El servicio de subida comprueba que los datos subidos siguen el estándar csv y están dispuestos de acuerdo a una convención establecida para el proyecto \\
+		\multirow{2}{11cm}{\textbf{C. Aceptación:}} & - El servicio de subida comprueba que los datos subidos siguen el estándar csv y están dispuestos de acuerdo a una convención establecida para el proyecto \\
 		& - En caso de no cumplir el estándar se devuelve un error \\ \hline 
 		\textbf{\textbf{Prioridad:}} & alta \\ \hline
 	\end{tabular}
@@ -125,7 +125,7 @@ Desglosando el Epic \textbf{EP-1:} Proporcionar una API REST de los tests estad�
 % *****************HISTORIA USUARIO 5****************** %
 
 \begin{table}[H]
-	\begin{tabular}{| p{3cm}| p{12cm} |}
+	\begin{tabular}{| p{3cm}| p{11cm} |}
 		\hline
 		\multicolumn{2}{|c|}{\textbf{HU-5} - Limitar ficheros subidos} \\ \hline
 		\textbf{Como:} & Desarrollador \\ \hline
@@ -139,13 +139,13 @@ Desglosando el Epic \textbf{EP-1:} Proporcionar una API REST de los tests estad�
 % *****************HISTORIA USUARIO 6****************** %
 
 \begin{table}[H]
-	\begin{tabular}{| p{3cm}| p{12cm} |}
+	\begin{tabular}{| p{3cm}| p{11cm} |}
 		\hline
 		\multicolumn{2}{|c|}{\textbf{HU-6} - Visualizar información tests} \\ \hline
 		\textbf{Como:} & Desarrollador \\ \hline
 		\textbf{Me gustaría:} & obtener información acerca de los tests estadísticos \\ \hline
 		\textbf{Ya que:} & esto permite conocer qué hace cada test y evita confusiones a la hora de utilizar el servicio \\ \hline
-		\multirow{2}{12cm}{\textbf{C. Aceptación:}} & - Los servicios de la API REST tienen información relativa al test (uso e hipótesis) \\
+		\multirow{2}{11cm}{\textbf{C. Aceptación:}} & - Los servicios de la API REST tienen información relativa al test (uso e hipótesis) \\
 		& - El módulo de Python donde están implementados los tests tiene documentación en base a un generador de documentación relativa al test (uso, hipótesis, argumentos de entrada / salida, ...) \\ \hline 
 		\textbf{\textbf{Prioridad:}} & media \\ \hline
 	\end{tabular}
@@ -160,14 +160,14 @@ Desglosando el Epic \textbf{EP-1:} Proporcionar una API REST de los tests estad�
 Desglosando el Epic \textbf{EP-2:} Permitir realizar tests estadísticos paramétricos, se obtienen las siguientes historias de usuario:
 
 \begin{table}[H]
-	\begin{tabular}{| p{3cm}| p{12cm} |}
+	\begin{tabular}{| p{3cm}| p{11cm} |}
 		\hline
-		\multicolumn{2}{|c|}{\textbf{HU-7} - Realizar test de Anova} \\ \hline
+		\multicolumn{2}{|c|}{\textbf{HU-7} - Realizar test de ANOVA} \\ \hline
 		\textbf{Como:} & Cliente \\ \hline
-		\textbf{Me gustaría:} & poder aplicar el test de Anova a mis datos \\ \hline
+		\textbf{Me gustaría:} & poder aplicar el test de ANOVA a mis datos \\ \hline
 		\textbf{Ya que:} & es una prueba muy utilizada para determinar si la media de más de dos muestras son similares \\ \hline
-		\multirow{3}{12cm}{\textbf{C. Aceptación:}} & - El módulo de Python tiene implementado el test Anova \\
-		& - La web muestra una sección para tests paramétricos donde se puede aplicar la prueba \\
+		\multirow{3}{11cm}{\textbf{C. Aceptación:}} & - El módulo de Python tiene implementado el test ANOVA \\
+		& - La plataforma muestra una sección para tests paramétricos donde se puede aplicar la prueba \\
 		& - El test devuelve los datos: estadístico, el $p-valor$ y el resultado. En caso de ser estadísticamente significativo, también aparecerán los resultados del test POST-HOC de Bonferroni ($p-valores$, $p-valores$ ajustados, etc.) \\ \hline
 		\textbf{\textbf{Prioridad:}} & alta \\ \hline
 	\end{tabular}
@@ -176,14 +176,14 @@ Desglosando el Epic \textbf{EP-2:} Permitir realizar tests estadísticos paramé
 % *****************HISTORIA USUARIO 8****************** %
 
 \begin{table}[H]
-	\begin{tabular}{| p{3cm}| p{12cm} |}
+	\begin{tabular}{| p{3cm}| p{11cm} |}
 		\hline
 		\multicolumn{2}{|c|}{\textbf{HU-8} - Realizar test T-test} \\ \hline
 		\textbf{Como:} & Cliente \\ \hline
 		\textbf{Me gustaría:} & poder aplicar el test T-test a mis datos \\ \hline
-		\textbf{Ya que:} & aunque contrasta la misma hipótesis que Anova éste tiene otro estadístico y funciona únicamente para dos algoritmos, con lo que puede resultar interesante tener otro punto de vista \\ \hline
-		\multirow{4}{12cm}{\textbf{C. Aceptación:}} & - El módulo de Python tiene implementado el test T-test \\
-		& - La web muestra una sección para tests paramétricos donde se puede aplicar la prueba \\
+		\textbf{Ya que:} & aunque contrasta la misma hipótesis que ANOVA éste tiene otro estadístico y funciona únicamente para dos algoritmos, con lo que puede resultar interesante tener otro punto de vista \\ \hline
+		\multirow{4}{11cm}{\textbf{C. Aceptación:}} & - El módulo de Python tiene implementado el test T-test \\
+		& - La plataforma muestra una sección para tests paramétricos donde se puede aplicar la prueba \\
 		& - El test devuelve los datos: estadístico, el $p-valor$ y el resultado \\
 		& - Devuelve error en caso de que los datos tengan resultados de más de 2 algoritmos \\ \hline
 		\textbf{\textbf{Prioridad:}} & media \\ \hline
@@ -192,17 +192,18 @@ Desglosando el Epic \textbf{EP-2:} Permitir realizar tests estadísticos paramé
 
 % *****************HISTORIA USUARIO 9****************** %
 
+\clearpage
 Desglosando el Epic \textbf{EP-3:} Permitir realizar tests estadísticos no paramétricos, se obtienen las siguientes historias de usuario:
 
 \begin{table}[H]
-	\begin{tabular}{| p{3cm}| p{12cm} |}
+	\begin{tabular}{| p{3cm}| p{11cm} |}
 		\hline
 		\multicolumn{2}{|c|}{\textbf{HU-9} - Realizar test de Wilcoxon} \\ \hline
 		\textbf{Como:} & Cliente \\ \hline
 		\textbf{Me gustaría:} & poder aplicar el test de Wilcoxon a mis datos \\ \hline
 		\textbf{Ya que:} & es útil como alternativa al test T-test cuando los datos no cumplen con el supuesto de normalidad \\ \hline
-		\multirow{4}{12cm}{\textbf{C. Aceptación:}} & - El módulo de Python tiene implementado el test de Wilcoxon \\
-		& - La web muestra una sección para tests no paramétricos donde se puede aplicar la prueba \\
+		\multirow{4}{11cm}{\textbf{C. Aceptación:}} & - El módulo de Python tiene implementado el test de Wilcoxon \\
+		& - La plataforma muestra una sección para tests no paramétricos donde se puede aplicar la prueba \\
 		& - El test devuelve el estadístico, el $p-valor$,... incluyendo también la suma de los rangos positivos y la suma de los rangos negativos característicos del test de Wilcoxon \\
 		& - Devuelve error en caso de que los datos tengan resultados de más de 2 algoritmos \\ \hline
 		\textbf{\textbf{Prioridad:}} & alta \\ \hline
@@ -212,14 +213,14 @@ Desglosando el Epic \textbf{EP-3:} Permitir realizar tests estadísticos no para
 % *****************HISTORIA USUARIO 10***************** %
 
 \begin{table}[H]
-	\begin{tabular}{| p{3cm}| p{12cm} |}
+	\begin{tabular}{| p{3cm}| p{11cm} |}
 		\hline
 		\multicolumn{2}{|c|}{\textbf{HU-10} - Realizar test de Friedman} \\ \hline
 		\textbf{Como:} & Cliente \\ \hline
 		\textbf{Me gustaría:} & poder aplicar el test de Friedman a mis datos \\ \hline
 		\textbf{Ya que:} & es una prueba muy útil a la hora de comparar algoritmos (ya que trabaja asignando rankings) y determinar si existen diferencias entre ellos \\ \hline
-		\multirow{3}{12cm}{\textbf{C. Aceptación:}} & - El módulo de Python tiene implementado el test de Friedman \\
-		& - La web muestra una sección para tests no paramétricos donde se puede aplicar la prueba \\
+		\multirow{3}{11cm}{\textbf{C. Aceptación:}} & - El módulo de Python tiene implementado el test de Friedman \\
+		& - La plataforma muestra una sección para tests no paramétricos donde se puede aplicar la prueba \\
 		& - El test devuelve los datos: estadístico, el $p-valor$, el resultado y el ranking \\ \hline
 		\textbf{\textbf{Prioridad:}} & alta \\ \hline
 	\end{tabular}
@@ -228,14 +229,14 @@ Desglosando el Epic \textbf{EP-3:} Permitir realizar tests estadísticos no para
 % *****************HISTORIA USUARIO 11***************** %
 
 \begin{table}[H]
-	\begin{tabular}{| p{3cm}| p{12cm} |}
+	\begin{tabular}{| p{3cm}| p{11cm} |}
 		\hline
 		\multicolumn{2}{|c|}{\textbf{HU-11} - Realizar test de Iman-Davenport} \\ \hline
 		\textbf{Como:} & Cliente \\ \hline
 		\textbf{Me gustaría:} & poder aplicar el test de Iman-Davenport a mis datos \\ \hline
 		\textbf{Ya que:} & es una prueba cuyo estadístico es más ajustado que el de Friedman y por lo tanto es más potente y puede servir mejor para mis datos \\ \hline
-		\multirow{3}{12cm}{\textbf{C. Aceptación:}} & - El módulo de Python tiene implementado el test de Iman-Davenport \\
-		& - La web muestra una sección para tests no paramétricos donde se puede aplicar la prueba \\
+		\multirow{3}{11cm}{\textbf{C. Aceptación:}} & - El módulo de Python tiene implementado el test de Iman-Davenport \\
+		& - La plataforma muestra una sección para tests no paramétricos donde se puede aplicar la prueba \\
 		& - El test devuelve los datos: estadístico, el $p-valor$, el resultado y el ranking \\ \hline
 		\textbf{\textbf{Prioridad:}} & alta \\ \hline
 	\end{tabular}
@@ -244,14 +245,14 @@ Desglosando el Epic \textbf{EP-3:} Permitir realizar tests estadísticos no para
 % *****************HISTORIA USUARIO 12***************** %
 
 \begin{table}[H]
-	\begin{tabular}{| p{3cm}| p{12cm} |}
+	\begin{tabular}{| p{3cm}| p{11cm} |}
 		\hline
 		\multicolumn{2}{|c|}{\textbf{HU-12} - Realizar test de los Rangos Alineados de Friedman} \\ \hline
 		\textbf{Como:} & Cliente \\ \hline
 		\textbf{Me gustaría:} & poder aplicar el test de Quade \\ \hline
 		\textbf{Ya que:} & es una prueba que a diferencia de la de Friedman establece los rankings teniendo en cuentas las posibles interrelaciones que pueden haber entre los distintos conjuntos de datos o problemas, con lo que puede ser muy útil en ese sentido \\ \hline
-		\multirow{3}{12cm}{\textbf{C. Aceptación:}} & - El módulo de Python tiene implementado el test de Rangos Alineados de Friedman \\
-		& - La web muestra una sección para tests no paramétricos donde se puede aplicar la prueba \\
+		\multirow{3}{11cm}{\textbf{C. Aceptación:}} & - El módulo de Python tiene implementado el test de Rangos Alineados de Friedman \\
+		& - La plataforma muestra una sección para tests no paramétricos donde se puede aplicar la prueba \\
 		& - El test devuelve los datos: estadístico, el $p-valor$, el resultado y el ranking \\ \hline
 		\textbf{\textbf{Prioridad:}} & alta \\ \hline
 	\end{tabular}
@@ -260,14 +261,14 @@ Desglosando el Epic \textbf{EP-3:} Permitir realizar tests estadísticos no para
 % *****************HISTORIA USUARIO 13***************** %
 
 \begin{table}[H]
-	\begin{tabular}{| p{3cm}| p{12cm} |}
+	\begin{tabular}{| p{3cm}| p{11cm} |}
 		\hline
 		\multicolumn{2}{|c|}{\textbf{HU-13} - Realizar test de Quade} \\ \hline
 		\textbf{Como:} & Cliente \\ \hline
 		\textbf{Me gustaría:} & poder aplicar el test de Quade \\ \hline
 		\textbf{Ya que:} & es una prueba que a diferencia de la de Friedman considera que algunos problemas son más difíciles, o que los resultados que obtienen los algoritmos sobre ellos son más distantes, con lo cual es de las pruebas de ranking más potentes y mejores que puedo aplicar sobre mis resultados \\ \hline
-		\multirow{3}{12cm}{\textbf{C. Aceptación:}} & - El módulo de Python tiene implementado el test de Quade \\
-		& - La web muestra una sección para tests no paramétricos donde se puede aplicar la prueba \\
+		\multirow{3}{11cm}{\textbf{C. Aceptación:}} & - El módulo de Python tiene implementado el test de Quade \\
+		& - La plataforma muestra una sección para tests no paramétricos donde se puede aplicar la prueba \\
 		& - El test devuelve los datos: estadístico, el $p-valor$, el resultado y el ranking \\ \hline
 		\textbf{\textbf{Prioridad:}} & alta \\ \hline
 	\end{tabular}
@@ -276,14 +277,14 @@ Desglosando el Epic \textbf{EP-3:} Permitir realizar tests estadísticos no para
 % *****************HISTORIA USUARIO 14***************** %
 
 \begin{table}[H]
-	\begin{tabular}{| p{3cm}| p{12cm} |}
+	\begin{tabular}{| p{3cm}| p{11cm} |}
 		\hline
 		\multicolumn{2}{|c|}{\textbf{HU-14} - Realizar test de Bonferroni-Dunn} \\ \hline
 		\textbf{Como:} & Cliente \\ \hline
 		\textbf{Me gustaría:} & poder aplicar el test de Bonferroni-Dunn \\ \hline
 		\textbf{Ya que:} & es una prueba muy común que se realiza en caso de que los tests de ranking obtengan diferencias significativas para detectar diferencias concretas entre pares de algoritmos \\ \hline
-		\multirow{3}{12cm}{\textbf{C. Aceptación:}} & - El módulo de Python tiene implementado el test de Bonferroni-Dunn con método de control y el test para comparaciones múltiples \\
-		& - La web muestra una sección para tests no paramétricos donde se puede aplicar la prueba tanto simple como comparación múltiple \\
+		\multirow{3}{11cm}{\textbf{C. Aceptación:}} & - El módulo de Python tiene implementado el test de Bonferroni-Dunn con método de control y el test para comparaciones múltiples \\
+		& - La plataforma muestra una sección para tests no paramétricos donde se puede aplicar la prueba tanto simple como comparación múltiple \\
 		& - El test devuelve los resultados propios del test, como los $p-valores$ ajustados, los estadísticos, el método de control, etc. en caso de que el test de ranking principal sea estadísticamente significativo. Si se trata del POST-HOC simple, se realizarán $K-1$ comparaciones. En el caso de la prueba multitest, se realizarán $\frac{K(K-1)}{2}$ comparaciones \\ \hline
 		\textbf{\textbf{Prioridad:}} & alta \\ \hline
 	\end{tabular}
@@ -292,14 +293,14 @@ Desglosando el Epic \textbf{EP-3:} Permitir realizar tests estadísticos no para
 % *****************HISTORIA USUARIO 15***************** %
 
 \begin{table}[H]
-	\begin{tabular}{| p{3cm}| p{12cm} |}
+	\begin{tabular}{| p{3cm}| p{11cm} |}
 		\hline
 		\multicolumn{2}{|c|}{\textbf{HU-15} - Realizar test de Holm} \\ \hline
 		\textbf{Como:} & Cliente \\ \hline
 		\textbf{Me gustaría:} & poder aplicar el test de Holm \\ \hline
 		\textbf{Ya que:} & se trata de una prueba de comparación a posteriori con más potencia que la de Bonferroni-Dunn y puede resultar más útil al rechazar posiblemente más hipótesis \\ \hline
-		\multirow{3}{12cm}{\textbf{C. Aceptación:}} & - El módulo de Python tiene implementado el test de Holm con método de control y el test para comparaciones múltiples \\
-		& - La web muestra una sección para tests no paramétricos donde se puede aplicar la prueba tanto simple como comparación múltiple \\
+		\multirow{3}{11cm}{\textbf{C. Aceptación:}} & - El módulo de Python tiene implementado el test de Holm con método de control y el test para comparaciones múltiples \\
+		& - La plataforma muestra una sección para tests no paramétricos donde se puede aplicar la prueba tanto simple como comparación múltiple \\
 		& - El test devuelve los resultados propios del test, como los $p-valores$ ajustados, los estadísticos, el método de control, etc. en caso de que el test de ranking principal sea estadísticamente significativo. Si se trata del POST-HOC simple, se realizarán $K-1$ comparaciones. En el caso de la prueba multitest, se realizarán $\frac{K(K-1)}{2}$ comparaciones \\ \hline
 		\textbf{\textbf{Prioridad:}} & alta \\ \hline
 	\end{tabular}
@@ -308,14 +309,14 @@ Desglosando el Epic \textbf{EP-3:} Permitir realizar tests estadísticos no para
 % *****************HISTORIA USUARIO 16***************** %
 
 \begin{table}[H]
-	\begin{tabular}{| p{3cm}| p{12cm} |}
+	\begin{tabular}{| p{3cm}| p{11cm} |}
 		\hline
 		\multicolumn{2}{|c|}{\textbf{HU-16} - Realizar test de Finner} \\ \hline
 		\textbf{Como:} & Cliente \\ \hline
 		\textbf{Me gustaría:} & poder aplicar el test de Finner \\ \hline
 		\textbf{Ya que:} & se trata de una prueba de comparación a posteriori con más potencia que la de Holm y puede resultar más útil al rechazar posiblemente más hipótesis \\ \hline
-		\multirow{3}{12cm}{\textbf{C. Aceptación:}} & - El módulo de Python tiene implementado el test de Finner con método de control y el test para comparaciones múltiples \\
-		& - La web muestra una sección para tests no paramétricos donde se puede aplicar la prueba tanto simple como comparación múltiple \\
+		\multirow{3}{11cm}{\textbf{C. Aceptación:}} & - El módulo de Python tiene implementado el test de Finner con método de control y el test para comparaciones múltiples \\
+		& - La plataforma muestra una sección para tests no paramétricos donde se puede aplicar la prueba tanto simple como comparación múltiple \\
 		& - El test devuelve los resultados propios del test, como los $p-valores$ ajustados, los estadísticos, el método de control, etc. en caso de que el test de ranking principal sea estadísticamente significativo. Si se trata del POST-HOC simple, se realizarán $K-1$ comparaciones. En el caso de la prueba multitest, se realizarán $\frac{K(K-1)}{2}$ comparaciones \\ \hline
 		\textbf{\textbf{Prioridad:}} & alta \\ \hline
 	\end{tabular}
@@ -324,14 +325,14 @@ Desglosando el Epic \textbf{EP-3:} Permitir realizar tests estadísticos no para
 % *****************HISTORIA USUARIO 17***************** %
 
 \begin{table}[H]
-	\begin{tabular}{| p{3cm}| p{12cm} |}
+	\begin{tabular}{| p{3cm}| p{11cm} |}
 		\hline
 		\multicolumn{2}{|c|}{\textbf{HU-17} - Realizar test de Hochberg} \\ \hline
 		\textbf{Como:} & Cliente \\ \hline
 		\textbf{Me gustaría:} & poder aplicar el test de Hochberg \\ \hline
 		\textbf{Ya que:} & se trata de una prueba de comparación a posteriori con más potencia que la de Finner y puede resultar más útil al rechazar posiblemente más hipótesis \\ \hline
-		\multirow{3}{12cm}{\textbf{C. Aceptación:}} & - El módulo de Python tiene implementado el test de Hochberg con método de control y el test para comparaciones múltiples \\
-		& - La web muestra una sección para tests no paramétricos donde se puede aplicar la prueba tanto simple como comparación múltiple \\
+		\multirow{3}{11cm}{\textbf{C. Aceptación:}} & - El módulo de Python tiene implementado el test de Hochberg con método de control y el test para comparaciones múltiples \\
+		& - La plataforma muestra una sección para tests no paramétricos donde se puede aplicar la prueba tanto simple como comparación múltiple \\
 		& - El test devuelve los resultados propios del test, como los $p-valores$ ajustados, los estadísticos, el método de control, etc. en caso de que el test de ranking principal sea estadísticamente significativo. Si se trata del POST-HOC simple, se realizarán $K-1$ comparaciones. En el caso de la prueba multitest, se realizarán $\frac{K(K-1)}{2}$ comparaciones \\ \hline
 		\textbf{\textbf{Prioridad:}} & alta \\ \hline
 	\end{tabular}
@@ -340,14 +341,14 @@ Desglosando el Epic \textbf{EP-3:} Permitir realizar tests estadísticos no para
 % *****************HISTORIA USUARIO 18***************** %
 
 \begin{table}[H]
-	\begin{tabular}{| p{3cm}| p{12cm} |}
+	\begin{tabular}{| p{3cm}| p{11cm} |}
 		\hline
 		\multicolumn{2}{|c|}{\textbf{HU-18} - Realizar test de Li} \\ \hline
 		\textbf{Como:} & Cliente \\ \hline
 		\textbf{Me gustaría:} & poder aplicar el test de Li \\ \hline
 		\textbf{Ya que:} & se trata de una prueba de comparación a posteriori con más potencia que la de Hochberg y puede resultar más útil al rechazar posiblemente más hipótesis \\ \hline
-		\multirow{3}{12cm}{\textbf{C. Aceptación:}} & - El módulo de Python tiene implementado el test de Li simple con método de control \\
-		& - La web muestra una sección para tests no paramétricos donde se puede aplicar la prueba \\
+		\multirow{3}{11cm}{\textbf{C. Aceptación:}} & - El módulo de Python tiene implementado el test de Li simple con método de control \\
+		& - La plataforma muestra una sección para tests no paramétricos donde se puede aplicar la prueba \\
 		& - El test devuelve los resultados propios del test, como los $K-1$ $p-valores$ ajustados, estadísticos, resultados, etc. \\ \hline
 		\textbf{\textbf{Prioridad:}} & alta \\ \hline
 	\end{tabular}
@@ -356,14 +357,14 @@ Desglosando el Epic \textbf{EP-3:} Permitir realizar tests estadísticos no para
 % *****************HISTORIA USUARIO 19***************** %
 
 \begin{table}[H]
-	\begin{tabular}{| p{3cm}| p{12cm} |}
+	\begin{tabular}{| p{3cm}| p{11cm} |}
 		\hline
 		\multicolumn{2}{|c|}{\textbf{HU-19} - Realizar test de Shaffer} \\ \hline
 		\textbf{Como:} & Cliente \\ \hline
 		\textbf{Me gustaría:} & poder aplicar el test de Shaffer para comparaciones múltiples \\ \hline
 		\textbf{Ya que:} & se trata de una prueba multitest con mucha potencia y puede que rechace muchas más hipótesis \\ \hline
-		\multirow{3}{12cm}{\textbf{C. Aceptación:}} & - El módulo de Python tiene implementado el test de Shaffer de comparaciones múltiples \\
-		& - La web muestra una sección para tests no paramétricos donde se puede aplicar la prueba \\
+		\multirow{3}{11cm}{\textbf{C. Aceptación:}} & - El módulo de Python tiene implementado el test de Shaffer de comparaciones múltiples \\
+		& - La plataforma muestra una sección para tests no paramétricos donde se puede aplicar la prueba \\
 		& - El test devuelve los resultados propios del test, como los $\frac{K(K-1)}{2}$ $p-valores$ ajustados, estadísticos, resultados, etc. \\ \hline
 		\textbf{\textbf{Prioridad:}} & alta \\ \hline
 	\end{tabular}
@@ -371,16 +372,17 @@ Desglosando el Epic \textbf{EP-3:} Permitir realizar tests estadísticos no para
 
 % *****************HISTORIA USUARIO 20***************** %
 
+\clearpage
 Desglosando el Epic \textbf{EP-4:} Permitir realizar tests estadísticos no paramétricos para evaluar las condiciones paramétricas, se obtienen las siguientes historias de usuario:
 
 \begin{table}[H]
-	\begin{tabular}{| p{3cm}| p{12cm} |}
+	\begin{tabular}{| p{3cm}| p{11cm} |}
 		\hline
 		\multicolumn{2}{|c|}{\textbf{HU-20} - Realizar tests de normalidad} \\ \hline
 		\textbf{Como:} & Cliente \\ \hline
 		\textbf{Me gustaría:} & poder realizar distintos tests para ver si mis muestras de datos obtenidas por los algoritmos están distribuidas de forma normal \\ \hline
 		\textbf{Ya que:} & esto ayuda a determinar si sobre mis datos puedo aplicar tests paramétricos o si por el contrario lo más adecuado (si no existe normalidad) es aplicar un test no paramétrico \\ \hline
-		\multirow{2}{12cm}{\textbf{C. Aceptación:}} & - La web muestra una sección para tests de condiciones paramétricas donde se pueden aplicar la pruebas de normalidad de Shapiro–Wilk, D’Agostino–Pearson y Kolmogorov–Smirnov para determinar si los datos siguen una distribución normal, siendo el test de Shapiro–Wilk el más potente y Kolmogorov–Smirnov el menos potente \\
+		\multirow{2}{11cm}{\textbf{C. Aceptación:}} & - La plataforma muestra una sección para tests de condiciones paramétricas donde se pueden aplicar la pruebas de normalidad de Shapiro–Wilk, D’Agostino–Pearson y Kolmogorov–Smirnov para determinar si los datos siguen una distribución normal, siendo el test de Shapiro–Wilk el más potente y Kolmogorov–Smirnov el menos potente \\
 		& - El test devuelve, para cada muestra de resultados obtenida por cada algoritmo, los estadísticos, $p-valores$ y resultados \\ \hline
 		\textbf{\textbf{Prioridad:}} & alta \\ \hline
 	\end{tabular}
@@ -389,14 +391,15 @@ Desglosando el Epic \textbf{EP-4:} Permitir realizar tests estadísticos no para
 % *****************HISTORIA USUARIO 21***************** %
 
 \begin{table}[H]
-	\begin{tabular}{| p{3cm}| p{12cm} |}
+	\begin{tabular}{| p{3cm}| p{11cm} |}
 		\hline
 		\multicolumn{2}{|c|}{\textbf{HU-21} - Realizar test de Levene} \\ \hline
 		\textbf{Como:} & Cliente \\ \hline
-		\textbf{Me gustaría:} & poder subir en un fichero los resultados obtenidos por los algoritmos \\ \hline
+		\textbf{Me gustaría:} & poder realizar el test de Levene para ver si mis muestras de datos obtenidas por
+		los algoritmos están distribuidas de forma normal  \\ \hline
 		\textbf{Ya que:} & se trata de una prueba para determinar la homocedasticidad, condición requerida para aplicar correctamente un test paramétrico o no paramétrico en caso de que los datos no presenten homocedasticidad \\ \hline
-		\multirow{2}{12cm}{\textbf{C. Aceptación:}} & - La web muestra una sección para tests de condiciones paramétricas donde se puede aplicar la prueba de homocedasticidad de Levene \\
-		& - El test devuelve, el estadístico, el $p-valore$ y el resultado de la prueba \\ \hline
+		\multirow{2}{11cm}{\textbf{C. Aceptación:}} & - La plataforma muestra una sección para tests de condiciones paramétricas donde se puede aplicar la prueba de homocedasticidad de Levene \\
+		& - El test devuelve, el estadístico, el $p-valor$ y el resultado de la prueba \\ \hline
 		\textbf{\textbf{Prioridad:}} & alta \\ \hline
 	\end{tabular}
 \end{table}
@@ -407,14 +410,14 @@ Desglosando el Epic \textbf{EP-4:} Permitir realizar tests estadísticos no para
 Desglosando el Epic \textbf{EP-5:} Permitir gestionar un fichero, se obtienen las siguientes historias de usuario:
 
 \begin{table}[H]
-	\begin{tabular}{| p{3cm}| p{12cm} |}
+	\begin{tabular}{| p{3cm}| p{11cm} |}
 		\hline
-		\multicolumn{2}{|c|}{\textbf{HU-22} - Subir fichero} \\ \hline
+		\multicolumn{2}{|c|}{\textbf{HU-22} - Subir fichero de datos} \\ \hline
 		\textbf{Como:} & Cliente \\ \hline
-		\textbf{Me gustaría:} & poder subir en un fichero los resultados obtenidos por los algoritmos \\ \hline
+		\textbf{Me gustaría:} & poder subir en un fichero los resultados obtenidos por los algoritmos de aprendizaje \\ \hline
 		\textbf{Ya que:} & es la forma más cómoda de proporcionar los datos y realizar los tests sobre ellos \\ \hline
-		\multirow{2}{12cm}{\textbf{C. Aceptación:}} & - La web muestra en la página principal un botón para subir el fichero \\
-		& - En la parte superior de la web también hay disponible un botón para poder realizar la subida de datos \\ \hline
+		\multirow{2}{11cm}{\textbf{C. Aceptación:}} & - La plataforma muestra en la página principal un botón para subir el fichero \\
+		& - En la parte superior de la plataforma también hay disponible un botón para poder realizar la subida de datos \\ \hline
 		\textbf{\textbf{Prioridad:}} & alta \\ \hline
 	\end{tabular}
 \end{table}
@@ -422,14 +425,14 @@ Desglosando el Epic \textbf{EP-5:} Permitir gestionar un fichero, se obtienen la
 % *****************HISTORIA USUARIO 23***************** %
 
 \begin{table}[H]
-	\begin{tabular}{| p{3cm}| p{12cm} |}
+	\begin{tabular}{| p{3cm}| p{11cm} |}
 		\hline
-		\multicolumn{2}{|c|}{\textbf{HU-23} - Consultar fichero} \\ \hline
+		\multicolumn{2}{|c|}{\textbf{HU-23} - Consultar fichero de datos} \\ \hline
 		\textbf{Como:} & Cliente \\ \hline
 		\textbf{Me gustaría:} & poder consultar los datos de mi fichero de resultados obtenidos por los algoritmos \\ \hline
 		\textbf{Ya que:} & es una forma de poder visualizar los datos sin tener que abrir el fichero en el escritorio local \\ \hline
-		\multirow{2}{12cm}{\textbf{C. Aceptación:}} & - La web en la parte superior muestra un botón para consultar el fichero en caso de que se haya subido uno previamente \\
-		& - Al subir un fichero, la web redirige automáticamente a la página de visualización del archivo \\ \hline
+		\multirow{2}{11cm}{\textbf{C. Aceptación:}} & - La plataforma en la parte superior muestra un botón para consultar el fichero en caso de que se haya subido uno previamente \\
+		& - Al subir un fichero, la plataforma redirige automáticamente a la página de visualización del archivo \\ \hline
 		\textbf{\textbf{Prioridad:}} & media \\ \hline
 	\end{tabular}
 \end{table}
@@ -439,13 +442,13 @@ Desglosando el Epic \textbf{EP-5:} Permitir gestionar un fichero, se obtienen la
 Desglosando el Epic \textbf{EP-6:} Visualizar resultados tests, se obtienen las siguientes historias de usuario:
 
 \begin{table}[H]
-	\begin{tabular}{| p{3cm}| p{12cm} |}
+	\begin{tabular}{| p{3cm}| p{11cm} |}
 		\hline
-		\multicolumn{2}{|c|}{\textbf{HU-24} - Visualizar resultados} \\ \hline
+		\multicolumn{2}{|c|}{\textbf{HU-24} - Visualizar resultados de los test} \\ \hline
 		\textbf{Como:} & Cliente \\ \hline
 		\textbf{Me gustaría:} & poder ver los resultados en forma de tabla señalando el lugar concreto de la tabla por donde se pasa el ratón \\ \hline
 		\textbf{Ya que:} & de esta forma, la lectura de resultados será más simple \\ \hline
-		\multirow{2}{12cm}{\textbf{C. Aceptación:}} & - Los resultados se muestran en forma de tabla, teniendo en la primera fila de las columnas el nombre que identifica a los datos de la columna \\
+		\multirow{2}{11cm}{\textbf{C. Aceptación:}} & - Los resultados se muestran en forma de tabla, teniendo en la primera fila de las columnas el nombre que identifica a los datos de la columna \\
 		& - Cuando se pasa el ratón por un elemento de la tabla, toda la fila se destaca para poder visualizar mejor los datos relacionados \\ \hline
 		\textbf{\textbf{Prioridad:}} & alta \\ \hline
 	\end{tabular}
@@ -454,13 +457,13 @@ Desglosando el Epic \textbf{EP-6:} Visualizar resultados tests, se obtienen las 
 % *****************HISTORIA USUARIO 25***************** %
 
 \begin{table}[H]
-	\begin{tabular}{| p{3cm}| p{12cm} |}
+	\begin{tabular}{| p{3cm}| p{11cm} |}
 		\hline
 		\multicolumn{2}{|c|}{\textbf{HU-25} - Exportar resultados csv} \\ \hline
 		\textbf{Como:} & Cliente \\ \hline
 		\textbf{Me gustaría:} & poder exportar los resultados a fichero en formato csv \\ \hline
 		\textbf{Ya que:} & así puedo guardar de forma automática los resultados en local en un formato sencillo y legible \\ \hline
-		\multirow{2}{12cm}{\textbf{C. Aceptación:}} & - Cuando se muestran los resultados en una tabla encima de ésta aparece un botón para exportar a formato csv \\
+		\multirow{2}{11cm}{\textbf{C. Aceptación:}} & - Cuando se muestran los resultados en una tabla encima de ésta aparece un botón para exportar a formato csv \\
 		& - En caso de que se aplique un test de comparación POST-HOC también se incluirá un botón para exportar a csv los resultados de éste \\ \hline
 		\textbf{\textbf{Prioridad:}} & media \\ \hline
 	\end{tabular}
@@ -469,13 +472,13 @@ Desglosando el Epic \textbf{EP-6:} Visualizar resultados tests, se obtienen las 
 % *****************HISTORIA USUARIO 26***************** %
 
 \begin{table}[H]
-	\begin{tabular}{| p{3cm}| p{12cm} |}
+	\begin{tabular}{| p{3cm}| p{11cm} |}
 		\hline
 		\multicolumn{2}{|c|}{\textbf{HU-26} - Exportar resultados \LaTeX} \\ \hline
 		\textbf{Como:} & Cliente \\ \hline
 		\textbf{Me gustaría:} & poder exportar los resultados a fichero en formato \LaTeX \\ \hline
 		\textbf{Ya que:} & así puedo guardar de forma automática los resultados para luego poder utilizarlos en un documento de \LaTeX sin necesidad de crear manualmente un tabla \\ \hline
-		\multirow{2}{12cm}{\textbf{C. Aceptación:}} & - Cuando se muestran los resultados en una tabla encima de ésta aparece un botón para exportar a formato \LaTeX \\
+		\multirow{2}{11cm}{\textbf{C. Aceptación:}} & - Cuando se muestran los resultados en una tabla encima de ésta aparece un botón para exportar a formato \LaTeX \\
 		& - En caso de que se aplique un test de comparación POST-HOC también se incluirá un botón para exportar a \LaTeX los resultados de éste \\ \hline
 		\textbf{\textbf{Prioridad:}} & media \\ \hline
 	\end{tabular}
@@ -486,7 +489,7 @@ Desglosando el Epic \textbf{EP-6:} Visualizar resultados tests, se obtienen las 
 Desglosando el Epic \textbf{EP-7:} Permitir modificar opciones de los tests, se obtienen las siguientes historias de usuario:
 
 \begin{table}[H]
-	\begin{tabular}{| p{3cm}| p{12cm} |}
+	\begin{tabular}{| p{3cm}| p{11cm} |}
 		\hline
 		\multicolumn{2}{|c|}{\textbf{HU-27} - Seleccionar nivel de significancia} \\ \hline
 		\textbf{Como:} & Cliente \\ \hline
@@ -500,7 +503,7 @@ Desglosando el Epic \textbf{EP-7:} Permitir modificar opciones de los tests, se 
 % *****************HISTORIA USUARIO 28***************** %
 
 \begin{table}[H]
-	\begin{tabular}{| p{3cm}| p{12cm} |}
+	\begin{tabular}{| p{3cm}| p{11cm} |}
 		\hline
 		\multicolumn{2}{|c|}{\textbf{HU-28} - Seleccionar función objetivo} \\ \hline
 		\textbf{Como:} & Cliente \\ \hline
@@ -513,16 +516,17 @@ Desglosando el Epic \textbf{EP-7:} Permitir modificar opciones de los tests, se 
 
 % *****************HISTORIA USUARIO 29***************** %
 
+\clearpage
 Desglosando el Epic \textbf{EP-8:} Proporcionar una interfaz usable, se obtienen las siguientes historias de usuario:
 
 \begin{table}[H]
-	\begin{tabular}{| p{3cm}| p{12cm} |}
+	\begin{tabular}{| p{3cm}| p{11cm} |}
 		\hline
 		\multicolumn{2}{|c|}{\textbf{HU-29} - Ver ayuda} \\ \hline
 		\textbf{Como:} & Cliente \\ \hline
-		\textbf{Me gustaría:} & poder acceder a la ayuda de la web \\ \hline
+		\textbf{Me gustaría:} & poder acceder a la ayuda de la plataforma \\ \hline
 		\textbf{Ya que:} & siempre es útil tener un acceso a información que puede ayudar a entender mejor los tests, y los conceptos relacionados con los resultados obtenidos, etc. \\ \hline
-		\multirow{2}{12cm}{\textbf{C. Aceptación:}} & - En la parte superior derecha de la web aparece un botón para acceder a la ayuda \\
+		\multirow{2}{11cm}{\textbf{C. Aceptación:}} & - En la parte superior derecha de la plataforma aparece un botón para acceder a la ayuda \\
 		& - En los lugares donde sea preciso (en el panel de subida de fichero, en los tests, etc.) hay disponible un enlace al concepto relacionado en la ayuda \\ \hline
 		\textbf{\textbf{Prioridad:}} & media \\ \hline
 	\end{tabular}
@@ -531,7 +535,7 @@ Desglosando el Epic \textbf{EP-8:} Proporcionar una interfaz usable, se obtienen
 % *****************HISTORIA USUARIO 30***************** %
 
 \begin{table}[H]
-	\begin{tabular}{| p{3cm}| p{12cm} |}
+	\begin{tabular}{| p{3cm}| p{11cm} |}
 		\hline
 		\multicolumn{2}{|c|}{\textbf{HU-30} - Recordar test de ranking} \\ \hline
 		\textbf{Como:} & Cliente \\ \hline
@@ -545,13 +549,13 @@ Desglosando el Epic \textbf{EP-8:} Proporcionar una interfaz usable, se obtienen
 % *****************HISTORIA USUARIO 31***************** %
 
 \begin{table}[H]
-	\begin{tabular}{| p{3cm}| p{12cm} |}
+	\begin{tabular}{| p{3cm}| p{11cm} |}
 		\hline
 		\multicolumn{2}{|c|}{\textbf{HU-31} - Avisar condiciones paramétricas} \\ \hline
 		\textbf{Como:} & Cliente \\ \hline
-		\textbf{Me gustaría:} & que la web me diese un aviso en caso de que intente aplicar un test paramétrico sin haber hecho previamente las condiciones paramétricas \\ \hline
+		\textbf{Me gustaría:} & que la plataforma me diese un aviso en caso de que intente aplicar un test paramétrico sin haber hecho previamente las condiciones paramétricas \\ \hline
 		\textbf{Ya que:} & aplicar un test paramétrico sobre datos que no siguen las suposiciones paramétricas no da resultados fiables \\ \hline
-		\multirow{2}{12cm}{\textbf{C. Aceptación:}} & - la web da un aviso si se intenta hacer un test paramétrico sin haber comprobado antes las condiciones sobre esos datos \\
+		\multirow{2}{11cm}{\textbf{C. Aceptación:}} & - la plataforma da un aviso si se intenta hacer un test paramétrico sin haber comprobado antes las condiciones sobre esos datos \\
 		& - No se impide hacer el test si así lo desea el usuario \\ \hline
 		\textbf{\textbf{Prioridad:}} & media \\ \hline
 	\end{tabular}
@@ -560,7 +564,7 @@ Desglosando el Epic \textbf{EP-8:} Proporcionar una interfaz usable, se obtienen
 % *****************HISTORIA USUARIO 32***************** %
 
 \begin{table}[H]
-	\begin{tabular}{| p{3cm}| p{12cm} |}
+	\begin{tabular}{| p{3cm}| p{11cm} |}
 		\hline
 		\multicolumn{2}{|c|}{\textbf{HU-32} - Ver breve información tests} \\ \hline
 		\textbf{Como:} & Cliente \\ \hline
@@ -574,7 +578,7 @@ Desglosando el Epic \textbf{EP-8:} Proporcionar una interfaz usable, se obtienen
 % *****************HISTORIA USUARIO 33***************** %
 
 \begin{table}[H]
-	\begin{tabular}{| p{3cm}| p{12cm} |}
+	\begin{tabular}{| p{3cm}| p{11cm} |}
 		\hline
 		\multicolumn{2}{|c|}{\textbf{HU-33} - Enlazar ficheros de ejemplo} \\ \hline
 		\textbf{Como:} & Cliente \\ \hline
@@ -588,13 +592,13 @@ Desglosando el Epic \textbf{EP-8:} Proporcionar una interfaz usable, se obtienen
 % *****************HISTORIA USUARIO 34***************** %
 
 \begin{table}[H]
-	\begin{tabular}{| p{3cm}| p{12cm} |}
+	\begin{tabular}{| p{3cm}| p{11cm} |}
 		\hline
 		\multicolumn{2}{|c|}{\textbf{HU-34} - Aplicación en diferentes pestañas del navegador} \\ \hline
 		\textbf{Como:} & Cliente \\ \hline
-		\textbf{Me gustaría:} & poder utilizar de forma independiente la web en diferentes pestañas del navegador \\ \hline
+		\textbf{Me gustaría:} & poder utilizar de forma independiente la plataforma en diferentes pestañas del navegador \\ \hline
 		\textbf{Ya que:} & así puedo estar trabajando a la vez con diferentes archivos \\ \hline
-		\textbf{C. Aceptación:} & - La web puede operar independientemente en diferentes pestañas con diferentes archivos de datos \\ \hline
+		\textbf{C. Aceptación:} & - La plataforma puede operar independientemente en diferentes pestañas con diferentes archivos de datos \\ \hline
 		\textbf{\textbf{Prioridad:}} & alta \\ \hline
 	\end{tabular}
 \end{table}
@@ -602,13 +606,13 @@ Desglosando el Epic \textbf{EP-8:} Proporcionar una interfaz usable, se obtienen
 % *****************HISTORIA USUARIO 35***************** %
 
 \begin{table}[H]
-	\begin{tabular}{| p{3cm}| p{12cm} |}
+	\begin{tabular}{| p{3cm}| p{11cm} |}
 		\hline
 		\multicolumn{2}{|c|}{\textbf{HU-35} - Diseño adaptable} \\ \hline
 		\textbf{Como:} & Cliente \\ \hline
-		\textbf{Me gustaría:} & poder utilizar la web en dispositivos pequeños \\ \hline
-		\textbf{Ya que:} & esto haría la web más usable y podría trabajar en más dispositivos, como una tableta o móvil \\ \hline
-		\textbf{C. Aceptación:} & - El diseño de la web se adapta a dispositivos cuya resolución es más baja de los normal \\ \hline
+		\textbf{Me gustaría:} & poder utilizar la plataforma en dispositivos pequeños \\ \hline
+		\textbf{Ya que:} & esto haría la plataforma más usable y podría trabajar en más dispositivos, como una tableta o móvil \\ \hline
+		\textbf{C. Aceptación:} & - El diseño de la plataforma se adapta a dispositivos cuya resolución es más baja de los normal \\ \hline
 		\textbf{\textbf{Prioridad:}} & media \\ \hline
 	\end{tabular}
 \end{table}
@@ -616,13 +620,13 @@ Desglosando el Epic \textbf{EP-8:} Proporcionar una interfaz usable, se obtienen
 % *****************HISTORIA USUARIO 36***************** %
 
 \begin{table}[H]
-	\begin{tabular}{| p{3cm}| p{12cm} |}
+	\begin{tabular}{| p{3cm}| p{11cm} |}
 		\hline
 		\multicolumn{2}{|c|}{\textbf{HU-36} - Idioma} \\ \hline
 		\textbf{Como:} & Cliente \\ \hline
-		\textbf{Me gustaría:} & que el lenguaje de la aplicación fuese el inglés \\ \hline
-		\textbf{Ya que:} & esto haría que la aplicación fuese utilizada por más personas \\ \hline
-		\textbf{C. Aceptación:} & - Los textos de la web están escritos en inglés \\ \hline
+		\textbf{Me gustaría:} & que el idioma de la aplicación fuese el inglés \\ \hline
+		\textbf{Ya que:} & esto haría que la aplicación fuese mas fácilmente divulgable y potencialmente utilizada por más personas \\ \hline
+		\textbf{C. Aceptación:} & - Los textos de la plataforma están escritos en inglés \\ \hline
 		\textbf{\textbf{Prioridad:}} & baja \\ \hline
 	\end{tabular}
 \end{table}
@@ -630,13 +634,13 @@ Desglosando el Epic \textbf{EP-8:} Proporcionar una interfaz usable, se obtienen
 % *****************HISTORIA USUARIO 37***************** %
 
 \begin{table}[H]
-	\begin{tabular}{| p{3cm}| p{12cm} |}
+	\begin{tabular}{| p{3cm}| p{11cm} |}
 		\hline
 		\multicolumn{2}{|c|}{\textbf{HU-37} - Flujo de trabajo} \\ \hline
 		\textbf{Como:} & Cliente \\ \hline
-		\textbf{Me gustaría:} & poder visualizar el flujo de trabajo al entrar en la web \\ \hline
+		\textbf{Me gustaría:} & poder visualizar el flujo de trabajo de la aplicación de los tests al entrar en la plataforma \\ \hline
 		\textbf{Ya que:} & esto me permitiría tener a primera vista una referencia clara de los pasos que debo seguir y las cosas que puedo hacer \\ \hline
-		\multirow{2}{12cm}{\textbf{C. Aceptación:}} & - La página principal de la web muestra el flujo de trabajo a través una imagen donde se detalla de forma esquemática el flujo \\
+		\multirow{2}{11cm}{\textbf{C. Aceptación:}} & - La página principal de la plataforma muestra el flujo de trabajo a través una imagen donde se detalla de forma esquemática el flujo \\
 		& - En la página principal se muestra un botón para subir un fichero, primer paso del flujo de trabajo \\ \hline
 		\textbf{\textbf{Prioridad:}} & baja \\ \hline
 	\end{tabular}

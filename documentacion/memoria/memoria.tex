@@ -5,7 +5,7 @@
 \usepackage{graphicx}
 \usepackage{subfigure}
 \usepackage[hidelinks]{hyperref}
-\usepackage[right=2.5cm]{geometry}
+\usepackage[hmarginratio=1:1]{geometry}
 \usepackage{multirow}
 \usepackage{float}
 
@@ -28,11 +28,14 @@
 \pagenumbering{arabic}
 \setcounter{page}{1}
 \pagestyle{headings}
+\setlength{\parskip}{3mm}
 \include{capitulos/introduccion}
 \cleardoublepage
 \include{capitulos/contrasteh}
 \cleardoublepage
 \include{capitulos/analisisreq}
+\cleardoublepage
+\include{capitulos/gestionproy}
 \cleardoublepage
 
 % Aquí empiezan los apéndices.
