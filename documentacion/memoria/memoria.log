@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2014.4.28)  30 JUL 2014 12:06
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2014.4.28)  7 AUG 2014 22:49
 entering extended mode
 **memoria.tex
 (C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\memoria.tex
@@ -471,6 +471,8 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 )
 (C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\memoria.aux
 (C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\capitulos/titulo.aux)
+(C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\capitulos/agradecimien
+tos.aux)
 (C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\capitulos/introduccion
 .aux)
 (C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\capitulos/contrasteh.a
@@ -622,7 +624,20 @@ s been already used, duplicate ignored
 <to be read again> 
                    \relax 
 l.32 \include{capitulos/introduccion}
-                                      [2]
+                                      [2]pdfTeX warning (ext4): destination wit
+h the same identifier (name{page.3}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.32 \include{capitulos/introduccion}
+                                      [3]pdfTeX warning (ext4): destination wit
+h the same identifier (name{page.4}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.33 \cleardoublepage
+                      [4
+
+
+]
 (C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\capitulos/contrasteh.t
 ex
 Cap\'{\i }tulo 2.
@@ -637,52 +652,41 @@ Underfull \hbox (badness 10000) in paragraph at lines 11--16
  []
 
 
-Underfull \vbox (badness 7362) has occurred while \output is active []
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
-pdfTeX warning (ext4): destination with the same identifier (name{page.3}) has 
-been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.38 \begin{center}
-                    [3
+ [5
 
 
-
-
-]pdfTeX warning (ext4): destination with the same identifier (name{page.4}) has
- been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.81 \begin{center}
-                    [4] <figuras/pdf_normal.png, id=261, 803.0pt x 602.25pt>
+]
+[6] <figuras/pdf_normal.png, id=273, 803.0pt x 602.25pt>
 File: figuras/pdf_normal.png Graphic file (type png)
 
 <use figuras/pdf_normal.png>
-Package pdftex.def Info: figuras/pdf_normal.png used on input line 113.
+Package pdftex.def Info: figuras/pdf_normal.png used on input line 112.
 (pdftex.def)             Requested size: 142.25475pt x 85.35284pt.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 113.
+(Font)              <8> on input line 112.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 113.
+(Font)              <6> on input line 112.
 
-<figuras/pdf_chi_cuadrado.png, id=262, 338.76563pt x 253.69781pt>
+<figuras/pdf_chi_cuadrado.png, id=274, 338.76563pt x 253.69781pt>
 File: figuras/pdf_chi_cuadrado.png Graphic file (type png)
 
 <use figuras/pdf_chi_cuadrado.png>
-Package pdftex.def Info: figuras/pdf_chi_cuadrado.png used on input line 116.
+Package pdftex.def Info: figuras/pdf_chi_cuadrado.png used on input line 115.
 (pdftex.def)             Requested size: 142.26508pt x 85.35802pt.
 
-<figuras/pdf_f.png, id=264, 192.72pt x 144.54pt>
+<figuras/pdf_f.png, id=276, 192.72pt x 144.54pt>
 File: figuras/pdf_f.png Graphic file (type png)
  <use figuras/pdf_f.png>
-Package pdftex.def Info: figuras/pdf_f.png used on input line 122.
+Package pdftex.def Info: figuras/pdf_f.png used on input line 121.
 (pdftex.def)             Requested size: 142.26355pt x 85.35724pt.
 
-<figuras/pdf_t_student.jpg, id=265, 451.6875pt x 278.03876pt>
+<figuras/pdf_t_student.jpg, id=277, 451.6875pt x 278.03876pt>
 File: figuras/pdf_t_student.jpg Graphic file (type jpg)
 
 <use figuras/pdf_t_student.jpg>
-Package pdftex.def Info: figuras/pdf_t_student.jpg used on input line 125.
+Package pdftex.def Info: figuras/pdf_t_student.jpg used on input line 124.
 (pdftex.def)             Requested size: 142.26163pt x 85.35957pt.
 
 
@@ -691,10 +695,10 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[5]
+[7]
 Underfull \vbox (badness 1097) has occurred while \output is active []
 
- [6pdfTeX warning (ext4): destination with the same identifier (name{figure.2.1
+ [8pdfTeX warning (ext4): destination with the same identifier (name{figure.2.1
 }) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
@@ -704,148 +708,134 @@ l.164
 mal.png> <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/pdf_c
 hi_cuadrado.png> <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figur
 as/pdf_f.png> <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/
-pdf_t_student.jpg>] <figuras/tipos_error.png, id=289, 301.125pt x 85.06781pt>
+pdf_t_student.jpg>] <figuras/tipos_error.png, id=300, 301.125pt x 85.06781pt>
 File: figuras/tipos_error.png Graphic file (type png)
 
 <use figuras/tipos_error.png>
-Package pdftex.def Info: figuras/tipos_error.png used on input line 179.
+Package pdftex.def Info: figuras/tipos_error.png used on input line 178.
 (pdftex.def)             Requested size: 199.17502pt x 56.90556pt.
- [7pdfTeX warning (ext4): destination with the same identifier (name{figure.2.2
+ [9pdfTeX warning (ext4): destination with the same identifier (name{figure.2.2
 }) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.183 \newpage
-               <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras
-/tipos_error.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 225--229
+l.207 
+       <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/tipos_e
+rror.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 223--227
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 225--229
+Underfull \hbox (badness 10000) in paragraph at lines 223--227
 
  []
 
-[8] <figuras/test_unilateral_izq.png, id=301, 555.07375pt x 554.07pt>
+<figuras/test_unilateral_izq.png, id=308, 555.07375pt x 554.07pt>
 File: figuras/test_unilateral_izq.png Graphic file (type png)
 
 <use figuras/test_unilateral_izq.png>
-Package pdftex.def Info: figuras/test_unilateral_izq.png used on input line 255
+Package pdftex.def Info: figuras/test_unilateral_izq.png used on input line 253
 .
 (pdftex.def)             Requested size: 142.26608pt x 85.35579pt.
 
-<figuras/test_unilateral_der.png, id=302, 555.07375pt x 554.07pt>
+<figuras/test_unilateral_der.png, id=309, 555.07375pt x 554.07pt>
 File: figuras/test_unilateral_der.png Graphic file (type png)
 
 <use figuras/test_unilateral_der.png>
-Package pdftex.def Info: figuras/test_unilateral_der.png used on input line 257
+Package pdftex.def Info: figuras/test_unilateral_der.png used on input line 255
 .
 (pdftex.def)             Requested size: 142.26608pt x 85.35579pt.
 
-<figuras/test_bilateral.png, id=303, 555.07375pt x 554.07pt>
+<figuras/test_bilateral.png, id=310, 555.07375pt x 554.07pt>
 File: figuras/test_bilateral.png Graphic file (type png)
 
 <use figuras/test_bilateral.png>
-Package pdftex.def Info: figuras/test_bilateral.png used on input line 262.
+Package pdftex.def Info: figuras/test_bilateral.png used on input line 260.
 (pdftex.def)             Requested size: 142.26608pt x 85.35579pt.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <14.4> on input line 273.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 273.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 273.
-
-<figuras/critico.png, id=304, 416.30531pt x 415.5525pt>
+ [10]
+<figuras/critico.png, id=315, 416.30531pt x 415.5525pt>
 File: figuras/critico.png Graphic file (type png)
 
 <use figuras/critico.png>
-Package pdftex.def Info: figuras/critico.png used on input line 280.
+Package pdftex.def Info: figuras/critico.png used on input line 278.
 (pdftex.def)             Requested size: 142.26608pt x 85.35367pt.
- [9pdfTeX warning (ext4): destination with the same identifier (name{figure.2.3
-}) has been already used, duplicate ignored
+ [11pdfTeX warning (ext4): destination with the same identifier (name{figure.2.
+3}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.287 
-       <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/test_un
-ilateral_izq.png> <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figu
-ras/test_unilateral_der.png> <C:/Users/Adrián/Desktop/tfg/stac/documentacion/m
-emoria/figuras/test_bilateral.png>]
+l.286 L
+       a decisión de rechazar o aceptar la hipótesis nula, se puede determ...
+pdfTeX warning (ext4): destination with the same identifier (name{figure.2.4}) 
+has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.286 L
+       a decisión de rechazar o aceptar la hipótesis nula, se puede determ...
+ <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/test_unilater
+al_izq.png> <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/te
+st_unilateral_der.png> <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria
+/figuras/test_bilateral.png> <C:/Users/Adrián/Desktop/tfg/stac/documentacion/m
+emoria/figuras/critico.png>]
 File: figuras/pdf_chi_cuadrado.png Graphic file (type png)
  <use figuras/pdf_chi_cuadrado.png>
-Package pdftex.def Info: figuras/pdf_chi_cuadrado.png used on input line 312.
+Package pdftex.def Info: figuras/pdf_chi_cuadrado.png used on input line 310.
 (pdftex.def)             Requested size: 142.26508pt x 85.35802pt.
 
-<figuras/cdf_chi_cuadrado.png, id=320, 803.0pt x 602.25pt>
+<figuras/cdf_chi_cuadrado.png, id=334, 803.0pt x 602.25pt>
 File: figuras/cdf_chi_cuadrado.png Graphic file (type png)
 
 <use figuras/cdf_chi_cuadrado.png>
-Package pdftex.def Info: figuras/cdf_chi_cuadrado.png used on input line 314.
+Package pdftex.def Info: figuras/cdf_chi_cuadrado.png used on input line 312.
 (pdftex.def)             Requested size: 142.25475pt x 85.35284pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[10pdfTeX warning (ext4): destination with the same identifier (name{figure.2.4
-}) has been already used, duplicate ignored
+ [12pdfTeX warning (ext4): destination with the same identifier (name{figure.2.
+5}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.330 
-       <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/critico
-.png>] [11pdfTeX warning (ext4): destination with the same identifier (name{fig
-ure.2.5}) has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.359 \item L
-             a decisión de rechazar o aceptar la hipótesis nula, se puede ...
- <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/cdf_chi_cuadr
-ado.png>] <figuras/normalidad.jpg, id=347, 504.38437pt x 221.32687pt>
+l.332 
+       <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/cdf_chi
+_cuadrado.png>] [13]
+<figuras/normalidad.jpg, id=360, 504.38437pt x 221.32687pt>
 File: figuras/normalidad.jpg Graphic file (type jpg)
 
 <use figuras/normalidad.jpg>
-Package pdftex.def Info: figuras/normalidad.jpg used on input line 395.
+Package pdftex.def Info: figuras/normalidad.jpg used on input line 391.
 (pdftex.def)             Requested size: 256.07817pt x 85.358pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[12] <figuras/homocedasticidad.png, id=358, 526.96875pt x 292.84406pt>
-File: figuras/homocedasticidad.png Graphic file (type png)
-
-<use figuras/homocedasticidad.png>
-Package pdftex.def Info: figuras/homocedasticidad.png used on input line 431.
-(pdftex.def)             Requested size: 170.71602pt x 85.35603pt.
- [13pdfTeX warning (ext4): destination with the same identifier (name{figure.2.
+ [14pdfTeX warning (ext4): destination with the same identifier (name{figure.2.
 6}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.437 
-      pdfTeX warning (ext4): destination with the same identifier (name{figure.
-2.7}) has been already used, duplicate ignored
+l.411 \item \textbf
+                   {Kolmogorov–Smirnov:} realiza una prueba de bondad de a...
+ <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/normalidad.jp
+g>] <figuras/homocedasticidad.png, id=369, 526.96875pt x 292.84406pt>
+File: figuras/homocedasticidad.png Graphic file (type png)
+
+<use figuras/homocedasticidad.png>
+Package pdftex.def Info: figuras/homocedasticidad.png used on input line 429.
+(pdftex.def)             Requested size: 170.71602pt x 85.35603pt.
+ [15pdfTeX warning (ext4): destination with the same identifier (name{figure.2.
+7}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.437 
-       <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/normali
-dad.jpg> <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/homoc
-edasticidad.png>] [14] [15] [16] [17] [18] [19] [20] [21]) [22]
+l.454 \item H
+             ipótesis alternativa $H_1$: $\exists \quad \mu_j \neq \mu \qua...
+ <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/homocedastici
+dad.png>] [16] [17] [18] [19] [20] [21] [22] [23]) [24]
 (C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\capitulos/analisisreq.
 tex
 Cap\'{\i }tulo 3.
-[23
+[25
 
 
 
 
-] [24]
+] [26]
 Overfull \hbox (227.62204pt too wide) in paragraph at lines 73--73
 [][]| 
  []
@@ -873,7 +863,7 @@ Overfull \hbox (4.08488pt too wide) in paragraph at lines 98--107
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [25]
+ [27]
 Overfull \hbox (227.62204pt too wide) in paragraph at lines 118--118
 [][]| 
  []
@@ -911,7 +901,7 @@ Overfull \hbox (4.08488pt too wide) in paragraph at lines 163--174
 
 Underfull \vbox (badness 3000) has occurred while \output is active []
 
- [26]
+ [28]
 Overfull \hbox (227.62204pt too wide) in paragraph at lines 185--185
 [][]| 
  []
@@ -921,7 +911,7 @@ Overfull \hbox (4.08488pt too wide) in paragraph at lines 179--191
 [][] 
  []
 
-[27]
+[29]
 Overfull \hbox (227.62204pt too wide) in paragraph at lines 205--205
 [][]| 
  []
@@ -964,7 +954,7 @@ Overfull \hbox (4.08488pt too wide) in paragraph at lines 248--259
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [28
+ [30
 
 ]
 Overfull \hbox (227.62204pt too wide) in paragraph at lines 270--270
@@ -996,7 +986,7 @@ Overfull \hbox (4.08488pt too wide) in paragraph at lines 296--307
 [][] 
  []
 
-[29]
+[31]
 Overfull \hbox (227.62204pt too wide) in paragraph at lines 318--318
 [][]| 
  []
@@ -1019,7 +1009,7 @@ Overfull \hbox (4.08488pt too wide) in paragraph at lines 328--339
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [30]
+ [32]
 Overfull \hbox (227.62204pt too wide) in paragraph at lines 350--350
 [][]| 
  []
@@ -1039,7 +1029,7 @@ Overfull \hbox (4.08488pt too wide) in paragraph at lines 360--371
 [][] 
  []
 
-[31]
+[33]
 Overfull \hbox (227.62204pt too wide) in paragraph at lines 385--385
 [][]| 
  []
@@ -1059,7 +1049,7 @@ Overfull \hbox (4.08488pt too wide) in paragraph at lines 394--405
 [][] 
  []
 
-[32
+[34
 
 ]
 Overfull \hbox (227.62204pt too wide) in paragraph at lines 419--419
@@ -1104,7 +1094,7 @@ Overfull \hbox (4.08488pt too wide) in paragraph at lines 460--470
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [33]
+ [35]
 Overfull \hbox (227.62204pt too wide) in paragraph at lines 481--481
 [][]| 
  []
@@ -1124,7 +1114,7 @@ Overfull \hbox (4.08488pt too wide) in paragraph at lines 506--515
 [][] 
  []
 
-[34]
+[36]
 Overfull \hbox (227.62204pt too wide) in paragraph at lines 529--529
 [][]| 
  []
@@ -1159,7 +1149,7 @@ Overfull \hbox (4.08488pt too wide) in paragraph at lines 581--590
 [][] 
  []
 
-[35
+[37
 
 ]
 Overfull \hbox (4.08488pt too wide) in paragraph at lines 595--604
@@ -1189,77 +1179,77 @@ Overfull \hbox (4.08488pt too wide) in paragraph at lines 637--647
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [36])
-[37] [38
+ [38])
+[39] [40
 
 
 ]
 (C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\capitulos/gestionproy.
 tex
 Cap\'{\i }tulo 4.
-[39
+[41
 
 
 ]
-Overfull \hbox (4.0849pt too wide) in paragraph at lines 30--39
+Overfull \hbox (4.0849pt too wide) in paragraph at lines 29--38
 [][] 
  []
 
 
-Overfull \hbox (4.0849pt too wide) in paragraph at lines 46--54
+Overfull \hbox (4.0849pt too wide) in paragraph at lines 45--53
 [][] 
  []
 
 
-Overfull \hbox (4.0849pt too wide) in paragraph at lines 58--67
+Overfull \hbox (4.0849pt too wide) in paragraph at lines 57--66
 [][] 
  []
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [40]
-Overfull \hbox (4.0849pt too wide) in paragraph at lines 71--80
+ [42]
+Overfull \hbox (4.0849pt too wide) in paragraph at lines 70--79
 [][] 
  []
 
 
-Overfull \hbox (4.0849pt too wide) in paragraph at lines 84--93
+Overfull \hbox (4.0849pt too wide) in paragraph at lines 83--92
 [][] 
  []
 
-[41] <figuras/ciclos_desarrollo.png, id=516, 560.0925pt x 292.09125pt>
+[43] <figuras/ciclos_desarrollo.png, id=529, 560.0925pt x 292.09125pt>
 File: figuras/ciclos_desarrollo.png Graphic file (type png)
 
 <use figuras/ciclos_desarrollo.png>
-Package pdftex.def Info: figuras/ciclos_desarrollo.png used on input line 125.
+Package pdftex.def Info: figuras/ciclos_desarrollo.png used on input line 124.
 (pdftex.def)             Requested size: 341.44226pt x 170.72337pt.
- [42] [43pdfTeX warning (ext4): destination with the same identifier (name{figu
+ [44] [45pdfTeX warning (ext4): destination with the same identifier (name{figu
 re.4.1}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.142 
+l.141 
        <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/ciclos_
-desarrollo.png>] [44] <figuras/burndown.png, id=532, 642.4pt x 325.215pt>
+desarrollo.png>] [46] <figuras/burndown.png, id=544, 642.4pt x 325.215pt>
 File: figuras/burndown.png Graphic file (type png)
 
 <use figuras/burndown.png>
-Package pdftex.def Info: figuras/burndown.png used on input line 169.
+Package pdftex.def Info: figuras/burndown.png used on input line 168.
 (pdftex.def)             Requested size: 341.4408pt x 170.72058pt.
- [45pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
+ [47pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
 2}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.188 \section
+l.187 \section
               {Gestión de la configuración} <C:/Users/Adrián/Desktop/tfg/sta
-c/documentacion/memoria/figuras/burndown.png>] [46]) [47] [48
+c/documentacion/memoria/figuras/burndown.png>] [48]) [49] [50
 
 
 ]
 (C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\capitulos/bibliografia
-.tex) [49
+.tex) [51
 
 
 
@@ -1283,41 +1273,40 @@ aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 46.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 46.
 Package rerunfilecheck Info: File `memoria.out' has not changed.
-(rerunfilecheck)             Checksum: 39F2ED6242AAF1D59F2AE21450CBE26F;2471.
+(rerunfilecheck)             Checksum: 61A4AE07B0D4380800E42A842A7C7BC1;2459.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 46.
  ) 
 Here is how much of TeX's memory you used:
- 6843 strings out of 493921
- 101857 string characters out of 3144870
- 196973 words of memory out of 3000000
- 9851 multiletter control sequences out of 15000+200000
- 10519 words of font info for 36 fonts, out of 3000000 for 9000
+ 6847 strings out of 493921
+ 102053 string characters out of 3144870
+ 197639 words of memory out of 3000000
+ 9854 multiletter control sequences out of 15000+200000
+ 9911 words of font info for 34 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 29i,12n,33p,1339b,434s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 29i,12n,30p,1339b,430s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx10.pfb>
 <C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C
 :/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbxti10.pfb><C
 :/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C:
 /Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/P
 rogram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Pro
-gram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Progr
-am Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Program 
-Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Program Fil
-es (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files 
-(x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files (x8
-6)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Program Files (x86)/M
-iKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Program Files (x86)/MiKTe
-X 2.9/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Program Files (x86)/MiKTeX 2.
-9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files (x86)/MiKTeX 2.9/fo
-nts/type1/public/amsfonts/cm/cmsl10.pfb><C:/Program Files (x86)/MiKTeX 2.9/font
-s/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/
-type1/public/amsfonts/cm/cmsy5.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/typ
-e1/public/amsfonts/cm/cmsy7.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/
-public/amsfonts/cm/cmti10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/pu
-blic/amsfonts/cm/cmti8.pfb>
-Output written on memoria.pdf (57 pages, 837489 bytes).
+gram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Progra
+m Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Program F
+iles (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program File
+s (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files (
+x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Program Files (x86)
+/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Program Files (x86)/MiK
+TeX 2.9/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Program Files (x86)/MiKTeX 
+2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files (x86)/MiKTeX 2.9/
+fonts/type1/public/amsfonts/cm/cmsl10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fo
+nts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files (x86)/MiKTeX 2.9/font
+s/type1/public/amsfonts/cm/cmsy5.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/t
+ype1/public/amsfonts/cm/cmsy7.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type
+1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/p
+ublic/amsfonts/cm/cmti10.pfb>
+Output written on memoria.pdf (59 pages, 832869 bytes).
 PDF statistics:
- 664 PDF objects out of 1000 (max. 8388607)
- 157 named destinations out of 1000 (max. 500000)
+ 673 PDF objects out of 1000 (max. 8388607)
+ 158 named destinations out of 1000 (max. 500000)
  348 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -1,23 +1,23 @@
 \select@language {spanish}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Distribuci\IeC {\'o}n normal con media $\mu $ y varianza $\sigma ^2$.}}}{6}{subfigure.2.1.2}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Distribuci\IeC {\'o}n $\chi ^2$ con $K$ grados de libertad.}}}{6}{subfigure.2.1.2}
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Distribuciones de probabilidad.}}{6}{figure.2.1}
-\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Distribuci\IeC {\'o}n \textit {f} con $d1$ y $d2$ grados de libertad.}}}{6}{figure.2.1}
-\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {Distribuci\IeC {\'o}n \textit {t} con $K$ grados de libertad.}}}{6}{figure.2.1}
-\contentsline {figure}{\numberline {2.2}{\ignorespaces Decisiones y tipos de error.}}{7}{figure.2.2}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Test unilateral. Cola a la izquierda.}}}{9}{subfigure.2.3.2}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Test unilateral. Cola a la derecha.}}}{9}{subfigure.2.3.2}
-\contentsline {figure}{\numberline {2.3}{\ignorespaces Regiones de aceptaci\IeC {\'o}n y rechazo.}}{9}{figure.2.3}
-\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Test bilateral o de dos colas.}}}{9}{figure.2.3}
-\contentsline {figure}{\numberline {2.4}{\ignorespaces Punto cr\IeC {\'\i }tico.}}{10}{figure.2.4}
-\contentsline {figure}{\numberline {2.5}{\ignorespaces Comparativa FDP y FDA.}}{11}{figure.2.5}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Funci\IeC {\'o}n de densidad de probabilidad.}}}{11}{figure.2.5}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Funci\IeC {\'o}n de distribuci\IeC {\'o}n acumulada.}}}{11}{figure.2.5}
-\contentsline {figure}{\numberline {2.6}{\ignorespaces Normalidad VS No normalidad.}}{13}{figure.2.6}
-\contentsline {figure}{\numberline {2.7}{\ignorespaces Homocedasticidad VS Heterocedasticidad.}}{13}{figure.2.7}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Distribuci\IeC {\'o}n $\mathcal {N}$ con media $\mu $ y varianza $\sigma ^2$.}}}{8}{subfigure.2.1.2}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Distribuci\IeC {\'o}n $\chi ^2$ con $K$ grados de libertad.}}}{8}{subfigure.2.1.2}
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Distribuciones de probabilidad.}}{8}{figure.2.1}
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Distribuci\IeC {\'o}n $\mathcal {F}$ con $d1$ y $d2$ grados de libertad.}}}{8}{figure.2.1}
+\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {Distribuci\IeC {\'o}n $\mathcal {T}$ con $K$ grados de libertad.}}}{8}{figure.2.1}
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Decisiones y tipos de error.}}{9}{figure.2.2}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Test unilateral. Cola a la izquierda.}}}{11}{subfigure.2.3.2}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Test unilateral. Cola a la derecha.}}}{11}{subfigure.2.3.2}
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Regiones de aceptaci\IeC {\'o}n y rechazo.}}{11}{figure.2.3}
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Test bilateral o de dos colas.}}}{11}{figure.2.3}
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Punto cr\IeC {\'\i }tico.}}{11}{figure.2.4}
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Comparativa entre FDP y FDA.}}{12}{figure.2.5}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Funci\IeC {\'o}n de densidad de probabilidad.}}}{12}{figure.2.5}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Funci\IeC {\'o}n de distribuci\IeC {\'o}n acumulada.}}}{12}{figure.2.5}
+\contentsline {figure}{\numberline {2.6}{\ignorespaces Normalidad vs. No normalidad.}}{14}{figure.2.6}
+\contentsline {figure}{\numberline {2.7}{\ignorespaces Homocedasticidad vs. Heterocedasticidad.}}{15}{figure.2.7}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Ciclos de desarrollo.}}{43}{figure.4.1}
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Ejemplo gr\IeC {\'a}fico Burn-Down.}}{45}{figure.4.2}
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Ciclos de desarrollo.}}{45}{figure.4.1}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Ejemplo gr\IeC {\'a}fico Burn-Down.}}{47}{figure.4.2}
