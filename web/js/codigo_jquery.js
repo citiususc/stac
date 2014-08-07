@@ -446,24 +446,111 @@ function exportTableToCSV($table, filename) {
         // Data URI
         csvData = 'data:application/csv;charset=utf-8,' + encodeURIComponent(csv);
 
-    $(this)
-        .attr({
-        'download': filename,
+    if(navigator.appName == 'Microsoft Internet Explorer'){
+        var generator = window.open(filename, 'csv', 'height=400,width=600');
+        generator.document.write('<html><head><title>CSV</title>');
+        generator.document.write('</head><body >');
+        generator.document.write('<textArea cols=70 rows=15 wrap="off" >');
+        generator.document.write(csv);
+        generator.document.write('</textArea>');
+        generator.document.write('</body></html>');
+        generator.document.close();
+    }
+    else{
+        $(this).attr({
+            'download': filename,
             'href': csvData,
             'target': '_blank'
-    });
+        });
+    }
+}
+
+//Función para exportar archivos .tex
+function exportTableToLaTeX($table, filename) {
+
+    /*Función para repetir un string un determinado número de veces.*/
+    String.prototype.repeat = function (n, d) {
+        return --n ? this + (d || "") + this.repeat(n, d) : "" + this;
+    };
+
+    var $firstrow = $table.find('tr:has(th)'),
+
+        // Temporary delimiter characters unlikely to be typed by keyboard
+        // This is to avoid accidentally splitting the actual contents
+        tmpColDelim = String.fromCharCode(11), // vertical tab character
+        tmpRowDelim = String.fromCharCode(0), // null character
+
+        // Actual delimiter characters for LaTeX format
+        colDelim = "&",
+        rowDelim = "\\\\\n",
+
+        /*Primera línea de la tabla LaTeX.*/
+        latex = "\\begin{tabular}{"+"c".repeat($firstrow.find('th').length,"|")+"}\n",
+
+        latex = latex + $firstrow.map(function (i, row) {
+            var $row = $(row),
+                $cols = $row.find('th');
+            return $cols.map(function (j, col) {
+                var $col = $(col),
+                    text = $col.text();
+                return text;
+            }).get().join(tmpColDelim);
+        }).get().join(tmpRowDelim)
+                .split(tmpRowDelim).join(rowDelim)
+                .split(tmpColDelim).join(colDelim);
+
+        latex = latex + "\\\\\n\\hline\n",
+
+        /*Resto de líneas de la tabla LaTeX.*/
+        $rows = $table.find('tr:has(td)'),
+
+        latex = latex + $rows.map(function (i, row) {
+            var $row = $(row),
+                $cols = $row.find('td');
+            return $cols.map(function (j, col) {
+                var $col = $(col),
+                    text = $col.text();
+                return text;
+            }).get().join(tmpColDelim);
+        }).get().join(tmpRowDelim)
+                .split(tmpRowDelim).join(rowDelim)
+                .split(tmpColDelim).join(colDelim);
+
+        /*Última línea de la tabla LaTeX.*/
+        latex = latex + "\n\\end{tabular}",
+
+        // Data URI
+        latexData = 'data:application/octet-stream;charset=utf-8,' + encodeURIComponent(latex);
+
+    if(navigator.appName == 'Microsoft Internet Explorer'){
+        var generator = window.open(filename, 'latex', 'height=400,width=600');
+        generator.document.write('<html><head><title>LaTeX</title>');
+        generator.document.write('</head><body >');
+        generator.document.write('<textArea cols=70 rows=15 wrap="off" >');
+        generator.document.write(latex);
+        generator.document.write('</textArea>');
+        generator.document.write('</body></html>');
+        generator.document.close();
+    }
+    else{
+        $(this).attr({
+            'download': filename,
+            'href': latexData,
+            'target': '_blank'
+        });
+    }
 }
 
 //Función javascript para generar la tabla de resultados para los tests paramétricos de Anova y T-test.
 function generar_tabla_parametricos(data,test) {
 
-    var salida = "<div class=\"table-responsive\"><br>";
+    var salida = "<div id=\"parametricos\" class=\"table-responsive\"><br>";
 
-    //Botón para exportar a .csv
+    //Botón para exportar a .csv y a .tex
     if(test == "anova")
-        salida = salida + "<a href=\"#\" onclick=\"exportTableToCSV.apply(this, [$('table'), 'anova.csv'])\"><button class=\"btn btn-default\">Exportar csv</button></a>";
+        salida = salida + "<a href=\"#\" onclick=\"exportTableToCSV.apply(this, [$('#parametricos'), 'anova_test.csv'])\"><button class=\"btn btn-default\">Export to csv</button></a>&nbsp;&nbsp;<a href=\"#\" onclick=\"exportTableToLaTeX.apply(this, [$('#parametricos'), 'anova_test.tex'])\"><button class=\"btn btn-default\">Export to LaTeX</button></a>";
     else
-        salida = salida + "<a href=\"#\" onclick=\"exportTableToCSV.apply(this, [$('table'), 'ttest.csv'])\"><button class=\"btn btn-default\">Exportar csv</button></a>";
+        salida = salida + "<a href=\"#\" onclick=\"exportTableToCSV.apply(this, [$('#parametricos'), 'ttest.csv'])\"><button class=\"btn btn-default\">Export to csv</button></a>&nbsp;&nbsp;<a href=\"#\" onclick=\"exportTableToLaTeX.apply(this, [$('#parametricos'), 'ttest.tex'])\"><button class=\"btn btn-default\">Export to LaTeX</button></a>";
 
     salida = salida + "<br><br><table class=\"table table-hover\">";
 
@@ -492,8 +579,8 @@ function generar_tabla_levene(data) {
 
     var salida = "<div class=\"table-responsive\"><br>";
 
-    //Botón para exportar a .csv
-    salida = salida + "<a href=\"#\" onclick=\"exportTableToCSV.apply(this, [$('table'), 'levene_test.csv'])\"><button class=\"btn btn-default\">Exportar csv</button></a>";
+    //Botón para exportar a .csv y a .tex
+    salida = salida + "<a href=\"#\" onclick=\"exportTableToCSV.apply(this, [$('table'), 'levene_test.csv'])\"><button class=\"btn btn-default\">Export to csv</button></a>&nbsp;&nbsp;<a href=\"#\" onclick=\"exportTableToLaTeX.apply(this, [$('table'), 'levene_test.tex'])\"><button class=\"btn btn-default\">Export to LaTeX</button></a>";
 
     salida = salida + "<br><br><table class=\"table table-hover\"><thead>";
     salida = salida + "<tr><th>Estadístico W</th><th>p-valor</th><th>Resultado</th></tr></thead>";
@@ -514,8 +601,8 @@ function generar_tabla_normalidad(data, test) {
 
     var salida = "<div class=\"table-responsive\"><br>";
 
-    //Botón para exportar a .csv
-    salida = salida + "<a href=\"#\" onclick=\"exportTableToCSV.apply(this, [$('table'), $('input[name=test]:checked').val()+'.csv'])\"><button class=\"btn btn-default\">Exportar csv</button></a>";
+    //Botón para exportar a .csv y a .tex
+    salida = salida + "<a href=\"#\" onclick=\"exportTableToCSV.apply(this, [$('table'), $('input[name=test]:checked').val()+'.csv'])\"><button class=\"btn btn-default\">Exportar csv</button></a>&nbsp;&nbsp;<a href=\"#\" onclick=\"exportTableToLaTeX.apply(this, [$('table'), $('input[name=test]:checked').val()+'.tex'])\"><button class=\"btn btn-default\">Export to LaTeX</button></a>";
 
     //Primera fila de la tabla.
     salida = salida + "<br><br><table class=\"table table-hover\"><thead><tr><th>Conjunto datos</th>";
@@ -564,8 +651,8 @@ function generar_tabla_wilcoxon(data) {
 
     var salida = "<div class=\"table-responsive\"><br>";
 
-    //Botón para exportar a .csv
-    salida = salida + "<a href=\"#\" onclick=\"exportTableToCSV.apply(this, [$('table'), 'wilcoxon_test.csv'])\"><button class=\"btn btn-default\">Exportar csv</button></a>";
+    //Botón para exportar a .csv y a .tex
+    salida = salida + "<a href=\"#\" onclick=\"exportTableToCSV.apply(this, [$('table'), 'wilcoxon_test.csv'])\"><button class=\"btn btn-default\">Exportar csv</button></a>&nbsp;&nbsp;<a href=\"#\" onclick=\"exportTableToLaTeX.apply(this, [$('table'), 'wilcoxon_test.tex'])\"><button class=\"btn btn-default\">Export to LaTeX</button></a>";
 
     salida = salida + "<br><br><table class=\"table table-hover\"><thead>";
     salida = salida + "<tr><th>Estadístico</th><th>Punto crítico</th><th>Suma Rangos Positivos</th><th>Suma Rangos Negativos</th><th>Resultado</th></tr></thead>";
@@ -586,8 +673,8 @@ function generar_tabla_ranking(data) {
 
     var salida = "<div id=\"result_ranking\" class=\"table-responsive\"><br>";
 
-    //Botón para exportar a .csv
-    salida = salida + "<a href=\"#\" onclick=\"exportTableToCSV.apply(this, [$('#result_ranking'), $('input[name=test]:checked').val()+'.csv'])\"><button class=\"btn btn-default\">Exportar csv</button></a>";
+    //Botón para exportar a .csv y a .tex
+    salida = salida + "<a href=\"#\" onclick=\"exportTableToCSV.apply(this, [$('#result_ranking'), $('input[name=test]:checked').val()+'.csv'])\"><button class=\"btn btn-default\">Exportar csv</button></a>&nbsp;&nbsp;<a href=\"#\" onclick=\"exportTableToLaTeX.apply(this, [$('#result_ranking'), $('input[name=test]:checked').val()+'.tex'])\"><button class=\"btn btn-default\">Export to LaTeX</button></a>";
 
     salida = salida + "<br><br><table class=\"table table-hover\"><thead>";
     salida = salida + "<tr><th>Ranking</th><th>Algoritmos</th><th>Estadístico</th><th>p-valor</th><th>Resultado:</th></tr></thead><tbody>";
@@ -616,8 +703,8 @@ function generar_tabla_control(data, test) {
 
     var salida = "<div id=\"post_hoc_metodoc\" class=\"table-responsive\"><br>";
 
-    //Botón para exportar a .csv
-    salida = salida + "<a href=\"#\" onclick=\"exportTableToCSV.apply(this, [$('#post_hoc_metodoc'), $('input[name=post_hoc]:checked').val()+'.csv'])\"><button class=\"btn btn-default\">Exportar csv</button></a>";
+    //Botón para exportar a .csv y a .tex
+    salida = salida + "<a href=\"#\" onclick=\"exportTableToCSV.apply(this, [$('#post_hoc_metodoc'), $('input[name=post_hoc]:checked').val()+'.csv'])\"><button class=\"btn btn-default\">Exportar csv</button></a>&nbsp;&nbsp;<a href=\"#\" onclick=\"exportTableToLaTeX.apply(this, [$('#post_hoc_metodoc'), $('input[name=post_hoc]:checked').val()+'.tex'])\"><button class=\"btn btn-default\">Export to LaTeX</button></a>";
 
     salida = salida + "<br><br><table class=\"table table-hover\"><thead>";
     if(test != "li_test")
@@ -674,7 +761,10 @@ function generar_tabla_multitests(data, test) {
     var salida = "<div id=\"post_hoc_multi\" class=\"table-responsive\"><br>";
 
     //Botón para exportar a .csv
-    salida = salida + "<a href=\"#\" onclick=\"exportTableToCSV.apply(this, [$('#post_hoc_multi'), $('input[name=post_hoc]:checked').val()+'.csv'])\"><button class=\"btn btn-default\">Exportar csv</button></a>";
+    if(test == "bonferroni")
+        salida = salida + "<a href=\"#\" onclick=\"exportTableToCSV.apply(this, [$('#post_hoc_multi'), 'bonferroni.csv'])\"><button class=\"btn btn-default\">Exportar csv</button></a>&nbsp;&nbsp;<a href=\"#\" onclick=\"exportTableToLaTeX.apply(this, [$('#post_hoc_multi'), 'bonferroni.tex'])\"><button class=\"btn btn-default\">Export to LaTeX</button></a>";
+    else
+        salida = salida + "<a href=\"#\" onclick=\"exportTableToCSV.apply(this, [$('#post_hoc_multi'), $('input[name=post_hoc]:checked').val()+'.csv'])\"><button class=\"btn btn-default\">Exportar csv</button></a>&nbsp;&nbsp;<a href=\"#\" onclick=\"exportTableToLaTeX.apply(this, [$('#post_hoc_multi'), $('input[name=post_hoc]:checked').val()+'.tex'])\"><button class=\"btn btn-default\">Export to LaTeX</button></a>";
 
     salida = salida + "<br><br><table class=\"table table-hover\"><thead>";
     salida = salida + "<tr><th>alpha ajustado</th><th>Comparación</th><th>Estadístico</th><th>p-valor</th><th>p-valor ajustado</th><th>Resultado</th></tr></thead><tbody>";
