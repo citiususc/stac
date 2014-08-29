@@ -21,3 +21,18 @@
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {4.1}{\ignorespaces Ciclos de desarrollo.}}{45}{figure.4.1}
 \contentsline {figure}{\numberline {4.2}{\ignorespaces Ejemplo gr\IeC {\'a}fico Burn-Down.}}{47}{figure.4.2}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Estructura de descomposici\IeC {\'o}n del trabajo (EDT).}}{49}{figure.4.3}
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Cronograma lineal de la planificaci\IeC {\'o}n de las fases.}}{51}{figure.4.4}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Arquitectura de la plataforma web.}}{53}{figure.5.1}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Patr\IeC {\'o}n MVC.}}{54}{figure.5.2}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Patr\IeC {\'o}n \textit {Singleton}.}}{56}{figure.5.3}
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Servicios web REST.}}{59}{figure.5.4}
+\contentsline {figure}{\numberline {5.5}{\ignorespaces Organizaci\IeC {\'o}n Twitter Bootstrap.}}{61}{figure.5.5}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {6.1}{\ignorespaces Prototipo de p\IeC {\'a}gina principal.}}{72}{figure.6.1}
+\contentsline {figure}{\numberline {6.2}{\ignorespaces Prototipo p\IeC {\'a}gina de ayuda.}}{72}{figure.6.2}
+\contentsline {figure}{\numberline {6.3}{\ignorespaces Prototipo p\IeC {\'a}gina selecci\IeC {\'o}n de par\IeC {\'a}metros/opciones.}}{73}{figure.6.3}
+\contentsline {figure}{\numberline {6.4}{\ignorespaces Prototipo p\IeC {\'a}gina visualizaci\IeC {\'o}n de resultados.}}{73}{figure.6.4}
+\contentsline {figure}{\numberline {6.5}{\ignorespaces Diagrama de secuencia de la subida de ficheros.}}{75}{figure.6.5}
+\contentsline {figure}{\numberline {6.6}{\ignorespaces Diagrama de secuencia de la consulta de ficheros.}}{75}{figure.6.6}
