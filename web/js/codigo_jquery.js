@@ -4,9 +4,9 @@ $(document).on('ready', function() {
     if(sessionStorage.getItem("fichero_actual") != null)
         $("#mostrar_consulta_fichero").show();
 
-	//Para obtener la url base. Compatible con los navegadores: Chrome 27, Firefox 23, Safari 6, Internet Explorer 10.
-	if (!window.location.origin)
- 		window.location.origin = window.location.protocol+"//"+window.location.host;
+        //Para obtener la url base. Compatible con los navegadores: Chrome 27, Firefox 23, Safari 6, Internet Explorer 10.
+        if (!window.location.origin)
+                window.location.origin = window.location.protocol+"//"+window.location.host;
 
     //Ejecución del test de Levene para comprobar el criterio de homocedasticidad.
     $(document).on('click', '#datos_homocedasticidad', function() {
@@ -19,9 +19,9 @@ $(document).on('ready', function() {
 
             var url;
             if(alpha != "no")
-                url = window.location.origin+"/stac/beta/api/levene/"+sessionStorage.getItem("fichero_actual")+"/"+alpha;
+                url = window.location.origin+"/stac/api/levene/"+sessionStorage.getItem("fichero_actual")+"/"+alpha;
             else
-                url = window.location.origin+"/stac/beta/api/levene/"+sessionStorage.getItem("fichero_actual");
+                url = window.location.origin+"/stac/api/levene/"+sessionStorage.getItem("fichero_actual");
 
             var salida;
 
@@ -65,9 +65,9 @@ $(document).on('ready', function() {
 
             var url;
             if(alpha != "no")
-                url = window.location.origin+"/stac/beta/api/"+test+"/"+sessionStorage.getItem("fichero_actual")+"/"+alpha;
+                url = window.location.origin+"/stac/api/"+test+"/"+sessionStorage.getItem("fichero_actual")+"/"+alpha;
             else
-                url = window.location.origin+"/stac/beta/api/"+test+"/"+sessionStorage.getItem("fichero_actual");
+                url = window.location.origin+"/stac/api/"+test+"/"+sessionStorage.getItem("fichero_actual");
 
             var salida;
 
@@ -119,9 +119,9 @@ $(document).on('ready', function() {
 
             var url;
             if(alpha != "no")
-                url = window.location.origin+"/stac/beta/api/anova/"+sessionStorage.getItem("fichero_actual")+"/"+alpha;
+                url = window.location.origin+"/stac/api/anova/"+sessionStorage.getItem("fichero_actual")+"/"+alpha;
             else
-                url = window.location.origin+"/stac/beta/api/anova/"+sessionStorage.getItem("fichero_actual");
+                url = window.location.origin+"/stac/api/anova/"+sessionStorage.getItem("fichero_actual");
 
             $.ajax({
                 type: "GET",
@@ -178,9 +178,9 @@ $(document).on('ready', function() {
 
             var url;
             if(alpha != "no")
-                url = window.location.origin+"/stac/beta/api/ttest/"+sessionStorage.getItem("fichero_actual")+"/"+alpha;
+                url = window.location.origin+"/stac/api/ttest/"+sessionStorage.getItem("fichero_actual")+"/"+alpha;
             else
-                url = window.location.origin+"/stac/beta/api/ttest/"+sessionStorage.getItem("fichero_actual");
+                url = window.location.origin+"/stac/api/ttest/"+sessionStorage.getItem("fichero_actual");
 
             $.ajax({
                 type: "GET",
@@ -232,9 +232,9 @@ $(document).on('ready', function() {
             var url;
             
             if(alpha != "no")
-                url = window.location.origin+"/stac/beta/api/wilcoxon/"+sessionStorage.getItem("fichero_actual")+"/"+alpha;
+                url = window.location.origin+"/stac/api/wilcoxon/"+sessionStorage.getItem("fichero_actual")+"/"+alpha;
             else
-                url = window.location.origin+"/stac/beta/api/wilcoxon/"+sessionStorage.getItem("fichero_actual");
+                url = window.location.origin+"/stac/api/wilcoxon/"+sessionStorage.getItem("fichero_actual");
 
             var salida = "";
         
@@ -285,21 +285,21 @@ $(document).on('ready', function() {
             var url;
             
             if(alpha != "no" && tipo != "no" && test_post_hoc != "no")
-                url = window.location.origin+"/stac/beta/api/"+test+"/"+sessionStorage.getItem("fichero_actual")+"/"+alpha+"/"+tipo+"/"+test_post_hoc;
+                url = window.location.origin+"/stac/api/"+test+"/"+sessionStorage.getItem("fichero_actual")+"/"+alpha+"/"+tipo+"/"+test_post_hoc;
             else if(test_post_hoc != "no" && alpha != "no")
-                url = window.location.origin+"/stac/beta/api/"+test+"/"+sessionStorage.getItem("fichero_actual")+"/"+alpha+"/"+test_post_hoc;
+                url = window.location.origin+"/stac/api/"+test+"/"+sessionStorage.getItem("fichero_actual")+"/"+alpha+"/"+test_post_hoc;
             else if(test_post_hoc != "no" && tipo != "no")
-                url = window.location.origin+"/stac/beta/api/"+test+"/"+sessionStorage.getItem("fichero_actual")+"/"+tipo+"/"+test_post_hoc;
+                url = window.location.origin+"/stac/api/"+test+"/"+sessionStorage.getItem("fichero_actual")+"/"+tipo+"/"+test_post_hoc;
             else if(test_post_hoc != "no")
-                url = window.location.origin+"/stac/beta/api/"+test+"/"+sessionStorage.getItem("fichero_actual")+"/"+test_post_hoc;
+                url = window.location.origin+"/stac/api/"+test+"/"+sessionStorage.getItem("fichero_actual")+"/"+test_post_hoc;
             else if(alpha != "no" & tipo !="no")
-                url = window.location.origin+"/stac/beta/api/"+test+"/"+sessionStorage.getItem("fichero_actual")+"/"+alpha+"/"+tipo;
+                url = window.location.origin+"/stac/api/"+test+"/"+sessionStorage.getItem("fichero_actual")+"/"+alpha+"/"+tipo;
             else if(alpha != "no")
-                url = window.location.origin+"/stac/beta/api/"+test+"/"+sessionStorage.getItem("fichero_actual")+"/"+alpha;
+                url = window.location.origin+"/stac/api/"+test+"/"+sessionStorage.getItem("fichero_actual")+"/"+alpha;
             else if(tipo != "no")
-                url = window.location.origin+"/stac/beta/api/"+test+"/"+sessionStorage.getItem("fichero_actual")+"/"+tipo;
+                url = window.location.origin+"/stac/api/"+test+"/"+sessionStorage.getItem("fichero_actual")+"/"+tipo;
             else
-                url = window.location.origin+"/stac/beta/api/"+test+"/"+sessionStorage.getItem("fichero_actual");
+                url = window.location.origin+"/stac/api/"+test+"/"+sessionStorage.getItem("fichero_actual");
 
             var salida = "";
         
@@ -345,13 +345,13 @@ $(document).on('ready', function() {
 
         var formData = new FormData($('#formfichero')[0]);
         var fichero = $("#fichero").val();
-		
+                
         if(!fichero)
             $('#mensaje_subida').html("<br><p style=\"color:red\";><strong>Selecciona un fichero</strong></p>");
         else{
             $.ajax({
                 type: "POST",
-                url: window.location.origin+"/stac/beta/api/fichero",
+                url: window.location.origin+"/stac/api/fichero",
                 dataType: "json",
                 data: formData,
                 cache: false,
@@ -361,12 +361,12 @@ $(document).on('ready', function() {
                     resultado = "";
                     if(!data.fallo){
                         //resultado = "<p style=\"color:green\";><strong>Fichero subido con éxito</strong></p>";
-						sessionStorage.setItem("fichero_actual", data.clave);
+                                                sessionStorage.setItem("fichero_actual", data.clave);
                         sessionStorage.setItem("homocedasticidad", "no");
                         sessionStorage.setItem("normalidad", "no");
                         $("#mostrar_consulta_fichero").show();
-                        window.location.replace("/stac/beta/consultar_fichero.html");
-					}
+                        window.location.replace("/stac/consultar_fichero.html");
+                                        }
                     else{
                         resultado = resultado + "<p style=\"color:red\";><strong>" + data.fallo + "</strong></p>";
                         $('#mensaje_subida').html("<br>"+resultado);
@@ -610,35 +610,35 @@ function generar_tabla_normalidad(data, test) {
     if(test == "shapiro"){
         salida = salida + "<th>Estadísticos W</th><th>p-valores</th><th>Resultados</th></tr></thead><tbody>";
         $.each(data.p_valores, function(index, value) {
-		    salida = salida + "<tr><td>" + (index+1) + "</td><td>" + data.estadisticos_w[index].toFixed(3) + "</td><td>" + data.p_valores[index].toFixed(3) + "</td>";
+                    salida = salida + "<tr><td>" + (index+1) + "</td><td>" + data.estadisticos_w[index].toFixed(3) + "</td><td>" + data.p_valores[index].toFixed(3) + "</td>";
             if(data.resultado[index] == true)
                 salida = salida + "<td>Se rechaza H0</td></tr>";
             else
                 salida = salida + "<td>Se acepta H0</td></tr>";
-	        });
+                });
     }
     else if(test == "kolmogorov"){
         salida = salida + "<th>Estadísticos D</th><th>p-valores</th><th>Resultados</th></tr></thead><tbody>";
         $.each(data.p_valores, function(index, value) {
-		    salida = salida + "<tr><td>" + (index+1) + "</td><td>" + data.estadisticos_d[index].toFixed(3) + "</td><td>" + data.p_valores[index].toFixed(3) + "</td>";
+                    salida = salida + "<tr><td>" + (index+1) + "</td><td>" + data.estadisticos_d[index].toFixed(3) + "</td><td>" + data.p_valores[index].toFixed(3) + "</td>";
             if(data.resultado[index] == true)
                 salida = salida + "<td>Se rechaza H0</td></tr>";
             else
                 salida = salida + "<td>Se acepta H0</td></tr>";
-	        });
+                });
     }
     else{
         salida = salida + "<th>Estadísticos K2</th><th>p-valores</th><th>Resultados</th></tr></thead><tbody>";
         $.each(data.p_valores, function(index, value) {
-		    salida = salida + "<tr><td>" + (index+1) + "</td><td>" + data.estadisticos_k2[index].toFixed(3) + "</td><td>" + data.p_valores[index].toFixed(3) + "</td>";
+                    salida = salida + "<tr><td>" + (index+1) + "</td><td>" + data.estadisticos_k2[index].toFixed(3) + "</td><td>" + data.p_valores[index].toFixed(3) + "</td>";
             if(data.resultado[index] == true)
                 salida = salida + "<td>Se rechaza H0</td></tr>";
             else
                 salida = salida + "<td>Se acepta H0</td></tr>";
-	        });
+                });
     }
 
-	salida = salida + "</tbody></table>";
+        salida = salida + "</tbody></table>";
 
     //Ayuda.
     salida = salida + "<a href=\"ayuda.html#collapseTwo\" id=\"ayuda_fichero\" target=\"_blank\">Ir a ayuda.</a></div>";
@@ -680,7 +680,7 @@ function generar_tabla_ranking(data) {
     salida = salida + "<tr><th>Ranking</th><th>Algoritmos</th><th>Estadístico</th><th>p-valor</th><th>Resultado:</th></tr></thead><tbody>";
     $.each(data.ranking, function(index, value) {
         if(index==0){
-		    salida = salida + "<tr><td>" + value.toFixed(3) + "</td><td>" + data.nombres[index] + "</td><td>" + data.estadistico.toFixed(3) + "</td><td>" + data.p_valor.toFixed(3) + "</td>";
+                    salida = salida + "<tr><td>" + value.toFixed(3) + "</td><td>" + data.nombres[index] + "</td><td>" + data.estadistico.toFixed(3) + "</td><td>" + data.p_valor.toFixed(3) + "</td>";
             if(data.resultado == true)
                 salida = salida + "<td>Se rechaza H0</td></tr>";
             else
@@ -688,7 +688,7 @@ function generar_tabla_ranking(data) {
         }
         else
             salida = salida + "<tr><td>" + value.toFixed(3) + "</td><td>" + data.nombres[index] + "</td><td>-</td><td>-</td><td>-</td></tr>";
-	});
+        });
 
     salida = salida + "</tbody></table>";
     
@@ -722,7 +722,7 @@ function generar_tabla_control(data, test) {
                 salida = salida + "<td>Se rechaza H0</td></tr>";
             else
                 salida = salida + "<td>Se acepta H0</td></tr>";
-	        
+                
         });
     }
     else{
@@ -772,7 +772,7 @@ function generar_tabla_multitests(data, test) {
         salida = salida + "<tr><td>" +data.alpha.toFixed(3)+ "</td>";
         $.each(data.comparaciones, function(index, value) {
             if(index==0)
-	            salida = salida + "<td>" + value + "</td><td>" +data.valores_z[index].toFixed(3)+ "</td><td>" +data.p_valores[index].toFixed(3)+ "</td><td>" +data.p_valores_ajustados[index].toFixed(3)+ "</td>";
+                    salida = salida + "<td>" + value + "</td><td>" +data.valores_z[index].toFixed(3)+ "</td><td>" +data.p_valores[index].toFixed(3)+ "</td><td>" +data.p_valores_ajustados[index].toFixed(3)+ "</td>";
             else
                 salida = salida + "<td>-</td><td>" + value + "</td><td>" +data.valores_z[index].toFixed(3)+ "</td><td>" +data.p_valores[index].toFixed(3)+ "</td><td>" +data.p_valores_ajustados[index].toFixed(3)+ "</td>";
             if(data.resultado[index] == true)
@@ -796,7 +796,7 @@ function generar_tabla_multitests(data, test) {
     }
     else{
         $.each(data.alphas, function(index, value) {
-	        salida = salida + "<td>" + value.toFixed(3) + "</td><td>" +data.comparaciones[index]+ "</td><td>" +data.valores_z[index].toFixed(3)+ "</td><td>" +data.p_valores[index].toFixed(3)+ "</td><td>" +data.p_valores_ajustados[index].toFixed(3)+ "</td>";
+                salida = salida + "<td>" + value.toFixed(3) + "</td><td>" +data.comparaciones[index]+ "</td><td>" +data.valores_z[index].toFixed(3)+ "</td><td>" +data.p_valores[index].toFixed(3)+ "</td><td>" +data.p_valores_ajustados[index].toFixed(3)+ "</td>";
             if(data.resultado[index] == true)
                 salida = salida + "<td>Se rechaza H0</td></tr>";
             else

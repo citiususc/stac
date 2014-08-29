@@ -6,7 +6,7 @@ $(document).on('ready', function() {
 	if(fichero!=null) {
         $.ajax({
             type: "GET",
-            url: window.location.origin+"/stac/beta/api/fichero/"+fichero,
+            url: window.location.origin+"/stac/api/fichero/"+fichero,
             success : function(data) {
                 if(data.fallo){
                     $("#alerta_fichero").show();
