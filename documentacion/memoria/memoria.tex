@@ -1,4 +1,4 @@
-%Paquetes.
+% Paquetes.
 \documentclass[10pt,twoside,a4paper]{book}
 \usepackage[utf8]{inputenc}
 \usepackage[spanish]{babel}
@@ -10,6 +10,9 @@
 \usepackage{float}
 \usepackage[eurosym,right]{eurofont}
 \usepackage{listings}
+\usepackage[strict]{chngpage}
+
+\lstset{basicstyle=\ttfamily\scriptsize}
 
 % Comienza el documento.
 \begin{document}
@@ -46,6 +49,10 @@
 
 % Aquí empiezan los apéndices.
 \appendix
+\cleardoublepage
+\include{capitulos/manualtec}
+\cleardoublepage
+\include{capitulos/manualusu}
 \cleardoublepage
 \include{capitulos/bibliografia}
 

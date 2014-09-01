@@ -45,7 +45,7 @@ UML proporciona 13 tipos de diagramas, que se dividen en tres categorías: estru
 
 \noindent
 \begin{itemize}
-\item \textbf{Diagramas de secuencia:} indican los componentes que forman parte del sistema y las llamadas que se hacen en cada uno de ellos para realizar una tarea determinada. Los mensajes o llamadas intercambiados están ordenados en secuencia.
+\item \textbf{Diagramas de secuencia:} indican los componentes que forman parte del sistema y las llamadas que se hacen en cada uno de ellos para realizar una tarea determinada. Los mensajes o llamadas intercambiados están ordenados temporalmente (en secuencia).
 \end{itemize}
 
 \subsection{Herramientas}
@@ -146,7 +146,8 @@ Para desarrollar los servicios web que diesen acceso a los test estadísticos, a
 \end{itemize}
 
 Bottle permite la implementación de servicios web accesibles mediante una o más URIs. El decorador \textit{route()} asigna una URI a un trozo de código (el propio servicio) en lo que se denomina ruta. El decorador decora a lo que realmente referencia, que es un trozo de código. Cada vez que el navegador llama a una URL especificada con \textit{route()} la función o servicio asociado es llamado y el valor de retorno se envía al navegador. A un mismo servicio se pueden unir tantas URIs como se desean. El siguiente código muestra cómo de una forma sencilla se puede implementar un servicio REST:
-\begin{lstlisting}[language=python]
+
+\begin{lstlisting}
 @route('/fichero/<id_fichero>', method='GET')
 def consultar_fichero(id_fichero):
     response.headers['Access-Control-Allow-Origin'] = '*'
@@ -154,6 +155,7 @@ def consultar_fichero(id_fichero):
     ...
     return datos
 \end{lstlisting}
+
 Como se puede ver en ejemplo, por medio de \textit{@route} se indica la URL. El método utilizado en este caso es GET y la respuesta será dada en formato JSON. Con \textit{id\_fichero}, se indica que se va a pasar el identificador del fichero como parte de la URL.
 
 \subsection{Análisis de frameworks para desarrollo web}
@@ -190,7 +192,7 @@ Para el desarrollo de la documentación se han utilizado las siguientes herramie
 \item \textbf{Dia 0.97.2:} herramienta multiplataforma de código abierto utilizada para la elaboración de diagramas en general. Es utilizada en este proyecto para elaborar el EDT, así como diagramas genéricos de arquitectura, etc.
 \end{itemize}
 
-\subsubsection{\textbf{Tecnologías}}
+\subsubsection{\textbf{Tecnologías}} \label{tecnologias}
 A parte de las tecnologías anteriormente mencionadas, el desarrollo del proyecto también está marcado por la utilización de las siguientes otras:
 
 \begin{itemize}

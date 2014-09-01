@@ -74,8 +74,15 @@
 \contentsline {section}{\numberline {6.1}M\IeC {\'o}dulo Python test estad\IeC {\'\i }sticos}{65}{section.6.1}
 \contentsline {subsection}{\numberline {6.1.1}Test param\IeC {\'e}tricos}{66}{subsection.6.1.1}
 \contentsline {subsection}{\numberline {6.1.2}Test no param\IeC {\'e}tricos}{67}{subsection.6.1.2}
-\contentsline {section}{\numberline {6.2}API Servicios REST}{69}{section.6.2}
+\contentsline {section}{\numberline {6.2}API Servicios REST}{70}{section.6.2}
 \contentsline {section}{\numberline {6.3}Aplicaci\IeC {\'o}n web}{72}{section.6.3}
 \contentsline {subsection}{\numberline {6.3.1}Prototipo de la interfaz gr\IeC {\'a}fica}{72}{subsection.6.3.1}
-\contentsline {subsection}{\numberline {6.3.2}Heur\IeC {\'\i }sticas de Nielsen}{73}{subsection.6.3.2}
-\contentsline {subsection}{\numberline {6.3.3}Diagramas de secuencia}{75}{subsection.6.3.3}
+\contentsline {subsection}{\numberline {6.3.2}Heur\IeC {\'\i }sticas de Nielsen}{74}{subsection.6.3.2}
+\contentsline {subsection}{\numberline {6.3.3}Diagramas de secuencia}{77}{subsection.6.3.3}
+\contentsline {chapter}{\numberline {A}Manual t\IeC {\'e}cnico}{83}{appendix.Alph1}
+\contentsline {section}{\numberline {A.1}Despliegue de la aplicaci\IeC {\'o}n en Apache}{83}{section.Alph1.1}
+\contentsline {chapter}{\numberline {B}Manual de usuario}{85}{appendix.Alph2}
+\contentsline {section}{\numberline {B.1}P\IeC {\'a}gina de inicio}{85}{section.Alph2.1}
+\contentsline {section}{\numberline {B.2}Ayuda y consulta de datos}{86}{section.Alph2.2}
+\contentsline {section}{\numberline {B.3}Selecci\IeC {\'o}n de par\IeC {\'a}metros / opciones de test}{88}{section.Alph2.3}
+\contentsline {section}{\numberline {B.4}Visualizaci\IeC {\'o}n de resultados}{90}{section.Alph2.4}
