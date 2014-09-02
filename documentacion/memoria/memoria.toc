@@ -50,4 +50,39 @@
 \contentsline {subsection}{\numberline {4.2.2}Scrum}{45}{subsection.4.2.2}
 \contentsline {section}{\numberline {4.3}Gesti\IeC {\'o}n de la configuraci\IeC {\'o}n}{48}{section.4.3}
 \contentsline {section}{\numberline {4.4}Planificaci\IeC {\'o}n temporal}{49}{section.4.4}
-\contentsline {section}{\numberline {4.5}Estimaci\IeC {\'o}n de costes}{49}{section.4.5}
+\contentsline {section}{\numberline {4.5}Estimaci\IeC {\'o}n de costes}{52}{section.4.5}
+\contentsline {chapter}{\numberline {5}Arquitectura y herramientas}{53}{chapter.5}
+\contentsline {section}{\numberline {5.1}Arquitectura del sistema}{53}{section.5.1}
+\contentsline {section}{\numberline {5.2}Herramientas de dise\IeC {\~n}o}{55}{section.5.2}
+\contentsline {subsection}{\numberline {5.2.1}Herramientas}{55}{subsection.5.2.1}
+\contentsline {subsection}{\numberline {5.2.2}Patrones de dise\IeC {\~n}o}{56}{subsection.5.2.2}
+\contentsline {section}{\numberline {5.3}Herramientas de desarrollo}{57}{section.5.3}
+\contentsline {subsection}{\numberline {5.3.1}An\IeC {\'a}lisis de librer\IeC {\'\i }as de test estad\IeC {\'\i }sticos en Python}{57}{subsection.5.3.1}
+\contentsline {subsubsection}{\textbf {Librer\IeC {\'\i }a SciPy - \textit {Scientific Computing Tools for Python}}}{57}{section*.22}
+\contentsline {subsubsection}{\textbf {Librer\IeC {\'\i }a nonparametric.py}}{58}{section*.23}
+\contentsline {subsection}{\numberline {5.3.2}An\IeC {\'a}lisis de librer\IeC {\'\i }as para servicios REST en Python}{58}{subsection.5.3.2}
+\contentsline {subsubsection}{\textbf {Servicios REST}}{58}{section*.24}
+\contentsline {subsubsection}{\textbf {Librer\IeC {\'\i }a Bottle}}{59}{section*.25}
+\contentsline {subsection}{\numberline {5.3.3}An\IeC {\'a}lisis de frameworks para desarrollo web}{60}{subsection.5.3.3}
+\contentsline {subsubsection}{\textbf {Twitter Bootstrap}}{60}{section*.26}
+\contentsline {subsection}{\numberline {5.3.4}Otras herramientas}{61}{subsection.5.3.4}
+\contentsline {subsubsection}{\textbf {Desarrollo}}{61}{section*.27}
+\contentsline {subsubsection}{\textbf {Documentaci\IeC {\'o}n}}{62}{section*.28}
+\contentsline {subsubsection}{\textbf {Tecnolog\IeC {\'\i }as}}{62}{section*.29}
+\contentsline {subsubsection}{\textbf {Librer\IeC {\'\i }as}}{63}{section*.30}
+\contentsline {chapter}{\numberline {6}Dise\IeC {\~n}o e implementaci\IeC {\'o}n}{65}{chapter.6}
+\contentsline {section}{\numberline {6.1}M\IeC {\'o}dulo Python test estad\IeC {\'\i }sticos}{65}{section.6.1}
+\contentsline {subsection}{\numberline {6.1.1}Test param\IeC {\'e}tricos}{66}{subsection.6.1.1}
+\contentsline {subsection}{\numberline {6.1.2}Test no param\IeC {\'e}tricos}{67}{subsection.6.1.2}
+\contentsline {section}{\numberline {6.2}API Servicios REST}{70}{section.6.2}
+\contentsline {section}{\numberline {6.3}Aplicaci\IeC {\'o}n web}{72}{section.6.3}
+\contentsline {subsection}{\numberline {6.3.1}Prototipo de la interfaz gr\IeC {\'a}fica}{72}{subsection.6.3.1}
+\contentsline {subsection}{\numberline {6.3.2}Heur\IeC {\'\i }sticas de Nielsen}{74}{subsection.6.3.2}
+\contentsline {subsection}{\numberline {6.3.3}Diagramas de secuencia}{77}{subsection.6.3.3}
+\contentsline {chapter}{\numberline {A}Manual t\IeC {\'e}cnico}{83}{appendix.Alph1}
+\contentsline {section}{\numberline {A.1}Despliegue de la aplicaci\IeC {\'o}n en Apache}{83}{section.Alph1.1}
+\contentsline {chapter}{\numberline {B}Manual de usuario}{85}{appendix.Alph2}
+\contentsline {section}{\numberline {B.1}P\IeC {\'a}gina de inicio}{85}{section.Alph2.1}
+\contentsline {section}{\numberline {B.2}Ayuda y consulta de datos}{86}{section.Alph2.2}
+\contentsline {section}{\numberline {B.3}Selecci\IeC {\'o}n de par\IeC {\'a}metros / opciones de test}{88}{section.Alph2.3}
+\contentsline {section}{\numberline {B.4}Visualizaci\IeC {\'o}n de resultados}{90}{section.Alph2.4}

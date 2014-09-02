@@ -50,8 +50,8 @@ La librería estará formada por test paramétricos, test para evaluar las condi
 paramétricos (para la normalidad y homocedasticidad), así como test no paramétricos. Estos test se verán en
 detalle a lo largo del capítulo \ref{contraste} en las secciones \ref{parametricos}, \ref{condiciones} y
 \ref{no_parametricos} respectivamente. La librería a extender se denomina ``nonparametric.py", y los test de
-normalidad y homocedasticidad se tomarán de la librería de estadística de Python SciPy (scipy.stats). El listado
-de test para el proyecto es el siguientes:
+normalidad y homocedasticidad, así como la prueba  $\mathcal{T}$ de Student se tomarán de la librería de estadística
+de Python SciPy (scipy.stats). El listado de test para el proyecto es el siguientes:
 
 - Normalidad: Shapiro-Wilk, D’Agostino–Pearson y Kolmogorov–Smirnov.
 
@@ -60,7 +60,7 @@ de test para el proyecto es el siguientes:
 - Paramétricos: t-test, ANOVA, Bonferroni.
 
 - No paramétricos: Wilcoxon, Friedman, Iman-Davenport, Rangos Alineados de Friedman, Quade, Bonferroni-Dunn,
-Holm, Finner, Hochberg, Li.
+Holm, Finner, Hochberg, Li, Shaffer.
 
 \item Crear los servicios web en Python, basados en REST, que hagan disponible el acceso a los
 test estadísticos vía web.

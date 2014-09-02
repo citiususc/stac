@@ -21,3 +21,38 @@
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {4.1}{\ignorespaces Ciclos de desarrollo.}}{45}{figure.4.1}
 \contentsline {figure}{\numberline {4.2}{\ignorespaces Ejemplo gr\IeC {\'a}fico Burn-Down.}}{47}{figure.4.2}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Estructura de descomposici\IeC {\'o}n del trabajo (EDT).}}{49}{figure.4.3}
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Cronograma lineal de la planificaci\IeC {\'o}n de las fases.}}{51}{figure.4.4}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Arquitectura de la plataforma web.}}{53}{figure.5.1}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Patr\IeC {\'o}n MVC.}}{54}{figure.5.2}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Patr\IeC {\'o}n \textit {Singleton}.}}{56}{figure.5.3}
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Servicios web REST.}}{59}{figure.5.4}
+\contentsline {figure}{\numberline {5.5}{\ignorespaces Organizaci\IeC {\'o}n Twitter Bootstrap.}}{61}{figure.5.5}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {6.1}{\ignorespaces Prototipo de p\IeC {\'a}gina principal.}}{73}{figure.6.1}
+\contentsline {figure}{\numberline {6.2}{\ignorespaces Prototipo p\IeC {\'a}gina de ayuda.}}{73}{figure.6.2}
+\contentsline {figure}{\numberline {6.3}{\ignorespaces Prototipo p\IeC {\'a}gina selecci\IeC {\'o}n de par\IeC {\'a}metros/opciones.}}{74}{figure.6.3}
+\contentsline {figure}{\numberline {6.4}{\ignorespaces Prototipo p\IeC {\'a}gina visualizaci\IeC {\'o}n de resultados.}}{74}{figure.6.4}
+\contentsline {figure}{\numberline {6.5}{\ignorespaces Diagrama de secuencia de la subida de ficheros.}}{77}{figure.6.5}
+\contentsline {figure}{\numberline {6.6}{\ignorespaces Diagrama de secuencia de la consulta de ficheros.}}{78}{figure.6.6}
+\contentsline {figure}{\numberline {6.7}{\ignorespaces Diagrama de secuencia del test de ANOVA.}}{79}{figure.6.7}
+\contentsline {figure}{\numberline {6.8}{\ignorespaces Diagrama de secuencia de los test no param\IeC {\'e}tricos de ranking.}}{80}{figure.6.8}
+\contentsline {figure}{\numberline {6.9}{\ignorespaces Diagrama de secuencia de los test de SciPy.}}{81}{figure.6.9}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {A.1}{\ignorespaces Directorio del proyecto STAC.}}{83}{figure.Alph1.1}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {B.1}{\ignorespaces P\IeC {\'a}gina de inicio de la plataforma.}}{85}{figure.Alph2.1}
+\contentsline {figure}{\numberline {B.2}{\ignorespaces Ventana emergente de subida de ficheros.}}{86}{figure.Alph2.2}
+\contentsline {figure}{\numberline {B.3}{\ignorespaces Mensaje de error.}}{86}{figure.Alph2.3}
+\contentsline {figure}{\numberline {B.4}{\ignorespaces Listado secciones ayuda.}}{87}{figure.Alph2.4}
+\contentsline {figure}{\numberline {B.5}{\ignorespaces Secci\IeC {\'o}n del formato del fichero de datos.}}{87}{figure.Alph2.5}
+\contentsline {figure}{\numberline {B.6}{\ignorespaces Pantalla de visualizaci\IeC {\'o}n del fichero de datos.}}{88}{figure.Alph2.6}
+\contentsline {figure}{\numberline {B.7}{\ignorespaces Descripci\IeC {\'o}n de test de condiciones param\IeC {\'e}tricas.}}{88}{figure.Alph2.7}
+\contentsline {figure}{\numberline {B.8}{\ignorespaces Selecci\IeC {\'o}n de opciones.}}{89}{figure.Alph2.8}
+\contentsline {figure}{\numberline {B.9}{\ignorespaces Error cuando no existe ning\IeC {\'u}n fichero.}}{89}{figure.Alph2.9}
+\contentsline {figure}{\numberline {B.10}{\ignorespaces Error cuando el n\IeC {\'u}mero de algoritmos es mayor a 2.}}{90}{figure.Alph2.10}
+\contentsline {figure}{\numberline {B.11}{\ignorespaces P\IeC {\'a}gina de visualizaci\IeC {\'o}n de resultados.}}{90}{figure.Alph2.11}
+\contentsline {figure}{\numberline {B.12}{\ignorespaces Ventana de di\IeC {\'a}logo exportaci\IeC {\'o}n resultados.}}{91}{figure.Alph2.12}
+\contentsline {figure}{\numberline {B.13}{\ignorespaces Formato datos \textlatin {\LaTeX }.}}{91}{figure.Alph2.13}
+\contentsline {figure}{\numberline {B.14}{\ignorespaces Formato datos CSV.}}{91}{figure.Alph2.14}

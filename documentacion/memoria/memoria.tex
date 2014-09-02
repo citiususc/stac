@@ -1,4 +1,4 @@
-%Paquetes.
+% Paquetes.
 \documentclass[10pt,twoside,a4paper]{book}
 \usepackage[utf8]{inputenc}
 \usepackage[spanish]{babel}
@@ -8,6 +8,11 @@
 \usepackage[hmarginratio=1:1]{geometry}
 \usepackage{multirow}
 \usepackage{float}
+\usepackage[eurosym,right]{eurofont}
+\usepackage{listings}
+\usepackage[strict]{chngpage}
+
+\lstset{basicstyle=\ttfamily\scriptsize}
 
 % Comienza el documento.
 \begin{document}
@@ -37,9 +42,17 @@
 \cleardoublepage
 \include{capitulos/gestionproy}
 \cleardoublepage
+\include{capitulos/arquitecturah}
+\cleardoublepage
+\include{capitulos/disenhoimpl}
+\cleardoublepage
 
 % Aquí empiezan los apéndices.
 \appendix
+\cleardoublepage
+\include{capitulos/manualtec}
+\cleardoublepage
+\include{capitulos/manualusu}
 \cleardoublepage
 \include{capitulos/bibliografia}
 

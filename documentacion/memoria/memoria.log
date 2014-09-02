@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2014.4.28)  7 AUG 2014 22:49
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2014.4.28)  1 SEP 2014 14:16
 entering extended mode
 **memoria.tex
 (C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\memoria.tex
@@ -469,6 +469,207 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \@float@everytoks=\toks20
 \@floatcapt=\box27
 )
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\eurofont\eurofont.sty"
+Package: eurofont 1999/01/30 v1.1.3 A package for using euro symbols
+\EF@tokb=\toks21
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\eurofont\eurofont.cfg"
+File: eurofont.cfg 1998/11/03 v1.0 Default config file for the eurofont package
+
+)
+LaTeX Info: Redefining \euros on input line 193.
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\textcomp.sty"
+Package: textcomp 2005/09/27 v1.99g Standard LaTeX package
+Package textcomp Info: Sub-encoding information:
+(textcomp)               5 = only ISO-Adobe without \textcurrency
+(textcomp)               4 = 5 + \texteuro
+(textcomp)               3 = 4 + \textohm
+(textcomp)               2 = 3 + \textestimated + \textcurrency
+(textcomp)               1 = TS1 - \textcircled - \t
+(textcomp)               0 = TS1 (full)
+(textcomp)             Font families with sub-encoding setting implement
+(textcomp)             only a restricted character set as indicated.
+(textcomp)             Family '?' is the default used for unknown fonts.
+(textcomp)             See the documentation for details.
+Package textcomp Info: Setting ? sub-encoding to TS1/1 on input line 71.
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\ts1enc.def"
+File: ts1enc.def 2001/06/05 v3.0e (jk/car/fm) Standard LaTeX file
+Now handling font encoding TS1 ...
+... processing UTF-8 mapping file for font encoding TS1
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\ts1enc.dfu"
+File: ts1enc.dfu 2008/04/05 v1.1m UTF-8 support for inputenc
+   defining Unicode char U+00A2 (decimal 162)
+   defining Unicode char U+00A3 (decimal 163)
+   defining Unicode char U+00A4 (decimal 164)
+   defining Unicode char U+00A5 (decimal 165)
+   defining Unicode char U+00A6 (decimal 166)
+   defining Unicode char U+00A7 (decimal 167)
+   defining Unicode char U+00A8 (decimal 168)
+   defining Unicode char U+00A9 (decimal 169)
+   defining Unicode char U+00AA (decimal 170)
+   defining Unicode char U+00AC (decimal 172)
+   defining Unicode char U+00AE (decimal 174)
+   defining Unicode char U+00AF (decimal 175)
+   defining Unicode char U+00B0 (decimal 176)
+   defining Unicode char U+00B1 (decimal 177)
+   defining Unicode char U+00B2 (decimal 178)
+   defining Unicode char U+00B3 (decimal 179)
+   defining Unicode char U+00B4 (decimal 180)
+   defining Unicode char U+00B5 (decimal 181)
+   defining Unicode char U+00B6 (decimal 182)
+   defining Unicode char U+00B7 (decimal 183)
+   defining Unicode char U+00B9 (decimal 185)
+   defining Unicode char U+00BA (decimal 186)
+   defining Unicode char U+00BC (decimal 188)
+   defining Unicode char U+00BD (decimal 189)
+   defining Unicode char U+00BE (decimal 190)
+   defining Unicode char U+00D7 (decimal 215)
+   defining Unicode char U+00F7 (decimal 247)
+   defining Unicode char U+0192 (decimal 402)
+   defining Unicode char U+02C7 (decimal 711)
+   defining Unicode char U+02D8 (decimal 728)
+   defining Unicode char U+02DD (decimal 733)
+   defining Unicode char U+0E3F (decimal 3647)
+   defining Unicode char U+2016 (decimal 8214)
+   defining Unicode char U+2020 (decimal 8224)
+   defining Unicode char U+2021 (decimal 8225)
+   defining Unicode char U+2022 (decimal 8226)
+   defining Unicode char U+2030 (decimal 8240)
+   defining Unicode char U+2031 (decimal 8241)
+   defining Unicode char U+203B (decimal 8251)
+   defining Unicode char U+203D (decimal 8253)
+   defining Unicode char U+2044 (decimal 8260)
+   defining Unicode char U+204E (decimal 8270)
+   defining Unicode char U+2052 (decimal 8274)
+   defining Unicode char U+20A1 (decimal 8353)
+   defining Unicode char U+20A4 (decimal 8356)
+   defining Unicode char U+20A6 (decimal 8358)
+   defining Unicode char U+20A9 (decimal 8361)
+   defining Unicode char U+20AB (decimal 8363)
+   defining Unicode char U+20AC (decimal 8364)
+   defining Unicode char U+20B1 (decimal 8369)
+   defining Unicode char U+2103 (decimal 8451)
+   defining Unicode char U+2116 (decimal 8470)
+   defining Unicode char U+2117 (decimal 8471)
+   defining Unicode char U+211E (decimal 8478)
+   defining Unicode char U+2120 (decimal 8480)
+   defining Unicode char U+2122 (decimal 8482)
+   defining Unicode char U+2126 (decimal 8486)
+   defining Unicode char U+2127 (decimal 8487)
+   defining Unicode char U+212E (decimal 8494)
+   defining Unicode char U+2190 (decimal 8592)
+   defining Unicode char U+2191 (decimal 8593)
+   defining Unicode char U+2192 (decimal 8594)
+   defining Unicode char U+2193 (decimal 8595)
+   defining Unicode char U+2329 (decimal 9001)
+   defining Unicode char U+232A (decimal 9002)
+   defining Unicode char U+2422 (decimal 9250)
+   defining Unicode char U+25E6 (decimal 9702)
+   defining Unicode char U+25EF (decimal 9711)
+   defining Unicode char U+266A (decimal 9834)
+))
+LaTeX Info: Redefining \oldstylenums on input line 266.
+Package textcomp Info: Setting cmr sub-encoding to TS1/0 on input line 281.
+Package textcomp Info: Setting cmss sub-encoding to TS1/0 on input line 282.
+Package textcomp Info: Setting cmtt sub-encoding to TS1/0 on input line 283.
+Package textcomp Info: Setting cmvtt sub-encoding to TS1/0 on input line 284.
+Package textcomp Info: Setting cmbr sub-encoding to TS1/0 on input line 285.
+Package textcomp Info: Setting cmtl sub-encoding to TS1/0 on input line 286.
+Package textcomp Info: Setting ccr sub-encoding to TS1/0 on input line 287.
+Package textcomp Info: Setting ptm sub-encoding to TS1/4 on input line 288.
+Package textcomp Info: Setting pcr sub-encoding to TS1/4 on input line 289.
+Package textcomp Info: Setting phv sub-encoding to TS1/4 on input line 290.
+Package textcomp Info: Setting ppl sub-encoding to TS1/3 on input line 291.
+Package textcomp Info: Setting pag sub-encoding to TS1/4 on input line 292.
+Package textcomp Info: Setting pbk sub-encoding to TS1/4 on input line 293.
+Package textcomp Info: Setting pnc sub-encoding to TS1/4 on input line 294.
+Package textcomp Info: Setting pzc sub-encoding to TS1/4 on input line 295.
+Package textcomp Info: Setting bch sub-encoding to TS1/4 on input line 296.
+Package textcomp Info: Setting put sub-encoding to TS1/5 on input line 297.
+Package textcomp Info: Setting uag sub-encoding to TS1/5 on input line 298.
+Package textcomp Info: Setting ugq sub-encoding to TS1/5 on input line 299.
+Package textcomp Info: Setting ul8 sub-encoding to TS1/4 on input line 300.
+Package textcomp Info: Setting ul9 sub-encoding to TS1/4 on input line 301.
+Package textcomp Info: Setting augie sub-encoding to TS1/5 on input line 302.
+Package textcomp Info: Setting dayrom sub-encoding to TS1/3 on input line 303.
+Package textcomp Info: Setting dayroms sub-encoding to TS1/3 on input line 304.
+
+Package textcomp Info: Setting pxr sub-encoding to TS1/0 on input line 305.
+Package textcomp Info: Setting pxss sub-encoding to TS1/0 on input line 306.
+Package textcomp Info: Setting pxtt sub-encoding to TS1/0 on input line 307.
+Package textcomp Info: Setting txr sub-encoding to TS1/0 on input line 308.
+Package textcomp Info: Setting txss sub-encoding to TS1/0 on input line 309.
+Package textcomp Info: Setting txtt sub-encoding to TS1/0 on input line 310.
+Package textcomp Info: Setting lmr sub-encoding to TS1/0 on input line 311.
+Package textcomp Info: Setting lmdh sub-encoding to TS1/0 on input line 312.
+Package textcomp Info: Setting lmss sub-encoding to TS1/0 on input line 313.
+Package textcomp Info: Setting lmssq sub-encoding to TS1/0 on input line 314.
+Package textcomp Info: Setting lmvtt sub-encoding to TS1/0 on input line 315.
+Package textcomp Info: Setting qhv sub-encoding to TS1/0 on input line 316.
+Package textcomp Info: Setting qag sub-encoding to TS1/0 on input line 317.
+Package textcomp Info: Setting qbk sub-encoding to TS1/0 on input line 318.
+Package textcomp Info: Setting qcr sub-encoding to TS1/0 on input line 319.
+Package textcomp Info: Setting qcs sub-encoding to TS1/0 on input line 320.
+Package textcomp Info: Setting qpl sub-encoding to TS1/0 on input line 321.
+Package textcomp Info: Setting qtm sub-encoding to TS1/0 on input line 322.
+Package textcomp Info: Setting qzc sub-encoding to TS1/0 on input line 323.
+Package textcomp Info: Setting qhvc sub-encoding to TS1/0 on input line 324.
+Package textcomp Info: Setting futs sub-encoding to TS1/4 on input line 325.
+Package textcomp Info: Setting futx sub-encoding to TS1/4 on input line 326.
+Package textcomp Info: Setting futj sub-encoding to TS1/4 on input line 327.
+Package textcomp Info: Setting hlh sub-encoding to TS1/3 on input line 328.
+Package textcomp Info: Setting hls sub-encoding to TS1/3 on input line 329.
+Package textcomp Info: Setting hlst sub-encoding to TS1/3 on input line 330.
+Package textcomp Info: Setting hlct sub-encoding to TS1/5 on input line 331.
+Package textcomp Info: Setting hlx sub-encoding to TS1/5 on input line 332.
+Package textcomp Info: Setting hlce sub-encoding to TS1/5 on input line 333.
+Package textcomp Info: Setting hlcn sub-encoding to TS1/5 on input line 334.
+Package textcomp Info: Setting hlcw sub-encoding to TS1/5 on input line 335.
+Package textcomp Info: Setting hlcf sub-encoding to TS1/5 on input line 336.
+Package textcomp Info: Setting pplx sub-encoding to TS1/3 on input line 337.
+Package textcomp Info: Setting pplj sub-encoding to TS1/3 on input line 338.
+Package textcomp Info: Setting ptmx sub-encoding to TS1/4 on input line 339.
+Package textcomp Info: Setting ptmj sub-encoding to TS1/4 on input line 340.
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\eurosym\eurosym.sty"
+Package: eurosym 1998/08/06 v1.1 European currency symbol ``Euro''
+\@eurobox=\box28
+)
+\EF@pmbshift=\skip50
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\listings\listings.sty"
+\lst@mode=\count110
+\lst@gtempboxa=\box29
+\lst@token=\toks22
+\lst@length=\count111
+\lst@currlwidth=\dimen121
+\lst@column=\count112
+\lst@pos=\count113
+\lst@lostspace=\dimen122
+\lst@width=\dimen123
+\lst@newlines=\count114
+\lst@lineno=\count115
+\lst@maxwidth=\dimen124
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\listings\lstmisc.sty"
+File: lstmisc.sty 2014/03/04 1.5c (Carsten Heinz)
+\c@lstnumber=\count116
+\lst@skipnumbers=\count117
+\lst@framebox=\box30
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\listings\listings.cfg"
+File: listings.cfg 2014/03/04 1.5c listings configuration
+))
+Package: listings 2014/03/04 1.5c (Carsten Heinz)
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\ltxmisc\chngpage.sty"
+Package: chngpage 2003/08/10 v1.2 change page layout
+\c@cp@cnt=\count118
+\c@cp@tempcnt=\count119
+)
 (C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\memoria.aux
 (C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\capitulos/titulo.aux)
 (C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\capitulos/agradecimien
@@ -481,49 +682,64 @@ ux)
 aux)
 (C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\capitulos/gestionproy.
 aux)
+(C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\capitulos/arquitectura
+h.aux)
+(C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\capitulos/disenhoimpl.
+aux)
+(C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\capitulos/manualtec.au
+x)
+(C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\capitulos/manualusu.au
+x)
 (C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\capitulos/bibliografia
 .aux))
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
- ("C:\Program Files (x86)\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
-[Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count110
-\scratchdimen=\dimen121
-\scratchbox=\box28
-\nofMPsegments=\count111
-\nofMParguments=\count112
-\everyMPshowfont=\toks21
-\MPscratchCnt=\count113
-\MPscratchDim=\dimen122
-\MPnumerator=\count114
-\makeMPintoPDFobject=\count115
-\everyMPtoPDFconversion=\toks22
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 18.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 18.
+ ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\ts1cmr.fd"
+File: ts1cmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
-\AtBeginShipoutBox=\box29
-Package hyperref Info: Link coloring OFF on input line 13.
+LaTeX Font Info:    ... okay on input line 18.
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count120
+\scratchdimen=\dimen125
+\scratchbox=\box31
+\nofMPsegments=\count121
+\nofMParguments=\count122
+\everyMPshowfont=\toks23
+\MPscratchCnt=\count123
+\MPscratchDim=\dimen126
+\MPnumerator=\count124
+\makeMPintoPDFobject=\count125
+\everyMPtoPDFconversion=\toks24
+)
+\AtBeginShipoutBox=\box32
+Package hyperref Info: Link coloring OFF on input line 18.
  ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\hyperref\nameref.sty"
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\gettitlestring.sty"
 Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
-\c@section@level=\count116
+\c@section@level=\count126
 )
-LaTeX Info: Redefining \ref on input line 13.
-LaTeX Info: Redefining \pageref on input line 13.
-LaTeX Info: Redefining \nameref on input line 13.
+LaTeX Info: Redefining \ref on input line 18.
+LaTeX Info: Redefining \pageref on input line 18.
+LaTeX Info: Redefining \nameref on input line 18.
 
 (C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\memoria.out)
 (C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\memoria.out)
@@ -564,8 +780,9 @@ LaTeX Info: Redefining \nameref on input line 13.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
+\c@lstlisting=\count127
 (C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\capitulos/titulo.tex
-<figuras/logo_usc.jpg, id=139, 589.20125pt x 382.42876pt>
+<figuras/logo_usc.jpg, id=243, 589.20125pt x 382.42876pt>
 File: figuras/logo_usc.jpg Graphic file (type jpg)
 
 <use figuras/logo_usc.jpg>
@@ -592,19 +809,17 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <7> on input line 3.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <5> on input line 3.
-)
-\tf@toc=\write4
  [1
 
-]
-[2
+])
+\tf@toc=\write4
 
-] (C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\memoria.lof)
+[2] (C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\memoria.lof
+[3
+
+])
 \tf@lof=\write5
-
-[3] [4
-
-]
+ [4]
 (C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\capitulos/introduccion
 .tex
 Cap\'{\i }tulo 1.
@@ -619,21 +834,22 @@ l.39
       [1
 
 
+
 ])pdfTeX warning (ext4): destination with the same identifier (name{page.2}) ha
 s been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.32 \include{capitulos/introduccion}
+l.37 \include{capitulos/introduccion}
                                       [2]pdfTeX warning (ext4): destination wit
 h the same identifier (name{page.3}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.32 \include{capitulos/introduccion}
+l.37 \include{capitulos/introduccion}
                                       [3]pdfTeX warning (ext4): destination wit
 h the same identifier (name{page.4}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.33 \cleardoublepage
+l.38 \cleardoublepage
                       [4
 
 
@@ -658,7 +874,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 ]
-[6] <figuras/pdf_normal.png, id=273, 803.0pt x 602.25pt>
+[6] <figuras/pdf_normal.png, id=465, 803.0pt x 602.25pt>
 File: figuras/pdf_normal.png Graphic file (type png)
 
 <use figuras/pdf_normal.png>
@@ -669,20 +885,20 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <6> on input line 112.
 
-<figuras/pdf_chi_cuadrado.png, id=274, 338.76563pt x 253.69781pt>
+<figuras/pdf_chi_cuadrado.png, id=466, 338.76563pt x 253.69781pt>
 File: figuras/pdf_chi_cuadrado.png Graphic file (type png)
 
 <use figuras/pdf_chi_cuadrado.png>
 Package pdftex.def Info: figuras/pdf_chi_cuadrado.png used on input line 115.
 (pdftex.def)             Requested size: 142.26508pt x 85.35802pt.
 
-<figuras/pdf_f.png, id=276, 192.72pt x 144.54pt>
+<figuras/pdf_f.png, id=468, 192.72pt x 144.54pt>
 File: figuras/pdf_f.png Graphic file (type png)
  <use figuras/pdf_f.png>
 Package pdftex.def Info: figuras/pdf_f.png used on input line 121.
 (pdftex.def)             Requested size: 142.26355pt x 85.35724pt.
 
-<figuras/pdf_t_student.jpg, id=277, 451.6875pt x 278.03876pt>
+<figuras/pdf_t_student.jpg, id=469, 451.6875pt x 278.03876pt>
 File: figuras/pdf_t_student.jpg Graphic file (type jpg)
 
 <use figuras/pdf_t_student.jpg>
@@ -708,7 +924,7 @@ l.164
 mal.png> <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/pdf_c
 hi_cuadrado.png> <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figur
 as/pdf_f.png> <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/
-pdf_t_student.jpg>] <figuras/tipos_error.png, id=300, 301.125pt x 85.06781pt>
+pdf_t_student.jpg>] <figuras/tipos_error.png, id=492, 301.125pt x 85.06781pt>
 File: figuras/tipos_error.png Graphic file (type png)
 
 <use figuras/tipos_error.png>
@@ -731,7 +947,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 223--227
 
  []
 
-<figuras/test_unilateral_izq.png, id=308, 555.07375pt x 554.07pt>
+<figuras/test_unilateral_izq.png, id=500, 555.07375pt x 554.07pt>
 File: figuras/test_unilateral_izq.png Graphic file (type png)
 
 <use figuras/test_unilateral_izq.png>
@@ -739,7 +955,7 @@ Package pdftex.def Info: figuras/test_unilateral_izq.png used on input line 253
 .
 (pdftex.def)             Requested size: 142.26608pt x 85.35579pt.
 
-<figuras/test_unilateral_der.png, id=309, 555.07375pt x 554.07pt>
+<figuras/test_unilateral_der.png, id=501, 555.07375pt x 554.07pt>
 File: figuras/test_unilateral_der.png Graphic file (type png)
 
 <use figuras/test_unilateral_der.png>
@@ -747,14 +963,14 @@ Package pdftex.def Info: figuras/test_unilateral_der.png used on input line 255
 .
 (pdftex.def)             Requested size: 142.26608pt x 85.35579pt.
 
-<figuras/test_bilateral.png, id=310, 555.07375pt x 554.07pt>
+<figuras/test_bilateral.png, id=502, 555.07375pt x 554.07pt>
 File: figuras/test_bilateral.png Graphic file (type png)
 
 <use figuras/test_bilateral.png>
 Package pdftex.def Info: figuras/test_bilateral.png used on input line 260.
 (pdftex.def)             Requested size: 142.26608pt x 85.35579pt.
  [10]
-<figuras/critico.png, id=315, 416.30531pt x 415.5525pt>
+<figuras/critico.png, id=507, 416.30531pt x 415.5525pt>
 File: figuras/critico.png Graphic file (type png)
 
 <use figuras/critico.png>
@@ -784,7 +1000,7 @@ File: figuras/pdf_chi_cuadrado.png Graphic file (type png)
 Package pdftex.def Info: figuras/pdf_chi_cuadrado.png used on input line 310.
 (pdftex.def)             Requested size: 142.26508pt x 85.35802pt.
 
-<figuras/cdf_chi_cuadrado.png, id=334, 803.0pt x 602.25pt>
+<figuras/cdf_chi_cuadrado.png, id=526, 803.0pt x 602.25pt>
 File: figuras/cdf_chi_cuadrado.png Graphic file (type png)
 
 <use figuras/cdf_chi_cuadrado.png>
@@ -798,7 +1014,7 @@ Package pdftex.def Info: figuras/cdf_chi_cuadrado.png used on input line 312.
 l.332 
        <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/cdf_chi
 _cuadrado.png>] [13]
-<figuras/normalidad.jpg, id=360, 504.38437pt x 221.32687pt>
+<figuras/normalidad.jpg, id=552, 504.38437pt x 221.32687pt>
 File: figuras/normalidad.jpg Graphic file (type jpg)
 
 <use figuras/normalidad.jpg>
@@ -812,7 +1028,7 @@ Package pdftex.def Info: figuras/normalidad.jpg used on input line 391.
 l.411 \item \textbf
                    {Kolmogorov–Smirnov:} realiza una prueba de bondad de a...
  <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/normalidad.jp
-g>] <figuras/homocedasticidad.png, id=369, 526.96875pt x 292.84406pt>
+g>] <figuras/homocedasticidad.png, id=561, 526.96875pt x 292.84406pt>
 File: figuras/homocedasticidad.png Graphic file (type png)
 
 <use figuras/homocedasticidad.png>
@@ -1218,7 +1434,7 @@ Overfull \hbox (4.0849pt too wide) in paragraph at lines 83--92
 [][] 
  []
 
-[43] <figuras/ciclos_desarrollo.png, id=529, 560.0925pt x 292.09125pt>
+[43] <figuras/ciclos_desarrollo.png, id=721, 560.0925pt x 292.09125pt>
 File: figuras/ciclos_desarrollo.png Graphic file (type png)
 
 <use figuras/ciclos_desarrollo.png>
@@ -1231,7 +1447,7 @@ re.4.1}) has been already used, duplicate ignored
                                                   \fi \fi 
 l.141 
        <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/ciclos_
-desarrollo.png>] [46] <figuras/burndown.png, id=544, 642.4pt x 325.215pt>
+desarrollo.png>] [46] <figuras/burndown.png, id=736, 642.4pt x 325.215pt>
 File: figuras/burndown.png Graphic file (type png)
 
 <use figuras/burndown.png>
@@ -1244,18 +1460,601 @@ Package pdftex.def Info: figuras/burndown.png used on input line 168.
                                                   \fi \fi 
 l.187 \section
               {Gestión de la configuración} <C:/Users/Adrián/Desktop/tfg/sta
-c/documentacion/memoria/figuras/burndown.png>] [48]) [49] [50
+c/documentacion/memoria/figuras/burndown.png>] [48]
+<figuras/edt.png, id=754, 1270.7475pt x 426.59375pt>
+File: figuras/edt.png Graphic file (type png)
+ <use figuras/edt.png>
+Package pdftex.def Info: figuras/edt.png used on input line 223.
+(pdftex.def)             Requested size: 398.3292pt x 199.17119pt.
+
+[49pdfTeX warning (ext4): destination with the same identifier (name{figure.4.3
+}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.234 
+       <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/edt.png
+>] [50] <figuras/gantt.png, id=766, 825.83531pt x 396.7322pt>
+File: figuras/gantt.png Graphic file (type png)
+
+<use figuras/gantt.png>
+Package pdftex.def Info: figuras/gantt.png used on input line 322.
+(pdftex.def)             Requested size: 369.88348pt x 170.71864pt.
+ [51pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
+4}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.328 
+       <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/gantt.p
+ng>]) [52]
+(C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\capitulos/arquitectura
+h.tex
+Cap\'{\i }tulo 5.
+<figuras/arquitectura.png, id=777, 720.6925pt x 79.29625pt>
+File: figuras/arquitectura.png Graphic file (type png)
+
+<use figuras/arquitectura.png>
+Package pdftex.def Info: figuras/arquitectura.png used on input line 11.
+(pdftex.def)             Requested size: 426.79134pt x 46.9586pt.
+
+Overfull \hbox (8.53766pt too wide) in paragraph at lines 11--12
+ [][] 
+ []
+
+
+Underfull \vbox (badness 2334) has occurred while \output is active []
+
+ [53
+
+
+
+
+pdfTeX warning (ext4): destination with the same identifier (name{figure.5.1}) 
+has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.17 
+      <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/arquitec
+tura.png>] <figuras/mvc.png, id=784, 493.845pt x 365.365pt>
+File: figuras/mvc.png Graphic file (type png)
+
+<use figuras/mvc.png>
+Package pdftex.def Info: figuras/mvc.png used on input line 26.
+(pdftex.def)             Requested size: 256.0748pt x 189.45012pt.
+ [54pdfTeX warning (ext4): destination with the same identifier (name{figure.5.
+2}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.34 \item E
+            l modelo es el responsable de realizar una gran parte de las fun...
+ <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/mvc.png>]
+[55] <figuras/singleton.png, id=797, 315.42844pt x 164.86594pt>
+File: figuras/singleton.png Graphic file (type png)
+
+<use figuras/singleton.png>
+Package pdftex.def Info: figuras/singleton.png used on input line 80.
+(pdftex.def)             Requested size: 170.71867pt x 85.36096pt.
+ [56pdfTeX warning (ext4): destination with the same identifier (name{figure.5.
+3}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.91 \begin{itemize}
+                     <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/f
+iguras/singleton.png>]
+Underfull \vbox (badness 7379) has occurred while \output is active []
+
+ [57]
+[58] <figuras/rest.png, id=823, 628.3475pt x 334.24875pt>
+File: figuras/rest.png Graphic file (type png)
+
+<use figuras/rest.png>
+Package pdftex.def Info: figuras/rest.png used on input line 132.
+(pdftex.def)             Requested size: 341.43109pt x 170.7196pt.
+ [59pdfTeX warning (ext4): destination with the same identifier (name{figure.5.
+4}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.144 \item \textbf
+                   {Utilidades:} la facilidad de acceso a datos de formulari...
+ <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/rest.png>]
+<figuras/bootstrap.png, id=835, 105.39375pt x 141.52875pt>
+File: figuras/bootstrap.png Graphic file (type png)
+
+<use figuras/bootstrap.png>
+Package pdftex.def Info: figuras/bootstrap.png used on input line 170.
+(pdftex.def)             Requested size: 105.39348pt x 141.5284pt.
+
+Underfull \vbox (badness 1163) has occurred while \output is active []
+
+ [60]
+Underfull \vbox (badness 2310) has occurred while \output is active []
+
+ [61pdfTeX warning (ext4): destination with the same identifier (name{figure.5.
+5}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.189 \item \textbf
+                   {Sphinx 1.2.2:} Sphinx se trata de una herramienta de có...
+ <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/bootstrap.png
+>] [62]) [63] [64
+
+
+]
+(C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\capitulos/disenhoimpl.
+tex
+Cap\'{\i }tulo 6.
+[65
+
+
+]
+Overfull \hbox (4.1427pt too wide) in paragraph at lines 46--47
+[]\OT1/cmtt/m/n/10 bonferroni[]test(nombres[]algoritmos, medias[]algoritmos, cu
+adrado[]medio[]error, N,
+ []
+
+[66] [67]
+Overfull \hbox (30.39247pt too wide) in paragraph at lines 105--106
+[]\OT1/cmtt/m/n/10 friedman[]rangos[]alineados[]test(nombres[]algoritmos, matri
+z[]datos, alpha=0.05, tipo=0) 
+ []
+
+
+Overfull \hbox (19.89256pt too wide) in paragraph at lines 132--133
+[]\OT1/cmtt/m/n/10 bonferroni[]dunn[]test(K, nombres, valores[]z, p[]valores, m
+etodo[]control, alpha=0.05) 
+ []
+
+[68] [69] [70pdfTeX warning (ext4): destination with the same identifier (name{
+table.6.1}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.215 
+      pdfTeX warning (ext4): destination with the same identifier (name{table.6
+.2}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.215 
+      ]
+Overfull \hbox (6.89551pt too wide) in paragraph at lines 252--264
+ [][] 
+ []
+
+
+Underfull \vbox (badness 1043) has occurred while \output is active []
+
+ [71pdfTeX warning (ext4): destination with the same identifier (name{table.6.3
+}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.285 
+      pdfTeX warning (ext4): destination with the same identifier (name{table.6
+.4}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.285 
+      pdfTeX warning (ext4): destination with the same identifier (name{table.6
+.5}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.285 
+      ] <figuras/prototipo_home.jpg, id=934, 455.45157pt x 267.24844pt>
+File: figuras/prototipo_home.jpg Graphic file (type jpg)
+
+<use figuras/prototipo_home.jpg>
+Package pdftex.def Info: figuras/prototipo_home.jpg used on input line 300.
+(pdftex.def)             Requested size: 284.53143pt x 170.72441pt.
+
+Underfull \vbox (badness 5064) has occurred while \output is active []
+
+ [72pdfTeX warning (ext4): destination with the same identifier (name{table.6.6
+}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.304 
+      ] <figuras/prototipo_help.jpg, id=939, 455.45157pt x 267.24844pt>
+File: figuras/prototipo_help.jpg Graphic file (type jpg)
+
+<use figuras/prototipo_help.jpg>
+Package pdftex.def Info: figuras/prototipo_help.jpg used on input line 307.
+(pdftex.def)             Requested size: 284.53143pt x 170.72441pt.
+
+<figuras/prototipo_test.jpg, id=940, 652.4375pt x 401.5pt>
+File: figuras/prototipo_test.jpg Graphic file (type jpg)
+
+<use figuras/prototipo_test.jpg>
+Package pdftex.def Info: figuras/prototipo_test.jpg used on input line 314.
+(pdftex.def)             Requested size: 284.53476pt x 170.71794pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [73pdfTeX warning (ext4): destination with the same identifier (name{figure.6.
+1}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.318 
+      pdfTeX warning (ext4): destination with the same identifier (name{figure.
+6.2}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.318 
+       <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/prototi
+po_home.jpg> <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/p
+rototipo_help.jpg>]
+<figuras/prototipo_results.jpg, id=945, 652.4375pt x 401.5pt>
+File: figuras/prototipo_results.jpg Graphic file (type jpg)
+
+<use figuras/prototipo_results.jpg>
+Package pdftex.def Info: figuras/prototipo_results.jpg used on input line 321.
+(pdftex.def)             Requested size: 284.53476pt x 170.71794pt.
+ [74pdfTeX warning (ext4): destination with the same identifier (name{figure.6.
+3}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.335 E
+       l sistema siempre trata de indicar el lugar donde se encuentra el usu...
+pdfTeX warning (ext4): destination with the same identifier (name{figure.6.4}) 
+has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.335 E
+       l sistema siempre trata de indicar el lugar donde se encuentra el usu...
+ <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/prototipo_tes
+t.jpg> <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/prototi
+po_results.jpg>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [75]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [76]
+<figuras/sec_subir_fichero.jpg, id=959, 772.8875pt x 654.445pt>
+File: figuras/sec_subir_fichero.jpg Graphic file (type jpg)
+
+<use figuras/sec_subir_fichero.jpg>
+Package pdftex.def Info: figuras/sec_subir_fichero.jpg used on input line 408.
+(pdftex.def)             Requested size: 386.4428pt x 327.2217pt.
+ [77pdfTeX warning (ext4): destination with the same identifier (name{figure.6.
+5}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.414 
+       <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/sec_sub
+ir_fichero.jpg>]
+<figuras/sec_consultar_fichero.jpg, id=968, 685.56125pt x 429.605pt>
+File: figuras/sec_consultar_fichero.jpg Graphic file (type jpg)
+
+<use figuras/sec_consultar_fichero.jpg>
+Package pdftex.def Info: figuras/sec_consultar_fichero.jpg used on input line 4
+18.
+(pdftex.def)             Requested size: 342.77979pt x 214.80197pt.
+ [78pdfTeX warning (ext4): destination with the same identifier (name{figure.6.
+6}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.424 
+       <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/sec_con
+sultar_fichero.jpg>] <figuras/sec_anova.jpg, id=975, 770.88pt x 562.1pt>
+File: figuras/sec_anova.jpg Graphic file (type jpg)
+
+<use figuras/sec_anova.jpg>
+Package pdftex.def Info: figuras/sec_anova.jpg used on input line 427.
+(pdftex.def)             Requested size: 385.43906pt x 281.04932pt.
+
+<figuras/sec_ranking.jpg, id=979, 1033.8625pt x 570.13pt>
+File: figuras/sec_ranking.jpg Graphic file (type jpg)
+
+<use figuras/sec_ranking.jpg>
+Package pdftex.def Info: figuras/sec_ranking.jpg used on input line 437.
+(pdftex.def)             Requested size: 516.93pt x 285.0643pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 437--438
+[][]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [79pdfTeX warning (ext4): destination with the same identifier (name{figure.6.
+7}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.442 
+       <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/sec_ano
+va.jpg>] [80pdfTeX warning (ext4): destination with the same identifier (name{f
+igure.6.8}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.446 
+       <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/sec_ran
+king.jpg>] <figuras/sec_scipy.jpg, id=994, 790.955pt x 594.22pt>
+File: figuras/sec_scipy.jpg Graphic file (type jpg)
+
+<use figuras/sec_scipy.jpg>
+Package pdftex.def Info: figuras/sec_scipy.jpg used on input line 449.
+(pdftex.def)             Requested size: 395.47653pt x 297.10927pt.
+) [81pdfTeX warning (ext4): destination with the same identifier (name{figure.6
+.9}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.47 \include{capitulos/disenhoimpl}
+                                     <C:/Users/Adrián/Desktop/tfg/stac/documen
+tacion/memoria/figuras/sec_scipy.jpg>] [82
+
+
+]
+(C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\capitulos/manualtec.te
+x
+Ap\'{e}ndice A.
+<figuras/directorio_proy.png, id=1006, 781.41937pt x 60.225pt>
+File: figuras/directorio_proy.png Graphic file (type png)
+
+<use figuras/directorio_proy.png>
+Package pdftex.def Info: figuras/directorio_proy.png used on input line 14.
+(pdftex.def)             Requested size: 390.70872pt x 30.11241pt.
+ [83
+
+
+
+pdfTeX warning (ext4): destination with the same identifier (name{figure.Alph1.
+1}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.34 \item C
+            rear un enlace simbólico para enlazar el directorio del proyect...
+ <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/directorio_pr
+oy.png>]
+LaTeX Font Info:    Try loading font information for TS1+cmtt on input line 35.
+
+ ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\ts1cmtt.fd"
+File: ts1cmtt.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+Overfull \hbox (12.84302pt too wide) in paragraph at lines 72--73
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+) [84]
+(C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\capitulos/manualusu.te
+x
+Ap\'{e}ndice B.
+<figuras/man_inicio.png, id=1061, 979.40906pt x 508.14844pt>
+File: figuras/man_inicio.png Graphic file (type png)
+
+<use figuras/man_inicio.png>
+Package pdftex.def Info: figuras/man_inicio.png used on input line 11.
+(pdftex.def)             Requested size: 391.75668pt x 203.25577pt.
+ [85
+
+
+
+
+pdfTeX warning (ext4): destination with the same identifier (name{figure.Alph2.
+1}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.17 
+      <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/man_inic
+io.png>] <figuras/man_fichero.png, id=1068, 502.87875pt x 205.5178pt>
+File: figuras/man_fichero.png Graphic file (type png)
+
+<use figuras/man_fichero.png>
+Package pdftex.def Info: figuras/man_fichero.png used on input line 20.
+(pdftex.def)             Requested size: 251.43875pt x 102.75865pt.
+
+<figuras/man_fichero2.png, id=1069, 234.8775pt x 94.85437pt>
+File: figuras/man_fichero2.png Graphic file (type png)
+
+<use figuras/man_fichero2.png>
+Package pdftex.def Info: figuras/man_fichero2.png used on input line 27.
+(pdftex.def)             Requested size: 117.43846pt x 47.42706pt.
+
+<figuras/man_ayuda1.png, id=1073, 246.1697pt x 214.55156pt>
+File: figuras/man_ayuda1.png Graphic file (type png)
+
+<use figuras/man_ayuda1.png>
+Package pdftex.def Info: figuras/man_ayuda1.png used on input line 42.
+(pdftex.def)             Requested size: 123.08453pt x 107.27551pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [86pdfTeX warning (ext4): destination with the same identifier (name{figure.Al
+ph2.2}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.46 
+     pdfTeX warning (ext4): destination with the same identifier (name{figure.A
+lph2.3}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.46 
+      <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/man_fich
+ero.png> <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/man_f
+ichero2.png>] <figuras/man_ayuda2.png, id=1082, 964.35281pt x 481.04718pt>
+File: figuras/man_ayuda2.png Graphic file (type png)
+
+<use figuras/man_ayuda2.png>
+Package pdftex.def Info: figuras/man_ayuda2.png used on input line 51.
+(pdftex.def)             Requested size: 385.7343pt x 192.41545pt.
+
+<figuras/man_consulta.png, id=1084, 962.84718pt x 494.59781pt>
+File: figuras/man_consulta.png Graphic file (type png)
+
+<use figuras/man_consulta.png>
+Package pdftex.def Info: figuras/man_consulta.png used on input line 60.
+(pdftex.def)             Requested size: 385.13205pt x 197.8356pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [87pdfTeX warning (ext4): destination with the same identifier (name{figure.Al
+ph2.4}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.64 
+     pdfTeX warning (ext4): destination with the same identifier (name{figure.A
+lph2.5}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.64 
+      <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/man_ayud
+a1.png> <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/man_ay
+uda2.png>] <figuras/man_descripcion.png, id=1092, 965.85844pt x 499.11469pt>
+File: figuras/man_descripcion.png Graphic file (type png)
+
+<use figuras/man_descripcion.png>
+Package pdftex.def Info: figuras/man_descripcion.png used on input line 71.
+(pdftex.def)             Requested size: 386.33653pt x 199.64232pt.
+ [88pdfTeX warning (ext4): destination with the same identifier (name{figure.Al
+ph2.6}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.77 
+     pdfTeX warning (ext4): destination with the same identifier (name{figure.A
+lph2.7}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.77 
+      <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/man_cons
+ulta.png> <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/man_
+descripcion.png>]
+<figuras/man_opciones.png, id=1100, 968.86969pt x 490.08093pt>
+File: figuras/man_opciones.png Graphic file (type png)
+
+<use figuras/man_opciones.png>
+Package pdftex.def Info: figuras/man_opciones.png used on input line 80.
+(pdftex.def)             Requested size: 387.54102pt x 196.0289pt.
+
+<figuras/man_nofichero.png, id=1103, 771.63281pt x 151.3153pt>
+File: figuras/man_nofichero.png Graphic file (type png)
+
+<use figuras/man_nofichero.png>
+Package pdftex.def Info: figuras/man_nofichero.png used on input line 89.
+(pdftex.def)             Requested size: 385.81546pt x 75.65746pt.
+
+<figuras/man_errorapli.png, id=1104, 769.37437pt x 189.70876pt>
+File: figuras/man_errorapli.png Graphic file (type png)
+
+<use figuras/man_errorapli.png>
+Package pdftex.def Info: figuras/man_errorapli.png used on input line 96.
+(pdftex.def)             Requested size: 384.68625pt x 94.85414pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [89pdfTeX warning (ext4): destination with the same identifier (name{figure.Al
+ph2.8}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.100 
+      pdfTeX warning (ext4): destination with the same identifier (name{figure.
+Alph2.9}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.100 
+       <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/man_opc
+iones.png> <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/man
+_nofichero.png>] <figuras/man_results.png, id=1113, 964.35281pt x 502.12593pt>
+File: figuras/man_results.png Graphic file (type png)
+
+<use figuras/man_results.png>
+Package pdftex.def Info: figuras/man_results.png used on input line 109.
+(pdftex.def)             Requested size: 385.7343pt x 200.84682pt.
+
+<figuras/man_dialog.png, id=1115, 407.27156pt x 170.88844pt>
+File: figuras/man_dialog.png Graphic file (type png)
+
+<use figuras/man_dialog.png>
+Package pdftex.def Info: figuras/man_dialog.png used on input line 118.
+(pdftex.def)             Requested size: 244.3648pt x 102.53384pt.
+ [90pdfTeX warning (ext4): destination with the same identifier (name{figure.Al
+ph2.10}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.122 
+      pdfTeX warning (ext4): destination with the same identifier (name{figure.
+Alph2.11}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.122 
+       <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/man_err
+orapli.png> <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/ma
+n_results.png>] <figuras/man_latex.png, id=1124, 282.30469pt x 137.7647pt>
+File: figuras/man_latex.png Graphic file (type png)
+
+<use figuras/man_latex.png>
+Package pdftex.def Info: figuras/man_latex.png used on input line 127.
+(pdftex.def)             Requested size: 169.38411pt x 82.65944pt.
+
+<figuras/man_csv.png, id=1125, 318.43968pt x 94.10156pt>
+File: figuras/man_csv.png Graphic file (type png)
+
+<use figuras/man_csv.png>
+Package pdftex.def Info: figuras/man_csv.png used on input line 134.
+(pdftex.def)             Requested size: 191.06528pt x 56.46136pt.
+) [91pdfTeX warning (ext4): destination with the same identifier (name{figure.A
+lph2.12}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.55 \include{capitulos/manualusu}
+                                  pdfTeX warning (ext4): destination with the s
+ame identifier (name{figure.Alph2.13}) has been already used, duplicate ignored
+
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.55 \include{capitulos/manualusu}
+                                  pdfTeX warning (ext4): destination with the s
+ame identifier (name{figure.Alph2.14}) has been already used, duplicate ignored
+
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.55 \include{capitulos/manualusu}
+                                   <C:/Users/Adrián/Desktop/tfg/stac/documenta
+cion/memoria/figuras/man_dialog.png> <C:/Users/Adrián/Desktop/tfg/stac/documen
+tacion/memoria/figuras/man_latex.png> <C:/Users/Adrián/Desktop/tfg/stac/docume
+ntacion/memoria/figuras/man_csv.png>] [92
 
 
 ]
 (C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\capitulos/bibliografia
-.tex) [51
-
+.tex) [93
 
 
 ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 46.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 46.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 59.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 59.
  (C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\memoria.aux (C:\Users
 \Adrián\Desktop\tfg\stac\documentacion\memoria\capitulos/titulo.aux)
 (C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\capitulos/agradecimien
@@ -1268,45 +2067,59 @@ ux)
 aux)
 (C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\capitulos/gestionproy.
 aux)
+(C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\capitulos/arquitectura
+h.aux)
+(C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\capitulos/disenhoimpl.
+aux)
+(C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\capitulos/manualtec.au
+x)
+(C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\capitulos/manualusu.au
+x)
 (C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\capitulos/bibliografia
 .aux))
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 46.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 46.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 59.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 59.
 Package rerunfilecheck Info: File `memoria.out' has not changed.
-(rerunfilecheck)             Checksum: 61A4AE07B0D4380800E42A842A7C7BC1;2459.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 46.
+(rerunfilecheck)             Checksum: F48098D7F11C5EDF4F9E08CF6664E9AF;4533.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 59.
  ) 
 Here is how much of TeX's memory you used:
- 6847 strings out of 493921
- 102053 string characters out of 3144870
- 197639 words of memory out of 3000000
- 9854 multiletter control sequences out of 15000+200000
- 9911 words of font info for 34 fonts, out of 3000000 for 9000
+ 9653 strings out of 493921
+ 143634 string characters out of 3144870
+ 240552 words of memory out of 3000000
+ 12381 multiletter control sequences out of 15000+200000
+ 11476 words of font info for 41 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 29i,12n,30p,1339b,430s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx10.pfb>
-<C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C
-:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbxti10.pfb><C
-:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C:
-/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/P
-rogram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Pro
-gram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Progra
-m Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Program F
-iles (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program File
-s (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files (
-x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Program Files (x86)
-/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Program Files (x86)/MiK
-TeX 2.9/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Program Files (x86)/MiKTeX 
-2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files (x86)/MiKTeX 2.9/
-fonts/type1/public/amsfonts/cm/cmsl10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fo
-nts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files (x86)/MiKTeX 2.9/font
-s/type1/public/amsfonts/cm/cmsy5.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/t
-ype1/public/amsfonts/cm/cmsy7.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type
-1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/p
-ublic/amsfonts/cm/cmti10.pfb>
-Output written on memoria.pdf (59 pages, 832869 bytes).
+ 29i,12n,43p,2184b,1103s stack positions out of 5000i,500n,10000p,200000b,50000s
+ <C:\Users\Adrián\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi60
+0\tctt1000.pk><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm
+/cmbx10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/c
+mbx12.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmb
+xti10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmc
+sc10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex
+10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10
+.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi5.pf
+b><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi7.pfb><
+C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/
+Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Pro
+gram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Program
+ Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Program Fil
+es (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Program Files (
+x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files (x86)
+/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsl10.pfb><C:/Program Files (x86)/M
+iKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files (x86)/MiK
+TeX 2.9/fonts/type1/public/amsfonts/cm/cmsy5.pfb><C:/Program Files (x86)/MiKTeX
+ 2.9/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Program Files (x86)/MiKTeX 2.
+9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files (x86)/MiKTeX 2.9/f
+onts/type1/public/amsfonts/cm/cmti10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fon
+ts/type1/public/amsfonts/cm/cmti7.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/
+type1/public/amsfonts/cm/cmtt10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/ty
+pe1/public/amsfonts/cm/cmtt8.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1
+/public/amsfonts/cm/cmtt9.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/pu
+blic/eurosym/feymr10.pfb>
+Output written on memoria.pdf (101 pages, 2158782 bytes).
 PDF statistics:
- 673 PDF objects out of 1000 (max. 8388607)
- 158 named destinations out of 1000 (max. 500000)
- 348 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1297 PDF objects out of 1440 (max. 8388607)
+ 331 named destinations out of 1000 (max. 500000)
+ 711 words of extra memory for PDF output out of 10000 (max. 10000000)
 

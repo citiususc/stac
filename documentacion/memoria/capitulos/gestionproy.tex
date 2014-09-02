@@ -60,7 +60,7 @@ A continuación, se enumeran los posibles riesgos en dos grupos. Para ello, se i
 		\textbf{Descripción:} & La información existente de una determinada prueba de hipótesis es escasa, debido a que el test es reciente y aún no existe mucha documentación, lo que dificulta e impide que se pueda implementar de forma correcta. \\ \hline
 		\textbf{Probabilidad:} & Baja \\ \hline
 		\textbf{Impacto:} & Tolerable \\ \hline
-		\textbf{Estrategia de prevención:} & Buscar información en artículos relacionados con el autor o tests similares que puedan ayudar a entender qué operaciones realiza el test. \\ \hline
+		\textbf{Estrategia de prevención:} & Buscar información en artículos relacionados con el autor o test similares que puedan ayudar a entender qué operaciones realiza el test. \\ \hline
 		\textbf{Plan de contingencia:} & Sustituir el test estadístico por otro de similares características para el que sí haya documentación. \\ \hline
 	\end{tabular}
 \end{table}
@@ -192,11 +192,11 @@ Para llevar a cabo la gestión de la configuración en este proyecto, se utiliza
 \noindent
 En este proyecto los elementos de configuración implican tanto los archivos de desarrollo como los archivos de documentación:
 \begin{itemize}
-\item Módulo de Python de los tests estadísticos (paramétricos y no paramétricos).
+\item Módulo de Python de los test estadísticos (paramétricos y no paramétricos).
 \item API REST.
 \item Archivos de la web: archivos HTML, CSS, JavaScript, imágenes, etc.
 \item Memoria.
-\item Documentación del módulo de Python de los tests estadísticos.
+\item Documentación del módulo de Python de los test estadísticos.
 \end{itemize}
 
 \noindent
@@ -214,5 +214,182 @@ El proceso de gestión de configuración es el siguiente:
 \end{enumerate}
 
 \section{Planificación temporal}
+La planificación temporal consiste en la identificación de tareas, asignación de tiempos y recursos a dichas tareas y en la planificación de la secuencia de ejecución de forma que el proyecto pueda finalizarse a tiempo. 
+
+El trabajo del presente proyecto se divide en varias fases, especificadas previamente en la estructura de descomposición del trabajo del anteproyecto, que se puede ver en la figura \ref{fig:edt}. El EDT consiste en una representación jerárquica del trabajo a realizar, con el fin de organizar y definir el alcance del proyecto. Debido al carácter iterativo de la metodología Scrum, las fases que a continuación se detallan se organizarán de una manera no secuencial (recordemos que las fases en esta metodología se solapan, como se vio en la sección \ref{metodologia}).
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=14cm,height=7cm]{figuras/edt.png}
+\caption{Estructura de descomposición del trabajo (EDT).}
+\label{fig:edt}
+\end{figure}
+
+A continuación se describen las diferentes etapas de una forma más detallada, donde se indica también el tipo de recurso que realizada cada etapa y la duración estimada de las mismas. La dedicación será de 20 horas semanales. En total, la duración estimada del proyecto es de aproximadamente 21 semanas de duración, lo que supone aproximadamente 425 horas de trabajo.
+
+\noindent
+\textbf{Etapa de Análisis}
+
+En esta etapa se estudiará el problema a resolver y se realizará un análisis de los requisitos del proyecto mediante la técnica de desarrollo ágil vista en el capítulo \ref{analisisreq}: las historias de usuario, que serán tratadas y discutidas con el rol del Product Owner y del Scrum Master, es decir, los directores del proyecto. También se dedicará parte del tiempo a estudiar las librerías (test estadísticos, servicios web REST), frameworks para el desarrollo web (parte visual de la plataforma) y herramientas existentes en la actualidad (IDEs, documentación, etc.) que puedan facilitar la labor de desarrollo.
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|c|}
+		\hline
+		\textbf{Tiempo estimado} \\ \hline
+		1 semana \\ \hline
+	\end{tabular}
+\end{table}
+
+\noindent
+\textbf{Etapa de Formación}
+
+Con la formación se tratará de adquirir los conocimientos necesarios en el lenguaje Python, incluyendo la lectura de manuales, tutoriales, etc. También será objeto de estudio la tecnología de los servicios web REST, que tienen un enfoque diferente al tradicional (servicios web SOAP). Aquí se realizarán por tanto diferentes lecturas sobre servicios web basados en REST para comprender esta tecnología. Asimismo, la etapa de formación también incluye el estudio del contraste de hipótesis (test estadísticos), ya que el proyecto en sí está dedicado a este propósito. Se realizará un estudio de cada test, para comprender su funcionamiento de cara a su implementación en las fases de codificación.
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|c|}
+		\hline
+		\textbf{Tiempo estimado} \\ \hline
+		1 semana \\ \hline
+	\end{tabular}
+\end{table}
+
+Además del tiempo estimado para esta etapa donde se dedicará el 100\% del tiempo asignado, esta etapa también se realizará en paralelo al resto de etapas del proyecto hasta el momento en que la parte de la implementación de los test estadísticos y el API REST esté completa. Esto es debido a que en muchas ocasiones resulta difícil tener los conceptos claros o saber qué es lo que se necesita hasta que no se empieza el diseño o la implementación. Sin embargo, la dedicación cuando se realiza en paralelo a otras etapas es mucho menor (en torno al 15 \%).
+
+\noindent
+\textbf{Etapa de Diseño}
+
+En esta fase se definirá en primer lugar la arquitectura del proyecto, para luego realizar el diseño de los test estadísticos, así como de la API REST y la interfaz web, para la cual se diseñará un prototipo inicial conocido como \textit{storyboard}, que es conjunto de ilustraciones con el objetivo de mostrar gráficamente las partes de las que se compone la interfaz. Dada la característica iterativa de la metodología elegida, el diseño también se irá refinando a medida que avance el proyecto.
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|c|}
+		\hline
+		\textbf{Tiempo estimado} \\ \hline
+		3 semanas \\ \hline
+	\end{tabular}
+\end{table}
+
+\noindent
+\textbf{Etapa de Implementación}
+
+Esta es la fase que requiere un mayor tiempo en proporción a las demás. Durante esta etapa se realizará la implementación de los test estadísticos y de la API REST, así como de la interfaz web de usuario, lo que constituye un importante espacio de tiempo.
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|c|}
+		\hline
+		\textbf{Tiempo estimado} \\ \hline
+		12 semanas \\ \hline
+	\end{tabular}
+\end{table}
+
+\noindent
+\textbf{Etapa de Validación y pruebas}
+
+La etapa de validación y pruebas incluye la realización de pruebas unitarias para comprobar el correcto funcionamiento de cada uno de los test estadísticos, así como la validación de los requisitos acordados y la elaboración de una encuesta de satisfacción de usuarios para obtener el feedback por parte de los usuarios que empiecen a utilizar la plataforma.
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|c|}
+		\hline
+		\textbf{Tiempo estimado} \\ \hline
+		2 semanas \\ \hline
+	\end{tabular}
+\end{table}
+
+\noindent
+\textbf{Etapa de Documentación}
+
+En esta fase se incluye la documentación relativa al desarrollo y gestión del proyecto, la realización de la memoria del proyecto y los manuales técnicos y de usuario.
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|c|}
+		\hline
+		\textbf{Tiempo estimado} \\ \hline
+		2 semanas \\ \hline
+	\end{tabular}
+\end{table}
+
+Además del tiempo estimado para esta etapa donde se dedicará el 100\% del tiempo asignado, asta fase se realizará en paralelo al resto de fases del proyecto (con un 15\% de tiempo dedicado), ya que durante todo el ciclo de vida del proyecto se está realizando la documentación del código, además de algunas partes de la memoria.
+
+A continuación en la figura \ref{fig:gantt} se puede ver el cronograma de la planificación de las distintas fases del proyecto. En la imagen se puede ver el número de sprints llevados a cabo así como cada una de las fases involucradas en cada sprint y el tiempo empleado:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=13cm,height=6cm]{figuras/gantt.png}
+\caption{Cronograma lineal de la planificación de las fases.}
+\label{fig:gantt}
+\end{figure}
+
+Cabe destacar que pese a que pese a que tuvo lugar la ocurrencia del riesgo \textbf{RPD-3}, y por lo tanto del riesgo \textbf{RPD-1} debido a que el test de Li para comparaciones múltiples no funcionaba correctamente y se tuvo que implementar en su lugar el test de Finner, esto no llevó a un retraso respecto al tiempo estimado.
 
 \section{Estimación de costes}
+
+Los costes se han dividido en tres categorías: coste de personal, costes hardware y los costes software.
+
+\noindent
+\textbf{Coste de personal}
+
+El coste del personal establecido es fruto de la investigación de salarios (brutos) de un analista programador en la Comunidad de Galicia.
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|c|c|c|}
+		\hline
+		\textbf{Horas Trabajadas} & \textbf{Coste/Hora} & \textbf{Coste Total} \\ \hline
+		428 & 13 \euro & 5564 \euro \\ \hline
+	\end{tabular}
+\end{table}
+
+\noindent
+\textbf{Costes hardware}
+
+Estos costes se refieren al material adquirido para poder realizar el proyecto.
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|l|c|}
+		\hline
+		\textbf{Componente Hardware} & \textbf{Coste} \\ \hline
+		Ordenador HP & 800 \euro \\ \hline
+	\end{tabular}
+\end{table}
+
+\noindent
+\textbf{Costes software}
+
+Durante el desarrollo del proyecto se utilizó únicamente software gratuito para reducir el coste.
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|l|c|}
+		\hline
+		\textbf{Componente Software} & \textbf{Coste} \\ \hline
+		Ubuntu 12.04 & 0 \euro \\ \hline
+		Spyder 2 & 0 \euro \\ \hline
+		Bottle 0.12 & 0 \euro \\ \hline
+		Twitter Bootstrap 3.1.1 & 0 \euro \\ \hline
+		Sphinx 1.2.2 & 0 \euro \\ \hline
+		TeXstudio 2.8.2 & 0 \euro \\ \hline
+	\end{tabular}
+	\quad
+	\begin{tabular}{|l|c|}
+		\hline
+		\textbf{Componente Software} & \textbf{Coste} \\ \hline
+		ProjectLibre 1.5.9 & 0 \euro \\ \hline
+		StarUML 5.0 & 0 \euro \\ \hline
+		Dia 0.97.2 & 0 \euro \\ \hline
+		Lumzy & 0 \euro \\ \hline
+		Librerías & 0 \euro \\ \hline
+		Apache 2.4 & 0 \euro \\ \hline
+	\end{tabular}
+\end{table}
+
+\noindent
+\textbf{Coste total}
+
+Si se asumen gastos indirectos de luz y conexión a Internet durante el desarrollo de 250 \euro, el coste final  del proyecto es el siguiente:
+\[ personal + hardware + software + indirecto = 5564 + 800 + 0 + 250 = 6614 \; Euros. \]
