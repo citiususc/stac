@@ -246,8 +246,8 @@ def ttest(id_fichero, alpha=0.05):
         argumentos = ()
         for i in range(len(datos["matriz_datos"][0])):
             argumentos = argumentos + ([conjunto[i] for conjunto in datos["matriz_datos"]],)
-        estadistico_t, p_valor = st.ttest_rel(*argumentos)
-        #Si p_valor < alpha, se rechaza la hipótesis "True" de que las 2 muestras relacionadas o repetidas
+        estadistico_t, p_valor = st.ttest_ind(*argumentos)
+        #Si p_valor < alpha, se rechaza la hipótesis "True" de que las 2 muestras independientes
         #tienen idénticos valores promedio (esperados).
         resultado = np.asscalar(p_valor<alpha)
         return json.dumps({"resultado" : resultado, "estadistico_t" : estadistico_t.tolist(), "p_valor" : p_valor})
