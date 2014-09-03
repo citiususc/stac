@@ -635,10 +635,10 @@ def datos_comunes_tests(test_principal, nombres, ranking, N):
     #Cálculo del estadístico Z (distribución normal). El valor cambia en función de si el
     #test principal es Friedman o Iman-Davenport, Rangos Alineados de Friedman o Quade.
     valores_z = []
-    if test_principal == "friedman" or test_principal == "iman-davenport":
+    if test_principal == "friedman_test" or test_principal == "iman_davenport_test":
         for j in range(1,K):
             valores_z.append((ranking[0]-ranking[j])/sp.sqrt((K*(K+1))/float(6*N)))
-    elif test_principal == "rangos-alineados":
+    elif test_principal == "friedman_rangos_alineados_test":
         for j in range(1,K):
             valores_z.append((ranking[0]-ranking[j])/sp.sqrt((K*(N+1))/float(6)))
     else:
@@ -1043,11 +1043,11 @@ def datos_comunes_multitests(test_principal, nombres, ranking, N):
     #Cálculo del estadístico Z (distribución normal). El valor cambia en función de si el
     #test principal es Friedman o Iman-Davenport, Rangos Alineados de Friedman o Quade.
     valores_z = []
-    if test_principal == "friedman" or test_principal == "iman-davenport":
+    if test_principal == "friedman_test" or test_principal == "iman_davenport_test":
         for i in range(K-1):
             for j in range(i+1,K):
                 valores_z.append((ranking[i]-ranking[j])/sp.sqrt((K*(K+1))/float(6*N)))
-    elif test_principal == "rangos-alineados":
+    elif test_principal == "friedman_rangos_alineados_test":
         for i in range(K-1):
             for j in range(i+1,K):
                 valores_z.append((ranking[i]-ranking[j])/sp.sqrt((K*(N+1))/float(6)))

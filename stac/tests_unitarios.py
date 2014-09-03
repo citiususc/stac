@@ -280,7 +280,7 @@ class TestDatosComunesTests(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.K, cls.nombres, cls.valores_z, cls.p_valores, cls.metodo_control = tnp.datos_comunes_tests("friedman", nombres2, datos5, 24)
+        cls.K, cls.nombres, cls.valores_z, cls.p_valores, cls.metodo_control = tnp.datos_comunes_tests("friedman_test", nombres2, datos5, 24)
 
     def test_K(self):
         """Verfifica que el valor de K devuelto es el correcto."""
@@ -309,7 +309,7 @@ class TestBonferroni_Dunn(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.K, cls.nombres, cls.valores_z, cls.p_valores, cls.metodo_control = tnp.datos_comunes_tests("friedman", nombres2, datos5, 24)
+        cls.K, cls.nombres, cls.valores_z, cls.p_valores, cls.metodo_control = tnp.datos_comunes_tests("friedman_test", nombres2, datos5, 24)
         cls.datos_devueltos = tnp.bonferroni_dunn_test(cls.K, cls.nombres, cls.valores_z, cls.p_valores, cls.metodo_control, 0.05)
 
     def test_resultado(self):
@@ -331,7 +331,7 @@ class TestHolm(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.K, cls.nombres, cls.valores_z, cls.p_valores, cls.metodo_control = tnp.datos_comunes_tests("friedman", nombres2, datos5, 24)
+        cls.K, cls.nombres, cls.valores_z, cls.p_valores, cls.metodo_control = tnp.datos_comunes_tests("friedman_test", nombres2, datos5, 24)
         cls.datos_devueltos = tnp.holm_test(cls.K, cls.nombres, cls.valores_z, cls.p_valores, cls.metodo_control, 0.05)
 
     def test_resultado(self):
@@ -353,7 +353,7 @@ class TestHochberg(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.K, cls.nombres, cls.valores_z, cls.p_valores, cls.metodo_control = tnp.datos_comunes_tests("friedman", nombres2, datos5, 24)
+        cls.K, cls.nombres, cls.valores_z, cls.p_valores, cls.metodo_control = tnp.datos_comunes_tests("friedman_test", nombres2, datos5, 24)
         cls.datos_devueltos = tnp.hochberg_test(cls.K, cls.nombres, cls.valores_z, cls.p_valores, cls.metodo_control, 0.05)
 
     def test_resultado(self):
@@ -375,7 +375,7 @@ class TestLi(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.K, cls.nombres, cls.valores_z, cls.p_valores, cls.metodo_control = tnp.datos_comunes_tests("friedman", nombres2, datos5, 24)
+        cls.K, cls.nombres, cls.valores_z, cls.p_valores, cls.metodo_control = tnp.datos_comunes_tests("friedman_test", nombres2, datos5, 24)
         cls.datos_devueltos = tnp.li_test(cls.K, cls.nombres, cls.valores_z, cls.p_valores, cls.metodo_control, 0.05)
 
     def test_resultado(self):
@@ -393,7 +393,7 @@ class TestFinner(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.K, cls.nombres, cls.valores_z, cls.p_valores, cls.metodo_control = tnp.datos_comunes_tests("friedman", nombres2, datos5, 24)
+        cls.K, cls.nombres, cls.valores_z, cls.p_valores, cls.metodo_control = tnp.datos_comunes_tests("friedman_test", nombres2, datos5, 24)
         cls.datos_devueltos = tnp.finner_test(cls.K, cls.nombres, cls.valores_z, cls.p_valores, cls.metodo_control, 0.05)
 
     def test_resultado(self):
@@ -422,7 +422,7 @@ class TestDatosComunesMultiTests(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.m, cls.comparaciones, cls.valores_z, cls.p_valores = tnp.datos_comunes_multitests("friedman", nombres1, datos4, 30)
+        cls.m, cls.comparaciones, cls.valores_z, cls.p_valores = tnp.datos_comunes_multitests("friedman_test", nombres1, datos4, 30)
 
     def test_m(self):
         """Verfifica que el valor de m (número de comparaciones) devuelto es el correcto."""
@@ -447,7 +447,7 @@ class TestNemenyi(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.m, cls.comparaciones, cls.valores_z, cls.p_valores = tnp.datos_comunes_multitests("friedman", nombres1, datos4, 30)
+        cls.m, cls.comparaciones, cls.valores_z, cls.p_valores = tnp.datos_comunes_multitests("friedman_test", nombres1, datos4, 30)
         cls.datos_devueltos = tnp.nemenyi_multitest(cls.m, cls.comparaciones, cls.valores_z, cls.p_valores, 0.05)
 
     def test_resultado(self):
@@ -469,7 +469,7 @@ class TestHolmMultitest(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.m, cls.comparaciones, cls.valores_z, cls.p_valores = tnp.datos_comunes_multitests("friedman", nombres1, datos4, 30)
+        cls.m, cls.comparaciones, cls.valores_z, cls.p_valores = tnp.datos_comunes_multitests("friedman_test", nombres1, datos4, 30)
         cls.datos_devueltos = tnp.holm_multitest(cls.m, cls.comparaciones, cls.valores_z, cls.p_valores, 0.05)
 
     def test_resultado(self):
@@ -491,7 +491,7 @@ class TestHochbergMultitest(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.m, cls.comparaciones, cls.valores_z, cls.p_valores = tnp.datos_comunes_multitests("friedman", nombres1, datos4, 30)
+        cls.m, cls.comparaciones, cls.valores_z, cls.p_valores = tnp.datos_comunes_multitests("friedman_test", nombres1, datos4, 30)
         cls.datos_devueltos = tnp.hochberg_multitest(cls.m, cls.comparaciones, cls.valores_z, cls.p_valores, 0.05)
 
     def test_resultado(self):
@@ -513,7 +513,7 @@ class TestFinnerMultitest(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.m, cls.comparaciones, cls.valores_z, cls.p_valores = tnp.datos_comunes_multitests("friedman", nombres1, datos4, 30)
+        cls.m, cls.comparaciones, cls.valores_z, cls.p_valores = tnp.datos_comunes_multitests("friedman_test", nombres1, datos4, 30)
         cls.datos_devueltos = tnp.finner_multitest(cls.m, cls.comparaciones, cls.valores_z, cls.p_valores, 0.05)
 
     def test_resultado(self):
@@ -535,7 +535,7 @@ class TestShafferMultitest(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.m, cls.comparaciones, cls.valores_z, cls.p_valores = tnp.datos_comunes_multitests("friedman", nombres1, datos4, 30)
+        cls.m, cls.comparaciones, cls.valores_z, cls.p_valores = tnp.datos_comunes_multitests("friedman_test", nombres1, datos4, 30)
         cls.datos_devueltos = tnp.shaffer_multitest(cls.m, cls.comparaciones, cls.valores_z, cls.p_valores, 0.05)
 
     def test_resultado(self):
