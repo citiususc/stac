@@ -1,0 +1,27 @@
+\chapter{Valoraciones finales}
+Como hemos detallado en la presente memoria, una de las tareas más importantes que se deben llevar a cabo en el aprendizaje automático es la validación de resultados obtenidos por los algoritmos de aprendizaje. El método estándar más aceptado en la actualidad por los analistas de datos es el de la aplicación de test estadísticos sobre los experimentos, que, entre otras utilidades, apoyan la toma de decisiones, como por ejemplo la elección del algoritmo más adecuado.
+
+La aplicación de test estadísticos se engloba en el ámbito de la Inferencia Estadística, que es la parte de la estadística que estudia cómo sacar conclusiones generales (sujetas a un determinado grado de fiabilidad o significancia) para toda la población a partir del estudio de una muestra. En este proyecto de fin de grado, se pretendió desarrollar un sistema con el que poder sacar conclusiones de los resultados obtenidos por diferentes algoritmos sobre distintos conjuntos de datos para determinar, por ejemplo, si los algoritmos podrían tener un rendimiento significativamente diferente y por lo tanto no se podrían considerar iguales.
+
+El objetivo de este Trabajo de Fin de Grado era desarrollar una plataforma web para la validación de experimentación en aprendizaje automático y minería de datos. En concreto, el trabajo descrito en esta memoria se resume en los siguientes puntos:
+
+\begin{itemize}
+\item Se extendió una librería de test estadísticos: nonparametric.py, actualmente implementada en Python.
+\item Se crearon servicios web basados en REST para facilitar el uso de los test y para poder realizar la subida y consulta de datos (pertenecientes a la aplicación de distintos algoritmos sobre problema o conjuntos de datos).
+\item Se desarrolló una interfaz web que hace uso de estos servicios y que muestra los resultados obtenidos.
+\end{itemize}
+
+El objetivo era que el analista pudiese introducir en la web los datos obtenidos mediante experimentación y seleccionar el test estadístico que desease utilizar para que, de forma automática, el sistema le mostrase los resultados de la aplicación del test. Así, el sistema permitiría, de un modo fácil y centralizado la validación de resultados mediante el uso de test estadísticos.
+
+\section{Posibles mejoras}
+
+A continuación se indican algunas ampliaciones que se le podrían aplicar a la aplicación desarrollada:
+
+\subsection{Test estadísticos para datos no apareados}
+Uno de los puntos a destacar sobre el presente trabajo, es que los test estadísticos desarrollados en este caso sirven para ser aplicados sobre un tipo de datos en particular: datos apareados. Estos datos, son los que tenemos cuando los datos de las muestras pertenecen a los mismos individuos (p. ej. aplicamos dos algoritmos sobre los mismos N conjuntos de datos, obteniendo dos muestras de tamaño N apareadas). Se podría extender la funcionalidad de la plataforma, permitiendo la aplicación de test estadísticos para datos no apareados. Existen actualmente test para este propósito. Por ejemplo, la contraposición para datos no apareados del test de los Rangos Signados de Wilcoxon presente en este proyecto sería el test U de Mann-Whitney.
+
+\subsection{Datos de entrada}
+Otra de las posibles mejoras es poder permitir al usuario la subida de datos no sólo mediante ficheros, sino a través de entrada manual de datos. Además, sería interesante poder permitir al usuario establecer él mismo el formato mediante el cual quiera subir los datos (p. ej. establecer el separador de columnas, el separador de filas, etc.). También se podría disponer de modificación vía web de los datos, tanto si son subidos mediante fichero de entrada o mediante formulario.
+
+\subsection{Otras mejoras}
+Se podrían añadir cambios a la interfaz con el fin de hacerla más atractiva al usuario. Por ejemplo: se podría mostrar una barra de progreso en la subida de datos. También se podría dar la posibilidad de mostrar los resultados con un determinado número de decimales (establecido por el usuario).

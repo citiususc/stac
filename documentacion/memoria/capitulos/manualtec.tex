@@ -78,5 +78,6 @@ root.mount('/api/', application) # Hacemos que todos los servicios escuchen en /
 \item Desactivar el sitio por defecto si es necesario:
 \subitem - \texttt{sudo a2disite 000-default}
 \item Reiniciar servidor:
-\subitem - \texttt{sudo service apache restart}
+\subitem - \texttt{sudo service apache2 restart}
+\subitem - O también: \texttt{sudo /etc/init.d/apache2 restart}
 \end{enumerate}
