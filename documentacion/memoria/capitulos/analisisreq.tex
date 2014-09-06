@@ -3,7 +3,7 @@
 \chapter{Análisis de requisitos} \label{analisisreq}
 El análisis de requisitos es el primer paso técnico del proceso de ingeniería del software. Es aquí donde se refina la declaración general del ámbito del software en una especificación concreta que se convierte en la base de todas las actividades de ingeniería del software que siguen.
 
-En este proyecto, hemos utilizado el enfoque de metodología de desarrollo ágil Scrum \cite{libroscrum}. Los detalles de esta metodología y la razón de su utilización en este proyecto se detallan en la sección \ref{metodologia} del capítulo \ref{chgestion}. Para realizar el análisis de requisitos, a diferencia del enfoque de tradicional en el que los requisitos son descritos de una forma muy estricta y formal, esta metodología permite describir las necesidades del usuario de una manera más simple. Para ello, se establecen los requisitos mediante las \textbf{historias de usuario}. Las historias de usuario son requisitos escritos en un lenguaje coloquial bien directamente por el mismo cliente, o bien como un recordatorio posterior de las conversaciones mantenidas con el cliente. Consisten en una o dos frases en donde de una forma no precisa se detalla lo que el usuario requiere de la aplicación. Además, deben ser:
+En este proyecto, hemos utilizado el enfoque de metodología de desarrollo ágil Scrum \cite{libroscrum}. Los detalles de esta metodología y la razón de su utilización en este proyecto se detallan en la sección \ref{metodologia}. Para realizar el análisis de requisitos, a diferencia del enfoque de tradicional en el que los requisitos son descritos de una forma muy estricta y formal, esta metodología permite describir las necesidades del usuario de una manera más simple. Para ello, se establecen los requisitos mediante las \textbf{historias de usuario}. Las historias de usuario son requisitos escritos en un lenguaje coloquial bien directamente por el mismo cliente, o bien como un recordatorio posterior de las conversaciones mantenidas con el cliente. Consisten en una o dos frases en donde de una forma no precisa se detalla lo que el usuario requiere de la aplicación. Además, deben ser:
 
 \begin{itemize}
 \item \textbf{Independientes:} no depender de otras para su compleción.
@@ -66,7 +66,7 @@ Desglosando el Epic \textbf{EP-1:} Proporcionar una API REST de los test estadí
 \begin{table}[H]
 	\begin{tabular}{| p{3cm}| p{11cm} |}
 		\hline
-		\multicolumn{2}{|c|}{\textbf{HU-1} - Acceder a test} \\ \hline
+		\multicolumn{2}{|c|}{\textbf{HU-1} - Acceder a los test} \\ \hline
 		\textbf{Como:} & Desarrollador \\ \hline
 		\textbf{Me gustaría:} & acceder a los test como recursos independientes con parámetros opcionales. \\ \hline
 		\textbf{Ya que:} & esto facilita su utilización y los hace más flexibles. \\ \hline
@@ -113,7 +113,7 @@ Desglosando el Epic \textbf{EP-1:} Proporcionar una API REST de los test estadí
 		\hline
 		\multicolumn{2}{|c|}{\textbf{HU-4} - Analizar datos subidos} \\ \hline
 		\textbf{Como:} & Desarrollador \\ \hline
-		\textbf{Me gustaría:} & que el fichero de datos subido al servidor tuviese siempre el formato csv. \\ \hline
+		\textbf{Me gustaría:} & que el fichero de datos subido al servidor tuviese el formato csv. \\ \hline
 		\textbf{Ya que:} & es un formato abierto y sencillo para representar datos en forma de tabla y los test reciben siempre los datos en forma de matriz, donde las filas representan los conjuntos de datos de cada problema y las columnas los resultados obtenidos de cada algoritmo. \\ \hline
 		\multirow{2}{11cm}{\textbf{C. Aceptación:}} & - El servicio de subida comprueba que los datos subidos siguen el estándar csv y están dispuestos de acuerdo a una convención establecida para el proyecto. \\
 		& - En caso de no cumplir el estándar se devuelve un error. \\ \hline 
@@ -182,8 +182,7 @@ Desglosando el Epic \textbf{EP-2:} Permitir realizar test estadísticos paramét
 		\textbf{Como:} & Cliente \\ \hline
 		\textbf{Me gustaría:} & poder aplicar el test t-test a mis datos. \\ \hline
 		\textbf{Ya que:} & aunque contrasta la misma hipótesis que ANOVA éste tiene otro estadístico y funciona únicamente para dos algoritmos, con lo que puede resultar interesante tener otro punto de vista. \\ \hline
-		\multirow{4}{11cm}{\textbf{C. Aceptación:}} & - El módulo de Python tiene implementado el test t-test. \\
-		& - La plataforma muestra una sección para test paramétricos donde se puede aplicar la prueba. \\
+		\multirow{4}{11cm}{\textbf{C. Aceptación:}} & - La plataforma muestra una sección para test paramétricos donde se puede aplicar la prueba. \\
 		& - El test devuelve los datos: estadístico, el $\textit{p-valor}$ y el resultado. \\
 		& - Devuelve error en caso de que los datos tengan resultados de más de 2 algoritmos. \\ \hline
 		\textbf{\textbf{Prioridad:}} & media \\ \hline

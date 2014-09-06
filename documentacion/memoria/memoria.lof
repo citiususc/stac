@@ -22,39 +22,44 @@
 \contentsline {figure}{\numberline {4.1}{\ignorespaces Ciclos de desarrollo.\relax }}{45}{figure.caption.73}
 \contentsline {figure}{\numberline {4.2}{\ignorespaces Ejemplo gr\IeC {\'a}fico Burn-Down.\relax }}{47}{figure.caption.74}
 \contentsline {figure}{\numberline {4.3}{\ignorespaces Estructura de descomposici\IeC {\'o}n del trabajo (EDT).\relax }}{49}{figure.caption.75}
-\contentsline {figure}{\numberline {4.4}{\ignorespaces Cronograma lineal de la planificaci\IeC {\'o}n de las fases.\relax }}{51}{figure.caption.82}
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Cronograma lineal de la planificaci\IeC {\'o}n de las fases.\relax }}{52}{figure.caption.82}
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Gr\IeC {\'a}ficos Burn-Down.\relax }}{52}{figure.caption.83}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Sprint 1.}}}{52}{figure.caption.83}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Sprint 2.}}}{52}{figure.caption.83}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Arquitectura de la plataforma web.\relax }}{53}{figure.caption.86}
-\contentsline {figure}{\numberline {5.2}{\ignorespaces Patr\IeC {\'o}n MVC.\relax }}{54}{figure.caption.87}
-\contentsline {figure}{\numberline {5.3}{\ignorespaces Patr\IeC {\'o}n \textit {Singleton}.\relax }}{56}{figure.caption.88}
-\contentsline {figure}{\numberline {5.4}{\ignorespaces Servicios web REST.\relax }}{59}{figure.caption.92}
-\contentsline {figure}{\numberline {5.5}{\ignorespaces Organizaci\IeC {\'o}n Twitter Bootstrap.\relax }}{61}{figure.caption.95}
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Arquitectura de la plataforma web.\relax }}{55}{figure.caption.87}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Patr\IeC {\'o}n MVC implementado.\relax }}{56}{figure.caption.88}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Patr\IeC {\'o}n \textit {Singleton}.\relax }}{58}{figure.caption.89}
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Servicios web REST.\relax }}{61}{figure.caption.93}
+\contentsline {figure}{\numberline {5.5}{\ignorespaces Organizaci\IeC {\'o}n Twitter Bootstrap.\relax }}{63}{figure.caption.96}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {6.1}{\ignorespaces Prototipo de p\IeC {\'a}gina principal.\relax }}{73}{figure.caption.107}
-\contentsline {figure}{\numberline {6.2}{\ignorespaces Prototipo p\IeC {\'a}gina de ayuda.\relax }}{73}{figure.caption.108}
-\contentsline {figure}{\numberline {6.3}{\ignorespaces Prototipo p\IeC {\'a}gina selecci\IeC {\'o}n de par\IeC {\'a}metros/opciones.\relax }}{74}{figure.caption.109}
-\contentsline {figure}{\numberline {6.4}{\ignorespaces Prototipo p\IeC {\'a}gina visualizaci\IeC {\'o}n de resultados.\relax }}{74}{figure.caption.110}
-\contentsline {figure}{\numberline {6.5}{\ignorespaces Diagrama de secuencia de la subida de ficheros.\relax }}{77}{figure.caption.111}
-\contentsline {figure}{\numberline {6.6}{\ignorespaces Diagrama de secuencia de la consulta de ficheros.\relax }}{78}{figure.caption.112}
-\contentsline {figure}{\numberline {6.7}{\ignorespaces Diagrama de secuencia del test de ANOVA.\relax }}{79}{figure.caption.113}
-\contentsline {figure}{\numberline {6.8}{\ignorespaces Diagrama de secuencia de los test no param\IeC {\'e}tricos de ranking.\relax }}{80}{figure.caption.114}
-\contentsline {figure}{\numberline {6.9}{\ignorespaces Diagrama de secuencia de los test de SciPy.\relax }}{81}{figure.caption.115}
+\contentsline {figure}{\numberline {6.1}{\ignorespaces Prototipo de p\IeC {\'a}gina principal.\relax }}{75}{figure.caption.108}
+\contentsline {figure}{\numberline {6.2}{\ignorespaces Prototipo p\IeC {\'a}gina de ayuda.\relax }}{75}{figure.caption.109}
+\contentsline {figure}{\numberline {6.3}{\ignorespaces Prototipo p\IeC {\'a}gina selecci\IeC {\'o}n de par\IeC {\'a}metros/opciones.\relax }}{76}{figure.caption.110}
+\contentsline {figure}{\numberline {6.4}{\ignorespaces Prototipo p\IeC {\'a}gina visualizaci\IeC {\'o}n de resultados.\relax }}{76}{figure.caption.111}
+\contentsline {figure}{\numberline {6.5}{\ignorespaces Error sin fichero.\relax }}{78}{figure.caption.112}
+\contentsline {figure}{\numberline {6.6}{\ignorespaces Vista test ANOVA.\relax }}{79}{figure.caption.113}
+\contentsline {figure}{\numberline {6.7}{\ignorespaces Diagrama de secuencia de la subida de ficheros.\relax }}{80}{figure.caption.115}
+\contentsline {figure}{\numberline {6.8}{\ignorespaces Diagrama de secuencia de la consulta de ficheros.\relax }}{81}{figure.caption.117}
+\contentsline {figure}{\numberline {6.9}{\ignorespaces Diagrama de secuencia del test de ANOVA.\relax }}{82}{figure.caption.119}
+\contentsline {figure}{\numberline {6.10}{\ignorespaces Diagrama de secuencia de los test no param\IeC {\'e}tricos de ranking.\relax }}{83}{figure.caption.121}
+\contentsline {figure}{\numberline {6.11}{\ignorespaces Diagrama de secuencia de los test de SciPy.\relax }}{84}{figure.caption.123}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {A.1}{\ignorespaces Directorio del proyecto STAC.\relax }}{91}{figure.caption.116}
+\contentsline {figure}{\numberline {A.1}{\ignorespaces Directorio del proyecto STAC.\relax }}{93}{figure.caption.124}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {B.1}{\ignorespaces P\IeC {\'a}gina de inicio de la plataforma.\relax }}{93}{figure.caption.117}
-\contentsline {figure}{\numberline {B.2}{\ignorespaces Ventana emergente de subida de ficheros.\relax }}{94}{figure.caption.118}
-\contentsline {figure}{\numberline {B.3}{\ignorespaces Mensaje de error.\relax }}{94}{figure.caption.119}
-\contentsline {figure}{\numberline {B.4}{\ignorespaces Listado secciones ayuda.\relax }}{95}{figure.caption.120}
-\contentsline {figure}{\numberline {B.5}{\ignorespaces Secci\IeC {\'o}n del formato del fichero de datos.\relax }}{95}{figure.caption.121}
-\contentsline {figure}{\numberline {B.6}{\ignorespaces Pantalla de visualizaci\IeC {\'o}n del fichero de datos.\relax }}{96}{figure.caption.122}
-\contentsline {figure}{\numberline {B.7}{\ignorespaces Descripci\IeC {\'o}n de test de condiciones param\IeC {\'e}tricas.\relax }}{96}{figure.caption.123}
-\contentsline {figure}{\numberline {B.8}{\ignorespaces Selecci\IeC {\'o}n de opciones.\relax }}{97}{figure.caption.124}
-\contentsline {figure}{\numberline {B.9}{\ignorespaces Error cuando no existe ning\IeC {\'u}n fichero.\relax }}{97}{figure.caption.125}
-\contentsline {figure}{\numberline {B.10}{\ignorespaces Error cuando el n\IeC {\'u}mero de algoritmos es mayor a 2.\relax }}{98}{figure.caption.126}
-\contentsline {figure}{\numberline {B.11}{\ignorespaces P\IeC {\'a}gina de visualizaci\IeC {\'o}n de resultados.\relax }}{98}{figure.caption.127}
-\contentsline {figure}{\numberline {B.12}{\ignorespaces Ventana de di\IeC {\'a}logo exportaci\IeC {\'o}n resultados.\relax }}{99}{figure.caption.128}
-\contentsline {figure}{\numberline {B.13}{\ignorespaces Formato datos \textlatin {\LaTeX }.\relax }}{99}{figure.caption.129}
-\contentsline {figure}{\numberline {B.14}{\ignorespaces Formato datos CSV.\relax }}{99}{figure.caption.130}
+\contentsline {figure}{\numberline {B.1}{\ignorespaces P\IeC {\'a}gina de inicio de la plataforma.\relax }}{95}{figure.caption.125}
+\contentsline {figure}{\numberline {B.2}{\ignorespaces Ventana emergente de subida de ficheros.\relax }}{96}{figure.caption.126}
+\contentsline {figure}{\numberline {B.3}{\ignorespaces Mensaje de error.\relax }}{96}{figure.caption.127}
+\contentsline {figure}{\numberline {B.4}{\ignorespaces Listado secciones ayuda.\relax }}{97}{figure.caption.128}
+\contentsline {figure}{\numberline {B.5}{\ignorespaces Secci\IeC {\'o}n del formato del fichero de datos.\relax }}{97}{figure.caption.129}
+\contentsline {figure}{\numberline {B.6}{\ignorespaces Pantalla de visualizaci\IeC {\'o}n del fichero de datos.\relax }}{98}{figure.caption.130}
+\contentsline {figure}{\numberline {B.7}{\ignorespaces Descripci\IeC {\'o}n de test de condiciones param\IeC {\'e}tricas.\relax }}{98}{figure.caption.131}
+\contentsline {figure}{\numberline {B.8}{\ignorespaces Selecci\IeC {\'o}n de opciones.\relax }}{99}{figure.caption.132}
+\contentsline {figure}{\numberline {B.9}{\ignorespaces Error cuando no existe ning\IeC {\'u}n fichero.\relax }}{99}{figure.caption.133}
+\contentsline {figure}{\numberline {B.10}{\ignorespaces Error cuando el n\IeC {\'u}mero de algoritmos es mayor a 2.\relax }}{100}{figure.caption.134}
+\contentsline {figure}{\numberline {B.11}{\ignorespaces P\IeC {\'a}gina de visualizaci\IeC {\'o}n de resultados.\relax }}{100}{figure.caption.135}
+\contentsline {figure}{\numberline {B.12}{\ignorespaces Ventana de di\IeC {\'a}logo exportaci\IeC {\'o}n resultados.\relax }}{101}{figure.caption.136}
+\contentsline {figure}{\numberline {B.13}{\ignorespaces Formato datos \textlatin {\LaTeX }.\relax }}{101}{figure.caption.137}
+\contentsline {figure}{\numberline {B.14}{\ignorespaces Formato datos CSV.\relax }}{101}{figure.caption.138}
