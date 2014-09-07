@@ -742,21 +742,24 @@ nivel de significancia proporcionado sin ajustar.
 \item \textbf{Test de Bonferroni-Dunn:} el contraste de las hipótesis se realiza comparando cada $\textit{p-valor}$ con
 el nivel de significancia ajustado:
 \[ \alpha_{ajustado} = \frac{\alpha}{(K-1)} \]
+La prueba de Bonferroni-Dunn no debe utilizarse a pesar de su simplicidad, ya que es una prueba muy conservadora y muchas diferencias pueden no ser detectadas.
 \item \textbf{Test de Holm:} compara cada $\textit{p-valor}$ (empezando por el más significativo) con:
 \[ \alpha_{ajustado_i} = \frac{\alpha}{(K-i)} \]
 Si se rechaza una hipótesis continúa contrastando. En el caso de que una hipótesis se rechace se rechazan todas
-las demás.
+las demás.\\
+Procedimiento de Holm siempre puede considerarse mejor (mayor potencia) que el de Bonferroni-Dunn, porque controla adecuadamente la FWER (\textit{Familywise error rate}), que es la probabilidad de cometer uno o más errores de tipo I entre todas las hipótesis.
+\item \textbf{Test de Hochberg:} compara en la dirección opuesta a Holm. En el momento que encuentra una hipótesis
+que pueda aceptar, acepta todas las demás.\\
+Procedimiento de Hochberg presenta mayor potencia que el de Holm, pero las diferencias entre ellos en la práctica son pequeñas. 
 \item \textbf{Test de Finner:} compara cada $\textit{p-valor}$ (empezando por el más significativo) con:
 \[ alpha_{ajustado_i} = 1-(1-\alpha)^{\frac{(K-1)}{i}} \]
-Al igual que el test de Holm, si se rechaza una hipótesis continúa contrastando. En el caso de que una hipótesis
-se rechace se rechazan todas
-las demás.
-\item \textbf{Test de Hochberg:} compara en la dirección opuesta a Holm. En el momento que encuentra una hipótesis
-que pueda aceptar, acepta todas las demás.
+Al igual que el test de Holm, si se rechaza una hipótesis continúa contrastando. En el caso de que una hipótesis se rechace se rechazan todas las demás.\\
+Una de las mejores alternativas es la prueba Finner, ya que es fácil de aplicar y ofrece mejores resultados que los los otros procedimientos, excepto la prueba de Li en algunos casos.
 \item \textbf{Test de Li:} rechaza todas las hipótesis si el $\textit{p-valor}$ menos significativo es menor que  $\alpha$.
 En otro caso, acepta dicha hipótesis y rechaza cualquier hipótesis restante cuyo $\textit{p-valor}$ sea menor que un valor
 específico:
 \[ valor = \frac{(1-\textit{p-valor}_{k-1})}{(1-\alpha)\alpha} \]
+El test POST-HOC de Li es más simple incluso que el test de Finner (ya que sólo requiere dos pasos). El autor declara que la potencia de esta prueba está altamente influenciada por el \textit{p-valor} (mayor potencia cuando el \textit{p-valor} es inferior a 0.5) \cite{potencia}.
 \end{itemize}
 
 Los test anteriores son para el caso de comparaciones simples (utilizan un método de control), con lo que
@@ -775,7 +778,7 @@ entre $K$ distribuciones, donde $K \geq 2$ y $S(0) = S(1) = \{0\}$
 \end{itemize}
 
 Los test de la lista anterior están ordenados de menor a mayor potencia, siendo, como se puede apreciar,
-el test de Bonferroni-Dunn el menos potente de todos y el test de Li el que mayor potencia presenta \cite{potencia}.
+el test de Bonferroni-Dunn el menos potente de todos y el test de Li el que mayor potencia presenta. Sin embargo, las diferencias de potencia entre los métodos son bastante pequeñas en general, con algunas excepciones, como se ha comentado anteriormente \cite{potencia}.
 
 %----------------------------------
 

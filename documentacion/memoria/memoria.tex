@@ -11,12 +11,19 @@
 \usepackage[eurosym,right]{eurofont}
 \usepackage{listings}
 \usepackage[strict]{chngpage}
+\usepackage{array}
+\usepackage{color, colortbl}
+\usepackage{longtable}
+\usepackage{caption}
 
+\definecolor{Gray}{gray}{0.9}
 \lstset{basicstyle=\ttfamily\scriptsize}
 
 % Comienza el documento.
 \begin{document}
 \include{capitulos/titulo}
+\cleardoublepage
+\include{capitulos/certificacion}
 \cleardoublepage
 \include{capitulos/agradecimientos}
 \cleardoublepage
@@ -45,6 +52,10 @@
 \include{capitulos/arquitecturah}
 \cleardoublepage
 \include{capitulos/disenhoimpl}
+\cleardoublepage
+\include{capitulos/validacionyp}
+\cleardoublepage
+\include{capitulos/valoracionesf}
 \cleardoublepage
 
 % Aquí empiezan los apéndices.

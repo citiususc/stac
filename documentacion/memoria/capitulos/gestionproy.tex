@@ -69,7 +69,7 @@ A continuación, se enumeran los posibles riesgos en dos grupos. Para ello, se i
 \begin{table}[H]
 	\begin{tabular}{| p{4cm}| p{10cm} |}
 		\hline
-		\multicolumn{2}{|c|}{\textbf{RPD-3} - Resultados test no esperados} \\ \hline
+		\multicolumn{2}{|c|}{\textbf{RPD-3} - Resultados de test no esperados} \\ \hline
 		\textbf{Descripción:} & Los resultados obtenidos de la aplicación de un test no son los esperados. Cabe destacar que puede que para un determinado conjunto de datos de entrada los resultados obtenidos sean mejores que los resultados obtenidos para otros datos. \\ \hline
 		\textbf{Probabilidad:} & Moderada \\ \hline
 		\textbf{Impacto:} & Tolerable \\ \hline
@@ -92,12 +92,11 @@ A continuación, se enumeran los posibles riesgos en dos grupos. Para ello, se i
 \end{table}
 
 \section{Metodología de desarrollo} \label{metodologia}
-
-\subsection{Metodologías ágiles}
 En todo proyecto software la elección de la metodología de desarrollo juega un papel crucial a la hora de finalizar con éxito el proyecto. El diseño y el desarrollo de software no es una tarea sencilla y cada proyecto tiene características personales que propician la selección de una determinada metodología u otra.
 
-Al principio, cuando el desarrollo de software todavía se estaba iniciando, surgió la necesidad de mejorar el proceso para poder finalizar con éxito los proyectos, con lo que se implantaron y adaptaron metodologías existentes en otras áreas al desarrollo de software. Estas metodologías tradicionales o también denominadas pesadas dividen el proceso de desarrollo en varias etapas que se van realizando de manera secuencial, siendo la primera fase aquella que sienta las bases del proyecto. Uno de los principales inconvenientes que tienen estas metodologías es su baja tolerancia a los cambios, así como el no ofrecer una buena solución en entornos volátiles.
+Al principio, cuando el desarrollo de software todavía se estaba iniciando, surgió la necesidad de mejorar el proceso para poder finalizar con éxito los proyectos, con lo que se implantaron y adaptaron metodologías existentes en otras áreas al desarrollo de software. Estas metodologías tradicionales, también denominadas pesadas, dividen el proceso de desarrollo en varias etapas que se van realizando de manera secuencial, siendo la primera fase aquella que sienta las bases del proyecto. Uno de los principales inconvenientes que tienen estas metodologías es su baja tolerancia a los cambios, así como el no ofrecer una buena solución en entornos volátiles.
 
+\subsection{Metodologías ágiles}
 En un escenario rápido e inestable, encajan mal las estrategias de negocio predictivas (metodologías pesadas), que diseñan un producto y trazan un plan de negocio. Es en este ámbito donde surgen las metodologías ágiles, que ofrecen una mayor libertad al equipo de trabajo cuando existe incertidumbre. No se trata de elegir un modelo como el mejor, simplemente habrá casos en los que convendrá una gestión predictiva (p.ej. cuando los requisitos están completamente determinados desde el principio y no habrá cambios) y otros (p.ej. entornos volátiles) en los que la opción ágil puede ser más beneficiosa.
 
 En marzo de 2001, 17 críticos de los modelos de producción basados en procesos, convocados por Kent Beck, que había publicado un par de años antes el libro en el que explicaba la nueva metodología Extreme Programming Beck \cite{kent}) se reunieron en Salt Lake City para discutir sobre el desarrollo de software. En la reunión se acuñó el término ``Métodos Ágiles" para definir a aquellos que estaban surgiendo como alternativa a las metodologías formales, a las que consideraban excesivamente pesadas y rígidas por su carácter normativo y fuerte dependencia de planificaciones detalladas, previas al desarrollo. Los integrantes de la reunión resumieron en cuatro postulados lo que ha quedado denominado como ``Manifiesto Ágil", que son los valores sobre los que se asientan estos métodos:
@@ -127,7 +126,11 @@ Sobre estos valores, se establecen una serie de principios de las metodologías 
 \end{figure}
 
 \subsection{Scrum} \label{scrum}
-Existen muchas metodologías ágiles disponibles, como el método de desarrollo de sistemas dinámicos (DSDM), la programación extrema (XP), etc. Sin embargo, en este proyecto se hace uso de la metodología Scrum. Actualmente, Scrum es una de las metodologías más populares para la gestión de proyectos. Este modelo fue identificado y definido por Ikujiro Nonaka e Hirotaka Takeuchi a principios de los 80, al analizar cómo desarrollaban los nuevos productos las principales empresas de manufactura tecnológica en esa época. Nonaka y Takeuchi compararon la nueva forma de trabajo en equipo, con el avance en formación de scrum de los jugadores de Rugby, a raíz de lo cual quedó acuñado el término “scrum” para referirse a ella.
+Existen muchas metodologías ágiles disponibles, como el método de desarrollo de sistemas dinámicos (DSDM), la programación extrema (XP), etc. Sin embargo, en este proyecto se hace uso de la metodología Scrum. Actualmente, Scrum es una de las metodologías más populares para la gestión de proyectos. 
+
+La razón principal de la elección de esta metodología es su flexibilidad a la hora de realizar las diferentes tareas del proyecto, pudiendo seleccionar aquellas tareas que más convienen hacer en un momento dado (las tareas de mayor importancia al principio, para presentar versiones utilizables lo antes posible). Además, en este proyecto existe cierta incertidumbre a la hora de establecer requisitos fijos de antemano, como se puede ver en la sección \ref{riesgos} en el riesgo \textbf{RPD-1}. Así, se desarrollan tareas en función de las necesidades cambiantes durante todo el proyecto y el solapamiento de fases ilustrado en la figura \ref{fig:ciclos} evita que no se tenga que esperar a la finalización de una fase para poder comenzar otra (una de las desventajas de las metodologías pesadas). Otra razón por la que se eligió esta metodología es por la necesidad de ir presentando periódicamente versiones utilizables de la aplicación al cliente (los directores), para que éstos puedan empezar a utilizar la aplicación desde el principio e ir sugiriendo cambios y mejoras a realizar (característica de entornos con incertidumbre). Por ello, las reuniones de planificación y revisión de los sprints (incrementos) son tan importantes en este proyecto.
+
+Scrum fue identificado y definido por Ikujiro Nonaka e Hirotaka Takeuchi a principios de los 80, al analizar cómo desarrollaban los nuevos productos las principales empresas de manufactura tecnológica en esa época. Nonaka y Takeuchi compararon la nueva forma de trabajo en equipo, con el avance en formación de scrum de los jugadores de Rugby, a raíz de lo cual quedó acuñado el término “scrum” para referirse a ella.
 
 Entre las características que describen los entornos de desarrollo típicos en los que se puede aplicar la metodología de desarrollo ágil Scrum, destacan las siguientes:
 
@@ -137,13 +140,13 @@ Entre las características que describen los entornos de desarrollo típicos en 
 \item Control sutil: El equipo trabaja con autonomía en un entorno de ambigüedad, inestabilidad y tensión. La gestión establece puntos de control suficientes para evitar que el ambiente de ambigüedad, inestabilidad y tensión del derive hacia descontrol, pero no ejerce un control rígido que impediría la creatividad y la espontaneidad.
 \end{itemize}
 
-En Scrum la gestión no se basa en el seguimiento de un plan, sino en la adaptación continua a las circunstancias de la evolución del proyecto. El desarrollo se inicia desde la visión general de producto, dando detalle  solo a las funcionalidades que, por ser las de mayor prioridad para el negocio, se van a desarrollar en primer lugar, y pueden llevarse a cabo en un periodo de tiempo breve (entre 15 y 60 días). Cada uno de los ciclos de desarrollo es una iteración (sprint) que produce un incremento terminado y operativo del producto. Estas iteraciones son la base del desarrollo ágil, y Scrum gestiona su evolución a través de reuniones breves de seguimiento en las que todo el equipo revisa el trabajo realizado desde la reunión anterior y el previsto hasta la reunión siguiente.
+En Scrum la gestión no se basa en el seguimiento de un plan, sino en la adaptación continua a las circunstancias de la evolución del proyecto. El desarrollo se inicia desde la visión general de producto, dando detalle  solo a las funcionalidades que, por ser las de mayor prioridad para el negocio, se van a desarrollar en primer lugar, y pueden llevarse a cabo en un periodo de tiempo breve (entre 15 y 30 días). Cada uno de los ciclos de desarrollo es una iteración (sprint) que produce un incremento terminado y operativo del producto. Estas iteraciones son la base del desarrollo ágil, y Scrum gestiona su evolución a través de reuniones breves de seguimiento en las que todo el equipo revisa el trabajo realizado desde la reunión anterior y el previsto hasta la reunión siguiente.
 
 \noindent
 \textbf{Roles}
 \begin{itemize}
 \item \textbf{Propietario del producto (\textit{Product Owner}):} Representa la voz del cliente. Se asegura de que el equipo Scrum trabaje de forma adecuada desde la perspectiva del negocio. Tiene entre sus responsabilidades la financiación, la decisión para efectuar el lanzamiento, etc. También puede escribir historias de usuario, priorizarlas y colocarlas en el \textit{Product Backlog} (descripciones genéricas de todos los requisitos priorizadas de mayor a menor importancia).
-\item \textbf{Facilitador (\textit{Scrum Master}):} Responsable de garantizar que se aplica correctamente la metodología. Su trabajo principal es eliminar los obstáculos que impiden que el equipo alcance el objetivo del sprint.
+\item \textit{Scrum Master:} Responsable de garantizar que se aplica correctamente la metodología. Su trabajo principal es eliminar los obstáculos que impiden que el equipo alcance el objetivo del sprint.
 \item \textbf{Equipo desarrollo:} Tiene la responsabilidad de entregar el producto y capacidades para análisis, diseño, desarrollo, pruebas, documentación, etc.
 \end{itemize}
 
@@ -151,7 +154,7 @@ En Scrum la gestión no se basa en el seguimiento de un plan, sino en la adaptac
 \textbf{Componentes básicos}
 \begin{itemize}
 \item \textbf{\textit{Product Backlog}:} Listado general de requisitos que evoluciona durante todo el desarrollo. Todos pueden contribuir y aportar sugerencias y están ordenados por prioridad según el cliente.
-\item \textbf{Facilitador (\textit{Sprint Backlog}):} Lista de tareas a realizar en el sprint para generar el incremento. Se asignan los recursos y se estiman las unidades de tiempo para realizar cada tarea.
+\item \textit{Sprint Backlog:} Lista de tareas a realizar en el sprint para generar el incremento. Se asignan los recursos y se estiman las unidades de tiempo para realizar cada tarea.
 \item \textbf{Incremento:} Es el resultado de cada sprint listo enseñar al cliente (está terminado y probado) y por tanto en condiciones de ser usado.
 \end{itemize}
 
@@ -178,16 +181,16 @@ Herramienta para gestionar y seguir el trabajo de cada sprint, donde se represen
 Las \textbf{modificaciones realizas} sobre la metodología Scrum para realizar este proyecto son dos: 
 \begin{itemize}
 \item Los roles de \textit{Product Owner} y \textit{Scrum Master} en este proyecto son los mismos, es decir, corresponden a los directores del proyecto, que hacen de voz representativa del cliente y garantizan que se aplique correctamente la metodología. Además, el equipo de desarrollo está representado por una persona.
-\item No se realizan las reuniones de monitorización o seguimiento del sprint, ya que en este caso no es necesario realizar un seguimiento tan exhaustivo en el desarrollo y por lo sólo se llevan a cabo cuando existe algún impedimento para continuar con el sprint. Sí se realizan las reuniones de planificación y de revisión del sprint.
+\item No se realizan las reuniones de monitorización o seguimiento del sprint, ya que en este caso no es necesario realizar un seguimiento tan exhaustivo en el desarrollo y por lo que sólo se llevan a cabo cuando existe algún impedimento para continuar con el sprint. Sí se realizan las reuniones de planificación y de revisión del sprint.
 \end{itemize}
 
 \noindent
-La razón principal de la elección de esta metodología es su flexibilidad a la hora de realizar las diferentes tareas del proyecto, pudiendo seleccionar aquellas tareas que más convienen hacer en un momento dado (las tareas de mayor importancia al principio, para presentar versiones utilizables lo antes posible). Además, en este proyecto existe cierta incertidumbre a la hora de establecer requisitos fijos de antemano, como se puede ver en la sección \ref{riesgos} en el riesgo \textbf{RPD-1}. Así, se desarrollan tareas en función de las necesidades cambiantes durante todo el proyecto y el solapamiento de fases ilustrado en la figura \ref{fig:ciclos} evita que no se tenga que esperar a la finalización de una fase para poder comenzar otra (una de las desventajas de las metodologías pesadas). Otra razón por la que se eligió esta metodología es por la necesidad de ir presentando periódicamente versiones utilizables de la aplicación al cliente (los directores), para que éstos puedan empezar a utilizar la aplicación desde el principio e ir sugiriendo cambios y mejoras a realizar (característica de entornos con incertidumbre). Por ello, las reuniones de planificación y revisión de los sprints (incrementos) son tan importantes en este proyecto.
+Como herramienta de gestión de proyectos, se ha utilizado Acunote \cite{acunote}. Se trata de una herramienta de gestión de proyectos ágiles y software Scrum. Es utilizada ampliamente en el mundo empresarial como parte de la gestión de proyecto TIC. Entre las razones de su utilización cabe destacar su sencillez y facilidad de uso. Asimismo, permite mostrar el progreso actual y proporciona potentes analíticas, como el gráfico Burn-Down, del que hemos hablado anteriormente.
 
 \section{Gestión de la configuración}
 La configuración del software es el conjunto de características funcionales y físicas del software detalladas en la documentación técnica o alcanzadas en un producto. (IEEE610.12-90). La gestión de la configuración, por su parte, es un proceso cuyo propósito es establecer y mantener la integridad de los elementos de trabajo. Para ello, se identifican los elementos y se controlan los cambios de éstos a lo largo de su ciclo de vida, registrando el estado y verificando que estén completos y que sean los correctos.
 
-Para llevar a cabo la gestión de la configuración en este proyecto, se utiliza un sistema de control de versiones mediante la herramienta GitLab que ofrece el CiTIUS y que facilita la gestión de repositorios. Esta herramienta, se basa en GIT, que es un SCV (sistema de control de versiones) multiplataforma y distribuido, donde hay un repositorio central con el cual se puede sincronizar todo el mundo. Se sitúa en una máquina en concreto y es el repositorio que contiene todo el histórico, etiquetas y ramas. La razón de utilizar esta herramienta es su velocidad, su diseño sencillo y la posibilidad de visualizar gráficamente la interacción (gráficas de modificaciones, etc.) con el repositorio.
+Para llevar a cabo la gestión de la configuración en este proyecto, se utiliza un sistema de control de versiones mediante la herramienta GitLab que ofrece el CiTIUS \cite{gitlab} y que facilita la gestión de repositorios. Esta herramienta, se basa en GIT, que es un SCV (sistema de control de versiones) multiplataforma y distribuido, donde hay un repositorio central con el cual se puede sincronizar todo el mundo. Se sitúa en una máquina en concreto y es el repositorio que contiene todo el histórico, etiquetas y ramas. La razón de utilizar esta herramienta es su velocidad, su diseño sencillo y la posibilidad de visualizar gráficamente la interacción (gráficas de modificaciones, etc.) con el repositorio.
 
 \noindent
 En este proyecto los elementos de configuración implican tanto los archivos de desarrollo como los archivos de documentación:
@@ -213,7 +216,7 @@ El proceso de gestión de configuración es el siguiente:
 - La nomenclatura de las etiquetas será la siguiente: ``v0.X", donde X representa el número de sprints actual.
 \end{enumerate}
 
-\section{Planificación temporal}
+\section{Planificación temporal} \label{plantemp}
 La planificación temporal consiste en la identificación de tareas, asignación de tiempos y recursos a dichas tareas y en la planificación de la secuencia de ejecución de forma que el proyecto pueda finalizarse a tiempo. 
 
 El trabajo del presente proyecto se divide en varias fases, especificadas previamente en la estructura de descomposición del trabajo del anteproyecto, que se puede ver en la figura \ref{fig:edt}. El EDT consiste en una representación jerárquica del trabajo a realizar, con el fin de organizar y definir el alcance del proyecto. Debido al carácter iterativo de la metodología Scrum, las fases que a continuación se detallan se organizarán de una manera no secuencial (recordemos que las fases en esta metodología se solapan, como se vio en la sección \ref{metodologia}).
@@ -225,7 +228,7 @@ El trabajo del presente proyecto se divide en varias fases, especificadas previa
 \label{fig:edt}
 \end{figure}
 
-A continuación se describen las diferentes etapas de una forma más detallada, donde se indica también el tipo de recurso que realizada cada etapa y la duración estimada de las mismas. La dedicación será de 20 horas semanales. En total, la duración estimada del proyecto es de aproximadamente 21 semanas de duración, lo que supone aproximadamente 425 horas de trabajo.
+A continuación se describen las diferentes etapas de una forma más detallada, donde se indica también el tipo de recurso que realizada cada etapa y la duración estimada de las mismas. Las estimaciones son iniciales y no estimaciones realizadas al inicio de cada sprint, las cuales son mucho más cercanas a la realidad, y con las actividades más desglosadas. La dedicación será de 20 horas semanales. En total, la duración estimada del proyecto es de aproximadamente 21 semanas de duración, lo que supone aproximadamente 425 horas de trabajo.
 
 \noindent
 \textbf{Etapa de Análisis}
@@ -324,7 +327,53 @@ A continuación en la figura \ref{fig:gantt} se puede ver el cronograma de la pl
 \label{fig:gantt}
 \end{figure}
 
-Cabe destacar que pese a que pese a que tuvo lugar la ocurrencia del riesgo \textbf{RPD-3}, y por lo tanto del riesgo \textbf{RPD-1} debido a que el test de Li para comparaciones múltiples no funcionaba correctamente y se tuvo que implementar en su lugar el test de Finner, esto no llevó a un retraso respecto al tiempo estimado.
+En las figuras \ref{fig:bd1}, \ref{fig:bd2} y \ref{fig:bd3} podemos los gráficos Burn-Down correspondientes a los 9 sprints realizados. A modo de resumen, en el primero de ellos, se realizó un caso de prueba con el test de Wilcoxon. En el segundo, fue donde se llevó a cabo el desarrollo de los test no paramétricos de ranking, además de los servicios web correspondientes de consulta y subida de ficheros. El sprint 3 incluye mejoras del anterior y el desarrollo de los test POST-HOC. El sprint 4, incluye mejoras del sprint anterior y el desarrollo de los test paramétricos.
+
+\begin{figure}[h]
+\centering
+\subfigure[Sprint 1.]{
+\includegraphics[scale=0.6]{figuras/b1.png} }
+\subfigure[Sprint 2.]{
+\includegraphics[scale=0.6]{figuras/b2.png} }
+\end{figure}
+\begin{figure}[h]
+\centering
+\subfigure[Sprint 3.]{
+\includegraphics[scale=0.6]{figuras/b3.png} }
+\subfigure[Sprint 4.]{
+\includegraphics[scale=0.6]{figuras/b4.png} }
+\caption{Burn-Down Sprint 1, 2, 3 y 4.}
+\label{fig:bd1}
+\end{figure}
+
+El sprint 5, incluye corrección de errores, mejoras del anterior sprint y algunos POST-HOC de comparación multiple. En el sprint 6, se empieza a desarrollar la interfaz web, además de alguna mejora del anterior sprint. Los sprints 7, 8 y 9 son básicamente mejoras realizadas sobre la interfaz y la exportación de resultados (formato \LaTeX \space y CSV), centrándose un poco más en la elaboración de la memoria.
+
+\begin{figure}[h]
+\centering
+\subfigure[Sprint 5.]{
+\includegraphics[scale=0.6]{figuras/b5.png} }
+\subfigure[Sprint 6.]{
+\includegraphics[scale=0.6]{figuras/b6.png} }
+\end{figure}
+\begin{figure}[h]
+\centering
+\subfigure[Sprint 7.]{
+\includegraphics[scale=0.6]{figuras/b7.png} }
+\subfigure[Sprint 8.]{
+\includegraphics[scale=0.6]{figuras/b8.png} }
+\caption{Burn-Down Sprint 5, 6, 7 y 8.}
+\label{fig:bd2}
+\end{figure}
+
+Cabe destacar que pese a que tuvo lugar la ocurrencia del riesgo \textbf{RPD-3}, y por lo tanto del riesgo \textbf{RPD-1} debido a que el test de Li para comparaciones múltiples no funcionaba correctamente y se tuvo que implementar en su lugar el test de Finner, esto no llevó a un retraso respecto al tiempo estimado.
+
+\begin{figure}[h]
+\centering
+\subfigure[Sprint 9.]{
+\includegraphics[scale=0.6]{figuras/b9.png} }
+\caption{Burn-Down Sprint 9.}
+\label{fig:bd3}
+\end{figure}
 
 \section{Estimación de costes}
 
@@ -333,7 +382,7 @@ Los costes se han dividido en tres categorías: coste de personal, costes hardwa
 \noindent
 \textbf{Coste de personal}
 
-El coste del personal establecido es fruto de la investigación de salarios (brutos) de un analista programador en la Comunidad de Galicia.
+El coste del personal establecido es fruto de la investigación de salarios (brutos) de un analista programador en la Comunidad de Galicia \cite{payscale}, así como del examen de costes de otros proyectos de fin de grado desarrollados. En este apartado habría que incluir también el coste de personal asociado al rol de dirección. Sin embargo, por cuestiones de simplicidad este análisis sólo considera el coste asociado al analista programador.
 
 \begin{table}[H]
 	\centering
@@ -347,14 +396,14 @@ El coste del personal establecido es fruto de la investigación de salarios (bru
 \noindent
 \textbf{Costes hardware}
 
-Estos costes se refieren al material adquirido para poder realizar el proyecto.
+Estos costes se refieren al material adquirido para poder realizar el proyecto. Teniendo en cuenta que la vida útil de una estación de trabajo es de 5 años y que las horas de utilización cada año son 1700, si el precio del equipo es de 800 \euro, el coste total amortizado durante el proyecto suma un total de 40.28 \euro.
 
 \begin{table}[H]
 	\centering
 	\begin{tabular}{|l|c|}
 		\hline
 		\textbf{Componente Hardware} & \textbf{Coste} \\ \hline
-		Ordenador HP & 800 \euro \\ \hline
+		Ordenador HP & 40.28 \euro \\ \hline
 	\end{tabular}
 \end{table}
 
@@ -391,5 +440,5 @@ Durante el desarrollo del proyecto se utilizó únicamente software gratuito par
 \noindent
 \textbf{Coste total}
 
-Si se asumen gastos indirectos de luz y conexión a Internet durante el desarrollo de 250 \euro, el coste final  del proyecto es el siguiente:
-\[ personal + hardware + software + indirecto = 5564 + 800 + 0 + 250 = 6614 \; Euros. \]
+Si se asumen gastos indirectos de luz, conexión a Internet, etc. durante el desarrollo (en la USC para proyectos TIC se estima en un 20\% adicional del coste total del proyecto), el coste final es el siguiente:
+\[ personal + hardware + software + indirecto = 5564 + 40.28 + 0 + 1120.86 = 6725.14 \; Euros. \]

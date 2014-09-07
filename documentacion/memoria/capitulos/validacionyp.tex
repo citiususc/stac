@@ -1,0 +1,149 @@
+\chapter{Validación y pruebas} \label{valiprue}
+Durante y después del proceso de implementación, el programa que se está desarrollando debe ser comprobado para asegurar que satisface su especificación y entrega la funcionalidad esperada por las personas interesadas en el software. La verificación y la validación es el nombre dado a estos procesos de análisis y pruebas. Tienen lugar en cada etapa del proceso del software. Comienza con revisiones de los requerimientos y continúa con revisiones del diseño e inspecciones de código hasta la prueba del producto \cite{sommerville}.
+
+La verificación y la validación no son lo mismo, aunque a menudo se confunden. Boehm \cite{boehm} expresó de forma breve la diferencia entre ellas:
+
+\begin{itemize}
+\item \textbf{Verificación:} \textit{¿estamos construyendo el producto correctamente?}
+\item \textbf{Validación:} \textit{¿estamos construyendo el producto correcto?}
+\end{itemize}
+
+En este capítulo, se detallarán las pruebas de verificación y validación realizadas, para lo cual se llevarán a cabo:
+\begin{itemize}
+\item \textbf{Pruebas unitarias:} para verificar si los test implementados calculan y devuelven de forma correcta todos los datos necesarios.
+\item \textbf{Validación de requisitos (historias de usuario):} para documentar el balance de éxito del proyecto desde el punto de vista del grado de cumplimiento de las historias de usuario.
+\end{itemize}
+
+Dada la metodología Scrum (sección \ref{scrum}), que ha sido la utilizada en este proyecto, las pruebas cobran mayor importancia a lo largo de todo el ciclo de vida del software (no sólo al final). Esto es debido a que el carácter solapado de sus fases ``impone" \space realizar pruebas para verificar que el código se comporta de la manera esperada y en base a las historias de usuario antes de poner fin a cada sprint, ya que es después de la finalización del sprint cuando se establece la reunión de análisis y revisión del incremento generado. En esta reunión se presenta al cliente (los directores del proyecto) el incremento desarrollado (terminado, probado y operando en un entorno), con el fin de obtener realimentación para mejorar e incorporar en sucesivos sprints e ir determinando el balance de éxito en el cumplimiento de las historias de usuario (validación de historias de usuario).
+
+\section{Pruebas unitarias}
+Una prueba unitaria es una forma de probar el correcto funcionamiento de un módulo de código. Esto sirve para asegurar que cada uno de los módulos funcione correctamente por separado. Dicho de otra forma, las pruebas unitarias se basan en hacer pruebas en pequeños fragmentos de un programa. Estos fragmentos deben ser unidades estructurales de un programa encargados de una tarea especifica. En programación procedural u orientada a objetos se puede afirmar que estas unidades son los métodos o las funciones que tenemos definidos. En nuestro caso, se han utilizado para comprobar que cada uno de los test estadísticos implementados calcula y devuelve correctamente todos los datos requeridos.
+
+El objetivo de las pruebas unitarias es el aislamiento de partes del código y la demostración de que estas partes no contienen errores. Además, una vez realizadas las pruebas unitarias, en caso de que haya que refactorizar algún test estadístico las mismas pruebas pueden servir para probar el nuevo código asegurándonos de que éste sigue siendo válido bajo la nueva implementación.
+
+Durante el ciclo de vida del proyecto se han realizado diferentes fases de pruebas dedicadas especialmente a verificación del correcto funcionamiento de los test. Para aquellos test provenientes de la librería SciPy (de los que hemos hablado en capítulos anteriores), no se han realizado pruebas unitarias, pues ya están verificados por dicha librería.
+
+Para realizar las pruebas unitarias sobre los test implementados se ha utilizado el siguiente marco experimental \cite{potencia}:
+\begin{itemize}
+\item \textbf{Test no paramétricos de ranking y POST-HOC de comparación simple (con método de control):} 24 problemas o conjuntos de datos de los repositorios UCI \cite{uci} (repositorio de aprendizaje automático) y KEEL \cite{keel} (que además de incluir un repositorio de conjuntos de datos es una herramienta para evaluar algoritmos evolutivos para problemas de minería de datos, incluyendo la clasificación, etc.), sobre los que se aplicaron 4 algoritmos de clasificación de la herramienta KEEL: PDFC (\textit{Positive Definite Fuzzy Classifier}), NNEP (\textit{Neural Network Evolutionary Programming}), IS-CHC + 1NN (\textit{CHC Adaptative Search for Instance Selection}), FH-GBML (\textit{Fuzzy Hybrid Genetics-Based Machine Learning}).
+\item \textbf{POST-HOC de comparación múltiple:} Ranking obtenido por el test de Friedman aplicado en 30 conjuntos de datos de UCI y KEEL sobre los que se aplicaron otros 5 algoritmos de clasificación de la herramienta KEEL: C4.5, 1NN, Naïve Bayes, Kernel y CN2.
+\end{itemize}
+
+Asimismo, para el caso del test de Wilcoxon, el test de Anova y el test de Bonferroni, se han empleado datos obtenidos de Internet con los que se han podido verificar su correcto funcionamiento \cite{anova_data}. Además, con algunos test se empleó la herramienta STATService 2.0 \cite{statservice} para tener una referencia adicional de verificación de resultados.
+
+A continuación, en el tabla \ref{unitarias} se detallan las pruebas unitarias realizadas, las cuales se han llevado a cabo con el valor 0.05 como de nivel de significancia, ya que es el valor más común:
+
+\begin{center}
+\setlength{\belowcaptionskip}{0.5cm}
+\begin{longtable}[H]{| p{3cm}| p{7cm} | p{3cm} |}
+	\hline
+	\rowcolor{Gray}
+	\multicolumn{1}{|c|}{\textbf{Test estadístico}} & \multicolumn{1}{|c|}{\textbf{Resultado esperado}} & \multicolumn{1}{|c|}{\textbf{Resultado obtenido}} \\ \hline
+	\endfirsthead
+	\hline
+	\rowcolor{Gray}
+	\multicolumn{1}{|c|}{\textbf{Test estadístico}} & \multicolumn{1}{|c|}{\textbf{Resultado esperado}} & \multicolumn{1}{|c|}{\textbf{Resultado obtenido}} \\ \hline
+	\endhead
+	\caption{Pruebas unitarias realizadas.}
+	\label{unitarias}
+	\endfoot
+	Test de los Rangos Signados de Wilcoxon & Devuelve correctamente el estadístico, el \textit{p-valor} y el resultado, incluyendo también la suma de los rangos positivos y la suma de los rangos negativos. Devuelve error en caso de que los datos tengan resultados de más de 2 algoritmos. & Correcto \\ \hline
+	Test de Friedman & Devuelve correctamente el estadístico, el \textit{p-valor} y el resultado, así como los rankings (tanto en maximización como en minimización). & Correcto \\ \hline
+	Test de Iman-Davenport & Devuelve correctamente el estadístico (más ajustado que el Friedman) y su \textit{p-valor} correspondiente. & Correcto \\ \hline
+	Test de los Rangos Alineados de Friedman & Los mismos datos que Friedman pero para este test. & Correcto \\ \hline
+	Test de Quade & Los mismos datos que Friedman pero para este test. & Correcto \\ \hline
+	Datos comunes a los test POST-HOC con método de control & Devuelve correctamente los estadísticos (valores Z), los \textit{p-valores} asociados, los nombres de los algoritmos ordenados según los \textit{p-valores}, el método de control y el valor K (número de algoritmos involucrados). & Correcto \\ \hline
+	Test de Bonferroni-Dunn & Devuelve correctamente los \textit{p-valores} ajustados, los resultados y el nivel de significación ajustado a partir de los datos obtenidos en la función anterior. & Correcto \\ \hline
+	Test de Holm & Devuelve correctamente los \textit{p-valores} ajustados, los resultados y los niveles de significancia ajustados. & Correcto \\ \hline
+	Test de Hochberg & Los mismos datos que Holm pero para este test. & Correcto \\ \hline
+	Test de Li & Devuelve correctamente los \textit{p-valores} ajustados y los resultados. & Correcto \\ \hline
+	Test de Finner & Los mismos datos que Holm pero para este test. & Correcto \\ \hline
+	Datos comunes a los test POST-HOC de comparaciones múltiples & Devuelve correctamente los estadísticos (valores Z), los \textit{p-valores} asociados, los nombres de las comparaciones ordenados según los \textit{p-valores} y el número total de comparaciones. & Correcto \\ \hline
+	Multitest de Bonferroni-Dunn & Devuelve correctamente los \textit{p-valores} ajustados, los resultados y el nivel de significación ajustado a partir de los datos obtenidos en la función anterior. & Correcto \\ \hline
+	Multitest de Holm & Devuelve correctamente los \textit{p-valores} ajustados, los resultados y los niveles de significancia ajustados. & Correcto \\ \hline
+	Multitest de Hochberg & Los mismos datos que el multitest de Holm pero para este test. & Correcto \\ \hline
+	Multitest de Finner & Los mismos datos que el multitest de Holm pero para este test. & Correcto \\ \hline
+	Test de Shaffer & Los mismos datos que el multitest de Holm pero para este test. & Correcto \\ \hline
+	Test ANOVA & Devuelve correctamente el resultado, el estadístico, el \textit{p-valor}, las variaciones y los grados de libertad (totales, del tratamiento y del error), los cuadrados medios y los valores medios (algoritmos y media general). & Correcto. \\ \hline
+	Test de Bonferroni & Devuelve correctamente el nivel de significancia ajustado, los estadístico (valores t), sus \textit{p-valores} asociados, los resultados y los \textit{p-valores} ajustados. & Correcto \\ \hline
+\end{longtable}
+\end{center}
+
+\section{Validación de requisitos}
+
+Como se comentó anteriormente, la validación es el proceso de comprobar que el sistema software producido es lo que el usuario realmente quería. Las historias de usuario, descritas en las secciones \ref{hu_desarrollador} y \ref{hu_cliente}, correspondientes a las historias de usuario desarrollador y cliente respectivamente, se han ido validando en las diferentes reuniones con los directores del proyecto al final de cada sprint. Para ello se han tenido en cuenta los criterios de aceptación incluidos en las propias historias de usuario. Estos criterios de aceptación fueron definidos lo antes posible con el fin de ayudar a entender mejor lo que se esperaba del proyecto y poder realizar estimaciones de forma más fácil y precisa. Además, estos criterios también sirvieron de guía para el desarrollo de pruebas unitarias, tal y como hemos visto en la sección anterior, para verificar el correcto funcionamiento de los test estadísticos.
+
+A continuación se muestra la validación de las historias de usuario desarrollador (tabla \ref{validacionhud}):
+
+\begin{center}
+\setlength{\belowcaptionskip}{0.5cm}
+\begin{longtable}[H]{| p{1cm} | p{4.25cm} | p{1cm} | p{5cm} |}
+	\hline
+	\rowcolor{Gray}
+	\multicolumn{1}{|c|}{\textbf{H. Usuario}} & \multicolumn{1}{|c|}{\textbf{Título}} & \multicolumn{1}{|c|}{\textbf{Resultado}} & \multicolumn{1}{|c|}{\textbf{Comentario}} \\ \hline
+	\endfirsthead
+	\hline
+	\rowcolor{Gray}
+	\multicolumn{1}{|c|}{\textbf{H. Usuario}} & \multicolumn{1}{|c|}{\textbf{Título}} & \multicolumn{1}{|c|}{\textbf{Resultado}} & \multicolumn{1}{|c|}{\textbf{Comentario}} \\ \hline
+	\endhead
+	\caption{Historias de usuario desarrollador.}
+	\label{validacionhud}
+	\endfoot
+	\textbf{HU-1} & Acceder a los test & Hecho & Se proporcionan diferentes URIs. \\ \hline
+	\textbf{HU-2} & Gestionar ficheros & Hecho & Se permite la subida y consulta de datos. \\ \hline
+	\textbf{HU-3} & Devolver datos JSON & Hecho & Todos los servicios web manejan este formato. \\ \hline
+	\textbf{HU-4} & Analizar datos subidos & Hecho & Devolución de error en caso de formato incorrecto. \\ \hline
+	\textbf{HU-5} & Limitar ficheros subidos & Hecho & Almacenamiento en diccionario con límite de elementos. \\ \hline
+	\textbf{HU-6} & Visualizar información test & Hecho & Módulo STAC y API correctamente comentados.  \\ \hline
+\end{longtable}
+\end{center}
+
+Ahora pasamos a detallar la validación de las historias de usuario cliente (tabla \ref{validacionhuc}):
+
+\begin{center}
+\setlength{\belowcaptionskip}{0.5cm}
+\begin{longtable}[H]{| p{2cm} | p{4.25cm} | p{1cm} | p{5cm} |}
+	\hline
+	\rowcolor{Gray}
+	\multicolumn{1}{|c|}{\textbf{H. Usuario}} & \multicolumn{1}{|c|}{\textbf{Título}} & \multicolumn{1}{|c|}{\textbf{Resultado}} & \multicolumn{1}{|c|}{\textbf{Comentario}} \\ \hline
+	\endfirsthead
+	\hline
+	\rowcolor{Gray}
+	\multicolumn{1}{|c|}{\textbf{H. Usuario}} & \multicolumn{1}{|c|}{\textbf{Título}} & \multicolumn{1}{|c|}{\textbf{Resultado}} & \multicolumn{1}{|c|}{\textbf{Comentario}} \\ \hline
+	\endhead
+	\caption{Historias de usuario cliente.}
+	\label{validacionhuc}
+	\endfoot
+	\textbf{HU-7} & Realizar test de ANOVA & Hecho & En caso de ser estadísticamente significativo se proporcionan también los resultados de Bonferroni. \\ \hline
+	\textbf{HU-8} & Realizar test t-test & Hecho & La interfaz dispone de una sección donde aplicar el test. \\ \hline
+	\textbf{HU-9} & Realizar test de Wilcoxon & Hecho & Sin comentarios \\ \hline
+	\textbf{HU-10} & Realizar test de Friedman & Hecho & Sin comentarios \\ \hline
+	\textbf{HU-11} & Realizar test de Iman-Davenport & Hecho & Sin comentarios \\ \hline
+	\textbf{HU-12} & Realizar test de los Rangos Alineados de Friedman & Hecho & Sin comentarios \\ \hline
+	\textbf{HU-13} & Realizar test de Quade & Hecho & Sin comentarios \\ \hline
+	\textbf{HU-14} & Realizar test de Bonferroni-Dunn & Hecho & Tanto el test simple (método de control) como multitest. \\ \hline
+	\textbf{HU-15} & Realizar test de Holm & Hecho & Sin comentarios \\ \hline
+	\textbf{HU-16} & Realizar test de Finner & Hecho & Sin comentarios \\ \hline
+	\textbf{HU-17} & Realizar test de Hochberg & Hecho & Sin comentarios \\ \hline
+	\textbf{HU-18} & Realizar test de Li & Hecho & La interfaz dispone de una sección donde aplicar el test. \\ \hline
+	\textbf{HU-19} & Realizar test de Shaffer & Hecho & Sin comentarios \\ \hline
+	\textbf{HU-20} & Realizar test de normalidad & Hecho & Sección en la interfaz para el test de Shapiro-Wilk, D’Agostino–Pearson y Kolmogorov–Smirnov. \\ \hline
+	\textbf{HU-21} & Realizar test de Levene & Hecho & La interfaz dispone de una sección donde aplicar el test. \\ \hline
+	\textbf{HU-22} & Subir fichero de datos & Hecho & Se dispone de un botón en la barra de navegación superior. \\ \hline
+	\textbf{HU-23} & Consultar fichero de datos & Hecho & Se dispone de un botón en la barra de navegación superior y se visualiza automáticamente después de la subida. \\ \hline
+	\textbf{HU-24} & Visualizar resultados de los test & Hecho & Los resultados se muestran en forma de tabla. \\ \hline
+	\textbf{HU-25} & Exportar los resultados en formato csv & Hecho & Botón en la pantalla de visualización de resultados. \\ \hline
+	\textbf{HU-26} & Exportar los resultados en formato \LaTeX & Hecho & Botón en la pantalla de visualización de resultados. \\ \hline
+	\textbf{HU-27} & Seleccionar nivel de significancia & Hecho & Combobox con varios niveles. \\ \hline
+	\textbf{HU-28} & Seleccionar la función objetivo & Hecho & Combobox en la sección de test de ranking. \\ \hline
+	\textbf{HU-29} & Ver ayuda & Hecho & Se dispone de un botón en la barra de navegación superior y de varios enlaces a conceptos concretos. \\ \hline
+	\textbf{HU-30} & Recordar el test de ranking & Hecho & Mensaje que indica el test de ranking seleccionado. \\ \hline
+	\textbf{HU-31} & Avisar de las condiciones paramétricas & Hecho & Mensaje de alerta si no se comprueban las condiciones paramétricas al aplicar un test paramétrico. \\ \hline
+	\textbf{HU-32} & Ver una breve información de los test & Hecho & Se muestra una breve descripción de las hipótesis que se contrastan. \\ \hline
+	\textbf{HU-33} & Enlazar con ficheros de ejemplo & Hecho & Enlaces a ficheros de ejemplo. \\ \hline
+	\textbf{HU-34} & Aplicación en diferentes pestañas del navegador & Hecho & La plataforma puede operar independientemente en diferentes pestañas con diferentes archivos de datos. \\ \hline
+	\textbf{HU-35} & Diseño adaptable & Hecho & Interfaz adaptable a dispositivos de varias resolución. \\ \hline
+	\textbf{HU-36} & Idioma & Hecho & Interfaz en inglés. \\ \hline
+	\textbf{HU-37} & Flujo de trabajo & Hecho & Imagen en la página principal. \\ \hline
+\end{longtable}
+\end{center}
