@@ -1,4 +1,4 @@
-\chapter{Validación y pruebas}
+\chapter{Validación y pruebas} \label{valiprue}
 Durante y después del proceso de implementación, el programa que se está desarrollando debe ser comprobado para asegurar que satisface su especificación y entrega la funcionalidad esperada por las personas interesadas en el software. La verificación y la validación es el nombre dado a estos procesos de análisis y pruebas. Tienen lugar en cada etapa del proceso del software. Comienza con revisiones de los requerimientos y continúa con revisiones del diseño e inspecciones de código hasta la prueba del producto \cite{sommerville}.
 
 La verificación y la validación no son lo mismo, aunque a menudo se confunden. Boehm \cite{boehm} expresó de forma breve la diferencia entre ellas:
@@ -14,24 +14,24 @@ En este capítulo, se detallarán las pruebas de verificación y validación rea
 \item \textbf{Validación de requisitos (historias de usuario):} para documentar el balance de éxito del proyecto desde el punto de vista del grado de cumplimiento de las historias de usuario.
 \end{itemize}
 
-Dada la metodología Scrum vista en la sección \ref{scrum} utilizada en este proyecto, las pruebas cobran mayor importancia a lo largo de todo el ciclo de vida del software (no sólo al final). Esto es debido que el carácter solapado de sus fases ``impone" \space realizar pruebas para verificar que el código se comporta de la manera esperada y en base a las historias de usuario antes de poner fin a cada sprint, ya que es después de la finalización del sprint cuando se establece la reunión de análisis y revisión del incremento generado. En esta reunión, como se comentó en la sección \ref{scrum}, se presenta al cliente (los directores del proyecto) el incremento desarrollado (terminado, probado y operando en un entorno), con el fin de obtener feedback para mejorar e incorporar en sucesivos sprints e ir determinando el balance de éxito en el cumplimiento de las historias de usuario (validación de historias de usuario).
+Dada la metodología Scrum (sección \ref{scrum}), que ha sido la utilizada en este proyecto, las pruebas cobran mayor importancia a lo largo de todo el ciclo de vida del software (no sólo al final). Esto es debido a que el carácter solapado de sus fases ``impone" \space realizar pruebas para verificar que el código se comporta de la manera esperada y en base a las historias de usuario antes de poner fin a cada sprint, ya que es después de la finalización del sprint cuando se establece la reunión de análisis y revisión del incremento generado. En esta reunión se presenta al cliente (los directores del proyecto) el incremento desarrollado (terminado, probado y operando en un entorno), con el fin de obtener realimentación para mejorar e incorporar en sucesivos sprints e ir determinando el balance de éxito en el cumplimiento de las historias de usuario (validación de historias de usuario).
 
 \section{Pruebas unitarias}
-Una prueba unitaria es una forma de probar el correcto funcionamiento de un módulo de código. Esto sirve para asegurar que cada uno de los módulos funcione correctamente por separado. Dicho de otra forma, las pruebas unitarias se basan en hacer pruebas en pequeños fragmentos de un programa. Estos fragmentos deben ser unidades estructurales de un programa encargados de una tarea especifica, en programación procedural u orientada a objetos se puede afirmar que estas unidades son los métodos o las funciones que tenemos definidos. En nuestro caso, se han utilizado para comprobar que cada uno de los test estadísticos implementados calcula y devuelve correctamente todos los datos requeridos.
+Una prueba unitaria es una forma de probar el correcto funcionamiento de un módulo de código. Esto sirve para asegurar que cada uno de los módulos funcione correctamente por separado. Dicho de otra forma, las pruebas unitarias se basan en hacer pruebas en pequeños fragmentos de un programa. Estos fragmentos deben ser unidades estructurales de un programa encargados de una tarea especifica. En programación procedural u orientada a objetos se puede afirmar que estas unidades son los métodos o las funciones que tenemos definidos. En nuestro caso, se han utilizado para comprobar que cada uno de los test estadísticos implementados calcula y devuelve correctamente todos los datos requeridos.
 
-El objetivo de las pruebas unitarias es el aislamiento de partes del código y la demostración de que estas partes no contienen errores. Además, una vez realizados las pruebas unitarias, en caso de que haya que refactorizar algún test estadístico las mismas pruebas pueden servir para probar el nuevo código asegurándonos de que éste sigue siendo válido bajo la nueva implementación.
+El objetivo de las pruebas unitarias es el aislamiento de partes del código y la demostración de que estas partes no contienen errores. Además, una vez realizadas las pruebas unitarias, en caso de que haya que refactorizar algún test estadístico las mismas pruebas pueden servir para probar el nuevo código asegurándonos de que éste sigue siendo válido bajo la nueva implementación.
 
 Durante el ciclo de vida del proyecto se han realizado diferentes fases de pruebas dedicadas especialmente a verificación del correcto funcionamiento de los test. Para aquellos test provenientes de la librería SciPy (de los que hemos hablado en capítulos anteriores), no se han realizado pruebas unitarias, pues ya están verificados por dicha librería.
 
-Para realizar las pruebas unitarias sobre los test implementados se ha utilizado el siguiente marco experimental \cite{no_parametricos}:
+Para realizar las pruebas unitarias sobre los test implementados se ha utilizado el siguiente marco experimental \cite{potencia}:
 \begin{itemize}
-\item \textbf{Test no paramétricos de ranking y POST-HOC de comparación simple (con método de control):} 24 problemas o conjuntos de datos de UCI \cite{uci} (repositorio de aprendizaje automático) y KEEL \cite{keel} (repositorio de conjuntos de datos), sobre los que se aplicaron 4 algoritmos clásicos (de búsqueda dispersa, optimización de nube de partículas, etc.): PDFC, NNEP, IS-CHC + 1NN, FH-GBML.
-\item \textbf{POST-HOC de comparación múltiple:} Ranking obtenido por el test de Friedman aplicado en 30 conjuntos de datos de UCI y KEEL sobre los que se aplicaron 5 algoritmos: C4.5, 1NN, Naïve Bayes, Kernel y CN2.
+\item \textbf{Test no paramétricos de ranking y POST-HOC de comparación simple (con método de control):} 24 problemas o conjuntos de datos de los repositorios UCI \cite{uci} (repositorio de aprendizaje automático) y KEEL \cite{keel} (que además de incluir un repositorio de conjuntos de datos es una herramienta para evaluar algoritmos evolutivos para problemas de minería de datos, incluyendo la clasificación, etc.), sobre los que se aplicaron 4 algoritmos de clasificación de la herramienta KEEL: PDFC (\textit{Positive Definite Fuzzy Classifier}), NNEP (\textit{Neural Network Evolutionary Programming}), IS-CHC + 1NN (\textit{CHC Adaptative Search for Instance Selection}), FH-GBML (\textit{Fuzzy Hybrid Genetics-Based Machine Learning}).
+\item \textbf{POST-HOC de comparación múltiple:} Ranking obtenido por el test de Friedman aplicado en 30 conjuntos de datos de UCI y KEEL sobre los que se aplicaron otros 5 algoritmos de clasificación de la herramienta KEEL: C4.5, 1NN, Naïve Bayes, Kernel y CN2.
 \end{itemize}
 
-Así mismo, para el caso del test de Wilcoxon, el test de Anova y el test de Bonferroni, se han empleado datos obtenidos de Internet con los que se han podido verificar su correcto funcionamiento. Además, con algunos test se empleó la herramienta STATService 2.0 \cite{statservice} para tener una referencia a mayores de verificación de resultados.
+Asimismo, para el caso del test de Wilcoxon, el test de Anova y el test de Bonferroni, se han empleado datos obtenidos de Internet con los que se han podido verificar su correcto funcionamiento \cite{anova_data}. Además, con algunos test se empleó la herramienta STATService 2.0 \cite{statservice} para tener una referencia adicional de verificación de resultados.
 
-A continuación en el tabla \ref{unitarias} se detallan las pruebas unitarias realizadas, las cuales se han llevado a cabo con el valor 0.05 como de nivel de significancia, ya que es el valor más común:
+A continuación, en el tabla \ref{unitarias} se detallan las pruebas unitarias realizadas, las cuales se han llevado a cabo con el valor 0.05 como de nivel de significancia, ya que es el valor más común:
 
 \begin{center}
 \setlength{\belowcaptionskip}{0.5cm}
@@ -71,7 +71,7 @@ A continuación en el tabla \ref{unitarias} se detallan las pruebas unitarias re
 
 \section{Validación de requisitos}
 
-Como se comentó anteriormente, la validación es el proceso de comprobar que el sistema software producido es lo que el usuario realmente quería. Las historias de usuario, descritas en las secciones \ref{hu_desarrollador} y \ref{hu_cliente} correspondientes a las historias de usuario desarrollador y cliente respectivamente, se han ido validando en las diferentes reuniones con los directores del proyecto al final de cada sprint. Para ello, se han tenido en cuenta los criterios de aceptación incluidos en las propias historias de usuario. Estos criterios de aceptación fueron definidos lo antes posible con el fin de ayudar a entender mejor lo que se esperaba del proyecto y poder realizar estimaciones de forma más fácil y precisa. Además, estos criterios también sirvieron de guía para el desarrollo de pruebas unitarias, tal y como hemos visto en la sección anterior, para verificar el correcto funcionamiento de los test estadísticos.
+Como se comentó anteriormente, la validación es el proceso de comprobar que el sistema software producido es lo que el usuario realmente quería. Las historias de usuario, descritas en las secciones \ref{hu_desarrollador} y \ref{hu_cliente}, correspondientes a las historias de usuario desarrollador y cliente respectivamente, se han ido validando en las diferentes reuniones con los directores del proyecto al final de cada sprint. Para ello se han tenido en cuenta los criterios de aceptación incluidos en las propias historias de usuario. Estos criterios de aceptación fueron definidos lo antes posible con el fin de ayudar a entender mejor lo que se esperaba del proyecto y poder realizar estimaciones de forma más fácil y precisa. Además, estos criterios también sirvieron de guía para el desarrollo de pruebas unitarias, tal y como hemos visto en la sección anterior, para verificar el correcto funcionamiento de los test estadísticos.
 
 A continuación se muestra la validación de las historias de usuario desarrollador (tabla \ref{validacionhud}):
 
@@ -116,17 +116,17 @@ Ahora pasamos a detallar la validación de las historias de usuario cliente (tab
 	\endfoot
 	\textbf{HU-7} & Realizar test de ANOVA & Hecho & En caso de ser estadísticamente significativo se proporcionan también los resultados de Bonferroni. \\ \hline
 	\textbf{HU-8} & Realizar test t-test & Hecho & La interfaz dispone de una sección donde aplicar el test. \\ \hline
-	\textbf{HU-9} & Realizar test de Wilcoxon & Hecho & \\ \hline
-	\textbf{HU-10} & Realizar test de Friedman & Hecho & \\ \hline
-	\textbf{HU-11} & Realizar test de Iman-Davenport & Hecho & \\ \hline
-	\textbf{HU-12} & Realizar test de los Rangos Alineados de Friedman & Hecho & \\ \hline
-	\textbf{HU-13} & Realizar test de Quade & Hecho & \\ \hline
+	\textbf{HU-9} & Realizar test de Wilcoxon & Hecho & Sin comentarios \\ \hline
+	\textbf{HU-10} & Realizar test de Friedman & Hecho & Sin comentarios \\ \hline
+	\textbf{HU-11} & Realizar test de Iman-Davenport & Hecho & Sin comentarios \\ \hline
+	\textbf{HU-12} & Realizar test de los Rangos Alineados de Friedman & Hecho & Sin comentarios \\ \hline
+	\textbf{HU-13} & Realizar test de Quade & Hecho & Sin comentarios \\ \hline
 	\textbf{HU-14} & Realizar test de Bonferroni-Dunn & Hecho & Tanto el test simple (método de control) como multitest. \\ \hline
-	\textbf{HU-15} & Realizar test de Holm & Hecho & \\ \hline
-	\textbf{HU-16} & Realizar test de Finner & Hecho & \\ \hline
-	\textbf{HU-17} & Realizar test de Hochberg & Hecho & \\ \hline
+	\textbf{HU-15} & Realizar test de Holm & Hecho & Sin comentarios \\ \hline
+	\textbf{HU-16} & Realizar test de Finner & Hecho & Sin comentarios \\ \hline
+	\textbf{HU-17} & Realizar test de Hochberg & Hecho & Sin comentarios \\ \hline
 	\textbf{HU-18} & Realizar test de Li & Hecho & La interfaz dispone de una sección donde aplicar el test. \\ \hline
-	\textbf{HU-19} & Realizar test de Shaffer & Hecho & \\ \hline
+	\textbf{HU-19} & Realizar test de Shaffer & Hecho & Sin comentarios \\ \hline
 	\textbf{HU-20} & Realizar test de normalidad & Hecho & Sección en la interfaz para el test de Shapiro-Wilk, D’Agostino–Pearson y Kolmogorov–Smirnov. \\ \hline
 	\textbf{HU-21} & Realizar test de Levene & Hecho & La interfaz dispone de una sección donde aplicar el test. \\ \hline
 	\textbf{HU-22} & Subir fichero de datos & Hecho & Se dispone de un botón en la barra de navegación superior. \\ \hline

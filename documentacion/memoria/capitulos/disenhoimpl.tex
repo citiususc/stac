@@ -1,5 +1,5 @@
 \chapter{Diseño e implementación}
-Una vez diseñada la arquitectura de la plataforma, es necesario detallar el proceso de creación de cada una de las unidades de las que consta la aplicación. Para ello, en primer lugar, se explicará como está organizado y desarrollado el módulo de Python de los test estadísticos. En segundo lugar, se detallará el diseño de la API REST desde el punto de vista de las URIs que conforman cada servicio web. Por último, se detallará la capa superior de la arquitectura, explicando cómo será la interfaz gráfica mediante prototipado y analizando su nivel de usabilidad mediante los principios heurísticos de Nielsen. Así mismo, se hará uso de UML para especificar los diagramas de secuencia de las funcionalidades más relevantes del sistema.
+Una vez diseñada la arquitectura de la plataforma, es necesario detallar el proceso de creación de cada una de las unidades de las que consta la aplicación. Para ello, en primer lugar, se explicará como está organizado y desarrollado el módulo de Python de los test estadísticos. En segundo lugar, se detallará el diseño de la API REST desde el punto de vista de las URIs que conforman cada servicio web. Por último, se detallará la capa superior de la arquitectura, explicando cómo será la interfaz gráfica mediante prototipado y analizando su nivel de usabilidad mediante los principios heurísticos de Nielsen. Asimismo, se hará uso de UML para especificar los diagramas de secuencia de las funcionalidades más relevantes de la plataforma.
 
 \section{Módulo Python test estadísticos} \label{dis_py}
 El módulo de Python de los test estadísticos o módulo STAC (Statistical Tests for Algorithm Comparison) está formado por los siguientes archivos:
@@ -416,7 +416,7 @@ La plataforma web cuenta con un botón en la barra superior mediante el cual se 
 \subsection{Diagramas de secuencia}
 Como se ha comentado en el capítulo \ref{arquitecturayh}, los diagramas de secuencia indican los componentes que forman parte del sistema y las llamadas que se hacen en cada uno de ellos para realizar una tarea determinada. Los mensajes o llamadas intercambiados están ordenados temporalmente (en secuencia).
 
-Los objetos Interfaz Web y API REST representan a aquellos ficheros que componen la interfaz web (documentos HTML, CSS, JavaScript etc.) y aquellos que constituyen los servicios web REST (fichero de los servicios y la librería Bottle) respectivamente. Así mismo, la clase \textit{LimitedSizeDict} representa la clase utilizada para limitar el número de ficheros subidos (diccionario con límite de elementos). A continuación se explicarán los diagramas de secuencia para las funcionalidades más relevantes del sistema.
+Los objetos Interfaz Web y API REST representan a aquellos ficheros que componen la interfaz web (documentos HTML, CSS, JavaScript etc.) y aquellos que constituyen los servicios web REST (fichero de los servicios y la librería Bottle) respectivamente. Asimismo, la clase \textit{LimitedSizeDict} representa la clase utilizada para limitar el número de ficheros subidos (diccionario con límite de elementos). A continuación se explicarán los diagramas de secuencia para las funcionalidades más relevantes del sistema.
 
 \subsubsection{Diagrama para subir fichero de datos (HU-22)}
 
@@ -465,8 +465,8 @@ Una vez obtenidos los datos (siempre en formato JSON), si el resultado de la pru
 
 \begin{figure}[H]
 \centering
-\begin{adjustwidth}{-5em}{-5em}
-\includegraphics[scale=0.5]{figuras/sec_ranking.jpg}
+\begin{adjustwidth}{-4em}{-4em}
+\includegraphics[scale=0.7]{figuras/sec_ranking.jpg}
 \caption{Diagrama de secuencia de los test no paramétricos de ranking.}
 \label{fig:sec_ranking}
 \end{adjustwidth}

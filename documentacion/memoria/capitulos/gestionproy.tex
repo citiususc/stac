@@ -185,7 +185,7 @@ Las \textbf{modificaciones realizas} sobre la metodología Scrum para realizar e
 \end{itemize}
 
 \noindent
-Como herramienta de gestión de proyectos, se ha utilizado Acunote \cite{acunote}. Se trata de una herramienta de gestión de proyectos ágiles y software Scrum. Es utilizada ampliamente en el mundo empresarial como parte de la gestión de proyecto TIC. Entre las razones de su utilización cabe destacar su sencillez y facilidad de uso. Así mismo, permite mostrar el progreso actual y proporciona potentes analíticas, como el gráfico Burn-Down, del que hemos hablado anteriormente.
+Como herramienta de gestión de proyectos, se ha utilizado Acunote \cite{acunote}. Se trata de una herramienta de gestión de proyectos ágiles y software Scrum. Es utilizada ampliamente en el mundo empresarial como parte de la gestión de proyecto TIC. Entre las razones de su utilización cabe destacar su sencillez y facilidad de uso. Asimismo, permite mostrar el progreso actual y proporciona potentes analíticas, como el gráfico Burn-Down, del que hemos hablado anteriormente.
 
 \section{Gestión de la configuración}
 La configuración del software es el conjunto de características funcionales y físicas del software detalladas en la documentación técnica o alcanzadas en un producto. (IEEE610.12-90). La gestión de la configuración, por su parte, es un proceso cuyo propósito es establecer y mantener la integridad de los elementos de trabajo. Para ello, se identifican los elementos y se controlan los cambios de éstos a lo largo de su ciclo de vida, registrando el estado y verificando que estén completos y que sean los correctos.
@@ -216,7 +216,7 @@ El proceso de gestión de configuración es el siguiente:
 - La nomenclatura de las etiquetas será la siguiente: ``v0.X", donde X representa el número de sprints actual.
 \end{enumerate}
 
-\section{Planificación temporal}
+\section{Planificación temporal} \label{plantemp}
 La planificación temporal consiste en la identificación de tareas, asignación de tiempos y recursos a dichas tareas y en la planificación de la secuencia de ejecución de forma que el proyecto pueda finalizarse a tiempo. 
 
 El trabajo del presente proyecto se divide en varias fases, especificadas previamente en la estructura de descomposición del trabajo del anteproyecto, que se puede ver en la figura \ref{fig:edt}. El EDT consiste en una representación jerárquica del trabajo a realizar, con el fin de organizar y definir el alcance del proyecto. Debido al carácter iterativo de la metodología Scrum, las fases que a continuación se detallan se organizarán de una manera no secuencial (recordemos que las fases en esta metodología se solapan, como se vio en la sección \ref{metodologia}).
@@ -327,7 +327,7 @@ A continuación en la figura \ref{fig:gantt} se puede ver el cronograma de la pl
 \label{fig:gantt}
 \end{figure}
 
-En la figura \ref{fig:bd1} podemos ver a modo de ejemplo los gráficos Burn-Down correspondientes a los dos primeros sprints. En el primero de ellos, se realizó un caso de prueba con el diseño y la implementación del test de Wilcoxon, así como la preparación correspondiente (formación) y el análisis de los frameworks para los servicios REST en Python.
+En las figuras \ref{fig:bd1}, \ref{fig:bd2} y \ref{fig:bd3} podemos los gráficos Burn-Down correspondientes a los 9 sprints realizados. A modo de resumen, en el primero de ellos, se realizó un caso de prueba con el test de Wilcoxon. En el segundo, fue donde se llevó a cabo el desarrollo de los test no paramétricos de ranking, además de los servicios web correspondientes de consulta y subida de ficheros. El sprint 3 incluye mejoras del anterior y el desarrollo de los test POST-HOC. El sprint 4, incluye mejoras del sprint anterior y el desarrollo de los test paramétricos.
 
 \begin{figure}[h]
 \centering
@@ -335,13 +335,45 @@ En la figura \ref{fig:bd1} podemos ver a modo de ejemplo los gráficos Burn-Down
 \includegraphics[scale=0.6]{figuras/b1.png} }
 \subfigure[Sprint 2.]{
 \includegraphics[scale=0.6]{figuras/b2.png} }
-\caption{Gráficos Burn-Down.}
+\end{figure}
+\begin{figure}[h]
+\centering
+\subfigure[Sprint 3.]{
+\includegraphics[scale=0.6]{figuras/b3.png} }
+\subfigure[Sprint 4.]{
+\includegraphics[scale=0.6]{figuras/b4.png} }
+\caption{Burn-Down Sprint 1, 2, 3 y 4.}
 \label{fig:bd1}
 \end{figure}
 
-El segundo, correspondiente al sprint 2, fue donde se llevó a cabo el diseño y la implementación de algunos de los test no paramétricos de ranking junto con sus servicios web correspondientes. Además, se implementaron los servicios para la consulta y subida de ficheros de datos y se realizaron pruebas unitarias para comprobar el correcto funcionamiento de los test.
+El sprint 5, incluye corrección de errores, mejoras del anterior sprint y algunos POST-HOC de comparación multiple. En el sprint 6, se empieza a desarrollar la interfaz web, además de alguna mejora del anterior sprint. Los sprints 7, 8 y 9 son básicamente mejoras realizadas sobre la interfaz y la exportación de resultados (formato \LaTeX \space y CSV), centrándose un poco más en la elaboración de la memoria.
+
+\begin{figure}[h]
+\centering
+\subfigure[Sprint 5.]{
+\includegraphics[scale=0.6]{figuras/b5.png} }
+\subfigure[Sprint 6.]{
+\includegraphics[scale=0.6]{figuras/b6.png} }
+\end{figure}
+\begin{figure}[h]
+\centering
+\subfigure[Sprint 7.]{
+\includegraphics[scale=0.6]{figuras/b7.png} }
+\subfigure[Sprint 8.]{
+\includegraphics[scale=0.6]{figuras/b8.png} }
+\caption{Burn-Down Sprint 5, 6, 7 y 8.}
+\label{fig:bd2}
+\end{figure}
 
 Cabe destacar que pese a que tuvo lugar la ocurrencia del riesgo \textbf{RPD-3}, y por lo tanto del riesgo \textbf{RPD-1} debido a que el test de Li para comparaciones múltiples no funcionaba correctamente y se tuvo que implementar en su lugar el test de Finner, esto no llevó a un retraso respecto al tiempo estimado.
+
+\begin{figure}[h]
+\centering
+\subfigure[Sprint 9.]{
+\includegraphics[scale=0.6]{figuras/b9.png} }
+\caption{Burn-Down Sprint 9.}
+\label{fig:bd3}
+\end{figure}
 
 \section{Estimación de costes}
 

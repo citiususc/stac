@@ -1,13 +1,5 @@
 \chapter{Manual técnico}
-\noindent
-A pesar de que la plataforma web está actualmente disponible en:
-
-\begin{center}
-\textit{http://tec.citius.usc.es/stac/},
-\end{center}
-
-\noindent
-en este apéndice se muestra el manual de despliegue, pensado para que los usuarios puedan configurar y poner en funcionamiento la plataforma en sus equipos. Para ello, se tomará como base el Sistema Operativo Ubuntu 14.04, junto con Apache 2.4. Las razones de realizar el despliegue con Apache y no con el propio servidor de Bottle se detallan en la sección \ref{tecnologias}. En la figura \ref{fig:directorio_proy}, podemos ver los sub directorios que forman parte del directorio del proyecto:
+En este apéndice se muestra el manual de despliegue de la aplicación, pensado para que los usuarios puedan configurar y poner en funcionamiento la plataforma en sus equipos \footnote{Recordemos que, en cualquier caso, la plataforma web está actualmente disponible en la URL: \\ \textit{\url{http://tec.citius.usc.es/stac/}}}. Para ello, se tomará como base el Sistema Operativo Ubuntu 14.04, junto con Apache 2.4. Las razones de realizar el despliegue con Apache y no con el propio servidor de Bottle se detallan en la sección \ref{tecnologias}. En la figura \ref{fig:directorio_proy}, podemos ver los sub directorios que forman parte del directorio del proyecto:
 
 \begin{figure}[H]
 \centering
@@ -19,15 +11,15 @@ en este apéndice se muestra el manual de despliegue, pensado para que los usuar
 \begin{itemize}
 \item \textbf{api:} API REST (servicios web, archivo de la librería de Bottle y archivo app.wgi).
 \item \textbf{documentación:} archivos de la memoria y documentación de los test estadísticos con Sphinx.
-\item \textbf{samples:} muestras de ficheros de datos.
 \item \textbf{stac:} módulo Python de los test estadísticos.
-\item \textbf{web:} archivos web (Framework Bootstrap, CSS, JavaScript, imágenes, etc.).
+\item \textbf{web:} archivos web (Framework Bootstrap, CSS, JavaScript, imágenes, ficheros de datos de entrada de ejemplo, etc.).
 \end{itemize}
 
 \section{Despliegue de la aplicación en Apache}
 
 \begin{enumerate}
 \item Instalar Apache, el módulo WSGI y la librería SciPy:
+\newpage
 \subitem - \texttt{sudo apt-get install apache2}
 \subitem - \texttt{sudo apt-get install libapache2-mod-wsgi}
 \subitem - \texttt{sudo apt-get install python-scipy}

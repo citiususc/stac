@@ -50,7 +50,7 @@
 \contentsline {subsection}{\numberline {4.2.2}Scrum}{45}{subsection.4.2.2}
 \contentsline {section}{\numberline {4.3}Gesti\IeC {\'o}n de la configuraci\IeC {\'o}n}{48}{section.4.3}
 \contentsline {section}{\numberline {4.4}Planificaci\IeC {\'o}n temporal}{49}{section.4.4}
-\contentsline {section}{\numberline {4.5}Estimaci\IeC {\'o}n de costes}{53}{section.4.5}
+\contentsline {section}{\numberline {4.5}Estimaci\IeC {\'o}n de costes}{54}{section.4.5}
 \contentsline {chapter}{\numberline {5}Arquitectura y herramientas}{55}{chapter.5}
 \contentsline {section}{\numberline {5.1}Arquitectura del sistema}{55}{section.5.1}
 \contentsline {section}{\numberline {5.2}Herramientas de dise\IeC {\~n}o}{57}{section.5.2}
@@ -58,18 +58,18 @@
 \contentsline {subsection}{\numberline {5.2.2}Patrones de dise\IeC {\~n}o}{58}{subsection.5.2.2}
 \contentsline {section}{\numberline {5.3}Herramientas de desarrollo}{59}{section.5.3}
 \contentsline {subsection}{\numberline {5.3.1}An\IeC {\'a}lisis de librer\IeC {\'\i }as de test estad\IeC {\'\i }sticos en Python}{59}{subsection.5.3.1}
-\contentsline {subsubsection}{\textbf {Librer\IeC {\'\i }a SciPy - \textit {Scientific Computing Tools for Python}}}{59}{section*.90}
-\contentsline {subsubsection}{\textbf {Librer\IeC {\'\i }a nonparametric.py}}{59}{section*.91}
+\contentsline {subsubsection}{\textbf {Librer\IeC {\'\i }a SciPy - \textit {Scientific Computing Tools for Python}}}{59}{section*.94}
+\contentsline {subsubsection}{\textbf {Librer\IeC {\'\i }a nonparametric.py}}{59}{section*.95}
 \contentsline {subsection}{\numberline {5.3.2}An\IeC {\'a}lisis de librer\IeC {\'\i }as para servicios REST en Python}{60}{subsection.5.3.2}
-\contentsline {subsubsection}{\textbf {Servicios REST}}{60}{section*.92}
-\contentsline {subsubsection}{\textbf {Librer\IeC {\'\i }a Bottle}}{61}{section*.94}
+\contentsline {subsubsection}{\textbf {Servicios REST}}{60}{section*.96}
+\contentsline {subsubsection}{\textbf {Librer\IeC {\'\i }a Bottle}}{61}{section*.98}
 \contentsline {subsection}{\numberline {5.3.3}An\IeC {\'a}lisis de frameworks para desarrollo web}{62}{subsection.5.3.3}
-\contentsline {subsubsection}{\textbf {Twitter Bootstrap}}{62}{section*.95}
+\contentsline {subsubsection}{\textbf {Twitter Bootstrap}}{62}{section*.99}
 \contentsline {subsection}{\numberline {5.3.4}Otras herramientas}{63}{subsection.5.3.4}
-\contentsline {subsubsection}{\textbf {Desarrollo}}{63}{section*.97}
-\contentsline {subsubsection}{\textbf {Documentaci\IeC {\'o}n}}{64}{section*.98}
-\contentsline {subsubsection}{\textbf {Tecnolog\IeC {\'\i }as}}{64}{section*.99}
-\contentsline {subsubsection}{\textbf {Librer\IeC {\'\i }as}}{65}{section*.100}
+\contentsline {subsubsection}{\textbf {Desarrollo}}{63}{section*.101}
+\contentsline {subsubsection}{\textbf {Documentaci\IeC {\'o}n}}{64}{section*.102}
+\contentsline {subsubsection}{\textbf {Tecnolog\IeC {\'\i }as}}{64}{section*.103}
+\contentsline {subsubsection}{\textbf {Librer\IeC {\'\i }as}}{65}{section*.104}
 \contentsline {chapter}{\numberline {6}Dise\IeC {\~n}o e implementaci\IeC {\'o}n}{67}{chapter.6}
 \contentsline {section}{\numberline {6.1}M\IeC {\'o}dulo Python test estad\IeC {\'\i }sticos}{67}{section.6.1}
 \contentsline {subsection}{\numberline {6.1.1}Test param\IeC {\'e}tricos}{68}{subsection.6.1.1}
@@ -79,11 +79,11 @@
 \contentsline {subsection}{\numberline {6.3.1}Prototipo de la interfaz gr\IeC {\'a}fica}{74}{subsection.6.3.1}
 \contentsline {subsection}{\numberline {6.3.2}Heur\IeC {\'\i }sticas de Nielsen}{76}{subsection.6.3.2}
 \contentsline {subsection}{\numberline {6.3.3}Diagramas de secuencia}{79}{subsection.6.3.3}
-\contentsline {subsubsection}{Diagrama para subir fichero de datos (HU-22)}{80}{section*.114}
-\contentsline {subsubsection}{Diagrama para consultar fichero de datos (HU-23)}{81}{section*.116}
-\contentsline {subsubsection}{Diagrama para realizar test de ANOVA (HU-7)}{82}{section*.118}
-\contentsline {subsubsection}{Diagrama para realizar los test no param\IeC {\'e}tricos de ranking}{83}{section*.120}
-\contentsline {subsubsection}{Diagrama para realizar test de SciPy}{84}{section*.122}
+\contentsline {subsubsection}{Diagrama para subir fichero de datos (HU-22)}{80}{section*.118}
+\contentsline {subsubsection}{Diagrama para consultar fichero de datos (HU-23)}{81}{section*.120}
+\contentsline {subsubsection}{Diagrama para realizar test de ANOVA (HU-7)}{82}{section*.122}
+\contentsline {subsubsection}{Diagrama para realizar los test no param\IeC {\'e}tricos de ranking}{83}{section*.124}
+\contentsline {subsubsection}{Diagrama para realizar test de SciPy}{84}{section*.126}
 \contentsline {chapter}{\numberline {7}Validaci\IeC {\'o}n y pruebas}{85}{chapter.7}
 \contentsline {section}{\numberline {7.1}Pruebas unitarias}{86}{section.7.1}
 \contentsline {section}{\numberline {7.2}Validaci\IeC {\'o}n de requisitos}{88}{section.7.2}

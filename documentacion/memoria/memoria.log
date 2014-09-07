@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2014.4.28)  6 SEP 2014 18:17
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2014.4.28)  7 SEP 2014 18:25
 entering extended mode
 **memoria.tex
 (C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\memoria.tex
@@ -928,7 +928,7 @@ ing (ext4): destination with the same identifier (name{page.III}) has been alre
 ady used, duplicate ignored
 <to be read again> 
                    \relax 
-l.58 ...e}tricas.\relax }}{98}{figure.caption.131}
+l.65 ...de datos.\relax }}{97}{figure.caption.133}
                                                    [3
 
 ])
@@ -983,7 +983,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 ]
-[6] <figuras/pdf_normal.png, id=518, 803.0pt x 602.25pt>
+[6] <figuras/pdf_normal.png, id=522, 803.0pt x 602.25pt>
 File: figuras/pdf_normal.png Graphic file (type png)
 
 <use figuras/pdf_normal.png>
@@ -994,20 +994,20 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <6> on input line 112.
 
-<figuras/pdf_chi_cuadrado.png, id=519, 338.76563pt x 253.69781pt>
+<figuras/pdf_chi_cuadrado.png, id=523, 338.76563pt x 253.69781pt>
 File: figuras/pdf_chi_cuadrado.png Graphic file (type png)
 
 <use figuras/pdf_chi_cuadrado.png>
 Package pdftex.def Info: figuras/pdf_chi_cuadrado.png used on input line 115.
 (pdftex.def)             Requested size: 142.26508pt x 85.35802pt.
 
-<figuras/pdf_f.png, id=521, 192.72pt x 144.54pt>
+<figuras/pdf_f.png, id=525, 192.72pt x 144.54pt>
 File: figuras/pdf_f.png Graphic file (type png)
  <use figuras/pdf_f.png>
 Package pdftex.def Info: figuras/pdf_f.png used on input line 121.
 (pdftex.def)             Requested size: 142.26355pt x 85.35724pt.
 
-<figuras/pdf_t_student.jpg, id=522, 451.6875pt x 278.03876pt>
+<figuras/pdf_t_student.jpg, id=526, 451.6875pt x 278.03876pt>
 File: figuras/pdf_t_student.jpg Graphic file (type jpg)
 
 <use figuras/pdf_t_student.jpg>
@@ -1024,7 +1024,7 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 mal.png> <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/pdf_c
 hi_cuadrado.png> <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figur
 as/pdf_f.png> <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/
-pdf_t_student.jpg>] <figuras/tipos_error.png, id=546, 301.125pt x 85.06781pt>
+pdf_t_student.jpg>] <figuras/tipos_error.png, id=550, 301.125pt x 85.06781pt>
 File: figuras/tipos_error.png Graphic file (type png)
 
 <use figuras/tipos_error.png>
@@ -1041,7 +1041,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 223--227
 
  []
 
-<figuras/test_unilateral_izq.png, id=555, 555.07375pt x 554.07pt>
+<figuras/test_unilateral_izq.png, id=559, 555.07375pt x 554.07pt>
 File: figuras/test_unilateral_izq.png Graphic file (type png)
 
 <use figuras/test_unilateral_izq.png>
@@ -1049,7 +1049,7 @@ Package pdftex.def Info: figuras/test_unilateral_izq.png used on input line 253
 .
 (pdftex.def)             Requested size: 142.26608pt x 85.35579pt.
 
-<figuras/test_unilateral_der.png, id=556, 555.07375pt x 554.07pt>
+<figuras/test_unilateral_der.png, id=560, 555.07375pt x 554.07pt>
 File: figuras/test_unilateral_der.png Graphic file (type png)
 
 <use figuras/test_unilateral_der.png>
@@ -1057,14 +1057,14 @@ Package pdftex.def Info: figuras/test_unilateral_der.png used on input line 255
 .
 (pdftex.def)             Requested size: 142.26608pt x 85.35579pt.
 
-<figuras/test_bilateral.png, id=557, 555.07375pt x 554.07pt>
+<figuras/test_bilateral.png, id=561, 555.07375pt x 554.07pt>
 File: figuras/test_bilateral.png Graphic file (type png)
 
 <use figuras/test_bilateral.png>
 Package pdftex.def Info: figuras/test_bilateral.png used on input line 260.
 (pdftex.def)             Requested size: 142.26608pt x 85.35579pt.
  [10]
-<figuras/critico.png, id=562, 416.30531pt x 415.5525pt>
+<figuras/critico.png, id=566, 416.30531pt x 415.5525pt>
 File: figuras/critico.png Graphic file (type png)
 
 <use figuras/critico.png>
@@ -1081,7 +1081,7 @@ File: figuras/pdf_chi_cuadrado.png Graphic file (type png)
 Package pdftex.def Info: figuras/pdf_chi_cuadrado.png used on input line 310.
 (pdftex.def)             Requested size: 142.26508pt x 85.35802pt.
 
-<figuras/cdf_chi_cuadrado.png, id=580, 803.0pt x 602.25pt>
+<figuras/cdf_chi_cuadrado.png, id=584, 803.0pt x 602.25pt>
 File: figuras/cdf_chi_cuadrado.png Graphic file (type png)
 
 <use figuras/cdf_chi_cuadrado.png>
@@ -1089,7 +1089,7 @@ Package pdftex.def Info: figuras/cdf_chi_cuadrado.png used on input line 312.
 (pdftex.def)             Requested size: 142.25475pt x 85.35284pt.
  [12 <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/cdf_chi_c
 uadrado.png>] [13]
-<figuras/normalidad.jpg, id=606, 504.38437pt x 221.32687pt>
+<figuras/normalidad.jpg, id=610, 504.38437pt x 221.32687pt>
 File: figuras/normalidad.jpg Graphic file (type jpg)
 
 <use figuras/normalidad.jpg>
@@ -1097,7 +1097,7 @@ Package pdftex.def Info: figuras/normalidad.jpg used on input line 391.
 (pdftex.def)             Requested size: 256.07817pt x 85.358pt.
  [14 <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/normalida
 d.jpg>]
-<figuras/homocedasticidad.png, id=615, 526.96875pt x 292.84406pt>
+<figuras/homocedasticidad.png, id=619, 526.96875pt x 292.84406pt>
 File: figuras/homocedasticidad.png Graphic file (type png)
 
 <use figuras/homocedasticidad.png>
@@ -1497,7 +1497,7 @@ Overfull \hbox (5.28488pt too wide) in paragraph at lines 83--92
 [][] 
  []
 
-[43] <figuras/ciclos_desarrollo.png, id=817, 560.0925pt x 292.09125pt>
+[43] <figuras/ciclos_desarrollo.png, id=821, 560.0925pt x 292.09125pt>
 File: figuras/ciclos_desarrollo.png Graphic file (type png)
 
 <use figuras/ciclos_desarrollo.png>
@@ -1505,14 +1505,14 @@ Package pdftex.def Info: figuras/ciclos_desarrollo.png used on input line 123.
 (pdftex.def)             Requested size: 341.44226pt x 170.72337pt.
  [44] [45 <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/cicl
 os_desarrollo.png>] [46]
-<figuras/burndown.png, id=835, 642.4pt x 325.215pt>
+<figuras/burndown.png, id=839, 642.4pt x 325.215pt>
 File: figuras/burndown.png Graphic file (type png)
  <use figuras/burndown.png>
 Package pdftex.def Info: figuras/burndown.png used on input line 171.
 (pdftex.def)             Requested size: 341.4408pt x 170.72058pt.
 
 [47 <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/burndown.p
-ng>] [48] <figuras/edt.png, id=854, 1270.7475pt x 426.59375pt>
+ng>] [48] <figuras/edt.png, id=858, 1270.7475pt x 426.59375pt>
 File: figuras/edt.png Graphic file (type png)
 
 <use figuras/edt.png>
@@ -1520,7 +1520,7 @@ Package pdftex.def Info: figuras/edt.png used on input line 226.
 (pdftex.def)             Requested size: 398.3292pt x 199.17119pt.
  [49 <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/edt.png>]
  [50]
-<figuras/gantt.png, id=869, 825.83531pt x 396.7322pt>
+<figuras/gantt.png, id=873, 825.83531pt x 396.7322pt>
 File: figuras/gantt.png Graphic file (type png)
  <use figuras/gantt.png>
 Package pdftex.def Info: figuras/gantt.png used on input line 325.
@@ -1529,30 +1529,75 @@ Package pdftex.def Info: figuras/gantt.png used on input line 325.
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [51]
-<figuras/b1.png, id=879, 214.55156pt x 156.585pt>
+<figuras/b1.png, id=885, 214.55156pt x 156.585pt>
 File: figuras/b1.png Graphic file (type png)
  <use figuras/b1.png>
 Package pdftex.def Info: figuras/b1.png used on input line 335.
 (pdftex.def)             Requested size: 128.73192pt x 93.95172pt.
 
-<figuras/b2.png, id=880, 207.77625pt x 158.09062pt>
+<figuras/b2.png, id=886, 207.77625pt x 158.09062pt>
 File: figuras/b2.png Graphic file (type png)
  <use figuras/b2.png>
 Package pdftex.def Info: figuras/b2.png used on input line 337.
 (pdftex.def)             Requested size: 124.6667pt x 94.85509pt.
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
+<figuras/b3.png, id=887, 210.03468pt x 158.09062pt>
+File: figuras/b3.png Graphic file (type png)
+ <use figuras/b3.png>
+Package pdftex.def Info: figuras/b3.png used on input line 342.
+(pdftex.def)             Requested size: 126.02177pt x 94.85509pt.
 
+<figuras/b4.png, id=888, 207.77625pt x 156.585pt>
+File: figuras/b4.png Graphic file (type png)
+ <use figuras/b4.png>
+Package pdftex.def Info: figuras/b4.png used on input line 344.
+(pdftex.def)             Requested size: 124.6667pt x 93.95172pt.
  [52 <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/gantt.png
 > <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/b1.png> <C:/
-Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/b2.png>]) [53] [54
+Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/b2.png> <C:/Users/
+Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/b3.png> <C:/Users/Adriá
+n/Desktop/tfg/stac/documentacion/memoria/figuras/b4.png>]
+<figuras/b5.png, id=898, 213.79875pt x 155.83218pt>
+File: figuras/b5.png Graphic file (type png)
+ <use figuras/b5.png>
+Package pdftex.def Info: figuras/b5.png used on input line 354.
+(pdftex.def)             Requested size: 128.28023pt x 93.50003pt.
 
+<figuras/b6.png, id=899, 210.7875pt x 158.09062pt>
+File: figuras/b6.png Graphic file (type png)
+ <use figuras/b6.png>
+Package pdftex.def Info: figuras/b6.png used on input line 356.
+(pdftex.def)             Requested size: 126.47346pt x 94.85509pt.
 
-]
+<figuras/b7.png, id=900, 213.04594pt x 155.83218pt>
+File: figuras/b7.png Graphic file (type png)
+ <use figuras/b7.png>
+Package pdftex.def Info: figuras/b7.png used on input line 361.
+(pdftex.def)             Requested size: 127.82854pt x 93.50003pt.
+
+<figuras/b8.png, id=901, 211.54031pt x 157.33781pt>
+File: figuras/b8.png Graphic file (type png)
+ <use figuras/b8.png>
+Package pdftex.def Info: figuras/b8.png used on input line 363.
+(pdftex.def)             Requested size: 126.92516pt x 94.4034pt.
+
+<figuras/b9.png, id=902, 212.29312pt x 156.585pt>
+File: figuras/b9.png Graphic file (type png)
+ <use figuras/b9.png>
+Package pdftex.def Info: figuras/b9.png used on input line 373.
+(pdftex.def)             Requested size: 127.37685pt x 93.95172pt.
+
+Underfull \vbox (badness 5787) has occurred while \output is active []
+
+ [53 <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/b5.png> <
+C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/b6.png> <C:/Use
+rs/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/b7.png> <C:/Users/Adr
+ián/Desktop/tfg/stac/documentacion/memoria/figuras/b8.png> <C:/Users/Adrián/D
+esktop/tfg/stac/documentacion/memoria/figuras/b9.png>]) [54]
 (C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\capitulos/arquitectura
 h.tex
 Cap\'{\i }tulo 5.
-<figuras/arquitectura.png, id=902, 720.6925pt x 79.29625pt>
+<figuras/arquitectura.png, id=924, 720.6925pt x 79.29625pt>
 File: figuras/arquitectura.png Graphic file (type png)
 
 <use figuras/arquitectura.png>
@@ -1566,8 +1611,10 @@ Overfull \hbox (8.53766pt too wide) in paragraph at lines 11--12
 [55
 
 
+
+
  <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/arquitectura.
-png>] <figuras/mvc.png, id=908, 493.845pt x 365.365pt>
+png>] <figuras/mvc.png, id=930, 493.845pt x 365.365pt>
 File: figuras/mvc.png Graphic file (type png)
 
 <use figuras/mvc.png>
@@ -1575,7 +1622,7 @@ Package pdftex.def Info: figuras/mvc.png used on input line 26.
 (pdftex.def)             Requested size: 256.0748pt x 189.45012pt.
  [56 <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/mvc.png>]
  [57]
-<figuras/singleton.png, id=922, 315.42844pt x 164.86594pt>
+<figuras/singleton.png, id=944, 315.42844pt x 164.86594pt>
 File: figuras/singleton.png Graphic file (type png)
 
 <use figuras/singleton.png>
@@ -1583,14 +1630,14 @@ Package pdftex.def Info: figuras/singleton.png used on input line 80.
 (pdftex.def)             Requested size: 170.71867pt x 85.36096pt.
  [58 <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/singleton
 .png>] [59] [60]
-<figuras/rest.png, id=948, 628.3475pt x 334.24875pt>
+<figuras/rest.png, id=970, 628.3475pt x 334.24875pt>
 File: figuras/rest.png Graphic file (type png)
  <use figuras/rest.png>
 Package pdftex.def Info: figuras/rest.png used on input line 130.
 (pdftex.def)             Requested size: 341.43109pt x 170.7196pt.
 
 [61 <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/rest.png>]
-<figuras/bootstrap.png, id=959, 105.39375pt x 141.52875pt>
+<figuras/bootstrap.png, id=981, 105.39375pt x 141.52875pt>
 File: figuras/bootstrap.png Graphic file (type png)
 
 <use figuras/bootstrap.png>
@@ -1637,7 +1684,7 @@ Overfull \hbox (7.69548pt too wide) in paragraph at lines 252--264
  [][] 
  []
 
-[73] <figuras/prototipo_home.jpg, id=1059, 455.45157pt x 267.24844pt>
+[73] <figuras/prototipo_home.jpg, id=1081, 455.45157pt x 267.24844pt>
 File: figuras/prototipo_home.jpg Graphic file (type jpg)
 
 <use figuras/prototipo_home.jpg>
@@ -1647,14 +1694,14 @@ Package pdftex.def Info: figuras/prototipo_home.jpg used on input line 300.
 Underfull \vbox (badness 4673) has occurred while \output is active []
 
  [74]
-<figuras/prototipo_help.jpg, id=1064, 455.45157pt x 267.24844pt>
+<figuras/prototipo_help.jpg, id=1086, 455.45157pt x 267.24844pt>
 File: figuras/prototipo_help.jpg Graphic file (type jpg)
 
 <use figuras/prototipo_help.jpg>
 Package pdftex.def Info: figuras/prototipo_help.jpg used on input line 307.
 (pdftex.def)             Requested size: 284.53143pt x 170.72441pt.
 
-<figuras/prototipo_test.jpg, id=1065, 652.4375pt x 401.5pt>
+<figuras/prototipo_test.jpg, id=1087, 652.4375pt x 401.5pt>
 File: figuras/prototipo_test.jpg Graphic file (type jpg)
 
 <use figuras/prototipo_test.jpg>
@@ -1665,7 +1712,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [75 <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/prototipo
 _home.jpg> <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/pro
-totipo_help.jpg>] <figuras/prototipo_results.jpg, id=1071, 652.4375pt x 401.5pt
+totipo_help.jpg>] <figuras/prototipo_results.jpg, id=1093, 652.4375pt x 401.5pt
 >
 File: figuras/prototipo_results.jpg Graphic file (type jpg)
 
@@ -1678,7 +1725,7 @@ totipo_results.jpg>]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [77]
-<figuras/nielsen_error.png, id=1080, 770.88pt x 98.61844pt>
+<figuras/nielsen_error.png, id=1102, 770.88pt x 98.61844pt>
 File: figuras/nielsen_error.png Graphic file (type png)
 
 <use figuras/nielsen_error.png>
@@ -1686,7 +1733,7 @@ Package pdftex.def Info: figuras/nielsen_error.png used on input line 367.
 (pdftex.def)             Requested size: 385.43906pt x 49.30908pt.
  [78 <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/nielsen_e
 rror.png>]
-<figuras/nielsen_general.png, id=1086, 971.88094pt x 469.00218pt>
+<figuras/nielsen_general.png, id=1108, 971.88094pt x 469.00218pt>
 File: figuras/nielsen_general.png Graphic file (type png)
 
 <use figuras/nielsen_general.png>
@@ -1694,7 +1741,7 @@ Package pdftex.def Info: figuras/nielsen_general.png used on input line 404.
 (pdftex.def)             Requested size: 388.74548pt x 187.59755pt.
  [79 <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/nielsen_g
 eneral.png>]
-<figuras/sec_subir_fichero.jpg, id=1093, 778.91pt x 807.015pt>
+<figuras/sec_subir_fichero.jpg, id=1115, 778.91pt x 807.015pt>
 File: figuras/sec_subir_fichero.jpg Graphic file (type jpg)
 
 <use figuras/sec_subir_fichero.jpg>
@@ -1702,7 +1749,7 @@ Package pdftex.def Info: figuras/sec_subir_fichero.jpg used on input line 425.
 (pdftex.def)             Requested size: 389.45406pt x 403.50652pt.
  [80 <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/sec_subir
 _fichero.jpg>]
-<figuras/sec_consultar_fichero.jpg, id=1101, 685.56125pt x 429.605pt>
+<figuras/sec_consultar_fichero.jpg, id=1123, 685.56125pt x 429.605pt>
 File: figuras/sec_consultar_fichero.jpg Graphic file (type jpg)
 
 <use figuras/sec_consultar_fichero.jpg>
@@ -1710,7 +1757,7 @@ Package pdftex.def Info: figuras/sec_consultar_fichero.jpg used on input line 4
 40.
 (pdftex.def)             Requested size: 342.77979pt x 214.80197pt.
 
-<figuras/sec_anova.jpg, id=1103, 807.015pt x 650.43pt>
+<figuras/sec_anova.jpg, id=1125, 807.015pt x 650.43pt>
 File: figuras/sec_anova.jpg Graphic file (type jpg)
 
 <use figuras/sec_anova.jpg>
@@ -1719,15 +1766,15 @@ Package pdftex.def Info: figuras/sec_anova.jpg used on input line 453.
  [81 <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/sec_consu
 ltar_fichero.jpg>] [82 <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria
 /figuras/sec_anova.jpg>]
-<figuras/sec_ranking.jpg, id=1118, 972.63374pt x 642.4pt>
+<figuras/sec_ranking.jpg, id=1140, 708.39656pt x 464.4853pt>
 File: figuras/sec_ranking.jpg Graphic file (type jpg)
 
 <use figuras/sec_ranking.jpg>
 Package pdftex.def Info: figuras/sec_ranking.jpg used on input line 469.
-(pdftex.def)             Requested size: 486.31567pt x 321.19922pt.
+(pdftex.def)             Requested size: 495.8742pt x 325.1375pt.
  [83 <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/sec_ranki
 ng.jpg>]
-<figuras/sec_scipy.jpg, id=1127, 819.06pt x 662.475pt>
+<figuras/sec_scipy.jpg, id=1149, 819.06pt x 662.475pt>
 File: figuras/sec_scipy.jpg Graphic file (type jpg)
 
 <use figuras/sec_scipy.jpg>
@@ -1901,12 +1948,12 @@ Cap\'{\i }tulo 8.
 (C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\capitulos/manualtec.te
 x
 Ap\'{e}ndice A.
-<figuras/directorio_proy.png, id=1189, 781.41937pt x 60.225pt>
+<figuras/directorio_proy.png, id=1217, 666.23906pt x 60.225pt>
 File: figuras/directorio_proy.png Graphic file (type png)
 
 <use figuras/directorio_proy.png>
-Package pdftex.def Info: figuras/directorio_proy.png used on input line 14.
-(pdftex.def)             Requested size: 390.70872pt x 30.11241pt.
+Package pdftex.def Info: figuras/directorio_proy.png used on input line 6.
+(pdftex.def)             Requested size: 333.11871pt x 30.11241pt.
  [93
 
 
@@ -1915,13 +1962,13 @@ Package pdftex.def Info: figuras/directorio_proy.png used on input line 14.
 
  <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/directorio_pr
 oy.png>]
-LaTeX Font Info:    Try loading font information for TS1+cmtt on input line 35.
+LaTeX Font Info:    Try loading font information for TS1+cmtt on input line 27.
 
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\ts1cmtt.fd"
 File: ts1cmtt.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
-Overfull \hbox (12.84302pt too wide) in paragraph at lines 72--73
+Overfull \hbox (12.84302pt too wide) in paragraph at lines 64--65
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
@@ -1929,7 +1976,7 @@ Overfull \hbox (12.84302pt too wide) in paragraph at lines 72--73
 (C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\capitulos/manualusu.te
 x
 Ap\'{e}ndice B.
-<figuras/man_inicio.png, id=1244, 979.40906pt x 508.14844pt>
+<figuras/man_inicio.png, id=1274, 979.40906pt x 508.14844pt>
 File: figuras/man_inicio.png Graphic file (type png)
 
 <use figuras/man_inicio.png>
@@ -1942,21 +1989,21 @@ Package pdftex.def Info: figuras/man_inicio.png used on input line 11.
 
  <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/man_inicio.pn
 g>]
-<figuras/man_fichero.png, id=1251, 502.87875pt x 205.5178pt>
+<figuras/man_fichero.png, id=1281, 502.87875pt x 205.5178pt>
 File: figuras/man_fichero.png Graphic file (type png)
 
 <use figuras/man_fichero.png>
 Package pdftex.def Info: figuras/man_fichero.png used on input line 20.
 (pdftex.def)             Requested size: 251.43875pt x 102.75865pt.
 
-<figuras/man_fichero2.png, id=1252, 234.8775pt x 94.85437pt>
+<figuras/man_fichero2.png, id=1282, 234.8775pt x 94.85437pt>
 File: figuras/man_fichero2.png Graphic file (type png)
 
 <use figuras/man_fichero2.png>
 Package pdftex.def Info: figuras/man_fichero2.png used on input line 27.
 (pdftex.def)             Requested size: 117.43846pt x 47.42706pt.
 
-<figuras/man_ayuda1.png, id=1256, 246.1697pt x 214.55156pt>
+<figuras/man_ayuda1.png, id=1286, 246.1697pt x 214.55156pt>
 File: figuras/man_ayuda1.png Graphic file (type png)
 
 <use figuras/man_ayuda1.png>
@@ -1967,14 +2014,14 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [96 <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/man_fiche
 ro.png> <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/man_fi
-chero2.png>] <figuras/man_ayuda2.png, id=1265, 964.35281pt x 481.04718pt>
+chero2.png>] <figuras/man_ayuda2.png, id=1295, 964.35281pt x 481.04718pt>
 File: figuras/man_ayuda2.png Graphic file (type png)
 
 <use figuras/man_ayuda2.png>
 Package pdftex.def Info: figuras/man_ayuda2.png used on input line 51.
 (pdftex.def)             Requested size: 385.7343pt x 192.41545pt.
 
-<figuras/man_consulta.png, id=1267, 962.84718pt x 494.59781pt>
+<figuras/man_consulta.png, id=1297, 962.84718pt x 494.59781pt>
 File: figuras/man_consulta.png Graphic file (type png)
 
 <use figuras/man_consulta.png>
@@ -1986,7 +2033,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
  [97 <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/man_ayuda
 1.png> <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/man_ayu
 da2.png>]
-<figuras/man_descripcion.png, id=1275, 965.85844pt x 499.11469pt>
+<figuras/man_descripcion.png, id=1305, 965.85844pt x 499.11469pt>
 File: figuras/man_descripcion.png Graphic file (type png)
 
 <use figuras/man_descripcion.png>
@@ -1995,21 +2042,21 @@ Package pdftex.def Info: figuras/man_descripcion.png used on input line 71.
  [98 <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/man_consu
 lta.png> <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/man_d
 escripcion.png>]
-<figuras/man_opciones.png, id=1283, 968.86969pt x 490.08093pt>
+<figuras/man_opciones.png, id=1313, 968.86969pt x 490.08093pt>
 File: figuras/man_opciones.png Graphic file (type png)
 
 <use figuras/man_opciones.png>
 Package pdftex.def Info: figuras/man_opciones.png used on input line 80.
 (pdftex.def)             Requested size: 387.54102pt x 196.0289pt.
 
-<figuras/man_nofichero.png, id=1286, 771.63281pt x 151.3153pt>
+<figuras/man_nofichero.png, id=1316, 771.63281pt x 151.3153pt>
 File: figuras/man_nofichero.png Graphic file (type png)
 
 <use figuras/man_nofichero.png>
 Package pdftex.def Info: figuras/man_nofichero.png used on input line 89.
 (pdftex.def)             Requested size: 385.81546pt x 75.65746pt.
 
-<figuras/man_errorapli.png, id=1287, 769.37437pt x 189.70876pt>
+<figuras/man_errorapli.png, id=1317, 769.37437pt x 189.70876pt>
 File: figuras/man_errorapli.png Graphic file (type png)
 
 <use figuras/man_errorapli.png>
@@ -2020,14 +2067,14 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [99 <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/man_opcio
 nes.png> <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/man_n
-ofichero.png>] <figuras/man_results.png, id=1296, 964.35281pt x 502.12593pt>
+ofichero.png>] <figuras/man_results.png, id=1326, 964.35281pt x 502.12593pt>
 File: figuras/man_results.png Graphic file (type png)
 
 <use figuras/man_results.png>
 Package pdftex.def Info: figuras/man_results.png used on input line 109.
 (pdftex.def)             Requested size: 385.7343pt x 200.84682pt.
 
-<figuras/man_dialog.png, id=1298, 376.40625pt x 153.57375pt>
+<figuras/man_dialog.png, id=1328, 376.40625pt x 153.57375pt>
 File: figuras/man_dialog.png Graphic file (type png)
 
 <use figuras/man_dialog.png>
@@ -2038,14 +2085,14 @@ Underfull \vbox (badness 1533) has occurred while \output is active []
 
  [100 <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/man_erro
 rapli.png> <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/man
-_results.png>] <figuras/man_latex.png, id=1307, 280.04625pt x 137.01187pt>
+_results.png>] <figuras/man_latex.png, id=1337, 280.04625pt x 137.01187pt>
 File: figuras/man_latex.png Graphic file (type png)
 
 <use figuras/man_latex.png>
 Package pdftex.def Info: figuras/man_latex.png used on input line 127.
 (pdftex.def)             Requested size: 168.02904pt x 82.20775pt.
 
-<figuras/man_csv.png, id=1308, 315.42844pt x 93.34875pt>
+<figuras/man_csv.png, id=1338, 315.42844pt x 93.34875pt>
 File: figuras/man_csv.png Graphic file (type png)
 
 <use figuras/man_csv.png>
@@ -2105,11 +2152,11 @@ LaTeX Warning: There were multiply-defined labels.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 70.
  ) 
 Here is how much of TeX's memory you used:
- 11056 strings out of 493921
- 169360 string characters out of 3144870
- 281887 words of memory out of 3000000
- 13649 multiletter control sequences out of 15000+200000
- 11476 words of font info for 41 fonts, out of 3000000 for 9000
+ 11113 strings out of 493921
+ 170221 string characters out of 3144870
+ 282141 words of memory out of 3000000
+ 13684 multiletter control sequences out of 15000+200000
+ 11996 words of font info for 43 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
  36i,14n,49p,1339b,1103s stack positions out of 5000i,500n,10000p,200000b,50000s
  <C:\Users\Adrián\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi60
@@ -2118,29 +2165,30 @@ Here is how much of TeX's memory you used:
 mbx12.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmb
 xti10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmc
 sc10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex
-10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10
-.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi5.pf
-b><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi7.pfb><
-C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/
-Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Pro
-gram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Program
- Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Program Fil
-es (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Program Files (
-x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files (x86)
-/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsl10.pfb><C:/Program Files (x86)/M
-iKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files (x86)/MiK
-TeX 2.9/fonts/type1/public/amsfonts/cm/cmsy5.pfb><C:/Program Files (x86)/MiKTeX
- 2.9/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Program Files (x86)/MiKTeX 2.
-9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files (x86)/MiKTeX 2.9/f
-onts/type1/public/amsfonts/cm/cmti10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fon
-ts/type1/public/amsfonts/cm/cmti7.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/
-type1/public/amsfonts/cm/cmtt10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/ty
-pe1/public/amsfonts/cm/cmtt8.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1
-/public/amsfonts/cm/cmtt9.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/pu
-blic/eurosym/feymr10.pfb>
-Output written on memoria.pdf (114 pages, 2324675 bytes).
+10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmitt1
+0.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.
+pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi5.pfb
+><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C
+:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/P
+rogram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Prog
+ram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Program 
+Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Program File
+s (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Program Files (x
+86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files (x86)/
+MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsl10.pfb><C:/Program Files (x86)/Mi
+KTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files (x86)/MiKT
+eX 2.9/fonts/type1/public/amsfonts/cm/cmsy5.pfb><C:/Program Files (x86)/MiKTeX 
+2.9/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Program Files (x86)/MiKTeX 2.9
+/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files (x86)/MiKTeX 2.9/fo
+nts/type1/public/amsfonts/cm/cmti10.pfb><C:/Program Files (x86)/MiKTeX 2.9/font
+s/type1/public/amsfonts/cm/cmti7.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/t
+ype1/public/amsfonts/cm/cmtt10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/typ
+e1/public/amsfonts/cm/cmtt8.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/
+public/amsfonts/cm/cmtt9.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/pub
+lic/eurosym/feymr10.pfb>
+Output written on memoria.pdf (114 pages, 2382723 bytes).
 PDF statistics:
- 1501 PDF objects out of 1728 (max. 8388607)
- 419 named destinations out of 1000 (max. 500000)
- 795 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1547 PDF objects out of 1728 (max. 8388607)
+ 432 named destinations out of 1000 (max. 500000)
+ 830 words of extra memory for PDF output out of 10000 (max. 10000000)
 
