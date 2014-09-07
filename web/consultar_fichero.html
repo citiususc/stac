@@ -42,45 +42,45 @@
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
                         <!--Consulta de fichero-->
-                        <li><a href="consultar_fichero.html">Consultar fichero</a></li>
+                        <li><a href="consultar_fichero.html">Show file</a></li>
                         <!--Subir el fichero-->
-                        <li><a id="a_subida" href="#modal_fichero" data-toggle="modal">Subir fichero</a></li>
+                        <li><a id="a_subida" href="#modal_fichero" data-toggle="modal">Upload file</a></li>
                         <!--Ayuda-->
-                        <li><a href="ayuda.html">Ayuda</a></li>
+                        <li><a href="ayuda.html">Help</a></li>
                     </ul>
                 </div>
             </div>
         </div>
 
         <!--***************************************Modal de Subir el fichero***************************************-->
-        <div id="modal_fichero" class="modal fade">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title">Subir fichero</h4>
-                    </div>
-                    <div class="modal-body">
-                        <form class="form" id="formfichero" enctype="multipart/form-data">
-                            <p class="text-warning"><small>El formato del archivo sigue el estándar .csv &nbsp;&nbsp;<label><a href="ayuda.html#collapseOne" id="ayuda_fichero" target="_blank">[More info]</a></label></small></p>
-                            <div class="input-group">
-                                <span class="input-group-btn">
-                                    <span class="btn btn-primary btn-file">
-                                        Abrir <input type="file" name="fichero" id="fichero"/>
-                                    </span>
-                                </span>
-                                <input type="text" class="form-control" style="width:150px;" readonly>
-                            </div>
-                            <div id="mensaje_subida" align="center"></div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                        <button type="button" class="btn btn-primary" id="boton_fichero">Subir fichero</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+	    <div id="modal_fichero" class="modal fade">
+		<div class="modal-dialog">
+		    <div class="modal-content">
+			<div class="modal-header">
+			    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			    <h4 class="modal-title">Upload file</h4>
+			</div>
+			<div class="modal-body">
+			    <form class="form" id="formfichero" enctype="multipart/form-data">
+			        <p class="text-warning"><small>The file must be in csv format &nbsp;&nbsp;<label><a href="ayuda.html#collapseOne" id="ayuda_fichero" target="_blank">[More info]</a></label></small></p>
+			        <div class="input-group">
+			            <span class="input-group-btn">
+			                <span class="btn btn-primary btn-file">
+			                    Open <input type="file" name="fichero" id="fichero"/>
+			                </span>
+			            </span>
+			            <input type="text" class="form-control" style="width:150px;" readonly>
+			        </div>
+			        <div id="mensaje_subida" align="center"></div>
+			    </form>
+			</div>
+			<div class="modal-footer">
+			    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			    <button type="button" class="btn btn-primary" id="boton_fichero">Upload file</button>
+			</div>
+		    </div>
+		</div>
+	    </div>
         <!--*******************************************************************************************************-->
 
         <div class="container-fluid">
@@ -88,34 +88,33 @@
                 <div class="col-sm-3 col-md-2 sidebar">
                     <div id="MainMenu">
                         <div class="nav nav-sidebar list-group panel">
-                            <a href="index.html" class="list-group-item"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;&nbsp;&nbsp;Principal</a>
-                            <a href="#lista1" class="list-group-item" data-toggle="collapse" style="display=show;" data-parent="#MainMenu">Condiciones Paramétricas <i class="caret"></i></a>
+                            <a href="index.html" class="list-group-item"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;&nbsp;&nbsp;Main</a>
+                            <a href="#lista1" class="list-group-item" data-toggle="collapse" style="display=show;" data-parent="#MainMenu">Parametric conditions <i class="caret"></i></a>
                             <div class="collapse" id="lista1">
-                                <a href="conditions_info.html" class="list-group-item">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-asterisk"></span>&nbsp;&nbsp;Descripción</a>
-                                <a href="normality.html" class="list-group-item">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-asterisk"></span>&nbsp;&nbsp;Normalidad</a>
-                                <a href="homocedasticity.html" class="list-group-item">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-asterisk"></span>&nbsp;&nbsp;Homocedasticidad</a>
+                                <a href="conditions_info.html" class="list-group-item">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-asterisk"></span>&nbsp;&nbsp;Description</a>
+                                <a href="normality.html" class="list-group-item">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-asterisk"></span>&nbsp;&nbsp;Normality</a>
+                                <a href="homocedasticity.html" class="list-group-item">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-asterisk"></span>&nbsp;&nbsp;Homoscedasticity</a>
                             </div>
-                            <a href="#lista2" class="list-group-item" data-toggle="collapse" data-parent="#MainMenu">Tests Paramétricos <i class="caret"></i></a>
+                            <a href="#lista2" class="list-group-item" data-toggle="collapse" data-parent="#MainMenu">Parametric tests <i class="caret"></i></a>
                             <div class="collapse" id="lista2">
-                                <a href="parametric_info.html" class="list-group-item">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-asterisk"></span>&nbsp;&nbsp;Descripción</a>
+                                <a href="parametric_info.html" class="list-group-item">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-asterisk"></span>&nbsp;&nbsp;Description</a>
                                 <a href="anova.html" class="list-group-item">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-asterisk"></span>&nbsp;&nbsp;Anova</a>
                                 <a href="ttest.html" class="list-group-item">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-asterisk"></span>&nbsp;&nbsp;T-test</a>
                             </div>
-                            <a href="#lista3" class="list-group-item" data-toggle="collapse" data-parent="#MainMenu">Tests no Paramétricos <i class="caret"></i></a>
+                            <a href="#lista3" class="list-group-item" data-toggle="collapse" data-parent="#MainMenu">Nonparametric tests <i class="caret"></i></a>
                             <div class="collapse" id="lista3">
-                                <a href="nonparametric_info.html" class="list-group-item">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-asterisk"></span>&nbsp;&nbsp;Descripción</a>
+                                <a href="nonparametric_info.html" class="list-group-item">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-asterisk"></span>&nbsp;&nbsp;Description</a>
                                 <a href="wilcoxon.html" class="list-group-item">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-asterisk"></span>&nbsp;&nbsp;Wilcoxon</a>
-                                <a href="ranking.html" class="list-group-item">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-asterisk"></span>&nbsp;&nbsp;Tests de Ranking</a>
+                                <a href="ranking.html" class="list-group-item">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-asterisk"></span>&nbsp;&nbsp;Ranking tests</a>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-                    <h1 class="page-header">Contenido del fichero</h1>
+                    <h1 class="page-header">File Contents</h1>
                     <div id="alerta_fichero" class="alert alert-info alert-dismissable" style="display:none">
                         <button type="button" class="close" data-dismiss="alert">&times;</button>
-                        <strong>¡Sube un fichero!</strong> A la derecha de la barra la barra de navegación superior puedes seleccionar y
-                        subir un fichero en "Subir fichero". A continuación, pulsa en "Consultar fichero" para ver su contenido. 
+                        <strong>¡Upload a file!</strong> In the top right of the navigation bar you can select and upload a file by clicking "Upload file". Then, click "Show file" to watch its contents.
                     </div>
                     <div class="table-responsive">
                         <table id="contenido_fichero" class="table table-hover"></table>
@@ -134,3 +133,4 @@
         <script src="js/consultar_fichero.js"></script>
     </body>
 </html>
+

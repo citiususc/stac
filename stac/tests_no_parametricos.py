@@ -85,7 +85,7 @@ def wilcoxon_test(matriz_datos, alpha=0.05):
 
     #El test de Wilcoxon compara dos algoritmos.
     if len(matriz_datos[0]) != 2:
-        raise Exception("Test de Wilcoxon solo aplicable a dos algoritmos")
+        raise Exception("Wilcoxon test requires only two algorithms.")
 
     #Paso de una matriz de conjuntos de datos a dos listas: lista "a", que contiene
     #los resultados de aplicar el primer algoritmo a los datos y una lista "b" que
@@ -116,7 +116,7 @@ def wilcoxon_test(matriz_datos, alpha=0.05):
 
     #El tamaño de la muestra  (sin ligaduras) debe ser al menos de 5.
     if N < 5:
-        raise Exception("Menos de 5 conjuntos de datos sin ligaduras")
+        raise Exception("Less than 5 datasets without ties.")
 
     #Rangos de orden 1,2,...,N. Cada elemento de copia tiene un rango asociado:
     #indice(elemento) + 1. Si hay empates se calcula la media del rango de cada
@@ -146,7 +146,7 @@ def wilcoxon_test(matriz_datos, alpha=0.05):
     #aproximar con la distribución normal.
     if N <= 25:
         if alpha not in tabla_wilcoxon:
-            raise Exception("Valor de alpha no contenido en la tabla de Wilcoxon")
+            raise Exception("Alpha value is not available in the Wilcoxon table.")
         #Límite inferior del intervalo de aceptación.
         punto_critico = tabla_wilcoxon[alpha][N]
 

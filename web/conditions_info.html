@@ -42,45 +42,45 @@
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
                         <!--Consulta de fichero-->
-                        <li id="mostrar_consulta_fichero" style="display:none"><a href="consultar_fichero.html">Consultar fichero</a></li>
+                        <li id="mostrar_consulta_fichero" style="display:none"><a href="consultar_fichero.html">Show file</a></li>
                         <!--Subir el fichero-->
-                        <li><a id="a_subida" href="#modal_fichero" data-toggle="modal">Subir fichero</a></li>
+                        <li><a id="a_subida" href="#modal_fichero" data-toggle="modal">Upload file</a></li>
                         <!--Ayuda-->
-                        <li><a href="ayuda.html" target="blank">Ayuda</a></li>
+                        <li><a href="ayuda.html" target="blank">Help</a></li>
                     </ul>
                 </div>
             </div>
         </div>
 
         <!--***************************************Modal de Subir el fichero***************************************-->
-        <div id="modal_fichero" class="modal fade">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title">Subir fichero</h4>
-                    </div>
-                    <div class="modal-body">
-                        <form class="form" id="formfichero" enctype="multipart/form-data">
-                            <p class="text-warning"><small>El formato del archivo sigue el estándar .csv &nbsp;&nbsp;<label><a href="ayuda.html#collapseOne" id="ayuda_fichero" target="_blank">[More info]</a></label></small></p>
-                            <div class="input-group">
-                                <span class="input-group-btn">
-                                    <span class="btn btn-primary btn-file">
-                                        Abrir <input type="file" name="fichero" id="fichero"/>
-                                    </span>
-                                </span>
-                                <input type="text" class="form-control" style="width:150px;" readonly>
-                            </div>
-                            <div id="mensaje_subida" align="center"></div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                        <button type="button" class="btn btn-primary" id="boton_fichero">Subir fichero</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+	    <div id="modal_fichero" class="modal fade">
+		<div class="modal-dialog">
+		    <div class="modal-content">
+			<div class="modal-header">
+			    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			    <h4 class="modal-title">Upload file</h4>
+			</div>
+			<div class="modal-body">
+			    <form class="form" id="formfichero" enctype="multipart/form-data">
+			        <p class="text-warning"><small>The file must be in csv format &nbsp;&nbsp;<label><a href="ayuda.html#collapseOne" id="ayuda_fichero" target="_blank">[More info]</a></label></small></p>
+			        <div class="input-group">
+			            <span class="input-group-btn">
+			                <span class="btn btn-primary btn-file">
+			                    Open <input type="file" name="fichero" id="fichero"/>
+			                </span>
+			            </span>
+			            <input type="text" class="form-control" style="width:150px;" readonly>
+			        </div>
+			        <div id="mensaje_subida" align="center"></div>
+			    </form>
+			</div>
+			<div class="modal-footer">
+			    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			    <button type="button" class="btn btn-primary" id="boton_fichero">Upload file</button>
+			</div>
+		    </div>
+		</div>
+	    </div>
         <!--*******************************************************************************************************-->
 
         <div class="container-fluid">
@@ -88,24 +88,24 @@
                 <div class="col-sm-3 col-md-2 sidebar">
                     <div id="MainMenu">
                         <div class="nav nav-sidebar list-group panel">
-                            <a href="index.html" class="list-group-item"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;&nbsp;&nbsp;Principal</a>
-                            <a href="#lista1" class="list-group-item active" data-toggle="collapse" style="display=show;" data-parent="#MainMenu">Condiciones Paramétricas <i class="caret"></i></a>
-                            <div class="collapse" id="lista1">
-                                <a href="conditions_info.html" class="list-group-item">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-asterisk"></span>&nbsp;&nbsp;Descripción</a>
-                                <a href="normality.html" class="list-group-item">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-asterisk"></span>&nbsp;&nbsp;Normalidad</a>
-                                <a href="homocedasticity.html" class="list-group-item">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-asterisk"></span>&nbsp;&nbsp;Homocedasticidad</a>
+                            <a href="index.html" class="list-group-item"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;&nbsp;&nbsp;Main</a>
+                            <a href="#lista1" class="list-group-item" data-toggle="collapse" style="display=show;" data-parent="#MainMenu">Parametric conditions <i class="caret"></i></a>
+                            <div class="in collapse" id="lista1">
+                                <a href="conditions_info.html" class="list-group-item active">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-asterisk"></span>&nbsp;&nbsp;Description</a>
+                                <a href="normality.html" class="list-group-item">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-asterisk"></span>&nbsp;&nbsp;Normality</a>
+                                <a href="homocedasticity.html" class="list-group-item">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-asterisk"></span>&nbsp;&nbsp;Homoscedasticity</a>
                             </div>
-                            <a href="#lista2" class="list-group-item" data-toggle="collapse" data-parent="#MainMenu">Tests Paramétricos <i class="caret"></i></a>
+                            <a href="#lista2" class="list-group-item" data-toggle="collapse" data-parent="#MainMenu">Parametric tests <i class="caret"></i></a>
                             <div class="collapse" id="lista2">
-                                <a href="parametric_info.html" class="list-group-item">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-asterisk"></span>&nbsp;&nbsp;Descripción</a>
+                                <a href="parametric_info.html" class="list-group-item">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-asterisk"></span>&nbsp;&nbsp;Description</a>
                                 <a href="anova.html" class="list-group-item">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-asterisk"></span>&nbsp;&nbsp;Anova</a>
                                 <a href="ttest.html" class="list-group-item">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-asterisk"></span>&nbsp;&nbsp;T-test</a>
                             </div>
-                            <a href="#lista3" class="list-group-item" data-toggle="collapse" data-parent="#MainMenu">Tests no Paramétricos <i class="caret"></i></a>
+                            <a href="#lista3" class="list-group-item" data-toggle="collapse" data-parent="#MainMenu">Nonparametric tests <i class="caret"></i></a>
                             <div class="collapse" id="lista3">
-                                <a href="nonparametric_info.html" class="list-group-item">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-asterisk"></span>&nbsp;&nbsp;Descripción</a>
+                                <a href="nonparametric_info.html" class="list-group-item">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-asterisk"></span>&nbsp;&nbsp;Description</a>
                                 <a href="wilcoxon.html" class="list-group-item">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-asterisk"></span>&nbsp;&nbsp;Wilcoxon</a>
-                                <a href="ranking.html" class="list-group-item">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-asterisk"></span>&nbsp;&nbsp;Tests de Ranking</a>
+                                <a href="ranking.html" class="list-group-item">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-asterisk"></span>&nbsp;&nbsp;Ranking tests</a>
                             </div>
                         </div>
                     </div>
@@ -114,17 +114,17 @@
                     <h1 class="page-header">Parametric Conditions</h1>
                     <!--*******************************************************************************************************-->
                     <h3>Description</h3>
-                    <p>Para la ejecución de los tests paramétricos se deben cumplir tres condiciones:</p>
+                    <p>To run parametric tests three conditions must be met:</p>
                     <ul>
                         <li>
-                            <b>Normalidad:</b> Las muestras o datos obtenidos por los algoritmos siguen una distribución normal.<br>Ejemplo:<br><br>
+                            <b>Normality:</b> Samples or data obtained by the algorithms follow a normal distribution.<br><br>
                             <img src="imagenes/normalidad.jpg" class="img-responsive" alt="Distribución normal" width="400px;" height="200px;">
                         </li>
                         <br>
-                        <li><b>Independencia:</b> Las muestras o datos obtenidos por los algoritmos no dependen de unas de otras (asumida por el usuario).</li>
+                        <li><b>Independence:</b> Samples or data obtained by the algorithms do not depend on each other (assumed by users).</li>
                         <br>
                         <li>
-                            <b>Homocedasticidad:</b> Es la condición que dice que las poblaciones de entrada o datos obtenidos por los algoritmos proceden de poblaciones con varianzas iguales. El caso contrario sería heterocedasticidad.
+                            <b>Homoscedasticity:</b> It is the condition which says that the populations of input or data obtained by the algorithms come from populations with equal variances. The opposite would heteroscedasticity.
                             <br><br>
                             <img src="imagenes/homocedasticidad.png" class="img-responsive" alt="Heterocedasticidad y Homocedasticidad" width="300px;" height="225px;">
                         </li>
@@ -143,3 +143,4 @@
         <script src="js/codigo_jquery.js"></script>
     </body>
 </html>
+

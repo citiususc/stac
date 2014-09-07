@@ -8,6 +8,18 @@ Created on Tue Api 22 16:05:31 2014
 import csv, re, hashlib
 from collections import *
 
+def singleton(myClass):
+    """Patrón Singleton para tener únicamente una instancia de la clase
+    LimitedSizeDict.
+    """
+    instances = {}
+    def getInstance(*args,**kwds):
+        if myClass not in instances:
+            instances[myClass] = myClass(*args,**kwds)
+        return instances[myClass]
+    return getInstance
+
+@singleton
 class LimitedSizeDict(OrderedDict):
     """Un diccionario con tamaño máximo. Cuando llega al límite, elimina al
     elemento más antiguo del diccionario (FIFO).
@@ -43,7 +55,7 @@ def leer_datos(archivo):
 
     for fila in lector:
         if len(fila)<3:
-            raise Exception("Error formato datos.")
+            raise Exception("Data format error.")
         if numero_linea == 0:
             for i in range(len(fila)):
                 if i == 0:
@@ -52,25 +64,25 @@ def leer_datos(archivo):
                     if nombres_algoritmos.count(fila[i]) == 0:
                         nombres_algoritmos.append(fila[i])
                     else:
-                        raise Exception("Nombre de algoritmo repetido.")
+                        raise Exception("Algorithm name repeated.")
         else:
             numero_algoritmos = len(nombres_algoritmos)
             if len(fila) != numero_algoritmos + 1:
-                raise Exception("Error formato datos")
+                raise Exception("Data format error")
             lista_datos = []
             for i in range(len(fila)):
                 if i == 0:
                     if nombres_conj_datos.count(fila[i]) == 0:
                         nombres_conj_datos.append(fila[i])
                     else:
-                        raise Exception("Nombre conjunto datos repetido.")
+                        raise Exception("Algorithm name repeated.")
                 else:
                     m = patron_numeros.match(fila[i])
                     if m:
                         dato = float(fila[i])
                         lista_datos.append(dato)
                     else:
-                        raise Exception("Número \"" + fila[i] + "\" no valido en línea " + str(numero_linea+1) +".")
+                        raise Exception("Number \"" + fila[i] + "\" not valid in line " + str(numero_linea+1) +".")
             matriz_datos.append(lista_datos)
         numero_linea = numero_linea + 1
 
@@ -88,3 +100,4 @@ def generar_md5(archivo):
         bufer = archivo.read(tam_bloque)
     archivo.seek(0, 0);
     return md5.hexdigest()
+

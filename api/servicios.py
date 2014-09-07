@@ -44,7 +44,7 @@ def consultar_fichero(id_fichero):
     try:
         datos = lista_ficheros[id_fichero]
     except Exception:
-        return {"fallo" : "No existe ningún fichero con esa clave."}
+        return {"fallo" : "There is no file with that key."}
     return datos
 
 
@@ -58,7 +58,7 @@ def wilcoxon(id_fichero, alpha=0.05):
     try:
         datos = lista_ficheros[id_fichero]
     except Exception:
-        return {"fallo" : "No existe ningún fichero con esa clave."}
+        return {"fallo" : "There is no file with that key."}
     try:
         resultado = wilcoxon_test(datos["matriz_datos"],alpha)
     except Exception, fallo:
@@ -82,7 +82,7 @@ def friedman(id_fichero, alpha=0.05, tipo=0, test_comparacion="bonferroni_dunn_t
     try:
         datos = lista_ficheros[id_fichero]
     except Exception:
-        return {"fallo" : "No existe ningún fichero con esa clave."}
+        return {"fallo" : "There is no file with that key."}
     resultado = test_ranking(friedman_test, getattr(tnp, test_comparacion), datos["nombres_algoritmos"], datos["matriz_datos"], len(datos["matriz_datos"]), alpha, tipo)
     return json.dumps(resultado)
 
@@ -103,7 +103,7 @@ def iman_davenport(id_fichero, alpha=0.05, tipo=0, test_comparacion="bonferroni_
     try:
         datos = lista_ficheros[id_fichero]
     except Exception:
-        return {"fallo" : "No existe ningún fichero con esa clave."}
+        return {"fallo" : "There is no file with that key."}
     resultado = test_ranking(iman_davenport_test, getattr(tnp, test_comparacion), datos["nombres_algoritmos"], datos["matriz_datos"], len(datos["matriz_datos"]), alpha, tipo)
     return json.dumps(resultado)
 
@@ -124,7 +124,7 @@ def friedman_rangos_alineados(id_fichero, alpha=0.05, tipo=0, test_comparacion="
     try:
         datos = lista_ficheros[id_fichero]
     except Exception:
-        return {"fallo" : "No existe ningún fichero con esa clave."}
+        return {"fallo" : "There is no file with that key."}
     resultado = test_ranking(friedman_rangos_alineados_test, getattr(tnp, test_comparacion), datos["nombres_algoritmos"], datos["matriz_datos"], len(datos["matriz_datos"]), alpha, tipo)
     return json.dumps(resultado)
 
@@ -145,7 +145,7 @@ def quade(id_fichero, alpha=0.05, tipo=0, test_comparacion="bonferroni_dunn_test
     try:
         datos = lista_ficheros[id_fichero]
     except Exception:
-        return {"fallo" : "No existe ningún fichero con esa clave."}
+        return {"fallo" : "There is no file with that key."}
     resultado = test_ranking(quade_test, getattr(tnp, test_comparacion), datos["nombres_algoritmos"], datos["matriz_datos"], len(datos["matriz_datos"]), alpha, tipo)
     return json.dumps(resultado)
 
@@ -159,7 +159,7 @@ def shapiro(id_fichero, alpha=0.05):
     try:
         datos = lista_ficheros[id_fichero]
     except Exception:
-        return {"fallo" : "No existe ningún fichero con esa clave."}
+        return {"fallo" : "There is no file with that key."}
     estadisticos_w = []
     p_valores = []
     resultados = []
@@ -181,7 +181,7 @@ def kolmogorov(id_fichero, alpha=0.05):
     try:
         datos = lista_ficheros[id_fichero]
     except Exception:
-        return {"fallo" : "No existe ningún fichero con esa clave."}
+        return {"fallo" : "There is no file with that key."}
     estadisticos_d = []
     p_valores = []
     resultados = []
@@ -203,7 +203,7 @@ def agostino(id_fichero, alpha=0.05):
     try:
         datos = lista_ficheros[id_fichero]
     except Exception:
-        return {"fallo" : "No existe ningún fichero con esa clave."}
+        return {"fallo" : "There is no file with that key."}
     estadisticos_k2, p_valores = st.normaltest(datos["matriz_datos"],axis=0)
     #Si p_valor < alpha, se rechaza la hipótesis "True" de que la muestra provenga de una distribución normal.
     resultados = [np.asscalar(p_valores[i]<alpha) for i in range(len(p_valores))]
@@ -219,7 +219,7 @@ def levene(id_fichero, alpha=0.05):
     try:
         datos = lista_ficheros[id_fichero]
     except Exception:
-        return {"fallo" : "No existe ningún fichero con esa clave."}
+        return {"fallo" : "There is no file with that key."}
     argumentos = ()
     for i in range(len(datos["matriz_datos"][0])):
         argumentos = argumentos + ([conjunto[i] for conjunto in datos["matriz_datos"]],)
@@ -239,9 +239,9 @@ def ttest(id_fichero, alpha=0.05):
     try:
         datos = lista_ficheros[id_fichero]
     except Exception:
-        return {"fallo" : "No existe ningún fichero con esa clave."}
+        return {"fallo" : "There is no file with that key.."}
     if len(datos["matriz_datos"][0]) != 2:
-        return {"fallo" : "Se requieren únicamente dos muestras."}
+        return {"fallo" : "Require only two samples."}
     else:
         argumentos = ()
         for i in range(len(datos["matriz_datos"][0])):
@@ -262,7 +262,7 @@ def anova(id_fichero, alpha=0.05):
     try:
         datos = lista_ficheros[id_fichero]
     except Exception:
-        return {"fallo" : "No existe ningún fichero con esa clave."}
+        return {"fallo" : "There is no file with that key."}
     res_anova = anova_test(datos["matriz_datos"],alpha)
     if res_anova["resultado"] == True:
         res_comparacion = bonferroni_test(datos["nombres_algoritmos"],res_anova["medias_algoritmos"],res_anova["cuadrados_medios"][2],len(datos["matriz_datos"]),alpha)
