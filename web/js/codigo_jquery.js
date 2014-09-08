@@ -652,11 +652,17 @@ function generar_tabla_wilcoxon(data) {
     var salida = "<div class=\"table-responsive\"><br>";
 
     //Botón para exportar a .csv y a .tex
-    salida = salida + "<a href=\"#\" onclick=\"exportTableToCSV.apply(this, [$('table'), 'wilcoxon_test.csv'])\"><button class=\"btn btn-default\">Exporta to csv</button></a>&nbsp;&nbsp;<a href=\"#\" onclick=\"exportTableToLaTeX.apply(this, [$('table'), 'wilcoxon_test.tex'])\"><button class=\"btn btn-default\">Export to LaTeX</button></a>";
+    salida = salida + "<a href=\"#\" onclick=\"exportTableToCSV.apply(this, [$('table'), 'wilcoxon_test.csv'])\"><button class=\"btn btn-default\">Export to csv</button></a>&nbsp;&nbsp;<a href=\"#\" onclick=\"exportTableToLaTeX.apply(this, [$('table'), 'wilcoxon_test.tex'])\"><button class=\"btn btn-default\">Export to LaTeX</button></a>";
 
     salida = salida + "<br><br><table class=\"table table-hover\"><thead>";
-    salida = salida + "<tr><th>Statistic</th><th>Critical point</th><th>Sum of positive ranks</th><th>Sum of negative ranks</th><th>Result</th></tr></thead>";
-    salida = salida + "<tbody><tr><td>" +data.estadistico+ "</td><td>" +data["punto critico"]+ "</td><td>" +data["suma rangos pos"]+ "</td><td>" +data["suma rangos neg"]+ "</td>";
+    if(data.p_valor){
+        salida = salida + "<tr><th>Statistic</th><th>p-value</th><th>Sum of positive ranks</th><th>Sum of negative ranks</th><th>Result</th></tr></thead>";
+        salida = salida + "<tbody><tr><td>" +data.estadistico.toFixed(3)+ "</td><td>" +data.p_valor.toFixed(3)+ "</td><td>" +data["suma rangos pos"]+ "</td><td>" +data["suma rangos neg"]+ "</td>";
+    }
+    else{
+        salida = salida + "<tr><th>Statistic</th><th>Critical point</th><th>Sum of positive ranks</th><th>Sum of negative ranks</th><th>Result</th></tr></thead>";
+        salida = salida + "<tbody><tr><td>" +data.estadistico+ "</td><td>" +data["punto critico"]+ "</td><td>" +data["suma rangos pos"]+ "</td><td>" +data["suma rangos neg"]+ "</td>";
+    }
     if(data.resultado == true)
         salida = salida + "<td>H0 is rejected</td></tr></tbody></table>";
     else
@@ -811,4 +817,5 @@ function generar_tabla_multitests(data, test) {
 
     return salida;
 }
+
 
