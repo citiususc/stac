@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2014.4.28)  7 SEP 2014 18:25
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2014.4.28)  8 SEP 2014 06:07
 entering extended mode
 **memoria.tex
 (C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\memoria.tex
@@ -1976,12 +1976,12 @@ Overfull \hbox (12.84302pt too wide) in paragraph at lines 64--65
 (C:\Users\Adrián\Desktop\tfg\stac\documentacion\memoria\capitulos/manualusu.te
 x
 Ap\'{e}ndice B.
-<figuras/man_inicio.png, id=1274, 979.40906pt x 508.14844pt>
+<figuras/man_inicio.png, id=1274, 1024.57782pt x 493.0922pt>
 File: figuras/man_inicio.png Graphic file (type png)
 
 <use figuras/man_inicio.png>
 Package pdftex.def Info: figuras/man_inicio.png used on input line 11.
-(pdftex.def)             Requested size: 391.75668pt x 203.25577pt.
+(pdftex.def)             Requested size: 409.82387pt x 197.23338pt.
  [95
 
 
@@ -1989,110 +1989,110 @@ Package pdftex.def Info: figuras/man_inicio.png used on input line 11.
 
  <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/man_inicio.pn
 g>]
-<figuras/man_fichero.png, id=1281, 502.87875pt x 205.5178pt>
+<figuras/man_fichero.png, id=1280, 481.8pt x 198.7425pt>
 File: figuras/man_fichero.png Graphic file (type png)
 
 <use figuras/man_fichero.png>
 Package pdftex.def Info: figuras/man_fichero.png used on input line 20.
-(pdftex.def)             Requested size: 251.43875pt x 102.75865pt.
+(pdftex.def)             Requested size: 240.8994pt x 99.371pt.
 
-<figuras/man_fichero2.png, id=1282, 234.8775pt x 94.85437pt>
+<figuras/man_fichero2.png, id=1281, 187.45032pt x 91.09032pt>
 File: figuras/man_fichero2.png Graphic file (type png)
 
 <use figuras/man_fichero2.png>
 Package pdftex.def Info: figuras/man_fichero2.png used on input line 27.
-(pdftex.def)             Requested size: 117.43846pt x 47.42706pt.
+(pdftex.def)             Requested size: 93.72491pt x 45.54503pt.
 
-<figuras/man_ayuda1.png, id=1286, 246.1697pt x 214.55156pt>
+<figuras/man_ayuda1.png, id=1285, 252.945pt x 216.05719pt>
 File: figuras/man_ayuda1.png Graphic file (type png)
 
 <use figuras/man_ayuda1.png>
 Package pdftex.def Info: figuras/man_ayuda1.png used on input line 42.
-(pdftex.def)             Requested size: 123.08453pt x 107.27551pt.
+(pdftex.def)             Requested size: 126.47218pt x 108.02832pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [96 <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/man_fiche
 ro.png> <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/man_fi
-chero2.png>] <figuras/man_ayuda2.png, id=1295, 964.35281pt x 481.04718pt>
+chero2.png>] <figuras/man_ayuda2.png, id=1293, 1012.5328pt x 493.0922pt>
 File: figuras/man_ayuda2.png Graphic file (type png)
 
 <use figuras/man_ayuda2.png>
 Package pdftex.def Info: figuras/man_ayuda2.png used on input line 51.
-(pdftex.def)             Requested size: 385.7343pt x 192.41545pt.
+(pdftex.def)             Requested size: 405.00595pt x 197.23338pt.
 
-<figuras/man_consulta.png, id=1297, 962.84718pt x 494.59781pt>
+<figuras/man_consulta.png, id=1295, 1011.02719pt x 493.0922pt>
 File: figuras/man_consulta.png Graphic file (type png)
 
 <use figuras/man_consulta.png>
 Package pdftex.def Info: figuras/man_consulta.png used on input line 60.
-(pdftex.def)             Requested size: 385.13205pt x 197.8356pt.
+(pdftex.def)             Requested size: 404.40372pt x 197.23338pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [97 <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/man_ayuda
 1.png> <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/man_ayu
 da2.png>]
-<figuras/man_descripcion.png, id=1305, 965.85844pt x 499.11469pt>
+<figuras/man_descripcion.png, id=1301, 1012.5328pt x 491.58656pt>
 File: figuras/man_descripcion.png Graphic file (type png)
 
 <use figuras/man_descripcion.png>
 Package pdftex.def Info: figuras/man_descripcion.png used on input line 71.
-(pdftex.def)             Requested size: 386.33653pt x 199.64232pt.
+(pdftex.def)             Requested size: 405.00595pt x 196.63113pt.
  [98 <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/man_consu
 lta.png> <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/man_d
 escripcion.png>]
-<figuras/man_opciones.png, id=1313, 968.86969pt x 490.08093pt>
+<figuras/man_opciones.png, id=1307, 1012.5328pt x 493.0922pt>
 File: figuras/man_opciones.png Graphic file (type png)
 
 <use figuras/man_opciones.png>
 Package pdftex.def Info: figuras/man_opciones.png used on input line 80.
-(pdftex.def)             Requested size: 387.54102pt x 196.0289pt.
+(pdftex.def)             Requested size: 405.00595pt x 197.23338pt.
 
-<figuras/man_nofichero.png, id=1316, 771.63281pt x 151.3153pt>
+<figuras/man_nofichero.png, id=1310, 771.63281pt x 151.3153pt>
 File: figuras/man_nofichero.png Graphic file (type png)
 
 <use figuras/man_nofichero.png>
 Package pdftex.def Info: figuras/man_nofichero.png used on input line 89.
 (pdftex.def)             Requested size: 385.81546pt x 75.65746pt.
 
-<figuras/man_errorapli.png, id=1317, 769.37437pt x 189.70876pt>
+<figuras/man_errorapli.png, id=1311, 810.77907pt x 192.72pt>
 File: figuras/man_errorapli.png Graphic file (type png)
 
 <use figuras/man_errorapli.png>
 Package pdftex.def Info: figuras/man_errorapli.png used on input line 96.
-(pdftex.def)             Requested size: 384.68625pt x 94.85414pt.
+(pdftex.def)             Requested size: 405.38855pt x 96.35976pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [99 <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/man_opcio
 nes.png> <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/man_n
-ofichero.png>] <figuras/man_results.png, id=1326, 964.35281pt x 502.12593pt>
+ofichero.png>] <figuras/man_results.png, id=1320, 1012.5328pt x 485.56406pt>
 File: figuras/man_results.png Graphic file (type png)
 
 <use figuras/man_results.png>
 Package pdftex.def Info: figuras/man_results.png used on input line 109.
-(pdftex.def)             Requested size: 385.7343pt x 200.84682pt.
+(pdftex.def)             Requested size: 405.00595pt x 194.22217pt.
 
-<figuras/man_dialog.png, id=1328, 376.40625pt x 153.57375pt>
+<figuras/man_dialog.png, id=1322, 376.40625pt x 153.57375pt>
 File: figuras/man_dialog.png Graphic file (type png)
 
 <use figuras/man_dialog.png>
 Package pdftex.def Info: figuras/man_dialog.png used on input line 118.
 (pdftex.def)             Requested size: 225.84547pt x 92.14494pt.
 
-Underfull \vbox (badness 1533) has occurred while \output is active []
+Underfull \vbox (badness 2547) has occurred while \output is active []
 
  [100 <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/man_erro
 rapli.png> <C:/Users/Adrián/Desktop/tfg/stac/documentacion/memoria/figuras/man
-_results.png>] <figuras/man_latex.png, id=1337, 280.04625pt x 137.01187pt>
+_results.png>] <figuras/man_latex.png, id=1329, 280.04625pt x 137.01187pt>
 File: figuras/man_latex.png Graphic file (type png)
 
 <use figuras/man_latex.png>
 Package pdftex.def Info: figuras/man_latex.png used on input line 127.
 (pdftex.def)             Requested size: 168.02904pt x 82.20775pt.
 
-<figuras/man_csv.png, id=1338, 315.42844pt x 93.34875pt>
+<figuras/man_csv.png, id=1330, 315.42844pt x 93.34875pt>
 File: figuras/man_csv.png Graphic file (type png)
 
 <use figuras/man_csv.png>
@@ -2186,9 +2186,9 @@ ype1/public/amsfonts/cm/cmtt10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/typ
 e1/public/amsfonts/cm/cmtt8.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/
 public/amsfonts/cm/cmtt9.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/pub
 lic/eurosym/feymr10.pfb>
-Output written on memoria.pdf (114 pages, 2382723 bytes).
+Output written on memoria.pdf (114 pages, 2181098 bytes).
 PDF statistics:
- 1547 PDF objects out of 1728 (max. 8388607)
+ 1539 PDF objects out of 1728 (max. 8388607)
  432 named destinations out of 1000 (max. 500000)
  830 words of extra memory for PDF output out of 10000 (max. 10000000)
 
