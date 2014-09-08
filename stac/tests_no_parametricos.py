@@ -147,6 +147,8 @@ def wilcoxon_test(matriz_datos, alpha=0.05):
     if N <= 25:
         if alpha not in tabla_wilcoxon:
             raise Exception("Alpha value is not available in the Wilcoxon table.")
+        if N not in tabla_wilcoxon[alpha]:
+            raise Exception("Number of data sets without ties not available in the wilcoxon table with that significance level.")
         #Límite inferior del intervalo de aceptación.
         punto_critico = tabla_wilcoxon[alpha][N]
 
@@ -1421,3 +1423,4 @@ def shaffer_multitest(m, comparaciones, valores_z, p_valores, alpha=0.05):
 
     return {"valores_z" : valores_z, "p_valores" : p_valores, "comparaciones" : comparaciones, "alphas" : alphas,
             "resultado" : resultado, "p_valores_ajustados" : p_valores_ajustados}
+
