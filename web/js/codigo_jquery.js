@@ -35,7 +35,10 @@ $(document).on('ready', function() {
                     $("#alerta_fichero_homocedasticidad").hide();
 
                     if(data.fallo){
-                        $("#alerta_fichero_homocedasticidad").show();
+                        if(data.fallo.indexOf("fichero") > -1)
+                            $("#alerta_fichero_homocedasticidad").show();
+                        else
+                            $("#fallo_test_homocedasticidad").html(data.fallo).show();
                     }
                     else{
                         salida = salida + generar_tabla_levene(data);
@@ -82,7 +85,10 @@ $(document).on('ready', function() {
                     $("#alerta_fichero").hide();
 
                     if(data.fallo){
-                        $("#alerta_fichero").show();
+                        if(data.fallo.indexOf("fichero") > -1)
+                            $("#alerta_fichero").show();
+                        else
+                            $("#fallo_test").html(data.fallo).show();
                     }
                     else{
                         salida = salida + generar_tabla_normalidad(data,test);
