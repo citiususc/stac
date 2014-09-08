@@ -46,7 +46,7 @@
                         <!--Subir el fichero-->
                         <!--<li><a id="a_subida" href="#modal_fichero" data-toggle="modal">Subir fichero</a></li>-->
                         <!--Ayuda-->
-                        <li><a href="ayuda.html">Ayuda</a></li>
+                        <li><a href="ayuda.html">Help</a></li>
                     </ul>
                 </div>
             </div>
@@ -95,29 +95,29 @@
                 </div>-->
                 <!--<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">-->
                 <div class="main">
-                    <h1 class="page-header">Ayuda</h1>
+                    <h1 class="page-header">Help</h1>
                     <div class="panel-group" id="accordion">
                         <!--Formato del fichero de datos-->
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h4 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">1. Formato fichero de datos</a>
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">1. Data file format</a>
                                 </h4>
                             </div>
                             <div id="collapseOne" class="panel-collapse collapse">
                                 <div class="panel-body">
-                                    <p>El fichero de datos sigue el estándar csv ("comma separated values", que es un formato de texto plano donde cada elemento del conjunto de datos se escribe en una fila y cuyos elementos están separados por comas. En esta imagen podemos ver un ejemplo:</p>
+                                    <p>The data file must be in csv ("comma separated values") format. That is, a plain text file in which each row represents an element of the data set, with its attributes separated by commas. Lets take the following image as an example:</p>
                                     <img src="imagenes/fichero.png" class="img-responsive" alt="Formato fichero" width="130px;" height="290px;">
                                     <br>
-                                    <p>Se compone de los siguientes elementos:</p>
+                                    <p>It consists of the following elements:</p>
                                     <ul>
-                                        <li>Primera fila: datasets (aquí podría ir cualquier palabra antes de la primera coma), nombreAlgoritmo1, nombreAlgoritmo2, ... , nombreAlgoritmoN</li>
-                                        <li>Siguientes filas: nombreDataset, resultadoAlgoritmo1, resultadoAlgoritmo2, ... , resultadoAlgoritmoN</li>
+                                        <li>First row: datasets (any word would be valid before the first comma), algorithmName1, algorithmName2, ... , algorithmNameN</li>
+                                        <li>Next rows: datasetName, algorithmResult1, algorithmResult2, ... , algorithmResultN</li>
                                     </ul>
                                     <br>
-                                    <p>Ejemplos:</p>
-                                    <a href="./samples/data_sample1.csv" download="data_2_algorithm.csv">Muestra de datos 2 algoritmos</a><br>
-                                    <a href="./samples/data_sample2.csv" download="data_4_algorithm.csv">Muestra de datos 4 algoritmos</a>
+                                    <p>Examples:</p>
+                                    <a href="./samples/data_sample1.csv" download="data_2_algorithm.csv">Data sample with 2 algorithms</a><br>
+                                    <a href="./samples/data_sample2.csv" download="data_4_algorithm.csv">Data sample with 4 algorithms</a>
                                 </div>
                             </div>
                         </div>
@@ -125,20 +125,20 @@
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h4 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">2. Conceptos básicos</a>
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">2. Basic concepts</a>
                                 </h4>
                             </div>
                             <div id="collapseTwo" class="panel-collapse collapse">
                                 <div class="panel-body">
-                                    <p><b>Contraste de hipótesis:</b> Problema estadístico que considera una hipótesis inicial \(H_0\), y una hipótesis alternativa \(H_1\) en una muestra de datos e intenta determinar cuál es la hipótesis verdadera, tras aplicar cálculos estadísticos en la muestra. <a href="http://es.wikipedia.org/wiki/Contraste_de_hip%C3%B3tesis" target="_blank">Aprender más.</a></p>
-                                    <p><b>p-valor:</b> Probabilidad de obtener un valor al menos tan extremo como el estadístico de contraste obtenido. El estadístico es un valor que sigue una determinada distribución muestral (normal, chi-cuadrado, etc.) <a href="http://es.wikipedia.org/wiki/Valor_P" target="_blank">Aprender más.</a></p>
-                                    <p><b>p-valores ajustados:</b> p-valores que dependen de toda la familia de comparaciones y no sólo de una comparación. Es resultado de los tests Post-Hoc (que se aplican si un test de ranking encuentra alguna diferencia).</p>
-                                    <p><b>Estadístico:</b> Medida cuantitativa calculada por los tests que proporciona la factibilidad de la hipótesis nula. Cada test tiene su forma característica de hallar este valor y estos estadísticos siguen una determinada distribución de probabilidad (como distribución normal, etc.). Es una medición que se extrae de la muestra de datos (fichero subido).</p>
-                                    <p><b>Ranking:</b> En los tests de ranking, proporciona la posición que ocupa el algoritmo comparado con los demás algoritmos (¿cuál es el mejor?), que se ordenan de arriba a abajo dependiendo de si la función objetivo de los algoritmos es maximizar o minimizar. </p>
-                                    <p><b>Suma rangos positivos / negativos:</b> En el test de Wilcoxon, la suma de rangos positivos indica la suma de los rangos de las diferencias mayores que 0 y la suma de rangos negativos indica la suma de los rangos de las diferencias menores que 0. </p>
-                                    <p><b>Punto crítico:</b> En el test de Wilcoxon, cuando el número de conjunto de datos sin ligaduras (diferencias 0) es menor o igual que 25, el resultado final se determina mediante la comparación del estadístico con el valor crítico de la tabla de Wilcoxon (diferente para cada nivel de significación y número de conjunto de datos sin ligaduras). </p>
-                                    <p><b>Nivel de significación (\({\alpha}\)):</b> Probabilidad de rechazar la hipótesis nula siendo cierta. También se conoce como nivel de confianza o error tipo 1. Divide la distribución en dos regiones: la región de aceptación y la región de rechazo. <a href="http://es.wikipedia.org/wiki/Significaci%C3%B3n_estad%C3%ADstica" target="_blank">Aprender más.</a></p>
-                                    <p><b>Rechazo de \(H_0\):</sub></b> Si el p-valor es menor que el nivel de significación \({\alpha}\), el contraste se considerará estadísticamente significativo y por tanto se rechazaría la hipótesis nula. <a href="http://es.wikipedia.org/wiki/Contraste_de_hip%C3%B3tesis" target="_blank">Aprender más.</a></p>
+                                    <p><b>Hypothesis testing:</b> Statistical problem which, in regard to a data sample, assumes an initial hypothesis, \({H_0}\), and an alternative hypothesis, \({H_1}\), and attempts to validate the truth of those hypothesis with statistical estimations. <a href="http://en.wikipedia.org/wiki/Statistical_hypothesis_testing" target="_blank">Learn more.</a></p>
+                                    <p><b>p-value:</b> Probability of obtaining a value at least as extreme as the obtained test statistic. The value of the statistic follows a particular sampling distribution (normal, chi-squared, etc.) <a href="http://en.wikipedia.org/wiki/P-value" target="_blank">Learn more.</a></p>
+                                    <p><b>Adjusted p-values:</b> p-values that depend on not just one but the whole family of comparisons. They are the result of POST-HOC tests (which apply if a ranking test finds any discrepancy).</p>
+                                    <p><b>Statistic:</b> Quantitative measure calculated with the tests. This quantitative measure provides the feasibility of the null hypothesis. Each test has its characteristic way of obtaining this value and the statistics follow a particular probability distribution (such as normal distribution, etc.). The statistic is obtained from the data sample (uploaded file).</p>
+                                    <p><b>Ranking:</b> In the ranking tests, the ranking provides the position of the algorithm when compared to the others (i.e. which is better?), ordered from greater to less or vice versa depending on whether the goal of the algorithms is to maximize or to minimize. </p>
+                                    <p><b>Sum of positive / negative ranks:</b> In the Wilcoxon test, the sum of positive ranks denotes the sum of the ranks with discrepancies greater than 0 and the sum of negative ranks is the sum of the ranks with discrepancies less than 0. </p>
+                                    <p><b>Critical point:</b> In the Wilcoxon test, when the amount of data sets without ties (discrepancies of 0) is less than or equal to 25, the final result is determined by the comparison of the statistic and the critical point from the Wilcoxon table (which is different for each significance level and amount of data sets without ties). </p>
+                                    <p><b>Significance level (\({\alpha}\)):</b> Probability of rejecting a valid null hypothesis. Also known as confidence level or type 1 error. This level divides the distribution in two regions: the region of acceptance and the region of rejection.<a href="http://en.wikipedia.org/wiki/Statistical_significance" target="_blank">Learn more.</a></p>
+                                    <p><b>Rejection of \(H_0\):</sub></b> When the p-value is less than the significance level \({\alpha}\), the test is considered statistically significant and the null hypothesis is, therefore, rejected. <a href="http://en.wikipedia.org/wiki/Statistical_hypothesis_testing" target="_blank">Learn more.</a></p>
                                 </div>
                             </div>
                         </div>
@@ -146,15 +146,15 @@
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h4 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseNine">3. Tests de normalidad disponibles</a>
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseNine">3. Available normality tests.</a>
                                 </h4>
                             </div>
                             <div id="collapseNine" class="panel-collapse collapse">
                                 <div class="panel-body">
-                                    <p><b>Shapiro-Wilk:</b> Contrasta la hipótesis nula de que las muestras o poblaciones provienen de una población normalmente distribuida. Se considera de los más potentes, sobre todo para muestras de menos de 30 elementos.</p>
-                                    <p><b>D'Agostino-Pearson:</b> Contrasta la hipótesis nula de que las muestras o poblaciones provienen de una población normalmente distribuida. Combina el coeficiente de asimetría (en qué medida la normal es simétrica ó coeficiente 0) y el coeficiente de Kurtosis (grado de amplitud, donde lo normal es coeficiente 0) para obtener un estadístico y p-valor. Es menos potente que el test de Shapiro-Wilk</p>
-                                    <p><b>Kolmogorov-Smirnov:</b> Realiza una prueba de bondad de ajuste, para determinar si los datos se ajustan a la distribución normal. Tiene como \(H_0\) que la distribución obtenida de los datos observados es idéntica a la distribución normal. Es la prueba que menos potencia presenta de los tres y, por tanto es la que peor funciona.</p>
-                                    <p><b>En los tres casos</b>, si el p-valor es menor a \({\alpha}\) (nivel de confianza) entonces la hipótesis nula es rechazada.</p>
+                                    <p><b>Shapiro-Wilk:</b> Tests the null hypothesis that the samples come from a normally distributed population. This is considered as one of the most powerful tests, especially for samples of less than 30 elements.</p>
+                                    <p><b>D'Agostino-Pearson:</b> Tests the null hypothesis that the samples come from normally distributed population. The test combines the asymmetry coefficient (to what extent the normal is symmetric or of coefficient 0) and the coefficient of Kurtosis (degree of amplitude, usually of coefficient 0) in order to obtain an statistic and p-value. It's less powerful than Shapiro-Wilk.</p>
+                                    <p><b>Kolmogorov-Smirnov:</b> Performs a test of goodness of fit, to determine if the data follows a normal distribution. It assumes, as H0, that the distribution obtained from the observed data is identical to the normal distribution. This is the least powerful offering the worst results off the three.</p>
+                                    <p><b>In the three cases</b>, if the p-value is less than \({\alpha}\) (confidence level) then the null hypothesis must be rejected.</p>
                                 </div>
                             </div>
                         </div>
@@ -162,19 +162,19 @@
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h4 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseEleven">4. Test de Anova</a>
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseEleven">4. ANOVA test</a>
                                 </h4>
                             </div>
                             <div id="collapseEleven" class="panel-collapse collapse">
                                 <div class="panel-body">
-                                    <p><b>Anova:</b> Contrasta la hipótesis nula de que las medias de los resultados de dos o más algoritmos son iguales, es decir si la media de dos o más muestras o poblaciones son iguales. Para ello, analiza la variación entre muestras y la variación en el interior de las mismas mediante la determinación de varianzas. El estadístico de la prueba de Anova, se aproxima mediante la distribución f, y se rechazará la hipótesis nula si: \(p-valor &lt; {\alpha}\) (nivel de significación ó \({\alpha}\)), aceptando la hipótesis alternativa de que al menos dos medias poblacionales son diferentes.</p>
-                                    <p>Se deben cumplir las condiciones paramétricas:</p>
+                                    <p><b>ANOVA:</b> Tests the null hypothesis that the means of the results of two or more algorithms are the same, i.e. if the mean of two or more samples or populations are equal. For this, the test analyzes the variation between samples as well as their inner variation with the variance. The statistic of the ANOVA test, is estimated by the f-distribution, and the null hypothesis is rejected if: \(p-value &lt; {\alpha}\) (significance level or \({\alpha}\)), accepting the alternative hypothesis: at least one of the mean populations differs from the others.</p>
+                                    <p>The parametric conditions must be met:</p>
                                     <ul>
-                                    <li>Normalidad</li>
-                                    <li>Homocedasticidad</li>
-                                    <li>Independencia</li>
+                                    <li>Normality</li>
+                                    <li>Homoscedasticity</li>
+                                    <li>Independence</li>
                                     </ul>
-                                    <p><b>Bonferroni:</b> Una vez se tenga constancia gracias al análisis de varianzas Anova de que existen diferencias significativas entre las medias de los algoritmos, se procede con el test Post-Hoc de Bonferroni para determinar las diferencias entre todas las muestras, comparando las medias de todos los algoritmos entre sí. Cada p-valor asociado con la hipótesis \({H_i}\) se compara con un \({\alpha}\) ajustado a todas las comparaciones: \(p_i &lt; {\alpha \over m}\), donde \({K}\) es el número de algoritmos y \({m}\) se corresponde con el número de comparaciones: \(m = {K*(K-1) \over 2}\)</p>
+                                    <p><b>Bonferroni:</b> Once evidence of the existence of significant differences between the means of the algorithms is achieved, thanks to the variance analysis of ANOVA, it is possible to proceed with the POST-HOC test of Bonferroni in order to determine the discrepancies between all the samples, comparing the means of all the algorithms. Each p-value associated with the hypothesis \({H_i}\) is compared taking an \({\alpha}\) adjusted to all the comparisons: \(p_i &lt; {\alpha \over m}\), where \({K}\) is the number of algorithms and m is the number of comparisons: \(m = {K*(K-1) \over 2}\)</p>
                                 </div>
                             </div>
                         </div>
@@ -182,19 +182,19 @@
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h4 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwelve">5. Test T-test</a>
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwelve">5. T-test</a>
                                 </h4>
                             </div>
                             <div id="collapseTwelve" class="panel-collapse collapse">
                                 <div class="panel-body">
-                                    <p>Si \(p-valor &lt; {\alpha}\), se rechaza la hipótesis nula de que 2 muestras relacionadas o repetidas tienen idénticos valores promedio (esperados). La prueba mide si la puntuación media difiere significativamente entre las muestras.</p>
-                                    <p>Se deben cumplir las condiciones paramétricas:</p>
+                                    <p>If \(p-value &lt; {\alpha}\), the null hypothesis (2 related or repeated samples have identical mean values (expected)) is rejected. The test checks if the mean score differs significantly between the samples.</p>
+                                    <p>The parametric conditions must be met:</p>
                                     <ul>
-                                    <li>Normalidad</li>
-                                    <li>Homocedasticidad</li>
-                                    <li>Independencia</li>
+                                    <li>Normality</li>
+                                    <li>Homoscedasticity</li>
+                                    <li>Independence</li>
                                     </ul>
-                                    <p>También se dede cumplir que el número de algoritmos o muestras sea de dos.</p>
+                                    <p>Also, the number of algorithms or samples must be two.</p>
                                 </div>
                             </div>
                         </div>
@@ -202,12 +202,12 @@
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h4 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTen">6. Test de homocedasticidad de Levene</a>
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTen">6. Levene's test of homoscedasticity.</a>
                                 </h4>
                             </div>
                             <div id="collapseTen" class="panel-collapse collapse">
                                 <div class="panel-body">
-                                     <p>Contrasta la hipótesis nula de que todas las poblaciones de entrada proceden de poblaciones con varianzas iguales. Si el p-valor resultante del test de Levene es menor que el nivel de significancia, se rechaza la hipótesis. Tests paramétricos como Anova o t-test, asumen homocedasticidad en las poblaciones.</p>
+                                     <p>Tests the null hypothesis that all the input populations come from populations with equal variances. If the p-value obtained from Levene's test is less than the significance level, the hypothesis is rejected. Parametric tests such as Anova or T-test, assume homoscedasticity in the populations.</p>
                                 </div>
                             </div>
                         </div>
@@ -215,16 +215,16 @@
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h4 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseEight">7. Test de Wilcoxon</a>
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseEight">7. Wilcoxon test</a>
                                 </h4>
                             </div>
                             <div id="collapseEight" class="panel-collapse collapse">
                                 <div class="panel-body">
-                                    <p>Contrasta la hipótesis nula de que las medianas de las diferencias de dos muestras (resultados de dos algoritmos) relacionadas son iguales. Para tamaños muestrales pequeños, se puede determinar mediante la comparación del estadístico con el valor crítico de la tabla de Wilcoxon (si estadistico es menor que el valor crítico se rechaza \({H_0}\)). Para tamaños muestrales grandes (\({> 25}\)), el test se puede aproximar con la distribución normal (en cuyo caso \({H_0}\) sería rechazada si \(p-valor &lt; {\alpha}\)).</p>
-                                    <p><strong>Restricciones:</strong></p>
+                                    <p>Tests the null hypothesis that the medians of the differences between two related samples (results from two algorithms) are equal. For small samples, comparing the statistic with the critical value from the Wilcoxon table suffices (if the statistic is less than the critical value \({H_0}\) is rejected). For big samples (\({> 25}\)), the test can be estimated with the normal distribution (in which case \({H_0}\) would be rejected if \(p-value &lt; {\alpha}\)).</p>
+                                    <p><strong>Restrictions:</strong></p>
                                     <ul>
-                                        <li>Número de algortimos \({>= 2}\)</li>
-                                        <li>Se deben tener al menos 5 conjuntos de datos cuyas diferencias sean distintas de 0.</li>
+                                        <li>Number of algorithms \({>= 2}\)</li>
+                                        <li>There must be at least 5 data sets with discrepancies not equal to 0.</li>
                                     </ul>
                                 </div>
                             </div>
@@ -233,17 +233,17 @@
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h4 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">8. Tests de ranking</a>
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">8. Ranking tests</a>
                                 </h4>
                             </div>
                             <div id="collapseFour" class="panel-collapse collapse">
                                 <div class="panel-body">
-                                    <p>Los <b>tests no paramétricos de ranking</b>, contrastan la hipótesis nula de que todos los algoritmos se comportan de forma similar, en cuyo caso sus rankings deberían de ser similares y por tanto se podrían considerar iguales todos los algoritmos. Los tests de ranking se diferencian en la forma de calcular los rankings o en la forma de calcular el estadístico.</p>
-                                    <p>Estos tests, dan como resultado la existencia o no de diferencias significativas entre los algoritmos sobre los que se han aplicado. Es decir, nos dice si el contraste de hipótesis es o no estadísticamente significativo. Si se rechaza la hipótesis nula de “todos los algoritmos son iguales”, sabremos que entre los algoritmos existen diferencias. Sin embargo, puede ocurrir que un algoritmo presente un rendimiento similar a otro u otros y por tanto se pueda considerar igual.</p>
-                                    <p>Por este motivo, después de aplicar los tests de ranking se aplican los <b>tests Post-Hoc</b>. Estos tests comparan los algoritmos y realizan contrastes de hipótesis entre ellos para determinar diferencias. Se distinguen dos tipos de comparación:</p>
+                                    <p>The <b>nonparametric ranking tests</b>, attempt to verify the null hypothesis that all the algorithms behave similarly, in which case their rankings should also be similar and, therefore, all the algorithms could be considered equal. The ranking tests differ in the method for calculating the rankings or in the way in which the statistic is calculated.</p>
+                                    <p>These tests prove the existence or nonexistence of significant discrepancies between the algorithms to which the tests are applied. That is, the tests determine whether or not the hypothesis testing is statistically significant. If the null hypothesis that “all the algorithms are equal” is rejected, we will know that there are some differences between the algorithms. It could happen, however, that a given algorithm performs similarly to other or others and, therefore, could be considered equal.</p>
+                                    <p>That is why, the <b>POST-HOC tests</b> are applied after the ranking tests. These tests compare the algorithms and contrast the hypothesis to find discrepancies. Two types of comparison can be distinguished:</p>
                                     <ul>
-                                        <li>Método de control: Se compara el primer algoritmo del ranking devuelto por el test de ranking con el resto de algoritmos y por tanto habrá \({K-1}\) comparaciones.</li>
-                                        <li>Comparación múltiple (multitest): Compara todos los algoritmos con todos. El número de comparaciones será: \(m = {K*(K-1) \over 2}\).</li>
+                                        <li>Control method: The first algorithm returned from the ranking test is compared with the others. There are \({K-1}\) comparisons.</li>
+                                        <li>Multiple comparison (multitest): Compares all the algorithms between themselves. The number of comparisons would be \(m = {K*(K-1) \over 2}\).</li>
                                     </ul>
                                 </div>
                             </div>
@@ -252,13 +252,12 @@
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h4 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseSeven">9. Minimización / Maximización</a>
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseSeven">9. Minimization / Maximization</a>
                                 </h4>
                             </div>
                             <div id="collapseSeven" class="panel-collapse collapse">
                                 <div class="panel-body">
-                                    <p>Indica la función objetivo de los algoritmos que se están contrastando, es decir, si lo que pretendían los algoritmos era obtener el resultado más pequeño posible o el resultado más grande.</p>
-                                    <p>Influye en la asignación de rankings, ya que el orden cambiaría (el primero del ranking podría ser el de mayor o el de menor valor).</p>
+                                    <p>This determines the objective function for the algorithms being tested, i.e. whether the goal is to obtain the lowest possible result or the highest. The objective function influences the ranking assignment, changing the order (the first in the ranking can be the one with the highest or with the lowest).</p>
                                 </div>
                             </div>
                         </div>
@@ -266,15 +265,15 @@
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h4 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive">10. Tests de ranking disponibles</a>
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive">10. Available ranking tests</a>
                                 </h4>
                             </div>
                             <div id="collapseFive" class="panel-collapse collapse">
                                 <div class="panel-body">
-                                    <p><b>Friedman:</b> Realiza comparaciones y asigna rankings dentro de cada conjunto de datos. El estadístico se distribuye como una distribución chi-cuadrado con \({K-1}\) grados de libertad, siendo \({K}\) el número de variables relacionadas (o número de algoritmos).</p>
-                                    <p><b>Iman-Davenport:</b> Mejora del test de Friedman con un estadístico más ajustado, que se distribuye de acuerdo a una distribución f con \({(K-1)}\) y \({(K-1)*(N-1)}\) grados de libertad, siendo \({N}\) el número de conjunto de datos. El comportamiento es menos conservativo que el test de Friedman, ya que se rechazan más hipótesis (mayor potencia).</p>
-                                    <p><b>Rangos Alineados de Friedman:</b> Realiza comparaciones y asigna rankings teniendo en cuenta a todos los conjuntos de datos. Suele emplearse cuando el número de algoritmos en la comparación es pequeño.</p>
-                                    <p><b>Quade:</b> Similar a Iman-Davenport, pero considera que algunos problemas son más difíciles o que los resultados que obtienen los algoritmos sobre ellos son más distantes (ponderación).</p>
+                                    <p><b>Friedman:</b> This test makes comparisons and assigns rankings to each data set. The statistic follows a chis-quared distribution with \({K-1}\) degrees of freedom, being \({K}\) the number of related variables (or number of algorithms).</p>
+                                    <p><b>Iman-Davenport:</b> It's an improvement over the Friedman test with a more adjusted statistic following an f-distribution with \({(K-1)}\) and \({(K-1)*(N-1)}\) degrees of freedom, being \({N}\) the number of data set. Its behavior is less conservative than that of Friedman's test, in that it rejects more hypothesis (higher potency).</p>
+                                    <p><b>Friedman's aligned ranks:</b> It makes comparisons an assigns rankings considering all the data sets. It is usually employed when the number of algorithms in the comparison is low.</p>
+                                    <p><b>Quade:</b> Similar to ImanDavenport, only that it takes into account that some problems are more difficult or that the results obtained from different algorithms present higher discrepancies (weighting).</p>
                                 </div>
                             </div>
                         </div>
@@ -282,18 +281,18 @@
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h4 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseSix">11. Tests Post-Hoc disponibles</a>
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseSix">11. Available POST-HOC tests</a>
                                 </h4>
                             </div>
                             <div id="collapseSix" class="panel-collapse collapse">
                                 <div class="panel-body">
-                                    <p><strong>Bonferroni-Dunn: </strong>Rechaza la hipótesis nula si: \(p-valor &lt; {\alpha \over (K-1)}\), donde \({K}\) es el número de algoritmos de la muestra.</p>
-                                    <p><strong>Holm: </strong>Compara cada \({p_i}\) (empezando por el más significativo o pequeño) con: \({\alpha \over (K-i)}\), donde \({i \in [1,K-1]}\). Si se rechaza una hipótesis continúa contrastando. En el caso de que una hipótesis se acepte se aceptan todas las demás.</p>
-                                    <p><strong>Finner: </strong>Sigue un proceso igual al test de Holm pero cada p-valor asociado con la hipótesis \({H_i}\) se compara como: \(p_i \leq {1-(1-\alpha)^{\frac{(K-1)}{i}}}\), donde \({i \in [1,K-1]}\)</p>
-                                    <p><strong>Hochberg: </strong>Compara en la dirección opuesta a Holm. En el momento que encuentra una hipótesis que pueda aceptar, acepta todas las demás.</p>
-                                    <p><strong>Li: </strong>Rechaza todas las hipótesis si el p-valor menos significativo es menor que \({\alpha}\) (nivel de significación). En otro caso, acepta dicha hipótesis y rechaza cualquier hipótesis restante cuyo p-valor sea menor que un valor calculado: \(valor = \frac{(1-p-valor_{K-1})}{(1-\alpha)\alpha}\)</p>
-                                    <p><strong>Multitests: </strong>Iguales que los demás pero en lugar de \({K-1}\) comparaciones se relizan \({m}\) donde, \(m = {K*(K-1) \over 2}\).</p>
-                                    <p><strong>Shaffer: </strong>Igual a Holm pero cada p-valor asociado con la hipótesis \({H_i}\) se compara como \(p_i \leq {\alpha \over t_i}\), donde \({t_i}\) es el número máximo de hipótesis posibles suponiendo que las \({(j-1)}\) anteriores han sido rechazadas.</p>
+                                    <p><strong>Bonferroni-Dunn: </strong>This test rejects the null hypothesis if: \(p-value &lt; {\alpha \over (K-1)}\), where \({K}\) is the number of algorithms in the sample.</p>
+                                    <p><strong>Holm: </strong>It compares each \({p_i}\) (starting from the most significant or the lowest) with: \({\alpha \over (K-i)}\), where \({i \in [1,K-1]}\). If the hypothesis is rejected the test continues the comparisons. When an hypothesis is accepted, all the other hypothesis are accepted as well.</p>
+                                    <p><strong>Finner: </strong>Finner's test is similar to Holm's but each p-value associated with the hypothesis \({H_i}\) is compared with: \(p_i \leq {1-(1-\alpha)^{\frac{(K-1)}{i}}}\), where \({i \in [1,K-1]}\)</p>
+                                    <p><strong>Hochberg: </strong>It compares in the opposite direction to Holm. As soon as an acceptable hypothesis is found, all the other hypothesis are accepted.</p>
+                                    <p><strong>Li: </strong>This test rejects all the hypothesis if the least significant p-value is less than \({\alpha}\) (significance level). Else, the test accepts the hypothesis and rejects any remaining hypothesis whose p-value is less than: \(value = \frac{(1-p-value_{K-1})}{(1-\alpha)\alpha}\)</p>
+                                    <p><strong>Multitests: </strong>Just like the others but with \({m}\) comparisons instead of \({K-1}\), where \(m = {K*(K-1) \over 2}\).</p>
+                                    <p><strong>Shaffer: </strong>This test is like Holm's but each p-value associated with the hypothesis \({H_i}\) is compared as \(p_i \leq {\alpha \over t_i}\), where \({t_i}\) is the maximum number of possible hypothesis assuming that the previous \({(j-1)}\) hypothesis have been rejected.</p>
                                 </div>
                             </div>
                         </div>
@@ -301,18 +300,18 @@
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h4 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">12. Acerca de la web</a>
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">12. About the site</a>
                                 </h4>
                             </div>
                             <div id="collapseThree" class="panel-collapse collapse">
                                 <div class="panel-body">
-                                    <p>En esta plataforma web puedes llevar a cabo la validación de resultados obtenidos por los algoritmos de aprendizaje mediante la aplicación de tests estadísticos sobre los experimentos, que, entre otras utilidades, apoyan la toma de decisiones (por ejemplo la elección del algoritmo más adecuado). Actualmente, es el método estándar más aceptado para validar este tipo de experimentación.</p>
-                                    <p>Los tests se basan en el contraste de hipótesis. Por ejemplo: se puede contrastar la hipótesis nula o \({H_0}\) de que las medias de los datos obtenidos por un algoritmo son iguales. Estos tests, verifican si es o no cierta esta hipótesis inicial. Para ello, se obtiene un estadístico (sujeto a una determinada distribución estadística) y se halla la probabilidad de obtener un estadístico al menos tan extremo como el que se obtuvo (p-valor). Si este p-valor es menor que un nivel de confianza dado (valor \({alpha}\)), se rechazará la hipótesis nula. En caso contrario, se aceptará.</p>
+                                    <p>Through this web platform you can verify the results obtained from the learning algorithms applying the statistic tests to the experiments, which, among other uses, support the decision making process (the election of the most suitable algorithm, for example). At present, this is the most widely accepted method for validating this kind of experiments.</p>
+                                    <p>The tests are based in the verification of hypothesis. For example: a test could verify the null hypothesis or \({H_0}\) that all the averages of the data obtained from an algorithm are equal. These tests, verify whether or not this initial hypothesis is valid. For that, an statistic is obtained (subject to a particular statistic distribution), and the probability of obtaining another statistic at least as extreme as the former (p-value). If this p-value is less than a given (\({\alpha}\) value), the null hypothesis will be rejected, otherwise accepted.</p>
                                     <div class="col-xs-offset-3 col-sm-offset-3 col-md-offset-4">
                                         <img src="imagenes/grafico.png" class="img-responsive" alt="grafico" width="350px;" height="300px;">
                                     </div>
-                                    <p>En la imagen se pueden ver la dos regiones en las que se divide una función de distribución de probabilidad (en este ejemplo la distribución chi-cuadrado) después de establecer un nivel de significación (valor \({alpha}\)): la región de aceptación y la región de rechazo. El p-valor, determina si el estadístico cae en la región de aceptación o en la región de rechazo. El punto crítico (en este ejemplo 1 punto), es el valor que separa las dos regiones.</p>
-                                    <i><b>Trabajo de Fin de Grado realizado por: Adrián Canosa Mouzo. Universidad de Santiago de Compostela - Escuela Técnica Superior de Ingeniería.</b></i>
+                                    <p>The image shows the two regions in which a probability distribution function is divided (in this example the chi-squared distribution) after setting a significance level (\({\alpha}\) value): the acceptance region and the rejection region. The p-value, determines to which of these regions the statistic belongs to. The critical point (in this example, 1 point), is the value separating the two regions.</p>
+                                    <i><b>Final Degree Project by: Adrián Canosa Mouzo. Universidad de Santiago de Compostela - Escuela Técnica Superior de Ingeniería.</b></i>
                                 </div>
                             </div>
                         </div>
@@ -338,3 +337,4 @@
         <script src="js/ver_ayuda.js"></script>
     </body>
 </html>
+

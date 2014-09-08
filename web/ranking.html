@@ -158,7 +158,7 @@
                                     <script>
                                         function obtener_nombre(){
                                             var nombre_test = $('label[name="nombre_test"].active').text();
-                                            $('#texto_tests').html("<h3>Select the Post-Hoc test to apply after "+nombre_test+" test:<h3>");
+                                            $('#texto_tests').html("<h3>Select the POST-HOC test to apply after "+nombre_test+" test:<h3>");
                                         }
                                     </script>
                                     <div class="col-xs-offset-4 col-xs-8 col-sm-offset-3 col-sm-9 col-md-offset-2 col-md-10 col-lg-offset-2 col-lg-10">
@@ -172,8 +172,8 @@
                             <p><strong>Comments:</strong></p>
                             <ul type = square>
                                 <li>Friedman: Between-group comparisons.
-                                <li>Iman-davenport: Less conservative behavior that Friedman.
-                                <li>Friedman Aligned Ranks: Comparisons between data sets. When the number of algorithms to be compared is small.
+                                <li>Iman-davenport: Its behavior is less conservative than that of Friedman's test.
+                                <li>Friedman's aligned ranks: Comparisons between data sets. When the number of algorithms to be compared is small.
                                 <li>Quade: The rankings are scaled depending on the differences in the performance of the algorithms.
                             </ul>
                         </div>
@@ -182,7 +182,7 @@
                             <div id="texto_tests"></div>
                             <form class="form-horizontal" role="form">
                                 <div class="form-group">
-                                    <label class="col-xs-4 col-sm-3 col-md-2 col-lg-2 control-label">Post-Hoc test: <br><a href="ayuda.html#collapseSix" id="ayuda_fichero" target="_blank">[More info]</a></label>
+                                    <label class="col-xs-4 col-sm-3 col-md-2 col-lg-2 control-label">POST-HOC test: <br><a href="ayuda.html#collapseSix" id="ayuda_fichero" target="_blank">[More info]</a></label>
                                     <div class="col-xs-8 col-sm-9 col-md-10 col-lg-10">
                                         <div class="btn-group-vertical" data-toggle="buttons">
                                             <label name="nombre_post" class="btn btn-primary active"><input type="radio" name="post_hoc" value="bonferroni_dunn_test" checked>Bonferroni-Dunn</label>
@@ -209,8 +209,8 @@
                                 <p><strong>Null hypothesis (H<sub>0</sub>):</strong> There is no difference between "Algorithm A" and "Algorithm B".</p>
                                 <p><strong>Comments:</strong></p>
                                 <ul type = square>
-                                    <li>For Post-Hoc tests normal, best ranking algorithm is compared with others.
-                                    <li>For Post-Hoc tests multitests, all the algorithms are compared each other, so there will be more hypothesis to be tested.
+                                    <li>For POST-HOC simple, the first algorithm returned from the ranking test is compared with the others.
+                                    <li>For POST-HOC multitests, all the algorithms are compared each other, so there will be more hypothesis to be tested.
                                     <li>The tests are ordered from low to high power (both normal and multitests).
                                 </ul>
                             </form>
