@@ -286,11 +286,11 @@
                             </div>
                             <div id="collapseSix" class="panel-collapse collapse">
                                 <div class="panel-body">
-                                    <p><strong>Bonferroni-Dunn: </strong>This test rejects the null hypothesis if: \(p-value &lt; {\alpha \over (K-1)}\), where \({K}\) is the number of algorithms in the sample.</p>
-                                    <p><strong>Holm: </strong>It compares each \({p_i}\) (starting from the most significant or the lowest) with: \({\alpha \over (K-i)}\), where \({i \in [1,K-1]}\). If the hypothesis is rejected the test continues the comparisons. When an hypothesis is accepted, all the other hypothesis are accepted as well.</p>
-                                    <p><strong>Finner: </strong>Finner's test is similar to Holm's but each p-value associated with the hypothesis \({H_i}\) is compared with: \(p_i \leq {1-(1-\alpha)^{\frac{(K-1)}{i}}}\), where \({i \in [1,K-1]}\)</p>
-                                    <p><strong>Hochberg: </strong>It compares in the opposite direction to Holm. As soon as an acceptable hypothesis is found, all the other hypothesis are accepted.</p>
-                                    <p><strong>Li: </strong>This test rejects all the hypothesis if the least significant p-value is less than \({\alpha}\) (significance level). Else, the test accepts the hypothesis and rejects any remaining hypothesis whose p-value is less than: \(value = \frac{(1-p-value_{K-1})}{(1-\alpha)\alpha}\)</p>
+                                    <p><strong>Bonferroni-Dunn: </strong>This test rejects the null hypothesis if: \(p-value &lt; {\alpha \over (K-1)}\), where \({K}\) is the number of algorithms in the sample. It is a very conservative test and many differences can not be detected (the worst power).</p>
+                                    <p><strong>Holm: </strong>It compares each \({p_i}\) (starting from the most significant or the lowest) with: \({\alpha \over (K-i)}\), where \({i \in [1,K-1]}\). If the hypothesis is rejected the test continues the comparisons. When an hypothesis is accepted, all the other hypothesis are accepted as well. It is better (more power) than Bonferroni-Dunn test, because it controls the FWER (familywise error rate), which is the probability of committing one or more type I errors among all hypothesis.</p>
+                                    <p><strong>Hochberg: </strong>It compares in the opposite direction to Holm. As soon as an acceptable hypothesis is found, all the other hypothesis are accepted. It is better (more power) than Holm test, but the differences between them are small in practice.</p>
+                                    <p><strong>Finner: </strong>Finner's test is similar to Holm's but each p-value associated with the hypothesis \({H_i}\) is compared with: \(p_i \leq {1-(1-\alpha)^{\frac{(K-1)}{i}}}\), where \({i \in [1,K-1]}\). It is more powerful than Bonferroni-Dunn, Holm, Hochberg and Li (only in some cases).</p>
+                                    <p><strong>Li: </strong>This test rejects all the hypothesis if the least significant p-value is less than \({\alpha}\) (significance level). Else, the test accepts the hypothesis and rejects any remaining hypothesis whose p-value is less than: \(value = \frac{(1-p-value_{K-1})}{(1-\alpha)\alpha}\). The author states that the power of this test is Highly influenced by the p-value (greater power when the p-value is less than 0.5).</p>
                                     <p><strong>Multitests: </strong>Just like the others but with \({m}\) comparisons instead of \({K-1}\), where \(m = {K*(K-1) \over 2}\).</p>
                                     <p><strong>Shaffer: </strong>This test is like Holm's but each p-value associated with the hypothesis \({H_i}\) is compared as \(p_i \leq {\alpha \over t_i}\), where \({t_i}\) is the maximum number of possible hypothesis assuming that the previous \({(j-1)}\) hypothesis have been rejected.</p>
                                 </div>
@@ -337,5 +337,6 @@
         <script src="js/ver_ayuda.js"></script>
     </body>
 </html>
+
 
 
