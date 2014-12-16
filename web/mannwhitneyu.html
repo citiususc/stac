@@ -3,6 +3,8 @@
     <head>
 		<meta charset="UTF-8">
 		<script src="js/loader.js"></script>
+		
+		<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
     </head>
 
     <body>
@@ -12,7 +14,7 @@
 			<div id="modals"></div>
             <div class="row">
                 <div class="col-sm-12 col-md-12 main">
-                    <h1 class="page-header">Normality Test</h1>
+                    <h1 class="page-header">Mann-Whitney U Test</h1>
                     <div class="tab-content">
                         <div id="normalidad" class="tab-pane fade in active">
 							<div class=row">
@@ -24,9 +26,7 @@
 											<label class="col-lg-5 control-label">Select test<a href="#helpModal" data-toggle="modal" more-info="normality"> [?] </a>:</label>
 											<div class="col-lg-7">
 												<div class="btn-group-vertical" data-toggle="buttons">
-													<label name="test_cond" class="btn btn-default active"><input type="radio" name="test" id="option1" value="shapiro" checked> Shapiro-Wilk</label>
-													<label name="test_cond" class="btn btn-default"><input type="radio" name="test" id="option3" value="agostino"> D'Agostino-Pearson</label>
-													<label name="test_cond" class="btn btn-default"><input type="radio" name="test" id="option2" value="kolmogorov"> Kolmogorov-Smirnov</label>
+													<label name="test_cond" class="btn btn-default active"><input type="radio" name="test" id="option1" value="mannwhitneyu" checked> Mann-Whitney U Test</label>
 												</div>
 											</div>
 										</div>
@@ -45,7 +45,7 @@
 										</div>
 										<div class="form-group">
 											<div class="col-lg-offset-7 col-lg-5">
-												<a data-toggle="tab" href="#result"><button type="button" class="btn btn-primary" id="apply" test="normality"><label class="glyphicon glyphicon-play"></label> Apply </button></a>
+												<a data-toggle="tab" href="#result"><button type="button" class="btn btn-primary" id="apply" test="mannwhitneyu"><label class="glyphicon glyphicon-play"></label> Apply </button></a>
 											</div>
 										</div>
 									</form>
@@ -53,12 +53,11 @@
 								<div class="col-lg-7">
 									<div class="panel panel-default">
 									  <div class="panel-body">
-										<p><strong>Null hypothesis (H<sub>0</sub>)</strong>: The samples follow a normal distribution.</p>
-										<p><strong>Power comparison</strong>:</p>
+										<p><strong>Null hypothesis (H<sub>0</sub>):</strong> The medians of the differences between two related samples (results from two algorithms) are equal.</p>
+										<p><strong>Restrictions:</strong></p>
 										<ul type = square>
-											<li><p><strong>Shapiro-Wilk</strong>: The best of the three methods, especially for samples of less than 30 elements.</p></li>
-											<li><p><strong>D'Agostino-Pearson</strong>: It's less powerful than Shapiro-Wilk.</p></li>
-											<li><p><strong>Kolmogorov-Smirnov</strong>: The less powerful.</p></li>
+											<li>Number of algorithms >= 2</li>
+											<li>There must be at least 5 data sets without ties (discrepancies of 0)</li>
 										</ul>
 									  </div>
 									</div>
@@ -77,9 +76,7 @@
 									  <div class="panel-heading">References</div>
 									  <div class="panel-body">
 										<ul type = square>
-											<li><p><strong>Shapiro-Wilk</strong>: Shapiro, S. S.; Wilk, M. B. (1965). "An analysis of variance test for normality (complete samples)". Biometrika 52 (3–4): 591–611. doi:10.1093/biomet/52.3-4.591. JSTOR 2333709. MR 205384. p. 593</p></li>
-											<li><p><strong>D'Agostino-Pearson</strong>: Pearson, Egon S. (1931). "Note on tests for normality". Biometrika 22 (3/4): 423–424. doi:10.1093/biomet/22.3-4.423. JSTOR 2332104.</p></li>
-											<li><p><strong>Kolmogorov-Smirnov</strong>: Massey Jr, Frank J. "The Kolmogorov-Smirnov test for goodness of fit." Journal of the American statistical Association 46.253 (1951): 68-78.</p></li>
+                                            <li>Mann, Henry B., and Donald R. Whitney. "On a test of whether one of two random variables is stochastically larger than the other." The annals of mathematical statistics (1947): 50-60.</li>
 										</ul>
 									  </div>
 									</div>

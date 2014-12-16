@@ -1,8 +1,10 @@
 $(document).on('ready', function() {
 
     //Para mostrar "Consultar fichero" en caso de que halla algún fichero subido.
-    if(sessionStorage.getItem("fichero_actual") != null)
-        $("#mostrar_consulta_fichero").show();
+    if(sessionStorage.getItem("fichero_actual") != null) {
+		console.log("show");
+        $(document).find("#mostrar_consulta_fichero").show();
+	}
 
 	//Para obtener la url base. Compatible con los navegadores: Chrome 27, Firefox 23, Safari 6, Internet Explorer 10.
 	if (!window.location.origin)
@@ -33,6 +35,7 @@ $(document).on('ready', function() {
                     salida = "<br><u>Levene test result (homocedasticity):</u>";
 
                     $("#alerta_fichero_homocedasticidad").hide();
+                    $("#fallo_test_homocedasticidad").hide();
 
                     if(data.fallo){
                         if(data.fallo.indexOf("fichero") > -1)
@@ -83,6 +86,7 @@ $(document).on('ready', function() {
                     salida = "<br><u>"+nombre+" test result:</u>";
 
                     $("#alerta_fichero").hide();
+                    $("#fallo_test").hide();
 
                     if(data.fallo){
                         if(data.fallo.indexOf("fichero") > -1)

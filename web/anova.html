@@ -1,180 +1,102 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
     <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="">
-        <meta name="author" content="">
-        <link rel="shortcut icon" href="bootstrap-3.1.1/docs/assets/ico/favicon.ico">
-
-        <title>STAC Web Platform</title>
-
-        <!-- Bootstrap core CSS -->
-        <link href="bootstrap-3.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
-
-        <!-- Custom styles for this template -->
-        <link href="css/dashboard.css" rel="stylesheet">
-
-        <!-- Just for debugging purposes. Don't actually copy this line! -->
-        <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-
-        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!--[if lt IE 9]>
-            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
+		<meta charset="UTF-8">
+		<script src="js/loader.js"></script>
+		
+		<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
     </head>
 
-    <body>
-
-        <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="index.html">STAC Web Platform</a>
-                </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav navbar-right">
-                        <!--Consulta de fichero-->
-                        <li id="mostrar_consulta_fichero" style="display:none"><a href="consultar_fichero.html">Show file</a></li>
-                        <!--Subir el fichero-->
-                        <li><a id="a_subida" href="#modal_fichero" data-toggle="modal">Upload file</a></li>
-                        <!--Ayuda-->
-                        <li><a href="ayuda.html" target="_blank">Help</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <!--***************************************Modal de Subir el fichero***************************************-->
-	    <div id="modal_fichero" class="modal fade">
-		<div class="modal-dialog">
-		    <div class="modal-content">
-			<div class="modal-header">
-			    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-			    <h4 class="modal-title">Upload file</h4>
-			</div>
-			<div class="modal-body">
-			    <form class="form" id="formfichero" enctype="multipart/form-data">
-			        <p class="text-warning"><small>The file must be in csv format &nbsp;&nbsp;<label><a href="ayuda.html#collapseOne" id="ayuda_fichero" target="_blank">[More info]</a></label></small></p>
-			        <div class="input-group">
-			            <span class="input-group-btn">
-			                <span class="btn btn-primary btn-file">
-			                    Open <input type="file" name="fichero" id="fichero"/>
-			                </span>
-			            </span>
-			            <input type="text" class="form-control" style="width:150px;" readonly>
-			        </div>
-			        <div id="mensaje_subida" align="center"></div>
-			    </form>
-			</div>
-			<div class="modal-footer">
-			    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-			    <button type="button" class="btn btn-primary" id="boton_fichero">Upload file</button>
-			</div>
-		    </div>
-		</div>
-	    </div>
-        <!--*******************************************************************************************************-->
-
-        <div class="container-fluid">
+	<body>
+        <div id="topbar"></div>
+		
+        <div class="container">
+			<div id="modals"></div>
             <div class="row">
-                <div class="col-sm-3 col-md-2 sidebar">
-                    <div id="MainMenu">
-                        <div class="nav nav-sidebar list-group panel">
-                            <a href="index.html" class="list-group-item"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;&nbsp;&nbsp;Main</a>
-                            <a href="#lista1" class="list-group-item" data-toggle="collapse" style="display=show;" data-parent="#MainMenu">Parametric conditions <i class="caret"></i></a>
-                            <div class="collapse" id="lista1">
-                                <a href="conditions_info.html" class="list-group-item">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-asterisk"></span>&nbsp;&nbsp;Description</a>
-                                <a href="normality.html" class="list-group-item">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-asterisk"></span>&nbsp;&nbsp;Normality</a>
-                                <a href="homocedasticity.html" class="list-group-item">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-asterisk"></span>&nbsp;&nbsp;Homoscedasticity</a>
-                            </div>
-                            <a href="#lista2" class="list-group-item" data-toggle="collapse" data-parent="#MainMenu">Parametric tests <i class="caret"></i></a>
-                            <div class="in collapse" id="lista2">
-                                <a href="parametric_info.html" class="list-group-item">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-asterisk"></span>&nbsp;&nbsp;Description</a>
-                                <a href="anova.html" class="list-group-item active">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-asterisk"></span>&nbsp;&nbsp;Anova</a>
-                                <a href="ttest.html" class="list-group-item">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-asterisk"></span>&nbsp;&nbsp;T-test</a>
-                            </div>
-                            <a href="#lista3" class="list-group-item" data-toggle="collapse" data-parent="#MainMenu">Nonparametric tests <i class="caret"></i></a>
-                            <div class="collapse" id="lista3">
-                                <a href="nonparametric_info.html" class="list-group-item">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-asterisk"></span>&nbsp;&nbsp;Description</a>
-                                <a href="wilcoxon.html" class="list-group-item">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-asterisk"></span>&nbsp;&nbsp;Wilcoxon</a>
-                                <a href="ranking.html" class="list-group-item">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-asterisk"></span>&nbsp;&nbsp;Ranking tests</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-                    <h1 class="page-header">Parametric Tests</h1>
-                    <!--*****************************Tests paramétricos*****************************************-->
+                <div class="col-sm-12 col-md-12 main">
+                    <h1 class="page-header">ANOVA test and Bonferroni test <a href="#helpModal" data-toggle="modal" more-info="normality"> [?] </a></label></h1>
                     <div class="tab-content">
                         <div id="anova" class="tab-pane fade in active">
-                            <h3>ANOVA test and Bonferroni test</h3>
-                            <label><a href="ayuda.html#collapseEleven" id="ayuda_fichero" target="_blank">[More info]</a></label>
-                            <br><br>
-                            <form class="form-horizontal" role="form">
-                                <div class="form-group">
-                                    <label class="col-xs-4 col-sm-3 col-md-2 col-lg-2 control-label">Significance level: <br><a href="ayuda.html#collapseTwo" id="ayuda_fichero" target="_blank">[More info]</a></label>
-                                    <div class="col-xs-8 col-sm-9 col-md-10 col-lg-10">
-                                        <select class="form-control" id="alpha_anova" style="width:100px;">
-                                            <option value="0.10">0.10</option>
-                                            <option value="0.05" selected="selected">0.05</option>
-                                            <option value="0.02">0.02</option>
-                                            <option value="0.01">0.01</option>
-                                            <option value="0.005">0.005</option>
-                                            <option value="0.001">0.001</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-xs-offset-4 col-xs-8 col-sm-offset-3 col-sm-9 col-md-offset-2 col-md-10 col-lg-offset-2 col-lg-10">
-                                        <a data-toggle="tab" href="#ver_resultados_anova"><button type="button" class="btn btn-success" id="datos_anova">Apply</button></a>
-                                    </div>
-                                </div>
-                            </form>
-                            <br>
-                            <p><u>General information:</u></p>
-                                <p>ANOVA:</p>
-                                <p><strong>Null hypothesis (H<sub>0</sub>):</strong> The means of the results of two or more algorithms are the same.</p>
-                                <p><strong>It should comply:</strong></p>
-                                <ul type = square>
-                                    <li>Normality
-                                    <li>Homocedasticity
-                                    <li>Independence
-                                </ul>
-                                <p>Bonferroni:</p>
-                                <p><strong>Null hypothesis (H<sub>0</sub>):</strong> The mean of the results of the "Algorithm A" and "Algorithm B" is equal (compares all algorithms each other).</p>
-                                <p><strong>Is applied if:</strong> ANOVA indicates that there are differences.</p>
-                        </div>
-                        <!--Mostrar resultados anova-->
-                        <div id="ver_resultados_anova" class="tab-pane fade">
-                            <div id="resultado"></div>
-                            <br>
-                            <div id="alerta_fichero" class="alert alert-info" style="display:none">
-				<strong>¡Upload a file!</strong> In the top right of the navigation bar you can select and upload a file by clicking "Upload file". Then, click "Show file" to watch its contents.
-                            </div>
-                            <div id="fallo_test" class="alert alert-info alert-danger" style="display:none"></div>
-                            <a data-toggle="tab" href="#anova"><button type="button" class="btn btn-default">Back</button></a>
+							<div class=row">
+								<div class="col-lg-5">
+									<form class="form-horizontal" role="form">
+										<div class="form-group">
+											<label class="col-lg-5 control-label">Select test<a href="#helpModal" data-toggle="modal" more-info="normality"> [?] </a>:</label>
+											<div class="col-lg-7">
+												<div class="btn-group-vertical" data-toggle="buttons">
+													<label name="test_cond" class="btn btn-default active"><input type="radio" name="test" id="option1" value="anova" checked> ANOVA</label>
+												</div>
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-lg-5 control-label">Post-hoc<a href="#helpModal" data-toggle="modal" more-info="normality"> [?] </a>:</label>
+											<div class="col-lg-7">
+												<div class="btn-group-vertical" data-toggle="buttons">
+													<label name="test_cond" class="btn btn-default active"><input type="radio" name="post-hoc" id="option1" value="bonferroni" checked> Bonferroni</label>
+												</div>
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-lg-5 control-label">Significance level<a href="#helpModal" data-toggle="modal" more-info="basic"> [?] </a>:</label>
+											<div class="col-lg-7">
+												<select class="form-control" id="alpha">
+													<option value="0.10">0.10</option>
+													<option value="0.05" selected="selected">0.05</option>
+													<option value="0.02">0.02</option>
+													<option value="0.01">0.01</option>
+													<option value="0.005">0.005</option>
+													<option value="0.001">0.001</option>
+												</select>
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="col-lg-offset-7 col-lg-5">
+												<a data-toggle="tab" href="#result"><button type="button" class="btn btn-primary" id="apply" test="anova"><label class="glyphicon glyphicon-play"></label> Apply </button></a>
+											</div>
+										</div>
+									</form>
+								</div>
+								<div class="col-lg-7">
+									<div class="panel panel-default">
+									  <div class="panel-body">
+										<p>ANOVA:</p>
+										<ul type = square>
+											<li><strong>Null hypothesis (H<sub>0</sub>):</strong> The means of the results of two or more algorithms are the same.</li>
+											<li><strong>It should comply:</strong> normality, homocedasticity and independence.</li>
+										</ul>
+										<p>Bonferroni:</p>
+										<ul>
+											<li><strong>Null hypothesis (H<sub>0</sub>):</strong> The mean of the results of the "Algorithm A" and "Algorithm B" is equal (compares all algorithms each other).</li>
+											<li><strong>Is applied if:</strong> ANOVA indicates that there are differences.</li>
+										</ul>
+									  </div>
+									</div>
+								</div>
+							</div>
+							
+							<div class="row">
+								<div class="col-lg-12">
+									<div id="result" class="tab-pane fade" style="display: none;"></div>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-lg-12" style="margin-top: 50px;">
+									<div class="panel panel-default">
+									  <div class="panel-heading">References</div>
+									  <div class="panel-body">
+										<ul type = square>
+											<li><p><strong>Levene</strong>: Levene, Howard (1960). Ingram Olkin, Harold Hotelling, et alia, ed. Contributions to Probability and Statistics: Essays in Honor of Harold Hotelling. Stanford University Press. pp. 278–292.</p></li>
+										</ul>
+									  </div>
+									</div>
+								</div>
+							</div>
                         </div>
                     </div>
-                    <!--*******************************************************************************************************-->
                 </div>
             </div>
         </div>
-
-        <!-- Bootstrap core JavaScript
-        ================================================== -->
-        <!-- Placed at the end of the document so the pages load faster -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-        <script src="bootstrap-3.1.1/dist/js/bootstrap.min.js"></script>
-        <script src="bootstrap-3.1.1/docs/assets/js/docs.min.js"></script>
-        <script src="js/codigo_jquery.js"></script>
     </body>
 </html>
 

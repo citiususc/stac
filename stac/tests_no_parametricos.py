@@ -176,22 +176,15 @@ def test_ranking(test, post_hoc, nombres_algoritmos, matriz_datos, N, alpha=0.05
     #Lista de tests POST-HOC de método de control (no multitests).
     post_hoc_metodo_control = ["bonferroni_dunn_test", "holm_test", "hochberg_test", "li_test", "finner_test"]
 
-    #Si el test de ranking es estadísticamente significativo, se caculan los datos comunes del POST-HOC de comparación
-    #múltiple o del POST-HOC con método de control y se calcula el resultado del mismo.
-    if resultado_ranking["resultado"] == True:
-
-        resultado_post_hoc = {}
-        if post_hoc.__name__ in post_hoc_metodo_control:
-            K, nombres, valores_z, p_valores, metodo_control = datos_comunes_tests(test.__name__, resultado_ranking["nombres"], resultado_ranking["ranking"], N)
-            resultado_post_hoc = post_hoc(K, nombres, valores_z, p_valores, metodo_control, alpha)
-        else:
-            m, comparaciones, valores_z, p_valores = datos_comunes_multitests(test.__name__, resultado_ranking["nombres"], resultado_ranking["ranking"], N)
-            resultado_post_hoc = post_hoc(m, comparaciones, valores_z, p_valores, alpha)
-
-        return {"test_ranking" : resultado_ranking, "test_comparacion" : resultado_post_hoc}
-
+    resultado_post_hoc = {}
+    if post_hoc.__name__ in post_hoc_metodo_control:
+        K, nombres, valores_z, p_valores, metodo_control = datos_comunes_tests(test.__name__, resultado_ranking["names"], resultado_ranking["ranking"], N)
+        resultado_post_hoc = post_hoc(K, nombres, valores_z, p_valores, metodo_control, alpha)
     else:
-        return {"test_ranking" : resultado_ranking}
+        m, comparaciones, valores_z, p_valores = datos_comunes_multitests(test.__name__, resultado_ranking["names"], resultado_ranking["ranking"], N)
+        resultado_post_hoc = post_hoc(m, comparaciones, valores_z, p_valores, alpha)
+
+    return {"test_ranking" : resultado_ranking, "post_hoc" : resultado_post_hoc}
 
 
 
@@ -279,8 +272,8 @@ def friedman_test(nombres_algoritmos, matriz_datos, alpha=0.05, tipo=0):
     #Ordenamiento de menor a mayor de los rankings medios obtenidos.
     rankings_medios.sort()
 
-    return {"resultado" : np.asscalar(p_valor < alpha), "p_valor" : p_valor, "estadistico" : chi2,
-    "nombres" : ranking_nombres, "ranking" : rankings_medios}
+    return {"result" : np.asscalar(p_valor < alpha), "p_value" : p_valor, "statistic" : chi2,
+    "names" : ranking_nombres, "ranking" : rankings_medios}
 
 
 
@@ -336,7 +329,7 @@ def iman_davenport_test(nombres_algoritmos, matriz_datos, alpha=0.05, tipo=0):
 
     # Cálculo del estadistico de Friedman.
     friedman = friedman_test(nombres_algoritmos, matriz_datos, alpha, tipo)
-    chi2 = friedman["estadistico"]
+    chi2 = friedman["statistic"]
 
     # Cálculo del estadistico de Iman-Davenport, que se distribuye de acuerdo a una distribución
     #f con (K-1) y (K-1)(N-1) grados de libertad.
@@ -346,8 +339,8 @@ def iman_davenport_test(nombres_algoritmos, matriz_datos, alpha=0.05, tipo=0):
     #iman_davenport.
     p_valor = 1 - st.f.cdf(iman_davenport, K-1, (K-1)*(N-1))
 
-    return {"resultado" : np.asscalar(p_valor < alpha), "p_valor" : p_valor, "estadistico" : iman_davenport,
-    "nombres" : friedman["nombres"], "ranking" : friedman["ranking"]}
+    return {"result" : np.asscalar(p_valor < alpha), "p_value" : p_valor, "statistic" : iman_davenport,
+    "names" : friedman["names"], "ranking" : friedman["ranking"]}
 
 
 
@@ -460,8 +453,8 @@ def friedman_rangos_alineados_test(nombres_algoritmos, matriz_datos, alpha=0.05,
     #Ordenamiento de menor a mayor de los rankings medios obtenidos.
     rankings_medios.sort()
 
-    return {"resultado" : np.asscalar(p_valor < alpha), "p_valor" : p_valor, "estadistico" : T,
-    "nombres" : ranking_nombres, "ranking" : rankings_medios}
+    return {"result" : np.asscalar(p_valor < alpha), "p_value" : p_valor, "statistic" : T,
+    "names" : ranking_nombres, "ranking" : rankings_medios}
 
 
 
@@ -588,8 +581,8 @@ def quade_test(nombres_algoritmos, matriz_datos, alpha=0.05, tipo=0):
     #Ordenamiento de menor a mayor de los rankings medios obtenidos.
     rankings_medios.sort()
 
-    return {"resultado" : np.asscalar(p_valor < alpha), "p_valor" : p_valor, "estadistico" : T,
-    "nombres" : ranking_nombres, "ranking" : rankings_medios}
+    return {"result" : np.asscalar(p_valor < alpha), "p_value" : p_valor, "statistic" : T,
+    "names" : ranking_nombres, "ranking" : rankings_medios}
 
 
 
@@ -724,9 +717,9 @@ def bonferroni_dunn_test(K, nombres, valores_z, p_valores, metodo_control, alpha
     for i in range(K-1):
         v = (K-1)*p_valores[i]
         p_valores_ajustados.append(min(v,1))
-
-    return {"valores_z" : valores_z, "p_valores" : p_valores, "metodo_control" : metodo_control, "nombres" : nombres,
-    "alpha" : alpha2, "resultado" : resultado, "p_valores_ajustados" : p_valores_ajustados}
+    
+    return {"statistics" : valores_z, "p_values" : p_valores, "control_method" : metodo_control, "names" : nombres,
+            "alpha" : alpha2, "result" : resultado, "adjusted_p_values" : p_valores_ajustados}
 
 
 
@@ -793,8 +786,8 @@ def holm_test(K, nombres, valores_z, p_valores, metodo_control, alpha=0.05):
         v = max([(K-(j+1))*p_valores[j] for j in range(i+1)])
         p_valores_ajustados.append(min(v,1))
 
-    return {"valores_z" : valores_z, "p_valores" : p_valores, "metodo_control" : metodo_control, "nombres" : nombres,
-    "alphas" : alphas, "resultado" : resultado, "p_valores_ajustados" : p_valores_ajustados}
+    return {"statistics" : valores_z, "p_values" : p_valores, "control_method" : metodo_control, "names" : nombres,
+            "alphas" : alphas, "result" : resultado, "adjusted_p_values" : p_valores_ajustados}
 
 
 
@@ -861,8 +854,8 @@ def hochberg_test(K, nombres, valores_z, p_valores, metodo_control, alpha=0.05):
     for i in range(K-1):
         p_valores_ajustados.append(min([(K-j)*p_valores[j-1] for j in range(K-1,i,-1)]))
 
-    return {"valores_z" : valores_z, "p_valores" : p_valores, "metodo_control" : metodo_control, "nombres" : nombres,
-    "alphas" : alphas, "resultado" : resultado, "p_valores_ajustados" : p_valores_ajustados}
+    return {"statistics" : valores_z, "p_values" : p_valores, "control_method" : metodo_control, "names" : nombres,
+            "alphas" : alphas, "result" : resultado, "adjusted_p_values" : p_valores_ajustados}
 
 
 
@@ -922,8 +915,8 @@ def li_test(K, nombres, valores_z, p_valores, metodo_control, alpha=0.05):
     for i in range(K-1):
         p_valores_ajustados.append(p_valores[i]/float(p_valores[i]+1-p_valores[K-2]))
 
-    return {"valores_z" : valores_z, "p_valores" : p_valores, "metodo_control" : metodo_control,
-    "nombres" : nombres, "resultado" : resultado, "p_valores_ajustados" : p_valores_ajustados}
+    return {"statistics" : valores_z, "p_values" : p_valores, "control_method" : metodo_control, "names" : nombres,
+            "result" : resultado, "adjusted_p_values" : p_valores_ajustados}
 
 
 
@@ -989,8 +982,8 @@ def finner_test(K, nombres, valores_z, p_valores, metodo_control, alpha=0.05):
         v = max([1-(1-p_valores[j])**((K-1)/float(j+1)) for j in range(i+1)])
         p_valores_ajustados.append(min(v,1))
 
-    return {"valores_z" : valores_z, "p_valores" : p_valores, "metodo_control" : metodo_control, "nombres" : nombres,
-    "alphas" : alphas, "resultado" : resultado, "p_valores_ajustados" : p_valores_ajustados}
+    return {"statistics" : valores_z, "p_values" : p_valores, "control_method" : metodo_control, "names" : nombres,
+            "alphas" : alphas, "result" : resultado, "adjusted_p_values" : p_valores_ajustados}
 
 
 
@@ -1048,15 +1041,15 @@ def datos_comunes_multitests(test_principal, nombres, ranking, N):
     if test_principal == "friedman_test" or test_principal == "iman_davenport_test":
         for i in range(K-1):
             for j in range(i+1,K):
-                valores_z.append((ranking[i]-ranking[j])/sp.sqrt((K*(K+1))/float(6*N)))
+                valores_z.append((ranking[j]-ranking[i])/sp.sqrt((K*(K+1))/float(6*N)))
     elif test_principal == "friedman_rangos_alineados_test":
         for i in range(K-1):
             for j in range(i+1,K):
-                valores_z.append((ranking[i]-ranking[j])/sp.sqrt((K*(N+1))/float(6)))
+                valores_z.append((ranking[j]-ranking[i])/sp.sqrt((K*(N+1))/float(6)))
     else:
         for i in range(K-1):
             for j in range(i+1,K):
-                valores_z.append((ranking[i]-ranking[j])/sp.sqrt((K*(K+1)*((2*N)+1)*(K-1))/float(18*N*(N+1))))
+                valores_z.append((ranking[j]-ranking[i])/sp.sqrt((K*(K+1)*((2*N)+1)*(K-1))/float(18*N*(N+1))))
 
     #Cálculo de los p_valores.
     p_valores = []
@@ -1129,8 +1122,8 @@ def nemenyi_multitest(m, comparaciones, valores_z, p_valores, alpha=0.05):
         v = m*p_valores[i]
         p_valores_ajustados.append(min(v,1))
 
-    return {"valores_z" : valores_z, "p_valores" : p_valores, "comparaciones" : comparaciones, "alpha" : alpha2,
-    "resultado" : resultado, "p_valores_ajustados" : p_valores_ajustados}
+    return {"statistics" : valores_z, "p_values" : p_valores, "comparisons" : comparaciones, "alpha" : alpha2,
+            "result" : resultado, "adjusted_p_values" : p_valores_ajustados}
 
 
 
@@ -1194,8 +1187,8 @@ def holm_multitest(m, comparaciones, valores_z, p_valores, alpha=0.05):
         v = max([(m-j)*p_valores[j] for j in range(i+1)])
         p_valores_ajustados.append(min(v,1))
 
-    return {"valores_z" : valores_z, "p_valores" : p_valores, "comparaciones" : comparaciones, "alphas" : alphas,
-    "resultado" : resultado, "p_valores_ajustados" : p_valores_ajustados}
+    return {"statistics" : valores_z, "p_values" : p_valores, "comparisons" : comparaciones, "alphas" : alphas,
+            "result" : resultado, "adjusted_p_values" : p_valores_ajustados}
 
 
 
@@ -1258,8 +1251,8 @@ def hochberg_multitest(m, comparaciones, valores_z, p_valores, alpha=0.05):
     for i in range(m):
         p_valores_ajustados.append(min([(m+1-j)*p_valores[j-1] for j in range(m,i,-1)]))
 
-    return {"valores_z" : valores_z, "p_valores" : p_valores, "comparaciones" : comparaciones, "alphas" : alphas,
-    "resultado" : resultado, "p_valores_ajustados" : p_valores_ajustados}
+    return {"statistics" : valores_z, "p_values" : p_valores, "comparisons" : comparaciones, "alphas" : alphas,
+            "result" : resultado, "adjusted_p_values" : p_valores_ajustados}
 
 
 
@@ -1321,8 +1314,8 @@ def finner_multitest(m, comparaciones, valores_z, p_valores, alpha=0.05):
         v = max([1-(1-p_valores[j])**(m/float(j+1)) for j in range(i+1)])
         p_valores_ajustados.append(min(v,1))
 
-    return {"valores_z" : valores_z, "p_valores" : p_valores, "comparaciones" : comparaciones, "alphas" : alphas,
-    "resultado" : resultado, "p_valores_ajustados" : p_valores_ajustados}
+    return {"statistics" : valores_z, "p_values" : p_valores, "comparisons" : comparaciones, "alphas" : alphas,
+            "result" : resultado, "adjusted_p_values" : p_valores_ajustados}
 
 
 
@@ -1421,6 +1414,6 @@ def shaffer_multitest(m, comparaciones, valores_z, p_valores, alpha=0.05):
         v = max([t[j]*p_valores[j] for j in range(i+1)])
         p_valores_ajustados.append(min(v,1))
 
-    return {"valores_z" : valores_z, "p_valores" : p_valores, "comparaciones" : comparaciones, "alphas" : alphas,
-            "resultado" : resultado, "p_valores_ajustados" : p_valores_ajustados}
+    return {"statistics" : valores_z, "p_values" : p_valores, "comparisons" : comparaciones, "alphas" : alphas,
+            "result" : resultado, "adjusted_p_values" : p_valores_ajustados}
 

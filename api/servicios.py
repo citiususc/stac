@@ -17,27 +17,27 @@ lista_ficheros = LimitedSizeDict(size_limit=5)
 
 
 #Servicio para la subida de ficheros.
-@route('/fichero', method='POST')
-def subir_fichero():
+@route('/file', method='POST')
+def post_file():
     response.headers['Access-Control-Allow-Origin'] = '*'
     response.content_type = "application/json"
-    subida = request.files.get('fichero')
+    subida = request.files.get('file')
     clave_hash = generar_md5(subida.file)
     for clave in lista_ficheros.keys():
         if clave == clave_hash:
-            #return {"fallo" : "El fichero con hash \"" + clave + "\" ya se encuentra el servidor."}
-            return {"clave" : clave_hash}
+            return {"hash" : clave_hash}
     try:
         datos = leer_datos(subida.file)
     except Exception, fallo:
         return {"fallo" : str(fallo)}
     lista_ficheros[clave_hash] = datos
-    return {"clave" : clave_hash}
+    
+    return {"hash" : clave_hash}
 
 
 #Servicio para la consulta de ficheros.
-@route('/fichero/<id_fichero>', method='GET')
-def consultar_fichero(id_fichero):
+@route('/file/<id_fichero>', method='GET')
+def get_file(id_fichero):
     response.headers['Access-Control-Allow-Origin'] = '*'
     response.content_type = "application/json"
     #Consulta del contenido de un fichero en concreto.
@@ -52,18 +52,34 @@ def consultar_fichero(id_fichero):
 @route('/wilcoxon/<id_fichero>', method="GET")
 @route('/wilcoxon/<id_fichero>/<alpha:float>', method="GET")
 def wilcoxon(id_fichero, alpha=0.05):
-
-    response.headers['Access-Control-Allow-Origin'] = '*'
-    response.content_type = "application/json"
-    try:
-        datos = lista_ficheros[id_fichero]
-    except Exception:
-        return {"fallo" : "There is no file with that key."}
-    try:
-        resultado = wilcoxon_test(datos["matriz_datos"],alpha)
-    except Exception, fallo:
-        return {"fallo" : str(fallo)}
-    return json.dumps(resultado)
+	response.headers['Access-Control-Allow-Origin'] = '*'
+	response.content_type = "application/json"
+	try:
+		datos = lista_ficheros[id_fichero]
+	except Exception:
+		return {"error" : "There is no file with that key."}
+	try:
+		statistic, p_value = st.wilcoxon([v[0] for v in datos["matriz_datos"]], [v[1] for v in datos["matriz_datos"]])
+		result = np.asscalar(p_value<alpha)
+	except Exception, fallo:
+		return {"error" : str(fallo)}
+	return json.dumps({"result" : result, "statistic" : statistic, "p_value" : p_value})
+	
+@route('/mannwhitneyu/<id_fichero>', method="GET")
+@route('/mannwhitneyu/<id_fichero>/<alpha:float>', method="GET")
+def mannwhitneyu(id_fichero, alpha=0.05):
+	response.headers['Access-Control-Allow-Origin'] = '*'
+	response.content_type = "application/json"
+	try:
+		datos = lista_ficheros[id_fichero]
+	except Exception:
+		return {"error" : "There is no file with that key."}
+	try:
+		statistic, p_value = st.mannwhitneyu([v[0] for v in datos["matriz_datos"]], [v[1] for v in datos["matriz_datos"]], "false")
+		result = np.asscalar(p_value*2<alpha)
+	except Exception, fallo:
+		return {"error" : str(fallo)}
+	return json.dumps({"result" : result, "statistic" : statistic, "p_value" : p_value*2})
 
 
 #Servicio para el test de Friedman.
@@ -172,7 +188,7 @@ def shapiro(id_fichero, alpha=0.05):
             resultados.append(resultado_shapiro[1]<alpha)
         except Exception, fallo:
             return {"fallo" : str(fallo)}
-    return json.dumps({"resultado" : resultados, "estadisticos_w" : estadisticos_w, "p_valores" : p_valores})
+    return json.dumps({"result" : resultados, "w" : estadisticos_w, "p_value" : p_valores, "dataset": datos["nombres_algoritmos"]})
 
 
 #Servicio para el test de normalidad de Kolmogorov-Smirnov.
@@ -190,7 +206,7 @@ def kolmogorov(id_fichero, alpha=0.05):
     resultados = []
     for i in range(len(datos["matriz_datos"][0])):
         try:
-            resultado_kolmogorov = st.kstest([conjunto[i] for conjunto in datos["matriz_datos"]],'norm')
+            resultado_kolmogorov = st.kstest([conjunto[i] for conjunto in datos["matriz_datos"]], 'norm')
             estadisticos_d.append(resultado_kolmogorov[0])
             p_valores.append(resultado_kolmogorov[1])
             #Si p_valor < alpha, se rechaza la hipótesis "True" de que la muestra provenga de una distribución normal.
@@ -259,7 +275,7 @@ def ttest(id_fichero, alpha=0.05):
         for i in range(len(datos["matriz_datos"][0])):
             argumentos = argumentos + ([conjunto[i] for conjunto in datos["matriz_datos"]],)
         try:
-            estadistico_t, p_valor = st.ttest_rel(*argumentos)
+            estadistico_t, p_valor = st.ttest_ind(*argumentos)
             #Si p_valor < alpha, se rechaza la hipótesis "True" de que las 2 muestras relacionadas o repetidas
             #tienen idénticos valores promedio (esperados).
             resultado = np.asscalar(p_valor<alpha)
@@ -279,10 +295,10 @@ def anova(id_fichero, alpha=0.05):
     except Exception:
         return {"fallo" : "There is no file with that key."}
     res_anova = anova_test(datos["matriz_datos"],alpha)
-    if res_anova["resultado"] == True:
-        res_comparacion = bonferroni_test(datos["nombres_algoritmos"],res_anova["medias_algoritmos"],res_anova["cuadrados_medios"][2],len(datos["matriz_datos"]),alpha)
-        return json.dumps({"test_anova" : res_anova, "test_comparacion" : res_comparacion})
-    return json.dumps({"test_anova" : res_anova})
+
+    res_comparacion = bonferroni_test(datos["nombres_algoritmos"],res_anova["medias_algoritmos"],res_anova["cuadrados_medios"][2],len(datos["matriz_datos"]),alpha)
+    return json.dumps({"test_anova" : res_anova, "test_comparacion" : res_comparacion})
+
 
 
 if __name__ == '__main__':
