@@ -10,7 +10,7 @@ $(document).ready(function() {
 		else {
 			$.ajax({
 				type: "POST",
-				url: window.location.origin+"/stac/api/file",
+				url: APP_CONFIG.api_url + "/file",
 				dataType: "json",
 				data: formData,
 				cache: false,
@@ -27,7 +27,7 @@ $(document).ready(function() {
 						$("#show_file").show();
 						$('#info_file').html("Done!");
 						
-						window.location = "/stac/file.html";
+						window.location = app_url + "/file.html";
 					} else{
 						resultado = resultado + "<p style=\"color:red\";><strong>" + data.fallo + "</strong></p>";
 						$('#info_file').html("<br>"+resultado);
@@ -51,7 +51,7 @@ function show_file() {
 
 	$.ajax({
 		type: "GET",
-		url: window.location.origin+"/stac/api/file/"+hash,
+		url: APP_CONFIG.app_url + "/file/"+hash,
 		success : function(data) {
 			if(data.fallo) {
 				$("#danger").html("There is no file uploaded.").show();

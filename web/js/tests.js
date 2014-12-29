@@ -8,9 +8,9 @@ $(document).ready(function(){
 			var test = $('input[name=test]:checked').val();
 			var alpha = $('#alpha').val();
             
-            var url = window.location.origin+"/stac/api/"+test+"/"+sessionStorage.getItem("data")+"/"+alpha;
+            var url = APP_CONFIG.api_url+"/"+test+"/"+sessionStorage.getItem("data")+"/"+alpha;
             var post_hoc = $('input[name=post_hoc]:checked').val();
-            if (post_hoc) var url = window.location.origin+"/stac/api/"+test+"/"+sessionStorage.getItem("data")+"/"+alpha+"/"+post_hoc;
+            if (post_hoc) var url = APP_CONFIG.api_url+"/"+test+"/"+sessionStorage.getItem("data")+"/"+alpha+"/"+post_hoc;
 			console.log(url);
 			
 			switch (type) {

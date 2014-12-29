@@ -36,11 +36,13 @@ loadStyle("css/bootstrap.min.css");
 loadStyle("css/dashboard.css");
 
 loadScript("js/jquery.min.js", function() {
-	loadScript("js/bootstrap.min.js");
-	loadScript("js/layout.js");
-	loadScript("js/behavior.js");
-	loadScript("js/file_manager.js");
-	loadScript("js/tests.js");
-	loadScript("js/export.js");
+    loadScript("js/config.js", function() {
+        loadScript("js/bootstrap.min.js");
+        loadScript("js/layout.js");
+        loadScript("js/behavior.js");
+        loadScript("js/file_manager.js");
+        loadScript("js/tests.js");
+        loadScript("js/export.js");
+    })
 });
 
