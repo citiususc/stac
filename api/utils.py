@@ -100,4 +100,22 @@ def generar_md5(archivo):
         bufer = archivo.read(tam_bloque)
     archivo.seek(0, 0);
     return md5.hexdigest()
-
+    
+def clean_missing_values(values, delete_row=True):
+    n = len(values.values()[0])
+    names = values.keys()
+    p = len(names)
+    if delete_row:
+        for i in range(n):
+            for j in range(p):
+                try:
+                    float(values[names[j]][i])
+                except:
+                    for k in names:
+                        values[k][i] = float('nan')
+                    break
+    for k in names:
+        values[k] = [v for v in values[k] if str(v) != 'nan']
+        
+    return values
+                

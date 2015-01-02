@@ -2,43 +2,59 @@ $(document).ready(function() {
 	$(document).on('click', '#upload_file', function() {
 		var formData = new FormData($('#formfile')[0]);
 		var fichero = $("#file").val();
-		
-		$('#info_file').html("Loading...");
-		
-		if(!fichero)
-			$('#info_file').html("<br><p style=\"color:red\";><strong>Select a file</strong></p>");
-		else {
-			$.ajax({
-				type: "POST",
-				url: APP_CONFIG.api_url + "/file",
-				dataType: "json",
-				data: formData,
-				cache: false,
-				contentType: false,
-				processData: false,
-				success : function(data) {
-					resultado = "";
-					if(!data.fallo){
-						resultado = "<p style=\"color:green\";><strong>Fichero subido con éxito</strong></p>";
-						sessionStorage.setItem("data", data.hash);
-						console.log(data);
-						sessionStorage.setItem("homocedasticity", false);
-						sessionStorage.setItem("normality", false);
-						$("#show_file").show();
-						$('#info_file').html("Done!");
+
+        var csvfile = $("#file")[0].files[0];
+
+        Papa.parse(csvfile, {
+            header: true,
+            dynamicTyping: true,
+            complete: function(results) {
+                var data = {};
+                data["dataset"] = [];
+                if (results.meta.fields[0] == "dataset") {
+                    results.meta.fields = results.meta.fields.splice(1)
+                    results.data.forEach(function(row) {    
+                        data["dataset"].push(row["dataset"]);
+                    });
+                }
+                data["names"] = results.meta.fields;
+                
+                var values = {};
+                results.meta.fields.forEach(function(field) {
+                    values[field] = [];
+                });
+
+                try {
+                    results.data.forEach(function(row) {
+                        results.meta.fields.forEach(function(field) {
+                            if (row[field]) {
+                                if (row[field] == "-" || 
+                                    row[field] == "?" || 
+                                    row[field] == "") 
+                                {
+                                    values[field].push(NaN);
+                                } else if (!isNaN(row[field])) {
+                                    values[field].push(row[field]);
+                                } else {
+                                    throw "Unexpected character " + row[field];
+                                }
+                            }
+                        });
+                    });
+                    
+                    data["values"] = values;
+                    sessionStorage["data"] = JSON.stringify(data);
+                    $("#show_file").show();
+                    $('#info_file').html("Done!");
 						
-						window.location = APP_CONFIG.app_url + "/file.html";
-					} else{
-						resultado = resultado + "<p style=\"color:red\";><strong>" + data.fallo + "</strong></p>";
-						$('#info_file').html("<br>"+resultado);
-						$('#formfile').trigger('reset');
-					}
-				},
-				error : function(e) {
-					console.log(e);
-				}
-			});
-		}
+                    window.location = APP_CONFIG.app_url + "/file.html";
+                } catch (err) {
+                    var resultado = "<p style=\"color:red\";><strong>" + err + "</strong></p>";
+                    $('#info_file').html("<br>"+resultado);
+                    $('#formfile').trigger('reset');
+                }
+            }
+        });
 	});
 	
 	if ($(document).find("#file_table").length > 0) {
@@ -47,38 +63,35 @@ $(document).ready(function() {
 });
 
 function show_file() {
-	var hash = sessionStorage.getItem("data");
-
-	$.ajax({
-		type: "GET",
-		url: APP_CONFIG.api_url + "/file/"+hash,
-		success : function(data) {
-			if(data.fallo) {
-				$("#danger").html("There is no file uploaded.").show();
-			} else {
-				var salida = "<thead><tr><th>" + data.palabra + "</th>";
+    var data = JSON.parse(sessionStorage["data"]);
     
-				$.each(data.nombres_algoritmos, function(index, value) {
-					salida = salida + "<th>" + value + "</th>";
-				});
-
-				salida = salida + "</tr></thead><tbody>";
-				$.each(data.nombres_conj_datos, function(index, value) {
-					salida = salida + "<tr><td>" + value + "</td>";
-					$.each(data.matriz_datos[index], function(index, value) {
-						salida = salida + "<td>" + value + "</td>";
-					});
-					salida = salida + "</tr>";
-				});
-
-				salida = salida + "</tbody>";
-				
-				$('#file_table').html(salida);
-			}
-		},
-		error : function(e) {
-			console.log('Error: ' + e);
-		}
-	});
+	if (!data) {
+        $("#danger").html("There is no file uploaded.").show();
+    } else {
+        var salida = "<thead><tr>";
+        if (data.dataset.length != 0) {
+            salida = salida + "<th>Dataset</th>";
+        }
+    
+        $.each(data.names, function(index, value) {
+            salida = salida + "<th>" + value + "</th>";
+        });
+        salida = salida + "</tr></thead><tbody>";
+        
+        for (var i = 0; i < data.values[data.names[0]].length; i++) {
+            salida = salida + "<tr>";
+            if (data.dataset.length != 0) {
+                salida = salida + "<td>" + data.dataset[i] + "</td>";
+            }
+            $.each(data.names, function(j, name) {
+                salida = salida + "<td>" + data.values[name][i] + "</td>";
+            });
+            salida = salida + "</tr>";
+        }
+        
+        salida = salida + "</tbody>";
+        
+        $('#file_table').html(salida);
+    }
 }
 

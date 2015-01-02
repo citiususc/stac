@@ -38,6 +38,7 @@ loadStyle("css/dashboard.css");
 loadScript("js/jquery.min.js", function() {
     loadScript("js/config.js", function() {
         loadScript("js/bootstrap.min.js");
+        loadScript("js/papaparse.js");
         loadScript("js/layout.js");
         loadScript("js/behavior.js");
         loadScript("js/file_manager.js");
@@ -45,4 +46,3 @@ loadScript("js/jquery.min.js", function() {
         loadScript("js/export.js");
     })
 });
-

@@ -8,10 +8,9 @@ $(document).ready(function(){
 			var test = $('input[name=test]:checked').val();
 			var alpha = $('#alpha').val();
             
-            var url = APP_CONFIG.api_url+"/"+test+"/"+sessionStorage.getItem("data")+"/"+alpha;
+            var url = APP_CONFIG.api_url+"/"+test+"/"+alpha;
             var post_hoc = $('input[name=post_hoc]:checked').val();
             if (post_hoc) var url = APP_CONFIG.api_url+"/"+test+"/"+sessionStorage.getItem("data")+"/"+alpha+"/"+post_hoc;
-			console.log(url);
 			
 			switch (type) {
 				case "normality":
@@ -84,8 +83,8 @@ $(document).ready(function(){
 							$("#danger").hide();
 							$("#warning").hide();
 							
-							if (data.fallo) {
-								$("#danger").html(data.fallo).show();
+							if (data.error) {
+								$("#danger").html(data.error).show();
 							} else {
 								var salida = ttest_table(data, test, alpha);
 									
@@ -100,17 +99,17 @@ $(document).ready(function(){
 					break;
 				case "wilcoxon":
 					$.ajax({
-						type: "GET", url: url, dataType: "json",
+						type: "POST", url: url, dataType: "json",
+                        contentType: "application/json",
+                        data: sessionStorage.data,
 						success : function(data) {
 							$("#danger").hide();
 							$("#warning").hide();
 							
 							if (data.error) {
-								$("#danger").html(data.fallo).show();
+								$("#danger").html(data.error).show();
 							} else {
-								var salida = wilcoxon_table(data, test, alpha);
-									
-								$("#result").html(salida).show();
+								$("#result").html(wilcoxon_table(data, test, alpha)).show();
 							}
 							
 						},
@@ -121,13 +120,15 @@ $(document).ready(function(){
 					break;
 				case "mannwhitneyu":
 					$.ajax({
-						type: "GET", url: url, dataType: "json",
+						type: "POST", url: url, dataType: "json",
+                        contentType: "application/json",
+                        data: sessionStorage.data,
 						success : function(data) {
 							$("#danger").hide();
 							$("#warning").hide();
 							
 							if (data.error) {
-								$("#danger").html(data.fallo).show();
+								$("#danger").html(data.error).show();
 							} else {
 								var salida = wilcoxon_table(data, test, alpha);
 									

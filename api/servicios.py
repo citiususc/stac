@@ -10,117 +10,69 @@ import scipy.stats as st
 import numpy as np
 from stac import tests_no_parametricos as tnp
 from stac import *
-from utils import LimitedSizeDict, leer_datos, generar_md5
+from utils import LimitedSizeDict, leer_datos, generar_md5, clean_missing_values
 import json
-
-lista_ficheros = LimitedSizeDict(size_limit=5)
-
-
-#Servicio para la subida de ficheros.
-@route('/file', method='POST')
-def post_file():
-    response.headers['Access-Control-Allow-Origin'] = '*'
-    response.content_type = "application/json"
-    subida = request.files.get('file')
-    clave_hash = generar_md5(subida.file)
-    for clave in lista_ficheros.keys():
-        if clave == clave_hash:
-            return {"hash" : clave_hash}
-    try:
-        datos = leer_datos(subida.file)
-    except Exception, fallo:
-        return {"fallo" : str(fallo)}
-    lista_ficheros[clave_hash] = datos
-    
-    return {"hash" : clave_hash}
-
-
-#Servicio para la consulta de ficheros.
-@route('/file/<id_fichero>', method='GET')
-def get_file(id_fichero):
-    response.headers['Access-Control-Allow-Origin'] = '*'
-    response.content_type = "application/json"
-    #Consulta del contenido de un fichero en concreto.
-    try:
-        datos = lista_ficheros[id_fichero]
-    except Exception:
-        return {"fallo" : "There is no file with that key."}
-    return datos
 
 
 #Servicio para el test de Wilcoxon.
-@route('/wilcoxon/<id_fichero>', method="GET")
-@route('/wilcoxon/<id_fichero>/<alpha:float>', method="GET")
-def wilcoxon(id_fichero, alpha=0.05):
-	response.headers['Access-Control-Allow-Origin'] = '*'
-	response.content_type = "application/json"
-	try:
-		datos = lista_ficheros[id_fichero]
-	except Exception:
-		return {"error" : "There is no file with that key."}
-	try:
-		statistic, p_value = st.wilcoxon([v[0] for v in datos["matriz_datos"]], [v[1] for v in datos["matriz_datos"]])
-		result = np.asscalar(p_value<alpha)
-	except Exception, fallo:
-		return {"error" : str(fallo)}
-	return json.dumps({"result" : result, "statistic" : statistic, "p_value" : p_value})
-	
-@route('/mannwhitneyu/<id_fichero>', method="GET")
-@route('/mannwhitneyu/<id_fichero>/<alpha:float>', method="GET")
-def mannwhitneyu(id_fichero, alpha=0.05):
-	response.headers['Access-Control-Allow-Origin'] = '*'
-	response.content_type = "application/json"
-	try:
-		datos = lista_ficheros[id_fichero]
-	except Exception:
-		return {"error" : "There is no file with that key."}
-	try:
-		statistic, p_value = st.mannwhitneyu([v[0] for v in datos["matriz_datos"]], [v[1] for v in datos["matriz_datos"]], "false")
-		result = np.asscalar(p_value*2<alpha)
-	except Exception, fallo:
-		return {"error" : str(fallo)}
-	return json.dumps({"result" : result, "statistic" : statistic, "p_value" : p_value*2})
-
-
-#Servicio para el test de Friedman.
-@route('/friedman/<id_fichero>/<test_comparacion>', method="GET")
-@route('/friedman/<id_fichero>/<alpha:float>/<test_comparacion>', method="GET")
-@route('/friedman/<id_fichero>/<tipo:int>/<test_comparacion>', method="GET")
-@route('/friedman/<id_fichero>/<alpha:float>/<tipo:int>/<test_comparacion>', method="GET")
-@route('/friedman/<id_fichero>', method="GET")
-@route('/friedman/<id_fichero>/<alpha:float>', method="GET")
-@route('/friedman/<id_fichero>/<tipo:int>', method="GET")
-@route('/friedman/<id_fichero>/<alpha:float>/<tipo:int>', method="GET")
-def friedman(id_fichero, alpha=0.05, tipo=0, test_comparacion="bonferroni_dunn_test"):
-
+#@route('/wilcoxon/<id_fichero>', method="GET")
+#@route('/wilcoxon/<id_fichero>/<alpha:float>', method="GET")
+#def wilcoxon(id_fichero, alpha=0.05):
+#	response.headers['Access-Control-Allow-Origin'] = '*'
+#	response.content_type = "application/json"
+#	try:
+#		datos = lista_ficheros[id_fichero]
+#	except Exception:
+#		return {"error" : "There is no file with that key."}
+#	try:
+#		statistic, p_value = st.wilcoxon([v[0] for v in datos["matriz_datos"]], [v[1] for v in datos["matriz_datos"]])
+#		result = np.asscalar(p_value<alpha)
+#	except Exception, fallo:
+#		return {"error" : str(fallo)}
+#	return json.dumps({"result" : result, "statistic" : statistic, "p_value" : p_value})
+    
+@route('/wilcoxon', method="POST")
+@route('/wilcoxon/<alpha:float>', method="POST")
+def wilcoxon(alpha=0.05):
     response.headers['Access-Control-Allow-Origin'] = '*'
     response.content_type = "application/json"
+    
+    values = clean_missing_values(request.json['values'])
+    
     try:
-        datos = lista_ficheros[id_fichero]
-    except Exception:
-        return {"fallo" : "There is no file with that key."}
-    resultado = test_ranking(friedman_test, getattr(tnp, test_comparacion), datos["nombres_algoritmos"], datos["matriz_datos"], len(datos["matriz_datos"]), alpha, tipo)
-    return json.dumps(resultado)
+        statistic, p_value = st.wilcoxon(values.values()[0], values.values()[1])
+        result = np.asscalar(p_value<alpha)
+    except Exception, fallo:
+		return {"error" : str(fallo)}
+
+    return json.dumps({"result" : result, "statistic" : statistic, "p_value" : p_value})
+	
+@route('/mannwhitneyu/', method="POST")
+@route('/mannwhitneyu/<alpha:float>', method="POST")
+def mannwhitneyu(alpha=0.05):
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    response.content_type = "application/json"
+
+    values = clean_missing_values(request.json['values'], delete_row=False)
+    
+    try:
+        statistic, p_value = st.mannwhitneyu(values.values()[0], values.values()[1], use_continuity="false")
+        result = np.asscalar(p_value*2<alpha)
+    except Exception, fallo:
+        return {"error" : str(fallo)}
+    return json.dumps({"result" : result, "statistic" : statistic, "p_value" : p_value*2})
 
 
 #Servicio para el test de Iman-Davenport.
-@route('/iman-davenport/<id_fichero>/<test_comparacion>', method="GET")
-@route('/iman-davenport/<id_fichero>/<alpha:float>/<test_comparacion>', method="GET")
-@route('/iman-davenport/<id_fichero>/<tipo:int>/<test_comparacion>', method="GET")
-@route('/iman-davenport/<id_fichero>/<alpha:float>/<tipo:int>/<test_comparacion>', method="GET")
-@route('/iman-davenport/<id_fichero>', method="GET")
-@route('/iman-davenport/<id_fichero>/<alpha:float>', method="GET")
-@route('/iman-davenport/<id_fichero>/<tipo:int>', method="GET")
-@route('/iman-davenport/<id_fichero>/<alpha:float>/<tipo:int>', method="GET")
-def iman_davenport(id_fichero, alpha=0.05, tipo=0, test_comparacion="bonferroni_dunn_test"):
-
+@route('/friedman/<post_hoc>', method="POST")
+@route('/friedman/<alpha:float>/<post_hoc>', method="POST")
+@route('/friedman/<objective:int>/<post_hoc>', method="POST")
+@route('/friedman/<alpha:float>/<objective:int>/<post_hoc>', method="POST")
+def friedman(id_fichero, alpha=0.05, obj=0, post_hoc="bonferroni_dunn_test"):
     response.headers['Access-Control-Allow-Origin'] = '*'
     response.content_type = "application/json"
-    try:
-        datos = lista_ficheros[id_fichero]
-    except Exception:
-        return {"fallo" : "There is no file with that key."}
-    resultado = test_ranking(iman_davenport_test, getattr(tnp, test_comparacion), datos["nombres_algoritmos"], datos["matriz_datos"], len(datos["matriz_datos"]), alpha, tipo)
+
+    resultado = test_ranking(friedman_test, getattr(tnp, post_hoc), clean_missing_values(request.json['values']), alpha, objective)
     return json.dumps(resultado)
 
 
