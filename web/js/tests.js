@@ -15,15 +15,18 @@ $(document).ready(function(){
 			switch (type) {
 				case "normality":
 					$.ajax({
-						type: "GET", url: url, dataType: "json",
+						type: "POST", url: url, dataType: "json",
+                        contentType: "application/json",
+                        data: sessionStorage.data,
 						success : function(data) {
 							$("#danger").hide();
 							$("#warning").hide();
 							
-							if (data.fallo) {
-								$("#danger").html(data.fallo).show();
+							if (data.error) {
+								$("#danger").html(data.error).show();
 							} else {
-								var salida = normality_table(data, test, alpha);
+                                console.log(data);
+								var salida = normality_table(data, JSON.parse(sessionStorage["data"]).names, test, alpha);
 									
 								$("#result").html(salida).show();
 							}
@@ -36,13 +39,15 @@ $(document).ready(function(){
 					break;
 				case "homocedasticity":
 					$.ajax({
-						type: "GET", url: url, dataType: "json",
+						type: "POST", url: url, dataType: "json",
+                        contentType: "application/json",
+                        data: sessionStorage.data,
 						success : function(data) {
 							$("#danger").hide();
 							$("#warning").hide();
 							
-							if (data.fallo) {
-								$("#danger").html(data.fallo).show();
+							if (data.error) {
+								$("#danger").html(data.error).show();
 							} else {
 								var salida = homocedasticity_table(data, test, alpha);
 									
@@ -56,16 +61,18 @@ $(document).ready(function(){
 					break;
 				case "anova":
 					$.ajax({
-						type: "GET", url: url, dataType: "json",
+						type: "POST", url: url, dataType: "json",
+                        contentType: "application/json",
+                        data: sessionStorage.data,
 						success : function(data) {
 							$("#danger").hide();
 							$("#warning").hide();
 							
-							if (data.fallo) {
-								$("#danger").html(data.fallo).show();
+							if (data.error) {
+								$("#danger").html(data.error).show();
 							} else {
-								var salida = anova_table(data.test_anova, test, alpha);
-								salida = salida + multi_posthoc_table(data.test_comparacion, "bonferroni", alpha)
+								var salida = anova_table(data.anova, test, alpha);
+								salida = salida + multi_posthoc_table(data.post_hoc, "bonferroni", alpha)
 									
 								$("#result").html(salida).show();
 							}
@@ -78,7 +85,9 @@ $(document).ready(function(){
 					break;
 				case "ttest":
 					$.ajax({
-						type: "GET", url: url, dataType: "json",
+						type: "POST", url: url, dataType: "json",
+                        contentType: "application/json",
+                        data: sessionStorage.data,
 						success : function(data) {
 							$("#danger").hide();
 							$("#warning").hide();
@@ -171,7 +180,7 @@ $(document).ready(function(){
 });
 
 
-function normality_table(data, test, alpha) {
+function normality_table(data, names, test, alpha) {
     var salida = 
     "<div class=\"table-responsive\"><h2>Results</h2>\
 		<a href=\"#\" onclick=\"exportTableToCSV.apply(this, [$('table'), $('input[name=test]:checked').val()+'.csv'])\"><button class=\"btn btn-default\"><span class=\"glyphicon glyphicon-export\"></span> CSV</button></a>&nbsp;&nbsp;\
@@ -182,34 +191,14 @@ function normality_table(data, test, alpha) {
 					<tr>\
 						<th>Dataset</th>";
 		
-		if(test == "shapiro") {
-			salida = salida + "<th>W Statistic</th><th>p-value</th><th>Result</th></thead><tbody>";
-			$.each(data.p_value, function(index, value) {
-				salida = salida + "<tr><td>" + data.dataset[index] + "</td><td>" + data.w[index].toFixed(5) + "</td><td>" + data.p_value[index].toFixed(5) + "</td>";
-				if(data.result[index] == true)
-					salida = salida + "<td>H0 is rejected</td></tr>";
-				else
-					salida = salida + "<td>H0 is accepted</td></tr>";
-			});
-    } else if(test == "kolmogorov"){
-        salida = salida + "<th>D Statistic</th><th>p-value</th><th>Result</th></tr></thead><tbody>";
-        $.each(data.p_valores, function(index, value) {
-		    salida = salida + "<tr><td>" + (index+1) + "</td><td>" + data.estadisticos_d[index].toFixed(5) + "</td><td>" + data.p_valores[index].toFixed(5) + "</td>";
-            if(data.resultado[index] == true)
-                salida = salida + "<td>H0 is rejected</td></tr>";
-            else
-                salida = salida + "<td>H0 is accepted</td></tr>";
-	        });
-    } else{
-        salida = salida + "<th>K2 Statistic</th><th>p-value</th><th>Result</th></tr></thead><tbody>";
-        $.each(data.p_valores, function(index, value) {
-		    salida = salida + "<tr><td>" + (index+1) + "</td><td>" + data.estadisticos_k2[index].toFixed(5) + "</td><td>" + data.p_valores[index].toFixed(5) + "</td>";
-            if(data.resultado[index] == true)
-                salida = salida + "<td>H0 is rejected</td></tr>";
-            else
-                salida = salida + "<td>H0 is accepted</td></tr>";
-	        });
-    }
+    salida = salida + "<th>Statistic</th><th>p-value</th><th>Result</th></thead><tbody>";
+    $.each(data.p_value, function(index, value) {
+        salida = salida + "<tr><td>" + names[index] + "</td><td>" + data.statistic[index].toFixed(5) + "</td><td>" + data.p_value[index].toFixed(5) + "</td>";
+        if(data.result[index] == true)
+            salida = salida + "<td>H0 is rejected</td></tr>";
+        else
+            salida = salida + "<td>H0 is accepted</td></tr>";
+    });
 
 	salida = salida + "</tbody></table></div>";
 
@@ -223,8 +212,8 @@ function homocedasticity_table(data, test, alpha) {
 		<a href=\"#\" onclick=\"exportTableToLaTeX.apply(this, [$('table'), $('input[name=test]:checked').val()+'.tex'])\"><button class=\"btn btn-default\"><span class=\"glyphicon glyphicon-export\"></span> LaTeX</button></a> \
 		<table class=\"table table-hover table-striped\">\
 			<caption>"+ $("input[value="+test+"]").parent().text() + " test (significance level of " + alpha + ")</caption>\
-			<thead><tr><th>W Statistic</th><th>p-value</th><th>Result</th></tr></thead>\
-			<tbody><tr><td>" +data.estadistico_w.toFixed(5)+ "</td><td>" +data.p_valor.toFixed(5)+ "</td>";
+			<thead><tr><th>Statistic</th><th>p-value</th><th>Result</th></tr></thead>\
+			<tbody><tr><td>" +data.statistic.toFixed(5)+ "</td><td>" +data.p_value.toFixed(5)+ "</td>";
     if (data.resultado == true)
         salida = salida + "<td>H0 is rejected</td></tr>";
     else
@@ -232,26 +221,6 @@ function homocedasticity_table(data, test, alpha) {
 
 	salida = salida + "</tbody></table></div>";
 
-    return salida;
-}
-
-function anova_table(data, test, alpha) {
-    var salida = 
-    "<div class=\"table-responsive\"><h2>Results</h2>\
-		<a href=\"#\" onclick=\"exportTableToCSV.apply(this, [$('table'), $('input[name=test]:checked').val()+'.csv'])\"><button class=\"btn btn-default\"><span class=\"glyphicon glyphicon-export\"></span> CSV</button></a>&nbsp;&nbsp;\
-		<a href=\"#\" onclick=\"exportTableToLaTeX.apply(this, [$('table'), $('input[name=test]:checked').val()+'.tex'])\"><button class=\"btn btn-default\"><span class=\"glyphicon glyphicon-export\"></span> LaTeX</button></a> \
-		<table class=\"table table-hover table-striped\">\
-			<caption>"+ $("input[value="+test+"]").parent().text() + " test (significance level of " + alpha + ")</caption>\
-			<thead><tr><th>Statistic</th><th>p-value</th><th>Result</th></tr></thead>\
-			<tbody><tr><td>" +data.estadistico.toFixed(5)+ "</td><td>" +data.p_valor.toFixed(5)+ "</td>";
-    
-    if(data.resultado == true)
-        salida = salida + "<td>H0 is rejected</td></tr>";
-    else
-        salida = salida + "<td>H0 is accepted</td></tr>";
-
-	salida = salida + "</tbody></table></div>";
-	
     return salida;
 }
 
@@ -263,7 +232,27 @@ function ttest_table(data, test, alpha) {
 		<table class=\"table table-hover table-striped\">\
 			<caption>T-test (significance level of " + alpha + ")</caption>\
 			<thead><tr><th>T Statistic</th><th>p-value</th><th>Result</th></tr></thead>\
-			<tbody><tr><td>" +data.estadistico_t.toFixed(5)+ "</td><td>" +data.p_valor.toFixed(5)+ "</td>";
+			<tbody><tr><td>" +data.statistic.toFixed(5)+ "</td><td>" +data.p_value.toFixed(5)+ "</td>";
+    
+    if(data.resultado == true)
+        salida = salida + "<td>H0 is rejected</td></tr>";
+    else
+        salida = salida + "<td>H0 is accepted</td></tr>";
+
+	salida = salida + "</tbody></table></div>";
+	
+    return salida;
+}
+
+function anova_table(data, test, alpha) {
+    var salida = 
+    "<div class=\"table-responsive\"><h2>Results</h2>\
+		<a href=\"#\" onclick=\"exportTableToCSV.apply(this, [$('table'), $('input[name=test]:checked').val()+'.csv'])\"><button class=\"btn btn-default\"><span class=\"glyphicon glyphicon-export\"></span> CSV</button></a>&nbsp;&nbsp;\
+		<a href=\"#\" onclick=\"exportTableToLaTeX.apply(this, [$('table'), $('input[name=test]:checked').val()+'.tex'])\"><button class=\"btn btn-default\"><span class=\"glyphicon glyphicon-export\"></span> LaTeX</button></a> \
+		<table class=\"table table-hover table-striped\">\
+			<caption>"+ $("input[value="+test+"]").parent().text() + " test (significance level of " + alpha + ")</caption>\
+			<thead><tr><th>Statistic</th><th>p-value</th><th>Result</th></tr></thead>\
+			<tbody><tr><td>" +data.statistic.toFixed(5)+ "</td><td>" +data.p_value.toFixed(5)+ "</td>";
     
     if(data.resultado == true)
         salida = salida + "<td>H0 is rejected</td></tr>";
@@ -351,25 +340,15 @@ function multi_posthoc_table(data, test, alpha) {
 		<table class=\"table table-hover table-striped\">\
 			<caption>"+ $("input[value="+test+"]").parent().text() + " test (significance level of " + alpha + ")</caption>\
 			<thead><tr><th>Comparison</th><th>Statistic</th><th>Adjusted p-value</th><th>Result</th></tr></thead>\
-            <tbody>";
-			
-    if(test == "bonferroni"){
-        $.each(data.comparaciones, function(index, value) {
-                salida = salida + "<tr><td>" + value + "</td><td>" +data.valores_t[index].toFixed(5)+ "</td><td>" +data.p_valores[index].toFixed(5)+ "</td><td>" +data.p_valores_ajustados[index].toFixed(5)+ "</td>";
-            if(data.resultado[index] == true)
-                salida = salida + "<td>H0 is rejected</td></tr>";
-            else
-                salida = salida + "<td>H0 is accepted</td></tr>";
-        });
-    } else {
-        $.each(data.comparisons, function(index, value) {
-	        salida = salida + "<tr><td>" + value + "</td><td>" + data.statistic[index].toFixed(5) + "</td><td>" +data.p_value[index].toFixed(5)+ "</td>";
-            if(data.result[index])
-                salida = salida + "<td>H0 is rejected</td></tr>";
-            else
-                salida = salida + "<td>H0 is accepted</td></tr>";
-        });
-    }
+            <tbody>";	
+
+    $.each(data.comparisons, function(index, value) {
+        salida = salida + "<tr><td>" + value + "</td><td>" + data.statistic[index].toFixed(5) + "</td><td>" +data.p_value[index].toFixed(5)+ "</td>";
+        if(data.result[index])
+            salida = salida + "<td>H0 is rejected</td></tr>";
+        else
+            salida = salida + "<td>H0 is accepted</td></tr>";
+    });
     
     salida = salida + "</tbody></table></div>";
 

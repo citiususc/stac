@@ -156,7 +156,7 @@ def levene(alpha=0.05):
 @headers
 def ttest(alpha=0.05):
     values = clean_missing_values(request.json['values'])
-    statistic, p_value = st.ttest_rel(*values.values())
+    statistic, p_value = st.ttest_rel(values.values()[0], values.values()[1])
     result = int(p_value < alpha)
     return {"statistic": statistic.tolist(), "p_value": p_value, "result": result}
     
@@ -165,7 +165,7 @@ def ttest(alpha=0.05):
 @headers
 def ttest_ind(alpha=0.05):
     values = clean_missing_values(request.json['values'])
-    statistic, p_value = st.ttest_ind(*values.values())
+    statistic, p_value = st.ttest_ind(values.values()[0], values.values()[1])
     result = int(p_value < alpha)
     return {"statistic": statistic.tolist(), "p_value": p_value, "result": result}
 
