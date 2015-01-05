@@ -3,23 +3,7 @@
 import numpy as np
 import scipy as sp
 import scipy.stats as st
-
-def test_ranking(test, post_hoc, data, alpha=0.05, objective=0):
-
-    resultado_ranking = test(data, alpha, objective)
-
-    post_hoc_metodo_control = ["bonferroni_dunn_test", "holm_test", "hochberg_test", "li_test", "finner_test"]
-
-    resultado_post_hoc = {}
-    if post_hoc.__name__ in post_hoc_metodo_control:
-        K, nombres, valores_z, p_valores, metodo_control = datos_comunes_tests(test.__name__, resultado_ranking["names"], resultado_ranking["ranking"], N)
-        resultado_post_hoc = post_hoc(K, nombres, valores_z, p_valores, metodo_control, alpha)
-    else:
-        m, comparaciones, valores_z, p_valores = datos_comunes_multitests(test.__name__, resultado_ranking["names"], resultado_ranking["ranking"], N)
-        resultado_post_hoc = post_hoc(m, comparaciones, valores_z, p_valores, alpha)
-
-    return {"test_ranking" : resultado_ranking, "post_hoc" : resultado_post_hoc}
-
+import itertools as it
 
 
 def friedman_test(*args):
@@ -34,14 +18,15 @@ def friedman_test(*args):
         row_sort = sorted(row)
         rankings.append([row_sort.index(v) + 1 + (row_sort.count(v)-1)/2. for v in row])
 
-    rankings_avg = [sp.mean([row[i] for row in rankings]) for i in range(k)]
+    rankings_avg = [sp.mean([case[j] for case in rankings]) for j in range(k)]
+    rankings_cmp = [r/sp.sqrt(k*(k+1)/(6.*n)) for r in rankings_avg]
 
     chi2 = ((12*n)/float((k*(k+1))))*((sp.sum(r**2 for r in rankings_avg))-((k*(k+1)**2)/float(4)))
     iman_davenport = ((n-1)*chi2)/float((n*(k-1)-chi2))
 
     p_value = 1 - st.f.cdf(iman_davenport, k-1, (k-1)*(n-1))
 
-    return iman_davenport, p_value, rankings_avg
+    return iman_davenport, p_value, rankings_avg, rankings_cmp
 
 
 
@@ -66,15 +51,16 @@ def friedman_aligned_ranks_test(*args):
             row.append(aligned_observations_sort.index(v) + 1 + (aligned_observations_sort.count(v)-1)/2.)
         aligned_ranks.append(row)
 
-    rankings_avg = [sp.mean([row[i] for row in aligned_ranks]) for i in range(k)]
+    rankings_avg = [sp.mean([case[j] for case in aligned_ranks]) for j in range(k)]
+    rankings_cmp = [r/sp.sqrt(k*(n+1)/6.) for r in rankings_avg]
 
-    r_i = [np.sum(row) for row in aligned_ranks]
-    r_j = [np.sum([row[j] for row in aligned_ranks]) for j in range(k)]
+    r_i = [np.sum(case) for case in aligned_ranks]
+    r_j = [np.sum([case[j] for case in aligned_ranks]) for j in range(k)]
     T = (k-1) * (sp.sum(v**2 for v in r_j) - (k*n**2/4.) * (k*n+1)**2) / float(((k*n*(k*n+1)*(2*k*n+1))/6.) - (1./float(k))*sp.sum(v**2 for v in r_i))
 
     p_value = 1 - st.chi2.cdf(T, k-1)
 
-    return T, p_value, rankings_avg
+    return T, p_value, rankings_avg, rankings_cmp
 
 
 
@@ -105,304 +91,205 @@ def quade_test(*args):
     Wj = [np.sum(row[j] for row in W) for j in range(k)]
     
     rankings_avg = [w / (n*(n+1)/2.) for w in Wj]
+    rankings_cmp = [r/sp.sqrt(k*(k+1)*(2*n+1)*(k-1)/(18.*n*(n+1))) for r in rankings_avg]
 
     A = sp.sum(S[i][j]**2 for i in range(n) for j in range(k))
     B = sp.sum(s**2 for s in Sj)/float(n)
-    T = (n-1)*B/(A-B)
+    F = (n-1)*B/(A-B)
 
-    p_value = 1 - st.f.cdf(T, k-1, (k-1)*(n-1))
+    p_value = 1 - st.f.cdf(F, k-1, (k-1)*(n-1))
 
-    return T, p_value, rankings_avg
+    return F, p_value, rankings_avg, rankings_cmp
 
-
-
-def datos_comunes_tests(test_principal, nombres, ranking, N):
-    K = len(ranking)
-
-    valores_z = []
-    if test_principal == "friedman_test":
-        for j in range(1,K):
-            valores_z.append((ranking[0]-ranking[j])/sp.sqrt((K*(K+1))/float(6*N)))
-    elif test_principal == "friedman_rangos_alineados_test":
-        for j in range(1,K):
-            valores_z.append((ranking[0]-ranking[j])/sp.sqrt((K*(N+1))/float(6)))
+def bonferroni_dunn_test(ranks, control=None):
+    k = len(ranks)
+    values = ranks.values()
+    keys = ranks.keys()
+    if not control:
+        control_i = values.index(min(values))
     else:
-        for j in range(1,K):
-            valores_z.append((ranking[0]-ranking[j])/sp.sqrt((K*(K+1)*((2*N)+1)*(K-1))/float(18*N*(N+1))))
+        control_i = keys.index(control)
 
-    p_valores = []
-    for i in range(K-1):
-        p_valores.append(2*(1-st.norm.cdf(abs(valores_z[i]))))
-
-    metodo_control = nombres[0]
-
-    tabla = zip(nombres[1:],valores_z,p_valores)
-    tabla.sort(key=lambda valor: valor[2])
-    n, z, p = zip(*tabla)
-    nombres = list(n)
-    valores_z = list(z)
-    p_valores = list(p)
-
-    return K, nombres, valores_z, p_valores, metodo_control
-
-
-
-def bonferroni_dunn_test(K, nombres, valores_z, p_valores, metodo_control, alpha=0.05):
-    alpha2 = alpha/float(K-1)
-
-    resultado = []
-    for i in range(K-1):
-        resultado.append(np.asscalar(p_valores[i]<alpha2))
-
-    p_valores_ajustados = []
-    for i in range(K-1):
-        v = (K-1)*p_valores[i]
-        p_valores_ajustados.append(min(v,1))
+    comparisons = [keys[control_i] + " vs " + keys[i] for i in range(k) if i != control_i]
+    z_values = [abs(values[control_i] - values[i]) for i in range(k) if i != control_i]
+    p_values = [2*(1-st.norm.cdf(abs(z))) for z in z_values]
+    # Sort values by p_value so that p_0 < p_1
+    p_values, z_values, comparisons = map(list, zip(*sorted(zip(p_values, z_values, comparisons), key=lambda t: t[0])))
+    adj_p_values = [min((k-1)*p_value,1) for p_value in p_values]
     
-    return {"statistics" : valores_z, "p_values" : p_valores, "control_method" : metodo_control, "names" : nombres,
-            "alpha" : alpha2, "result" : resultado, "adjusted_p_values" : p_valores_ajustados}
-
-
-
-def holm_test(K, nombres, valores_z, p_valores, metodo_control, alpha=0.05):
-    alphas = []
-    for i in range(1,K):
-        alphas.append(alpha/float(K-i))
-
-    resultado = [False]*(K-1)
-    for i in range(K-1):
-        if p_valores[i] < alphas[i]:
-            resultado[i] = True
-        else:
-            break
-
-    p_valores_ajustados = []
-    for i in range(K-1):
-        v = max([(K-(j+1))*p_valores[j] for j in range(i+1)])
-        p_valores_ajustados.append(min(v,1))
-
-    return {"statistics" : valores_z, "p_values" : p_valores, "control_method" : metodo_control, "names" : nombres,
-            "alphas" : alphas, "result" : resultado, "adjusted_p_values" : p_valores_ajustados}
-
-
-
-def hochberg_test(K, nombres, valores_z, p_valores, metodo_control, alpha=0.05):
-    alphas = []
-    for i in range(K-1,0,-1):
-        alphas.append(alpha/float(i))
-
-    resultado = [True]*(K-1)
-    for i in range(K-2,-1,-1):
-        if p_valores[i] > alphas[i]:
-            resultado[i] = False
-        else:
-            break
-
-    p_valores_ajustados = []
-    for i in range(K-1):
-        p_valores_ajustados.append(min([(K-j)*p_valores[j-1] for j in range(K-1,i,-1)]))
-
-    return {"statistics" : valores_z, "p_values" : p_valores, "control_method" : metodo_control, "names" : nombres,
-            "alphas" : alphas, "result" : resultado, "adjusted_p_values" : p_valores_ajustados}
-
-
-
-def li_test(K, nombres, valores_z, p_valores, metodo_control, alpha=0.05):
-    resultado = [True]*(K-1)
-    if p_valores[K-2] > alpha:
-        resultado[K-2] =  False
-        valor = ((1-p_valores[K-2])/float(1-alpha))*alpha
-        for i in range(K-2):
-            if p_valores[i] > valor:
-                resultado[i] = False
-
-    p_valores_ajustados = []
-    for i in range(K-1):
-        p_valores_ajustados.append(p_valores[i]/float(p_valores[i]+1-p_valores[K-2]))
-
-    return {"statistics" : valores_z, "p_values" : p_valores, "control_method" : metodo_control, "names" : nombres,
-            "result" : resultado, "adjusted_p_values" : p_valores_ajustados}
-
-
-
-def finner_test(K, nombres, valores_z, p_valores, metodo_control, alpha=0.05):
-    alphas = []
-    for i in range(1,K):
-        alphas.append(1-(1-alpha)**((K-1)/float(i)))
-
-    resultado = [False]*(K-1)
-    for i in range(K-1):
-        if p_valores[i] <= alphas[i]:
-            resultado[i] = True
-        else:
-            break
-
-    p_valores_ajustados = []
-    for i in range(K-1):
-        v = max([1-(1-p_valores[j])**((K-1)/float(j+1)) for j in range(i+1)])
-        p_valores_ajustados.append(min(v,1))
-
-    return {"statistics" : valores_z, "p_values" : p_valores, "control_method" : metodo_control, "names" : nombres,
-            "alphas" : alphas, "result" : resultado, "adjusted_p_values" : p_valores_ajustados}
-
-
-
-def datos_comunes_multitests(test_principal, nombres, ranking, N):
-    K = len(ranking)
-
-    m = (K*(K-1))/2
-
-    comparaciones = []
-    for i in range(K-1):
-        for j in range(i+1,K):
-            comparaciones.append(nombres[i] + " vs " + nombres[j])
-
-    valores_z = []
-    if test_principal == "friedman_test" or test_principal == "iman_davenport_test":
-        for i in range(K-1):
-            for j in range(i+1,K):
-                valores_z.append((ranking[j]-ranking[i])/sp.sqrt((K*(K+1))/float(6*N)))
-    elif test_principal == "friedman_rangos_alineados_test":
-        for i in range(K-1):
-            for j in range(i+1,K):
-                valores_z.append((ranking[j]-ranking[i])/sp.sqrt((K*(N+1))/float(6)))
+    return comparisons, z_values, p_values, adj_p_values
+    
+    
+def holm_test(ranks, control=None):
+    k = len(ranks)
+    values = ranks.values()
+    keys = ranks.keys()
+    if not control:
+        control_i = values.index(min(values))
     else:
-        for i in range(K-1):
-            for j in range(i+1,K):
-                valores_z.append((ranking[j]-ranking[i])/sp.sqrt((K*(K+1)*((2*N)+1)*(K-1))/float(18*N*(N+1))))
+        control_i = keys.index(control)
 
-    p_valores = []
-    for i in range(m):
-        p_valores.append(2*(1-st.norm.cdf(abs(valores_z[i]))))
+    comparisons = [keys[control_i] + " vs " + keys[i] for i in range(k) if i != control_i]
+    z_values = [abs(values[control_i] - values[i]) for i in range(k) if i != control_i]
+    p_values = [2*(1-st.norm.cdf(abs(z))) for z in z_values]
+    # Sort values by p_value so that p_0 < p_1
+    p_values, z_values, comparisons = map(list, zip(*sorted(zip(p_values, z_values, comparisons), key=lambda t: t[0])))
+    adj_p_values = [min(max((k-(j+1))*p_values[j] for j in range(i+1)), 1) for i in range(k-1)]
+    
+    return comparisons, z_values, p_values, adj_p_values
+    
+    
+def hochberg_test(ranks, control=None):
+    k = len(ranks)
+    values = ranks.values()
+    keys = ranks.keys()
+    if not control:
+        control_i = values.index(min(values))
+    else:
+        control_i = keys.index(control)
 
-    tabla = zip(comparaciones,valores_z,p_valores)
-    tabla.sort(key=lambda valor: valor[2])
-    c, z, p = zip(*tabla)
-    comparaciones = list(c)
-    valores_z = list(z)
-    p_valores = list(p)
+    comparisons = [keys[control_i] + " vs " + keys[i] for i in range(k) if i != control_i]
+    z_values = [abs(values[control_i] - values[i]) for i in range(k) if i != control_i]
+    p_values = [2*(1-st.norm.cdf(abs(z))) for z in z_values]
+    # Sort values by p_value so that p_0 < p_1
+    p_values, z_values, comparisons = map(list, zip(*sorted(zip(p_values, z_values, comparisons), key=lambda t: t[0])))
+    adj_p_values = [min(max((k-j)*p_values[j-1] for j in range(k-1, i, -1)), 1) for i in range(k-1)]
+    
+    return comparisons, z_values, p_values, adj_p_values
 
-    return m, comparaciones, valores_z, p_valores
+def li_test(ranks, control=None):
+    k = len(ranks)
+    values = ranks.values()
+    keys = ranks.keys()
+    if not control:
+        control_i = values.index(min(values))
+    else:
+        control_i = keys.index(control)
 
+    comparisons = [keys[control_i] + " vs " + keys[i] for i in range(k) if i != control_i]
+    z_values = [abs(values[control_i] - values[i]) for i in range(k) if i != control_i]
+    p_values = [2*(1-st.norm.cdf(abs(z))) for z in z_values]
+    # Sort values by p_value so that p_0 < p_1
+    p_values, z_values, comparisons = map(list, zip(*sorted(zip(p_values, z_values, comparisons), key=lambda t: t[0])))
+    adj_p_values = [p_values[i]/(p_values[i]+1-p_values[-1]) for i in range(k-1)]
+    
+    return comparisons, z_values, p_values, adj_p_values
 
+def finner_test(ranks, control=None):
+    k = len(ranks)
+    values = ranks.values()
+    keys = ranks.keys()
+    if not control:
+        control_i = values.index(min(values))
+    else:
+        control_i = keys.index(control)
 
-def nemenyi_multitest(m, comparaciones, valores_z, p_valores, alpha=0.05):
-    alpha2 = alpha/float(m)
-
-    resultado = []
-    for i in range(m):
-        resultado.append(np.asscalar(p_valores[i]<alpha2))
-
-    p_valores_ajustados = []
-    for i in range(m):
-        v = m*p_valores[i]
-        p_valores_ajustados.append(min(v,1))
-
-    return {"statistics" : valores_z, "p_values" : p_valores, "comparisons" : comparaciones, "alpha" : alpha2,
-            "result" : resultado, "adjusted_p_values" : p_valores_ajustados}
-
-
-
-def holm_multitest(m, comparaciones, valores_z, p_valores, alpha=0.05):
-    alphas = []
-    for i in range(1,m+1):
-        alphas.append(alpha/float(m+1-i))
-
-    resultado = [False]*m
-    for i in range(m):
-        if p_valores[i] < alphas[i]:
-            resultado[i] = True
-        else:
-            break
-
-    p_valores_ajustados = []
-    for i in range(m):
-        v = max([(m-j)*p_valores[j] for j in range(i+1)])
-        p_valores_ajustados.append(min(v,1))
-
-    return {"statistics" : valores_z, "p_values" : p_valores, "comparisons" : comparaciones, "alphas" : alphas,
-            "result" : resultado, "adjusted_p_values" : p_valores_ajustados}
-
-
-
-def hochberg_multitest(m, comparaciones, valores_z, p_valores, alpha=0.05):
-    alphas = []
-    for i in range(m,0,-1):
-        alphas.append(alpha/float(i))
-
-    resultado = [True]*m
-    for i in range(m-1,-1,-1):
-        if p_valores[i] > alphas[i]:
-            resultado[i] = False
-        else:
-            break
-
-    p_valores_ajustados = []
-    for i in range(m):
-        p_valores_ajustados.append(min([(m+1-j)*p_valores[j-1] for j in range(m,i,-1)]))
-
-    return {"statistics" : valores_z, "p_values" : p_valores, "comparisons" : comparaciones, "alphas" : alphas,
-            "result" : resultado, "adjusted_p_values" : p_valores_ajustados}
+    comparisons = [keys[control_i] + " vs " + keys[i] for i in range(k) if i != control_i]
+    z_values = [abs(values[control_i] - values[i]) for i in range(k) if i != control_i]
+    p_values = [2*(1-st.norm.cdf(abs(z))) for z in z_values]
+    # Sort values by p_value so that p_0 < p_1
+    p_values, z_values, comparisons = map(list, zip(*sorted(zip(p_values, z_values, comparisons), key=lambda t: t[0])))
+    adj_p_values = [min(max(1-(1-p_values[j])**((k-1)/float(j+1)) for j in range(i+1)), 1) for i in range(k-1)]
+    
+    return comparisons, z_values, p_values, adj_p_values
 
 
+def nemenyi_multitest(ranks):
+    k = len(ranks)
+    values = ranks.values()
+    keys = ranks.keys()
+    versus = list(it.combinations(range(k), 2))
 
-def finner_multitest(m, comparaciones, valores_z, p_valores, alpha=0.05):
-    alphas = []
-    for i in range(1,m+1):
-        alphas.append(1-(1-alpha)**(m/float(i)))
-
-    resultado = [False]*m
-    for i in range(m):
-        if p_valores[i] <= alphas[i]:
-            resultado[i] = True
-        else:
-            break
-
-    p_valores_ajustados = []
-    for i in range(m):
-        v = max([1-(1-p_valores[j])**(m/float(j+1)) for j in range(i+1)])
-        p_valores_ajustados.append(min(v,1))
-
-    return {"statistics" : valores_z, "p_values" : p_valores, "comparisons" : comparaciones, "alphas" : alphas,
-            "result" : resultado, "adjusted_p_values" : p_valores_ajustados}
+    comparisons = [keys[vs[0]] + " vs " + keys[vs[1]] for vs in versus]
+    z_values = [abs(values[vs[0]] - values[vs[1]]) for vs in versus]
+    p_values = [2*(1-st.norm.cdf(abs(z))) for z in z_values]
+    # Sort values by p_value so that p_0 < p_1
+    p_values, z_values, comparisons = map(list, zip(*sorted(zip(p_values, z_values, comparisons), key=lambda t: t[0])))
+    m = k*(k-1)/2.
+    adj_p_values = [min(m*p_value,1) for p_value in p_values]
+    
+    return comparisons, z_values, p_values, adj_p_values
 
 
+def holm_multitest(ranks):
+    k = len(ranks)
+    values = ranks.values()
+    keys = ranks.keys()
+    versus = list(it.combinations(range(k), 2))
 
-def S(K):
-    if K == 0 or K == 1:
+    comparisons = [keys[vs[0]] + " vs " + keys[vs[1]] for vs in versus]
+    z_values = [abs(values[vs[0]] - values[vs[1]]) for vs in versus]
+    p_values = [2*(1-st.norm.cdf(abs(z))) for z in z_values]
+    # Sort values by p_value so that p_0 < p_1
+    p_values, z_values, comparisons = map(list, zip(*sorted(zip(p_values, z_values, comparisons), key=lambda t: t[0])))
+    m = k*(k-1)/2.
+    adj_p_values = [min(max((m-j)*p_values[j] for j in range(i+1)), 1) for i in range(m)]
+    
+    return comparisons, z_values, p_values, adj_p_values
+
+
+def hochberg_multitest(ranks):
+    k = len(ranks)
+    values = ranks.values()
+    keys = ranks.keys()
+    versus = list(it.combinations(range(k), 2))
+
+    comparisons = [keys[vs[0]] + " vs " + keys[vs[1]] for vs in versus]
+    z_values = [abs(values[vs[0]] - values[vs[1]]) for vs in versus]
+    p_values = [2*(1-st.norm.cdf(abs(z))) for z in z_values]
+    # Sort values by p_value so that p_0 < p_1
+    p_values, z_values, comparisons = map(list, zip(*sorted(zip(p_values, z_values, comparisons), key=lambda t: t[0])))
+    m = k*(k-1)/2.
+    adj_p_values = [min(max((m+1-j)*p_values[j-1] for j in range(m-1, i, -1)), 1) for i in range(m)]
+    
+    return comparisons, z_values, p_values, adj_p_values
+    
+
+def finner_multitest(ranks):
+    k = len(ranks)
+    values = ranks.values()
+    keys = ranks.keys()
+    versus = list(it.combinations(range(k), 2))
+
+    comparisons = [keys[vs[0]] + " vs " + keys[vs[1]] for vs in versus]
+    z_values = [abs(values[vs[0]] - values[vs[1]]) for vs in versus]
+    p_values = [2*(1-st.norm.cdf(abs(z))) for z in z_values]
+    # Sort values by p_value so that p_0 < p_1
+    p_values, z_values, comparisons = map(list, zip(*sorted(zip(p_values, z_values, comparisons), key=lambda t: t[0])))
+    m = k*(k-1)/2.
+    adj_p_values = [min(max(1-(1-p_values[j])**(m/float(j+1)) for j in range(i+1)), 1) for i in range(m)]
+    
+    return comparisons, z_values, p_values, adj_p_values
+
+
+def S(k):
+    if k == 0 or k == 1:
         return {0}
     else:
         result = set()
-        for j in reversed(range(1, K+1)):
-            tmp = S(K - j)
+        for j in reversed(range(1, k+1)):
+            tmp = S(k - j)
             for s in tmp:
                 result = result.union({sp.special.binom(j, 2) + s})
         return list(result)
 
 
+def shaffer_multitest(ranks):
+    k = len(ranks)
+    values = ranks.values()
+    keys = ranks.keys()
+    versus = list(it.combinations(range(k), 2))
+    
+    m = int(k*(k-1)/2.)
+    A = S(int((1 + sp.sqrt(1+4*m*2))/2))
+    t = [max([a for a in A if a <= m-i]) for i in range(m)]
 
-def shaffer_multitest(m, comparaciones, valores_z, p_valores, alpha=0.05):
-    K = int((1 + sp.sqrt(1+4*m*2))/2)
-    A = S(K)
-    t = []
-
-    alphas = []
-    for i in range(1,m+1):
-        t.insert(i-1,max([a for a in A if a <= m-i+1]))
-        alphas.append(alpha/float(t[i-1]))
-
-    resultado = [False]*m
-    for i in range(m):
-        if p_valores[i] <= alphas[i]:
-            resultado[i] = True
-        else:
-            break
-
-    p_valores_ajustados = []
-    for i in range(m):
-        v = max([t[j]*p_valores[j] for j in range(i+1)])
-        p_valores_ajustados.append(min(v,1))
-
-    return {"statistics" : valores_z, "p_values" : p_valores, "comparisons" : comparaciones, "alphas" : alphas,
-            "result" : resultado, "adjusted_p_values" : p_valores_ajustados}
+    comparisons = [keys[vs[0]] + " vs " + keys[vs[1]] for vs in versus]
+    z_values = [abs(values[vs[0]] - values[vs[1]]) for vs in versus]
+    p_values = [2*(1-st.norm.cdf(abs(z))) for z in z_values]
+    # Sort values by p_value so that p_0 < p_1
+    p_values, z_values, comparisons = map(list, zip(*sorted(zip(p_values, z_values, comparisons), key=lambda t: t[0])))
+    adj_p_values = [min(max(t[j]*p_values[j] for j in range(i+1)), 1) for i in range(m)]
+    
+    return comparisons, z_values, p_values, adj_p_values
 

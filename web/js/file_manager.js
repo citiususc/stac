@@ -13,7 +13,7 @@ $(document).ready(function() {
                 data["dataset"] = [];
                 if (results.meta.fields[0] == "dataset") {
                     results.meta.fields = results.meta.fields.splice(1)
-                    results.data.forEach(function(row) {    
+                    results.data.forEach(function(row) {
                         data["dataset"].push(row["dataset"]);
                     });
                 }

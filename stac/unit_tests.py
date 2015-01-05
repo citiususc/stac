@@ -19,22 +19,53 @@ test_data2 = {
 
 class TestRankings(unittest.TestCase):        
     def test_friedman(self):
-        statistic, p_value, ranking = npt.friedman_test(*test_data.values())
+        statistic, p_value, ranking, rank_cmp = npt.friedman_test(*test_data.values())
         self.assertListEqual([round(v, 4) for v in ranking], [1.8333, 2.5000, 1.6667])
         self.assertAlmostEqual(statistic, 1.2068965517241395, 4)
         self.assertAlmostEqual(p_value, 0.3392, 4)
     
     def test_aligned_ranks(self):
-        statistic, p_value, ranking = npt.friedman_aligned_ranks_test(*test_data.values())
+        statistic, p_value, ranking, rank_cmp = npt.friedman_aligned_ranks_test(*test_data.values())
         self.assertListEqual([round(v, 4) for v in ranking], [9.3333, 13.0000, 6.1667])
         self.assertAlmostEqual(statistic, 3.702455111762549, 4)
         self.assertAlmostEqual(p_value, 0.1570, 4)
         
     def test_quade(self):
-        statistic, p_value, ranking = npt.quade_test(*test_data.values())
+        statistic, p_value, ranking, rank_cmp = npt.quade_test(*test_data.values())
         self.assertListEqual([round(v, 4) for v in ranking], [1.9286, 2.5952, 1.4762])
         self.assertAlmostEqual(statistic, 2.31374172185, 4)
         self.assertAlmostEqual(p_value, 0.1493, 4)
+        
+class TestControlPosthoc(unittest.TestCase):
+    def setUp(self):
+        _,_,_,rank_cmp = npt.friedman_test(*test_data.values())
+        self.ranks = {key: rank_cmp[i] for i,key in enumerate(test_data.keys())}
+        
+    def test_bonferroni_dunn(self):
+        npt.bonferroni_dunn_test(self.ranks)
+        
+    def test_holm(self):
+        npt.holm_test(self.ranks)
+        
+    def test_hochberg(self):
+        npt.hochberg_test(self.ranks)
+        
+    def test_li(self):
+        npt.li_test(self.ranks)
+        
+    def test_finner(self):
+        npt.finner_test(self.ranks)
+        
+class TestMultiPosthoc(unittest.TestCase):
+    def setUp(self):
+        _,_,_,rank_cmp = npt.friedman_test(*test_data.values())
+        self.ranks = {key: rank_cmp[i] for i,key in enumerate(test_data.keys())}
+        
+    def test_nemenyi(self):
+        print npt.nemenyi_multitest(self.ranks)
+        
+    def test_shaffer(self):
+        print npt.shaffer_multitest(self.ranks)
 
 if __name__ == '__main__':
     unittest.main()
