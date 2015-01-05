@@ -2,6 +2,7 @@
 
 import unittest
 import nonparametric_tests as npt
+import parametric_tests as pt
 
 test_data = {
     "A": [3, 4, 5, 6, 1, 5],
@@ -62,10 +63,19 @@ class TestMultiPosthoc(unittest.TestCase):
         self.ranks = {key: rank_cmp[i] for i,key in enumerate(test_data.keys())}
         
     def test_nemenyi(self):
-        print npt.nemenyi_multitest(self.ranks)
+        npt.nemenyi_multitest(self.ranks)
         
     def test_shaffer(self):
-        print npt.shaffer_multitest(self.ranks)
+        npt.shaffer_multitest(self.ranks)
+        
+class TestAnova(unittest.TestCase):
+    def test_anova(self):
+        pt.anova_test(*test_data.values())
+        
+    def test_bonferroni(self):
+        _,_,pivots = pt.anova_test(*test_data.values())
+        pivots = {key: pivots[i] for i,key in enumerate(test_data.keys())}
+        pt.bonferroni_test(pivots, len(test_data.values()[0]))
 
 if __name__ == '__main__':
     unittest.main()

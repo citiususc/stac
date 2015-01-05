@@ -1,89 +1,42 @@
 
 
-import numpy as np
+import itertools as it
 import scipy as sp
 import scipy.stats as st
 
-def anova_test(matriz_datos, alpha=0.05):
+def anova_test(*args):
+    k = len(args)
+    if k < 2: raise ValueError('Less than 2 levels')
+    n = len(args[0])
+    if len(set([len(v) for v in args])) != 1: raise ValueError('Unequal number of samples')
 
-    N = len(matriz_datos)
+    means = [sp.mean(sample) for sample in args]
+    mean_global = sp.mean(means)
+    ss_error = sp.sum([(args[i][j] - means[i])**2 for j in range(n) for i in range(k)])
+    ss_population = sp.sum([n*(means[i] - mean_global)**2 for i in range(k)])
+    sd = sp.sqrt(sp.sum([(means[i] - mean_global)**2 for i in range(k)])/float(n-k))
+    pivots = [mean/(sd*sp.sqrt(2/float(n))) for mean in means]
 
-    K = len(matriz_datos[0])
+    F = (ss_population/float(k-1))/(ss_error/float(n*k-k))
+    p_value = 1 - st.f.cdf(F, k-1, n*k-k)
 
-    medias_algoritmos = []
-    for columna in zip(*matriz_datos):
-        medias_algoritmos.append(sp.mean(columna))
+    return F, p_value, pivots
+    
 
-    media_general = sp.mean(medias_algoritmos)
+def bonferroni_test(pivots, n):
+    k = len(pivots)
+    values = pivots.values()
+    keys = pivots.keys()
 
-    SCT = 0
+    m = (k*(k-1))/2.
 
-    SCE = 0
+    versus = list(it.combinations(range(k), 2))
 
-    SCTR = 0
-    for i in range(len(matriz_datos[0])):
-    	x  = [conjunto[i] for conjunto in matriz_datos]
-    	for elem in x:
-    	    SCT = SCT + (elem-media_general)**2
-    	    SCE = SCE + (elem-medias_algoritmos[i])**2
-    	SCTR = SCTR + (len(x)*(medias_algoritmos[i]-media_general)**2)
-
-    GLT = (N*K)-1
-    GLTR = K-1
-    GLE = GLT - GLTR
-
-    CMT = SCT/GLT
-    CMTR = SCTR/GLTR
-    CME = SCE/GLE
-
-    F = CMTR/CME
-
-    p_valor = 1 - st.f.cdf(F, GLTR, GLE)
-
-    return {"resultado" : np.asscalar(p_valor < alpha), "p_valor" : p_valor, "estadistico" : F,
-    	    "variaciones" : [SCT,SCTR,SCE], "grados_libertad" : [GLT,GLTR,GLE],
-    	    "cuadrados_medios" : [CMT,CMTR,CME], "medias_algoritmos" : medias_algoritmos,
-    	    "media_general" : media_general}
-
-
-
-def bonferroni_test(nombres_algoritmos, medias_algoritmos, cuadrado_medio_error, N, alpha=0.05):
-
-	K = len(medias_algoritmos)
-
-	m = (K*(K-1))/2
-
-	comparaciones = []
-	for i in range(K-1):
-		for j in range(i+1,K):
-			comparaciones.append(nombres_algoritmos[i] + " vs " + nombres_algoritmos[j])
-
-	valores_t = []
-	for i in range(K-1):
-		for j in range(i+1,K):
-			valores_t.append((abs(medias_algoritmos[i]-medias_algoritmos[j]))/float(sp.sqrt(cuadrado_medio_error)*sp.sqrt(2/float(N))))
-
-	p_valores = []
-	for i in range(m):
-		p_valores.append(1-st.t.cdf(valores_t[i],(N*K)-K))
-
-	tabla = zip(comparaciones,valores_t,p_valores)
-	tabla.sort(key=lambda valor: valor[2])
-	c, z, p = zip(*tabla)
-	comparaciones = list(c)
-	valores_t = list(z)
-	p_valores = list(p)
-
-	alpha2 = alpha/float(m)
-
-	resultado = []
-	for i in range(m):
-		resultado.append(np.asscalar(p_valores[i]<alpha2))
-
-	p_valores_ajustados = []
-	for i in range(m):
-		v = m*p_valores[i]
-		p_valores_ajustados.append(min(v,1))
-
-	return {"valores_t" : valores_t, "p_valores" : p_valores, "comparaciones" : comparaciones, "alpha" : alpha2,
-			"resultado" : resultado, "p_valores_ajustados" : p_valores_ajustados}
+    comparisons = [keys[vs[0]] + " vs " + keys[vs[1]] for vs in versus]
+    t_values = [abs(values[vs[0]] - values[vs[1]]) for vs in versus]
+    p_values = [1-st.t.cdf(t, n*k-k) for t in t_values]
+    # Sort values by p_value so that p_0 < p_1
+    p_values, t_values, comparisons = map(list, zip(*sorted(zip(p_values, t_values, comparisons), key=lambda t: t[0])))
+    adj_p_values = [min(m*p_value,1) for p_value in p_values]
+    
+    return comparisons, t_values, p_values, adj_p_values
