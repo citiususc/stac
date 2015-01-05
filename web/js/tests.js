@@ -10,7 +10,7 @@ $(document).ready(function(){
             
             var url = APP_CONFIG.api_url+"/"+test+"/"+alpha;
             var post_hoc = $('input[name=post_hoc]:checked').val();
-            if (post_hoc) var url = APP_CONFIG.api_url+"/"+test+"/"+sessionStorage.getItem("data")+"/"+alpha+"/"+post_hoc;
+            if (post_hoc) var url = APP_CONFIG.api_url+"/"+test+"/"+post_hoc+"/"+alpha;
 			
 			switch (type) {
 				case "normality":
@@ -142,7 +142,9 @@ $(document).ready(function(){
 					break;
                 case "ranking":
 					$.ajax({
-						type: "GET", url: url, dataType: "json",
+						type: "POST", url: url, dataType: "json",
+                        contentType: "application/json",
+                        data: sessionStorage.data,
 						success : function(data) {
 							$("#danger").hide();
 							$("#warning").hide();
@@ -150,7 +152,7 @@ $(document).ready(function(){
 							if (data.error) {
 								$("#danger").html(data.fallo).show();
 							} else {
-								var salida = ranking_table(data.test_ranking, test, alpha);
+								var salida = ranking_table(data.ranking, test, alpha);
                                 if ($("input[name=post_hoc]:checked").attr("comparison") == "control")
                                     salida = salida + control_method_table(data.post_hoc, test, alpha);
                                 else
@@ -309,13 +311,13 @@ function ranking_table(data, test, alpha) {
                 salida = salida + "<td>H0 is accepted</td></tr>";
     salida = salida + "</tbody></table>";
     
-    var salida =  salida +
+    salida =  salida +
     "   <table class=\"table table-hover table-striped\">\
 			<caption>Ranking</caption>\
 			<thead><tr><th>Rank</th><th>Algorithm</th></thead>\
             <tbody>";
             
-    $.each(data.ranking, function(index, value) {
+    $.each(data.rankings, function(index, value) {
         salida = salida + "<tr><td>" + value.toFixed(5) + "</td><td>" + data.names[index] + "</td></tr>";
 	});
     salida = salida + "</tbody></table></div>";
@@ -326,12 +328,12 @@ function ranking_table(data, test, alpha) {
 function control_method_table(data, test, alpha) {
     var salida = 
 	"<table class=\"table table-hover table-striped\">\
-            <caption>Post-hoc (Using "+data.control_method+" as control method)</caption>\
-			<thead><tr><th>Comparison</th><th>Statistic</th><th>p-value</th><th>Adjusted p-value</th><th>Result</th></tr></thead>\
+            <caption>Post-hoc (Using "+data.control+" as control method)</caption>\
+			<thead><tr><th>Comparison</th><th>Statistic</th><th>Adjusted p-value</th><th>Result</th></tr></thead>\
             <tbody>";
 
-    $.each(data.names, function(index, value) {
-        salida = salida + "<td>" + data.control_method + " vs " + value + "</td><td>" + data.statistics[index].toFixed(5) + "</td><td>" + data.p_values[index].toFixed(5) + "</td><td>" + data.adjusted_p_values[index].toFixed(5) + "</td>";
+    $.each(data.comparisons, function(index, value) {
+        salida = salida + "<td>" + value + "</td><td>" + data.statistic[index].toFixed(5) + "</td><td>" + data.p_value[index].toFixed(5) + "</td>";
         if (data.result[index])
             salida = salida + "<td>H0 is rejected</td></tr>";
         else
@@ -348,7 +350,7 @@ function multi_posthoc_table(data, test, alpha) {
 	"<hr><div class=\"table-responsive\">\
 		<table class=\"table table-hover table-striped\">\
 			<caption>"+ $("input[value="+test+"]").parent().text() + " test (significance level of " + alpha + ")</caption>\
-			<thead><tr><th>Comparison</th><th>Statistic</th><th>p-value</th><th>Adjusted p-value</th><th>Result</th></tr></thead>\
+			<thead><tr><th>Comparison</th><th>Statistic</th><th>Adjusted p-value</th><th>Result</th></tr></thead>\
             <tbody>";
 			
     if(test == "bonferroni"){
@@ -361,7 +363,7 @@ function multi_posthoc_table(data, test, alpha) {
         });
     } else {
         $.each(data.comparisons, function(index, value) {
-	        salida = salida + "<tr><td>" + value + "</td><td>" + data.statistics[index].toFixed(5) + "</td><td>" +data.p_values[index].toFixed(5)+ "</td><td>" +data.adjusted_p_values[index].toFixed(5) + "</td>";
+	        salida = salida + "<tr><td>" + value + "</td><td>" + data.statistic[index].toFixed(5) + "</td><td>" +data.p_value[index].toFixed(5)+ "</td>";
             if(data.result[index])
                 salida = salida + "<td>H0 is rejected</td></tr>";
             else

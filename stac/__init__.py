@@ -1,4 +1,4 @@
-from .tests_parametricos import anova_test, bonferroni_test
+from .parametric_tests import *
 from .nonparametric_tests import *
 
 __all__ = ['anova_test',

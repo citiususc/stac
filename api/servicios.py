@@ -18,20 +18,21 @@ def headers(func):
     def func_wrapper(*args, **kwargs):
         response.headers['Access-Control-Allow-Origin'] = '*'
         response.content_type = "application/json"
-        try :
+        try:
             return json.dumps(func(*args, **kwargs))
-        except Exception, error:
-            return json.dumps({"error": error})
+        except Exception as e:
+            return json.dumps({"error": str(e)})
+        
     return func_wrapper
 
 
-@route('/wilcoxon', method="POST")
+@route('/wilcoxon/', method="POST")
 @route('/wilcoxon/<alpha:float>', method="POST")
 @headers
 def wilcoxon(alpha=0.05):
     values = clean_missing_values(request.json['values'])
     statistic, p_value = st.wilcoxon(values.values()[0], values.values()[1])
-    result = np.asscalar(p_value<alpha)
+    result = int(p_value<alpha)
     return {"result" : result, "statistic" : statistic, "p_value" : p_value}
     
 	
@@ -41,12 +42,12 @@ def wilcoxon(alpha=0.05):
 def mannwhitneyu(alpha=0.05):
     values = clean_missing_values(request.json['values'], delete_row=False)
     statistic, p_value = st.mannwhitneyu(values.values()[0], values.values()[1], use_continuity="false")
-    result = np.asscalar(p_value*2<alpha)
+    result = int(p_value*2<alpha)
     return {"result" : result, "statistic" : statistic, "p_value" : p_value*2}
     
 
 def ranking(func):
-    def func_wrapper(*args, **kwargs):
+    def func_wrapper(alpha=0.05, *args, **kwargs):
         response.headers['Access-Control-Allow-Origin'] = '*'
         response.content_type = "application/json"
         statistic, p_value, rankings, names, comparisons, z_values, adj_p_values = func(*args, **kwargs)
@@ -55,12 +56,15 @@ def ranking(func):
                 "statistic": statistic, 
                 "p_value": p_value, 
                 "rankings": rankings,
-                "names": names
+                "names": names,
+                "result": np.asscalar(p_value < alpha)
             },
             "post_hoc": {
                 "comparisons": comparisons,
                 "statistic": z_values,
-                "p_value": adj_p_values
+                "p_value": adj_p_values,
+                "control": names[0],
+                "result": [int(adj_p_value < alpha) for adj_p_value in adj_p_values]
             }
         }
     return func_wrapper
@@ -74,6 +78,35 @@ def ranking(func):
 def friedman(alpha=0.05, post_hoc="bonferroni_dunn_test"):
     values = clean_missing_values(request.json['values'])
     statistic, p_value, rankings, ranking_cmp = npt.friedman_test(*values.values())
+    rankings, names = map(list, zip(*sorted(zip(rankings, values.keys()), key=lambda t: t[0])))
+    ranks = {key: ranking_cmp[i] for i,key in enumerate(values.keys())}
+    comparisons, z_values, _, adj_p_values = getattr(npt, post_hoc)(ranks)
+    return statistic, p_value, rankings, names, comparisons, z_values, adj_p_values
+    
+
+@route('/friedman-aligned-ranks/', method="POST")
+@route('/friedman-aligned-ranks/<alpha:float>', method="POST")
+@route('/friedman-aligned-ranks/<post_hoc>', method="POST")
+@route('/friedman-aligned-ranks/<post_hoc>/<alpha:float>', method="POST")
+@headers
+@ranking
+def friedman(alpha=0.05, post_hoc="bonferroni_dunn_test"):
+    values = clean_missing_values(request.json['values'])
+    statistic, p_value, rankings, ranking_cmp = npt.friedman_aligned_ranks_test(*values.values())
+    rankings, names = map(list, zip(*sorted(zip(rankings, values.keys()), key=lambda t: t[0])))
+    ranks = {key: ranking_cmp[i] for i,key in enumerate(values.keys())}
+    comparisons, z_values, _, adj_p_values = getattr(npt, post_hoc)(ranks)
+    return statistic, p_value, rankings, names, comparisons, z_values, adj_p_values
+    
+@route('/quade/', method="POST")
+@route('/quade/<alpha:float>', method="POST")
+@route('/quade/<post_hoc>', method="POST")
+@route('/quade/<post_hoc>/<alpha:float>', method="POST")
+@headers
+@ranking
+def friedman(alpha=0.05, post_hoc="bonferroni_dunn_test"):
+    values = clean_missing_values(request.json['values'])
+    statistic, p_value, rankings, ranking_cmp = npt.quade_test(*values.values())
     rankings, names = map(list, zip(*sorted(zip(rankings, values.keys()), key=lambda t: t[0])))
     ranks = {key: ranking_cmp[i] for i,key in enumerate(values.keys())}
     comparisons, z_values, _, adj_p_values = getattr(npt, post_hoc)(ranks)
