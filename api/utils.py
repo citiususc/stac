@@ -5,101 +5,135 @@ Created on Tue Api 22 16:05:31 2014
 @author: Adrián
 """
 
-import csv, re, hashlib
-from collections import *
+import networkx as nx
 
-def singleton(myClass):
-    """Patrón Singleton para tener únicamente una instancia de la clase
-    LimitedSizeDict.
-    """
-    instances = {}
-    def getInstance(*args,**kwds):
-        if myClass not in instances:
-            instances[myClass] = myClass(*args,**kwds)
-        return instances[myClass]
-    return getInstance
+color = "#adadad"
+fillcolor = "#ebebeb"
 
-@singleton
-class LimitedSizeDict(OrderedDict):
-    """Un diccionario con tamaño máximo. Cuando llega al límite, elimina al
-    elemento más antiguo del diccionario (FIFO).
-    """
-    
-    def __init__(self, *args, **kwds):
-        self.size_limit = kwds.pop("size_limit", None)
-        OrderedDict.__init__(self, *args, **kwds)
-        self._check_size_limit()
+G = nx.DiGraph()
 
-    def __setitem__(self, key, value):
-        OrderedDict.__setitem__(self, key, value)
-        self._check_size_limit()
+# Nodes
+G.add_node("parametric_conditions", label="Normality AND\nHomocedasticity?", shape="diamond")
+G.add_node("parametric", label="Parametric test")
+G.add_node("groups_parametric", label="Number of\ngroups (k)?", shape="diamond")
+G.add_node("paired_ttest", label="Paired\nsamples?", shape="diamond")
+G.add_node("ttest_rel", label="t-test\npaired samples", shape="box", style="rounded")
+G.add_node("ttest_ind", label="t-test\nunpaired samples", shape="box", style="rounded")
+G.add_node("paired_anova", label="Paired\nsamples?", shape="diamond")
+G.add_node("anova", label="ANOVA\nbetween cases", shape="box", style="rounded")
+G.add_node("anova_within", label="ANOVA\nwithin cases", shape="box", style="rounded")
+G.add_node("nonparametric", label="Non Parametric test")
+G.add_node("groups_nonparametric", label="Number of\ngroups (k)?", shape="diamond")
+G.add_node("paired_wilcoxon", label="Paired\nsamples?", shape="diamond")
+G.add_node("wilcoxon_test", label="Wilcoxon", shape="box", style="rounded")
+G.add_node("mannwhitneyu_test", label="Mann Whitney U", shape="box", style="rounded")
+G.add_node("sample_ranking", label="Sample\nsize (n)?", shape="diamond")
+G.add_node("friedman_test", label="Friedman", shape="box", style="rounded")
+G.add_node("aligned_ranks_test", label="Aligned Ranks", shape="box", style="rounded")
+for node in G.nodes(): G.node[node].update({'color': color, 'style': G.node[node].get('style', "")+",filled", 'fillcolor': 'white'})
 
-    def _check_size_limit(self):
-        if self.size_limit is not None:
-            while len(self) > self.size_limit:
-                self.popitem(last=False)
+# Edges
+G.add_edge("parametric_conditions", "parametric", label="yes")
+G.add_edge("parametric_conditions", "nonparametric", label="no")
+G.add_edge("parametric", "groups_parametric")
+G.add_edge("groups_parametric", "paired_ttest", label="k = 2")
+G.add_edge("paired_ttest", "ttest_rel", label="paired")
+G.add_edge("paired_ttest", "ttest_ind", label="unpaired")
+G.add_edge("groups_parametric", "paired_anova", label="k > 2")
+G.add_edge("paired_anova", "anova_within", label="paired")
+G.add_edge("paired_anova", "anova", label="unpaired")
+G.add_edge("nonparametric", "groups_nonparametric")
+G.add_edge("groups_nonparametric", "paired_wilcoxon", label="k = 2")
+G.add_edge("paired_wilcoxon", "wilcoxon_test", label="paired")
+G.add_edge("paired_wilcoxon", "mannwhitneyu_test", label="unpaired")
+G.add_edge("groups_nonparametric", "sample_ranking", label="k > 2")
+G.add_edge("sample_ranking", "friedman_test", label="k > 4\n and n >= 2k")
+G.add_edge("sample_ranking", "aligned_ranks_test", label="k < 5\nor n < 2k")
+for edge in G.edges(): G.edge[edge[0]][edge[1]].update({'label': " " + G.edge[edge[0]][edge[1]].get('label', "") + " ", 'style': G.edge[edge[0]][edge[1]].get('style', "")+",filled", 'fillcolor': 'white'})
 
-
-#Función para leer los datos de un fichero.
-def leer_datos(archivo):
-    patron_numeros = re.compile('^\d+(\.\d+)?([eE][+-]?\d+)?$')
-
-    palabra = ""
-    nombres_conj_datos = []
-    nombres_algoritmos = []
-    matriz_datos = []
-
-    lector = csv.reader(archivo)
-
-    numero_linea = 0
-
-    for fila in lector:
-        if len(fila)<3:
-            raise Exception("Data format error.")
-        if numero_linea == 0:
-            for i in range(len(fila)):
-                if i == 0:
-                    palabra = fila[i]
-                else:
-                    if nombres_algoritmos.count(fila[i]) == 0:
-                        nombres_algoritmos.append(fila[i])
-                    else:
-                        raise Exception("Algorithm name repeated.")
+def evaluate_test(data):
+    selection = []
+    # Tree logic
+    if data['normality'] and data['homocedasticity']:
+        selection.extend([
+            G.node["parametric_conditions"],
+            G.edge["parametric_conditions"]["parametric"],
+            G.node["parametric"],
+            G.edge["parametric"]["groups_parametric"],
+            G.node["groups_parametric"]
+        ])
+        
+        if data['k'] > 2:
+            selection.extend([
+                G.edge["groups_parametric"]["anova"],
+                G.node["anova"]
+            ])
+            test = 'anova'
         else:
-            numero_algoritmos = len(nombres_algoritmos)
-            if len(fila) != numero_algoritmos + 1:
-                raise Exception("Data format error")
-            lista_datos = []
-            for i in range(len(fila)):
-                if i == 0:
-                    if nombres_conj_datos.count(fila[i]) == 0:
-                        nombres_conj_datos.append(fila[i])
-                    else:
-                        raise Exception("Algorithm name repeated.")
-                else:
-                    m = patron_numeros.match(fila[i])
-                    if m:
-                        dato = float(fila[i])
-                        lista_datos.append(dato)
-                    else:
-                        raise Exception("Number \"" + fila[i] + "\" not valid in line " + str(numero_linea+1) +".")
-            matriz_datos.append(lista_datos)
-        numero_linea = numero_linea + 1
+            selection.extend([
+                G.edge["groups_parametric"]["paired_ttest"],
+                G.node["paired_ttest"]
+            ])
+            if data['paired']:
+                selection.extend([
+                    G.edge["paired_ttest"]["ttest_rel"],
+                    G.node["ttest_rel"]
+                ])
+                test = 'ttest'
+            else:
+                selection.extend([
+                    G.edge["paired_ttest"]["ttest_ind"],
+                    G.node["ttest_ind"]
+                ])
+                test = 'ttest_ind'
+    else:
+        selection.extend([
+            G.node["parametric_conditions"],
+            G.edge["parametric_conditions"]["nonparametric"],
+            G.node["nonparametric"],
+            G.edge["nonparametric"]["groups_nonparametric"],
+            G.node["groups_nonparametric"]
+        ])
+        if data['k'] > 2:
+            selection.extend([
+                G.edge["groups_nonparametric"]["sample_ranking"],
+                G.node["sample_ranking"]
+            ])
+            
+            if data['k'] < 5 or data['n'] < 2*data['k']:
+                selection.extend([
+                    G.edge["sample_ranking"]["aligned_ranks_test"],
+                    G.node["aligned_ranks_test"]
+                ])
+                test = 'aligned_ranks'
+            else:
+                selection.extend([
+                    G.edge["sample_ranking"]["friedman_test"],
+                    G.node["friedman_test"]
+                ])
+                test = 'friedman'
+        else:
+            selection.extend([
+                G.edge["groups_nonparametric"]["paired_wilcoxon"],
+                G.node["paired_wilcoxon"]
+            ])
+            if data['paired']:
+                selection.extend([
+                    G.edge["paired_wilcoxon"]["wilcoxon_test"],
+                    G.node["wilcoxon_test"]
+                ])
+                test = 'wilcoxon'
+            else:
+                selection.extend([
+                    G.edge["paired_wilcoxon"]["mannwhitneyu_test"],
+                    G.node["mannwhitneyu_test"]
+                ])
+                test = 'mannwhitneyu'
+           
+    for v in selection: v.update({"fillcolor": fillcolor})
+        
+    return {'test': test, 'graph': str(nx.to_agraph(G))}
 
-    return {"palabra" : palabra, "nombres_conj_datos" : nombres_conj_datos, "nombres_algoritmos" : nombres_algoritmos,
-        "matriz_datos" : matriz_datos}
-
-
-#Función para generar el resumen hash MD5 de los ficheros.
-def generar_md5(archivo):
-    tam_bloque = 65536
-    md5 = hashlib.md5()
-    bufer = archivo.read(tam_bloque)
-    while len(bufer) > 0:
-        md5.update(bufer)
-        bufer = archivo.read(tam_bloque)
-    archivo.seek(0, 0);
-    return md5.hexdigest()
     
 def clean_missing_values(values, delete_row=True):
     n = len(values.values()[0])

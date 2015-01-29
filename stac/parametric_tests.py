@@ -6,22 +6,61 @@ import scipy.stats as st
 
 def anova_test(*args):
     k = len(args)
-    if k < 2: raise ValueError('Less than 2 levels')
+    if k < 2: raise ValueError('Less than 2 groups')
     n = len(args[0])
     if len(set([len(v) for v in args])) != 1: raise ValueError('Unequal number of samples')
 
-    means = [sp.mean(sample) for sample in args]
-    mean_global = sp.mean(means)
-    ss_error = sp.sum([(args[i][j] - means[i])**2 for j in range(n) for i in range(k)])
-    ss_population = sp.sum([n*(means[i] - mean_global)**2 for i in range(k)])
-    sd = sp.sqrt(sp.sum([(means[i] - mean_global)**2 for i in range(k)])/float(n-k))
-    pivots = [mean/(sd*sp.sqrt(2/float(n))) for mean in means]
+    # Precalcs
+    x_j = [sp.sum(group) for group in args]
+    x_t = sp.sum(x_j)
 
-    F = (ss_population/float(k-1))/(ss_error/float(n*k-k))
-    p_value = 1 - st.f.cdf(F, k-1, n*k-k)
+    # Variances
+    ss_t = sp.sum([v**2 for v in group for group in args]) - x_t**2/float(k*n)
+    ss_bg = sp.sum(x_j[j]**2/float(n) for j in range(k)) - x_t**2/float(k*n)
+    ss_wg = ss_t - ss_bg
+
+    # Degrees of freedom
+    df_bg = k - 1
+    df_wg = n*k - k
+
+    F = (ss_bg/df_bg)/(ss_wg/df_wg)
+    p_value = 1 - st.f.cdf(F, df_bg, df_wg)
+    
+    # Pivots
+    pivots = [sp.mean(group)/sp.sqrt(2*(ss_wg/df_wg)/float(n)) for group in args]
 
     return F, p_value, pivots
     
+def anova_within_test(*args):
+    k = len(args)
+    if k < 2: raise ValueError('Less than 2 groups')
+    n = len(args[0])
+    if len(set([len(v) for v in args])) != 1: raise ValueError('Unequal number of samples')
+
+    # Precalcs
+    x_j = [sp.sum(group) for group in args]
+    x_t = sp.sum(x_j)
+    s_i = [sp.sum([group[i] for group in args]) for i in range(n)]
+
+    # Variances
+    ss_t = sp.sum([v**2 for v in group for group in args]) - x_t**2/float(k*n)
+    ss_bg = sp.sum([x_j[j]**2/float(n) for j in range(k)]) - x_t**2/float(k*n)
+    ss_bs = sp.sum([s_i[i]**2/float(k) for i in range(n)]) - x_t**2/float(k*n)
+    ss_wg = ss_t - ss_bg
+    ss_res = ss_t - ss_bg - ss_bs
+
+    # Degrees of freedom
+    df_bg = k - 1
+    df_wg = n*k - k
+    df_res = (n-1)*(k-1)
+
+    F = (ss_bg/df_bg)/(ss_res/df_res)
+    p_value = 1 - st.f.cdf(F, df_bg, df_res)
+    
+    # Pivots
+    pivots = [sp.mean(group)/sp.sqrt(2*(ss_wg/df_wg)/float(n)) for group in args]
+
+    return F, p_value, pivots
 
 def bonferroni_test(pivots, n):
     k = len(pivots)

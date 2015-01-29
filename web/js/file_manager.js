@@ -11,10 +11,11 @@ $(document).ready(function() {
             complete: function(results) {
                 var data = {};
                 data["dataset"] = [];
-                if (results.meta.fields[0] == "dataset") {
+                var key = results.meta.fields[0];
+                if (results.data.map(function(row) { return isNaN(row[key]); }).reduce(function(prev, curr, index, array) { return prev && curr; })) {
                     results.meta.fields = results.meta.fields.splice(1)
                     results.data.forEach(function(row) {
-                        data["dataset"].push(row["dataset"]);
+                        data["dataset"].push(row[key]);
                     });
                 }
                 data["names"] = results.meta.fields;
@@ -26,20 +27,19 @@ $(document).ready(function() {
 
                 try {
                     results.data.forEach(function(row) {
-                        results.meta.fields.forEach(function(field) {
-                            if (row[field]) {
+                        if ($.map(row, function(v) {return v;}).length == results.meta.fields.length) {
+                            results.meta.fields.forEach(function(field) {
                                 if (row[field] == "-" || 
-                                    row[field] == "?" || 
-                                    row[field] == "") 
+                                    row[field] == "?") 
                                 {
                                     values[field].push(NaN);
                                 } else if (!isNaN(row[field])) {
                                     values[field].push(row[field]);
                                 } else {
-                                    throw "Unexpected character " + row[field];
+                                    throw "Unexpected character";
                                 }
-                            }
-                        });
+                            });
+                        }
                     });
                     
                     data["values"] = values;

@@ -205,7 +205,7 @@ def nemenyi_multitest(ranks):
     p_values = [2*(1-st.norm.cdf(abs(z))) for z in z_values]
     # Sort values by p_value so that p_0 < p_1
     p_values, z_values, comparisons = map(list, zip(*sorted(zip(p_values, z_values, comparisons), key=lambda t: t[0])))
-    m = k*(k-1)/2.
+    m = int(k*(k-1)/2.)
     adj_p_values = [min(m*p_value,1) for p_value in p_values]
     
     return comparisons, z_values, p_values, adj_p_values
@@ -222,7 +222,7 @@ def holm_multitest(ranks):
     p_values = [2*(1-st.norm.cdf(abs(z))) for z in z_values]
     # Sort values by p_value so that p_0 < p_1
     p_values, z_values, comparisons = map(list, zip(*sorted(zip(p_values, z_values, comparisons), key=lambda t: t[0])))
-    m = k*(k-1)/2.
+    m = int(k*(k-1)/2.)
     adj_p_values = [min(max((m-j)*p_values[j] for j in range(i+1)), 1) for i in range(m)]
     
     return comparisons, z_values, p_values, adj_p_values
@@ -239,8 +239,8 @@ def hochberg_multitest(ranks):
     p_values = [2*(1-st.norm.cdf(abs(z))) for z in z_values]
     # Sort values by p_value so that p_0 < p_1
     p_values, z_values, comparisons = map(list, zip(*sorted(zip(p_values, z_values, comparisons), key=lambda t: t[0])))
-    m = k*(k-1)/2.
-    adj_p_values = [min(max((m+1-j)*p_values[j-1] for j in range(m-1, i, -1)), 1) for i in range(m)]
+    m = int(k*(k-1)/2.)
+    adj_p_values = [max((m+1-j)*p_values[j-1] for j in range(m, i, -1))for i in range(m)]
     
     return comparisons, z_values, p_values, adj_p_values
     
@@ -256,7 +256,7 @@ def finner_multitest(ranks):
     p_values = [2*(1-st.norm.cdf(abs(z))) for z in z_values]
     # Sort values by p_value so that p_0 < p_1
     p_values, z_values, comparisons = map(list, zip(*sorted(zip(p_values, z_values, comparisons), key=lambda t: t[0])))
-    m = k*(k-1)/2.
+    m = int(k*(k-1)/2.)
     adj_p_values = [min(max(1-(1-p_values[j])**(m/float(j+1)) for j in range(i+1)), 1) for i in range(m)]
     
     return comparisons, z_values, p_values, adj_p_values

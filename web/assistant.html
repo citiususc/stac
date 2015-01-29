@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+		<meta charset="UTF-8">
+		<script src="js/loader.js"></script>
+        <script src="js/assistant.js"></script>
+        <script src="js/viz.js"></script>
+    </head>
+
+    <body>
+        <div id="topbar"></div>
+		
+        <div class="container">
+			<div id="modals"></div>
+            <div class="row">
+                <div class="col-sm-12 col-md-12 main">
+                    <h1 class="page-header"> Assistant</h1>
+                    <p align="justify">In this section, an assistant process can be executed in order to automatically estimate the best fitted statistical test for the data provided by the user. 
+                    The decision process takes into account the following data:
+                    <ul>
+                        <li>The number of groups available (k)</li>
+                        <li>The number of samples per group (n)</li>
+                        <li>Pairing between groups</li>
+                        <li>The normality of each group (tested using a Shapiro-Wilks test with alpha 0.1)</li>
+                        <li>The homocedasticity between groups (tested using Levene test with alpha 0.1)</li>
+                    </ul>
+                    </p>
+
+
+                    <br><div align="center">
+                        <a href="#" id="apply" class="btn btn-primary btn-xl" test="assistant">Assist Me!</a>
+                    </div>
+                    <br/>
+                    <br/>
+                    <div id="decision_process" class="panel panel-indigo" style="display: none">
+                        <div class="panel-heading">
+                            Decision process
+                        </div>
+                        <div id="graph" class="panel-body" align="center">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

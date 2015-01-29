@@ -5,14 +5,54 @@ $(document).ready(function(){
             $("#danger").show();
         } else {
 			var type = $(this).attr("test");
-			var test = $('input[name=test]:checked').val();
-			var alpha = $('#alpha').val();
+
+            var test = $('input[name=test]:checked').val();
+            var alpha = $('#alpha').val();
             
             var url = APP_CONFIG.api_url+"/"+test+"/"+alpha;
             var post_hoc = $('input[name=post_hoc]:checked').val();
-            if (post_hoc) var url = APP_CONFIG.api_url+"/"+test+"/"+post_hoc+"/"+alpha;
+            if (post_hoc) {
+                if ($("#control").length) {
+                    control = $("#control").val();
+                    url = APP_CONFIG.api_url+"/"+test+"/"+post_hoc+"/"+control+"/"+alpha;
+                } else {
+                    url = APP_CONFIG.api_url+"/"+test+"/"+post_hoc+"/"+alpha;
+                }
+            }
+            
 			
 			switch (type) {
+                case "assistant":
+					$.ajax({
+						type: "POST", url: APP_CONFIG.api_url+"/assistant", dataType: "json",
+                        contentType: "application/json",
+                        data: sessionStorage.data,
+						success : function(data) {
+							$("#danger").hide();
+							$("#warning").hide();
+							
+							if (data.error) {
+								$("#danger").html(data.error).show();
+							} else {
+                                $("#graph").html('\
+                                <ul align="left">\
+                                    <li>Number of groups k = ' +data.k+ '</li>\
+                                    <li>Number of samples n = ' +data.n+ '</li>\
+                                    <li>' + (data.paired ? 'Paired data' : 'Unpaired data') + '</li>\
+                                    <li>' + (data.normality ? 'Normality satisfied' : 'Normality not satisfied') + '</li>\
+                                    <li>' + (data.homocedasticity ? 'Homocedasticity satisfied' : 'Homocedasticity not satisfied') + '</li>\
+                                    </ul>' + 
+                                    Viz(data.graph, "svg"));
+                                    $("svg").attr("width", "100%");
+                                $("#decision_process").show();
+							}
+							
+						},
+						error : function(e) {
+							console.log('error: ' + e);
+						}
+					});
+					break;
 				case "normality":
 					$.ajax({
 						type: "POST", url: url, dataType: "json",
@@ -84,10 +124,12 @@ $(document).ready(function(){
 					});
 					break;
 				case "ttest":
+                    var group1 = $("#group1").val()
+                    var group2 = $("#group2").val()
 					$.ajax({
 						type: "POST", url: url, dataType: "json",
                         contentType: "application/json",
-                        data: sessionStorage.data,
+                        data: JSON.stringify({values: {group1: JSON.parse(sessionStorage.data).values[group1], group2: JSON.parse(sessionStorage.data).values[group2]}}),
 						success : function(data) {
 							$("#danger").hide();
 							$("#warning").hide();
@@ -107,10 +149,12 @@ $(document).ready(function(){
 					});
 					break;
 				case "wilcoxon":
+                    var group1 = $("#group1").val()
+                    var group2 = $("#group2").val()
 					$.ajax({
 						type: "POST", url: url, dataType: "json",
                         contentType: "application/json",
-                        data: sessionStorage.data,
+                        data: JSON.stringify({values: {group1: JSON.parse(sessionStorage.data).values[group1], group2: JSON.parse(sessionStorage.data).values[group2]}}),
 						success : function(data) {
 							$("#danger").hide();
 							$("#warning").hide();
@@ -121,28 +165,6 @@ $(document).ready(function(){
 								$("#result").html(wilcoxon_table(data, test, alpha)).show();
 							}
 							
-						},
-						error : function(e) {
-							console.log('error: ' + e);
-						}
-					});
-					break;
-				case "mannwhitneyu":
-					$.ajax({
-						type: "POST", url: url, dataType: "json",
-                        contentType: "application/json",
-                        data: sessionStorage.data,
-						success : function(data) {
-							$("#danger").hide();
-							$("#warning").hide();
-							
-							if (data.error) {
-								$("#danger").html(data.error).show();
-							} else {
-								var salida = wilcoxon_table(data, test, alpha);
-									
-								$("#result").html(salida).show();
-							}
 						},
 						error : function(e) {
 							console.log('error: ' + e);
@@ -183,9 +205,8 @@ $(document).ready(function(){
 function normality_table(data, names, test, alpha) {
     var salida = 
     "<div class=\"table-responsive\"><h2>Results</h2>\
-		<a href=\"#\" onclick=\"exportTableToCSV.apply(this, [$('table'), $('input[name=test]:checked').val()+'.csv'])\"><button class=\"btn btn-default\"><span class=\"glyphicon glyphicon-export\"></span> CSV</button></a>&nbsp;&nbsp;\
-		<a href=\"#\" onclick=\"exportTableToLaTeX.apply(this, [$('table'), $('input[name=test]:checked').val()+'.tex'])\"><button class=\"btn btn-default\"><span class=\"glyphicon glyphicon-export\"></span> LaTeX</button></a> \
-			<table class=\"table table-hover table-striped\">\
+        <a href=\"#modal_export\" data-toggle=\"modal\"><button class=\"btn btn-default\"><span class=\"glyphicon glyphicon-export\"></span>Export</button></a>\
+		<table class=\"table table-hover table-striped\">\
 				<caption>"+ $("input[value="+test+"]").parent().text() + " test (significance level of " + alpha + ")</caption>\
 				<thead>\
 					<tr>\
@@ -227,8 +248,7 @@ function homocedasticity_table(data, test, alpha) {
 function ttest_table(data, test, alpha) {
     var salida = 
     "<div class=\"table-responsive\"><h2>Results</h2>\
-		<a href=\"#\" onclick=\"exportTableToCSV.apply(this, [$('table'), $('input[name=test]:checked').val()+'.csv'])\"><button class=\"btn btn-default\"><span class=\"glyphicon glyphicon-export\"></span> CSV</button></a>&nbsp;&nbsp;\
-		<a href=\"#\" onclick=\"exportTableToLaTeX.apply(this, [$('table'), $('input[name=test]:checked').val()+'.tex'])\"><button class=\"btn btn-default\"><span class=\"glyphicon glyphicon-export\"></span> LaTeX</button></a> \
+		<a href=\"#modal_export\" data-toggle=\"modal\"><button class=\"btn btn-default\"><span class=\"glyphicon glyphicon-export\"></span>Export</button></a>\
 		<table class=\"table table-hover table-striped\">\
 			<caption>T-test (significance level of " + alpha + ")</caption>\
 			<thead><tr><th>T Statistic</th><th>p-value</th><th>Result</th></tr></thead>\
@@ -247,8 +267,7 @@ function ttest_table(data, test, alpha) {
 function anova_table(data, test, alpha) {
     var salida = 
     "<div class=\"table-responsive\"><h2>Results</h2>\
-		<a href=\"#\" onclick=\"exportTableToCSV.apply(this, [$('table'), $('input[name=test]:checked').val()+'.csv'])\"><button class=\"btn btn-default\"><span class=\"glyphicon glyphicon-export\"></span> CSV</button></a>&nbsp;&nbsp;\
-		<a href=\"#\" onclick=\"exportTableToLaTeX.apply(this, [$('table'), $('input[name=test]:checked').val()+'.tex'])\"><button class=\"btn btn-default\"><span class=\"glyphicon glyphicon-export\"></span> LaTeX</button></a> \
+        <a href=\"#modal_export\" data-toggle=\"modal\"><button class=\"btn btn-default\"><span class=\"glyphicon glyphicon-export\"></span>Export</button></a>\
 		<table class=\"table table-hover table-striped\">\
 			<caption>"+ $("input[value="+test+"]").parent().text() + " test (significance level of " + alpha + ")</caption>\
 			<thead><tr><th>Statistic</th><th>p-value</th><th>Result</th></tr></thead>\
@@ -267,9 +286,8 @@ function anova_table(data, test, alpha) {
 function wilcoxon_table(data, test, alpha) {
 	var salida = 
     "<div class=\"table-responsive\"><h2>Results</h2>\
-		<a href=\"#\" onclick=\"exportTableToCSV.apply(this, [$('table'), $('input[name=test]:checked').val()+'.csv'])\"><button class=\"btn btn-default\"><span class=\"glyphicon glyphicon-export\"></span> CSV</button></a>&nbsp;&nbsp;\
-		<a href=\"#\" onclick=\"exportTableToLaTeX.apply(this, [$('table'), $('input[name=test]:checked').val()+'.tex'])\"><button class=\"btn btn-default\"><span class=\"glyphicon glyphicon-export\"></span> LaTeX</button></a> \
-		<table class=\"table table-hover table-striped\">\
+        <a href=\"#modal_export\" data-toggle=\"modal\"><button class=\"btn btn-default\"><span class=\"glyphicon glyphicon-export\"></span>Export</button></a>\
+        <table class=\"table table-hover table-striped\">\
 			<caption>"+ $("input[value="+test+"]").parent().text() + " test (significance level of " + alpha + ")</caption>\
 			<thead><tr><th>Statistic</th><th>p-value</th><th>Result</th></tr></thead>\
 			<tbody><tr><td>" +data.statistic+ "</td><td>" +data.p_value+ "</td>";
@@ -287,9 +305,8 @@ function wilcoxon_table(data, test, alpha) {
 function ranking_table(data, test, alpha) {
     var salida = 
     "<div class=\"table-responsive\"><h2>Results</h2>\
-		<a href=\"#\" onclick=\"exportTableToCSV.apply(this, [$('table'), $('input[name=test]:checked').val()+'.csv'])\"><button class=\"btn btn-default\"><span class=\"glyphicon glyphicon-export\"></span> CSV</button></a>&nbsp;&nbsp;\
-		<a href=\"#\" onclick=\"exportTableToLaTeX.apply(this, [$('table'), $('input[name=test]:checked').val()+'.tex'])\"><button class=\"btn btn-default\"><span class=\"glyphicon glyphicon-export\"></span> LaTeX</button></a> \
-		<table class=\"table table-hover table-striped\">\
+		<a href=\"#modal_export\" data-toggle=\"modal\"><button class=\"btn btn-default\"><span class=\"glyphicon glyphicon-export\"></span>Export</button></a>\
+        <table class=\"table table-hover table-striped\">\
             <caption>"+ $("input[value="+test+"]").parent().text() + " test (significance level of " + alpha + ")</caption>\
 			<thead><tr><th>Statistic</th><th>p-value</th><th>Result</th></thead>\
             <tbody>\

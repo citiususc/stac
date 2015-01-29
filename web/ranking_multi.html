@@ -28,25 +28,18 @@
 												</div>
 											</div>
 										</div>
-										<div class="form-group">
-											<label class="col-lg-5 control-label">Post-hoc Control vs All<a href="#helpModal" data-toggle="modal" more-info="normality"> [?] </a>:</label>
-											<div class="col-lg-7">
-												<div class="btn-group-vertical" data-toggle="buttons">
-													<label name="nombre_post" class="btn btn-default active"><input type="radio" name="post_hoc" value="bonferroni_dunn_test"  comparison="control" checked>Bonferroni-Dunn</label>
-													<label name="nombre_post" class="btn btn-default"><input type="radio" name="post_hoc" value="holm_test" comparison="control">Holm</label>
-                                                    <label name="nombre_post" class="btn btn-default"><input type="radio" name="post_hoc" value="finner_test" comparison="control">Finner</label>
-													<label name="nombre_post" class="btn btn-default"><input type="radio" name="post_hoc" value="hochberg_test" comparison="control">Hochberg</label>
-													<label name="nombre_post" class="btn btn-default"><input type="radio" name="post_hoc" value="li_test" comparison="control">Li</label>
-												</div>
-                                            </div>
-										</div>
                                         <div class="form-group">
-                                            <label class="col-lg-5 control-label">Control method:</label>
-											<div class="col-lg-7">
-												<select class="form-control" id="control">
-												</select>
+                                            <label class="col-lg-5 control-label">Post-hoc All vs All<a href="#helpModal" data-toggle="modal" more-info="normality"> [?] </a>:</label>
+                                            <div class="col-lg-7">
+                                                <div class="btn-group-vertical" data-toggle="buttons">
+													<label name="nombre_post" class="btn btn-default active"><input type="radio" name="post_hoc" value="nemenyi_multitest" comparison="all" checked>Nemenyi</label>
+													<label name="nombre_post" class="btn btn-default"><input type="radio" name="post_hoc" value="holm_multitest" comparison="all">Holm</label>
+													<label name="nombre_post" class="btn btn-default"><input type="radio" name="post_hoc" value="finner_multitest" comparison="all">Finner</label>
+													<label name="nombre_post" class="btn btn-default"><input type="radio" name="post_hoc" value="hochberg_multitest" comparison="all">Hochberg</label>
+													<label name="nombre_post" class="btn btn-default"><input type="radio" name="post_hoc" value="shaffer_multitest" comparison="all">Shaffer</label>
+												</div>
 											</div>
-                                        </div>
+										</div>
 										<div class="form-group">
 											<label class="col-lg-5 control-label">Significance level<a href="#helpModal" data-toggle="modal" more-info="basic"> [?] </a>:</label>
 											<div class="col-lg-7">

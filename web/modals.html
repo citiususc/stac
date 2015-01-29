@@ -42,6 +42,33 @@
 	</div>
 </div>
 
+<div id="modal_export" class="modal fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">Export Results</h4>
+			</div>
+			<div class="modal-body">
+				<form class="form-horizontal">
+					<div class="form-group">
+                        <label class="col-lg-5 control-label">Output format:</label>
+                        <div class="col-lg-7">
+                            <select class="form-control" id="export_format">
+                                <option value="latex" selected="selected">LaTeX</option>
+                                <option value="csv">CSV</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control" id="export_text" rows="10"></textarea>
+                    </div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
 <script> 
 	$(function(){
 		$("#help").load("help.html");

@@ -24,7 +24,8 @@
 											<label class="col-lg-5 control-label">Select test<a href="#helpModal" data-toggle="modal" more-info="normality"> [?] </a>:</label>
 											<div class="col-lg-7">
 												<div class="btn-group-vertical" data-toggle="buttons">
-													<label name="test_cond" class="btn btn-default active"><input type="radio" name="test" id="option1" value="ttest" checked> t-test</label>
+													<label name="test_cond" class="btn btn-default active"><input type="radio" name="test" id="option1" value="ttest" checked> t-test paired</label>
+                                                    <label name="test_cond" class="btn btn-default"><input type="radio" name="test" id="option2" value="ttest-ind"> t-test unpaired</label>
 												</div>
 											</div>
 										</div>
@@ -41,9 +42,23 @@
 												</select>
 											</div>
 										</div>
+                                        <div class="form-group">
+											<label class="col-lg-5 control-label">1st group:</label>
+											<div class="col-lg-7">
+												<select class="form-control" id="group1">
+												</select>
+											</div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-5 control-label">2nd group:</label>
+											<div class="col-lg-7">
+												<select class="form-control" id="group2">
+												</select>
+											</div>
+										</div>
 										<div class="form-group">
 											<div class="col-lg-offset-7 col-lg-5">
-												<a data-toggle="tab" href="#result"><button type="button" class="btn btn-primary" id="apply" test="ttest"><label class="glyphicon glyphicon-play"></label> Apply </button></a>
+												<a data-toggle="tab" href="#result"><button type="button" class="btn btn-primary apply" id="apply" test="ttest"><label class="glyphicon glyphicon-play"></label> Apply </button></a>
 											</div>
 										</div>
 									</form>
