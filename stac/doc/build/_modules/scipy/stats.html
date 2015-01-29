@@ -1,0 +1,523 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>scipy.stats &mdash; STAC 0.7 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="STAC 0.7 documentation" href="../../index.html"/>
+        <link rel="up" title="Module code" href="../index.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="../../index.html" class="fa fa-home"> STAC</a>
+        
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../scipy-stats.html">Tests for two groups comparison</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../scipy.stats.ttest_ind.html">scipy.stats.ttest_ind</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../scipy.stats.ttest_rel.html">scipy.stats.ttest_rel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../scipy.stats.wilcoxon.html">scipy.stats.wilcoxon</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../scipy.stats.mannwhitneyu.html">scipy.stats.mannwhitneyu</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../parametric.html">Parametric tests for Multiple Comparison</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../stac.parametric_tests.anova_test.html">stac.parametric_tests.anova_test</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../stac.parametric_tests.anova_within_test.html">stac.parametric_tests.anova_within_test</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../stac.parametric_tests.bonferroni_test.html">stac.parametric_tests.bonferroni_test</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../nonparametric.html">Non-parametric tests for Multiple Comparison</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../stac.nonparametric_tests.friedman_test.html">stac.nonparametric_tests.friedman_test</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../stac.nonparametric_tests.friedman_aligned_ranks_test.html">stac.nonparametric_tests.friedman_aligned_ranks_test</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../stac.nonparametric_tests.quade_test.html">stac.nonparametric_tests.quade_test</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../stac.nonparametric_tests.holm_test.html">stac.nonparametric_tests.holm_test</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../stac.nonparametric_tests.finner_test.html">stac.nonparametric_tests.finner_test</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../stac.nonparametric_tests.hochberg_test.html">stac.nonparametric_tests.hochberg_test</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../stac.nonparametric_tests.li_test.html">stac.nonparametric_tests.li_test</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../stac.nonparametric_tests.nemenyi_multitest.html">stac.nonparametric_tests.nemenyi_multitest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../stac.nonparametric_tests.holm_multitest.html">stac.nonparametric_tests.holm_multitest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../stac.nonparametric_tests.finner_multitest.html">stac.nonparametric_tests.finner_multitest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../stac.nonparametric_tests.hochberg_multitest.html">stac.nonparametric_tests.hochberg_multitest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../stac.nonparametric_tests.shaffer_multitest.html">stac.nonparametric_tests.shaffer_multitest</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../index.html">STAC</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+      
+    <li>scipy.stats</li>
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <h1>Source code for scipy.stats</h1><div class="highlight"><pre>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">==========================================</span>
+<span class="sd">Statistical functions (:mod:`scipy.stats`)</span>
+<span class="sd">==========================================</span>
+
+<span class="sd">.. module:: scipy.stats</span>
+
+<span class="sd">This module contains a large number of probability distributions as</span>
+<span class="sd">well as a growing library of statistical functions.</span>
+
+<span class="sd">Each included distribution is an instance of the class rv_continous:</span>
+<span class="sd">For each given name the following methods are available:</span>
+
+<span class="sd">.. autosummary::</span>
+<span class="sd">   :toctree: generated/</span>
+
+<span class="sd">   rv_continuous</span>
+<span class="sd">   rv_continuous.pdf</span>
+<span class="sd">   rv_continuous.logpdf</span>
+<span class="sd">   rv_continuous.cdf</span>
+<span class="sd">   rv_continuous.logcdf</span>
+<span class="sd">   rv_continuous.sf</span>
+<span class="sd">   rv_continuous.logsf</span>
+<span class="sd">   rv_continuous.ppf</span>
+<span class="sd">   rv_continuous.isf</span>
+<span class="sd">   rv_continuous.moment</span>
+<span class="sd">   rv_continuous.stats</span>
+<span class="sd">   rv_continuous.entropy</span>
+<span class="sd">   rv_continuous.fit</span>
+<span class="sd">   rv_continuous.expect</span>
+
+<span class="sd">Calling the instance as a function returns a frozen pdf whose shape,</span>
+<span class="sd">location, and scale parameters are fixed.</span>
+
+<span class="sd">Similarly, each discrete distribution is an instance of the class</span>
+<span class="sd">rv_discrete:</span>
+
+<span class="sd">.. autosummary::</span>
+<span class="sd">   :toctree: generated/</span>
+
+<span class="sd">   rv_discrete</span>
+<span class="sd">   rv_discrete.rvs</span>
+<span class="sd">   rv_discrete.pmf</span>
+<span class="sd">   rv_discrete.logpmf</span>
+<span class="sd">   rv_discrete.cdf</span>
+<span class="sd">   rv_discrete.logcdf</span>
+<span class="sd">   rv_discrete.sf</span>
+<span class="sd">   rv_discrete.logsf</span>
+<span class="sd">   rv_discrete.ppf</span>
+<span class="sd">   rv_discrete.isf</span>
+<span class="sd">   rv_discrete.stats</span>
+<span class="sd">   rv_discrete.moment</span>
+<span class="sd">   rv_discrete.entropy</span>
+<span class="sd">   rv_discrete.expect</span>
+
+<span class="sd">Continuous distributions</span>
+<span class="sd">========================</span>
+
+<span class="sd">.. autosummary::</span>
+<span class="sd">   :toctree: generated/</span>
+
+<span class="sd">   alpha             -- Alpha</span>
+<span class="sd">   anglit            -- Anglit</span>
+<span class="sd">   arcsine           -- Arcsine</span>
+<span class="sd">   beta              -- Beta</span>
+<span class="sd">   betaprime         -- Beta Prime</span>
+<span class="sd">   bradford          -- Bradford</span>
+<span class="sd">   burr              -- Burr</span>
+<span class="sd">   cauchy            -- Cauchy</span>
+<span class="sd">   chi               -- Chi</span>
+<span class="sd">   chi2              -- Chi-squared</span>
+<span class="sd">   cosine            -- Cosine</span>
+<span class="sd">   dgamma            -- Double Gamma</span>
+<span class="sd">   dweibull          -- Double Weibull</span>
+<span class="sd">   erlang            -- Erlang</span>
+<span class="sd">   expon             -- Exponential</span>
+<span class="sd">   exponweib         -- Exponentiated Weibull</span>
+<span class="sd">   exponpow          -- Exponential Power</span>
+<span class="sd">   f                 -- F (Snecdor F)</span>
+<span class="sd">   fatiguelife       -- Fatigue Life (Birnbaum-Sanders)</span>
+<span class="sd">   fisk              -- Fisk</span>
+<span class="sd">   foldcauchy        -- Folded Cauchy</span>
+<span class="sd">   foldnorm          -- Folded Normal</span>
+<span class="sd">   frechet_r         -- Frechet Right Sided, Extreme Value Type II (Extreme LB) or weibull_min</span>
+<span class="sd">   frechet_l         -- Frechet Left Sided, Weibull_max</span>
+<span class="sd">   genlogistic       -- Generalized Logistic</span>
+<span class="sd">   genpareto         -- Generalized Pareto</span>
+<span class="sd">   genexpon          -- Generalized Exponential</span>
+<span class="sd">   genextreme        -- Generalized Extreme Value</span>
+<span class="sd">   gausshyper        -- Gauss Hypergeometric</span>
+<span class="sd">   gamma             -- Gamma</span>
+<span class="sd">   gengamma          -- Generalized gamma</span>
+<span class="sd">   genhalflogistic   -- Generalized Half Logistic</span>
+<span class="sd">   gilbrat           -- Gilbrat</span>
+<span class="sd">   gompertz          -- Gompertz (Truncated Gumbel)</span>
+<span class="sd">   gumbel_r          -- Right Sided Gumbel, Log-Weibull, Fisher-Tippett, Extreme Value Type I</span>
+<span class="sd">   gumbel_l          -- Left Sided Gumbel, etc.</span>
+<span class="sd">   halfcauchy        -- Half Cauchy</span>
+<span class="sd">   halflogistic      -- Half Logistic</span>
+<span class="sd">   halfnorm          -- Half Normal</span>
+<span class="sd">   hypsecant         -- Hyperbolic Secant</span>
+<span class="sd">   invgamma          -- Inverse Gamma</span>
+<span class="sd">   invgauss          -- Inverse Gaussian</span>
+<span class="sd">   invweibull        -- Inverse Weibull</span>
+<span class="sd">   johnsonsb         -- Johnson SB</span>
+<span class="sd">   johnsonsu         -- Johnson SU</span>
+<span class="sd">   ksone             -- Kolmogorov-Smirnov one-sided (no stats)</span>
+<span class="sd">   kstwobign         -- Kolmogorov-Smirnov two-sided test for Large N (no stats)</span>
+<span class="sd">   laplace           -- Laplace</span>
+<span class="sd">   logistic          -- Logistic</span>
+<span class="sd">   loggamma          -- Log-Gamma</span>
+<span class="sd">   loglaplace        -- Log-Laplace (Log Double Exponential)</span>
+<span class="sd">   lognorm           -- Log-Normal</span>
+<span class="sd">   lomax             -- Lomax (Pareto of the second kind)</span>
+<span class="sd">   maxwell           -- Maxwell</span>
+<span class="sd">   mielke            -- Mielke&#39;s Beta-Kappa</span>
+<span class="sd">   nakagami          -- Nakagami</span>
+<span class="sd">   ncx2              -- Non-central chi-squared</span>
+<span class="sd">   ncf               -- Non-central F</span>
+<span class="sd">   nct               -- Non-central Student&#39;s T</span>
+<span class="sd">   norm              -- Normal (Gaussian)</span>
+<span class="sd">   pareto            -- Pareto</span>
+<span class="sd">   pearson3          -- Pearson type III</span>
+<span class="sd">   powerlaw          -- Power-function</span>
+<span class="sd">   powerlognorm      -- Power log normal</span>
+<span class="sd">   powernorm         -- Power normal</span>
+<span class="sd">   rdist             -- R-distribution</span>
+<span class="sd">   reciprocal        -- Reciprocal</span>
+<span class="sd">   rayleigh          -- Rayleigh</span>
+<span class="sd">   rice              -- Rice</span>
+<span class="sd">   recipinvgauss     -- Reciprocal Inverse Gaussian</span>
+<span class="sd">   semicircular      -- Semicircular</span>
+<span class="sd">   t                 -- Student&#39;s T</span>
+<span class="sd">   triang            -- Triangular</span>
+<span class="sd">   truncexpon        -- Truncated Exponential</span>
+<span class="sd">   truncnorm         -- Truncated Normal</span>
+<span class="sd">   tukeylambda       -- Tukey-Lambda</span>
+<span class="sd">   uniform           -- Uniform</span>
+<span class="sd">   vonmises          -- Von-Mises (Circular)</span>
+<span class="sd">   wald              -- Wald</span>
+<span class="sd">   weibull_min       -- Minimum Weibull (see Frechet)</span>
+<span class="sd">   weibull_max       -- Maximum Weibull (see Frechet)</span>
+<span class="sd">   wrapcauchy        -- Wrapped Cauchy</span>
+
+<span class="sd">Discrete distributions</span>
+<span class="sd">======================</span>
+
+<span class="sd">.. autosummary::</span>
+<span class="sd">   :toctree: generated/</span>
+
+<span class="sd">   bernoulli         -- Bernoulli</span>
+<span class="sd">   binom             -- Binomial</span>
+<span class="sd">   boltzmann         -- Boltzmann (Truncated Discrete Exponential)</span>
+<span class="sd">   dlaplace          -- Discrete Laplacian</span>
+<span class="sd">   geom              -- Geometric</span>
+<span class="sd">   hypergeom         -- Hypergeometric</span>
+<span class="sd">   logser            -- Logarithmic (Log-Series, Series)</span>
+<span class="sd">   nbinom            -- Negative Binomial</span>
+<span class="sd">   planck            -- Planck (Discrete Exponential)</span>
+<span class="sd">   poisson           -- Poisson</span>
+<span class="sd">   randint           -- Discrete Uniform</span>
+<span class="sd">   skellam           -- Skellam</span>
+<span class="sd">   zipf              -- Zipf</span>
+
+<span class="sd">Statistical functions</span>
+<span class="sd">=====================</span>
+
+<span class="sd">Several of these functions have a similar version in scipy.stats.mstats</span>
+<span class="sd">which work for masked arrays.</span>
+
+<span class="sd">.. autosummary::</span>
+<span class="sd">   :toctree: generated/</span>
+
+<span class="sd">   cmedian           -- Computed median</span>
+<span class="sd">   describe          -- Descriptive statistics</span>
+<span class="sd">   gmean             -- Geometric mean</span>
+<span class="sd">   hmean             -- Harmonic mean</span>
+<span class="sd">   kurtosis          -- Fisher or Pearson kurtosis</span>
+<span class="sd">   kurtosistest      --</span>
+<span class="sd">   mode              -- Modal value</span>
+<span class="sd">   moment            -- Central moment</span>
+<span class="sd">   normaltest        --</span>
+<span class="sd">   skew              -- Skewness</span>
+<span class="sd">   skewtest          --</span>
+<span class="sd">   tmean             -- Truncated arithmetic mean</span>
+<span class="sd">   tvar              -- Truncated variance</span>
+<span class="sd">   tmin              --</span>
+<span class="sd">   tmax              --</span>
+<span class="sd">   tstd              --</span>
+<span class="sd">   tsem              --</span>
+<span class="sd">   nanmean           -- Mean, ignoring NaN values</span>
+<span class="sd">   nanstd            -- Standard deviation, ignoring NaN values</span>
+<span class="sd">   nanmedian         -- Median, ignoring NaN values</span>
+<span class="sd">   variation         -- Coefficient of variation</span>
+
+<span class="sd">.. autosummary::</span>
+<span class="sd">   :toctree: generated/</span>
+
+<span class="sd">   cumfreq           _</span>
+<span class="sd">   histogram2        _</span>
+<span class="sd">   histogram         _</span>
+<span class="sd">   itemfreq          _</span>
+<span class="sd">   percentileofscore _</span>
+<span class="sd">   scoreatpercentile _</span>
+<span class="sd">   relfreq           _</span>
+
+<span class="sd">.. autosummary::</span>
+<span class="sd">   :toctree: generated/</span>
+
+<span class="sd">   binned_statistic     -- Compute a binned statistic for a set of data.</span>
+<span class="sd">   binned_statistic_2d  -- Compute a 2-D binned statistic for a set of data.</span>
+<span class="sd">   binned_statistic_dd  -- Compute a d-D binned statistic for a set of data.</span>
+
+<span class="sd">.. autosummary::</span>
+<span class="sd">   :toctree: generated/</span>
+
+<span class="sd">   obrientransform</span>
+<span class="sd">   signaltonoise</span>
+<span class="sd">   bayes_mvs</span>
+<span class="sd">   sem</span>
+<span class="sd">   zmap</span>
+<span class="sd">   zscore</span>
+
+<span class="sd">.. autosummary::</span>
+<span class="sd">   :toctree: generated/</span>
+
+<span class="sd">   threshold</span>
+<span class="sd">   trimboth</span>
+<span class="sd">   trim1</span>
+
+<span class="sd">.. autosummary::</span>
+<span class="sd">   :toctree: generated/</span>
+
+<span class="sd">   f_oneway</span>
+<span class="sd">   pearsonr</span>
+<span class="sd">   spearmanr</span>
+<span class="sd">   pointbiserialr</span>
+<span class="sd">   kendalltau</span>
+<span class="sd">   linregress</span>
+
+<span class="sd">.. autosummary::</span>
+<span class="sd">   :toctree: generated/</span>
+
+<span class="sd">   ttest_1samp</span>
+<span class="sd">   ttest_ind</span>
+<span class="sd">   ttest_rel</span>
+<span class="sd">   kstest</span>
+<span class="sd">   chisquare</span>
+<span class="sd">   power_divergence</span>
+<span class="sd">   ks_2samp</span>
+<span class="sd">   mannwhitneyu</span>
+<span class="sd">   tiecorrect</span>
+<span class="sd">   rankdata</span>
+<span class="sd">   ranksums</span>
+<span class="sd">   wilcoxon</span>
+<span class="sd">   kruskal</span>
+<span class="sd">   friedmanchisquare</span>
+
+<span class="sd">.. autosummary::</span>
+<span class="sd">   :toctree: generated/</span>
+
+<span class="sd">   ansari</span>
+<span class="sd">   bartlett</span>
+<span class="sd">   levene</span>
+<span class="sd">   shapiro</span>
+<span class="sd">   anderson</span>
+<span class="sd">   binom_test</span>
+<span class="sd">   fligner</span>
+<span class="sd">   mood</span>
+<span class="sd">   oneway</span>
+
+<span class="sd">Contingency table functions</span>
+<span class="sd">===========================</span>
+
+<span class="sd">.. autosummary::</span>
+<span class="sd">   :toctree: generated/</span>
+
+<span class="sd">   chi2_contingency</span>
+<span class="sd">   contingency.expected_freq</span>
+<span class="sd">   contingency.margins</span>
+<span class="sd">   fisher_exact</span>
+
+<span class="sd">General linear model</span>
+<span class="sd">====================</span>
+
+<span class="sd">.. autosummary::</span>
+<span class="sd">   :toctree: generated/</span>
+
+<span class="sd">   glm</span>
+
+<span class="sd">Plot-tests</span>
+<span class="sd">==========</span>
+
+<span class="sd">.. autosummary::</span>
+<span class="sd">   :toctree: generated/</span>
+
+<span class="sd">   ppcc_max</span>
+<span class="sd">   ppcc_plot</span>
+<span class="sd">   probplot</span>
+
+
+<span class="sd">Masked statistics functions</span>
+<span class="sd">===========================</span>
+
+<span class="sd">.. toctree::</span>
+
+<span class="sd">   stats.mstats</span>
+
+
+<span class="sd">Univariate and multivariate kernel density estimation (:mod:`scipy.stats.kde`)</span>
+<span class="sd">==============================================================================</span>
+
+<span class="sd">.. autosummary::</span>
+<span class="sd">   :toctree: generated/</span>
+
+<span class="sd">   gaussian_kde</span>
+
+<span class="sd">For many more stat related functions install the software R and the</span>
+<span class="sd">interface package rpy.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">absolute_import</span>
+
+<span class="kn">from</span> <span class="nn">.stats</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">.distributions</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">.rv</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">.morestats</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">._binned_statistic</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">.kde</span> <span class="kn">import</span> <span class="n">gaussian_kde</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">mstats</span>
+<span class="kn">from</span> <span class="nn">.contingency</span> <span class="kn">import</span> <span class="n">chi2_contingency</span>
+
+<span class="c">#remove vonmises_cython from __all__, I don&#39;t know why it is included</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="n">s</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">dir</span><span class="p">()</span> <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">&#39;_&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">s</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s">&#39;cython&#39;</span><span class="p">))]</span>
+
+<span class="kn">from</span> <span class="nn">numpy.testing</span> <span class="kn">import</span> <span class="n">Tester</span>
+<span class="n">test</span> <span class="o">=</span> <span class="n">Tester</span><span class="p">()</span><span class="o">.</span><span class="n">test</span>
+</pre></div>
+
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, Ismael.
+    </p>
+  </div>
+
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'0.7',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

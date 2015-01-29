@@ -1,10 +1,32 @@
+"""
+.. module:: parametric_tests
+   :synopsis: Parametric Tests
 
+.. moduleauthor:: Andrew Carter <andrew@invalid.com>
+
+
+"""
 
 import itertools as it
 import scipy as sp
 import scipy.stats as st
 
 def anova_test(*args):
+    """
+        Performs a 1-way ANOVA.
+        
+        Parameters
+        ----------
+        sample1, sample2, ... : array_like
+            The sample measurements for each group.
+            
+        Returns
+        -------
+        F-value : float
+            The computed F-value of the test.
+        p-value : float
+            The associated p-value from the F-distribution.
+    """
     k = len(args)
     if k < 2: raise ValueError('Less than 2 groups')
     n = len(args[0])
@@ -32,6 +54,21 @@ def anova_test(*args):
     return F, p_value, pivots
     
 def anova_within_test(*args):
+    """
+        Performs a 1-way ANOVA within cases.
+        
+        Parameters
+        ----------
+        sample1, sample2, ... : array_like
+            The sample measurements for each group.
+            
+        Returns
+        -------
+        F-value : float
+            The computed F-value of the test.
+        p-value : float
+            The associated p-value from the F-distribution.
+    """
     k = len(args)
     if k < 2: raise ValueError('Less than 2 groups')
     n = len(args[0])

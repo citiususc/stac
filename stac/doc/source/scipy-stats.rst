@@ -1,0 +1,11 @@
+Tests for two groups comparison
+===============
+.. currentmodule:: scipy.stats
+
+.. autosummary::
+    :toctree:
+
+    ttest_ind
+    ttest_rel
+    wilcoxon
+    mannwhitneyu

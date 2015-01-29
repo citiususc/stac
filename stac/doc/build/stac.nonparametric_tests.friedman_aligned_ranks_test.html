@@ -1,0 +1,206 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>stac.nonparametric_tests.friedman_aligned_ranks_test &mdash; STAC 0.7 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="STAC 0.7 documentation" href="index.html"/>
+        <link rel="up" title="Non-parametric tests for Multiple Comparison" href="nonparametric.html"/>
+        <link rel="next" title="stac.nonparametric_tests.quade_test" href="stac.nonparametric_tests.quade_test.html"/>
+        <link rel="prev" title="stac.nonparametric_tests.friedman_test" href="stac.nonparametric_tests.friedman_test.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="index.html" class="fa fa-home"> STAC</a>
+        
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="scipy-stats.html">Tests for two groups comparison</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="scipy.stats.ttest_ind.html">scipy.stats.ttest_ind</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scipy.stats.ttest_rel.html">scipy.stats.ttest_rel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scipy.stats.wilcoxon.html">scipy.stats.wilcoxon</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scipy.stats.mannwhitneyu.html">scipy.stats.mannwhitneyu</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="parametric.html">Parametric tests for Multiple Comparison</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="stac.parametric_tests.anova_test.html">stac.parametric_tests.anova_test</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stac.parametric_tests.anova_within_test.html">stac.parametric_tests.anova_within_test</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stac.parametric_tests.bonferroni_test.html">stac.parametric_tests.bonferroni_test</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="nonparametric.html">Non-parametric tests for Multiple Comparison</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="stac.nonparametric_tests.friedman_test.html">stac.nonparametric_tests.friedman_test</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">stac.nonparametric_tests.friedman_aligned_ranks_test</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stac.nonparametric_tests.quade_test.html">stac.nonparametric_tests.quade_test</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stac.nonparametric_tests.holm_test.html">stac.nonparametric_tests.holm_test</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stac.nonparametric_tests.finner_test.html">stac.nonparametric_tests.finner_test</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stac.nonparametric_tests.hochberg_test.html">stac.nonparametric_tests.hochberg_test</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stac.nonparametric_tests.li_test.html">stac.nonparametric_tests.li_test</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stac.nonparametric_tests.nemenyi_multitest.html">stac.nonparametric_tests.nemenyi_multitest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stac.nonparametric_tests.holm_multitest.html">stac.nonparametric_tests.holm_multitest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stac.nonparametric_tests.finner_multitest.html">stac.nonparametric_tests.finner_multitest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stac.nonparametric_tests.hochberg_multitest.html">stac.nonparametric_tests.hochberg_multitest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stac.nonparametric_tests.shaffer_multitest.html">stac.nonparametric_tests.shaffer_multitest</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">STAC</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="nonparametric.html">Non-parametric tests for Multiple Comparison</a> &raquo;</li>
+      
+    <li>stac.nonparametric_tests.friedman_aligned_ranks_test</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="_sources/stac.nonparametric_tests.friedman_aligned_ranks_test.txt" rel="nofollow"> View page source</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <div class="section" id="stac-nonparametric-tests-friedman-aligned-ranks-test">
+<h1>stac.nonparametric_tests.friedman_aligned_ranks_test<a class="headerlink" href="#stac-nonparametric-tests-friedman-aligned-ranks-test" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="stac.nonparametric_tests.friedman_aligned_ranks_test">
+<tt class="descclassname">stac.nonparametric_tests.</tt><tt class="descname">friedman_aligned_ranks_test</tt><big>(</big><em>*args</em><big>)</big><a class="reference internal" href="_modules/stac/nonparametric_tests.html#friedman_aligned_ranks_test"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#stac.nonparametric_tests.friedman_aligned_ranks_test" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="stac.nonparametric_tests.quade_test.html" class="btn btn-neutral float-right" title="stac.nonparametric_tests.quade_test">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="stac.nonparametric_tests.friedman_test.html" class="btn btn-neutral" title="stac.nonparametric_tests.friedman_test"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, Ismael.
+    </p>
+  </div>
+
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.7',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
