@@ -13,9 +13,10 @@ $(document).ready(function() {
                 data["dataset"] = [];
                 var key = results.meta.fields[0];
                 if (results.data.map(function(row) { return isNaN(row[key]); }).reduce(function(prev, curr, index, array) { return prev && curr; })) {
-                    results.meta.fields = results.meta.fields.splice(1)
+                    results.meta.fields = results.meta.fields.splice(1);
                     results.data.forEach(function(row) {
                         data["dataset"].push(row[key]);
+			delete row[key];
                     });
                 }
                 data["names"] = results.meta.fields;

@@ -1,0 +1,251 @@
+swagger: '2.0'
+
+info:
+  title: STAC API
+  description: Statistical Tests for Algorithms Comparison API
+  version: "0.8.0"
+
+host: tec.citius.usc.es
+basePath: /stac/api
+
+consumes: 
+  - application/json
+  
+
+paths:
+  /assistant:
+    post:
+      tags:
+        - assistant
+      description: Obtains the best fitted test for the data provided
+      parameters:
+        - name: data
+          in: body
+          description: Data values
+          required: true
+          schema:
+            $ref: Data
+      responses:
+        200:
+          description: Successful response
+        400:
+          description: Bad request/body parameters
+          schema:
+            $ref: Error
+  
+  /wilcoxon/{alpha}:
+    post:
+      tags:
+        - non parametric
+        - two groups
+        - paired
+      description:
+      parameters:
+        - name: data
+          in: body
+          description: Data values
+          required: true
+          schema:
+            $ref: Data
+            
+        - name: alpha
+          in: path
+          description: Significance level
+          required: true
+          type: number
+          format: float
+          default: 0.05
+      responses:
+        200:
+          description: Successful response
+        400:
+          description: Bad request/body parameters
+          schema:
+            $ref: Error
+            
+  /mannwhitneyu/{alpha}:
+    post:
+      tags:
+        - non parametric
+        - two groups
+        - unpaired
+      description: 
+      parameters:
+        - name: data
+          in: body
+          description: Data values
+          required: true
+          schema:
+            $ref: Data
+            
+        - name: alpha
+          in: path
+          description: Significance level
+          required: true
+          type: number
+          format: float
+          default: 0.05
+      responses:
+        200:
+          description: Successful response
+        400:
+          description: Bad request/body parameters
+          schema:
+            $ref: Error
+            
+  /friedman/{post_hoc}/{control}/{alpha}:
+    post:
+      tags:
+        - non parametric
+        - multiple groups
+        - unpaired
+      description: 
+      parameters:
+        - name: data
+          in: body
+          description: Data values
+          required: true
+          schema:
+            $ref: Data
+        
+        - name: post_hoc
+          in: path
+          description: Post-hoc analysis method
+          required: true
+          type: array
+          items:
+            type: string
+          enum:
+            - bonferroni_dunn_test
+            - holm_test
+          default: bonferroni_dunn_test
+          
+        - name: control
+          in: path
+          description: Control group
+          required: true
+          type: string
+          
+        - name: alpha
+          in: path
+          description: Significance level
+          required: true
+          type: number
+          format: float
+          default: 0.05
+      responses:
+        200:
+          description: Successful response
+        400:
+          description: Bad request/body parameters
+          schema:
+            $ref: Error
+            
+  /friedman_aligned_ranks/{post_hoc}/{control}/{alpha}:
+    post:
+      tags:
+        - non parametric
+        - multiple groups
+        - unpaired
+      description: 
+      parameters:
+        - name: data
+          in: body
+          description: Data values
+          required: true
+          schema:
+            $ref: Data
+        
+        - name: post_hoc
+          in: path
+          description: Post-hoc analysis method
+          required: true
+          type: array
+          items:
+            type: string
+          enum:
+            - bonferroni_dunn_test
+            - holm_test
+          default: bonferroni_dunn_test
+          
+        - name: control
+          in: path
+          description: Control group
+          required: true
+          type: string
+          
+        - name: alpha
+          in: path
+          description: Significance level
+          required: true
+          type: number
+          format: float
+          default: 0.05
+      responses:
+        200:
+          description: Successful response
+        400:
+          description: Bad request/body parameters
+          schema:
+            $ref: Error
+            
+  /quade/{post_hoc}/{control}/{alpha}:
+    post:
+      tags:
+        - non parametric
+        - multiple groups
+        - unpaired
+      description: 
+      parameters:
+        - name: data
+          in: body
+          description: Data values
+          required: true
+          schema:
+            $ref: Data
+        
+        - name: post_hoc
+          in: path
+          description: Post-hoc analysis method
+          required: true
+          type: array
+          items:
+            type: string
+          enum:
+            - bonferroni_dunn_test
+            - holm_test
+          default: bonferroni_dunn_test
+          
+        - name: control
+          in: path
+          description: Control group
+          required: true
+          type: string
+          
+        - name: alpha
+          in: path
+          description: Significance level
+          required: true
+          type: number
+          format: float
+          default: 0.05
+      responses:
+        200:
+          description: Successful response
+        400:
+          description: Bad request/body parameters
+          schema:
+            $ref: Error
+    
+
+definitions:
+  Error:
+    properties:
+      error:
+        type: string
+  Data:
+    required:
+      - values
+    properties:
+      values:
+        type: object

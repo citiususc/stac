@@ -14,7 +14,7 @@
 			<div id="modals"></div>
             <div class="row">
                 <div class="col-sm-12 col-md-12 main">
-                    <h1 class="page-header">Wilcoxon Test</h1>
+                    <h1 class="page-header">Non-parametric two groups</h1>
                     <div class="tab-content">
                         <div id="normalidad" class="tab-pane fade in active">
 							<div class=row">
@@ -23,7 +23,7 @@
 								<div class="col-lg-5">
 									<form class="form-horizontal" role="form">
 										<div class="form-group">
-											<label class="col-lg-5 control-label">Select test<a href="#helpModal" data-toggle="modal" more-info="normality"> [?] </a>:</label>
+											<label class="col-lg-5 control-label">Select test<a href="#helpModal" data-toggle="modal" more-info="nonparametric_two"> [?] </a>:</label>
 											<div class="col-lg-7">
 												<div class="btn-group-vertical" data-toggle="buttons">
 													<label name="test_cond" class="btn btn-default active"><input type="radio" name="test" id="option1" value="wilcoxon" checked> Wilcoxon (paired)</label>
@@ -68,11 +68,10 @@
 								<div class="col-lg-7">
 									<div class="panel panel-default">
 									  <div class="panel-body">
-										<p><strong>Null hypothesis (H<sub>0</sub>):</strong> The medians of the differences between two related samples (results from two algorithms) are equal.</p>
-										<p><strong>Restrictions:</strong></p>
+										<p><strong>Null hypothesis (H<sub>0</sub>):</strong> The medians of the differences between the two group samples are equal.</p>
 										<ul type = square>
-											<li>Number of algorithms >= 2</li>
-											<li>There must be at least 5 data sets without ties (discrepancies of 0)</li>
+											<li>Wilcoxon: paired data. </li>
+											<li>Mann-Whitney-U: unpaired data.</li>
 										</ul>
 									  </div>
 									</div>
@@ -91,6 +90,8 @@
 									  <div class="panel-heading">References</div>
 									  <div class="panel-body">
 										<ul type = square>
+											<li><p><b>Wilcoxon</b>: Wilcoxon, F. (1945). Individual comparisons by ranking methods. Biometrics bulletin, 80-83.</p></li>
+											<li><p><b>Mann-Whitney-U</b>: Mann, H. B., Whitney, D. R. (1947). On a test of whether one of two random variables is stochastically larger than the other. The annals of mathematical statistics, 50-60.</p></li>
 										</ul>
 									  </div>
 									</div>

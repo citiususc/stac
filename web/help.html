@@ -33,117 +33,49 @@
 		</div>
 		<div id="basic_info" class="panel-collapse collapse">
 			<div class="panel-body">
-				<p><b>Hypothesis testing:</b> Statistical problem which, in regard to a data sample, assumes an initial hypothesis, \({H_0}\), and an alternative hypothesis, \({H_1}\), and attempts to validate the truth of those hypothesis with statistical estimations. <a href="http://en.wikipedia.org/wiki/Statistical_hypothesis_testing" target="_blank">Learn more.</a></p>
-				<p><b>p-value:</b> Probability of obtaining a value at least as extreme as the obtained test statistic. The value of the statistic follows a particular sampling distribution (normal, chi-squared, etc.) <a href="http://en.wikipedia.org/wiki/P-value" target="_blank">Learn more.</a></p>
-				<p><b>Adjusted p-values:</b> p-values that depend on not just one but the whole family of comparisons. They are the result of POST-HOC tests (which apply if a ranking test finds any discrepancy).</p>
-				<p><b>Statistic:</b> Quantitative measure calculated with the tests. This quantitative measure provides the feasibility of the null hypothesis. Each test has its characteristic way of obtaining this value and the statistics follow a particular probability distribution (such as normal distribution, etc.). The statistic is obtained from the data sample (uploaded file).</p>
-				<p><b>Ranking:</b> In the ranking tests, the ranking provides the position of the algorithm when compared to the others (i.e. which is better?), ordered from greater to less or vice versa depending on whether the goal of the algorithms is to maximize or to minimize. </p>
-				<p><b>Sum of positive / negative ranks:</b> In the Wilcoxon test, the sum of positive ranks denotes the sum of the ranks with discrepancies greater than 0 and the sum of negative ranks is the sum of the ranks with discrepancies less than 0. </p>
-				<p><b>Critical point:</b> In the Wilcoxon test, when the amount of data sets without ties (discrepancies of 0) is less than or equal to 25, the final result is determined by the comparison of the statistic and the critical point from the Wilcoxon table (which is different for each significance level and amount of data sets without ties). </p>
-				<p><b>Significance level (\({\alpha}\)):</b> Probability of rejecting a valid null hypothesis. Also known as confidence level or type 1 error. This level divides the distribution in two regions: the region of acceptance and the region of rejection.<a href="http://en.wikipedia.org/wiki/Statistical_significance" target="_blank">Learn more.</a></p>
-				<p><b>Rejection of \(H_0\):</sub></b> When the p-value is less than the significance level \({\alpha}\), the test is considered statistically significant and the null hypothesis is, therefore, rejected. <a href="http://en.wikipedia.org/wiki/Statistical_hypothesis_testing" target="_blank">Learn more.</a></p>
+				<p><b>Hypothesis testing:</b> Statistical problem which, in regard to a data sample, assumes that an initial hypothesis \({H_0}\) is true and check if the evidence against it is sufficiently strong in favor of an alternative hypothesis \({H_1}\). <a href="http://en.wikipedia.org/wiki/Statistical_hypothesis_testing" target="_blank">Learn more.</a></p>
+				<p><b>Statistic:</b> Quantitative measure calculated with the tests. This quantitative measure provides the feasibility of the null hypothesis. Each test has its characteristic way of obtaining this value and the statistics follow a particular probability distribution (such as normal distribution, etc.).</p>
+				<p><b>Significance level (\(\alpha\)):</b> Probability of rejecting a null hypothesis when it is true. Also known as confidence level or Type I error (false positive). <a href="http://en.wikipedia.org/wiki/Statistical_significance" target="_blank">Learn more.</a></p>
+				<p><b>Power (\(1-\beta\))</b>: Probability of rejecting a null hypothesis when it is false. As the power increases, the chances of a Type II error (false negative or \(\beta\)) decrease. <a href="http://en.wikipedia.org/wiki/Statistical_power" target="_blank">Learn more.</a></p>
+				<p><b>p-value:</b> Probability of obtaining a value of the statistic at least as extreme as the obtained in the test.  <a href="http://en.wikipedia.org/wiki/P-value" target="_blank">Learn more.</a></p>
+				<p><b>Rejection of \(H_0\):</b> When the p-value is less than the significance level \({\alpha}\), the test is considered statistically significant and the null hypothesis is, therefore, rejected. <a href="http://en.wikipedia.org/wiki/Statistical_hypothesis_testing" target="_blank">Learn more.</a></p>
 			</div>
 		</div>
 	</div>
-	<!--Normalidad-->
+	<!--Paramtric_vs_Non-parametric-->
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h4 class="panel-title">
-				<a data-toggle="collapse" data-parent="#accordion" href="#normality_info">3. Available normality tests.</a>
+				<a data-toggle="collapse" data-parent="#accordion" href="#parametric_info">3. Parametric vs Non-parametric</a>
 			</h4>
 		</div>
-		<div id="normality_info" class="panel-collapse collapse">
+		<div id="parametric_info" class="panel-collapse collapse">
 			<div class="panel-body">
-				<p><b>Shapiro-Wilk:</b> Tests the null hypothesis that the samples come from a normally distributed population. This is considered as one of the most powerful tests, especially for samples of less than 30 elements.</p>
-				<p><b>D'Agostino-Pearson:</b> Tests the null hypothesis that the samples come from normally distributed population. The test combines the asymmetry coefficient (to what extent the normal is symmetric or of coefficient 0) and the coefficient of Kurtosis (degree of amplitude, usually of coefficient 0) in order to obtain an statistic and p-value. It's less powerful than Shapiro-Wilk.</p>
-				<p><b>Kolmogorov-Smirnov:</b> Performs a test of goodness of fit, to determine if the data follows a normal distribution. It assumes, as H0, that the distribution obtained from the observed data is identical to the normal distribution. This is the least powerful offering the worst results off the three.</p>
-				<p><b>In the three cases</b>, if the p-value is less than \({\alpha}\) (confidence level) then the null hypothesis must be rejected.</p>
-			</div>
-		</div>
-	</div>
-	<!--Test de Anova-->
-	<div class="panel panel-default">
-		<div class="panel-heading">
-			<h4 class="panel-title">
-				<a data-toggle="collapse" data-parent="#accordion" href="#collapseEleven">4. ANOVA test</a>
-			</h4>
-		</div>
-		<div id="collapseEleven" class="panel-collapse collapse">
-			<div class="panel-body">
-				<p><b>ANOVA:</b> Tests the null hypothesis that the means of the results of two or more algorithms are the same, i.e. if the mean of two or more samples or populations are equal. For this, the test analyzes the variation between samples as well as their inner variation with the variance. The statistic of the ANOVA test, is estimated by the f-distribution, and the null hypothesis is rejected if: \(p-value &lt; {\alpha}\) (significance level or \({\alpha}\)), accepting the alternative hypothesis: at least one of the mean populations differs from the others.</p>
-				<p>The parametric conditions must be met:</p>
+				<p><b>Parametric test</b>: Statistical test that makes assumptions about the parameters of the population distribution of the data. These assumptions can be summarize as:</p>
 				<ul>
-				<li>Normality</li>
-				<li>Homoscedasticity</li>
-				<li>Independence</li>
+				    <li>Normality: the distribution of the data follows a gaussian distribution. <a href="http://en.wikipedia.org/wiki/Normal_distribution" target="_blank">Learn more.</a></li>
+				    <li>Homoscedasticity: the distributions of different groups are equal. <a href="http://en.wikipedia.org/wiki/Homoscedasticity" target="_blank">Learn more.</a></li>
+				    <li>Independence: the values of a group are independent between them. <a href="http://en.wikipedia.org/wiki/Homoscedasticity" target="_blank">Learn more.</a></li>
 				</ul>
-				<p><b>Bonferroni:</b> Once evidence of the existence of significant differences between the means of the algorithms is achieved, thanks to the variance analysis of ANOVA, it is possible to proceed with the POST-HOC test of Bonferroni in order to determine the discrepancies between all the samples, comparing the means of all the algorithms. Each p-value associated with the hypothesis \({H_i}\) is compared taking an \({\alpha}\) adjusted to all the comparisons: \(p_i &lt; {\alpha \over m}\), where \({K}\) is the number of algorithms and m is the number of comparisons: \(m = {K*(K-1) \over 2}\)</p>
+				<p><b>Non-parametric test</b>: Statistical test that does not make assumptions about the parameters of the population distribution of the data. Less powerful than its parametric counterpart.</p>
 			</div>
 		</div>
 	</div>
-	<!--Test T-test-->
+	<!--Multitest-->
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h4 class="panel-title">
-				<a data-toggle="collapse" data-parent="#accordion" href="#collapseTwelve">5. T-test</a>
+				<a data-toggle="collapse" data-parent="#accordion" href="#multiple_info">4. Multiple comparisons</a>
 			</h4>
 		</div>
-		<div id="collapseTwelve" class="panel-collapse collapse">
+		<div id="multiple_info" class="panel-collapse collapse">
 			<div class="panel-body">
-				<p>If \(p-value &lt; {\alpha}\), the null hypothesis (2 related or repeated samples have identical mean values (expected)) is rejected. The test checks if the mean score differs significantly between the samples.</p>
-				<p>The parametric conditions must be met:</p>
+				<p>A two-step procedure is used to compare more than two groups of samples (algorithms):</p>
 				<ul>
-				<li>Normality</li>
-				<li>Homoscedasticity</li>
-				<li>Independence</li>
+				    <li>Reject the null hypothesis that all the groups behave similarly, usually calculating a ranking of the groups. It is only necessary that two groups are different to reject the null hypothesis.</li>
+				    <li>A post-hoc test that compare the groups in pairs to test if the difference between each pair is statistically significant. This procedure controls the familywise error rate, the increase in the Type I error due to the use of multiple related tests. <a href="http://en.wikipedia.org/wiki/Familywise_error_rate" target="_blank">Learn more.</a></li>
 				</ul>
-				<p>Also, the number of algorithms or samples must be two.</p>
-			</div>
-		</div>
-	</div>
-	<!--Test de homocedasticidad-->
-	<div class="panel panel-default">
-		<div class="panel-heading">
-			<h4 class="panel-title">
-				<a data-toggle="collapse" data-parent="#accordion" href="#collapseTen">6. Levene's test of homoscedasticity.</a>
-			</h4>
-		</div>
-		<div id="collapseTen" class="panel-collapse collapse">
-			<div class="panel-body">
-				 <p>Tests the null hypothesis that all the input populations come from populations with equal variances. If the p-value obtained from Levene's test is less than the significance level, the hypothesis is rejected. Parametric tests such as Anova or T-test, assume homoscedasticity in the populations.</p>
-			</div>
-		</div>
-	</div>
-	<!--Test de Wilcoxon-->
-	<div class="panel panel-default">
-		<div class="panel-heading">
-			<h4 class="panel-title">
-				<a data-toggle="collapse" data-parent="#accordion" href="#collapseEight">7. Wilcoxon test</a>
-			</h4>
-		</div>
-		<div id="collapseEight" class="panel-collapse collapse">
-			<div class="panel-body">
-				<p>Tests the null hypothesis that the medians of the differences between two related samples (results from two algorithms) are equal. For small samples, comparing the statistic with the critical value from the Wilcoxon table suffices (if the statistic is less than the critical value \({H_0}\) is rejected). For big samples (\({> 25}\)), the test can be estimated with the normal distribution (in which case \({H_0}\) would be rejected if \(p-value &lt; {\alpha}\)).</p>
-				<p><strong>Restrictions:</strong></p>
-				<ul>
-					<li>Number of algorithms \({>= 2}\)</li>
-					<li>There must be at least 5 data sets without ties (discrepancies of 0)</li>
-				</ul>
-			</div>
-		</div>
-	</div>
-	<!--Explicación tests de ranking-->
-	<div class="panel panel-default">
-		<div class="panel-heading">
-			<h4 class="panel-title">
-				<a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">8. Ranking tests</a>
-			</h4>
-		</div>
-		<div id="collapseFour" class="panel-collapse collapse">
-			<div class="panel-body">
-				<p>The <b>nonparametric ranking tests</b>, attempt to verify the null hypothesis that all the algorithms behave similarly, in which case their rankings should also be similar and, therefore, all the algorithms could be considered equal. The ranking tests differ in the method for calculating the rankings or in the way in which the statistic is calculated.</p>
-				<p>These tests prove the existence or nonexistence of significant discrepancies between the algorithms to which the tests are applied. That is, the tests determine whether or not the hypothesis testing is statistically significant. If the null hypothesis that “all the algorithms are equal” is rejected, we will know that there are some differences between the algorithms. It could happen, however, that a given algorithm performs similarly to other or others and, therefore, could be considered equal.</p>
-				<p>That is why, the <b>POST-HOC tests</b> are applied after the ranking tests. These tests compare the algorithms and contrast the hypothesis to find discrepancies. Two types of comparison can be distinguished:</p>
+				<p>Two types of post-hoc tests can be distinguished:</p>
 				<ul>
 					<li>Control method: The first algorithm returned from the ranking test is compared with the others. There are \({K-1}\) comparisons.</li>
 					<li>Multiple comparison (multitest): Compares all the algorithms between themselves. The number of comparisons would be \(m = {K*(K-1) \over 2}\).</li>
@@ -151,16 +83,77 @@
 			</div>
 		</div>
 	</div>
-	<!--Minimización / Maximización.-->
+	<!--Normalidad-->
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h4 class="panel-title">
-				<a data-toggle="collapse" data-parent="#accordion" href="#collapseSeven">9. Minimization / Maximization</a>
+				<a data-toggle="collapse" data-parent="#accordion" href="#normality_info">5. Normality tests</a>
 			</h4>
 		</div>
-		<div id="collapseSeven" class="panel-collapse collapse">
+		<div id="normality_info" class="panel-collapse collapse">
 			<div class="panel-body">
-				<p>This determines the objective function for the algorithms being tested, i.e. whether the goal is to obtain the lowest possible result or the highest. The objective function influences the ranking assignment, changing the order (the first in the ranking can be the one with the highest or with the lowest).</p>
+				<p><b>Shapiro-Wilk:</b> Tests the null hypothesis that the samples come from a normally distributed population. This is considered as one of the most powerful tests, especially for samples of less than 30 elements.</p>
+				<p><b>D'Agostino-Pearson:</b> Tests the null hypothesis that the samples come from normally distributed population. The test combines the asymmetry coefficient (to what extent the normal is symmetric or of coefficient 0) and the coefficient of Kurtosis (degree of amplitude, usually of coefficient 0) in order to obtain an statistic and p-value. It's less powerful than Shapiro-Wilk.</p>
+				<p><b>Kolmogorov-Smirnov:</b> Performs a test of goodness of fit, to determine if the data follows a normal distribution. It assumes, as H0, that the distribution obtained from the observed data is identical to the normal distribution. This is the least powerful offering the worst results off the three.</p>
+			</div>
+		</div>
+	</div>
+	<!--Test de homocedasticidad-->
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h4 class="panel-title">
+				<a data-toggle="collapse" data-parent="#accordion" href="#homocedasticity_info">6.  Homoscedasticity test</a>
+			</h4>
+		</div>
+		<div id="homocedasticity_info" class="panel-collapse collapse">
+			<div class="panel-body">
+				 <p><b>Levene:</b> Tests the null hypothesis that all the input populations come from populations with equal variances. If the p-value obtained from Levene's test is less than the significance level, the hypothesis is rejected. Parametric tests such as Anova or T-test, assume homoscedasticity in the populations.</p>
+			</div>
+		</div>
+	</div>
+	<!--Test T-test-->
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h4 class="panel-title">
+				<a data-toggle="collapse" data-parent="#accordion" href="#parametric_two_info">7. Parametric two groups tests</a>
+			</h4>
+		</div>
+		<div id="parametric_two_info" class="panel-collapse collapse">
+			<div class="panel-body">
+				<p><b>t-test</b>: Tests the null hypothesis that 2 related or repeated samples have identical mean values. The test checks if the mean score differs significantly between the samples.  <a href="http://en.wikipedia.org/wiki/Student%27s_t-test" target="_blank">Learn more.</a></p>
+				<p>It can be applied to:</p>
+				<ul>
+				    <li>Paired data: the data values of each group are related.</li>
+				    <li>Unpaired data: the data values of each group are independent.</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<!--Test de Anova-->
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h4 class="panel-title">
+				<a data-toggle="collapse" data-parent="#accordion" href="#parametric_multi_info">8. Parametric multiple groups tests</a>
+			</h4>
+		</div>
+		<div id="parametric_multi_info" class="panel-collapse collapse">
+			<div class="panel-body">
+				<p><b>ANOVA:</b> Tests the null hypothesis that the means of the results of two or more groups are the same. For this, the test analyzes the variation between samples as well as their inner variation with the variance. The statistic of the ANOVA test, is estimated by the f-distribution.</p>
+				<p><b>Bonferroni:</b> Once evidence of the existence of significant differences between the means of the algorithms is achieved, thanks to the variance analysis of ANOVA, it is possible to proceed with the POST-HOC test of Bonferroni in order to determine the discrepancies between all the samples, comparing the means of all the algorithms. Each p-value associated with the hypothesis \({H_i}\) is compared taking an \({\alpha}\) adjusted to all the comparisons: \(p_i &lt; {\alpha \over m}\), where \({K}\) is the number of algorithms and m is the number of comparisons: \(m = {K*(K-1) \over 2}\)</p>
+			</div>
+		</div>
+	</div>
+	<!--Test de Wilcoxon-->
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h4 class="panel-title">
+				<a data-toggle="collapse" data-parent="#accordion" href="#nonparametric_two_info">9. Non-parametric two groups tests</a>
+			</h4>
+		</div>
+		<div id="nonparametric_two_info" class="panel-collapse collapse">
+			<div class="panel-body">
+				<p><b>Wilcoxon</b>: Tests the null hypothesis that two related paired samples come from the same distribution. In particular, it tests whether the distribution of the differences between both groups is symmetric about zero. <a href="http://en.wikipedia.org/wiki/Wilcoxon_signed-rank_test" target="_blank">Learn more.</a></p>
+				<p><b>Mann-Whitney-U</b>: Tests the null hypothesis that two non-paired samples come from the same distribution. <a href="http://en.wikipedia.org/wiki/Mann%E2%80%93Whitney_U_test" target="_blank">Learn more.</a></p>
 			</div>
 		</div>
 	</div>
@@ -168,13 +161,12 @@
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h4 class="panel-title">
-				<a data-toggle="collapse" data-parent="#accordion" href="#collapseFive">10. Available ranking tests</a>
+				<a data-toggle="collapse" data-parent="#accordion" href="#nonparametric_multi_info">10. Non-parametric multiple groups tests</a>
 			</h4>
 		</div>
-		<div id="collapseFive" class="panel-collapse collapse">
+		<div id="nonparametric_multi_info" class="panel-collapse collapse">
 			<div class="panel-body">
 				<p><b>Friedman:</b> This test makes comparisons and assigns rankings to each data set. The statistic follows a chis-quared distribution with \({K-1}\) degrees of freedom, being \({K}\) the number of related variables (or number of algorithms).</p>
-				<p><b>Iman-Davenport:</b> It's an improvement over the Friedman test with a more adjusted statistic following an f-distribution with \({(K-1)}\) and \({(K-1)*(N-1)}\) degrees of freedom, being \({N}\) the number of data set. Its behavior is less conservative than that of Friedman's test, in that it rejects more hypothesis (higher potency).</p>
 				<p><b>Friedman's aligned ranks:</b> It makes comparisons an assigns rankings considering all the data sets. It is usually employed when the number of algorithms in the comparison is low.</p>
 				<p><b>Quade:</b> Similar to ImanDavenport, only that it takes into account that some problems are more difficult or that the results obtained from different algorithms present higher discrepancies (weighting).</p>
 			</div>
@@ -184,10 +176,10 @@
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h4 class="panel-title">
-				<a data-toggle="collapse" data-parent="#accordion" href="#collapseSix">11. Available POST-HOC tests</a>
+				<a data-toggle="collapse" data-parent="#accordion" href="#post-hoc">11. Non-parametric post-hoc tests</a>
 			</h4>
 		</div>
-		<div id="collapseSix" class="panel-collapse collapse">
+		<div id="post-hoc" class="panel-collapse collapse">
 			<div class="panel-body">
 				<p><strong>Bonferroni-Dunn: </strong>This test rejects the null hypothesis if: \(p-value &lt; {\alpha \over (K-1)}\), where \({K}\) is the number of algorithms in the sample. It is a very conservative test and many differences can not be detected (the worst power).</p>
 				<p><strong>Holm: </strong>It compares each \({p_i}\) (starting from the most significant or the lowest) with: \({\alpha \over (K-i)}\), where \({i \in [1,K-1]}\). If the hypothesis is rejected the test continues the comparisons. When an hypothesis is accepted, all the other hypothesis are accepted as well. It is better (more power) than Bonferroni-Dunn test, because it controls the FWER (familywise error rate), which is the probability of committing one or more type I errors among all hypothesis.</p>
@@ -203,10 +195,10 @@
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h4 class="panel-title">
-				<a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">12. About the site</a>
+				<a data-toggle="collapse" data-parent="#accordion" href="#about">12. About the site</a>
 			</h4>
 		</div>
-		<div id="collapseThree" class="panel-collapse collapse">
+		<div id="about" class="panel-collapse collapse">
 			<div class="panel-body">
 				<p>Through this web platform you can verify the results obtained from the learning algorithms applying the statistic tests to the experiments, which, among other uses, support the decision making process (the election of the most suitable algorithm, for example). At present, this is the most widely accepted method for validating this kind of experiments.</p>
 				<p>The tests are based in the verification of hypothesis. For example: a test could verify the null hypothesis or \({H_0}\) that all the averages of the data obtained from an algorithm are equal. These tests, verify whether or not this initial hypothesis is valid. For that, an statistic is obtained (subject to a particular statistic distribution), and the probability of obtaining another statistic at least as extreme as the former (p-value). If this p-value is less than a given (\({\alpha}\) value), the null hypothesis will be rejected, otherwise accepted.</p>

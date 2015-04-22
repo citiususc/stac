@@ -14,14 +14,16 @@
 			<div id="modals"></div>
             <div class="row">
                 <div class="col-sm-12 col-md-12 main">
-                    <h1 class="page-header">T-test <a href="#helpModal" data-toggle="modal" more-info="normality"> [?] </a></label></h1>
+                    <h1 class="page-header">Parametric two groups </a></label></h1>
                     <div class="tab-content">
                         <div id="anova" class="tab-pane fade in active">
 							<div class=row">
+								<div id="danger" class="alert alert-danger" style="display:none"></div>
+								<div id="warning" class="alert alert-warning" style="display:none"></div>
 								<div class="col-lg-5">
 									<form class="form-horizontal" role="form">
 										<div class="form-group">
-											<label class="col-lg-5 control-label">Select test<a href="#helpModal" data-toggle="modal" more-info="normality"> [?] </a>:</label>
+											<label class="col-lg-5 control-label">Select test<a href="#helpModal" data-toggle="modal" more-info="parametric_two_info"> [?] </a>:</label>
 											<div class="col-lg-7">
 												<div class="btn-group-vertical" data-toggle="buttons">
 													<label name="test_cond" class="btn btn-default active"><input type="radio" name="test" id="option1" value="ttest" checked> t-test paired</label>
@@ -68,7 +70,7 @@
 									  <div class="panel-body">
 										<ul>
 											<li>Null hypothesis (H<sub>0</sub>):</strong> Two related or repeated samples have identical mean values ​​(expected).</li>
-											<li><strong>It should comply:</strong> normality, homocedasticity and independence.</li>
+											<li><strong>Data should satisfy:</strong> normality, homocedasticity and independence. <a href="#helpModal" data-toggle="modal" more-info="parametric"> [?] </a></li>
 										</ul>
 									  </div>
 									</div>
@@ -78,6 +80,19 @@
 							<div class="row">
 								<div class="col-lg-12">
 									<div id="result" class="tab-pane fade" style="display: none;"></div>
+								</div>
+							</div>
+							
+							<div class="row">
+								<div class="col-lg-12" style="margin-top: 50px;">
+									<div class="panel panel-default">
+									  <div class="panel-heading">References</div>
+									  <div class="panel-body">
+										<ul type = square>
+											<li><p>Sheskin, D. J. (2003). Handbook of parametric and nonparametric statistical procedures. crc Press.<p></li>
+										</ul>
+									  </div>
+									</div>
 								</div>
 							</div>
                         </div>

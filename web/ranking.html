@@ -12,14 +12,16 @@
 			<div id="modals"></div>
             <div class="row">
                 <div class="col-sm-12 col-md-12 main">
-                    <h1 class="page-header">Multiple Comparison using Ranking <a href="#helpModal" data-toggle="modal" more-info="normality"> [?] </a></label></h1>
+                    <h1 class="page-header">Non-parametric multiple groups One vs All</label></h1>
                     <div class="tab-content">
                         <div id="anova" class="tab-pane fade in active">
 							<div class=row">
+								<div id="danger" class="alert alert-danger" style="display:none"></div>
+								<div id="warning" class="alert alert-warning" style="display:none"></div>
 								<div class="col-lg-5">
 									<form class="form-horizontal" role="form">
 										<div class="form-group">
-											<label class="col-lg-5 control-label">Ranking test<a href="#helpModal" data-toggle="modal" more-info="normality"> [?] </a>:</label>
+											<label class="col-lg-5 control-label">Ranking test<a href="#helpModal" data-toggle="modal" more-info="nonparametric_multi"> [?] </a>:</label>
 											<div class="col-lg-7">
 												<div class="btn-group-vertical" data-toggle="buttons">
 													<label name="nombre_test" class="btn btn-default active"><input type="radio" name="test" id="option1" value="friedman" checked>Friedman</label>
@@ -29,7 +31,7 @@
 											</div>
 										</div>
 										<div class="form-group">
-											<label class="col-lg-5 control-label">Post-hoc Control vs All<a href="#helpModal" data-toggle="modal" more-info="normality"> [?] </a>:</label>
+											<label class="col-lg-5 control-label">Post-hoc<a href="#helpModal" data-toggle="modal" more-info="post-hoc"> [?] </a>:</label>
 											<div class="col-lg-7">
 												<div class="btn-group-vertical" data-toggle="buttons">
 													<label name="nombre_post" class="btn btn-default active"><input type="radio" name="post_hoc" value="bonferroni_dunn_test"  comparison="control" checked>Bonferroni-Dunn</label>
@@ -41,7 +43,7 @@
                                             </div>
 										</div>
                                         <div class="form-group">
-                                            <label class="col-lg-5 control-label">Control method:</label>
+                                            <label class="col-lg-5 control-label">Control method <a href="#helpModal" data-toggle="modal" more-info="multiple"> [?] </a>:</label>
 											<div class="col-lg-7">
 												<select class="form-control" id="control">
 												</select>
@@ -70,15 +72,18 @@
 								<div class="col-lg-7">
 									<div class="panel panel-default">
 									  <div class="panel-body">
-										<p>ANOVA:</p>
+										<p>Ranking:</p>
 										<ul type = square>
 											<li><strong>Null hypothesis (H<sub>0</sub>):</strong> The means of the results of two or more algorithms are the same.</li>
-											<li><strong>It should comply:</strong> normality, homocedasticity and independence.</li>
+											<li>Use Aligned Ranks when the number of groups is low (less than 4).</li>
+											<li>Use Quake to take into account the difficulty to obtain each sample (dataset).</li>
 										</ul>
-										<p>Bonferroni:</p>
+										<p>Post-hoc with control method:</p>
 										<ul>
-											<li><strong>Null hypothesis (H<sub>0</sub>):</strong> The mean of the results of the "Algorithm A" and "Algorithm B" is equal (compares all algorithms each other).</li>
-											<li><strong>Is applied if:</strong> ANOVA indicates that there are differences.</li>
+											<li><strong>Null hypothesis (H<sub>0</sub>):</strong> The mean of the results of the control method and against each other groups is equal (compared in pairs).</li>
+											<li>Bonferroni-Dunn is the less powerful but the most interpretable followed by Li, which has more power.</li>
+											<li>Holm and Hochber are similar in power and the most widely used.</li>
+											<li>Finner has the best power but is less interpretable.</li>
 										</ul>
 									  </div>
 									</div>
@@ -97,6 +102,20 @@
 									  <div class="panel-heading">References</div>
 									  <div class="panel-body">
 										<ul type = square>
+										    <li>Ranking:</li>
+											<ul>
+											    <li><b>Friedman: </b>M. Friedman, The use of ranks to avoid the assumption of normality implicit in the analysis of variance, Journal of the American Statistical Association 32 (1937) 674–701.</li>
+											    <li><b>Friedman Aligned Ranks: </b>J.L. Hodges, E.L. Lehmann, Ranks methods for combination of independent experiments in analysis of variance, Annals of Mathematical Statistics 33 (1962) 482–497.</li>
+											     <li><b>Quade: </b>D. Quade, Using weighted rankings in the analysis of complete blocks with additive block effects, Journal of the American Statistical Association 74 (1979) 680–683. </li>
+											</ul>
+										    <li>Post-hoc:</li>
+											<ul>
+											    <li><b>Bonferroni-Dunn: </b>O.J. Dunn, Multiple comparisons among means, Journal of the American Statistical Association 56 (1961) 52–64.</li>
+											    <li><b>Holm: </b>O.J. S. Holm, A simple sequentially rejective multiple test procedure, Scandinavian Journal of Statistics 6 (1979) 65–70.</li>
+											    <li><b>Hochberg: </b>Y. Hochberg, A sharper Bonferroni procedure for multiple tests of significance, Biometrika 75 (1988) 800–803.</li>
+											    <li><b>Finner: </b>H. Finner, On a monotonicity problem in step-down multiple test procedures, Journal of the American Statistical Association 88 (1993) 920–923. </li>
+											    <li><b>Li: </b> J. Li, A two-step rejection procedure for testing multiple hypotheses, Journal of Statistical Planning and Inference 138 (2008) 1521–1527.</li>
+											</ul>
 										</ul>
 									  </div>
 									</div>

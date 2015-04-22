@@ -26,7 +26,7 @@ $(document).ready(function(){
 	if (!sessionStorage.getItem("data")) {
 		$("#warning").html("There is no file uploaded with the data needed to do the test. Please upload one before applying any test.");
 		$("#warning").show();
-		$('button').prop('disabled', true);
+		$('#apply').prop('disabled', true);
 	} else {
         names = JSON.parse(sessionStorage.data).names
         if ($("#group1").length) {

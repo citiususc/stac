@@ -5,6 +5,16 @@
 		<script src="js/loader.js"></script>
 		
 		<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-59235014-1', 'auto');
+          ga('send', 'pageview');
+
+        </script>
     </head>
 
     <body>
@@ -15,7 +25,7 @@
             <div class="row">
                 <div class="col-sm-12 col-md-12 main">
                     <h1 class="page-header"> STAC - Statistical Tests for Algorithm Comparison</h1>
-                    <p align="justify">Through this web platform you can verify the results obtained from the learning algorithms applying the statistic tests to the experiments, which, among other uses, support the decision making process (the election of the most suitable algorithm, for example). <label><a href="#helpModal" data-toggle="modal" more-info="file">[?]</a></label></p>
+                    <p align="justify">Through this web platform you can verify the results obtained from the learning algorithms applying the statistic tests to the experiments, which, among other uses, support the decision making process (the election of the most suitable algorithm, for example).</p>
 
 
                     <br><div align="center">
@@ -34,10 +44,18 @@
                                 <pre class="prettyprint language-bib">
 @misc{stac,
 author={Ismael Rodr\'{i}guez-Fdez and Adri\'{a}n Canosa and Manuel Mucientes and Alberto Bugar\'{i}n},
-title={STAC: a web platform for the comparison of algorithms using statistical tests},
+title={{STAC}: a web platform for the comparison of algorithms using statistical tests},
 url={http://tec.citius.usc.es/stac},
 year={2015}}</pre>
                         </div>
+                    </div>
+                    <div class="btn-group pull-left" role="group">
+			    <a href="mailto:citius.stac@usc.es?Subject=[STAC]" class="btn btn-default" role="button"><span class="glyphicon glyphicon-envelope"></span> Contact email</a>
+                    </div>
+                    <div class="btn-group pull-right" role="group">
+			    <a href="https://gitlab.citius.usc.es/ismael.rodriguez/stac/" class="btn btn-default" role="button"><span class="icon-github"></span> Source on Gitlab</a>
+			    <a href="http://tec.citius.usc.es/stac/doc/" class="btn btn-default" role="button"><span class="icon-python"></span> Python Doc</a>
+			    <a href="http://tec.citius.usc.es/stac/apidoc/" class="btn btn-default" role="button"><span class="icon-swagger"></span> API REST Doc</a>
                     </div>
                 </div>
             </div>
