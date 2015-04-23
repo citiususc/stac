@@ -17,11 +17,17 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				<h4 class="modal-title">Upload file</h4>
+				<h4 class="modal-title">Import  data</h4>
 			</div>
 			<div class="modal-body">
 				<form class="form" id="formfile" enctype="multipart/form-data">
-					<p class="bg-warning">The file must be in csv format <label><a href="#helpModal" data-toggle="modal" more-info="file">[?]</a></label></p>
+                                        <div id="danger_file" class="alert alert-danger" style="display:none"></div>
+                                        <p class="bg-warning">The data must be in csv format <label><a href="#helpModal" data-toggle="modal" more-info="file">[?]</a></label></p>
+                                        <h5>Insert text:</h5>
+                                        <div class="form-group">
+                                            <textarea class="form-control" id="import_text" rows="10"></textarea>
+                                        </div>
+                                        <h5>Or upload a file:</h5>
 					<div class="input-group">
 						<span class="input-group-btn">
 							<span class="btn btn-primary btn-file">
@@ -32,11 +38,10 @@
 					</div>
 					<div id="info_file" align="center"></div>
 				</form>
-				
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-primary" id="upload_file">Upload file</button>
+				<button type="button" class="btn btn-primary" id="upload_file">Import data</button>
 			</div>
 		</div>
 	</div>
