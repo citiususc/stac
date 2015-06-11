@@ -75,7 +75,7 @@ def friedman_aligned_ranks_test(*args):
         aligned_ranks.append(row)
 
     rankings_avg = [sp.mean([case[j] for case in aligned_ranks]) for j in range(k)]
-    rankings_cmp = [r/sp.sqrt(k*(n+1)/6.) for r in rankings_avg]
+    rankings_cmp = [r/sp.sqrt(k*(n*k+1)/6.) for r in rankings_avg]
 
     r_i = [np.sum(case) for case in aligned_ranks]
     r_j = [np.sum([case[j] for case in aligned_ranks]) for j in range(k)]
