@@ -6,6 +6,29 @@ import scipy.stats as st
 import itertools as it
 
 
+def binomial_sign_test(*args):
+    k = len(args)
+    if k != 2: raise ValueError('The test needs two samples')
+    n = len(args[0])
+    
+    d_plus = 0
+    d_minus = 0
+    for i in range(n):
+        # Zero differences are eliminated
+        if args[0][i] < args[1][i]: 
+            d_plus = d_plus+1
+        elif args[0][i] > args[1][i]:
+            d_minus = d_minus+1
+    
+    x = max(d_plus, d_minus)
+    n = d_plus + d_minus
+    
+    p_value = 2*(1 - st.binom.cdf(x, n, 0.5)) # Two-tailed of the smallest p-value
+    
+    return x, p_value
+    
+        
+
 def friedman_test(*args):
     k = len(args)
     if k < 2: raise ValueError('Less than 2 levels')

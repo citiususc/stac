@@ -65,6 +65,15 @@ def asssistant():
     
     return data
 
+@route('/binomialsign', method=["POST", "OPTIONS"])
+@route('/binomialsign/<alpha:float>', method=["POST", "OPTIONS"])
+@headers
+def binomialsign(alpha=0.05):
+    values = clean_missing_values(request.json['values'])
+    statistic, p_value = npt.binomial_sign_test(values.values()[0], values.values()[1])
+    result = int(p_value<alpha)
+    return {"result" : result, "statistic" : statistic, "p_value" : p_value}
+
 @route('/wilcoxon', method=["POST", "OPTIONS"])
 @route('/wilcoxon/<alpha:float>', method=["POST", "OPTIONS"])
 @headers

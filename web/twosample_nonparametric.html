@@ -26,8 +26,9 @@
 											<label class="col-lg-5 control-label">Select test<a href="#helpModal" data-toggle="modal" more-info="nonparametric_two"> [?] </a>:</label>
 											<div class="col-lg-7">
 												<div class="btn-group-vertical" data-toggle="buttons">
-													<label name="test_cond" class="btn btn-default active"><input type="radio" name="test" id="option1" value="wilcoxon" checked> Wilcoxon (paired)</label>
-                                                    <label name="test_cond" class="btn btn-default"><input type="radio" name="test" id="option1" value="mannwhitneyu"> Mann-Whitney-U (unpaired)</label>
+													<label name="test_cond" class="btn btn-default active"><input type="radio" name="test" id="option1" value="wilcoxon" checked> Wilcoxon</label>
+													<label name="test_cond" class="btn btn-default"><input type="radio" name="test" id="option1" value="binomialsign"> Binomial Sign</label>
+                                                                                                        <label name="test_cond" class="btn btn-default"><input type="radio" name="test" id="option1" value="mannwhitneyu"> Mann-Whitney-U</label>
 												</div>
 											</div>
 										</div>
@@ -70,7 +71,8 @@
 									  <div class="panel-body">
 										<p><strong>Null hypothesis (H<sub>0</sub>):</strong> The medians of the differences between the two group samples are equal.</p>
 										<ul type = square>
-											<li>Wilcoxon: paired data. </li>
+											<li>Wilcoxon: paired data. Assumes that the differences between samples are symmetrical with respect to the median. </li>
+											<li>Binomial Sign: paired data. Does not assume symmetry but is less powerfull than Wilcoxon. </li>
 											<li>Mann-Whitney-U: unpaired data.</li>
 										</ul>
 									  </div>

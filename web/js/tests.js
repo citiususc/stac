@@ -1,4 +1,11 @@
 $(document).ready(function(){
+        function labrozadeangel() {
+            label = $("#apply label");
+            label.toggleClass("glyphicon-refresh");
+            label.toggleClass("glyphicon-refresh-animate");
+            label.toggleClass("glyphicon-play");
+            $("#apply").prop("disabled", false);
+        }
 	$(document).on('click', '#apply', function() {
         if(!sessionStorage.getItem("data")) {
             $("#danger").html("<strong>¡Upload a file!</strong> In the top right of the navigation bar you can select and upload a file by clicking <it>Upload file</it>. Then, click <it>Show file</it> to watch its contents.");
@@ -20,7 +27,11 @@ $(document).ready(function(){
                 }
             }
             
-			
+			$("#apply").prop("disabled", true);
+                        label = $("#apply label");
+                        label.toggleClass("glyphicon-play");
+                        label.toggleClass("glyphicon-refresh");
+                        label.toggleClass("glyphicon-refresh-animate");
 			switch (type) {
                 case "assistant":
 					$.ajax({
@@ -51,7 +62,7 @@ $(document).ready(function(){
 						error : function(e) {
 							console.log('error: ' + e);
 						}
-					});
+					}).always(labrozadeangel);
 					break;
 				case "normality":
 					$.ajax({
@@ -75,7 +86,7 @@ $(document).ready(function(){
 						error : function(e) {
 							console.log('error: ' + e);
 						}
-					});
+					}).always(labrozadeangel);
 					break;
 				case "homocedasticity":
 					$.ajax({
@@ -97,7 +108,7 @@ $(document).ready(function(){
 						error : function(e) {
 							console.log('error: ' + e);
 						}
-					});
+					}).always(labrozadeangel);
 					break;
 				case "anova":
 					$.ajax({
@@ -121,7 +132,7 @@ $(document).ready(function(){
 						error : function(e) {
 							console.log('error: ' + e);
 						}
-					});
+					}).always(labrozadeangel);
 					break;
 				case "ttest":
                     var group1 = $("#group1").val()
@@ -146,7 +157,7 @@ $(document).ready(function(){
 						error : function(e) {
 							console.log('error: ' + e);
 						}
-					});
+					}).always(labrozadeangel);
 					break;
 				case "wilcoxon":
                     var group1 = $("#group1").val()
@@ -169,8 +180,30 @@ $(document).ready(function(){
 						error : function(e) {
 							console.log('error: ' + e);
 						}
-					});
+					}).always(labrozadeangel);
 					break;
+                case "binomialsign":
+                        var group1 = $("#group1").val()
+                        var group2 = $("#group2").val()
+                                            $.ajax({
+                                                    type: "POST", url: url, dataType: "json",
+                            contentType: "application/json",
+                            data: JSON.stringify({values: {group1: JSON.parse(sessionStorage.data).values[group1], group2: JSON.parse(sessionStorage.data).values[group2]}}),
+                                                    success : function(data) {
+                                                            $("#danger").hide();
+                                                            $("#warning").hide();
+                                                            
+                                                            if (data.error) {
+                                                                    $("#danger").html(data.error).show();
+                                                            } else {
+                                                                    $("#result").html(wilcoxon_table(data, test, alpha)).show();
+                                                            }
+                                                            
+                                                    },
+                                                    error : function(e) {
+                                                            console.log('error: ' + e);
+                                                    }
+                                            }).always(labrozadeangel);
                 case "ranking":
 					$.ajax({
 						type: "POST", url: url, dataType: "json",
@@ -194,7 +227,7 @@ $(document).ready(function(){
 						error : function(e) {
 							console.log('error: ' + e);
 						}
-					});
+					}).always(labrozadeangel);
 					break;
 			}
         }

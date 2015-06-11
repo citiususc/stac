@@ -52,87 +52,88 @@ G.add_edge("sample_ranking", "aligned_ranks_test", label="k < 5\nor n < 2k")
 for edge in G.edges(): G.edge[edge[0]][edge[1]].update({'label': " " + G.edge[edge[0]][edge[1]].get('label', "") + " ", 'style': G.edge[edge[0]][edge[1]].get('style', "")+",filled", 'fillcolor': 'white'})
 
 def evaluate_test(data):
+    gl = G.copy()
     selection = []
     # Tree logic
     if data['normality'] and data['homocedasticity']:
         selection.extend([
-            G.node["parametric_conditions"],
-            G.edge["parametric_conditions"]["parametric"],
-            G.node["parametric"],
-            G.edge["parametric"]["groups_parametric"],
-            G.node["groups_parametric"]
+            gl.node["parametric_conditions"],
+            gl.edge["parametric_conditions"]["parametric"],
+            gl.node["parametric"],
+            gl.edge["parametric"]["groups_parametric"],
+            gl.node["groups_parametric"]
         ])
         
         if data['k'] > 2:
             selection.extend([
-                G.edge["groups_parametric"]["anova"],
-                G.node["anova"]
+                gl.edge["groups_parametric"]["anova"],
+                gl.node["anova"]
             ])
             test = 'anova'
         else:
             selection.extend([
-                G.edge["groups_parametric"]["paired_ttest"],
-                G.node["paired_ttest"]
+                gl.edge["groups_parametric"]["paired_ttest"],
+                gl.node["paired_ttest"]
             ])
             if data['paired']:
                 selection.extend([
-                    G.edge["paired_ttest"]["ttest_rel"],
-                    G.node["ttest_rel"]
+                    gl.edge["paired_ttest"]["ttest_rel"],
+                    gl.node["ttest_rel"]
                 ])
                 test = 'ttest'
             else:
                 selection.extend([
-                    G.edge["paired_ttest"]["ttest_ind"],
-                    G.node["ttest_ind"]
+                    gl.edge["paired_ttest"]["ttest_ind"],
+                    gl.node["ttest_ind"]
                 ])
                 test = 'ttest_ind'
     else:
         selection.extend([
-            G.node["parametric_conditions"],
-            G.edge["parametric_conditions"]["nonparametric"],
-            G.node["nonparametric"],
-            G.edge["nonparametric"]["groups_nonparametric"],
-            G.node["groups_nonparametric"]
+            gl.node["parametric_conditions"],
+            gl.edge["parametric_conditions"]["nonparametric"],
+            gl.node["nonparametric"],
+            gl.edge["nonparametric"]["groups_nonparametric"],
+            gl.node["groups_nonparametric"]
         ])
         if data['k'] > 2:
             selection.extend([
-                G.edge["groups_nonparametric"]["sample_ranking"],
-                G.node["sample_ranking"]
+                gl.edge["groups_nonparametric"]["sample_ranking"],
+                gl.node["sample_ranking"]
             ])
             
             if data['k'] < 5 or data['n'] < 2*data['k']:
                 selection.extend([
-                    G.edge["sample_ranking"]["aligned_ranks_test"],
-                    G.node["aligned_ranks_test"]
+                    gl.edge["sample_ranking"]["aligned_ranks_test"],
+                    gl.node["aligned_ranks_test"]
                 ])
                 test = 'aligned_ranks'
             else:
                 selection.extend([
-                    G.edge["sample_ranking"]["friedman_test"],
-                    G.node["friedman_test"]
+                    gl.edge["sample_ranking"]["friedman_test"],
+                    gl.node["friedman_test"]
                 ])
                 test = 'friedman'
         else:
             selection.extend([
-                G.edge["groups_nonparametric"]["paired_wilcoxon"],
-                G.node["paired_wilcoxon"]
+                gl.edge["groups_nonparametric"]["paired_wilcoxon"],
+                gl.node["paired_wilcoxon"]
             ])
             if data['paired']:
                 selection.extend([
-                    G.edge["paired_wilcoxon"]["wilcoxon_test"],
-                    G.node["wilcoxon_test"]
+                    gl.edge["paired_wilcoxon"]["wilcoxon_test"],
+                    gl.node["wilcoxon_test"]
                 ])
                 test = 'wilcoxon'
             else:
                 selection.extend([
-                    G.edge["paired_wilcoxon"]["mannwhitneyu_test"],
-                    G.node["mannwhitneyu_test"]
+                    gl.edge["paired_wilcoxon"]["mannwhitneyu_test"],
+                    gl.node["mannwhitneyu_test"]
                 ])
                 test = 'mannwhitneyu'
            
     for v in selection: v.update({"fillcolor": fillcolor})
         
-    return {'test': test, 'graph': str(nx.to_agraph(G))}
+    return {'test': test, 'graph': str(nx.to_agraph(gl))}
 
     
 def clean_missing_values(values, delete_row=True):

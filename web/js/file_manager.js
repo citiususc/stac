@@ -19,24 +19,25 @@ $(document).ready(function() {
                         header: true,
                         dynamicTyping: true,
                         complete: function(results) {
-                            var data = {};
-                            data["dataset"] = [];
-                            var key = results.meta.fields[0];
-                            if (results.data.map(function(row) { return isNaN(row[key]); }).reduce(function(prev, curr, index, array) { return prev && curr; })) {
-                                results.meta.fields = results.meta.fields.splice(1);
-                                results.data.forEach(function(row) {
-                                    data["dataset"].push(row[key]);
-                                    delete row[key];
-                                });
-                            }
-                            data["names"] = results.meta.fields;
-                            
-                            var values = {};
-                            results.meta.fields.forEach(function(field) {
-                                values[field] = [];
-                            });
-
                             try {
+                                if (results.meta.fields.length < 2) throw "Too few columns";
+                                var data = {};
+                                data["dataset"] = [];
+                                var key = results.meta.fields[0];
+                                if (results.data.map(function(row) { return isNaN(row[key]); }).reduce(function(prev, curr, index, array) { return prev && curr; })) {
+                                    results.meta.fields = results.meta.fields.splice(1);
+                                    results.data.forEach(function(row) {
+                                        data["dataset"].push(row[key]);
+                                        delete row[key];
+                                    });
+                                }
+                                data["names"] = results.meta.fields;
+                                
+                                var values = {};
+                                results.meta.fields.forEach(function(field) {
+                                    values[field] = [];
+                                });
+                            
                                 results.data.forEach(function(row) {
                                     if ($.map(row, function(v) {return v;}).length == results.meta.fields.length) {
                                         results.meta.fields.forEach(function(field) {
@@ -60,7 +61,7 @@ $(document).ready(function() {
                                                             
                                 window.location = APP_CONFIG.app_url + "/data.html";
                             } catch (err) {
-                                $("#danger_file").html("<strong>"+ err +"</strong>");
+                                $("#danger_file").html("<strong>Format not valid, please read the <a href=\"#helpModal\" data-toggle=\"modal\" more-info=\"file\">expected format</a></strong>");
                                 $("#danger_file").show();
                                 $('#formfile').trigger('reset');
                             }
@@ -72,6 +73,10 @@ $(document).ready(function() {
 	if ($(document).find("#file_table").length > 0) {
 		show_file();
 	}
+	
+	$(document).on('hide.bs.modal', '#modal_fichero', function () {
+            $("#danger_file").hide();
+        });
 });
 
 function show_file() {

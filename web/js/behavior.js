@@ -24,7 +24,7 @@ $(document).ready(function(){
 	});
 	
 	if (!sessionStorage.getItem("data")) {
-		$("#warning").html("There is no file uploaded with the data needed to do the test. Please upload one before applying any test.");
+		$("#warning").html("There is no file uploaded with the data needed to do the test. Please <a href=\"#modal_fichero\" data-toggle=\"modal\">upload</a> one before applying any test.");
 		$("#warning").show();
 		$('#apply').prop('disabled', true);
 	} else {

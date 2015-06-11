@@ -34,6 +34,7 @@ function loadStyle(url, callback) {
 loadStyle("fonts/Roboto.css");
 loadStyle("css/bootstrap.min.css");
 loadStyle("css/dashboard.css");
+loadStyle("//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css");
 
 loadScript("js/jquery.min.js", function() {
     loadScript("js/config.js", function() {

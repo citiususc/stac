@@ -10,6 +10,7 @@ from scipy.stats import ttest_ind, ttest_rel, wilcoxon, mannwhitneyu
 
 __all__ = ['anova_test',
            'bonferroni_test',
+           'binomial_sign_test',
            'wilcoxon_test',
            'test_ranking',
            'friedman_test',
