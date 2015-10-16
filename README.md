@@ -37,39 +37,39 @@ The following directory tree shows the most important files with a short descrip
 STAC
 │-- README.md
 │-- License 
-│-- stac/                                # Python library sources
+│-- stac/                       # Python library sources
 │   │-- parametric.py
 │   │-- nonparametric.py
 │   │-- unit_tests.py
-│   └-- doc/                             # Sphinx documentation
-│-- api/                                   # Rest services sources
-│   │-- app.wsgi                     # To load from apache
-│   │-- services.py                 # Bottle implementation
+│   └-- doc/                    # Sphinx documentation
+│-- api/                        # Rest services sources
+│   │-- app.wsgi                # To load from apache
+│   │-- services.py             # Bottle implementation
 │   │-- utils.py
-│   └-- apidoc/                        # Swagger documentation
-│-- web/                                 # Rest services sources
-│   │-- header.html               # Header of all pages
-│   │-- topbar.html                # Top menu
-│   │-- index.html                  # Index page
-│   │-- modals.html              # Modal elements
-│   │-- help.html                   # Help content
-│   │-- data.html                   # File content table
-│   │-- \*.html                       # The other html files are the test forms
-│   │-- css/                             # Style files
-│   │-- fonts/                          # Font files
-│   │-- img/                            # Image files
-│   └-- js/                                # Javascript sources
-│       │-- lib/                           # Javascript external libraries
-│       │-- loader.js                 # Loads scripts and styles dynamically
-│       │-- config.js                 # Configurations of the website
-│       │-- layout.js                 # Dynamic layout loader
-│       │-- behavior.js             # Event handlers
-│       │-- file_manager.js      # File related event handlers
-│       │-- export.js                # Functions to export tables to CSV and Latex
-│       └-- tests.js                  # Functions to call the STAC API
-└-- docker/                           # Docker image resources
-         │-- Dockerfile              # Instructions to build the stac image
-         └-- stac.conf               # Apache site configuration
+│   └-- apidoc/                 # Swagger documentation
+│-- web/                        # Rest services sources
+│   │-- header.html             # Header of all pages
+│   │-- topbar.html             # Top menu
+│   │-- index.html              # Index page
+│   │-- modals.html             # Modal elements
+│   │-- help.html               # Help content
+│   │-- data.html               # File content table
+│   │-- \*.html                 # The other html files are the test forms
+│   │-- css/                    # Style files
+│   │-- fonts/                  # Font files
+│   │-- img/                    # Image files
+│   └-- js/                     # Javascript sources
+│       │-- lib/                # Javascript external libraries
+│       │-- loader.js           # Loads scripts and styles dynamically
+│       │-- config.js           # Configurations of the website
+│       │-- layout.js           # Dynamic layout loader
+│       │-- behavior.js         # Event handlers
+│       │-- file_manager.js     # File related event handlers
+│       │-- export.js           # Functions to export tables to CSV and Latex
+│       └-- tests.js            # Functions to call the STAC API
+└-- docker/                     # Docker image resources
+        │-- Dockerfile          # Instructions to build the stac image
+        └-- stac.conf           # Apache site configuration
 ```
 
 Build and deployment
