@@ -1,0 +1,165 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>scipy.stats.levene &mdash; STAC Release Candidate documentation</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     'Release Candidate',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="STAC Release Candidate documentation" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li><a href="index.html">STAC Release Candidate documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/scipy.stats.levene.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="scipy-stats-levene">
+<h1>scipy.stats.levene<a class="headerlink" href="#scipy-stats-levene" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="scipy.stats.levene">
+<tt class="descclassname">scipy.stats.</tt><tt class="descname">levene</tt><big>(</big><em>*args</em>, <em>**kwds</em><big>)</big><a class="headerlink" href="#scipy.stats.levene" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform Levene test for equal variances.</p>
+<p>The Levene test tests the null hypothesis that all input samples
+are from populations with equal variances.  Levene&#8217;s test is an
+alternative to Bartlett&#8217;s test <cite>bartlett</cite> in the case where
+there are significant deviations from normality.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>sample1, sample2, ...</strong> : array_like</p>
+<blockquote>
+<div><p>The sample data, possibly with different lengths</p>
+</div></blockquote>
+<p><strong>center</strong> : {&#8216;mean&#8217;, &#8216;median&#8217;, &#8216;trimmed&#8217;}, optional</p>
+<blockquote>
+<div><p>Which function of the data to use in the test.  The default
+is &#8216;median&#8217;.</p>
+</div></blockquote>
+<p><strong>proportiontocut</strong> : float, optional</p>
+<blockquote>
+<div><p>When <cite>center</cite> is &#8216;trimmed&#8217;, this gives the proportion of data points
+to cut from each end. (See <cite>scipy.stats.trim_mean</cite>.)
+Default is 0.05.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>W</strong> : float</p>
+<blockquote>
+<div><p>The test statistic.</p>
+</div></blockquote>
+<p><strong>p-value</strong> : float</p>
+<blockquote class="last">
+<div><p>The p-value for the test.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>Three variations of Levene&#8217;s test are possible.  The possibilities
+and their recommended usages are:</p>
+<blockquote>
+<div><ul class="simple">
+<li>&#8216;median&#8217; : Recommended for skewed (non-normal) distributions&gt;</li>
+<li>&#8216;mean&#8217; : Recommended for symmetric, moderate-tailed distributions.</li>
+<li>&#8216;trimmed&#8217; : Recommended for heavy-tailed distributions.</li>
+</ul>
+</div></blockquote>
+<p class="rubric">References</p>
+<table class="docutils citation" frame="void" id="r10" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[R10]</a></td><td><a class="reference external" href="http://www.itl.nist.gov/div898/handbook/eda/section3/eda35a.htm">http://www.itl.nist.gov/div898/handbook/eda/section3/eda35a.htm</a></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="r11" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[R11]</a></td><td>Levene, H. (1960). In Contributions to Probability and Statistics:
+Essays in Honor of Harold Hotelling, I. Olkin et al. eds.,
+Stanford University Press, pp. 278-292.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="r12" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id3">[R12]</a></td><td>Brown, M. B. and Forsythe, A. B. (1974), Journal of the American
+Statistical Association, 69, 364-367</td></tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li><a href="index.html">STAC Release Candidate documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2015, Ismael.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.1.
+    </div>
+  </body>
+</html>

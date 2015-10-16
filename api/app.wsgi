@@ -6,7 +6,7 @@ os.chdir(os.path.dirname(__file__))
 import bottle
 from bottle import Bottle
 
-import servicios # importa los servicios REST
+import services # importa los servicios REST
 
 application = bottle.default_app() # Carga la aplicacion por defecto con los servicios REST
 root = Bottle()

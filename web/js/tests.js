@@ -1,11 +1,14 @@
 $(document).ready(function(){
-        function labrozadeangel() {
-            label = $("#apply label");
-            label.toggleClass("glyphicon-refresh");
-            label.toggleClass("glyphicon-refresh-animate");
-            label.toggleClass("glyphicon-play");
-            $("#apply").prop("disabled", false);
-        }
+    // Idle visual feedback when applying a test  
+    function idleFeedBack() {
+        label = $("#apply label");
+        label.toggleClass("glyphicon-refresh");
+        label.toggleClass("glyphicon-refresh-animate");
+        label.toggleClass("glyphicon-play");
+        $("#apply").prop("disabled", false);
+    }
+    
+    // Event handler for applying a test
 	$(document).on('click', '#apply', function() {
         if(!sessionStorage.getItem("data")) {
             $("#danger").html("<strong>¡Upload a file!</strong> In the top right of the navigation bar you can select and upload a file by clicking <it>Upload file</it>. Then, click <it>Show file</it> to watch its contents.");
@@ -28,16 +31,16 @@ $(document).ready(function(){
             }
             
 			$("#apply").prop("disabled", true);
-                        label = $("#apply label");
-                        label.toggleClass("glyphicon-play");
-                        label.toggleClass("glyphicon-refresh");
-                        label.toggleClass("glyphicon-refresh-animate");
+            label = $("#apply label");
+            label.toggleClass("glyphicon-play");
+            label.toggleClass("glyphicon-refresh");
+            label.toggleClass("glyphicon-refresh-animate");
 			switch (type) {
                 case "assistant":
 					$.ajax({
 						type: "POST", url: APP_CONFIG.api_url+"/assistant", dataType: "json",
                         contentType: "application/json",
-                        data: sessionStorage.data,
+                        data: JSON.stringify(JSON.parse(sessionStorage.data).values),
 						success : function(data) {
 							$("#danger").hide();
 							$("#warning").hide();
@@ -62,13 +65,13 @@ $(document).ready(function(){
 						error : function(e) {
 							console.log('error: ' + e);
 						}
-					}).always(labrozadeangel);
+					}).always(idleFeedBack);
 					break;
 				case "normality":
 					$.ajax({
 						type: "POST", url: url, dataType: "json",
                         contentType: "application/json",
-                        data: sessionStorage.data,
+                        data: JSON.stringify(JSON.parse(sessionStorage.data).values),
 						success : function(data) {
 							$("#danger").hide();
 							$("#warning").hide();
@@ -86,13 +89,13 @@ $(document).ready(function(){
 						error : function(e) {
 							console.log('error: ' + e);
 						}
-					}).always(labrozadeangel);
+					}).always(idleFeedBack);
 					break;
 				case "homocedasticity":
 					$.ajax({
 						type: "POST", url: url, dataType: "json",
                         contentType: "application/json",
-                        data: sessionStorage.data,
+                        data: JSON.stringify(JSON.parse(sessionStorage.data).values),
 						success : function(data) {
 							$("#danger").hide();
 							$("#warning").hide();
@@ -108,13 +111,13 @@ $(document).ready(function(){
 						error : function(e) {
 							console.log('error: ' + e);
 						}
-					}).always(labrozadeangel);
+					}).always(idleFeedBack);
 					break;
 				case "anova":
 					$.ajax({
 						type: "POST", url: url, dataType: "json",
                         contentType: "application/json",
-                        data: sessionStorage.data,
+                        data: JSON.stringify(JSON.parse(sessionStorage.data).values),
 						success : function(data) {
 							$("#danger").hide();
 							$("#warning").hide();
@@ -132,7 +135,7 @@ $(document).ready(function(){
 						error : function(e) {
 							console.log('error: ' + e);
 						}
-					}).always(labrozadeangel);
+					}).always(idleFeedBack);
 					break;
 				case "ttest":
                     var group1 = $("#group1").val()
@@ -140,7 +143,7 @@ $(document).ready(function(){
 					$.ajax({
 						type: "POST", url: url, dataType: "json",
                         contentType: "application/json",
-                        data: JSON.stringify({values: {group1: JSON.parse(sessionStorage.data).values[group1], group2: JSON.parse(sessionStorage.data).values[group2]}}),
+                        data: JSON.stringify({group1: JSON.parse(sessionStorage.data).values[group1], group2: JSON.parse(sessionStorage.data).values[group2]}),
 						success : function(data) {
 							$("#danger").hide();
 							$("#warning").hide();
@@ -157,7 +160,7 @@ $(document).ready(function(){
 						error : function(e) {
 							console.log('error: ' + e);
 						}
-					}).always(labrozadeangel);
+					}).always(idleFeedBack);
 					break;
 				case "wilcoxon":
                     var group1 = $("#group1").val()
@@ -165,7 +168,7 @@ $(document).ready(function(){
 					$.ajax({
 						type: "POST", url: url, dataType: "json",
                         contentType: "application/json",
-                        data: JSON.stringify({values: {group1: JSON.parse(sessionStorage.data).values[group1], group2: JSON.parse(sessionStorage.data).values[group2]}}),
+                        data:  JSON.stringify({group1: JSON.parse(sessionStorage.data).values[group1], group2: JSON.parse(sessionStorage.data).values[group2]}),
 						success : function(data) {
 							$("#danger").hide();
 							$("#warning").hide();
@@ -180,7 +183,7 @@ $(document).ready(function(){
 						error : function(e) {
 							console.log('error: ' + e);
 						}
-					}).always(labrozadeangel);
+					}).always(idleFeedBack);
 					break;
                 case "binomialsign":
                         var group1 = $("#group1").val()
@@ -188,27 +191,27 @@ $(document).ready(function(){
                                             $.ajax({
                                                     type: "POST", url: url, dataType: "json",
                             contentType: "application/json",
-                            data: JSON.stringify({values: {group1: JSON.parse(sessionStorage.data).values[group1], group2: JSON.parse(sessionStorage.data).values[group2]}}),
-                                                    success : function(data) {
-                                                            $("#danger").hide();
-                                                            $("#warning").hide();
-                                                            
-                                                            if (data.error) {
-                                                                    $("#danger").html(data.error).show();
-                                                            } else {
-                                                                    $("#result").html(wilcoxon_table(data, test, alpha)).show();
-                                                            }
-                                                            
-                                                    },
-                                                    error : function(e) {
-                                                            console.log('error: ' + e);
-                                                    }
-                                            }).always(labrozadeangel);
+                            data: JSON.stringify({group1: JSON.parse(sessionStorage.data).values[group1], group2: JSON.parse(sessionStorage.data).values[group2]}),
+                            success : function(data) {
+                                    $("#danger").hide();
+                                    $("#warning").hide();
+                                    
+                                    if (data.error) {
+                                            $("#danger").html(data.error).show();
+                                    } else {
+                                            $("#result").html(wilcoxon_table(data, test, alpha)).show();
+                                    }
+                                    
+                            },
+                            error : function(e) {
+                                    console.log('error: ' + e);
+                            }
+                    }).always(idleFeedBack);
                 case "ranking":
 					$.ajax({
 						type: "POST", url: url, dataType: "json",
                         contentType: "application/json",
-                        data: sessionStorage.data,
+                        data: JSON.stringify(JSON.parse(sessionStorage.data).values),
 						success : function(data) {
 							$("#danger").hide();
 							$("#warning").hide();
@@ -227,7 +230,7 @@ $(document).ready(function(){
 						error : function(e) {
 							console.log('error: ' + e);
 						}
-					}).always(labrozadeangel);
+					}).always(idleFeedBack);
 					break;
 			}
         }
@@ -235,6 +238,7 @@ $(document).ready(function(){
 });
 
 
+// Transforms the output of a normality test into HTML tables
 function normality_table(data, names, test, alpha) {
     var salida = 
     "<div class=\"table-responsive\"><h2>Results</h2>\
@@ -259,6 +263,7 @@ function normality_table(data, names, test, alpha) {
     return salida;
 }
 
+// Transforms the output of a homoscedasticity test into HTML tables
 function homocedasticity_table(data, test, alpha) {
     var salida = 
     "<div class=\"table-responsive\"><h2>Results</h2>\
@@ -278,6 +283,7 @@ function homocedasticity_table(data, test, alpha) {
     return salida;
 }
 
+// Transforms the output of a t-test into HTML tables
 function ttest_table(data, test, alpha) {
     var salida = 
     "<div class=\"table-responsive\"><h2>Results</h2>\
@@ -297,6 +303,7 @@ function ttest_table(data, test, alpha) {
     return salida;
 }
 
+// Transforms the output of an ANOVA test into HTML tables
 function anova_table(data, test, alpha) {
     var salida = 
     "<div class=\"table-responsive\"><h2>Results</h2>\
@@ -316,6 +323,7 @@ function anova_table(data, test, alpha) {
     return salida;
 }
 
+// Transforms the output of a wilcoxon test into HTML tables
 function wilcoxon_table(data, test, alpha) {
 	var salida = 
     "<div class=\"table-responsive\"><h2>Results</h2>\
@@ -335,6 +343,7 @@ function wilcoxon_table(data, test, alpha) {
     return salida;
 }
 
+// Transforms the output of a ranking test into HTML tables
 function ranking_table(data, test, alpha) {
     var salida = 
     "<div class=\"table-responsive\"><h2>Results</h2>\
@@ -364,6 +373,7 @@ function ranking_table(data, test, alpha) {
     return salida;
 }
 
+// Transforms the output of a post-hoc test with control method into HTML tables
 function control_method_table(data, test, alpha) {
     var salida = 
 	"<table class=\"table table-hover table-striped\">\
@@ -384,6 +394,7 @@ function control_method_table(data, test, alpha) {
     return salida;
 }
 
+// Transforms the output of a post-hoc test without control method into HTML tables
 function multi_posthoc_table(data, test, alpha) {
     var salida = 
 	"<hr><div class=\"table-responsive\">\

@@ -1,3 +1,7 @@
+/**
+ * Contains the layout loading process
+ */
+
 $(function(){
 	$.get('header.html', function(content) {
 		$("head").append(content);

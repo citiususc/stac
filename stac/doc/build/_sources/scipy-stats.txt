@@ -9,3 +9,10 @@ Tests for two groups comparison
     ttest_rel
     wilcoxon
     mannwhitneyu
+
+.. currentmodule:: stac.nonparametric_tests
+
+.. autosummary::
+    :toctree:
+
+    binomial_sign_test

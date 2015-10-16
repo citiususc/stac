@@ -1,0 +1,16 @@
+Non-parametric tests for Multiple Comparison
+********************************************
+.. currentmodule:: scipy.stats
+
+.. autosummary::
+    :toctree:
+
+    wilcoxon
+    mannwhitneyu
+
+.. currentmodule:: stac.nonparametric_tests
+
+.. autosummary::
+    :toctree:
+
+    binomial_sign_test

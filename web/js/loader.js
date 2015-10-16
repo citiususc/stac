@@ -1,3 +1,9 @@
+/**
+ * Load a javascript file
+ * 
+ * @param {string} url - The url of the script to load
+ * @param {function} callback - the function to call when when the script is loaded
+ */
 function loadScript(url, callback) {
     // Adding the script tag to the head as suggested before
     var head = document.getElementsByTagName('head')[0];
@@ -14,6 +20,12 @@ function loadScript(url, callback) {
     head.appendChild(script);
 }
 
+/**
+ * Load a CSS file
+ * 
+ * @param {string} url - The url of the CSS file to load
+ * @param {function} callback - the function to call when when the CSS is loaded
+ */
 function loadStyle(url, callback) {
     // Adding the script tag to the head as suggested before
     var head = document.getElementsByTagName('head')[0];
@@ -31,15 +43,17 @@ function loadStyle(url, callback) {
 }
 
 
+// Load styles
 loadStyle("fonts/Roboto.css");
 loadStyle("css/bootstrap.min.css");
 loadStyle("css/dashboard.css");
 loadStyle("//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css");
 
-loadScript("js/jquery.min.js", function() {
+// Load scripts
+loadScript("js/lib/jquery.min.js", function() {
     loadScript("js/config.js", function() {
-        loadScript("js/bootstrap.min.js");
-        loadScript("js/papaparse.js");
+        loadScript("js/lib/bootstrap.min.js");
+        loadScript("js/lib/papaparse.js");
         loadScript("js/layout.js");
         loadScript("js/behavior.js");
         loadScript("js/file_manager.js");

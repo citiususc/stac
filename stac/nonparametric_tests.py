@@ -7,6 +7,26 @@ import itertools as it
 
 
 def binomial_sign_test(*args):
+    """
+        Performs a binomial sign test for two dependent samples.
+        Tests the hypothesis that the two dependent samples represent two different populations.
+        
+        Parameters
+        ----------
+        sample1, sample2: array_like
+            The sample measurements for each group.
+            
+        Returns
+        -------
+        B-value : float
+            The computed B-value of the test.
+        p-value : float
+            The associated p-value from the B-distribution.
+            
+        References
+        ----------
+        D.J. Sheskin, Handbook of parametric and nonparametric statistical procedures. crc Press, 2003, Test 19: The Binomial Sign Test for Two Dependent Samples
+    """
     k = len(args)
     if k != 2: raise ValueError('The test needs two samples')
     n = len(args[0])
@@ -30,6 +50,31 @@ def binomial_sign_test(*args):
         
 
 def friedman_test(*args):
+    """
+        Performs a Friedman ranking test.
+        Tests the hypothesis that in a set of k dependent samples groups (where k >= 2) at least two of the groups represent populations with different median values.
+        
+        Parameters
+        ----------
+        sample1, sample2, ... : array_like
+            The sample measurements for each group.
+            
+        Returns
+        -------
+        F-value : float
+            The computed F-value of the test.
+        p-value : float
+            The associated p-value from the F-distribution.
+        rankings : array_like
+            The ranking for each group.
+        pivots : array_like
+            The pivotal quantities for each group.
+            
+        References
+        ----------
+        M. Friedman, The use of ranks to avoid the assumption of normality implicit in the analysis of variance, Journal of the American Statistical Association 32 (1937) 674–701.
+        D.J. Sheskin, Handbook of parametric and nonparametric statistical procedures. crc Press, 2003, Test 25: The Friedman Two-Way Analysis of Variance by Ranks
+    """
     k = len(args)
     if k < 2: raise ValueError('Less than 2 levels')
     n = len(args[0])
@@ -54,6 +99,31 @@ def friedman_test(*args):
 
 
 def friedman_aligned_ranks_test(*args):
+    """
+        Performs a Friedman aligned ranks ranking test.
+        Tests the hypothesis that in a set of k dependent samples groups (where k >= 2) at least two of the groups represent populations with different median values.
+        The difference with a friedman test is that it uses the median of each group to construct the ranking, which is useful when the number of samples is low.
+        
+        Parameters
+        ----------
+        sample1, sample2, ... : array_like
+            The sample measurements for each group.
+            
+        Returns
+        -------
+        Chi2-value : float
+            The computed Chi2-value of the test.
+        p-value : float
+            The associated p-value from the Chi2-distribution.
+        rankings : array_like
+            The ranking for each group.
+        pivots : array_like
+            The pivotal quantities for each group.
+            
+        References
+        ----------
+         J.L. Hodges, E.L. Lehmann, Ranks methods for combination of independent experiments in analysis of variance, Annals of Mathematical Statistics 33 (1962) 482–497.
+    """
     k = len(args)
     if k < 2: raise ValueError('Less than 2 levels')
     n = len(args[0])
@@ -88,6 +158,31 @@ def friedman_aligned_ranks_test(*args):
 
 
 def quade_test(*args):
+    """
+        Performs a Quade ranking test.
+        Tests the hypothesis that in a set of k dependent samples groups (where k >= 2) at least two of the groups represent populations with different median values.
+        The difference with a friedman test is that it uses the median for each sample to wiehgt the ranking.
+        
+        Parameters
+        ----------
+        sample1, sample2, ... : array_like
+            The sample measurements for each group.
+            
+        Returns
+        -------
+        F-value : float
+            The computed F-value of the test.
+        p-value : float
+            The associated p-value from the F-distribution.
+        rankings : array_like
+            The ranking for each group.
+        pivots : array_like
+            The pivotal quantities for each group.
+            
+        References
+        ----------
+        D. Quade, Using weighted rankings in the analysis of complete blocks with additive block effects, Journal of the American Statistical Association 74 (1979) 680–683.
+    """
     k = len(args)
     if k < 2: raise ValueError('Less than 2 levels')
     n = len(args[0])
@@ -125,10 +220,36 @@ def quade_test(*args):
     return F, p_value, rankings_avg, rankings_cmp
 
 def bonferroni_dunn_test(ranks, control=None):
+    """
+        Performs a Bonferroni-Dunn post-hoc test using the pivot quantities obtained by a ranking test.
+        Tests the hypothesis that the ranking of the control method is different to each of the other methods.
+        
+        Parameters
+        ----------
+        pivots : dictionary_like
+            A dictionary with format 'groupname':'pivotal quantity' 
+        control : string optional
+            The name of the control method (one vs all), default None (all vs all) 
+            
+        Returns
+        ----------
+        Comparions : array-like
+            Strings identifier of each comparison with format 'group_i vs group_j'
+        Z-values : array-like
+            The computed Z-value statistic for each comparison.
+        p-values : array-like
+            The associated p-value from the Z-distribution wich depends on the index of the comparison
+        Adjusted p-values : array-like
+            The associated adjusted p-values wich can be compared with a significance level
+            
+        References
+        ----------
+        O.J. Dunn, Multiple comparisons among means, Journal of the American Statistical Association 56 (1961) 52–64.
+    """
     k = len(ranks)
     values = ranks.values()
     keys = ranks.keys()
-    if not control:
+    if not control :
         control_i = values.index(min(values))
     else:
         control_i = keys.index(control)
@@ -144,10 +265,36 @@ def bonferroni_dunn_test(ranks, control=None):
     
     
 def holm_test(ranks, control=None):
+    """
+        Performs a Holm post-hoc test using the pivot quantities obtained by a ranking test.
+        Tests the hypothesis that the ranking of the control method is different to each of the other methods.
+        
+        Parameters
+        ----------
+        pivots : dictionary_like
+            A dictionary with format 'groupname':'pivotal quantity' 
+        control : string optional
+            The name of the control method (one vs all), default None (all vs all) 
+            
+        Returns
+        ----------
+        Comparions : array-like
+            Strings identifier of each comparison with format 'group_i vs group_j'
+        Z-values : array-like
+            The computed Z-value statistic for each comparison.
+        p-values : array-like
+            The associated p-value from the Z-distribution wich depends on the index of the comparison
+        Adjusted p-values : array-like
+            The associated adjusted p-values wich can be compared with a significance level
+            
+        References
+        ----------
+        O.J. S. Holm, A simple sequentially rejective multiple test procedure, Scandinavian Journal of Statistics 6 (1979) 65–70.
+    """
     k = len(ranks)
     values = ranks.values()
     keys = ranks.keys()
-    if not control:
+    if not control :
         control_i = values.index(min(values))
     else:
         control_i = keys.index(control)
@@ -163,10 +310,36 @@ def holm_test(ranks, control=None):
     
     
 def hochberg_test(ranks, control=None):
+    """
+        Performs a Hochberg post-hoc test using the pivot quantities obtained by a ranking test.
+        Tests the hypothesis that the ranking of the control method is different to each of the other methods.
+        
+        Parameters
+        ----------
+        pivots : dictionary_like
+            A dictionary with format 'groupname':'pivotal quantity' 
+        control : string optional
+            The name of the control method,  default the group with minimum ranking
+            
+        Returns
+        ----------
+        Comparions : array-like
+            Strings identifier of each comparison with format 'group_i vs group_j'
+        Z-values : array-like
+            The computed Z-value statistic for each comparison.
+        p-values : array-like
+            The associated p-value from the Z-distribution wich depends on the index of the comparison
+        Adjusted p-values : array-like
+            The associated adjusted p-values wich can be compared with a significance level
+            
+        References
+        ----------
+        Y. Hochberg, A sharper Bonferroni procedure for multiple tests of significance, Biometrika 75 (1988) 800–803.
+    """
     k = len(ranks)
     values = ranks.values()
     keys = ranks.keys()
-    if not control:
+    if not control :
         control_i = values.index(min(values))
     else:
         control_i = keys.index(control)
@@ -181,10 +354,36 @@ def hochberg_test(ranks, control=None):
     return comparisons, z_values, p_values, adj_p_values
 
 def li_test(ranks, control=None):
+    """
+        Performs a Li post-hoc test using the pivot quantities obtained by a ranking test.
+        Tests the hypothesis that the ranking of the control method is different to each of the other methods.
+        
+        Parameters
+        ----------
+        pivots : dictionary_like
+            A dictionary with format 'groupname':'pivotal quantity' 
+        control : string optional
+            The name of the control method,  default the group with minimum ranking
+            
+        Returns
+        ----------
+        Comparions : array-like
+            Strings identifier of each comparison with format 'group_i vs group_j'
+        Z-values : array-like
+            The computed Z-value statistic for each comparison.
+        p-values : array-like
+            The associated p-value from the Z-distribution wich depends on the index of the comparison
+        Adjusted p-values : array-like
+            The associated adjusted p-values wich can be compared with a significance level
+            
+        References
+        ----------
+        J. Li, A two-step rejection procedure for testing multiple hypotheses, Journal of Statistical Planning and Inference 138 (2008) 1521–1527.
+    """
     k = len(ranks)
     values = ranks.values()
     keys = ranks.keys()
-    if not control:
+    if not control :
         control_i = values.index(min(values))
     else:
         control_i = keys.index(control)
@@ -199,10 +398,36 @@ def li_test(ranks, control=None):
     return comparisons, z_values, p_values, adj_p_values
 
 def finner_test(ranks, control=None):
+    """
+        Performs a Finner post-hoc test using the pivot quantities obtained by a ranking test.
+        Tests the hypothesis that the ranking of the control method is different to each of the other methods.
+        
+        Parameters
+        ----------
+        pivots : dictionary_like
+            A dictionary with format 'groupname':'pivotal quantity' 
+        control : string optional
+            The name of the control method,  default the group with minimum ranking
+            
+        Returns
+        ----------
+        Comparions : array-like
+            Strings identifier of each comparison with format 'group_i vs group_j'
+        Z-values : array-like
+            The computed Z-value statistic for each comparison.
+        p-values : array-like
+            The associated p-value from the Z-distribution wich depends on the index of the comparison
+        Adjusted p-values : array-like
+            The associated adjusted p-values wich can be compared with a significance level
+            
+        References
+        ----------
+        H. Finner, On a monotonicity problem in step-down multiple test procedures, Journal of the American Statistical Association 88 (1993) 920–923.
+    """
     k = len(ranks)
     values = ranks.values()
     keys = ranks.keys()
-    if not control:
+    if not control :
         control_i = values.index(min(values))
     else:
         control_i = keys.index(control)
@@ -218,6 +443,30 @@ def finner_test(ranks, control=None):
 
 
 def nemenyi_multitest(ranks):
+    """
+        Performs a Nemenyi post-hoc test using the pivot quantities obtained by a ranking test.
+        Tests the hypothesis that the ranking of each pair of groups are different.
+        
+        Parameters
+        ----------
+        pivots : dictionary_like
+            A dictionary with format 'groupname':'pivotal quantity' 
+            
+        Returns
+        ----------
+        Comparions : array-like
+            Strings identifier of each comparison with format 'group_i vs group_j'
+        Z-values : array-like
+            The computed Z-value statistic for each comparison.
+        p-values : array-like
+            The associated p-value from the Z-distribution wich depends on the index of the comparison
+        Adjusted p-values : array-like
+            The associated adjusted p-values wich can be compared with a significance level
+            
+        References
+        ----------
+        Bonferroni-Dunn: O.J. Dunn, Multiple comparisons among means, Journal of the American Statistical Association 56 (1961) 52–64.
+    """
     k = len(ranks)
     values = ranks.values()
     keys = ranks.keys()
@@ -235,6 +484,30 @@ def nemenyi_multitest(ranks):
 
 
 def holm_multitest(ranks):
+    """
+        Performs a Holm post-hoc test using the pivot quantities obtained by a ranking test.
+        Tests the hypothesis that the ranking of each pair of groups are different.
+        
+        Parameters
+        ----------
+        pivots : dictionary_like
+            A dictionary with format 'groupname':'pivotal quantity' 
+            
+        Returns
+        ----------
+        Comparions : array-like
+            Strings identifier of each comparison with format 'group_i vs group_j'
+        Z-values : array-like
+            The computed Z-value statistic for each comparison.
+        p-values : array-like
+            The associated p-value from the Z-distribution wich depends on the index of the comparison
+        Adjusted p-values : array-like
+            The associated adjusted p-values wich can be compared with a significance level
+            
+        References
+        ----------
+        O.J. S. Holm, A simple sequentially rejective multiple test procedure, Scandinavian Journal of Statistics 6 (1979) 65–70.
+    """
     k = len(ranks)
     values = ranks.values()
     keys = ranks.keys()
@@ -252,6 +525,30 @@ def holm_multitest(ranks):
 
 
 def hochberg_multitest(ranks):
+    """
+        Performs a Hochberg post-hoc test using the pivot quantities obtained by a ranking test.
+        Tests the hypothesis that the ranking of each pair of groups are different.
+        
+        Parameters
+        ----------
+        pivots : dictionary_like
+            A dictionary with format 'groupname':'pivotal quantity' 
+            
+        Returns
+        ----------
+        Comparions : array-like
+            Strings identifier of each comparison with format 'group_i vs group_j'
+        Z-values : array-like
+            The computed Z-value statistic for each comparison.
+        p-values : array-like
+            The associated p-value from the Z-distribution wich depends on the index of the comparison
+        Adjusted p-values : array-like
+            The associated adjusted p-values wich can be compared with a significance level
+            
+        References
+        ----------
+        Y. Hochberg, A sharper Bonferroni procedure for multiple tests of significance, Biometrika 75 (1988) 800–803.
+    """
     k = len(ranks)
     values = ranks.values()
     keys = ranks.keys()
@@ -269,6 +566,30 @@ def hochberg_multitest(ranks):
     
 
 def finner_multitest(ranks):
+    """
+        Performs a Finner post-hoc test using the pivot quantities obtained by a ranking test.
+        Tests the hypothesis that the ranking of each pair of groups are different.
+        
+        Parameters
+        ----------
+        pivots : dictionary_like
+            A dictionary with format 'groupname':'pivotal quantity' 
+            
+        Returns
+        ----------
+        Comparions : array-like
+            Strings identifier of each comparison with format 'group_i vs group_j'
+        Z-values : array-like
+            The computed Z-value statistic for each comparison.
+        p-values : array-like
+            The associated p-value from the Z-distribution wich depends on the index of the comparison
+        Adjusted p-values : array-like
+            The associated adjusted p-values wich can be compared with a significance level
+            
+        References
+        ----------
+        H. Finner, On a monotonicity problem in step-down multiple test procedures, Journal of the American Statistical Association 88 (1993) 920–923.
+    """
     k = len(ranks)
     values = ranks.values()
     keys = ranks.keys()
@@ -285,7 +606,11 @@ def finner_multitest(ranks):
     return comparisons, z_values, p_values, adj_p_values
 
 
-def S(k):
+def _S(k):
+    """
+        Helper function for the Shaffer test.
+        It obtains the number of independent test hypotheses when using an All vs All strategy using the number of groups to be compared.
+    """
     if k == 0 or k == 1:
         return {0}
     else:
@@ -298,13 +623,37 @@ def S(k):
 
 
 def shaffer_multitest(ranks):
+    """
+        Performs a Shaffer post-hoc test using the pivot quantities obtained by a ranking test.
+        Tests the hypothesis that the ranking of each pair of groups are different.
+        
+        Parameters
+        ----------
+        pivots : dictionary_like
+            A dictionary with format 'groupname':'pivotal quantity' 
+            
+        Returns
+        ----------
+        Comparions : array-like
+            Strings identifier of each comparison with format 'group_i vs group_j'
+        Z-values : array-like
+            The computed Z-value statistic for each comparison.
+        p-values : array-like
+            The associated p-value from the Z-distribution wich depends on the index of the comparison
+        Adjusted p-values : array-like
+            The associated adjusted p-values wich can be compared with a significance level
+            
+        References
+        ----------
+        J. Li, A two-step rejection procedure for testing multiple hypotheses, Journal of Statistical Planning and Inference 138 (2008) 1521–1527.
+    """
     k = len(ranks)
     values = ranks.values()
     keys = ranks.keys()
     versus = list(it.combinations(range(k), 2))
     
     m = int(k*(k-1)/2.)
-    A = S(int((1 + sp.sqrt(1+4*m*2))/2))
+    A = _S(int((1 + sp.sqrt(1+4*m*2))/2))
     t = [max([a for a in A if a <= m-i]) for i in range(m)]
 
     comparisons = [keys[vs[0]] + " vs " + keys[vs[1]] for vs in versus]

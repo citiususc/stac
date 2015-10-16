@@ -14,6 +14,7 @@ import scipy.stats as st
 def anova_test(*args):
     """
         Performs a 1-way ANOVA.
+        Tests the hypothesis that in a set of k independent samples groups (where k >= 2) at least two of the groups represent populations with different mean values.
         
         Parameters
         ----------
@@ -26,6 +27,12 @@ def anova_test(*args):
             The computed F-value of the test.
         p-value : float
             The associated p-value from the F-distribution.
+        pivots : array_like
+            The pivotal quantities for each group.
+            
+        References
+        ----------
+        D.J. Sheskin, Handbook of parametric and nonparametric statistical procedures. crc Press, 2003, Test 21: The Single-Factor Between-Subjects Analysis of Variance
     """
     k = len(args)
     if k < 2: raise ValueError('Less than 2 groups')
@@ -56,6 +63,7 @@ def anova_test(*args):
 def anova_within_test(*args):
     """
         Performs a 1-way ANOVA within cases.
+        Tests the hypothesis that in a set of k dependent sample groups (where k >= 2) at least two of the groups represent populations with different mean values.
         
         Parameters
         ----------
@@ -63,11 +71,17 @@ def anova_within_test(*args):
             The sample measurements for each group.
             
         Returns
-        -------
+        ----------
         F-value : float
             The computed F-value of the test.
         p-value : float
             The associated p-value from the F-distribution.
+        pivots : array_like
+            The pivotal quantities for each group.
+            
+        References
+        ----------
+        D.J. Sheskin, Handbook of parametric and nonparametric statistical procedures. crc Press, 2003, Test 24: The Single-Factor Within-Subjects Analysis of Variance
     """
     k = len(args)
     if k < 2: raise ValueError('Less than 2 groups')
@@ -100,6 +114,31 @@ def anova_within_test(*args):
     return F, p_value, pivots
 
 def bonferroni_test(pivots, n):
+    """
+        Performs a Bonferroni-Dunn post-hoc test using the pivot quantities obtained by an ANOVA test.
+        
+        Parameters
+        ----------
+        pivots : dictionary_like
+            A dictionary with format 'groupname':'pivotal quantity' 
+        n : int
+            Number of samples per group
+            
+        Returns
+        ----------
+        Comparions : array-like
+            Strings identifier of each comparison with format 'group_i vs group_j'
+        T-values: array-like
+            The computed T-value statistic for each comparison.
+        p-values: array-like
+            The associated p-value from the T-distribution wich depends on the index of the comparison
+        Adjusted p-values: array-like
+            The associated adjusted p-values wich can be compared with a significance level
+            
+        References
+        ----------
+        D.J. Sheskin, Handbook of parametric and nonparametric statistical procedures. crc Press, 2003, Test 21b: The Bonferroni-Dunn test
+    """
     k = len(pivots)
     values = pivots.values()
     keys = pivots.keys()

@@ -1,0 +1,840 @@
+swagger: '2.0'
+
+info:
+  title: STAC API
+  description: Through this API you can verify the results obtained from the learning algorithms applying the statistic tests to the experiments, which, among other uses, support the decision making process (the election of the most suitable algorithm, for example).
+  version: "0.9"
+
+host: tec.citius.usc.es
+basePath: /stac/api
+
+consumes: 
+  - application/json
+  
+
+paths:
+  /assistant:
+    post:
+      tags:
+        - assistant
+      description: Obtains the best fitted test for the data provided.
+      parameters:
+        - name: data
+          in: body
+          description: Contains pairs "groupname":[val1, val2, ....] for each sample group
+          required: true
+          schema:
+            $ref: Data
+      responses:
+        200:
+          description: Successful response
+        400:
+          description: Bad request/body parameters
+          schema:
+            $ref: Error
+  
+#########################################################
+# Normality
+#########################################################
+  /shapiro/{alpha}:
+    post:
+      tags:
+        - normality
+      description: Perform the Shapiro-Wilk test for normality. <br/>More info in [STAC Python Documentation](http://tec.citius.usc.es/stac/doc/scipy.stats.shapiro.html).
+      parameters:
+        - name: data
+          in: body
+          description: Contains pairs "groupname":[val1, val2, ....] for each sample group
+          required: true
+          schema:
+            $ref: Data
+            
+        - name: alpha
+          in: path
+          description: Significance level
+          required: true
+          type: number
+          format: float
+          default: 0.05
+      responses:
+        200:
+          description: Successful response
+          schema:
+            $ref: NormalityResult
+        400:
+          description: Bad request/body parameters
+          schema:
+            $ref: Error
+            
+  /agostino/{alpha}:
+    post:
+      tags:
+        - normality
+      description: Tests whether a sample differs from a normal distribution. <br/>More info in [STAC Python Documentation](http://tec.citius.usc.es/stac/doc/scipy.stats.normaltest.html).
+      parameters:
+        - name: data
+          in: body
+          description: Contains pairs "groupname":[val1, val2, ....] for each sample group
+          required: true
+          schema:
+            $ref: Data
+            
+        - name: alpha
+          in: path
+          description: Significance level
+          required: true
+          type: number
+          format: float
+          default: 0.05
+      responses:
+        200:
+          description: Successful response
+          schema:
+            $ref: NormalityResult
+        400:
+          description: Bad request/body parameters
+          schema:
+            $ref: Error
+            
+  /kolmogorov/{alpha}:
+    post:
+      tags:
+        - normality
+      description: Perform the Kolmogorov-Smirnov test for goodness of fit. <br>More info in [STAC Python Documentation](http://tec.citius.usc.es/stac/doc/scipy.stats.kstest.html).
+      parameters:
+        - name: data
+          in: body
+          description: Contains pairs "groupname":[val1, val2, ....] for each sample group
+          required: true
+          schema:
+            $ref: Data
+            
+        - name: alpha
+          in: path
+          description: Significance level
+          required: true
+          type: number
+          format: float
+          default: 0.05
+      responses:
+        200:
+          description: Successful response
+          schema:
+            $ref: NormalityResult
+        400:
+          description: Bad request/body parameters
+          schema:
+            $ref: Error
+            
+#########################################################
+# Normality
+#########################################################
+  /levene/{alpha}:
+    post:
+      tags:
+        - homoscedasticity
+      description: Perform Levene test for equal variances. <br/>More info in [STAC Python Documentation](http://tec.citius.usc.es/stac/doc/scipy.stats.levene.html).
+      parameters:
+        - name: data
+          in: body
+          description: Contains pairs "groupname":[val1, val2, ....] for each sample group
+          required: true
+          schema:
+            $ref: Data
+            
+        - name: alpha
+          in: path
+          description: Significance level
+          required: true
+          type: number
+          format: float
+          default: 0.05
+      responses:
+        200:
+          description: Successful response
+          schema:
+            $ref: PairedResult
+        400:
+          description: Bad request/body parameters
+          schema:
+            $ref: Error
+            
+#########################################################
+# Parametric two groups  
+#########################################################
+  /ttest/{alpha}:
+    post:
+      tags:
+        - parametric
+        - two groups
+        - paired
+      description: Calculates the T-test on TWO RELATED samples of scores, a and b. <br/>More info in [STAC Python Documentation](http://tec.citius.usc.es/stac/doc/scipy.stats.ttest_rel.html).
+      parameters:
+        - name: data
+          in: body
+          description: Contains pairs "groupname":[val1, val2, ....] for each sample group
+          required: true
+          schema:
+            $ref: Data
+            
+        - name: alpha
+          in: path
+          description: Significance level
+          required: true
+          type: number
+          format: float
+          default: 0.05
+      responses:
+        200:
+          description: Successful response
+          schema:
+            $ref: PairedResult
+        400:
+          description: Bad request/body parameters
+          schema:
+            $ref: Error
+            
+  /ttest-ind/{alpha}:
+    post:
+      tags:
+        - parametric
+        - two groups
+        - unpaired
+      description: Calculates the T-test for the means of TWO INDEPENDENT samples of scores. <br/>More info in [STAC Python Documentation](http://tec.citius.usc.es/stac/doc/scipy.stats.ttest_ind.html).
+      parameters:
+        - name: data
+          in: body
+          description: Contains pairs "groupname":[val1, val2, ....] for each sample group
+          required: true
+          schema:
+            $ref: Data
+            
+        - name: alpha
+          in: path
+          description: Significance level
+          required: true
+          type: number
+          format: float
+          default: 0.05
+      responses:
+        200:
+          description: Successful response
+          schema:
+            $ref: PairedResult
+        400:
+          description: Bad request/body parameters
+          schema:
+            $ref: Error
+  
+#########################################################
+# Non-parametric two groups  
+#########################################################
+  /binomialsign/{alpha}:
+    post:
+      tags:
+        - non parametric
+        - two groups
+        - paired
+      description: Performs a binomial sign test for two independent samples. </br>Tests the hypothesis that the two dependent samples represent two different populations. <br/>More info in [STAC Python Documentation](http://tec.citius.usc.es/stac/doc/stac.nonparametric_tests.binomial_sign_test.html).
+      parameters:
+        - name: data
+          in: body
+          description: Contains pairs "groupname":[val1, val2, ....] for each sample group
+          required: true
+          schema:
+            $ref: Data
+            
+        - name: alpha
+          in: path
+          description: Significance level
+          required: true
+          type: number
+          format: float
+          default: 0.05
+      responses:
+        200:
+          description: Successful response
+          schema:
+            $ref: PairedResult
+        400:
+          description: Bad request/body parameters
+          schema:
+            $ref: Error
+  
+  /wilcoxon/{alpha}:
+    post:
+      tags:
+        - non parametric
+        - two groups
+        - paired
+      description: Calculate the Wilcoxon signed-rank test. <br/>The Wilcoxon signed-rank test tests the null hypothesis that two related paired samples come from the same distribution. In particular, it tests whether the distribution of the differences x - y is symmetric about zero. It is a non-parametric version of the paired T-test. <br/>More info in [STAC Python Documentation](http://tec.citius.usc.es/stac/doc/scipy.stats.wilcoxon.html).
+      parameters:
+        - name: data
+          in: body
+          description: Contains pairs "groupname":[val1, val2, ....] for each sample group
+          required: true
+          schema:
+            $ref: Data
+            
+        - name: alpha
+          in: path
+          description: Significance level
+          required: true
+          type: number
+          format: float
+          default: 0.05
+      responses:
+        200:
+          description: Successful response
+          schema:
+            $ref: PairedResult
+        400:
+          description: Bad request/body parameters
+          schema:
+            $ref: Error
+            
+  /mannwhitneyu/{alpha}:
+    post:
+      tags:
+        - non parametric
+        - two groups
+        - unpaired
+      description:  Computes the Mann-Whitney rank test on samples x and y. <br/> More info in [STAC Python Documentation](http://tec.citius.usc.es/stac/doc/scipy.stats.mannwhitneyu.html).
+      parameters: 
+        - name: data
+          in: body
+          description: Contains pairs "groupname":[val1, val2, ....] for each sample group
+          required: true
+          schema:
+            $ref: Data
+            
+        - name: alpha
+          in: path
+          description: Significance level
+          required: true
+          type: number
+          format: float
+          default: 0.05
+      responses:
+        200:
+          description: Successful response
+          schema:
+            $ref: PairedResult
+        400:
+          description: Bad request/body parameters
+          schema:
+            $ref: Error
+
+#########################################################
+# Parametric multiple groups  
+#########################################################
+  /anova/{alpha}:
+    post:
+      tags:
+        - parametric
+        - multiple groups
+        - unpaired
+      description: Performs a 1-way ANOVA. Tests the hypothesis that in a set of k independent samples groups (where k >= 2) at least two of the groups represent populations with different mean values. <br> More info in [STAC Python Documentation](http://tec.citius.usc.es/stac/doc/stac.parametric_tests.anova_test.html).
+      parameters:
+        - name: data
+          in: body
+          description: Contains pairs "groupname":[val1, val2, ....] for each sample group
+          required: true
+          schema:
+            $ref: Data
+          
+        - name: alpha
+          in: path
+          description: Significance level
+          required: true
+          type: number
+          format: float
+          default: 0.05
+      responses:
+        200:
+          description: Successful response
+          schema:
+            $ref: AnovaResult
+        400:
+          description: Bad request/body parameters
+          schema:
+            $ref: Error
+            
+  /anova-within/{alpha}:
+    post:
+      tags:
+        - parametric
+        - multiple groups
+        - paired
+      description: Performs a 1-way ANOVA within cases. Tests the hypothesis that in a set of k dependent sample groups (where k >= 2) at least two of the groups represent populations with different mean values. <br> More info in [STAC Python Documentation](http://tec.citius.usc.es/stac/doc/stac.parametric_tests.anova_within_test.html).
+      parameters:
+        - name: data
+          in: body
+          description: Contains pairs "groupname":[val1, val2, ....] for each sample group
+          required: true
+          schema:
+            $ref: Data
+          
+        - name: alpha
+          in: path
+          description: Significance level
+          required: true
+          type: number
+          format: float
+          default: 0.05
+      responses:
+        200:
+          description: Successful response
+          schema:
+            $ref: AnovaResult
+        400:
+          description: Bad request/body parameters
+          schema:
+            $ref: Error
+
+
+#########################################################
+# Non-parametric multiple groups  
+#########################################################
+  /friedman/{post_hoc}/{control}/{alpha}:
+    post:
+      tags:
+        - non parametric
+        - multiple groups
+        - control method
+        - unpaired
+      description: Performs a Friedman ranking test. Tests the hypothesis that in a set of k dependent samples groups (where k >= 2) at least two of the groups represent populations with different median values. <br> More info in [STAC Python Documentation](http://tec.citius.usc.es/stac/doc/stac.nonparametric_tests.friedman_test.html).
+      parameters:
+        - name: data
+          in: body
+          description: Contains pairs "groupname":[val1, val2, ....] for each sample group
+          required: true
+          schema:
+            $ref: Data
+        
+        - name: post_hoc
+          in: path
+          description: Post-hoc analysis method
+          required: true
+          type: array
+          items:
+            type: string
+          enum:
+            - bonferroni_dunn_test
+            - holm_test
+            - finner_test
+            - li_test
+          default: bonferroni_dunn_test
+          
+        - name: control
+          in: path
+          description: Control group
+          required: true
+          type: string
+          
+        - name: alpha
+          in: path
+          description: Significance level
+          required: true
+          type: number
+          format: float
+          default: 0.05
+      responses:
+        200:
+          description: Successful response
+          schema:
+            $ref: RankingResult
+        400:
+          description: Bad request/body parameters
+          schema:
+            $ref: Error
+            
+  /friedman_aligned_ranks/{post_hoc}/{control}/{alpha}:
+    post:
+      tags:
+        - non parametric
+        - multiple groups
+        - control method
+        - unpaired
+      description: Performs a Friedman aligned ranks ranking test. Tests the hypothesis that in a set of k dependent samples groups (where k >= 2) at least two of the groups represent populations with different median values. <br> More info in [STAC Python Documentation](http://tec.citius.usc.es/stac/doc/stac.nonparametric_tests.friedman_aligned_ranks_test.html).
+      parameters:
+        - name: data
+          in: body
+          description: Contains pairs "groupname":[val1, val2, ....] for each sample group
+          required: true
+          schema:
+            $ref: Data
+        
+        - name: post_hoc
+          in: path
+          description: Post-hoc analysis method
+          required: true
+          type: array
+          items:
+            type: string
+          enum:
+            - bonferroni_dunn_test
+            - holm_test
+            - finner_test
+            - li_test
+          default: bonferroni_dunn_test
+          
+        - name: control
+          in: path
+          description: Control group
+          required: true
+          type: string
+          
+        - name: alpha
+          in: path
+          description: Significance level
+          required: true
+          type: number
+          format: float
+          default: 0.05
+      responses:
+        200:
+          description: Successful response
+          schema:
+            $ref: RankingResult
+        400:
+          description: Bad request/body parameters
+          schema:
+            $ref: Error
+            
+  /quade/{post_hoc}/{control}/{alpha}:
+    post:
+      tags:
+        - non parametric
+        - multiple groups
+        - control method
+        - unpaired
+      description: Performs a Quade ranking test. Tests the hypothesis that in a set of k dependent samples groups (where k >= 2) at least two of the groups represent populations with different median values. <br> More info in [STAC Python Documentation](http://tec.citius.usc.es/stac/doc/stac.nonparametric_tests.quade_test.html).
+      parameters:
+        - name: data
+          in: body
+          description: Contains pairs "groupname":[val1, val2, ....] for each sample group
+          required: true
+          schema:
+            $ref: Data
+        
+        - name: post_hoc
+          in: path
+          description: Post-hoc analysis method
+          required: true
+          type: array
+          items:
+            type: string
+          enum:
+            - bonferroni_dunn_test
+            - holm_test
+            - finner_test
+            - li_test
+          default: bonferroni_dunn_test
+          
+        - name: control
+          in: path
+          description: Control group
+          required: true
+          type: string
+          
+        - name: alpha
+          in: path
+          description: Significance level
+          required: true
+          type: number
+          format: float
+          default: 0.05
+      responses:
+        200:
+          description: Successful response
+          schema:
+            $ref: RankingResult
+        400:
+          description: Bad request/body parameters
+          schema:
+            $ref: Error
+            
+  /friedman/{post_hoc_multi}/{alpha}:
+    post:
+      tags:
+        - non parametric
+        - multiple groups
+        - unpaired
+      description: Performs a Friedman ranking test. Tests the hypothesis that in a set of k dependent samples groups (where k >= 2) at least two of the groups represent populations with different median values. <br> More info in [STAC Python Documentation](http://tec.citius.usc.es/stac/doc/stac.nonparametric_tests.friedman_test.html).
+      parameters:
+        - name: data
+          in: body
+          description: Contains pairs "groupname":[val1, val2, ....] for each sample group
+          required: true
+          schema:
+            $ref: Data
+        
+        - name: post_hoc_multi
+          in: path
+          description: Post-hoc analysis method
+          required: true
+          type: array
+          items:
+            type: string
+          enum:
+            - nemenyi_multitest
+            - holm_multitest
+            - finner_multitest
+            - hochberg_multitest
+            - shaffer_multitest
+          default: nemenyi_multitest
+          
+        - name: alpha
+          in: path
+          description: Significance level
+          required: true
+          type: number
+          format: float
+          default: 0.05
+      responses:
+        200:
+          description: Successful response
+          schema:
+            $ref: RankingResult
+        400:
+          description: Bad request/body parameters
+          schema:
+            $ref: Error
+    
+  /friedman_aligned_ranks/{post_hoc_multi}/{alpha}:
+    post:
+      tags:
+        - non parametric
+        - multiple groups
+        - unpaired
+      description: Performs a Friedman aligned ranks ranking test. Tests the hypothesis that in a set of k dependent samples groups (where k >= 2) at least two of the groups represent populations with different median values. <br> More info in [STAC Python Documentation](http://tec.citius.usc.es/stac/doc/stac.nonparametric_tests.friedman_aligned_ranks_test.html).
+      parameters:
+        - name: data
+          in: body
+          description: Contains pairs "groupname":[val1, val2, ....] for each sample group
+          required: true
+          schema:
+            $ref: Data
+        
+        - name: post_hoc_multi
+          in: path
+          description: Post-hoc analysis method
+          required: true
+          type: array
+          items:
+            type: string
+          enum:
+            - nemenyi_multitest
+            - holm_multitest
+            - finner_multitest
+            - hochberg_multitest
+            - shaffer_multitest
+          default: nemenyi_multitest
+
+        - name: alpha
+          in: path
+          description: Significance level
+          required: true
+          type: number
+          format: float
+          default: 0.05
+      responses:
+        200:
+          description: Successful response
+          schema:
+            $ref: RankingResult
+        400:
+          description: Bad request/body parameters
+          schema:
+            $ref: Error
+            
+  /quade/{post_hoc_multi}/{alpha}:
+    post:
+      tags:
+        - non parametric
+        - multiple groups
+        - unpaired
+      description: Performs a Quade ranking test. Tests the hypothesis that in a set of k dependent samples groups (where k >= 2) at least two of the groups represent populations with different median values. <br> More info in [STAC Python Documentation](http://tec.citius.usc.es/stac/doc/stac.nonparametric_tests.quade_test.html).
+      parameters:
+        - name: data
+          in: body
+          description: Contains pairs "groupname":[val1, val2, ....] for each sample group
+          required: true
+          schema:
+            $ref: Data
+        
+        - name: post_hoc_multi
+          in: path
+          description: Post-hoc analysis method
+          required: true
+          type: array
+          items:
+            type: string
+          enum:
+            - nemenyi_multitest
+            - holm_multitest
+            - finner_multitest
+            - hochberg_multitest
+            - shaffer_multitest
+          default: nemenyi_multitest
+          
+        - name: alpha
+          in: path
+          description: Significance level
+          required: true
+          type: number
+          format: float
+          default: 0.05
+      responses:
+        200:
+          description: Successful response
+          schema:
+            $ref: RankingResult
+        400:
+          description: Bad request/body parameters
+          schema:
+            $ref: Error
+
+#########################################################
+# JSON Schemas
+#########################################################
+definitions:
+  Error:
+    type: object
+    properties:
+      stack:
+        type: string
+        description: stacktrace of the error
+      error:
+        type: string
+        description: Informative error message
+        
+  NormalityResult:
+    type: object
+    properties:
+        p_value:
+            type: array
+            description: The associated p-values for each group
+            items:
+                type: number
+        result:
+            type: array
+            description: 1 if the null hypothesis is rejected
+            items:
+                type: number
+        statistic:
+            type: array
+            description: Statistics calculated for the test distribution for each group
+            items:
+                type: number
+        
+  PairedResult:
+    type: object
+    properties:
+        p_value:
+            type: number
+            description: The associated p-value 
+        result:
+            type: number
+            description: 1 if the null hypothesis is rejected
+        statistic:
+            type: number
+            description: Statistic calculated for the test distribution
+       
+  ControlPostHocResult:
+    properties:
+        control:
+            type: string
+            description: The control group that is going to be compared to the rest of groups
+            
+        comparisons:
+            type: array
+            description: Text that indicates which groups where involved in each comparison
+            items:
+                type: string
+        p_value:
+            type: array
+            description: The associated p-values for each comparison
+            items:
+                type: number
+        result:
+            type: array
+            description: 1 if the null hypothesis is rejected
+            items:
+                type: number
+        statistic:
+            type: array
+            description: Statistics calculated for the test distribution for each comparison
+            items:
+                type: number
+       
+  RankingResult:
+    type: object
+    properties:
+        ranking:
+            type: object
+            properties:
+                names:
+                    type: array
+                    description: Names of the groups sorted by ranking
+                    items:
+                        type: string
+                p_value:
+                    type: number
+                    description: The associated p-value
+                statistic:
+                    type: number
+                    description: Statistic calculated for the test distribution
+                rankings:
+                    type: array
+                    description: The sorted rankings
+                    items:
+                        type: number
+        post_hoc:
+            type: object
+            $ref: ControlPostHocResult
+            
+  PostHocResult:
+    properties:
+        comparisons:
+            type: array
+            description: Text that indicates which groups where involved in each comparison
+            items:
+                type: string
+        p_value:
+            type: array
+            description: The associated p-values for each comparison
+            items:
+                type: number
+        result:
+            type: array
+            description: 1 if the null hypothesis is rejected
+            items:
+                type: number
+        statistic:
+            type: array
+            description: Statistics calculated for the test distribution for each comparison
+            items:
+                type: number
+            
+  AnovaResult:
+    type: object
+    properties:
+        anova:
+            type: object
+            $ref: PairedResult
+        post_hoc:
+            type: object
+            $ref: PostHocResult
+        
+  Data:
+    properties:
+        group1:
+            type: array
+            items:
+                type: number
+        group2:
+            type: array
+            items:
+                type: number

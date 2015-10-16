@@ -1,4 +1,12 @@
-//Función para exportar archivos .tex
+/**
+ * Contains the functions to export the table info of the test results into LaTeX or CSV
+ */
+
+/**
+ * Exports a list of tables into LaTeX
+ * @param {list} table - List of tables to be exported
+ * @returns {string} The list of tables converted into LaTeX
+ */
 function exportTableToLaTeX($table) {
     switch ($table.length) {
         case 0:
@@ -65,7 +73,11 @@ function exportTableToLaTeX($table) {
     }
 }
 
-//Función para exportar archivos .csv
+/**
+ * Exports a list of tables into CSV
+ * @param {list} table - List of tables to be exported
+ * @returns {string} The list of tables converted into CSV
+ */
 function exportTableToCSV($table) {
     switch ($table.length) {
         case 0:

@@ -1,0 +1,143 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>scipy.stats.normaltest &mdash; STAC Release Candidate documentation</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     'Release Candidate',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="STAC Release Candidate documentation" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li><a href="index.html">STAC Release Candidate documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/scipy.stats.normaltest.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="scipy-stats-normaltest">
+<h1>scipy.stats.normaltest<a class="headerlink" href="#scipy-stats-normaltest" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="scipy.stats.normaltest">
+<tt class="descclassname">scipy.stats.</tt><tt class="descname">normaltest</tt><big>(</big><em>a</em>, <em>axis=0</em><big>)</big><a class="headerlink" href="#scipy.stats.normaltest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tests whether a sample differs from a normal distribution.</p>
+<p>This function tests the null hypothesis that a sample comes
+from a normal distribution.  It is based on D&#8217;Agostino and
+Pearson&#8217;s <a class="reference internal" href="#r13" id="id1">[R13]</a>, <a class="reference internal" href="#r14" id="id2">[R14]</a> test that combines skew and kurtosis to
+produce an omnibus test of normality.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>a</strong> : array_like</p>
+<blockquote>
+<div><p>The array containing the data to be tested.</p>
+</div></blockquote>
+<p><strong>axis</strong> : int or None</p>
+<blockquote>
+<div><p>If None, the array is treated as a single data set, regardless of
+its shape.  Otherwise, each 1-d array along axis <cite>axis</cite> is tested.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>k2</strong> : float or array</p>
+<blockquote>
+<div><p><cite>s^2 + k^2</cite>, where <cite>s</cite> is the z-score returned by <cite>skewtest</cite> and
+<cite>k</cite> is the z-score returned by <cite>kurtosistest</cite>.</p>
+</div></blockquote>
+<p><strong>p-value</strong> : float or array</p>
+<blockquote class="last">
+<div><p>A 2-sided chi squared probability for the hypothesis test.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">References</p>
+<table class="docutils citation" frame="void" id="r13" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[R13]</td><td><em>(<a class="fn-backref" href="#id1">1</a>, <a class="fn-backref" href="#id3">2</a>)</em> D&#8217;Agostino, R. B. (1971), &#8220;An omnibus test of normality for
+moderate and large sample size,&#8221; Biometrika, 58, 341-348</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="r14" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[R14]</td><td><em>(<a class="fn-backref" href="#id2">1</a>, <a class="fn-backref" href="#id4">2</a>)</em> D&#8217;Agostino, R. and Pearson, E. S. (1973), &#8220;Testing for
+departures from normality,&#8221; Biometrika, 60, 613-622</td></tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li><a href="index.html">STAC Release Candidate documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2015, Ismael.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.1.
+    </div>
+  </body>
+</html>

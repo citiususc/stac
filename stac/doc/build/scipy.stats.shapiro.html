@@ -1,0 +1,150 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>scipy.stats.shapiro &mdash; STAC Release Candidate documentation</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     'Release Candidate',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="STAC Release Candidate documentation" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li><a href="index.html">STAC Release Candidate documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/scipy.stats.shapiro.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="scipy-stats-shapiro">
+<h1>scipy.stats.shapiro<a class="headerlink" href="#scipy-stats-shapiro" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="scipy.stats.shapiro">
+<tt class="descclassname">scipy.stats.</tt><tt class="descname">shapiro</tt><big>(</big><em>x</em>, <em>a=None</em>, <em>reta=False</em><big>)</big><a class="headerlink" href="#scipy.stats.shapiro" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform the Shapiro-Wilk test for normality.</p>
+<p>The Shapiro-Wilk test tests the null hypothesis that the
+data was drawn from a normal distribution.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>x</strong> : array_like</p>
+<blockquote>
+<div><p>Array of sample data.</p>
+</div></blockquote>
+<p><strong>a</strong> : array_like, optional</p>
+<blockquote>
+<div><p>Array of internal parameters used in the calculation.  If these
+are not given, they will be computed internally.  If x has length
+n, then a must have length n/2.</p>
+</div></blockquote>
+<p><strong>reta</strong> : bool, optional</p>
+<blockquote>
+<div><p>Whether or not to return the internally computed a values.  The
+default is False.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>W</strong> : float</p>
+<blockquote>
+<div><p>The test statistic.</p>
+</div></blockquote>
+<p><strong>p-value</strong> : float</p>
+<blockquote>
+<div><p>The p-value for the hypothesis test.</p>
+</div></blockquote>
+<p><strong>a</strong> : array_like, optional</p>
+<blockquote class="last">
+<div><p>If <cite>reta</cite> is True, then these are the internally computed &#8220;a&#8221;
+values that may be passed into this function on future calls.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><tt class="xref py py-obj docutils literal"><span class="pre">anderson</span></tt></dt>
+<dd>The Anderson-Darling test for normality</dd>
+</dl>
+</div>
+<p class="rubric">References</p>
+<table class="docutils citation" frame="void" id="r15" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[R15]</a></td><td><a class="reference external" href="http://www.itl.nist.gov/div898/handbook/prc/section2/prc213.htm">http://www.itl.nist.gov/div898/handbook/prc/section2/prc213.htm</a></td></tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li><a href="index.html">STAC Release Candidate documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2015, Ismael.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.1.
+    </div>
+  </body>
+</html>

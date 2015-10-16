@@ -1,9 +1,17 @@
+/**
+ * Contains the handler functions for the upload file modal and data visualization
+ */
+
+
 $(document).ready(function() {
+    
+    // Event handler of uploading a file. It parses the file using papaparse
 	$(document).on('click', '#upload_file', function() {
 		var formData = new FormData($('#formfile')[0]);
 		var fichero = $("#file").val();
                 var text = $("#import_text").val();
                 
+                // Gets the file from the form
                 if (fichero == "" && text == "") {
                     $("#danger_file").html("<strong>You must enter either a text data or an input file.</strong>");
                     $("#danger_file").show();
@@ -15,6 +23,7 @@ $(document).ready(function() {
                         csvfile = text;
                     }
 
+                    // Parses file
                     Papa.parse(csvfile, {
                         header: true,
                         dynamicTyping: true,
@@ -23,6 +32,8 @@ $(document).ready(function() {
                                 if (results.meta.fields.length < 2) throw "Too few columns";
                                 var data = {};
                                 data["dataset"] = [];
+                                
+                                // Obtains the name of the groups/algorithms
                                 var key = results.meta.fields[0];
                                 if (results.data.map(function(row) { return isNaN(row[key]); }).reduce(function(prev, curr, index, array) { return prev && curr; })) {
                                     results.meta.fields = results.meta.fields.splice(1);
@@ -33,6 +44,7 @@ $(document).ready(function() {
                                 }
                                 data["names"] = results.meta.fields;
                                 
+                                // Obtains the values for each group
                                 var values = {};
                                 results.meta.fields.forEach(function(field) {
                                     values[field] = [];
@@ -54,10 +66,12 @@ $(document).ready(function() {
                                     }
                                 });
                                 
+                                // Stores the data in the sessionStorage as a string
                                 data["values"] = values;
                                 sessionStorage["data"] = JSON.stringify(data);
                                 $("#show_file").show();
                                 $('#info_file').html("Done!");
+                                console.log(data);
                                                             
                                 window.location = APP_CONFIG.app_url + "/data.html";
                             } catch (err) {
@@ -70,15 +84,20 @@ $(document).ready(function() {
                 }
 	});
 	
+    // Event handler to show the content of the file
 	if ($(document).find("#file_table").length > 0) {
 		show_file();
 	}
 	
+	// Event handler to remove the error bar when uploading files when the modal closes
 	$(document).on('hide.bs.modal', '#modal_fichero', function () {
             $("#danger_file").hide();
         });
 });
 
+/**
+ * Shows the content of the data upload to the application
+ */
 function show_file() {
     var data = JSON.parse(sessionStorage["data"]);
     

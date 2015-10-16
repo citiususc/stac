@@ -1,0 +1,8 @@
+Tests for homoscedasticity
+===============
+.. currentmodule:: scipy.stats
+
+.. autosummary::
+    :toctree:
+
+    levene

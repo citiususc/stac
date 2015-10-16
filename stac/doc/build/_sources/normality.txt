@@ -1,0 +1,10 @@
+Tests for normality
+===============
+.. currentmodule:: scipy.stats
+
+.. autosummary::
+    :toctree:
+
+    shapiro
+    normaltest
+    kstest

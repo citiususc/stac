@@ -1,0 +1,156 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Non-parametric tests for Multiple Comparison &mdash; STAC 0.7 documentation</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.7',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="STAC 0.7 documentation" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li><a href="index.html">STAC 0.7 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/nonparametric_multi.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="non-parametric-tests-for-multiple-comparison">
+<h1>Non-parametric tests for Multiple Comparison<a class="headerlink" href="#non-parametric-tests-for-multiple-comparison" title="Permalink to this headline">¶</a></h1>
+<p class="rubric">Ranking tests</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="stac.nonparametric_tests.friedman_test.html#stac.nonparametric_tests.friedman_test" title="stac.nonparametric_tests.friedman_test"><tt class="xref py py-obj docutils literal"><span class="pre">friedman_test</span></tt></a>(*args)</td>
+<td>Performs a Friedman ranking test.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="stac.nonparametric_tests.friedman_aligned_ranks_test.html#stac.nonparametric_tests.friedman_aligned_ranks_test" title="stac.nonparametric_tests.friedman_aligned_ranks_test"><tt class="xref py py-obj docutils literal"><span class="pre">friedman_aligned_ranks_test</span></tt></a>(*args)</td>
+<td>Performs a Friedman aligned ranks ranking test.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="stac.nonparametric_tests.quade_test.html#stac.nonparametric_tests.quade_test" title="stac.nonparametric_tests.quade_test"><tt class="xref py py-obj docutils literal"><span class="pre">quade_test</span></tt></a>(*args)</td>
+<td>Performs a Quade ranking test.</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Post-hoc 1 vs all tests</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">bonferroni_test</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="stac.nonparametric_tests.holm_test.html#stac.nonparametric_tests.holm_test" title="stac.nonparametric_tests.holm_test"><tt class="xref py py-obj docutils literal"><span class="pre">holm_test</span></tt></a>(ranks[,&nbsp;control])</td>
+<td>Performs a Holm post-hoc test using the pivot quantities obtained by a ranking test.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="stac.nonparametric_tests.finner_test.html#stac.nonparametric_tests.finner_test" title="stac.nonparametric_tests.finner_test"><tt class="xref py py-obj docutils literal"><span class="pre">finner_test</span></tt></a>(ranks[,&nbsp;control])</td>
+<td>Performs a Finner post-hoc test using the pivot quantities obtained by a ranking test.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="stac.nonparametric_tests.hochberg_test.html#stac.nonparametric_tests.hochberg_test" title="stac.nonparametric_tests.hochberg_test"><tt class="xref py py-obj docutils literal"><span class="pre">hochberg_test</span></tt></a>(ranks[,&nbsp;control])</td>
+<td>Performs a Hochberg post-hoc test using the pivot quantities obtained by a ranking test.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="stac.nonparametric_tests.li_test.html#stac.nonparametric_tests.li_test" title="stac.nonparametric_tests.li_test"><tt class="xref py py-obj docutils literal"><span class="pre">li_test</span></tt></a>(ranks[,&nbsp;control])</td>
+<td>Performs a Li post-hoc test using the pivot quantities obtained by a ranking test.</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Post-hoc all vs all tests</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="stac.nonparametric_tests.nemenyi_multitest.html#stac.nonparametric_tests.nemenyi_multitest" title="stac.nonparametric_tests.nemenyi_multitest"><tt class="xref py py-obj docutils literal"><span class="pre">nemenyi_multitest</span></tt></a>(ranks)</td>
+<td>Performs a Nemenyi post-hoc test using the pivot quantities obtained by a ranking test.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="stac.nonparametric_tests.holm_multitest.html#stac.nonparametric_tests.holm_multitest" title="stac.nonparametric_tests.holm_multitest"><tt class="xref py py-obj docutils literal"><span class="pre">holm_multitest</span></tt></a>(ranks)</td>
+<td>Performs a Holm post-hoc test using the pivot quantities obtained by a ranking test.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="stac.nonparametric_tests.finner_multitest.html#stac.nonparametric_tests.finner_multitest" title="stac.nonparametric_tests.finner_multitest"><tt class="xref py py-obj docutils literal"><span class="pre">finner_multitest</span></tt></a>(ranks)</td>
+<td>Performs a Finner post-hoc test using the pivot quantities obtained by a ranking test.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="stac.nonparametric_tests.hochberg_multitest.html#stac.nonparametric_tests.hochberg_multitest" title="stac.nonparametric_tests.hochberg_multitest"><tt class="xref py py-obj docutils literal"><span class="pre">hochberg_multitest</span></tt></a>(ranks)</td>
+<td>Performs a Hochberg post-hoc test using the pivot quantities obtained by a ranking test.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="stac.nonparametric_tests.shaffer_multitest.html#stac.nonparametric_tests.shaffer_multitest" title="stac.nonparametric_tests.shaffer_multitest"><tt class="xref py py-obj docutils literal"><span class="pre">shaffer_multitest</span></tt></a>(ranks)</td>
+<td>Performs a Shaffer post-hoc test using the pivot quantities obtained by a ranking test.</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li><a href="index.html">STAC 0.7 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2015, Ismael.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.1.
+    </div>
+  </body>
+</html>
