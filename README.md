@@ -93,8 +93,9 @@ This library was presented in the "IEEE International Conference on Fuzzy System
 
 ```
 @InProceedings{rodriguez-fdez2015stac,
-author={Ismael Rodr\'{i}guez-Fdez and Adri\'{a}n Canosa and Manuel Mucientes and Alberto Bugar\'{i}n},
-title={{STAC}: a web platform for the comparison of algorithms using statistical tests},
-booktitle = {Proceedings of the 2015 IEEE International Conference on Fuzzy Systems (FUZZ-IEEE)},   
-year={2015}}
+    author={Ismael Rodr\'{i}guez-Fdez and Adri\'{a}n Canosa and Manuel Mucientes and Alberto Bugar\'{i}n},
+    title={{STAC}: a web platform for the comparison of algorithms using statistical tests},
+    booktitle = {Proceedings of the 2015 IEEE International Conference on Fuzzy Systems (FUZZ-IEEE)},   
+    year={2015}
+}
 ```
