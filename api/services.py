@@ -1,10 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Fri Jan 31 12:49:31 2014
-
-@author: Adrián
-"""
-
 import sys, os
 sys.path = [os.path.dirname(__file__), os.path.dirname(os.path.dirname(__file__))] + sys.path
 from bottle import route, run, response, request, hook
@@ -44,16 +38,16 @@ def enable_cors():
 @route('/assistant', method=["POST", "OPTIONS"])
 @headers
 def asssistant():
-    values = request.json['values']
+    values = request.json
     data = {'n': len(values.values()[0]), 'k': len(values.keys())}
     
     # Paired?     
-    values_clean = clean_missing_values(request.json['values'])
+    values_clean = clean_missing_values(request.json)
     data['paired'] = True if data['n'] == len(values_clean.values()[0]) else False
     
     # Normality?
     alpha = 0.1
-    values_clean = clean_missing_values(request.json['values'], delete_row=False)
+    values_clean = clean_missing_values(request.json, delete_row=False)
     _, p_values = map(list, zip(*[st.shapiro(v) for v in values_clean.values()]))
     data['normality'] = int(reduce(lambda x,y: x and y, [p_value < alpha for p_value in p_values]))
     
@@ -69,7 +63,7 @@ def asssistant():
 @route('/binomialsign/<alpha:float>', method=["POST", "OPTIONS"])
 @headers
 def binomialsign(alpha=0.05):
-    values = clean_missing_values(request.json['values'])
+    values = clean_missing_values(request.json)
     statistic, p_value = npt.binomial_sign_test(values.values()[0], values.values()[1])
     result = int(p_value<alpha)
     return {"result" : result, "statistic" : statistic, "p_value" : p_value}
@@ -78,7 +72,7 @@ def binomialsign(alpha=0.05):
 @route('/wilcoxon/<alpha:float>', method=["POST", "OPTIONS"])
 @headers
 def wilcoxon(alpha=0.05):
-    values = clean_missing_values(request.json['values'])
+    values = clean_missing_values(request.json)
     statistic, p_value = st.wilcoxon(values.values()[0], values.values()[1])
     result = int(p_value<alpha)
     return {"result" : result, "statistic" : statistic, "p_value" : p_value}
@@ -88,7 +82,7 @@ def wilcoxon(alpha=0.05):
 @route('/mannwhitneyu/<alpha:float>', method=["POST", "OPTIONS"])
 @headers
 def mannwhitneyu(alpha=0.05):
-    values = clean_missing_values(request.json['values'], delete_row=False)
+    values = clean_missing_values(request.json, delete_row=False)
     statistic, p_value = st.mannwhitneyu(values.values()[0], values.values()[1], use_continuity="false")
     result = int(p_value*2<alpha)
     return {"result" : result, "statistic" : statistic, "p_value" : p_value*2}
@@ -126,7 +120,7 @@ def ranking(func):
 @headers
 @ranking
 def friedman(alpha=0.05, post_hoc="bonferroni_dunn_test", control=None):
-    values = clean_missing_values(request.json['values'])
+    values = clean_missing_values(request.json)
     statistic, p_value, rankings, ranking_cmp = npt.friedman_test(*values.values())
     rankings, names = map(list, zip(*sorted(zip(rankings, values.keys()), key=lambda t: t[0])))
     ranks = {key: ranking_cmp[i] for i,key in enumerate(values.keys())}
@@ -146,7 +140,7 @@ def friedman(alpha=0.05, post_hoc="bonferroni_dunn_test", control=None):
 @headers
 @ranking
 def friedman_aligned_ranks(alpha=0.05, post_hoc="bonferroni_dunn_test", control=None):
-    values = clean_missing_values(request.json['values'])
+    values = clean_missing_values(request.json)
     statistic, p_value, rankings, ranking_cmp = npt.friedman_aligned_ranks_test(*values.values())
     rankings, names = map(list, zip(*sorted(zip(rankings, values.keys()), key=lambda t: t[0])))
     ranks = {key: ranking_cmp[i] for i,key in enumerate(values.keys())}
@@ -165,7 +159,7 @@ def friedman_aligned_ranks(alpha=0.05, post_hoc="bonferroni_dunn_test", control=
 @headers
 @ranking
 def quade(alpha=0.05, post_hoc="bonferroni_dunn_test", control=None):
-    values = clean_missing_values(request.json['values'])
+    values = clean_missing_values(request.json)
     statistic, p_value, rankings, ranking_cmp = npt.quade_test(*values.values())
     rankings, names = map(list, zip(*sorted(zip(rankings, values.keys()), key=lambda t: t[0])))
     ranks = {key: ranking_cmp[i] for i,key in enumerate(values.keys())}
@@ -180,7 +174,7 @@ def quade(alpha=0.05, post_hoc="bonferroni_dunn_test", control=None):
 @route('/shapiro/<alpha:float>', method=["POST", "OPTIONS"])
 @headers
 def shapiro(alpha=0.05):
-    values = clean_missing_values(request.json['values'], delete_row=False)
+    values = clean_missing_values(request.json, delete_row=False)
     statistics, p_values = map(list, zip(*[st.shapiro(v) for v in values.values()]))
     result = [int(p_value < alpha) for p_value in p_values]
     return {"statistic": statistics, "p_value": p_values, "result": result}
@@ -189,7 +183,7 @@ def shapiro(alpha=0.05):
 @route('/kolmogorov/<alpha:float>', method=["POST", "OPTIONS"])
 @headers
 def kolmogorov(alpha=0.05):
-    values = clean_missing_values(request.json['values'], delete_row=False)
+    values = clean_missing_values(request.json, delete_row=False)
     statistics, p_values = map(list, zip(*[st.kstest(v, 'norm') for v in values.values()]))
     result = [int(p_value < alpha) for p_value in p_values]
     return {"statistic": statistics, "p_value": p_values, "result": result}
@@ -198,7 +192,7 @@ def kolmogorov(alpha=0.05):
 @route('/agostino/<alpha:float>', method=["POST", "OPTIONS"])
 @headers
 def agostino(alpha=0.05):
-    values = clean_missing_values(request.json['values'], delete_row=False)
+    values = clean_missing_values(request.json, delete_row=False)
     statistics, p_values = map(list, zip(*[st.normaltest(v) for v in values.values()]))
     result = [int(p_value < alpha) for p_value in p_values]
     return {"statistic": statistics, "p_value": p_values, "result": result}
@@ -207,7 +201,7 @@ def agostino(alpha=0.05):
 @route('/levene/<alpha:float>', method=["POST", "OPTIONS"])
 @headers
 def levene(alpha=0.05):
-    values = clean_missing_values(request.json['values'], delete_row=False)
+    values = clean_missing_values(request.json, delete_row=False)
     statistic, p_value = st.levene(*values.values())
     result = int(p_value < alpha)
     return {"statistic": statistic, "p_value": p_value, "result": result}
@@ -217,7 +211,7 @@ def levene(alpha=0.05):
 @route('/ttest/<alpha:float>', method=["POST", "OPTIONS"])
 @headers
 def ttest(alpha=0.05):
-    values = clean_missing_values(request.json['values'])
+    values = clean_missing_values(request.json)
     statistic, p_value = st.ttest_rel(values.values()[0], values.values()[1])
     result = int(p_value < alpha)
     return {"statistic": statistic.tolist(), "p_value": p_value, "result": result}
@@ -226,7 +220,7 @@ def ttest(alpha=0.05):
 @route('/ttest-ind/<alpha:float>', method=["POST", "OPTIONS"])
 @headers
 def ttest_ind(alpha=0.05):
-    values = clean_missing_values(request.json['values'])
+    values = clean_missing_values(request.json)
     statistic, p_value = st.ttest_ind(values.values()[0], values.values()[1])
     result = int(p_value < alpha)
     return {"statistic": statistic.tolist(), "p_value": p_value, "result": result}
@@ -236,7 +230,7 @@ def ttest_ind(alpha=0.05):
 @route('/anova/<alpha:float>', method=["POST", "OPTIONS"])
 @headers
 def anova(alpha=0.05):
-    values = clean_missing_values(request.json['values'])
+    values = clean_missing_values(request.json)
     statistic, p_value, pivots = pt.anova_test(*values.values())
     pivots_cmp = {key: pivots[i] for i,key in enumerate(values.keys())}
     comparisons, t_values, _, adj_p_values = pt.bonferroni_test(pivots_cmp, len(values.values()[0]))
@@ -258,7 +252,7 @@ def anova(alpha=0.05):
 @route('/anova-within/<alpha:float>', method=["POST", "OPTIONS"])
 @headers
 def anova(alpha=0.05):
-    values = clean_missing_values(request.json['values'])
+    values = clean_missing_values(request.json)
     statistic, p_value, pivots = pt.anova_within_test(*values.values())
     pivots_cmp = {key: pivots[i] for i,key in enumerate(values.keys())}
     comparisons, t_values, _, adj_p_values = pt.bonferroni_test(pivots_cmp, len(values.values()[0]))
