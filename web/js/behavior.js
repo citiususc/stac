@@ -78,7 +78,6 @@ $(document).ready(function(){
                 if( input.length ) {
                     input.val(log);
                 }
-            });
         });
     });
 });
