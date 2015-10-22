@@ -44,42 +44,13 @@ $(document).ready(function(){
     });
     
     // Event handler that shows the content to be exported when activating the modal
-    $(document).on('#modal_export show.bs.modal', function (e) {
-        var format = $("#export_format").val();
-        if (format == "latex") {
-            $("#export_text").val(exportTableToLaTeX($('table')));
-        } else {
-            $("#export_text").val(exportTableToCSV($('table')));
-        }
-    });
-    
-    // Event handler that changes the content exported when changed the combobox
-    $(document).on('change', '#export_format', function (e) {
-        var format = $("#export_format").val();
-        if (format == "latex") {
-            $("#export_text").val(exportTableToLaTeX($('table')));
-        } else {
-            $("#export_text").val(exportTableToCSV($('table')));
-        }
-    });
-    
-    // Event handler that perfoms feedback about the file selected
     $(document).on('change', '.btn-file :file', function() {
         var input = $(this),
             numFiles = input.get(0).files ? input.get(0).files.length : 1,
             label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
-        input.trigger('fileselect', [numFiles, label]);
+            $(this).parents('.input-group').find(':text').val(label);
     });
     
-    $(document).ready( function() {
-        $('.btn-file :file').on('fileselect', function(event, numFiles, label) {
-                var input = $(this).parents('.input-group').find(':text'),
-                                log = numFiles > 1 ? numFiles + ' files selected' : label;
-                if( input.length ) {
-                    input.val(log);
-                }
-        });
-    });
 });
 
 

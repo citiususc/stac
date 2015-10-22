@@ -74,14 +74,16 @@ STAC
 
 Build and deployment
 ====
-To build the project into a docker image, simple execute the following command:
+The project can be built into a [docker](https://www.docker.com/) image using only the docker folder of the project. To install docker, please follow the instructions [here](https://docs.docker.com/installation/).
+
+To build a docker image, simple execute the following command:
 ```
 docker build -t stac docker
 ```
 
 Then to deploy the docker image:
 ```
-docker run stac
+docker run -d -p 80:80 stac
 ```
 
 
