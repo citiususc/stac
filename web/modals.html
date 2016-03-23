@@ -22,7 +22,10 @@
 			<div class="modal-body">
 				<form class="form" id="formfile" enctype="multipart/form-data">
                                         <div id="danger_file" class="alert alert-danger" style="display:none"></div>
-                                        <p class="bg-warning">The data must be in csv format <label><a href="#helpModal" data-toggle="modal" more-info="file">[?]</a></label></p>
+                                        <p class="bg-warning">Data format: csv<label><a href="#helpModal" data-toggle="modal" more-info="file">[?]</a></label></p>
+										<p class="bg-warning">Data meaning: it is assumed in STAC that the lower the result of an algorithm on a problem,
+											the beter the performance of such algorithm. If this is not the case in your data file, just change the sign of each number in the file.
+											<label><a href="#helpModal" data-toggle="modal" more-info="meaning">[?]</a></label></p>
                                         <h5>Insert text:</h5>
                                         <div class="form-group">
                                             <textarea class="form-control" id="import_text" rows="10" placeholder=

@@ -24,11 +24,36 @@
 			</div>
 		</div>
 	</div>
+	<!--Info sobre maximización/minimización-->
+	<div class="panel panel-default">
+		<div class="panel-heading" role="tab">
+			<h4 class="panel-title">
+				<a data-toggle="collapse" data-parent="#accordion" href="#file_meaning">1. Data file format</a>
+			</h4>
+		</div>
+		<div id="file_meaning" class="panel-collapse collapse">
+			<div class="panel-body">
+				<p>It is assumed in STAC that the lower the result of an algorithm on a problem, the better the performance of such algorithm. Let us consider the following example:</p>
+				<img src="img/fichero.png" class="img-responsive" alt="Meaning fichero" width="130px;" height="290px;">
+				<br>
+				<p>It consists of the following elements:</p>
+				<ul>
+					<li>Here, on problem 4 (5th row) algorithm A performgs better than algorithm B (45 vs 48).</li>
+					<li>On the contrary, on problem 3 (4th row) algorithm A performs worse han algorithm B (64 vs 62).</li>
+				</ul>
+				<br>
+				<p>If your datafile does not meet this criteria (i.e., in your case the higher the value, the better the algorithm performance), there are a number of simple transformations you can apply to your data.
+					For example, just change the sign of each number in the file. In the previous example, the data file should look like:
+					<img src="img/ficheroNegativo.png" class="img-responsive" alt="Meaning fichero" width="130px;" height="290px;">
+				</p>
+			</div>
+		</div>
+	</div>
 	<!--Conceptos básicos de la web-->
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h4 class="panel-title">
-				<a data-toggle="collapse" data-parent="#accordion" href="#basic_info">2. Basic concepts</a>
+				<a data-toggle="collapse" data-parent="#accordion" href="#basic_info">3. Basic concepts</a>
 			</h4>
 		</div>
 		<div id="basic_info" class="panel-collapse collapse">
@@ -46,7 +71,7 @@
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h4 class="panel-title">
-				<a data-toggle="collapse" data-parent="#accordion" href="#parametric_info">3. Parametric vs Non-parametric</a>
+				<a data-toggle="collapse" data-parent="#accordion" href="#parametric_info">4. Parametric vs Non-parametric</a>
 			</h4>
 		</div>
 		<div id="parametric_info" class="panel-collapse collapse">
@@ -65,7 +90,7 @@
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h4 class="panel-title">
-				<a data-toggle="collapse" data-parent="#accordion" href="#multiple_info">4. Multiple comparisons</a>
+				<a data-toggle="collapse" data-parent="#accordion" href="#multiple_info">5. Multiple comparisons</a>
 			</h4>
 		</div>
 		<div id="multiple_info" class="panel-collapse collapse">
@@ -87,7 +112,7 @@
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h4 class="panel-title">
-				<a data-toggle="collapse" data-parent="#accordion" href="#normality_info">5. Normality tests</a>
+				<a data-toggle="collapse" data-parent="#accordion" href="#normality_info">6. Normality tests</a>
 			</h4>
 		</div>
 		<div id="normality_info" class="panel-collapse collapse">
@@ -102,7 +127,7 @@
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h4 class="panel-title">
-				<a data-toggle="collapse" data-parent="#accordion" href="#homocedasticity_info">6.  Homoscedasticity test</a>
+				<a data-toggle="collapse" data-parent="#accordion" href="#homocedasticity_info">7.  Homoscedasticity test</a>
 			</h4>
 		</div>
 		<div id="homocedasticity_info" class="panel-collapse collapse">
@@ -115,7 +140,7 @@
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h4 class="panel-title">
-				<a data-toggle="collapse" data-parent="#accordion" href="#parametric_two_info">7. Parametric two groups tests</a>
+				<a data-toggle="collapse" data-parent="#accordion" href="#parametric_two_info">8. Parametric two groups tests</a>
 			</h4>
 		</div>
 		<div id="parametric_two_info" class="panel-collapse collapse">
@@ -133,7 +158,7 @@
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h4 class="panel-title">
-				<a data-toggle="collapse" data-parent="#accordion" href="#parametric_multi_info">8. Parametric multiple groups tests</a>
+				<a data-toggle="collapse" data-parent="#accordion" href="#parametric_multi_info">9. Parametric multiple groups tests</a>
 			</h4>
 		</div>
 		<div id="parametric_multi_info" class="panel-collapse collapse">
@@ -147,7 +172,7 @@
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h4 class="panel-title">
-				<a data-toggle="collapse" data-parent="#accordion" href="#nonparametric_two_info">9. Non-parametric two groups tests</a>
+				<a data-toggle="collapse" data-parent="#accordion" href="#nonparametric_two_info">10. Non-parametric two groups tests</a>
 			</h4>
 		</div>
 		<div id="nonparametric_two_info" class="panel-collapse collapse">
@@ -162,7 +187,7 @@
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h4 class="panel-title">
-				<a data-toggle="collapse" data-parent="#accordion" href="#nonparametric_multi_info">10. Non-parametric multiple groups tests</a>
+				<a data-toggle="collapse" data-parent="#accordion" href="#nonparametric_multi_info">11. Non-parametric multiple groups tests</a>
 			</h4>
 		</div>
 		<div id="nonparametric_multi_info" class="panel-collapse collapse">
@@ -177,7 +202,7 @@
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h4 class="panel-title">
-				<a data-toggle="collapse" data-parent="#accordion" href="#post-hoc">11. Non-parametric post-hoc tests</a>
+				<a data-toggle="collapse" data-parent="#accordion" href="#post-hoc">12. Non-parametric post-hoc tests</a>
 			</h4>
 		</div>
 		<div id="post-hoc" class="panel-collapse collapse">
@@ -196,7 +221,7 @@
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h4 class="panel-title">
-				<a data-toggle="collapse" data-parent="#accordion" href="#about">12. About the site</a>
+				<a data-toggle="collapse" data-parent="#accordion" href="#about">13. About the site</a>
 			</h4>
 		</div>
 		<div id="about" class="panel-collapse collapse">
