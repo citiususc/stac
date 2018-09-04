@@ -247,8 +247,8 @@ def bonferroni_dunn_test(ranks, control=None):
         O.J. Dunn, Multiple comparisons among means, Journal of the American Statistical Association 56 (1961) 52–64.
     """
     k = len(ranks)
-    values = ranks.values()
-    keys = ranks.keys()
+    values = list(ranks.values())
+    keys = list(ranks.keys())
     if not control :
         control_i = values.index(min(values))
     else:
