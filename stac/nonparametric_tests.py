@@ -247,8 +247,8 @@ def bonferroni_dunn_test(ranks, control=None):
         O.J. Dunn, Multiple comparisons among means, Journal of the American Statistical Association 56 (1961) 52–64.
     """
     k = len(ranks)
-    values = ranks.values()
-    keys = ranks.keys()
+    values = list(ranks.values())
+    keys = list(ranks.keys())
     if not control :
         control_i = values.index(min(values))
     else:
@@ -292,8 +292,8 @@ def holm_test(ranks, control=None):
         O.J. S. Holm, A simple sequentially rejective multiple test procedure, Scandinavian Journal of Statistics 6 (1979) 65–70.
     """
     k = len(ranks)
-    values = ranks.values()
-    keys = ranks.keys()
+    values = list(ranks.values())
+    keys = list(ranks.keys())
     if not control :
         control_i = values.index(min(values))
     else:
@@ -337,8 +337,8 @@ def hochberg_test(ranks, control=None):
         Y. Hochberg, A sharper Bonferroni procedure for multiple tests of significance, Biometrika 75 (1988) 800–803.
     """
     k = len(ranks)
-    values = ranks.values()
-    keys = ranks.keys()
+    values = list(ranks.values())
+    keys = list(ranks.keys())
     if not control :
         control_i = values.index(min(values))
     else:
@@ -381,8 +381,8 @@ def li_test(ranks, control=None):
         J. Li, A two-step rejection procedure for testing multiple hypotheses, Journal of Statistical Planning and Inference 138 (2008) 1521–1527.
     """
     k = len(ranks)
-    values = ranks.values()
-    keys = ranks.keys()
+    values = list(ranks.values())
+    keys = list(ranks.keys())
     if not control :
         control_i = values.index(min(values))
     else:
@@ -425,8 +425,8 @@ def finner_test(ranks, control=None):
         H. Finner, On a monotonicity problem in step-down multiple test procedures, Journal of the American Statistical Association 88 (1993) 920–923.
     """
     k = len(ranks)
-    values = ranks.values()
-    keys = ranks.keys()
+    values = list(ranks.values())
+    keys = list(ranks.keys())
     if not control :
         control_i = values.index(min(values))
     else:
@@ -468,8 +468,8 @@ def nemenyi_multitest(ranks):
         Bonferroni-Dunn: O.J. Dunn, Multiple comparisons among means, Journal of the American Statistical Association 56 (1961) 52–64.
     """
     k = len(ranks)
-    values = ranks.values()
-    keys = ranks.keys()
+    values = list(ranks.values())
+    keys = list(ranks.keys())
     versus = list(it.combinations(range(k), 2))
 
     comparisons = [keys[vs[0]] + " vs " + keys[vs[1]] for vs in versus]
@@ -509,8 +509,8 @@ def holm_multitest(ranks):
         O.J. S. Holm, A simple sequentially rejective multiple test procedure, Scandinavian Journal of Statistics 6 (1979) 65–70.
     """
     k = len(ranks)
-    values = ranks.values()
-    keys = ranks.keys()
+    values = list(ranks.values())
+    keys = list(ranks.keys())
     versus = list(it.combinations(range(k), 2))
 
     comparisons = [keys[vs[0]] + " vs " + keys[vs[1]] for vs in versus]
@@ -550,8 +550,8 @@ def hochberg_multitest(ranks):
         Y. Hochberg, A sharper Bonferroni procedure for multiple tests of significance, Biometrika 75 (1988) 800–803.
     """
     k = len(ranks)
-    values = ranks.values()
-    keys = ranks.keys()
+    values = list(ranks.values())
+    keys = list(ranks.keys())
     versus = list(it.combinations(range(k), 2))
 
     comparisons = [keys[vs[0]] + " vs " + keys[vs[1]] for vs in versus]
@@ -591,8 +591,8 @@ def finner_multitest(ranks):
         H. Finner, On a monotonicity problem in step-down multiple test procedures, Journal of the American Statistical Association 88 (1993) 920–923.
     """
     k = len(ranks)
-    values = ranks.values()
-    keys = ranks.keys()
+    values = list(ranks.values())
+    keys = list(ranks.keys())
     versus = list(it.combinations(range(k), 2))
 
     comparisons = [keys[vs[0]] + " vs " + keys[vs[1]] for vs in versus]
@@ -648,8 +648,8 @@ def shaffer_multitest(ranks):
         J. Li, A two-step rejection procedure for testing multiple hypotheses, Journal of Statistical Planning and Inference 138 (2008) 1521–1527.
     """
     k = len(ranks)
-    values = ranks.values()
-    keys = ranks.keys()
+    values = list(ranks.values())
+    keys = list(ranks.keys())
     versus = list(it.combinations(range(k), 2))
     
     m = int(k*(k-1)/2.)
